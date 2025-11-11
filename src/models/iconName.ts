@@ -1,0 +1,157 @@
+/**
+ * Union type defining all available Google Material Icons
+ * 
+ * This type restricts icon names to a predefined set of Google Material Icons
+ * that are used throughout the application. Each string corresponds to a specific
+ * Material Design icon name.
+ * 
+ * @typedef {string} IconName
+ * 
+ * Categories of icons included:
+ * - **Navigation**: arrow_right_alt, arrow_back, exit_to_app, login, logout
+ * - **UI Controls**: close, settings, dehaze, visibility, help
+ * - **Content**: info, book_4, save_as, share, download, assignment_late
+ * - **User/People**: person, group, school, chair_alt, airline_seat_recline_normal
+ * - **Time/Schedule**: schedule, calendar_month, event_busy, replay
+ * - **Location**: distance, pin_drop, computer, monitoring
+ * - **Analytics**: analytics, assessment, trending_down, savings
+ * - **Status**: check_circle, star, task_alt, key, key_vertical
+ * - **Media**: videocam, light_mode, dark_mode, palette
+ * 
+ * @example
+ * // Valid usage
+ * const iconName: IconName = "schedule";
+ * const userIcon: IconName = "person";
+ * 
+ * // Invalid usage (TypeScript will error)
+ * const invalidIcon: IconName = "nonexistent_icon"; // Error!
+ */
+export type IconName =
+    | "schedule"
+    | "person"
+    | "arrow_right_alt"
+    | "info"
+    | "distance"
+    | "book_4"
+    | "school"
+    | "close"
+    | "analytics"
+    | "savings"
+    | "chair_alt"
+    | "airline_seat_recline_normal"
+    | "key"
+    | "star"
+    | "assessment"
+    | "trending_down"
+    | "exit_to_app"
+    | "group"
+    | "replay"
+    | "check_circle"
+    | "save_as"
+    | "share"
+    | "download"
+    | "settings"
+    | "calendar_month"
+    | "arrow_back"
+    | "pin_drop"
+    | "videocam"
+    | "login"
+    | "logout"
+    | "palette"
+    | "computer"
+    | "monitoring"
+    | "key_vertical"
+    | "help"
+    | "light_mode"
+    | "dark_mode"
+    | "event_busy"
+    | "visibility"
+    | "dehaze"
+    | "task_alt"
+    | "assignment_late"
+    | "view_column"
+    | "view_list"
+    | "search"
+    | "clear"
+    | "keyboard_arrow_down"
+    | "menu"
+    | "warning"
+    | "login"
+    | "check"
+    | "add"
+    | "visibility_off"
+    | "home"
+    | "upload"
+    | "lightbulb_2"
+    | "note_stack"
+    | "directions_car"
+    | "account_balance"
+    | "person_add"
+    | "group_search"
+    | "edit"
+    | "arrow_upward"
+    | "arrow_downward"
+    | "sort"
+    | "swap_vert"
+    | "filter_list_off"
+    | "filter_list"
+    | "note_stack"
+    | "directions_car"
+    | "apartment"
+    | "grass"
+    | "receipt_long"
+    | "credit_card"
+    | "attach_money"
+    | "payment"
+    | "error"
+    | "play_circle"
+    | "account_balance_wallet"
+    | "folder_open"
+    | "badge"
+    | "person_add"
+    | "account_balance"
+    | "trending_up"
+    | "arrow_circle_up"
+    | "arrow_circle_down"
+    | "sticky_note_2"
+    | "list_alt"
+    | "assignment"
+    | "edit"
+    | "groups"
+    | "lock"
+    | "query_stats"
+    | "mail"
+    | "delete"
+    | "open_in_new"
+    | "public"
+    | "directions_car"
+    | "agriculture"
+    | "image"
+    | "undo"
+    | "rocket_launch"
+    | "files"
+    | "person_add_disabled"
+    | "today"
+    | "history"
+    | "contract"
+    | "list"
+    | "checkbox"
+    | "add_card"
+    | "calculate"
+    | "finance"
+    | "battery_android_frame_1"
+    | "add_circle"
+    | "do_not_disturb_on"
+    | "show_chart"
+    | "table"
+    | "receipt"
+    | "home_storage"
+    | "draft"
+    | "dictionary"
+    | "work"
+    | "bookmark"
+    | "bookmark_check"
+    | "bookmark_added"
+    | "bookmark_add"
+    | "link"
+    | "";                      

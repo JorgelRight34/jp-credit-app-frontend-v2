@@ -1,0 +1,35 @@
+import { PagedResponse } from "@/models"
+import { AdjustmentNote } from "../models/adjusment-note"
+import { fetchWithQueryParams } from "@/utils/utils"
+import { Query } from "@/models/query"
+import { PermissionsProvider } from "@/models/permissionsProvider"
+import { adjustmentNoteCacheKey } from "../lib/constants"
+import { getModulePermissions } from "@/features/Auth/services/userService"
+import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants"
+import { AdjustmentNoteFormValues } from "../lib/form"
+import api from "@/services/api"
+
+const baseUrl = "adjustment-notes"
+
+export const getNotes = async (query: Query): Promise<PagedResponse<AdjustmentNote>> => {
+    return await fetchWithQueryParams(baseUrl, query);
+}
+
+export const getNote = async (id: number): Promise<AdjustmentNote> => {
+    const response = await api.get(`${baseUrl}/${id}`);
+    return response.data;
+}
+
+export const createNote = async (data: AdjustmentNoteFormValues) => {
+    const response = await api.post(baseUrl, data);
+    return response.data;
+}
+
+const getNotesModulePermissions = async () => {
+    return await getModulePermissions(baseUrl + "/" + PERMISSIONS_ENDPOINT_SUFFIX)
+}
+
+export const adjustmenNotesPermissionsProvider: PermissionsProvider = {
+    cacheKey: adjustmentNoteCacheKey,
+    getPermissions: getNotesModulePermissions
+}

@@ -1,0 +1,13 @@
+.entity-layout {
+  background-color: #fff;
+  margin-top: auto;
+  margin-bottom: auto;
+  animation: fadeIn;
+  animation-duration: 0.2s;
+}
+
+@media (max-width: 500px) {
+  .entity-layout {
+    width: 100dvw;
+  }
+}
