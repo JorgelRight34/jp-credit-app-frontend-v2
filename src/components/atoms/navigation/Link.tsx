@@ -1,5 +1,5 @@
-import { Link as RLink } from "react-router";
+import { default as NextLink } from "next/link";
 
-const Link = RLink;
+const Link = NextLink;
 
 export default Link;

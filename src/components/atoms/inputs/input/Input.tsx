@@ -6,12 +6,7 @@ export type InputProps = Omit<TextFieldProps, "onChange"> & {
 
 const Input = ({ onChange, ...props }: InputProps) => {
   return (
-    <>
-      <TextField
-        {...props}
-        onChange={(e) => onChange?.(e.target?.value ?? e)}
-      />
-    </>
+    <TextField {...props} onChange={(e) => onChange?.(e.target?.value ?? e)} />
   );
 };
 

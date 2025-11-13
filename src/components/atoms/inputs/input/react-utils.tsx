@@ -1,6 +1,6 @@
-import { Icon } from "@/components/ui";
 import { IconName } from "@/models";
 import { IconButton, InputAdornment } from "@mui/material";
+import Icon from "../../icon/Icon";
 
 export type IconInputSlotProps = {
   iconDirection?: string;

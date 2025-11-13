@@ -1,5 +1,5 @@
+import { ND, TEST } from "@/utils/constants";
 import parsePhoneNumberFromString, { CountryCode } from "libphonenumber-js";
-import { ND, TEST } from "../../utils/constants";
 
 interface PhoneLink {
   phoneNumber?: string;

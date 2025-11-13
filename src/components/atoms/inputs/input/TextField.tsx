@@ -3,10 +3,10 @@ import {
   TextField as MTextField,
 } from "@mui/material";
 import clsx from "clsx";
-import { muiSxConfig } from "./constants";
+import { muiSxConfig } from "../constants";
 import { ElementType } from "react";
-import { getIconInputSlot, IconInputSlotProps } from "../utils/react-utils";
-import { BaseTextFieldProps } from "../models/baseTextFieldProps";
+import { getIconInputSlot, IconInputSlotProps } from "./react-utils";
+import { BaseTextFieldProps } from "./baseTextFieldProps";
 
 export type TextFieldProps = BaseTextFieldProps & {
   onIconClick?: () => void;

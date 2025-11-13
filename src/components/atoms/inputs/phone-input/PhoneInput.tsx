@@ -1,4 +1,4 @@
-import MaskInput, { MaskInputProps } from "./MaskedInput";
+import MaskInput, { MaskInputProps } from "./masked-input/MaskedInput";
 
 const PhoneInput = (props: Omit<MaskInputProps, "mask">) => (
   <MaskInput {...props} mask="+1 (000) 000-0000" placeholder="xxx-xxxxxxx-x" />

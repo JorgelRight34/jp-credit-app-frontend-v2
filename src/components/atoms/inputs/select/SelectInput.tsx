@@ -1,11 +1,11 @@
 import { SelectOptions } from "@/models";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { forwardRef, ReactNode, useMemo } from "react";
-import { muiSxConfig } from "./constants";
+import { muiSxConfig } from "../constants";
 import { toTitleCase } from "@/utils/utils";
-import { InputProps } from "./Input";
-import { getIconInputSlot } from "../utils/react-utils";
+import { InputProps } from "../input/Input";
 import clsx from "clsx";
+import { getIconInputSlot } from "../input/react-utils";
 
 export type SelectInputProps = Omit<
   InputProps,
@@ -21,7 +21,7 @@ export type SelectInputProps = Omit<
 const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
   (
     { options, children, label, allowNoOption = true, value, icon, ...props },
-    ref,
+    ref
   ) => {
     const possibleValues = useMemo(() => {
       return options?.map((o) => o[0]);
@@ -49,7 +49,7 @@ const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
           ref={ref}
           onChange={(e) => props.onChange?.(e.target.value as string)}
           sx={{ width: "auto", minWidth: "fit-content", ...muiSxConfig }}
-          slotProps={{ ...getIconInputSlot(icon) }}
+          slotProps={getIconInputSlot(icon)}
         >
           {allowNoOption && <MenuItem value={undefined}>---</MenuItem>}
           {options &&
@@ -62,7 +62,9 @@ const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
         </Select>
       </FormControl>
     );
-  },
+  }
 );
+
+SelectInput.displayName = "SelectInput";
 
 export default SelectInput;

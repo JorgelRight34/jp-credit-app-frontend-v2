@@ -1,15 +1,14 @@
-// components/ui/Menu.tsx
 import { IconName } from "@/models";
 import { MenuProps, Menu as MuiMenu } from "@mui/material";
 import { forwardRef, useImperativeHandle, useState } from "react";
-import MenuItem from "./MenuItem";
-import Icon from "./Icon";
+import { MenuItem } from "./MenuItem";
+import Icon from "@/components/atoms/icon/Icon";
 
 export interface MenuOption {
   label: string;
-  onClick?: () => void;
   icon?: IconName;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 export interface MenuRef {
@@ -53,7 +52,9 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
         ))}
       </MuiMenu>
     );
-  },
+  }
 );
+
+Menu.displayName = "Menu";
 
 export default Menu;

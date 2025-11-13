@@ -1,7 +1,7 @@
 import { NumericFormat } from "react-number-format";
-import { InputProps } from "./Input";
+import { InputProps } from "../input/Input";
 import { forwardRef } from "react";
-import TextField from "./TextField";
+import TextField from "../input/TextField";
 
 type CurrencyInputProps = Omit<InputProps, "type">;
 
@@ -16,7 +16,6 @@ const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
           thousandSeparator
           valueIsNumericString
           prefix="$"
-          variant="outlined"
           defaultValue={props.defaultValue as string | null | undefined}
           value={(value as string | number | null | undefined) ?? ""}
           name={name}
@@ -30,5 +29,7 @@ const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
     );
   }
 );
+
+CurrencyInput.displayName = "CurrencyInput";
 
 export default CurrencyInput;

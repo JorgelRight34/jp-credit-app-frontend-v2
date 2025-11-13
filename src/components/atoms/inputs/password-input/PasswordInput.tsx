@@ -1,5 +1,5 @@
 import { forwardRef, useState } from "react";
-import Input, { InputProps } from "./Input";
+import Input, { InputProps } from "../input/Input";
 
 type PasswordInputProps = InputProps;
 
@@ -21,5 +21,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     );
   }
 );
+
+PasswordInput.displayName = "PasswordInput";
 
 export default PasswordInput;

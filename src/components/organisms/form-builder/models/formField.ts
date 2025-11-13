@@ -1,7 +1,7 @@
 
 import { SelectOptions } from "@/models";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
-import { IconInputSlotProps } from "../utils/react-utils";
+import { IconInputSlotProps } from "../../../atoms/inputs/input/react-utils";
 
 /**
  * A generic form field definition that supports custom behaviors and validation.

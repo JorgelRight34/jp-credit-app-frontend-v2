@@ -1,6 +1,6 @@
 import { forwardRef, useMemo } from "react";
 import { IMaskInput } from "react-imask";
-import Input from "./Input";
+import Input from "../input/Input";
 import { InputBaseComponentProps } from "@mui/material";
 
 export type MaskInputProps = {
@@ -22,10 +22,7 @@ const MaskedInput = forwardRef<
         "#": /[0-9]/,
       }}
       inputRef={ref}
-      onAccept={(_, maskRef) => {
-        // Use unmaskedValue to get raw value without mask characters
-        onChange(maskRef.unmaskedValue);
-      }}
+      onAccept={(_, maskRef) => onChange(maskRef.unmaskedValue)}
       overwrite
     />
   );
@@ -37,18 +34,17 @@ const MaskInput = forwardRef<
 >(({ mask, ...props }, ref) => {
   const MaskedInputWithMask = useMemo(
     () =>
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
       forwardRef<HTMLInputElement, any>((inputProps, inputRef) => (
         <MaskedInput {...inputProps} mask={mask} ref={inputRef} />
       )),
     [mask]
   );
 
-  return (
-    <>
-      <Input ref={ref} {...props} inputComponent={MaskedInputWithMask} />
-    </>
-  );
+  return <Input ref={ref} {...props} inputComponent={MaskedInputWithMask} />;
 });
+
+MaskedInput.displayName = "MaskedInput";
+MaskInput.displayName = "MaskInput";
 
 export default MaskInput;

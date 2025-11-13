@@ -1,4 +1,4 @@
-import SelectInput, { SelectInputProps } from "./SelectInput";
+import SelectInput, { SelectInputProps } from "../select/SelectInput";
 import { months } from "@/utils/constants";
 
 type MonthSelectProps = SelectInputProps;

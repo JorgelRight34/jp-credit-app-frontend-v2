@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import Icon from "./Icon";
 import { IconName } from "@/models/iconName";
 import { ElementType, ReactNode } from "react";
+import Icon from "../icon/Icon";
 
 export interface ButtonProps
   extends React.HtmlHTMLAttributes<HTMLButtonElement> {
@@ -30,7 +30,7 @@ const Button = ({
       className={clsx(
         `flex inline items-center justify-center !rounded-xl p-2 text-white shadow-sm`,
         className,
-        { "!pointer-events-none !cursor-not-allowed !opacity-50": disabled },
+        { "!pointer-events-none !cursor-not-allowed !opacity-50": disabled }
       )}
       type={type}
       title=""

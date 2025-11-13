@@ -1,7 +1,8 @@
 import { ElementType, useRef } from "react";
 import { ButtonProps } from "./Button";
-import Icon from "./Icon";
-import Menu, { MenuOption, MenuRef } from "./Menu";
+import { Menu } from "@/components/molecules";
+import { MenuOption, MenuRef } from "@/components/molecules/menu/Menu";
+import Icon from "../icon/Icon";
 
 export type SplitBtnProps = ButtonProps & {
   options: MenuOption[];

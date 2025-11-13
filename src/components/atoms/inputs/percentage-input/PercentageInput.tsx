@@ -4,7 +4,7 @@ import {
   NumericFormatProps,
 } from "react-number-format";
 import { forwardRef } from "react";
-import TextField from "./TextField";
+import TextField from "../input/TextField";
 
 type PercentageInputProps = Omit<
   NumericFormatProps,
@@ -14,19 +14,22 @@ type PercentageInputProps = Omit<
   onBlur?: () => void;
   value?: number;
   name?: string;
-  maxValue?: number;
+  max?: number;
+  min?: number;
   decimalScale?: number;
 };
 
 const PercentageInput = forwardRef<HTMLInputElement, PercentageInputProps>(
   (
     {
-      onChange,
-      onBlur,
       value,
       name,
-      maxValue = 100,
+      min = 0,
+      max = 100,
+      step,
       decimalScale = 2,
+      onChange,
+      onBlur,
       ...props
     },
     ref
@@ -44,6 +47,9 @@ const PercentageInput = forwardRef<HTMLInputElement, PercentageInputProps>(
       <NumericFormat
         value={displayValue}
         {...props}
+        max={Number(max)}
+        min={Number(min)}
+        step={Number(step)}
         customInput={TextField}
         thousandSeparator=","
         decimalSeparator="."
@@ -57,12 +63,14 @@ const PercentageInput = forwardRef<HTMLInputElement, PercentageInputProps>(
         getInputRef={ref}
         onValueChange={handleValueChange}
         isAllowed={(values) =>
-          values.floatValue === undefined || values.floatValue <= maxValue
+          values.floatValue === undefined || values.floatValue <= max
         }
         onBlur={onBlur}
       />
     );
   }
 );
+
+PercentageInput.displayName = "PercentageInput";
 
 export default PercentageInput;

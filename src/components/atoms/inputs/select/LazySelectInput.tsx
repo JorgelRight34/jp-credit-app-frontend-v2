@@ -20,6 +20,7 @@ const LazySelectInput = ({
   ...props
 }: LazySelectInputProps) => {
   const [selectOptions, setSelectOptions] = useState<SelectOptions>([]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const stableWatchedValuesNames = useMemo(() => valuesToWatch, []);
 
   const watchedValues = useWatch({
