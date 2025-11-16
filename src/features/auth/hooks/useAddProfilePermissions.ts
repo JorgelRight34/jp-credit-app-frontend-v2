@@ -1,8 +1,9 @@
-import { NO_PERMISSION } from "../lib/form";
-import { profilesQueryKey } from "../../Profiles/lib/constants";
+
 import { editPermission } from "../services/userService";
 import { toastService } from "@/services";
 import { useDataClient } from "@/hooks/useDataClient";
+import { NO_PERMISSION } from "../lib/form";
+import { profilesQueryKey } from "@/features/profiles";
 
 interface UseAddProfilePermissionsProps {
   claims?: string[];
@@ -42,10 +43,12 @@ const useAddProfilePermissions = ({
     await editPermission(payload, username);
 
     dataClient.invalidateQueries({
-      queryKey: [profilesQueryKey],
+      queryKey: [...profilesQueryKey],
     });
 
     toastService.success("Permisos actualizados!");
+
+    return data;
   };
 
   return { handleAddProfilePermissions };

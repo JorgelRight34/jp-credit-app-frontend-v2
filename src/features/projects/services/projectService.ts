@@ -37,3 +37,8 @@ export const deleteProject = async (id: number | string) => {
 export const getProjects = async (query: Query): Promise<PagedResponse<Project>> => {
   return await fetchWithQueryParams("projects", query)
 };
+
+export const projectsClient = {
+  getProjects,
+  fetchProject
+}

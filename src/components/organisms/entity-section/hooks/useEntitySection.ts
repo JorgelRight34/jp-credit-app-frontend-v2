@@ -1,8 +1,9 @@
 import { Query } from "@/models/query";
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "../../../hooks/useRouter";
 import { getUrlParams } from "@/utils/utils";
-import { BaseEntitySectionProps } from "@/components/EntitySection/components/EntitySection";
+import { BaseEntitySectionProps } from "../components/EntitySection";
+import { useRouter } from "next/router";
+import { usePathname } from "@/hooks/usePathname";
 
 type UseEntitySectionProps<TEntity, TQuery extends Query> = Pick<BaseEntitySectionProps<TEntity, TQuery>, "onQueryChange"> & TQuery & {
     navigate?: boolean;
@@ -13,20 +14,20 @@ type UseEntitySectionReturns<TQuery> = [TQuery, ((q: TQuery) => Promise<TQuery>)
 export const useEntitySection = <TEntity, TQuery extends Query>(
     { onQueryChange, navigate, ...query }: UseEntitySectionProps<TEntity, TQuery>):
     UseEntitySectionReturns<TQuery> => {
-    const router = useRouter();
     const [controlledQuery, setControlledQuery] = useState<TQuery>((query ?? {}) as TQuery);
+    const router = useRouter();
+    const pathname = usePathname();
 
-    const defaultQuery = useMemo(() => {
-        return {
-            ...query as TQuery,
-            ...Object.fromEntries((new URLSearchParams(window.location.search)).entries())
-        }
-    }, [query])
+    const defaultQuery = useMemo(() => ({
+        ...query as TQuery,
+        ...Object.fromEntries((new URLSearchParams(window.location.search)).entries())
+    }
+    ), [query])
 
     const handleChange = (q: TQuery) => {
         setControlledQuery(q);
         if (navigate) {
-            router.history.pushState({}, "", router.location.pathname + "?" + getUrlParams(q));
+            router.replace(pathname + "?" + getUrlParams(q));
         }
         return Promise.resolve(q);
     };

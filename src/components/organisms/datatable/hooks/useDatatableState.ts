@@ -1,3 +1,7 @@
+/* eslint-disable react-hooks/incompatible-library */
+"use client"
+"use no memo"
+
 import { useUpdateEffect } from "@/hooks/useUpdateEffect";
 import {
     getCoreRowModel, getExpandedRowModel, getPaginationRowModel,

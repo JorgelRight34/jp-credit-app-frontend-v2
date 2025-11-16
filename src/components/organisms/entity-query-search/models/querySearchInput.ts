@@ -1,5 +1,5 @@
-import { Query } from "../../../models/query";
-import { FormField } from "@/components/EntityForm";
+import { Query } from "@/models/query";
+import { FormField } from "../../form-builder/models/formField";
 
 /**
  * Props for a query search input component with flexible input types and options.
@@ -15,19 +15,3 @@ export type QuerySearchInput<T extends Query> = FormField<T> & {
   searchOnKeyUp?: boolean;
   showOnSmallScreen?: boolean;
 }
-
-/* & {
-
-  /
- 
-
-
-  
-  disabled?: boolean;
-
-  metadata?: Record<string | number | symbol, unknown>;
-  minValue?: number;
-
-  onChange?: ((value: unknown, q: Dispatch<SetStateAction<T>>) => void);
-  hideWhenDefault?: boolean;
-} */

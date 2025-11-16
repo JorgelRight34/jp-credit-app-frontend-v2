@@ -1,15 +1,13 @@
 import { useMemo } from "react";
-import { DatatableFile } from "../models/datatableFile";
-import { Tab, Tabs } from "@/components/Tabs";
 import clsx from "clsx";
-import FileExplorer from "./FileExplorer";
 import {
   mapApiFileToDatatableFile,
   mapFileFormFieldValuesToDatatableFile,
   mapFileToDatatableFile,
 } from "../lib/utils";
 import { UseUploadFilesInputReturn } from "../models/useMultipleFilesInputProp";
-import dayjs from "dayjs";
+import { Tab, Tabs } from "../../tabs";
+import FileFormExplorerTabContent from "./FileFormExplorerTabContent";
 
 type FileFormExplorerProps = UseUploadFilesInputReturn & {
   showLimitWarning?: boolean;
@@ -18,9 +16,6 @@ type FileFormExplorerProps = UseUploadFilesInputReturn & {
   title?: string;
   name?: string;
 };
-
-const sortDates = (a: DatatableFile, b: DatatableFile) =>
-  dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf();
 
 const FileFormExplorer = ({
   upload,
@@ -31,25 +26,25 @@ const FileFormExplorer = ({
   className,
   showLimitWarning,
 }: FileFormExplorerProps) => {
-  const uploadedFiles = useMemo<DatatableFile[]>(
-    () =>
-      [
-        ...upload.loaded.map(mapApiFileToDatatableFile),
-        ...upload.created.map(mapFileFormFieldValuesToDatatableFile),
-        ...upload.uploaded.map(mapFileToDatatableFile),
-      ].sort(sortDates),
-    [upload.created, upload.loaded, upload.uploaded],
-  );
+  const { uploadedLoaded, uploadedCreated, uploadedUploaded } = useMemo(() => {
+    return {
+      uploadedLoaded: upload.loaded.map(mapApiFileToDatatableFile),
+      uploadedCreated: upload.created.map(
+        mapFileFormFieldValuesToDatatableFile,
+      ),
+      uploadedUploaded: upload.uploaded.map(mapFileToDatatableFile),
+    };
+  }, [upload.loaded, upload.created, upload.uploaded]);
 
-  const tableRemovedFiles = useMemo<DatatableFile[]>(
-    () =>
-      [
-        ...remove.deleted.map(mapApiFileToDatatableFile),
-        ...remove.removedFiles.map(mapFileToDatatableFile),
-        ...remove.removedCreations.map(mapFileFormFieldValuesToDatatableFile),
-      ].sort(sortDates),
-    [remove.deleted, remove.removedCreations, remove.removedFiles],
-  );
+  const { removedDeleted, removedFiles, removedCreations } = useMemo(() => {
+    return {
+      removedDeleted: remove.deleted.map(mapApiFileToDatatableFile),
+      removedFiles: remove.removedFiles.map(mapFileToDatatableFile),
+      removedCreations: remove.removedCreations.map(
+        mapFileFormFieldValuesToDatatableFile,
+      ),
+    };
+  }, [remove.deleted, remove.removedFiles, remove.removedCreations]);
 
   return (
     <div className={clsx("flex h-full flex-col", className)}>
@@ -83,46 +78,34 @@ const FileFormExplorer = ({
             <button type="button">Subir</button>
           </label>
         </Tab>
-        <Tab path="uploaded" title="Ver Subidos" icon="download">
-          <FileExplorer
-            extraColumns={[
-              {
-                header: "Opciones",
-                cell: ({ row }) => (
-                  <span
-                    className="text-accent"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      remove.removeFile(row.index, row.original.key);
-                    }}
-                  >
-                    Borrar
-                  </span>
-                ),
-              },
-            ]}
-            files={uploadedFiles}
+        <Tab eventKey="uploaded" title="Ver Subidos" icon="download">
+          <FileFormExplorerTabContent
+            createdLabel="Subidos"
+            deletedLabel="Removidos"
+            created={uploadedUploaded}
+            deleted={removedFiles}
+            onRemove={remove.removeFile}
+            onRecover={remove.recoverFile}
           />
         </Tab>
-        <Tab path="removed" title="Eliminados" icon="close">
-          <FileExplorer
-            extraColumns={[
-              {
-                header: "Opciones",
-                cell: ({ row }) => (
-                  <span
-                    className="text-accent"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      remove.recoverFile(row.index, row.original.key);
-                    }}
-                  >
-                    Recuperar
-                  </span>
-                ),
-              },
-            ]}
-            files={tableRemovedFiles}
+        <Tab eventKey="loaded" title="Ver Iniciales" icon="download">
+          <FileFormExplorerTabContent
+            createdLabel="Iniciales"
+            deletedLabel="Removidos"
+            created={uploadedLoaded}
+            deleted={removedDeleted}
+            onRemove={remove.removeFile}
+            onRecover={remove.recoverFile}
+          />
+        </Tab>
+        <Tab eventKey="created" title="Ver Creados" icon="download">
+          <FileFormExplorerTabContent
+            createdLabel="Creados"
+            deletedLabel="Removidos"
+            created={uploadedCreated}
+            deleted={removedCreations}
+            onRemove={remove.removeFile}
+            onRecover={remove.recoverFile}
           />
         </Tab>
       </Tabs>

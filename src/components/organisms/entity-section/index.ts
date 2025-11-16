@@ -5,7 +5,7 @@
 export * from "./hooks/useEntitySection";
 
 // === Models & Types ===
-export * from "./models/EntitySectionProps";
+export * from "./models/entitySectionProps";
 
 // === Subcomponents (if any are defined under /components) ===
 export * from "./components/EntitySection";

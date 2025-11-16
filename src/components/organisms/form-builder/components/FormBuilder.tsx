@@ -9,8 +9,8 @@ import {
   FormBuilderProps,
   FormBuilderRef,
 } from "../models/formBuilder";
-import { useQueryParams } from "@/hooks/useQueryParams";
 import { getDefaultValues } from "../utils/utils";
+import { useSearchParams } from "next/navigation";
 
 const FormBuilder = forwardRef(
   <T extends object, TData extends FieldValues, TR>(
@@ -21,9 +21,9 @@ const FormBuilder = forwardRef(
       defaultValues: initialDefaultValues,
       ...props
     }: FormBuilderProps<T, TData, TR>,
-    ref: React.Ref<FormBuilderRef>,
+    ref: React.Ref<FormBuilderRef>
   ) => {
-    const params = useQueryParams();
+    const params = useSearchParams();
 
     const defaultValues = useMemo(
       () => ({
@@ -32,7 +32,7 @@ const FormBuilder = forwardRef(
         ...initialDefaultValues,
         ...params,
       }),
-      [config.defaultValues, formProvider.fields, initialDefaultValues, params],
+      [config.defaultValues, formProvider.fields, initialDefaultValues, params]
     );
 
     const { form, validation, state } = useFormBuilder({
@@ -83,7 +83,9 @@ const FormBuilder = forwardRef(
         </div>
       </FormProvider>
     );
-  },
+  }
 ) as FormBuilderComponent;
+
+FormBuilder.displayName = "FormBuilder";
 
 export default FormBuilder;

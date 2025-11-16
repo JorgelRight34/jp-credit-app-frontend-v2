@@ -1,8 +1,8 @@
-import { Modal } from "@/components/Modal";
-import { ModalProps } from "@/components/Modal/modalProps";
 import React, { useState } from "react";
 import FileForm, { FileFormProps } from "./FileForm";
 import { FileFormFieldValues } from "../lib/form";
+import { ModalProps } from "../../modal/models/modalProps";
+import Modal from "../../modal/components/Modal";
 
 type FileFormButtonProps = React.PropsWithChildren &
   FileFormProps & {

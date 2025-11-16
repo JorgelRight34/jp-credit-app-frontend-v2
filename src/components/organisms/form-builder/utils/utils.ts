@@ -1,20 +1,7 @@
-import { NumericKeys, toCurrency } from "@/utils/utils";
-import { HeaderContext } from "@tanstack/react-table";
 import { FormProvider } from "../models/formProvider";
+import { FieldValues } from "react-hook-form";
 
-export const getFooterTotalAsCurrency = <
-    T extends object,
-    K extends NumericKeys<T>
->(
-    info: HeaderContext<T, unknown>,
-    key: K
-) => {
-    const total = info.table.options.data.reduce((sum, row) => sum + (row[key] as number), 0);
-
-    return toCurrency(total);
-};
-
-export const getDefaultValues = <T,>(fields: FormProvider<T>["fields"]) => {
+export const getDefaultValues = <T extends FieldValues,>(fields: FormProvider<T>["fields"]) => {
     const defaults: Partial<Record<keyof T, null>> = {};
 
     for (let i = 0; i < fields.length; i++) {

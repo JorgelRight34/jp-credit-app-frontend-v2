@@ -1,7 +1,7 @@
 /**
  * Represents a file retrieved from an API, including metadata and URL.
  */
-export interface ApiFile {
+export interface FileModel {
   /** URL to access or download the file */
   url: string;
   publicId?: string;

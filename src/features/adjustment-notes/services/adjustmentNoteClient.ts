@@ -4,7 +4,7 @@ import { fetchWithQueryParams } from "@/utils/utils"
 import { Query } from "@/models/query"
 import { PermissionsProvider } from "@/models/permissionsProvider"
 import { adjustmentNoteCacheKey } from "../lib/constants"
-import { getModulePermissions } from "@/features/Auth/services/userService"
+import { getModulePermissions } from "@/features/auth"
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants"
 import { AdjustmentNoteFormValues } from "../lib/form"
 import api from "@/services/api"
@@ -25,6 +25,10 @@ export const createNote = async (data: AdjustmentNoteFormValues) => {
     return response.data;
 }
 
+export const deleteNote = async (id: number) => {
+    await api.delete(baseUrl + "/" + id);
+}
+
 const getNotesModulePermissions = async () => {
     return await getModulePermissions(baseUrl + "/" + PERMISSIONS_ENDPOINT_SUFFIX)
 }
@@ -32,4 +36,10 @@ const getNotesModulePermissions = async () => {
 export const adjustmenNotesPermissionsProvider: PermissionsProvider = {
     cacheKey: adjustmentNoteCacheKey,
     getPermissions: getNotesModulePermissions
+}
+
+export const adjustmentNoteClient = {
+    getNote,
+    getNotes,
+    createNote,
 }

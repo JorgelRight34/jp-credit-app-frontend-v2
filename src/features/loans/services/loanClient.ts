@@ -1,4 +1,4 @@
-import api from "../../../services/api";
+import api from "@/services/api";
 import { LoanFormValues } from "../lib/form";
 import { LoanQuery } from "../models/loanQuery";
 import { fetchBlobWithQueryParams, fetchWithQueryParams, getUrlParams } from "../../../utils/utils";
@@ -9,7 +9,7 @@ import { LoanMembers } from "../models/loanMembers";
 import { getModulePermissions } from "@/features/Auth/services/userService";
 import { PermissionsProvider } from "@/models/permissionsProvider";
 import { loansQueryKey } from "../lib/constants";
-import { Transaction } from "@/features/Transactions/models/transaction";
+import { Transaction } from "@/features/transactions";
 
 
 const baseUrl = "/loans";
@@ -93,4 +93,10 @@ export const getLoanModulePermissions = async () => {
 export const loanModulePermissionsProvider: PermissionsProvider = {
   getPermissions: getLoanModulePermissions,
   cacheKey: loansQueryKey
+}
+
+export const loanClient = {
+  getLoan,
+  getLoans,
+  createLoan,
 }

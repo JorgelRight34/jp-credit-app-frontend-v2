@@ -9,8 +9,8 @@ import { useData } from "@/hooks/useData";
 import { Column } from "../models/column";
 import { useEntityDatatableState } from "./useEntityDatatableState";
 import { Row } from "../models/row";
-import { Entity } from "@/components/EntityForm/models/entity";
 import { DataTableProps } from "../components/DataTable";
+import { Entity } from "@/models/entity";
 
 export interface UseEntityDatatableProps<T extends Entity, TQuery> extends Partial<DataTableProps<T>> {
   cacheKey: CacheKey;
@@ -77,11 +77,11 @@ const useEntityDatatable = <T extends Entity, TQuery extends Query>({
   return {
     columns,
     data: data || createDefaultPagedResponse<T>(),
-    getInitialSelection,
     isLoading,
     isError,
     page,
     limit,
+    getInitialSelection,
     fetchPage,
     sort,
     setLimit

@@ -1,9 +1,9 @@
-import { useEntitySection } from "@/components/EntitySection/hooks/useEntitySection";
 import { Query } from "@/models/query";
-import EntityDataTableLayout from "../../DataTable/layouts/EntityDataTableLayout";
-import { EntityDataTableProps, QuerySearchProps } from "@/models";
 import { ReactNode } from "react";
-import { EntitySectionProps } from "@/components/EntitySection/models/EntitySectionProps";
+import { EntitySectionProps } from "../models/entitySectionProps";
+import { QuerySearchProps } from "../../entity-query-search";
+import { EntityDataTableProps, EntityDataTableLayout } from "../../datatable";
+import { useEntitySection } from "../hooks/useEntitySection";
 
 export type BaseEntitySectionProps<
   TEntity,

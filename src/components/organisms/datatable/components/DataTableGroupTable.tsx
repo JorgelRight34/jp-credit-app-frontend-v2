@@ -7,7 +7,6 @@ import { DataTableRenderProps } from "./DataTableStateWrapper";
 const DataTableGroupTable = <T,>({ table }: DataTableRenderProps<T>) => {
   return (
     <>
-      {" "}
       <DataTableBody table={table} />
       <DataTableFooter className="[display:table-header-group]" table={table} />
       <tfoot className="!m-0 [display:table-header-group] border-none !p-0">

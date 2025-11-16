@@ -3,7 +3,7 @@ import { User } from "../models/user";
 import useAddProfilePermissions from "./useAddProfilePermissions";
 import usePossiblePermissions from "./usePossiblePermissions";
 import useUserPermissions from "./useUserPermissions";
-import { UseEntityFormReturn } from "@/models";
+import { UseEntityFormReturn } from "@/components";
 
 interface UsePermissionsFormProps {
   /** The user profile for which permissions are being managed */
@@ -18,8 +18,7 @@ interface UsePermissionsFormProps {
  *
  */
 const usePermissionsForm = ({ profile }: UsePermissionsFormProps): UseEntityFormReturn<Permissions, object> => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { permissionDomains, permissionsFormProvider } =
+  const possiblePermissions =
     usePossiblePermissions();
 
   const { permissions } = useUserPermissions({ id: profile?.id });
@@ -32,27 +31,27 @@ const usePermissionsForm = ({ profile }: UsePermissionsFormProps): UseEntityForm
 
   const findClaimByDomain = useCallback((
     claims: string[],
-    permissionDomain: (typeof permissionDomains)[number]
+    permissionDomain: (typeof possiblePermissions.permissionDomains)[number]
   ): string | undefined => {
     return claims?.find(
       (claim) =>
         claim.split(".")[0].toLowerCase() === permissionDomain.toLowerCase()
     );
-  }, []);
+  }, [possiblePermissions]);
 
   const getClaimValueForDomain = useCallback((
-    domain: (typeof permissionDomains)[number]
-  ): string => (profile ? findClaimByDomain(claims, domain) || "" : ""), [claims, findClaimByDomain, profile]);
+    domain: (typeof possiblePermissions.permissionDomains)[number]
+  ): string => (profile ? findClaimByDomain(claims, domain) || "" : ""), [claims, findClaimByDomain, possiblePermissions, profile]);
 
 
   const defaultFormValues = useMemo(() => {
-    return permissionsFormProvider.fields.reduce((formDefaults, permissionField) => {
+    return possiblePermissions.permissionsFormProvider.fields.reduce((formDefaults, permissionField) => {
       formDefaults[permissionField.name] = getClaimValueForDomain(
         permissionField.name
       );
       return formDefaults;
     }, {} as Record<string, string | number | null | undefined>);
-  }, [permissionsFormProvider.fields, getClaimValueForDomain]);
+  }, [possiblePermissions.permissionsFormProvider.fields, getClaimValueForDomain]);
 
 
   return {
@@ -60,8 +59,8 @@ const usePermissionsForm = ({ profile }: UsePermissionsFormProps): UseEntityForm
     config: {
       resetValues: false,
       formProvider: {
-        schema: permissionsFormProvider.schema,
-        fields: permissionsFormProvider.fields
+        schema: possiblePermissions.permissionsFormProvider.schema,
+        fields: possiblePermissions.permissionsFormProvider.fields
       },
       cacheKeysToInvalidate: []
     },

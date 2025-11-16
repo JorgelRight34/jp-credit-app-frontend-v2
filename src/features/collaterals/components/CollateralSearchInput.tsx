@@ -1,10 +1,9 @@
-import { EntitySearchInputProps } from "@/models";
+import { EntitySearchInput, EntitySearchInputProps } from "@/components";
 import { Collateral } from "../models/collateral";
 import { CollateralQuery } from "../models/collateralQuery";
-import { EntitySearchInput } from "@/components/EntityForm";
-import { collateralsQueryKey } from "../lib/constants";
-import { getCollateral } from "../services/collateralsClient";
 import CollateralsSection from "./CollateralsSection";
+import { collateralsQueryKey } from "../lib/constants";
+import { collateralClient } from "../services/collateralsClient";
 
 type CollateralSearchInputProps = EntitySearchInputProps<
   Collateral,
@@ -25,7 +24,7 @@ const CollateralSearchInput = ({
     }}
     accesorFn={(c) => c?.id}
     visibleValueFn={(c) => c?.title}
-    onSearch={getCollateral}
+    onSearch={collateralClient.getCollateral}
     onChange={onChange}
     id={id}
     render={(setValue) => (

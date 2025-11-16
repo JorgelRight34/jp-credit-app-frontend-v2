@@ -1,12 +1,9 @@
 import { useCurrentProject } from "@/contexts/ProjectContext";
-import { EntityDataTableProps } from "@/components/DataTable/models/entityDataTableProps";
 import { Query } from "@/models/query";
 import clsx from "clsx";
 import useEntityDatatable, {
   UseEntityDatatableProps,
 } from "../hooks/useEntityDatatable";
-import ChooseProjectPrompt from "@/features/Projects/components/ChooseProjectPrompt";
-import LoadingSpinner from "../../ui/LoadingSpinner";
 import DataTable from "./DataTable";
 import { CacheKey } from "@/models/cacheKey";
 import { PagedResponse } from "@/models";
@@ -14,7 +11,10 @@ import { toAllTitleCase } from "@/utils/utils";
 import { useRouter } from "@/hooks/useRouter";
 import { Column } from "../models/column";
 import EmptyMessage from "./EmptyMessage";
-import { Entity } from "@/components/EntityForm/models/entity";
+import { Entity } from "@/models/entity";
+import { EntityDataTableProps } from "../models/entityDataTableProps";
+import ChooseProjectPrompt from "@/features/projects/components/ChooseProjectPrompt";
+import { LoadingSpinner } from "@/components";
 
 type ThisEntityDataTableProps<
   T extends Entity,
@@ -84,7 +84,7 @@ const EntityDataTable = <T extends Entity, TQuery extends Query>({
       {!isLoading && shouldHideTable && (
         <EmptyMessage
           title={toAllTitleCase(title)}
-          createPath={router.getCreatePath()}
+          createPath={"aun no se"}
           className="mx-auto w-75 p-5"
         />
       )}

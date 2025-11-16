@@ -1,14 +1,15 @@
+"use client"
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FormBuilderRef } from "../models/formBuilder";
 import { FieldValues } from "react-hook-form";
-
 
 
 export const useEntityForm = <T extends FieldValues = FieldValues>() => {
     const formRef = useRef<FormBuilderRef<T>>(null);
     const [loadForm, setLoadForm] = useState(false);
     const [isDirty, setIsDirty] = useState(false);
-    const [reactiveForm, setReactiveForm] = useState(formRef.current);
+    const [reactiveForm, setReactiveForm] = useState<FormBuilderRef<T> | null>();
 
     const setRef = (instance: FormBuilderRef) => {
         formRef.current = instance as FormBuilderRef<T>;
@@ -21,8 +22,7 @@ export const useEntityForm = <T extends FieldValues = FieldValues>() => {
         if (isDirty !== isFormDirty) {
             setIsDirty(isFormDirty)
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [isDirty])
 
     useEffect(() => setReactiveForm(formRef.current), [loadForm])
 
@@ -30,8 +30,8 @@ export const useEntityForm = <T extends FieldValues = FieldValues>() => {
         form: reactiveForm,
         isDirty,
         onDirtyChange: handleOnDirtyChange,
-        onSubmit: formRef.current?.submit,
-        reset: formRef.current?.reset ?? (() => { }),
+        onSubmit: () => formRef.current?.submit,
+        reset: () => formRef.current?.reset ?? (() => { }),
         ref: setRef
     }
 }

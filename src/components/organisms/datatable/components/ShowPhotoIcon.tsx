@@ -1,9 +1,10 @@
-import { Icon, LightBox } from "@/components/ui";
-import { ApiFile, IconName } from "@/models";
+import { Icon, LightBox } from "@/components";
+import { IconName } from "@/models";
+import { FileModel } from "@/models/fileModel";
 import { useState } from "react";
 
 interface ShowPhotoIconProps {
-  image?: ApiFile;
+  image?: FileModel;
   src?: string;
   icon?: IconName;
 }
@@ -11,16 +12,15 @@ interface ShowPhotoIconProps {
 const ShowPhotoIcon = ({ image, src, icon }: ShowPhotoIconProps) => {
   const [showModal, setShowModal] = useState(false);
 
-  const handleOnClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    setShowModal(true);
-  };
-
   return (
     <>
-      <Icon icon={icon ? icon : "image"} onClick={handleOnClick} />
+      <Icon icon={icon ? icon : "image"} onClick={() => setShowModal(true)} />
       <LightBox
-        files={image ? [image] : [{ url: src || "", publicId: "---" }]}
+        files={
+          image
+            ? [image]
+            : [{ url: src || "", publicId: "---", fileType: "---" }]
+        }
         show={showModal}
         onHide={() => setShowModal(false)}
       />

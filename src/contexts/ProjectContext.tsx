@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from "react";
 import { PROJECT_KEY } from "../utils/constants";
-import { Project } from "../features/Projects/models/project";
 import { useQuery } from "@tanstack/react-query";
-import { fetchProject } from "../features/Projects/services/projectService";
 import { useAuth } from "./AuthContext";
+import { Project } from "@/features/projects";
+import { fetchProject } from "@/features/projects/services/projectService";
 
 type ProjectContextType = {
   project?: Project;
@@ -18,16 +18,16 @@ const ProjectProvider = ({ children }: React.PropsWithChildren) => {
   const { user } = useAuth();
 
   const [projectId, setProjectId] = useState<number | undefined>(
-    Number(localStorage.getItem(PROJECT_KEY)) || undefined
+    Number(localStorage.getItem(PROJECT_KEY)) || undefined,
   );
 
   const { data: project } = useQuery({
     queryKey: ["projects", projectId],
-    queryFn: () => {
+    queryFn: async () => {
       if (!projectId) {
         throw new Error("Project ID is required");
       }
-      return fetchProject(projectId);
+      return await fetchProject(projectId);
     },
     enabled: !!user && projectId !== undefined,
   });

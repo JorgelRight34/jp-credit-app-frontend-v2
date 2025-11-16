@@ -1,6 +1,4 @@
-import SelectInput, {
-  SelectInputProps,
-} from "../../EntityForm/inputs/SelectInput";
+import { SelectInput, SelectInputProps } from "@/components/atoms";
 
 const PageSizeSelector = ({ ...props }: SelectInputProps) => {
   return (

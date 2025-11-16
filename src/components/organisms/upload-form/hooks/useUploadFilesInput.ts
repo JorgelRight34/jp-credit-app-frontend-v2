@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
-import { ApiFile } from "@/models";
 import { FileFormFieldValues } from "../lib/form";
 import { UseMultipleFilesInputProps, UseUploadFilesInputReturn } from "../models/useMultipleFilesInputProp";
+import { FileModel } from "@/models/fileModel";
 
 export type FileUploads = {
   /* These are the initial files returned from the api, these represent the database model of the already uploaded file */
-  loaded: ApiFile[]
+  loaded: FileModel[]
   /* These are files uploaded via the form as File objects */
   uploaded: File[];
   /* These are the files created via a form to create the database model from scratch */
@@ -15,7 +15,7 @@ export type FileUploads = {
   /* Represents the removed uploaded files */
   removed: File[],
   /* Representes the deleted loaded files */
-  deleted: ApiFile[];
+  deleted: FileModel[];
 }
 
 const deleteMap: Partial<Record<keyof FileUploads, keyof FileUploads>> = {
@@ -49,6 +49,7 @@ export const useUploadFilesInput = ({ filesMaxLength = 10, value: fileUploads, o
       ...prev,
       uploaded: [...prev.uploaded, uploadedFile]
     }))
+
     markDirty();
   };
 
@@ -58,8 +59,10 @@ export const useUploadFilesInput = ({ filesMaxLength = 10, value: fileUploads, o
 
     onChange(prev => ({
       ...prev,
-      [key]: reverse ? [...prev[key], prev[target][index]] : prev[key].filter((_, i) => i !== index),
-      [target]: reverse ? prev[target].filter((_, i) => i !== index) : [...prev[target], prev[key][index]],
+      [key]: reverse ? [...prev[key], prev[target][index]]
+        : prev[key].filter((_, i) => i !== index),
+      [target]: reverse ? prev[target].filter((_, i) => i !== index)
+        : [...prev[target], prev[key][index]],
     }));
 
     markDirty();
@@ -79,10 +82,10 @@ export const useUploadFilesInput = ({ filesMaxLength = 10, value: fileUploads, o
       handleOnFileChange,
     },
     remove: {
-      removeFile,
       removedFiles: fileUploads.removed,
       deleted: fileUploads.deleted,
       removedCreations: fileUploads.removedCreations,
+      removeFile,
       recoverFile,
     },
     isDirty,

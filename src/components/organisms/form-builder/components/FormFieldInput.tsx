@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Controller,
   FieldValues,
@@ -6,8 +5,8 @@ import {
   useWatch,
 } from "react-hook-form";
 import { FormField } from "../models/formField";
-import { useEffect, useMemo, useState } from "react";
-import { inputRenderers } from "../inputs/input-renderers";
+import { useEffect, useMemo } from "react";
+import { inputRenderers } from "../utils/input-renderers";
 
 interface FormFieldInputProps<T, TData extends FieldValues> {
   formField: FormField<TData>;
@@ -31,23 +30,23 @@ const FormFieldInput = <T, TData extends FieldValues>({
   ...props
 }: FormFieldInputProps<T, TData>) => {
   const { getValues, setValue } = useFormContext<TData>();
-  const [isDisabled, setIsDisabled] = useState(config.disabled ?? false);
-  const stableWatchedValuesNames = useMemo(() => valuesToWatch, []);
 
   const watchedValues = useWatch({
-    name: stableWatchedValuesNames as readonly string[],
-    disabled: !stableWatchedValuesNames,
+    name: valuesToWatch as readonly string[],
+    disabled: !valuesToWatch,
   });
+
+  const isDisabled = useMemo(() => {
+    if (config.disabled !== undefined) return config.disabled;
+
+    return !!disabledWhen?.(getValues());
+  }, [config.disabled, disabledWhen, getValues]);
 
   useEffect(() => {
     if (changeWhen) {
       changeWhen(getValues(), setValue);
     }
-
-    if (disabledWhen) {
-      setIsDisabled(!!disabledWhen(getValues()));
-    }
-  }, [watchedValues]);
+  }, [changeWhen, getValues, setValue, watchedValues]);
 
   if (edit && showOnEdit === false) return;
 

@@ -1,9 +1,9 @@
-import { QuerySearchInput } from "@/models";
 import { Query } from "@/models/query";
 import clsx from "clsx";
-import { FormFieldInput } from "@/components/EntityForm";
-import { FormLabel } from "@/components/ui";
 import { useMemo } from "react";
+import { FormLabel } from "@/components/atoms";
+import { QuerySearchInput } from "../models/querySearchInput";
+import { FormFieldInput } from "../../form-builder";
 
 interface EntityQuerySearchMoreFiltersProps<T extends Query>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -21,7 +21,7 @@ const EntityQuerySearchMoreFilters = <T extends Query>({
 }: EntityQuerySearchMoreFiltersProps<T>) => {
   const columnWidth = useMemo(() => {
     return Math.ceil(
-      rowWidth / (fields.length > columns ? columns : fields.length),
+      rowWidth / (fields.length > columns ? columns : fields.length)
     );
   }, [fields.length, columns]);
 

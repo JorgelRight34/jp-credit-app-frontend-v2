@@ -1,5 +1,5 @@
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
 import { z } from "zod";
+import { FormProvider } from "../../form-builder";
 
 const fileFormSchema = z.object({
     name: z.string(),

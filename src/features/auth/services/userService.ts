@@ -2,13 +2,13 @@ import api from "@/services/api";
 import { PossiblePermissions } from "../models/possiblePermissions";
 import { ModulePermissions } from "../models/modulePermissions";
 import { UserPermissions } from "../models/userPermissions";
-import { Claim } from "@/models/claim";
 import { ChangeUserPasswordValues, UserFormValues } from "../lib/form";
 import { User } from "../models/user";
 import { fetchWithQueryParams } from "@/utils/utils";
 import { UserQuery } from "../models/userQuery";
 import { PagedResponse } from "@/models";
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
+import { Claim } from "../lib/claim";
 
 
 const baseUrl = "users"

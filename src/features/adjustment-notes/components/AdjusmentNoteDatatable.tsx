@@ -1,13 +1,15 @@
-import { EntityDataTable } from "@/components/DataTable";
-import { adjustmentNoteCacheKey } from "../lib/constants";
-import { Column } from "@/components/DataTable/models/column";
+import {
+  Column,
+  DateLabel,
+  EntityDataTable,
+  EntityDataTableProps,
+} from "@/components";
 import { AdjustmentNote } from "../models/adjusment-note";
-import { getNotes } from "../services/adjustmentNoteClient";
-import { EntityDataTableProps } from "@/models";
 import { AdjustmentNoteQuery } from "../models/adjusment-note-query";
 import { toCurrency } from "@/utils/utils";
-import LinkToLoan from "@/features/Loans/components/LinkToLoan";
-import { DateLabel } from "@/components/ui";
+import { LinkToLoan } from "@/features/loans";
+import { adjustmentNoteClient } from "../services/adjustmentNoteClient";
+import { adjustmentNoteCacheKey } from "../lib/constants";
 
 type AdjustmentDatatableProps = EntityDataTableProps<
   AdjustmentNote,
@@ -42,7 +44,7 @@ const AdjustmentDatatable = ({ ...props }: AdjustmentDatatableProps) => {
   return (
     <EntityDataTable
       columns={columns}
-      loader={getNotes}
+      loader={adjustmentNoteClient.getNotes}
       title="Notas de Ajuste"
       cacheKey={adjustmentNoteCacheKey}
       {...props}

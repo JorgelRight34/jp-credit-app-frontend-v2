@@ -1,13 +1,14 @@
-import { breadcrumbIcons } from "@/utils/constants";
-import Unauthorized from "../../pages/Unathorized";
-import { toAllTitleCase } from "../../utils/utils";
-import EntityLayout, { EntityLayoutProps } from "../EntityLayout/EntityLayout";
 import { CacheKey } from "@/models";
 import { useFormPage } from "./useFormPage";
-import { ConfirmationModal } from "@/components/Modal";
 import { useState } from "react";
-import { ConfirmationModalProps } from "@/components/Modal/ConfirmationModal";
-import { LoadingSpinner } from "@/components/ui";
+import EntityLayout, { EntityLayoutProps } from "../entity-layout/EntityLayout";
+import {
+  ConfirmationModal,
+  ConfirmationModalProps,
+  LoadingSpinner,
+} from "@/components";
+import { toAllTitleCase } from "@/utils/utils";
+import { breadcrumbIcons } from "@/utils/constants";
 
 type FormLayoutPageProps = React.PropsWithChildren &
   EntityLayoutProps &
@@ -23,25 +24,25 @@ const FormLayoutPage = ({
   title,
   edit,
   children,
+  description,
   breadcrumbs = [],
   permissionsProvider,
   deleteConfirmationMessage = "",
-  description,
   cacheKey,
   isLoading: isFetchingEntityToEdit,
   ...props
 }: FormLayoutPageProps) => {
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const { permissions, isLoading, onDelete } = useFormPage({
     permissionsProvider,
     onDelete: props.onDelete,
-  });
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  }); // MVOE TO SERVER SIDE
 
   const isAuthorized = () =>
     (edit && permissions?.canEdit) || (!edit && permissions?.canCreate);
 
   if (isLoading) return null;
-  if (!isAuthorized()) return <Unauthorized />;
+  if (!isAuthorized()) throw Error();
 
   return (
     <>

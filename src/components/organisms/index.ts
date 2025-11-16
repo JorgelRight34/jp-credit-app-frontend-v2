@@ -13,11 +13,6 @@ export * from "./datatable";
 
 
 // -------------------------------------
-// Entity Query Search (uses its own index.ts)
-// -------------------------------------
-export * from "./entity-query-search";
-
-// -------------------------------------
 // Entity Search Input
 // -------------------------------------
 export * from "./entity-search-input/EntitySearchInput";
@@ -28,7 +23,8 @@ export * from "./entity-search-input/useEntitySearchInput";
 // -------------------------------------
 // Entity Section (uses its own index.ts)
 // -------------------------------------
-export * from "./entity-section";
+export { default as EntitySection } from "./entity-section/components/EntitySection";
+export * from "./entity-section/models/entitySectionProps"
 
 // -------------------------------------
 // Form Builder (uses its own index.ts)
@@ -38,7 +34,10 @@ export * from "./form-builder";
 // -------------------------------------
 // Modal (uses its own index.ts)
 // -------------------------------------
-export * from "./modal";
+export { default as ConfirmationModal } from "./modal/components/ConfirmationModal"
+export * from "./modal/components/ConfirmationModal"
+export { default as Modal } from "./modal/components/Modal"
+export { default as Breadcrumb } from "./breadcrumb/Breadcrumb"
 
 // -------------------------------------
 // Navbar (uses its own index.ts)
@@ -54,3 +53,5 @@ export * from "./tabs";
 // Upload Form (uses its own index.ts)
 // -------------------------------------
 export * from "./upload-form";
+
+export * from "./entity-query-search"

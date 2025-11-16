@@ -1,7 +1,7 @@
+import { AccentBtn } from "@/components/atoms";
+import { SecondaryBtn } from "@/components/atoms";
 import clsx from "clsx";
-import { SecondaryBtn } from "../../ui";
-import AccentBtn from "../../ui/AccentBtn";
-import { MouseEventHandler, ReactNode, useId } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 export interface FormLayoutProps
   extends React.HtmlHTMLAttributes<HTMLDivElement> {
@@ -35,14 +35,11 @@ const FormLayout = ({
   onSubmit,
   onDelete,
 }: FormLayoutProps) => {
-  const formId = useId();
-
   if (renderLayout === false) return children;
 
   return (
-    <form id={formId} className={clsx("flex h-full flex-col", className)}>
+    <form className={clsx("flex h-full flex-col", className)}>
       <div className="flex h-full flex-1 flex-col pb-3">{children}</div>
-
       <div className="flex flex-shrink-0 md:justify-between">
         {showReset && (
           <div className="w-6/12 px-2">
@@ -56,13 +53,11 @@ const FormLayout = ({
             </SecondaryBtn>
           </div>
         )}
-
         {onDelete && (
           <AccentBtn type="button" className="ml-3 w-full" onClick={onDelete}>
             Eliminar
           </AccentBtn>
         )}
-
         <div className={clsx("w-6/12", { "w-full": showReset === false })}>
           <AccentBtn
             disabled={!isDirty}

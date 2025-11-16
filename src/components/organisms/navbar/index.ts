@@ -1,13 +1,14 @@
-// src/components/Navbar/index.ts
-export { default as Navbar } from "./Navbar";
-export { default as TopNavbar } from "./TopNavbar";
-export { default as BottomNavbar } from "./BottomNavbar";
-export { default as BottomNavbarMenu } from "./BottomNavbarMenu";
-export { default as BottomNavbarMenuBtn } from "./BottomNavbarMenuBtn";
-export { default as NavbarFooter } from "./NavbarFooter";
-export { default as NavbarHeader } from "./NavbarHeader";
-export { default as NavbarSearch } from "./NavbarSearch";
-export { default as NavOption } from "./NavOption";
+// components
+export { default as Navbar } from "./components/Navbar";
+export { default as BottomNavbar } from "./components/BottomNavbar";
+export { default as NavbarHeader } from "./components/NavbarHeader";
+export { default as NavbarFooter } from "./components/NavbarFooter";
+export { default as NavbarSearch } from "./components/NavbarSearch";
+export { default as NavLink } from "./components/NavLink";
+export { default as NavLinksContainer } from "./components/NavLinksContainer";
 
-// If navOptions is not a component but an object/array:
-export * from "./navOptions";
+// models
+export * from "./models/navItem";
+
+// lib
+export * from "./lib/navItems";

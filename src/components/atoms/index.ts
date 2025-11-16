@@ -1,17 +1,20 @@
 // -------------------------------------
 // Buttons
 // -------------------------------------
-export * from "./button/Button";
-export * from "./button/AccentBtn";
-export * from "./button/SecondaryBtn";
-export * from "./button/SearchBtn";
-export * from "./button/SplitBtn";
-export * from "./button/ToggleButtonGroup";
+export { default as Button } from "./button/Button";
+export { default as AccentBtn } from "./button/AccentBtn";
+export { default as SecondaryBtn } from "./button/SecondaryBtn";
+export { default as SearchBtn } from "./button/SearchBtn";
+export { default as SplitBtn } from "./button/SplitBtn";
+export { default as ToggleButtonGroup } from "./button/ToggleButtonGroup";
+export { default as LightBtn } from "./button/LightBtn";
 
 // -------------------------------------
-// Icon
+// Icon & Text
 // -------------------------------------
-export * from "./icon/Icon";
+export { default as Icon } from "./icon/Icon";
+export { default as Subtitle } from "./text/Subtitle";
+export { default as FormLabel } from "./form-label/FormLabel";
 
 // -------------------------------------
 // Inputs - Global Constants
@@ -21,63 +24,70 @@ export * from "./inputs/constants";
 // -------------------------------------
 // Inputs - Citizen ID
 // -------------------------------------
-export * from "./inputs/citizen-id-input/CitizenIdInput";
+export { default as CitizenIdInput } from "./inputs/citizen-id-input/CitizenIdInput";
 
 // -------------------------------------
 // Inputs - Currency
 // -------------------------------------
-export * from "./inputs/currency-input/CurrencyInput";
+export { default as CurrencyInput } from "./inputs/currency-input/CurrencyInput";
 
 // -------------------------------------
 // Inputs - Date
 // -------------------------------------
-export * from "./inputs/date-input/DateInput";
+export { default as DateInput } from "./inputs/date-input/DateInput";
 
 // -------------------------------------
 // Inputs - Base Input + TextField
 // -------------------------------------
-export * from "./inputs/input/Input";
-export * from "./inputs/input/TextField";
+export { default as Input } from "./inputs/input/Input";
+export { default as TextField } from "./inputs/input/TextField";
+export { default as MediumTitle } from "./text/MediumTitle"
+export { default as BigTitle } from "./text/BigTitle"
+export * from "./inputs/input/Input"
 export * from "./inputs/input/baseTextFieldProps";
 export * from "./inputs/input/react-utils";
 
 // -------------------------------------
 // Inputs - Masked
 // -------------------------------------
-export * from "./inputs/masked-input/MaskedInput";
+export { default as MaskedInput } from "./inputs/masked-input/MaskedInput";
 
 // -------------------------------------
 // Inputs - Month Select
 // -------------------------------------
-export * from "./inputs/month-select/MonthSelect";
+export { default as MonthSelect } from "./inputs/month-select/MonthSelect";
 
 // -------------------------------------
 // Inputs - Password
 // -------------------------------------
-export * from "./inputs/password-input/PasswordInput";
+export { default as PasswordInput } from "./inputs/password-input/PasswordInput";
 
 // -------------------------------------
 // Inputs - Percentage
 // -------------------------------------
-export * from "./inputs/percentage-input/PercentageInput";
+export { default as PercentageInput } from "./inputs/percentage-input/PercentageInput";
 
 // -------------------------------------
 // Inputs - Phone
 // -------------------------------------
-export * from "./inputs/phone-input/PhoneInput";
+export { default as PhoneInput } from "./inputs/phone-input/PhoneInput";
+export { default as Image } from "./image/Image"
+export * from "./image/Image"
 
 // -------------------------------------
 // Inputs - Select (Lazy & Normal)
 // -------------------------------------
-export * from "./inputs/select/LazySelectInput";
-export * from "./inputs/select/SelectInput";
-export * from "./inputs/select/SelectOption";
-export * from "./inputs/select/YearSelect";
+export { default as LazySelectInput } from "./inputs/select/LazySelectInput";
+export { default as SelectInput } from "./inputs/select/SelectInput";
+export * from "./inputs/select/SelectInput"
+export { default as SelectOption } from "./inputs/select/SelectOption";
+export { default as YearSelect } from "./inputs/select/YearSelect";
 
 // -------------------------------------
 // Navigation
 // -------------------------------------
-export * from "./navigation/Link";
-export * from "./navigation/AppLink";
-export * from "./navigation/NavLink";
-export * from "./navigation/PhoneLink";
+export { default as Link } from "./navigation/Link";
+export { default as AppLink } from "./navigation/AppLink";
+export { default as NavLink } from "./navigation/NavLink";
+export { default as PhoneLink } from "./navigation/PhoneLink";
+export { default as DateLabel } from "./date-label/DateLabel"

@@ -1,18 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { ReactNode, useMemo, useState } from "react";
 import { EntitySearchInputProps } from "./entitySearchInputProps";
-import Modal from "../Modal/Modal";
-import Input from "../EntityForm/inputs/Input";
 import { useEntitySearchInput } from "./useEntitySearchInput";
 import { CacheKey } from "@/models";
 import { Query } from "@/models/query";
+import { Input } from "@/components/atoms";
+import { Modal } from "../modal";
 
 type EntitySearchInputComponentProps<
   T,
@@ -46,56 +38,41 @@ const EntitySearchInput = <T, TData extends Query>({
   ...props
 }: EntitySearchInputComponentProps<T, TData>) => {
   const [showModal, setShowModal] = useState(false);
-  const [value, setValue] = useState<T | null>();
-  const initialDefaultValue = useRef(controlledValue);
+  const [selected, setSelected] = useState<T>();
+  /* eslint-disable react-hooks/exhaustive-deps */
+  const initialDefaultValue = useMemo(() => controlledValue, []);
+
   const { entity: fetchedDefaultValue } = useEntitySearchInput<T>({
-    defaultValue: initialDefaultValue.current,
+    defaultValue: initialDefaultValue,
     cacheKey,
     onSearch,
   });
 
-  useEffect(() => {
-    if (fetchedDefaultValue && defaultValue) {
-      setValue(fetchedDefaultValue);
-    }
-  }, [defaultValue, fetchedDefaultValue]);
-
-  useEffect(() => {
-    if (controlledValue && fetchedDefaultValue) {
-      setValue(fetchedDefaultValue);
-    }
-  }, [fetchedDefaultValue]);
-
-  useEffect(() => {
+  const value = useMemo(() => {
     if (controlledValue === undefined) {
-      setValue(undefined);
+      return undefined;
     }
-  }, [controlledValue]);
 
-  const handleSelect = useCallback(
-    (val: T) => {
-      setValue(val);
-      onChange?.(val);
-      setShowModal(false);
-    },
-    [onChange],
-  );
+    if (selected) {
+      return selected;
+    }
 
-  const hiddenValue = useMemo(
-    () => accesorFn(value ?? null)?.toString() ?? "",
-    [value, accesorFn],
-  );
+    if (fetchedDefaultValue && controlledValue) {
+      return fetchedDefaultValue;
+    }
+  }, [controlledValue, defaultValue, fetchedDefaultValue]);
 
-  const visibleValue = useMemo(
-    () => visibleValueFn(value ?? null) ?? "",
-    [value, visibleValueFn],
-  );
+  const handleSelect = (val: T) => {
+    onChange?.(val);
+    setSelected(val);
+    setShowModal(false);
+  };
 
   return (
     <>
       <input
         type="hidden"
-        value={hiddenValue}
+        value={accesorFn(value ?? null)?.toString() ?? ""}
         {...props}
         className="hidden"
         readOnly
@@ -104,7 +81,7 @@ const EntitySearchInput = <T, TData extends Query>({
         className={className}
         onClick={() => setShowModal(true)}
         placeholder={placeholder}
-        value={visibleValue}
+        value={visibleValueFn(value ?? null) ?? ""}
         disabled={isDisabled || false}
         label={floatingLabel ? label : undefined}
         error={error}

@@ -1,17 +1,10 @@
-import { ApiFile } from "@/models/apiFile";
-import { FileAccept } from "@/components/FileUpload/models/fileAccept";
-import { FileFormFieldValues } from "@/components/FileUpload/lib/form";
+import { FileModel } from "@/models/fileModel";
+import { FileAccept } from "../../upload-form/models/fileAccept";
+import { FileFormFieldValues } from "../../upload-form/lib/form";
 
 
-/**
- * Configuration for a file input component, supporting both new uploads and existing file sources.
- */
 export interface FileInputConfig<TData> {
-  // ─────────────────────────────────────────────
-  // 🔹 New File Uploads
-  // ─────────────────────────────────────────────
-
-  editFiles?: ApiFile[];
+  initialFiles?: FileModel[];
 
   /**
    * Function to update the selected files.
@@ -34,14 +27,9 @@ export interface FileInputConfig<TData> {
   // 🔹 Existing Files (e.g., from API)
   // ─────────────────────────────────────────────
 
-  /**
-   * List of files previously uploaded and retrieved from an API.
-   * These are shown as already-attached files.
-   */
-  defaultFileSources?: ApiFile[];
 
   onUpload: (files: File[], data: Partial<TData>) => Promise<unknown>;
-  onDelete?: (files: ApiFile[], data: Partial<TData>) => Promise<void>;
+  onDelete?: (files: FileModel[], data: Partial<TData>) => Promise<void>;
   onCreate?: (fileData: FileFormFieldValues[], data: Partial<TData>) => Promise<void>;
   accept: FileAccept
 }

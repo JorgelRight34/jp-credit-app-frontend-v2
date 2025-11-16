@@ -1,10 +1,8 @@
 import { Loan } from "../models/loan";
-import LoansSection from "./LoansSection";
-import { loansQueryKey } from "../lib/constants";
-import { getLoan } from "../services/loanClient";
-import { EntitySearchInputProps } from "@/models";
-import { EntitySearchInput } from "@/components/EntityForm";
 import { LoanQuery } from "../models/loanQuery";
+import { EntitySearchInput, EntitySearchInputProps } from "@/components";
+import { loansQueryKey } from "../lib/constants";
+import { loanClient } from "../services/loanClient";
 
 type LoanSearchInputProps = EntitySearchInputProps<Loan, LoanQuery>;
 
@@ -24,7 +22,7 @@ const LoanSearchInput = ({
       label={label}
       accesorFn={(l) => l?.id}
       visibleValueFn={(l) => (l ? `Préstamo #${l?.id}` : "")}
-      onSearch={getLoan}
+      onSearch={loanClient.getLoan}
       value={value}
       {...props}
       render={(setValue) => <LoansSection table={{ onRowClick: setValue }} />}

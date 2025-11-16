@@ -1,9 +1,9 @@
-import { ApiFile } from "@/models";
+import { FileModel } from "@/models/fileModel";
 import { DatatableFile } from "../models/datatableFile";
 import { FileFormFieldValues } from "./form";
-import { FormInterceptor } from "@/components/EntityForm/models/formInterceptor";
+import { FormInterceptor } from "../../form-builder";
 
-export const mapApiFileToDatatableFile = (file: ApiFile): DatatableFile => {
+export const mapApiFileToDatatableFile = (file: FileModel): DatatableFile => {
     return (
         {
             id: file.id,

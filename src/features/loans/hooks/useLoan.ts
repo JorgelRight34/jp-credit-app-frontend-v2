@@ -7,7 +7,7 @@ interface UseLoanProps {
     id?: number | string;
 }
 
-const useLoan = ({ id }: UseLoanProps) => {
+export const useLoan = ({ id }: UseLoanProps) => {
     const numericId = Number(id);
     const { data, isError, isLoading } = useQuery<Loan>({
         queryKey: [...loansQueryKey, numericId],
@@ -17,5 +17,3 @@ const useLoan = ({ id }: UseLoanProps) => {
 
     return { loan: data, isError, isLoading };
 };
-
-export default useLoan;

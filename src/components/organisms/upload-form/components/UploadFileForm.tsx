@@ -6,15 +6,15 @@ import {
   useEffect,
   useImperativeHandle,
 } from "react";
-import { FormBuilderRef } from "@/components/EntityForm/models/formBuilder";
 import { UseUploadFilesInputReturn } from "../models/useMultipleFilesInputProp";
 import { FileUploads, useUploadFilesInput } from "../hooks/useUploadFilesInput";
 import {
-  UseFileFormProps,
+  UseUploadFileFormProps,
   useUploadFileForm,
 } from "../hooks/useUploadFileForm";
+import { FormBuilderRef } from "../../form-builder/models/formBuilder";
 
-export interface FileFormProps extends UseFileFormProps {
+export interface FileFormProps extends UseUploadFileFormProps {
   resetFlag?: boolean;
   render: (methods: UseUploadFilesInputReturn) => ReactNode;
   onDirtyChange?: (isDirty: boolean) => void;
@@ -37,16 +37,18 @@ const UploadFileForm = forwardRef(
     }, [isDirty, onDirtyChange]);
 
     useImperativeHandle(ref, () => ({
-      submit: () => {},
-      reset,
-      setValue: () => {},
-      onChange: config.onChange,
-      validate: () => true,
       isDirty,
+      reset,
+      onChange: config.onChange,
+      submit: () => {},
+      validate: () => true,
+      setValue: () => {},
     }));
 
     return render({ isDirty, ...methods });
   },
 );
+
+UploadFileForm.displayName = "UploadFileForm";
 
 export default UploadFileForm;

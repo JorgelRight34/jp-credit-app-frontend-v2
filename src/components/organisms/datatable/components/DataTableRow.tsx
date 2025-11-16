@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Row } from "../models/row";
 import { flexRender } from "@tanstack/react-table";
-import { Icon } from "@/components/ui";
+import { Icon } from "@/components/atoms";
 
 export interface DataTableRowProps<TData> {
   row: Row<TData>;

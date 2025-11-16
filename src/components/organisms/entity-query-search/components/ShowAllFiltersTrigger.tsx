@@ -1,4 +1,4 @@
-import { Icon } from "@/components/ui";
+import { Icon } from "@/components/atoms";
 import clsx from "clsx";
 import { ElementType } from "react";
 
@@ -12,8 +12,8 @@ interface ShowAllFiltersTriggerProps
 const ShowAllFiltersTrigger = ({
   showAll,
   Component,
-  toggle,
   className,
+  toggle,
   ...props
 }: ShowAllFiltersTriggerProps) => {
   return (

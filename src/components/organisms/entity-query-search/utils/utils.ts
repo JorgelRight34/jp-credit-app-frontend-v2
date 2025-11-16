@@ -1,6 +1,7 @@
-import { FormField } from "@/components/EntityForm";
-import { QuerySearchInput } from "@/models"
+
 import { Query } from "@/models/query";
+import { QuerySearchInput } from "../models/querySearchInput";
+import { FormField } from "../../form-builder/models/formField";
 
 export const shouldShowField = <T extends Query>(
     field: QuerySearchInput<T>,
@@ -23,20 +24,19 @@ export function sanitizeFields<T extends Query>(
     {
         attributes,
         defaultValues,
-        valuesToWatch,
     }: {
         attributes?: Partial<Record<keyof T, Partial<FormField<T>>>>;
-        defaultValues?: Partial<T>;
-        valuesToWatch?: React.RefObject<(keyof T)[]>;
+        defaultValues?: Partial<T>
     }
 ) {
     const result: QuerySearchInput<T>[] = [];
+    const valuesToWatch: (keyof T)[] = [];
 
     for (const field of fields) {
         const { searchOnChange, id, name, hideWhenDefault, ...rest } = field;
 
-        if (searchOnChange && valuesToWatch?.current) {
-            valuesToWatch.current.push(name as keyof T);
+        if (searchOnChange && valuesToWatch) {
+            valuesToWatch.push(name as keyof T);
         }
 
         const base: QuerySearchInput<T> = {
@@ -51,5 +51,5 @@ export function sanitizeFields<T extends Query>(
         }
     }
 
-    return result;
+    return { fields: result, valuesToWatch };
 }

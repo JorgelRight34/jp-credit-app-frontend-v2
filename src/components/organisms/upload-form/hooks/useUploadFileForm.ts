@@ -1,17 +1,19 @@
-import { useCallback, useEffect, useState } from "react";
-import { FileInputConfig } from "@/components/EntityForm";
+"use client"
+
+import { useState } from "react";
 import { useDataMutation } from "@/hooks/useMutate";
 import { FileUploads } from "./useUploadFilesInput";
+import { FileInputConfig } from "../../form-builder/models/fileInputConfig";
 
-export type UseFileFormProps<T = object> = FileInputConfig<T> & {
+export type UseUploadFileFormProps<T = object> = FileInputConfig<T> & {
     defaultData?: T;
 };
 
 export const useUploadFileForm = <T = object>(
-    { onUpload, onDelete, onCreate, defaultData, editFiles, filesMaxLength }: UseFileFormProps<T>
+    { defaultData, initialFiles, filesMaxLength, onUpload, onDelete, onCreate }: UseUploadFileFormProps<T>
 ) => {
     const [fileUploads, setFileUploads] = useState<FileUploads>({
-        loaded: [],
+        loaded: initialFiles ?? [],
         uploaded: [],
         created: [],
         removed: [],
@@ -65,22 +67,16 @@ export const useUploadFileForm = <T = object>(
         await onCreate(filesToCreate, response);
     }
 
-    const init = useCallback(() => {
+    const init = () => {
         setFileUploads({
             uploaded: [],
             removed: [],
             created: [],
             deleted: [],
-            loaded: editFiles ?? [],
+            loaded: initialFiles ?? [],
             removedCreations: []
         })
-    }, [editFiles])
-
-    useEffect(() => {
-        if (editFiles) {
-            init()
-        }
-    }, [editFiles, init])
+    }
 
     return {
         value: fileUploads,

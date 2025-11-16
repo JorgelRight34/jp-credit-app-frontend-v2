@@ -1,5 +1,4 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
-import { User } from "../features/Auth/models/user";
 import { ACCESS_TOKEN } from "../utils/constants";
 import {
   UseMutateAsyncFunction,
@@ -7,10 +6,12 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { getMe, login as handleLogin } from "../services/authService";
-import { LoginFormValues } from "@/features/Auth/lib/form";
+import { User, LoginFormValues } from "@/features/auth";
 
 type AuthContextType = {
   user?: User | null;
+  isLoading: boolean;
+  isError: boolean;
   login: UseMutateAsyncFunction<
     { user: User; token: string },
     Error,
@@ -19,8 +20,6 @@ type AuthContextType = {
   >;
   logout: () => void;
   loadUser: () => void;
-  isLoading: boolean;
-  isError: boolean;
 };
 
 type AuthProviderProps = PropsWithChildren;
@@ -57,11 +56,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     <AuthContext.Provider
       value={{
         user: currentUser,
+        isLoading,
+        isError,
         login,
         logout,
         loadUser: () => setIsAuthenticated(true),
-        isLoading,
-        isError,
       }}
     >
       {children}

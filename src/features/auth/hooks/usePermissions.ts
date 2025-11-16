@@ -1,23 +1,19 @@
-import { ModulePermissions } from "../models/modulePermissions";
 import { CacheKey } from "@/models";
 import { useData } from "@/hooks/useData";
+import { ModulePermissions } from "../models/modulePermissions";
+import { permissionsQueryKey } from "../lib/constants";
 
 interface UsePermissionsProps {
-  getPermissions?: () => Promise<ModulePermissions>;
   cacheKey?: CacheKey;
+  getPermissions?: () => Promise<ModulePermissions>;
 }
 
-const usePermissions = ({
-  getPermissions,
-  cacheKey
-}: UsePermissionsProps) => {
+export const usePermissions = ({ cacheKey, getPermissions }: UsePermissionsProps) => {
   const { data, isLoading, isError } = useData<ModulePermissions>({
-    key: ["permissions", ...(cacheKey ?? [])],
+    key: [...permissionsQueryKey, ...(cacheKey ?? [])],
     getData: getPermissions,
     enabled: !!getPermissions || !!cacheKey
   })
 
   return { permissions: data, isLoading, isError }
 };
-
-export default usePermissions;

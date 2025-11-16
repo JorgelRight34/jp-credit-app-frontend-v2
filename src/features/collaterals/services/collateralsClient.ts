@@ -1,14 +1,15 @@
 
 import api from "@/services/api";
-import { CollateralFormValues } from "../lib/form";
 import { Collateral } from "../models/collateral";
-import { Collateralization } from "../models/collateralization";
-import { CollateralQuery } from "../models/collateralQuery";
 import { fetchBlobWithQueryParams, fetchWithQueryParams } from "@/utils/utils";
-import { ApiFile, PagedResponse } from "@/models";
-import { getModulePermissions } from "@/features/Auth/services/userService";
+import { PagedResponse } from "@/models";
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
 import { Query } from "@/models/query";
+import { Collateralization } from "../models/collateralization";
+import { CollateralFormValues } from "../lib/form";
+import { CollateralQuery } from "../models/collateralQuery";
+import { FileModel } from "@/models/fileModel";
+import { getModulePermissions } from "@/features/auth";
 
 const baseUrl = "collaterals";
 
@@ -66,7 +67,7 @@ export const uploadCollateralFiles = async (id: number, files: File[]) => {
   await api.post(`${baseUrl}/${id}/files`, data)
 }
 
-export const deleteCollateralFiles = async (files: ApiFile[]) => {
+export const deleteCollateralFiles = async (files: FileModel[]) => {
   await Promise.all(files.map(file => api.delete(`${baseUrl}/${file.id}/photo`)));
 }
 
@@ -76,4 +77,10 @@ export const getCollateralModulePermissions = async () => {
 
 export const getCollateralsReportBlob = async (query?: Query) => {
   return await fetchBlobWithQueryParams("collaterals/export", query)
+}
+
+export const collateralClient = {
+  getCollateral,
+  getCollaterals,
+  createCollateral
 }

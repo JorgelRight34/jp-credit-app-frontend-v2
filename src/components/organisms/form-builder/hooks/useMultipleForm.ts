@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useCallback } from "react";
 import { FormBuilderRef } from "../models/formBuilder";
 
@@ -44,9 +46,9 @@ export const useMultipleForm = <T extends string = string>(
 
     return {
         forms,
+        isDirty,
         setFormRef,
         reset,
-        isDirty,
         onDirtyChange: updateIsDirty,
         submitAllForms,
     };

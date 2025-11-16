@@ -3,12 +3,11 @@ import {
   profilesQueryKey,
   profileRolesSpanishTranslations,
 } from "../lib/constants";
-import { getProfile } from "../services/profilesClient";
 import { Profile } from "../models/profile";
-import { EntitySearchInputProps } from "@/models";
-import { EntitySearchInput } from "@/components/EntityForm";
 import { getFullName, toTitleCase } from "@/utils/utils";
 import { ProfileQuery } from "../models/profileQuery";
+import { EntitySearchInput, EntitySearchInputProps } from "@/components";
+import { profilesClient } from "../services/profilesClient";
 
 type ProfileSearchInputProps = EntitySearchInputProps<Profile, ProfileQuery>;
 
@@ -30,7 +29,7 @@ const ProfileSearchInput = ({
       }}
       accesorFn={(p) => p?.id}
       visibleValueFn={getFullName}
-      onSearch={getProfile}
+      onSearch={profilesClient.getProfile}
       role={role}
       onChange={onChange}
       id={id}

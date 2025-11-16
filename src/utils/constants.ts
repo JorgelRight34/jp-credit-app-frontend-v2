@@ -3,7 +3,7 @@ import "i18n-iso-countries/langs/es.json";
 import esLocale from "i18n-iso-countries/langs/es.json";
 import { PagedResponse } from "../models/pagedResponse";
 import { IconName } from "@/models";
-import { Compound } from "@/features/Armotizations/models/compound";
+import { Compound } from "@/features/calculators";
 
 countries.registerLocale(esLocale);
 
@@ -12,7 +12,7 @@ export const LOGOS = {
   vertical: "/header.jpg",
 };
 
-export const IS_DEV_MODE = !(import.meta.env.VITE_MODE === "PROD")
+export const IS_DEV_MODE = !(process.env.VITE_MODE === "PROD")
 
 export const ND = "N/D"
 
@@ -116,4 +116,17 @@ export const days = [
   "Viernes",
   "Sábado",
   "Domingo",
+];
+
+
+export const imageExtensions = [
+  "jpg",
+  "jpeg",
+  "png",
+  "gif",
+  "webp",
+  "bmp",
+  "svg",
+  "tiff",
+  "image/png",
 ];

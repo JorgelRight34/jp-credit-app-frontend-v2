@@ -1,10 +1,9 @@
 import ProfilesDataTable from "./ProfilesDataTable";
 import { ProfileQuery } from "../models/profileQuery";
 import ProfileQuerySearch from "./ProfileQuerySearch";
-import { ProfileRole } from "../models/profileRole";
 import { Profile } from "../models/profile";
-import { EntitySectionProps } from "@/components/EntitySection/models/EntitySectionProps";
-import EntitySection from "@/components/EntitySection/components/EntitySection";
+import { EntitySection, EntitySectionProps } from "@/components";
+import { ProfileRole } from "../models/profileRole";
 
 interface ProfilesSectionProps
   extends EntitySectionProps<Profile, ProfileQuery> {

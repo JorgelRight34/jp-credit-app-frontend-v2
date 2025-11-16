@@ -1,5 +1,5 @@
-import { ProfileRole } from "@/features/Profiles/models/profileRole";
-import { Query } from "../../../models/query";
+import { ProfileRole } from "@/features/profiles";
+import { Query } from "@/models/query";
 
 export interface AccountProfileQuery extends Query {
   profileId?: number;

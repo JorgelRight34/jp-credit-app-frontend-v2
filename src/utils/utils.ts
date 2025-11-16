@@ -1,16 +1,15 @@
-import { User } from "../features/Auth/models/user";
 import {
+    imageExtensions,
     PROJECT_URL_PARAM,
     TEST,
 } from "./constants";
-import { Profile } from "@/features/Profiles/models/profile";
-import api from "@/services/api";
 import { AxiosRequestConfig } from "axios";
-import { Column } from "@/components/DataTable/models/column";
-import { Row } from "@/components/DataTable/models/row";
-import { FormInterceptor } from "@/components/EntityForm/models/formInterceptor";
 import { Query } from "@/models/query";
 import dayjs from "dayjs";
+import { Column, FormInterceptor, Row } from "@/components";
+import api from "@/services/api";
+import { Profile } from "@/features/profiles";
+import { User } from "@/features/auth";
 
 
 export const toCurrency = (money: number | undefined): string | number => {
@@ -109,7 +108,7 @@ export const getRandomName = () => {
     return `${first} ${last}`;
 };
 
-export const getFullName = (user?: User | Profile | null): string => {
+export const getFullName = (user?: Profile | null): string => {
     if (TEST) return getRandomName();
     if (!user) return "";
 
@@ -138,6 +137,17 @@ export const triggerDownload = (blob: Blob, filename = "filename") => {
 
     URL.revokeObjectURL(url)
 }
+
+export const handleTriggerBrowserDownload = (data: Blob) => {
+    const blob = new Blob([data], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+
+    window.open(url, "_blank");
+
+    setTimeout(() => {
+        URL.revokeObjectURL(url);
+    }, 10000);
+};
 
 export const toTitleCase = (str?: string | number | null) => {
     if (!str || typeof (str) === "number") return str?.toString();
@@ -349,3 +359,6 @@ export const getLocaleMonth = (dateInput: Date | string) => {
     const date = new Date(dateInput);
     return date.toLocaleString(undefined, { month: "long" })
 }
+
+export const isImage = (ft?: string) =>
+    imageExtensions.includes(ft ?? "");

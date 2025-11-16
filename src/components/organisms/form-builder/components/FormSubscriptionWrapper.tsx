@@ -19,7 +19,7 @@ const FormSubscriptionWrapper = <T extends FieldValues>({
   if (form) {
     return <FormSubscription form={form} {...props} />;
   } else {
-    return <>No form </>;
+    return null;
   }
 };
 

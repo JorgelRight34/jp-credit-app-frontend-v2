@@ -1,8 +1,9 @@
 import { useAuth } from "@/contexts/AuthContext";
-import { LoginForm, UseEntityFormReturn } from "@/models";
 import { loginFormProvider, LoginFormValues } from "../lib/form";
 import { toastService } from "@/services";
 import { useRouter } from "@/hooks/useRouter";
+import { LoginForm } from "../models/loginForm";
+import { UseEntityFormReturn } from "@/components";
 
 export const useLoginForm = (): UseEntityFormReturn<
     LoginForm,
@@ -17,6 +18,8 @@ export const useLoginForm = (): UseEntityFormReturn<
         toastService.success(`Bienvenido ${response.user.firstName}!`);
 
         router.push("/");
+
+        return data;
     };
 
     return {

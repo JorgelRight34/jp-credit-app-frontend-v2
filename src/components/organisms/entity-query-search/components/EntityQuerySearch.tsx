@@ -1,20 +1,19 @@
-import useEntityQuerySearch, {
-  UseEntityQuerySearchProps,
-} from "@/components/EntityQuerySearch/hooks/useEntityQuerySearch";
 import { Query } from "@/models/query";
-import { QuerySearchInput } from "@/components/EntityQuerySearch/models/querySearchInput";
-import { ReportOptions } from "@/components/Report/reportOptions";
 import clsx from "clsx";
-import DownloadReportBtn from "@/components/Report/DownloadReportBtn";
-import { SearchBtn } from "@/components/ui";
 import { FormProvider } from "react-hook-form";
-import { FormFieldInput } from "@/components/EntityForm";
 import EntityQuerySearchMoreFields from "./EntityQuerySearchMoreFilters";
 import { useToggler } from "@/hooks/useToggler";
 import ShowAllFiltersTrigger from "./ShowAllFiltersTrigger";
-import LightBtn from "@/components/ui/LightBtn";
+import { LightBtn } from "@/components/atoms";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { SMALL_SCREEN_BREAKPOINT } from "@/utils/constants";
+import SearchBtn from "@/components/atoms/button/SearchBtn";
+import { FormFieldInput } from "../../form-builder";
+import useEntityQuerySearch, {
+  UseEntityQuerySearchProps,
+} from "../hooks/useEntityQuerySearch";
+import { QuerySearchInput } from "../models/querySearchInput";
+import { DownloadReportBtn, ReportOptions } from "@/features/reports";
 
 interface EntityQuerySearchProps<T extends Query, TReturn>
   extends UseEntityQuerySearchProps<T, TReturn> {

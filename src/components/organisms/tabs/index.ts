@@ -1,3 +1,9 @@
-export { default as Tabs } from "./Tabs";
-export { default as Tab } from "./Tab"
-export { default as useTabs } from "./useTabs"
+// components
+export { default as Tabs } from "./components/Tabs";
+export { default as Tab } from "./components/Tab";
+
+// hooks
+export * from "./hooks/useTabs";
+
+// lib
+export * from "./lib/variations";

@@ -1,16 +1,15 @@
 import { Link, LinkProps } from "@mui/material";
 import clsx from "clsx";
-import { Icon } from "../ui";
-import { BreadcrumbSpec } from "@/models";
 import { useBreadCrumb } from "./useBreadCrumb";
+import { BreadcrumbSpec } from "./breadcrumbSpec";
+import { Icon } from "@/components/atoms";
 
 interface BreadProps extends LinkProps {
   isLast: boolean;
   pathname?: string;
-  onClick: () => void;
   breadcrumb: BreadcrumbSpec;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params?: Record<string, any>;
+  params?: Record<string, unknown>;
+  onClick: () => void;
 }
 
 const Bread = ({

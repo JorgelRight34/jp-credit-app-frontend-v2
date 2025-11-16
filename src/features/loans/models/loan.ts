@@ -1,12 +1,9 @@
+import { Client, Guarantor, LoanOfficer } from "@/features/profiles";
 import { LoanStatus } from "./loanStatus";
-import { Transaction } from "../../Transactions/models/transaction";
-import { Compound } from "../../Armotizations/models/compound";
-import { Client } from "@/features/Profiles/models/client";
-import { Guarantor } from "@/features/Profiles/models/guarantor";
-import { LoanOfficer } from "@/features/Profiles/models/loanOfficer";
+import { Transaction } from "@/features/transactions";
 
 export interface Loan {
-  id: number; // Corresponds to int in C#
+  id: number;
   projectId: number;
   guarantorId?: number;
   loanOfficerId?: number;
@@ -54,7 +51,6 @@ export interface Loan {
   transactions?: Transaction[];
   overduePayments: number;
   delinquency: number;
-  compound?: Compound;
 
   hasPayments: boolean;
 

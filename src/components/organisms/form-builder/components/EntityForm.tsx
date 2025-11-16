@@ -6,7 +6,7 @@ import FormBuilder from "./FormBuilder";
 
 type EntityFormProps<
   T extends object,
-  TData extends FieldValues,
+  TData extends FieldValues
 > = FormBuilderProps<T, TData> &
   Omit<FormLayoutProps, "onSubmit" | "reset" | "children">;
 
@@ -25,15 +25,15 @@ const EntityForm = <T extends object, TData extends FieldValues>({
       setIsDirty(val);
       onDirtyChange?.(val);
     },
-    [onDirtyChange],
+    [onDirtyChange]
   );
 
   return (
     <FormLayout
       isDirty={isDirty}
       onDelete={onDelete as MouseEventHandler}
-      onSubmit={form.current?.submit}
-      reset={form.current?.reset}
+      onSubmit={() => form.current?.submit()}
+      reset={() => form.current?.reset()}
       renderLayout={renderLayout}
       showReset={showReset}
     >

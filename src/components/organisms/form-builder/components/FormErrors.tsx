@@ -1,4 +1,4 @@
-import { FormError } from "./models/formError";
+import { FormError } from "../models/formError";
 
 interface FormErrorsProps {
   errors: string[];

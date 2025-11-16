@@ -1,6 +1,6 @@
-import { Column } from "@/components/DataTable/models/column";
-import { Query } from "../../../models/query";
+import { Query } from "@/models/query";
 import { DataTableProps } from "../components/DataTable";
+import { Column } from "./column";
 
 /**
  * Props for rendering a generic entity-based data table.

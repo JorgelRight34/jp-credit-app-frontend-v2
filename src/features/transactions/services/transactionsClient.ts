@@ -1,5 +1,4 @@
-import api from "../../../services/api";
-import { fetchBlobWithQueryParams, fetchWithQueryParams, } from "../../../utils/utils";
+
 import { TransactionFormValues } from "../lib/form";
 import { ClosePeriodRequest } from "../models/closePeriodRequest";
 import { ClosedPeriodsQuery } from "../models/closedPeriodsQuery";
@@ -7,10 +6,12 @@ import { ClosedPeriod } from "../models/closedPeriod";
 import { Transaction } from "../models/transaction";
 import { PagedResponse } from "../../../models/pagedResponse";
 import { Query } from "@/models/query";
-import { getModulePermissions } from "@/features/Auth/services/userService";
+import { getModulePermissions } from "@/features/auth";
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
 import { transactionsCacheKey } from "../lib/constants";
 import { PermissionsProvider } from "@/models/permissionsProvider";
+import api from "@/services/api";
+import { fetchBlobWithQueryParams, fetchWithQueryParams } from "@/utils/utils";
 
 const baseUrl = `/transactions`;
 
@@ -61,4 +62,11 @@ export const getTransactionsModulePermissions = async () => {
 export const transactionPermissionsProvider: PermissionsProvider = {
   cacheKey: transactionsCacheKey,
   getPermissions: getTransactionsModulePermissions
+}
+
+export const transactionClient = {
+  getTransaction,
+  getTransactions,
+  createTransaction,
+  deleteTransaction
 }

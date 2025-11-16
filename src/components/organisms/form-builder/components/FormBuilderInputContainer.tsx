@@ -1,8 +1,8 @@
 import { FieldErrors, FieldValues } from "react-hook-form";
 import { FormField } from "../models/formField";
-import { FormLabel } from "@/components/ui";
 import FormFieldInput from "./FormFieldInput";
 import clsx from "clsx";
+import { FormLabel } from "@/components/atoms";
 
 interface FormBuilderInputContainer<T, TData extends FieldValues> {
   field?: FormField<TData> | null;

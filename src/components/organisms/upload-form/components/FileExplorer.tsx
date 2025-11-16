@@ -1,21 +1,22 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { ApiFile } from "../../../models/apiFile";
-import { toFormattedDate } from "../../../utils/utils";
+"use client";
+
 import { useState } from "react";
-import LightBox from "../../ui/LightBox";
-import DateLabel from "../../ui/DateLabel";
-import { DataTable } from "@/components/DataTable";
 import { toastService } from "@/services";
 import FilenameDataTableColumn from "./FilenameDataTableColumn";
-import { Column } from "@/components/DataTable/models/column";
 import { DatatableFile } from "../models/datatableFile";
+import { Column } from "../../datatable/models/column";
+import { isImage, toFormattedDate } from "@/utils/utils";
+import DateLabel from "@/components/atoms/date-label/DateLabel";
+import { FileModel } from "@/models/fileModel";
+import { DataTable } from "../../datatable";
+import { LightBox } from "@/components/molecules";
 
 interface FileExplorerProps {
   showLink?: boolean;
-  extraColumns?: ColumnDef<DatatableFile>[];
-  navigateCallBack?: (page: number) => void;
+  extraColumns?: Column<DatatableFile>[];
   files: DatatableFile[];
   showType?: boolean;
+  navigateCallBack?: (page: number) => void;
 }
 
 const columns: Column<DatatableFile>[] = [
@@ -57,33 +58,25 @@ const columns: Column<DatatableFile>[] = [
   },
 ];
 
-const imageExtensions = [
-  "jpg",
-  "jpeg",
-  "png",
-  "gif",
-  "webp",
-  "bmp",
-  "svg",
-  "tiff",
-  "image/png",
-];
-
 const FileExplorer = ({ files = [], extraColumns = [] }: FileExplorerProps) => {
-  const [lightBoxFiles, setLightBoxFiles] = useState<ApiFile[]>([]);
+  const [lightBoxFiles, setLightBoxFiles] = useState<FileModel[]>([]);
   const [showlightBox, setShowLightBox] = useState(false);
 
-  const onRowClick = (file: ApiFile) => {
-    if (imageExtensions.includes(file.fileType ?? "")) {
+  const onRowClick = (file: DatatableFile) => {
+    const type = file.fileType ?? "";
+
+    if (isImage(type)) {
+      setLightBoxFiles([file]);
       setShowLightBox(true);
-    } else if (file.url) {
-      window.open(file.url, "_blank", "noopener,noreferer");
-    } else {
-      toastService.error(
-        `Un archivo de tipo ${file.fileType} no se puede visualizar.`,
-      );
+      return;
     }
-    setLightBoxFiles([file]);
+
+    if (file.url) {
+      window.open(file.url, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    toastService.error(`Un archivo de tipo ${type} no se puede visualizar.`);
   };
 
   return (

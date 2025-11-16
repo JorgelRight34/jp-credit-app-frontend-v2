@@ -15,7 +15,6 @@ export interface BaseFormField<TData extends FieldValues> {
 
   /** Input name attribute (used as key in form data). */
   name: (keyof TData) | string;
-  names?: keyof (TData | string)[];
 
   /** HTML id attribute, often used for label association. */
   id?: keyof TData | string;

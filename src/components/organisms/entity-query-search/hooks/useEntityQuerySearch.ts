@@ -1,12 +1,14 @@
-import { useMemo, useRef } from "react";
-import useDownloadEntity from "./useDownload";
-import { Query } from "../../../models/query";
-import { QuerySearchInput, ReportOptions } from "@/models";
-import { FormField, useFormBuilder } from "@/components/EntityForm";
+import { useMemo } from "react";
 import { Path, useWatch } from "react-hook-form";
-import { useUpdateEffect } from "../../../hooks/useUpdateEffect";
-import { FormInterceptor } from "@/components/EntityForm/models/formInterceptor";
 import { sanitizeFields } from "../utils/utils";
+import { QuerySearchInput } from "../models/querySearchInput";
+import { FormInterceptor } from "../../form-builder/models/formInterceptor";
+import { FormField } from "../../form-builder/models/formField";
+import { ReportOptions } from "@/features/reports";
+import { Query } from "@/models/query";
+import { useFormBuilder } from "../../form-builder";
+import { useUpdateEffect } from "@/hooks/useUpdateEffect";
+import { useDownloadEntityReport } from "./useDownloadEntityReport";
 
 export interface UseEntityQuerySearchProps<T extends Query, TReturn> {
   defaultValues?: Partial<T>;
@@ -37,22 +39,21 @@ const useEntityQuerySearch = <T extends Query, TReturn>({
     resetValues: false,
     onSubmit
   });
-  const valuesToWatch = useRef<(keyof T)[]>([]);
 
-  const fields = useMemo<QuerySearchInput<T>[]>(() => {
-    return sanitizeFields([...initialFields, ...extraOptions ?? []], { attributes, defaultValues, valuesToWatch })
-  }, [initialFields, extraOptions, attributes, defaultValues])
+  const { fields, valuesToWatch } = useMemo(() => (
+    sanitizeFields([...initialFields, ...extraOptions ?? []], { attributes, defaultValues })
+  ), [initialFields, extraOptions, attributes, defaultValues])
 
-  const moreFields = useMemo<QuerySearchInput<T>[]>(() => {
-    return sanitizeFields(initialmoreFields ?? [], { attributes, defaultValues, valuesToWatch })
-  }, [initialmoreFields, attributes, defaultValues])
+  const { fields: moreFields, valuesToWatch: moreValuesToWatch } = useMemo(() => (
+    sanitizeFields(initialmoreFields ?? [], { attributes, defaultValues })
+  ), [initialmoreFields, attributes, defaultValues])
 
   const watchedValues = useWatch({
     control: form?.control,
-    name: valuesToWatch.current as Path<T>[],
+    name: [...valuesToWatch, ...moreValuesToWatch] as Path<T>[],
   })
 
-  const { download } = useDownloadEntity({
+  const { download } = useDownloadEntityReport({
     onDownload,
     reportTitle,
   });

@@ -1,9 +1,5 @@
 import { ReactNode, useEffect } from "react";
 import "./EntityLayout.css";
-import usePermissions from "../../features/Auth/hooks/usePermissions";
-import LoadingSpinner from "../../components/ui/LoadingSpinner";
-import Unauthorized from "../../pages/Unathorized";
-import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
 import type { BreadcrumbSpec } from "@/models";
 import { PermissionsProvider } from "@/models/permissionsProvider";
 import { SMALL_SCREEN_BREAKPOINT } from "@/utils/constants";
@@ -12,6 +8,8 @@ import EntityLayoutHeader, {
   EntityLayoutHeaderProps,
 } from "./EntityLayoutHeader";
 import { useCurrentProject } from "@/contexts/ProjectContext";
+import { usePermissions } from "@/features/auth";
+import { Breadcrumb, LoadingSpinner } from "@/components";
 
 export interface EntityLayoutProps extends EntityLayoutHeaderProps {
   children: ReactNode;
@@ -42,8 +40,9 @@ const EntityLayout = ({
   ...props
 }: EntityLayoutProps) => {
   const isSmallScreen = useMediaQuery(SMALL_SCREEN_BREAKPOINT);
-  const { project } = useCurrentProject();
+  const { project } = useCurrentProject(); // SEND IT IN A COOKIE
   const { permissions, isLoading, isError } = usePermissions({
+    // MAKE SERVER SIDE
     ...permissionsProvider,
   });
 
@@ -87,7 +86,7 @@ const EntityLayout = ({
 
           // Handle loading state
           if (isLoading) {
-            return <LoadingSpinner />;
+            return <LoadingSpinner />; // SHOULD BE SERVER SIDE.
           }
 
           // Handle error state
@@ -101,7 +100,7 @@ const EntityLayout = ({
           }
 
           // User doesn't have permission
-          return <Unauthorized />;
+          throw Error("");
         })()}
       </div>
     </div>

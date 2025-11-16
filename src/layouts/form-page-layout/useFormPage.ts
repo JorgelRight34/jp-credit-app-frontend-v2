@@ -1,7 +1,5 @@
-import usePermissions from "@/features/Auth/hooks/usePermissions";
+import { usePermissions } from "@/features/auth";
 import { PermissionsProvider } from "@/models/permissionsProvider";
-
-
 
 interface UseFormPageProps {
     permissionsProvider?: PermissionsProvider;
@@ -9,7 +7,6 @@ interface UseFormPageProps {
 }
 
 export const useFormPage = ({ permissionsProvider, onDelete }: UseFormPageProps) => {
-
     const { permissions, isLoading, isError } = usePermissions({
         ...permissionsProvider,
     });

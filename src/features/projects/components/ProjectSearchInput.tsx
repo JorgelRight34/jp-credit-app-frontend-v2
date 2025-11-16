@@ -1,9 +1,8 @@
-import EntitySearchInput from "../../../components/EntitySearchInput/EntitySearchInput";
-import { EntitySearchInputProps } from "../../../components/EntitySearchInput/entitySearchInputProps";
+import { EntitySearchInput, EntitySearchInputProps } from "@/components";
 import { projectsQueryKey } from "../lib/constants";
 import { Project } from "../models/project";
 import { ProjectsQuery } from "../models/projectsQuery";
-import { fetchProject } from "../services/projectService";
+import { projectsClient } from "../services/projectService";
 import ProjectSection from "./ProjectSection";
 
 type ProjectSearchInputProps = EntitySearchInputProps<Project, ProjectsQuery>;
@@ -19,16 +18,11 @@ const ProjectSearchInput = ({ ...props }: ProjectSearchInputProps) => {
       accesorFn={(p) => p?.id}
       visibleValueFn={(p) => p?.name}
       cacheKey={projectsQueryKey}
-      onSearch={fetchProject}
+      onSearch={projectsClient.fetchProject}
       {...props}
-      render={(setValue) => {
-        return (
-          <ProjectSection
-            allowSelect={false}
-            table={{ onRowClick: setValue }}
-          />
-        );
-      }}
+      render={(setValue) => (
+        <ProjectSection allowSelect={false} table={{ onRowClick: setValue }} />
+      )}
     ></EntitySearchInput>
   );
 };

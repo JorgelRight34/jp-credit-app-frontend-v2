@@ -1,10 +1,9 @@
-import { EntitySearchInputProps } from "@/models";
+import { EntitySearchInput, EntitySearchInputProps } from "@/components";
 import { Transaction } from "../models/transaction";
 import { TransactionsQuery } from "../models/transactionsQuery";
-import { EntitySearchInput } from "@/components/EntityForm";
-import { transactionsCacheKey } from "../lib/constants";
-import { getTransaction } from "../services/transactionsClient";
 import TransactionSection from "./TransactionSection";
+import { transactionsCacheKey } from "../lib/constants";
+import { transactionClient } from "../services/transactionsClient";
 
 type TransactionSearchInputProps = EntitySearchInputProps<
   Transaction,
@@ -26,7 +25,7 @@ const TransactionSearchInput = ({
       }}
       accesorFn={(t) => t?.id}
       visibleValueFn={(t) => t?.id.toString()}
-      onSearch={getTransaction}
+      onSearch={transactionClient.getTransaction}
       onChange={onChange}
       id={id}
       render={(setValue) => (

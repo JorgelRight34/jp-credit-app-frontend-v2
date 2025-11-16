@@ -1,11 +1,14 @@
+"use client";
+
 import { Table } from "@tanstack/react-table";
 import { useCallback, useMemo } from "react";
-import Pagination from "../../ui/Pagination";
 import PageSizeSelector from "./PageSizeSelector";
 import { DataTableProps } from "./DataTable";
 import { defaultPageSize } from "@/utils/constants";
 import clsx from "clsx";
 import { PageSize } from "../models/pageSize";
+import { Pagination } from "@/components/molecules";
+import { Subtitle } from "@/components/atoms";
 
 interface DataTableNavigationProps<TData> {
   table: Table<TData>;
@@ -28,7 +31,7 @@ const DataTableNavigation = <TData,>({
 
   const totalPages = useMemo(
     () => Math.ceil(totalItems / pageSize),
-    [totalItems, pageSize],
+    [totalItems, pageSize]
   );
 
   const handlePageSizeChange = useCallback(
@@ -37,20 +40,19 @@ const DataTableNavigation = <TData,>({
       table.setPageSize(numericVal);
       onLimitChange?.(numericVal);
     },
-    [onLimitChange, table],
+    [onLimitChange, table]
   );
 
   const handlePageChange = useCallback(
     (page: number) => table.setPageIndex(page - 1),
-    [table],
+    [table]
   );
 
   return (
     <div className={clsx("w-full border bg-white", className)}>
-      {/* Desktop Layout */}
       <div className="flex w-full flex-col justify-center p-3 py-2 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-2">
-          <span className="mr-auto flex items-center text-sm text-gray-500">
+          <Subtitle>
             <span className="hidden md:inline">
               Mostrando {currentRows} / {totalItems} de la página {page} /{" "}
               {totalPages}
@@ -58,7 +60,7 @@ const DataTableNavigation = <TData,>({
             <span className="inline md:hidden">
               {currentRows} / {totalItems} | pág {page}
             </span>
-          </span>
+          </Subtitle>
           <span className="inline md:hidden">
             <PageSizeSelector
               onChange={handlePageSizeChange}
@@ -66,7 +68,6 @@ const DataTableNavigation = <TData,>({
             />
           </span>
         </div>
-
         <div className="flex flex-col flex-wrap items-center justify-end gap-3 md:flex-row md:justify-center">
           {/* Items per page selector */}
           <div className="hidden flex-shrink-0 md:block">

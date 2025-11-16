@@ -1,11 +1,12 @@
-import { EntityForm } from "@/components/EntityForm";
+import { FileModel } from "@/models/fileModel";
+import { UseEntityModuleFormProps } from "../../form-builder/models/formBuilder";
 import { useFileForm, UseFileFormProps } from "../hooks/useFileForm";
-import { UseEntityModuleFormProps } from "@/components/EntityForm/models/UseEntityModuleFormProps";
-import { ApiFile } from "@/models";
+
 import { FileFormFieldValues } from "../lib/form";
+import { EntityForm } from "../../form-builder";
 
 export type FileFormProps = UseEntityModuleFormProps<
-  ApiFile,
+  FileModel,
   FileFormFieldValues
 > &
   UseFileFormProps;

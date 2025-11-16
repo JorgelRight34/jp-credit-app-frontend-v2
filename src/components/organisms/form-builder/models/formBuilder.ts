@@ -28,10 +28,16 @@ export interface FormBuilderRef<T extends FieldValues = FieldValues> {
     setValue: UseFormSetValue<T>;
 }
 
-export type FormBuilderComponent = <
-    T extends object,
-    TData extends FieldValues = FieldValues,
-    TReturn = T
->(
-    props: FormBuilderProps<T, TData, TReturn> & { ref?: React.Ref<FormBuilderRef> }
-) => React.ReactElement;
+export type FormBuilderComponent = {
+    <T extends object, TData extends FieldValues = FieldValues, TReturn = T>(
+        props: FormBuilderProps<T, TData, TReturn> & { ref?: React.Ref<FormBuilderRef> }
+    ): React.ReactElement;
+
+    displayName?: string;
+};
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export type UseEntityModuleFormProps<TEntity, _FormValues> = {
+    edit?: TEntity;
+    onDirtyChange?: (isDirty: boolean) => void;
+}

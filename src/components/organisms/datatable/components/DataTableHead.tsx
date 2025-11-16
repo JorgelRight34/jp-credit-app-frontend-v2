@@ -1,4 +1,4 @@
-import { Icon } from "@/components/ui";
+import { Icon } from "@/components/atoms";
 import { flexRender, Table } from "@tanstack/react-table";
 import clsx from "clsx";
 
@@ -25,7 +25,7 @@ const DataTableHead = <T,>({ table, className }: DataTableHeadProps<T>) => {
               >
                 {flexRender(
                   header.column.columnDef.header,
-                  header.getContext(),
+                  header.getContext()
                 )}
                 {header.column.getCanSort() && (
                   <Icon
@@ -34,8 +34,8 @@ const DataTableHead = <T,>({ table, className }: DataTableHeadProps<T>) => {
                       header.column.getIsSorted() === "asc"
                         ? "arrow_upward"
                         : header.column.getIsSorted() === "desc"
-                          ? "arrow_downward"
-                          : ""
+                        ? "arrow_downward"
+                        : ""
                     }
                   />
                 )}

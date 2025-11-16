@@ -1,18 +1,18 @@
-import { ApiError } from "@/components/EntityForm/models/apiError";
 import { CacheKey } from "@/models/cacheKey";
-import { FormError } from "@/components/EntityForm/models/formError";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { ZodType, ZodTypeDef } from "zod";
 import { useDataMutation } from "@/hooks/useMutate";
 import { useDataClient } from "@/hooks/useDataClient";
-import { FormInterceptor } from "@/components/EntityForm/models/formInterceptor";
+import { FormError } from "../models/formError";
+import { FormInterceptor } from "../models/formInterceptor";
+import { ApiError } from "../models/apiError";
+import { SchemaType } from "../models/schemaType";
 
 
 export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
-  schema?: ZodType<FieldValues, ZodTypeDef, FieldValues>;
+  schema?: SchemaType<TData>;
   defaultValues?: Record<string, unknown> | undefined;
   resetValues?: boolean;
   cacheKeysToInvalidate?: CacheKey[];
@@ -21,7 +21,6 @@ export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
   onSubmit: ((data: TData) => Promise<TReturn>);
   onDirtyChange?: (val: boolean) => void;
 }
-
 
 export const useFormBuilder = <T extends object, TData extends FieldValues, TReturn = T>({
   schema,
@@ -55,7 +54,6 @@ export const useFormBuilder = <T extends object, TData extends FieldValues, TRet
 
   const {
     control,
-    register,
     handleSubmit,
     reset,
     setValue,
@@ -129,18 +127,16 @@ export const useFormBuilder = <T extends object, TData extends FieldValues, TRet
     onDirtyChange?.(isDirty);
   }, [isDirty, onDirtyChange]);
 
-
   return {
     form: {
       control,
+      methods,
       getValues,
-      register,
       handleSubmit: handleSubmit(handleOnSubmit),
       setValue,
       reset: handleReset,
       resetValues: handleReset,
       watch,
-      methods,
     },
     state: {
       isPending,

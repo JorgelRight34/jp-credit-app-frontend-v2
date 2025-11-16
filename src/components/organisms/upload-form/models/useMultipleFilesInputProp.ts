@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { FileUploads } from "../hooks/useUploadFilesInput";
 import { FileFormFieldValues } from "../lib/form";
-import { ApiFile } from "@/models";
+import { FileModel } from "@/models/fileModel";
 
 export interface UseMultipleFilesInputProps {
     filesMaxLength?: number;
@@ -12,15 +12,15 @@ export interface UseMultipleFilesInputProps {
 export interface UseUploadFilesInputReturn {
     upload: {
         uploaded: File[];
-        loaded: ApiFile[];
+        loaded: FileModel[];
         created: FileFormFieldValues[];
         handleOnFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     };
     remove: {
-        removeFile: (index: number, key: keyof FileUploads) => void;
         removedFiles: File[];
-        deleted: ApiFile[];
+        deleted: FileModel[];
         removedCreations: FileFormFieldValues[],
+        removeFile: (index: number, key: keyof FileUploads) => void;
         recoverFile: (index: number, key: keyof FileUploads) => void;
     };
     isDirty: boolean;

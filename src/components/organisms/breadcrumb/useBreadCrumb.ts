@@ -3,8 +3,7 @@ import { BreadcrumbSpec, CacheKey } from "@/models";
 
 interface UseBreadProps {
     breadcrumb: BreadcrumbSpec;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    params?: Record<string, any>;
+    params?: Record<string, unknown>;
 }
 
 export const useBreadCrumb = ({ breadcrumb, params }: UseBreadProps) => {

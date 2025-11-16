@@ -1,17 +1,16 @@
-import api from "../../../services/api";
-import { ProfileFormValues } from "../lib/profileForm";
-import { Loan } from "../../Loans/models/loan";
+import { Loan } from "../../loans/models/loan";
 import { Profile } from "../models/profile";
-import { getProfilesEndpointForRole } from "../lib/utils";
-import { ProfileRole } from "@/features/Profiles/models/profileRole";
 import { fetchBlobWithQueryParams, fetchWithQueryParams } from "@/utils/utils";
-import { getModulePermissions } from "@/features/Auth/services/userService";
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
 import { Query } from "@/models/query";
 import { ProfileStats } from "../models/profileStats";
+import { ProfileFormValues } from "../lib/profileForm";
+import api from "@/services/api";
+import { ProfileRole } from "../models/profileRole";
+import { getProfilesEndpointForRole } from "../lib/utils";
+import { getModulePermissions } from "@/features/auth";
 
 const baseUrl = "/profiles";
-
 
 export const fetchProfileStats = async (id: number): Promise<ProfileStats> => {
   const response = await api.get(`${baseUrl}/${id}/stats`);
@@ -73,4 +72,8 @@ export const getProfileModulePermissions = async () => {
 
 export const getProfilesReportBlob = async (role: ProfileRole, query?: Query) => {
   return await fetchBlobWithQueryParams(getProfilesEndpointForRole(role) + "/export", query);
+}
+
+export const profilesClient = {
+  getProfile
 }

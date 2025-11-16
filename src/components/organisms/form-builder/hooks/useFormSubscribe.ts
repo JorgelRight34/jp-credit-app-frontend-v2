@@ -1,3 +1,5 @@
+"use client"
+
 import { useMemo } from "react";
 import { FieldValues, Path, useForm, useWatch } from "react-hook-form"
 import { FormBuilderRef } from "../models/formBuilder";

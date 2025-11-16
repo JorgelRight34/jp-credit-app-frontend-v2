@@ -1,7 +1,7 @@
-import { QuerySearchInput } from "@/components/EntityQuerySearch/models/querySearchInput";
-import { EntityDataTableProps } from "@/components/DataTable/models/entityDataTableProps";
 import { Query } from "@/models/query";
-import { Params } from "react-router";
+import { EntityDataTableProps } from "../../datatable";
+import { QuerySearchInput } from "../../entity-query-search";
+import { Params } from "@/models/params";
 
 export type EntitySectionProps<TEntity, TQuery extends Omit<Query, "id">> = TQuery & {
     reportTitle?: string;

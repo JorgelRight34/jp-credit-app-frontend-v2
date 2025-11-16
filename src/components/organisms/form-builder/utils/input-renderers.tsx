@@ -1,21 +1,23 @@
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import CurrencyInput from "./CurrencyInput";
-import PercentageInput from "./PercentageInput";
-import PasswordInput from "./PasswordInput";
-import CitizenIdInput from "./CitizenIdInput";
-import PhoneInput from "./PhoneInput";
-import SelectInput from "./SelectInput";
-import Input, { InputProps } from "./Input";
-import ProfileSearchInput from "@/features/Profiles/components/ProfileSearchInput";
-import ProjectSearchInput from "@/features/Projects/components/ProjectSearchInput";
-import LoanSearchInput from "@/features/Loans/components/LoanSearchInput";
 import { FormField } from "../models/formField";
 import { ElementType } from "react";
-import { DateRangeInput } from "@/components/EntityQuerySearch";
-import LazySelectInput from "./LazySelectInput";
-import DateInput from "./DateInput";
-import TransactionSearchInput from "@/features/Transactions/components/TransactionSearchInput";
-import CollateralSearchInput from "@/features/Collaterals/components/CollateralSearchInput";
+import {
+  CitizenIdInput,
+  DateInput,
+  Input,
+  InputProps,
+  LazySelectInput,
+  PasswordInput,
+  PhoneInput,
+  SelectInput,
+  CurrencyInput,
+  PercentageInput,
+} from "@/components/atoms";
+import { ProfilesSearchInput } from "@/features/profiles";
+import { ProjectSearchInput } from "@/features/projects";
+import { LoanSearchInput } from "@/features/loans";
+import { TransactionSearchInput } from "@/features/transactions";
+import { CollateralSearchInput } from "@/features/collaterals";
 
 type Field = ControllerRenderProps<FieldValues, string> &
   FormField<FieldValues> &
@@ -34,11 +36,11 @@ export const inputRenderers: Record<
   percentage: PercentageInput,
 
   profile: ({ ...field }: Field) => (
-    <ProfileSearchInput {...field} onChange={(p) => field.onChange(p.id)} />
+    <ProfilesSearchInput {...field} onChange={(p) => field.onChange(p.id)} />
   ),
 
   client: ({ ...field }: Field) => (
-    <ProfileSearchInput
+    <ProfilesSearchInput
       role="client"
       {...field}
       onChange={(p) => field.onChange(p.id)}
@@ -46,7 +48,7 @@ export const inputRenderers: Record<
   ),
 
   guarantor: ({ ...field }: Field) => (
-    <ProfileSearchInput
+    <ProfilesSearchInput
       role="guarantor"
       {...field}
       onChange={(p) => field.onChange(p.id)}
@@ -54,7 +56,7 @@ export const inputRenderers: Record<
   ),
 
   loanOfficer: ({ ...field }: Field) => (
-    <ProfileSearchInput
+    <ProfilesSearchInput
       role="guarantor"
       {...field}
       onChange={(p) => field.onChange(p.id)}
@@ -77,17 +79,17 @@ export const inputRenderers: Record<
     <CollateralSearchInput {...field} onChange={(c) => field.onChange(c.id)} />
   ),
 
-  password: ({ ...field }: Field) => <PasswordInput {...field} />,
+  password: PasswordInput,
 
-  dni: ({ ...field }: Field) => <CitizenIdInput {...field} />,
+  dni: CitizenIdInput,
 
-  phone: ({ ...field }: Field) => <PhoneInput {...field} />,
+  phone: PhoneInput,
 
-  select: ({ ...field }: Field) => <SelectInput {...field} />,
+  select: SelectInput,
 
-  "lazy-select": ({ ...field }: Field) => <LazySelectInput {...field} />,
+  date: DateInput,
 
-  "date-range": ({ ...field }: Field) => <DateRangeInput {...field} />,
+  "lazy-select": LazySelectInput,
 
   textarea: ({ ...field }: Field) => <Input type="text" {...field} multiline />,
 
@@ -96,8 +98,6 @@ export const inputRenderers: Record<
   text: ({ ...field }: Field) => <Input type="text" {...field} />,
 
   number: ({ ...field }: Field) => <Input type="number" {...field} />,
-
-  date: ({ ...field }: Field) => <DateInput {...field} />,
 
   email: ({ ...field }: Field) => <Input type="email" {...field} />,
 
