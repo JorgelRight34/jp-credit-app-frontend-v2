@@ -1,16 +1,19 @@
+import {
+  EntityFormProps,
+  FileFormExplorer,
+  FormBuilder,
+  FormLayout,
+  Tab,
+  Tabs,
+  UploadFileForm,
+  UploadFileFormRef,
+  useEntityForm,
+} from "@/components";
 import { ProfileFormValues } from "../lib/profileForm";
-import { Profile } from "../models/profile";
-import { ProfileRole } from "@/features/Profiles/models/profileRole";
-import useProfileForm from "../hooks/useProfileForm";
-import { Tab, Tabs } from "@/components/Tabs";
-import { UploadFileForm } from "@/components/FileUpload";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
-import FormLayout from "@/components/EntityForm/layouts/FormLayout";
-import { EntityFormProps, useEntityForm } from "@/components/EntityForm";
-import { useProfileFilesForm } from "../hooks/useProfileFilesForm";
-import FileFormExplorer from "@/components/FileUpload/components/FileFormExplorer";
-import { UploadFileFormRef } from "@/components/FileUpload/components/UploadFileForm";
 import { useRef } from "react";
+import { ProfileRole } from "../models/profileRole";
+import { Profile } from "../models/profile";
+import useProfileForm from "../hooks/useProfileForm";
 
 interface ProfileFormProps extends EntityFormProps<ProfileFormValues> {
   role?: ProfileRole;
@@ -28,7 +31,7 @@ const ProfileForm = ({ role, edit, ...props }: ProfileFormProps) => {
   return (
     <FormLayout {...methods}>
       <Tabs defaultActiveKey="data" navigate={false}>
-        <Tab title="Datos" path="data">
+        <Tab title="Datos" eventKey="data">
           <FormBuilder<Profile, ProfileFormValues>
             ref={ref}
             edit={edit}
@@ -40,12 +43,12 @@ const ProfileForm = ({ role, edit, ...props }: ProfileFormProps) => {
               ["officePhone", "profession", null],
             ]}
             onDirtyChange={onDirtyChange}
-            onSuccess={fileFormRef.current?.submit}
+            onSuccess={() => fileFormRef.current?.submit()}
             {...config}
             {...props}
           />
         </Tab>
-        <Tab title="Foto" path="photo">
+        <Tab title="Foto" eventKey="photo">
           <UploadFileForm
             {...fileFormConfig}
             {...props}

@@ -17,8 +17,9 @@ const LayoutPermissionsWrapper = ({
       fetchedPermissions={
         provider ? dataClient.get(provider.cacheKey) : undefined
       }
-      onSuccess={(provider, permissions) =>
-        dataClient.set(provider.cacheKey, permissions)
+      onSuccess={
+        (provider, permissions) =>
+          dataClient.set(provider.cacheKey, permissions) // Cache by window
       }
       {...props}
     >

@@ -1,10 +1,13 @@
 import { Query } from "@/models/query";
 import { PagedResponse } from "../../../models/pagedResponse";
 import api from "../../../services/api";
-import { fetchWithQueryParams } from "../../../utils/utils";
+import { fetchEntity, fetchWithQueryParams } from "../../../utils/utils";
 import { ProjectFormValues } from "../lib/projectForm";
 import { ProjectSettingsFormValues } from "../lib/projectSettingsForm";
 import { Project } from "../models/project";
+import { projectsTag } from "../lib/constants";
+import { getModulePermissions } from "@/features/auth";
+import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
 
 
 const baseUrl = "projects";
@@ -16,9 +19,12 @@ export const createProject = async (
   return response.data;
 };
 
-export const fetchProject = async (id: number | string): Promise<Project> => {
-  const response = await api.get(`${baseUrl}/${id}`);
-  return response.data;
+export const getProjectsModulePermissions = async () => {
+  return await getModulePermissions(baseUrl + "/" + PERMISSIONS_ENDPOINT_SUFFIX)
+}
+
+export const getProject = async (id: number | string): Promise<Project> => {
+  return await fetchEntity(`${baseUrl}/${id}`, [projectsTag, id.toString()], 3000)
 };
 
 export const editProject = async (
@@ -40,5 +46,8 @@ export const getProjects = async (query: Query): Promise<PagedResponse<Project>>
 
 export const projectsClient = {
   getProjects,
-  fetchProject
+  getProject,
+  deleteProject,
+  createProject,
+  editProject,
 }

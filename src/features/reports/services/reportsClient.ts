@@ -1,13 +1,14 @@
-import { ModulePermissions } from "@/features/Auth/models/modulePermissions"
-import { getModulePermissions } from "@/features/auth/services/userClient"
+
 import { ReportFormFields, ReportRunFormFields } from "../lib/form"
 import api from "@/services/api"
-import { ApiFile, PagedResponse } from "@/models"
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants"
 import { ReportQuery } from "../models/reportQuery"
 import { fetchBlobWithQueryParams, fetchWithQueryParams } from "@/utils/utils"
 import { Report } from "../models/report"
+import { getModulePermissions, ModulePermissions } from "@/features/auth"
+import { PagedResponse } from "@/models"
 import { flattenObject } from "../lib/utils"
+import { FileModel } from "@/models/fileModel"
 
 const baseUrl = "reports"
 
@@ -53,7 +54,7 @@ export const downloadReportRun = async (data: ReportRunFormFields) => {
     return await fetchBlobWithQueryParams(`${baseUrl}/generate`, data);
 }
 
-export const uploadReport = async (file: File): Promise<ApiFile> => {
+export const uploadReport = async (file: File): Promise<FileModel> => {
     const formData = new FormData();
     formData.set("file", file);
 
@@ -64,4 +65,16 @@ export const uploadReport = async (file: File): Promise<ApiFile> => {
 
 export const bookmarkReport = async (id: number, bookmark: boolean) => {
     await api.put(`${baseUrl}/bookmark/${id}`, { bookmark })
+}
+
+export const reportsClient = {
+    getReport,
+    getReports,
+    createReport,
+    editReport,
+    deleteReport,
+    bookmarkReport,
+    uploadReport,
+    downloadReportRun,
+    generateReport
 }

@@ -1,4 +1,4 @@
-import { Compound } from "../../Armotizations/models/compound";
+import { Compound } from "@/features/calculators";
 
 export interface Project {
   id: number;

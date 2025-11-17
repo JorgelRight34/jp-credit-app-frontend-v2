@@ -1,15 +1,17 @@
 
-import { User } from "@/features/Auth/models/user";
 import { getFirstAndLastName, getPicWithInitials } from "@/utils/utils";
-import { ProfileRole } from "@/features/Profiles/models/profileRole";
 import { Profile } from "../models/profile";
 import { profileRolesSpanishTranslations } from "./constants";
+import { User } from "@/features/auth";
+import { ProfileRole } from "../models/profileRole";
+import { defaultProfilePic } from "@/utils/constants";
 
 export const getProfilePicWithInitials = (
-  profile: User | Profile,
-  background = "random"
+  profile: User | Profile | undefined | null,
+  background = "random",
+  color = ""
 ) => {
-  return getPicWithInitials(getFirstAndLastName(profile), background);
+  return profile ? getPicWithInitials(getFirstAndLastName(profile), background, color) : defaultProfilePic;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

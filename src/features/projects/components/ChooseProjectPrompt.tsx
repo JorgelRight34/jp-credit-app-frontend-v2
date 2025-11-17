@@ -1,42 +1,33 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AccentBtn, AppLink, Icon, Subtitle } from "@/components";
 import ChooseProjectBtn from "./ChooseProjectBtn";
-import { faFolderOpen, faPlus } from "@fortawesome/free-solid-svg-icons";
-import AccentBtn from "../../../components/ui/AccentBtn";
-import { Link } from "react-router";
 
 const ChooseProjectPrompt = ({ className = "" }) => {
   return (
     <div className={className}>
       <div className="flex justify-center">
-        <FontAwesomeIcon
-          icon={faFolderOpen}
-          className="mx-auto mb-5 text-gray-700"
-          size="5x"
-        />
+        <Icon icon="folder_open" className="mx-auto mb-5 text-gray-700" />
       </div>
-
-      <div className="mb-5">
-        <h1 className="text-center text-2xl font-semibold text-gray-800 mb-3">
+      <header className="mb-5">
+        <h1 className="mb-3 text-center text-2xl font-semibold text-gray-800">
           Selecciona un Proyecto
         </h1>
-        <p className="text-gray-600 leading-relaxed">
+        <Subtitle className="leading-relaxed text-gray-600">
           Para ver préstamos, garantías y transacciones, necesitas seleccionar
           un proyecto primero. Los proyectos te ayudan a organizar tu portafolio
           crediticio por categorías como préstamos de vehículos, préstamos
           personales o préstamos comerciales.
-        </p>
-      </div>
+        </Subtitle>
+      </header>
       <div className="space-y-3">
         <ChooseProjectBtn
-          className="btn-accent py-2 w-100 mb-3"
+          className="btn-accent text-1xl mb-3 w-100 py-2"
           text="Seleccionar Proyecto"
-          textClassName="text-1xl"
         />
-        <Link to={"/projects/create"} className="link-reset">
-          <AccentBtn className="py-2 w-100" icon={faPlus}>
+        <AppLink to={"/projects/create"} className="link-reset">
+          <AccentBtn className="w-100 py-2" icon="add">
             Crear Proyecto
           </AccentBtn>
-        </Link>
+        </AppLink>
       </div>
     </div>
   );

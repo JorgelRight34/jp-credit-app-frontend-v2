@@ -8,7 +8,7 @@ interface LightBoxInterface {
   onHide: () => void;
 }
 
-const LightBox = ({ files, onHide, show }: LightBoxInterface) => {
+const LightBox = ({ files, show, onHide }: LightBoxInterface) => {
   const handleOnHide = (event: React.MouseEvent) => {
     event.stopPropagation();
     onHide();
@@ -18,18 +18,13 @@ const LightBox = ({ files, onHide, show }: LightBoxInterface) => {
 
   return (
     <div className="modal-overlay" onClick={handleOnHide}>
-      {/* Close button */}
-      <button
+      <Icon
+        icon="close"
         onClick={handleOnHide}
-        className="absolute top-4 right-4 z-50 text-white transition-colors hover:text-gray-300"
-        aria-label="Close lightbox"
-      >
-        <Icon icon="close" className="text-white" />
-      </button>
-      <Carousel
-        indicators={files.length > 1}
-        onClick={(e) => e.stopPropagation()}
-      >
+        className="text-white"
+        wrapperClassName="absolute top-4 right-4 z-50 text-white transition-colors hover:text-gray-300"
+      />
+      <Carousel>
         {files.map((file, key) => (
           <div
             key={key}

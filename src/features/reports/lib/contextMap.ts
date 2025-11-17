@@ -1,17 +1,16 @@
-import { FormField } from "@/components/EntityForm";
-import { getLoan } from "@/features/Loans/services/loanClient";
-import { getProfile } from "@/features/Profiles/services/profilesClient";
-import { getTransaction } from "@/features/Transactions/services/transactionsClient";
-import { getCollateral } from "@/features/Collaterals/services/collateralsClient";
-import { getNote } from "@/features/AdjustmentNotes/services/adjustmentNoteClient";
 
-import { Loan } from "@/features/Loans/models/loan";
-import { Collateral } from "@/features/Collaterals/models/collateral";
-import { Report } from "../models/report";
-import { ReportKey } from "../models/reportKey";
 
 // ────────────────────────────────
 // Entity-specific context metadata
+
+import { FormField } from "@/components";
+import { Collateral, collateralClient } from "@/features/collaterals";
+import { Loan, loanClient } from "@/features/loans";
+import { ReportKey } from "../models/reportKey";
+import { profilesClient } from "@/features/profiles";
+import { transactionClient } from "@/features/transactions";
+import { adjustmentNoteClient } from "@/features/adjustment-notes";
+
 // ────────────────────────────────
 const loanContextDetails: Record<keyof Loan, { description: string }> = {
     id: { description: "Identificador único del préstamo." },
@@ -54,7 +53,6 @@ const loanContextDetails: Record<keyof Loan, { description: string }> = {
     transactions: { description: "Transacciones relacionadas." },
     overduePayments: { description: "Cantidad de pagos atrasados." },
     delinquency: { description: "Porcentaje de morosidad." },
-    compound: { description: "Capitalización de intereses." },
     hasPayments: { description: "Indica si el préstamo tiene pagos registrados." },
     createdAt: { description: "Fecha en que se creó el registro." },
     updatedAt: { description: "Fecha de la última actualización." },
@@ -98,11 +96,11 @@ export const reportContextRegistry: Record<ReportKey, ReportContextDefinition> =
         label: "Préstamo",
         inputType: "loan",
         fetcher: async (id: number) => {
-            const loan = await getLoan(id);
+            const loan = await loanClient.getLoan(id);
             const [client, guarantor, loanOfficer] = await Promise.all([
-                getProfile(loan.clientProfileId),
-                loan.guarantorProfileId ? getProfile(loan.guarantorProfileId) : undefined,
-                loan.loanOfficerProfileId ? getProfile(loan.loanOfficerProfileId) : undefined
+                profilesClient.getProfile(loan.clientProfileId),
+                loan.guarantorProfileId ? profilesClient.getProfile(loan.guarantorProfileId) : undefined,
+                loan.loanOfficerProfileId ? profilesClient.getProfile(loan.loanOfficerProfileId) : undefined
             ])
 
             loan.client = { profile: client, profileId: loan.clientProfileId, id: loan.clientId };
@@ -123,23 +121,23 @@ export const reportContextRegistry: Record<ReportKey, ReportContextDefinition> =
     profile: {
         label: "Perfil",
         inputType: "profile",
-        fetcher: getProfile,
+        fetcher: profilesClient.getProfile,
     },
     transaction: {
         label: "Transacción",
         inputType: "transaction",
-        fetcher: getTransaction,
+        fetcher: transactionClient.getTransaction,
     },
     collateral: {
         label: "Garantía",
         inputType: "collateral",
-        fetcher: getCollateral,
+        fetcher: collateralClient.getCollateral,
         fields: collateralContextDetails,
     },
     note: {
         label: "Nota de ajuste",
         inputType: "note",
-        fetcher: getNote,
+        fetcher: adjustmentNoteClient.getNote,
     },
 };
 

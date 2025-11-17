@@ -1,9 +1,9 @@
-import { User } from "../../Auth/models/user";
-import ImageWithLightBox from "../../../components/ui/ImageWithLightBox";
+import { User } from "@/features/auth";
 import { getProfilePicWithInitials, isProfile } from "../lib/utils";
 import { Profile } from "../models/profile";
-import { Icon } from "@/components/ui";
 import { getFirstAndLastName } from "@/utils/utils";
+import { Icon, ImageWithLightBox } from "@/components";
+import clsx from "clsx";
 
 interface ProfileCardProps {
   profile: Profile | User;
@@ -13,48 +13,46 @@ interface ProfileCardProps {
 const ProfileCard = ({ profile, className }: ProfileCardProps) => {
   return (
     <div
-      className={`border-accent-secondary rounded p-3 shadow-sm md:max-w-xs ${className}`}
+      className={clsx(
+        "border-accent-secondary rounded p-3 shadow-sm md:max-w-xs",
+        className,
+      )}
     >
       {/* Heading */}
-      <h3 className="text-center mb-3 truncate">
+      <h3 className="mb-3 truncate text-center">
         {getFirstAndLastName(profile)}
       </h3>
       {/* Image */}
       <ImageWithLightBox
-        className="rounded-lg shadow-sm w-full h-[300px] object-cover mb-3"
+        className="mb-3 h-[300px] w-full rounded-lg object-cover shadow-sm"
         src={profile.photo?.url || getProfilePicWithInitials(profile)}
         alt={`Foto de ${profile.firstName}`}
         image={profile.photo}
       />
       {/* Contact */}
-      <div className="flex flex-col">
+      <aside className="flex flex-col">
         {/* Email */}
         {profile.email && (
-          <span
-            className="flex w-full items-center truncate justify-center mx-auto cursor-pointer mb-2"
+          <Icon
+            icon="mail"
+            label={profile.email}
+            className="mr-2"
             title={profile.email}
             data-title={profile.email}
-          >
-            <span>
-              <Icon icon="mail" label={profile.email} className="mr-2" />
-            </span>
-          </span>
+            wrapperClassName="mx-auto mb-2 flex w-full cursor-pointer items-center justify-center truncate"
+          />
         )}
         {/* Address */}
         {isProfile(profile) && (
-          <span
-            className="flex w-full items-center justify-center mx-auto cursor-pointer"
+          <Icon
+            icon="pin_drop"
+            wrapperClassName="truncate mx-auto flex w-full cursor-pointer items-center justify-center"
+            label={profile.address}
             title={profile.address}
             data-title={profile.address}
-          >
-            <Icon
-              icon="pin_drop"
-              wrapperClassName="truncate"
-              label={profile.address}
-            />
-          </span>
+          />
         )}
-      </div>
+      </aside>
     </div>
   );
 };

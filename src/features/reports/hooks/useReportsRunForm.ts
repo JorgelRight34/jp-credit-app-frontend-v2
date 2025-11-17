@@ -1,13 +1,12 @@
-import { UseEntityFormReturn } from "@/models";
+
 import { ReportRunFormFields, reportsRunFormProvider } from "../lib/form";
-import { EntityFormProps } from "@/components/EntityForm";
 import { Report } from "../models/report";
 import { useMemo } from "react";
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
 import { generateReport } from "../services/reportsClient";
 import { useDataClient } from "@/hooks/useDataClient";
 import { reportsCacheKey } from "../lib/constants";
 import { getReportFetcher, getReportInputType, getReportLabel } from "../lib/contextMap";
+import { EntityFormProps, FormProvider, UseEntityFormReturn } from "@/components";
 
 type UseReportsRunFormProps = EntityFormProps<Report, ReportRunFormFields> & {
     report: Report;
@@ -35,9 +34,9 @@ export const useReportsRunForm = ({ report }: UseReportsRunFormProps): UseReport
                 watchedValues: ["key"],
                 changeWhen: async ({ key }, setValue) => {
                     if (!key) return;
-                    const response = await client.ensureQueryData({
-                        queryKey: [...reportsCacheKey, "report-context", key],
-                        queryFn: () => getReportFetcher(report.key)(key!)
+                    const response = await client.ensure({
+                        key: [...reportsCacheKey, "report-context", key],
+                        getData: () => getReportFetcher(report.key)(key!)
                     })
                     setValue("context", response);
                 }
@@ -56,6 +55,7 @@ export const useReportsRunForm = ({ report }: UseReportsRunFormProps): UseReport
             formProvider,
             cacheKeysToInvalidate: [],
             defaultValues: { id: report.id },
+            tagsToInvalidate: [],
             resetValues: false
         },
     }

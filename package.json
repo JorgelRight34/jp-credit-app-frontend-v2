@@ -17,6 +17,7 @@
     "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
     "clsx": "^2.1.1",
+    "country-state-city": "^3.2.1",
     "dayjs": "^1.11.19",
     "embla-carousel-react": "^8.6.0",
     "i18n-iso-countries": "^7.14.0",
@@ -30,6 +31,7 @@
     "react-number-format": "^5.4.4",
     "react-spinners": "^0.17.0",
     "react-tabs": "^6.1.0",
+    "react-toastify": "^11.0.5",
     "react-top-loading-bar": "^3.0.2",
     "recharts": "^3.4.1"
   },

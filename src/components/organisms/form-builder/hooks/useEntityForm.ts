@@ -27,7 +27,7 @@ export const useEntityForm = <T extends FieldValues = FieldValues>() => {
     useEffect(() => setReactiveForm(formRef.current), [loadForm])
 
     return {
-        form: reactiveForm,
+        form: reactiveForm ?? null,
         isDirty,
         onDirtyChange: handleOnDirtyChange,
         onSubmit: () => formRef.current?.submit,

@@ -1,25 +1,24 @@
-import SecondaryBtn from "../../../components/ui/SecondaryBtn";
-import { useEffect, useState } from "react";
-import Modal from "../../../components/Modal/Modal";
-import ProjectSection from "./ProjectSection";
-import { useCurrentProject } from "../../../contexts/ProjectContext";
+"use client";
+
+import { useCurrentProject } from "@/contexts/ProjectContext";
+import { useState } from "react";
 import { Project } from "../models/project";
+import { Modal, SecondaryBtn } from "@/components";
+import ProjectSection from "./ProjectSection";
 
 interface ChooseProjectBtnProps extends React.PropsWithChildren {
   className?: string;
   alert?: boolean;
   text?: string;
-  textClassName?: string;
 }
 
 const ChooseProjectBtn = ({
   alert = false,
   text = "Proyecto",
-  textClassName,
   children,
   className,
 }: ChooseProjectBtnProps) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(() => !projectId && alert);
   const { projectId, chooseProject } = useCurrentProject();
 
   const handleChooseProject = (project: Project) => {
@@ -28,10 +27,6 @@ const ChooseProjectBtn = ({
   };
 
   const handleShowModal = () => setShowModal(true);
-
-  useEffect(() => {
-    if (!projectId && alert) setShowModal(true);
-  }, [projectId, alert]);
 
   return (
     <>
@@ -43,7 +38,7 @@ const ChooseProjectBtn = ({
           onClick={handleShowModal}
           icon="folder_open"
         >
-          <span className={textClassName}>{text}</span>
+          {text}
         </SecondaryBtn>
       )}
       <Modal
@@ -52,7 +47,7 @@ const ChooseProjectBtn = ({
         show={showModal}
         onHide={() => setShowModal(false)}
       >
-        <ProjectSection onRowClick={handleChooseProject} />
+        <ProjectSection table={{ onRowClick: handleChooseProject }} />
       </Modal>
     </>
   );

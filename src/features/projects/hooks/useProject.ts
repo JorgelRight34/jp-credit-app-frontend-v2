@@ -1,16 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchProject } from "../services/projectService";
 import { Project } from "../models/project";
 import { projectsQueryKey } from "../lib/constants";
+import { projectsClient } from "../services/projectService";
+import { useData } from "@/hooks/useData";
 
 interface UseProjectProps {
   id?: string | number;
 }
 
 const useProject = ({ id }: UseProjectProps) => {
-  const { data, isLoading, isError } = useQuery<Project>({
-    queryKey: [projectsQueryKey, Number(id)],
-    queryFn: () => fetchProject(id!),
+  const { data, isLoading, isError } = useData<Project>({
+    key: [...projectsQueryKey, Number(id)],
+    getData: () => projectsClient.getProject(id!),
     enabled: !!id,
   });
 

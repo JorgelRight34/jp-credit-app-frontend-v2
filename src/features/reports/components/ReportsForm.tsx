@@ -1,21 +1,25 @@
-import { EntityFormProps, useEntityForm } from "@/components/EntityForm";
+import {
+  Container,
+  EntityFormProps,
+  FileFormButton,
+  FileFormExplorer,
+  FormBuilder,
+  FormLayout,
+  FormSubscriptionWrapper,
+  SecondaryBtn,
+  UploadFileForm,
+  UploadFileFormRef,
+  useEntityForm,
+} from "@/components";
 import { useReportsForm } from "../hooks/useReportsForm";
 import { ReportFormFields } from "../lib/form";
-import FormLayout from "@/components/EntityForm/layouts/FormLayout";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
-import { Report } from "../models/report";
-import FormSubscriptionWrapper from "@/components/EntityForm/components/FormSubscriptionWrapper";
-import ReportsFormHelp from "./ReportsFormHelp";
-import Container from "@/components/ui/Container";
-import { ReportKey } from "../models/reportKey";
-import { useReportFileForm } from "../hooks/useReportFileForm";
-import { UploadFileForm } from "@/components/FileUpload";
-import FileFormButton from "@/components/FileUpload/components/FileFormButton";
-import { SecondaryBtn } from "@/components/ui";
-import { ApiFile } from "@/models";
-import FileFormExplorer from "@/components/FileUpload/components/FileFormExplorer";
 import { useRef } from "react";
-import { UploadFileFormRef } from "@/components/FileUpload/components/UploadFileForm";
+import { useReportFileForm } from "../hooks/useReportFileForm";
+import { FileModel } from "@/models/fileModel";
+import ReportsFormHelp from "./ReportsFormHelp";
+import { ReportKey } from "../models/reportKey";
+import { ND } from "@/utils/constants";
+import { Report } from "../models/report";
 
 type ReportsFormProps = EntityFormProps<ReportFormFields, Report>;
 
@@ -27,7 +31,7 @@ const ReportsForm = ({ edit }: ReportsFormProps) => {
   const fileFormConfig = useReportFileForm({ form, edit });
 
   return (
-    <FormLayout {...methods} onSubmit={fileFormRef.current?.submit}>
+    <FormLayout {...methods} onSubmit={() => fileFormRef.current?.submit()}>
       <div className="flex items-stretch gap-4">
         <div className="w-8/12">
           <FormBuilder
@@ -50,7 +54,7 @@ const ReportsForm = ({ edit }: ReportsFormProps) => {
                   ...prev,
                   created: [...prev.created, data],
                 }));
-                return data as ApiFile;
+                return { ...data, fileType: ND } as FileModel;
               }}
               onDirtyChange={onDirtyChange}
             >

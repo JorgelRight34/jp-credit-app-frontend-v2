@@ -1,7 +1,7 @@
-import { ReportKey } from "@/features/Reports/models/reportKey";
-import { LayoutOption } from "@/layouts/EntityLayout/layoutOption";
 import { Params } from "@/models/params";
 import BookMarkedReportsBtn from "../components/BookmarkedReportsBtn";
+import { LayoutOption } from "@/layouts/entity-layout/layoutOption";
+import { ReportKey } from "../models/reportKey";
 
 export const reportLayoutOption: Partial<LayoutOption> = {
     title: "Reportes",

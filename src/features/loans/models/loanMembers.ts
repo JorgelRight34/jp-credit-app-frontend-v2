@@ -1,6 +1,4 @@
-import { Client } from "@/features/Profiles/models/client";
-import { Guarantor } from "@/features/Profiles/models/guarantor";
-import { LoanOfficer } from "@/features/Profiles/models/loanOfficer";
+import { Client, Guarantor, LoanOfficer } from "@/features/profiles";
 
 export interface LoanMembers {
     client?: Client;

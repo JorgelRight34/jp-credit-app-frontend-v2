@@ -1,12 +1,14 @@
-import SplitBtn, { SplitBtnProps } from "@/components/ui/SplitBtn";
-import { useBookMarkedReports } from "../hooks/useBookmarkedReports";
+"use client";
+
+import SplitBtn, { SplitBtnProps } from "@/components/atoms/button/SplitBtn";
 import { ReportKey } from "../models/reportKey";
-import { useMemo } from "react";
-import { MenuOption } from "@/components/ui/Menu";
-import { useRouter } from "@/hooks/useRouter";
 import { Params } from "@/models/params";
+import { useBookMarkedReports } from "../hooks/useBookmarkedReports";
+import { useRouter } from "@/hooks/useRouter";
+import { useMemo } from "react";
 import { getUrlParams } from "@/utils/utils";
-import { SecondaryBtn } from "@/components/ui";
+import { MenuOption } from "@/components/molecules/menu/Menu";
+import { SecondaryBtn } from "@/components";
 
 type BookMarkedReportsBtnProps = Omit<SplitBtnProps, "options" | "Button"> & {
   reportKey: ReportKey;
@@ -22,7 +24,7 @@ const BookMarkedReportsBtn = ({
   const router = useRouter();
 
   const reportParams = useMemo(
-    () => `${params ? `/?` + getUrlParams(params) : ""}`,
+    () => `${params ? `/?` + params.toString() : ""}`,
     [params],
   );
 

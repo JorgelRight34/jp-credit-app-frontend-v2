@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { FormField } from "../../../models/formField";
-import { Project } from "../models/project";
+import { FormProvider } from "@/components";
 
 export const schema = z.object({
   name: z.string(),
@@ -8,10 +7,13 @@ export const schema = z.object({
 
 export type ProjectFormValues = z.infer<typeof schema>;
 
-export const projectFormFields: FormField<Project>[] = [
-  {
-    name: "name",
-    id: "name",
-    label: "Nombre",
-  },
-];
+export const projectFormProvider: FormProvider<ProjectFormValues> = {
+  schema: schema,
+  fields: [
+    {
+      name: "name",
+      id: "name",
+      label: "Nombre",
+    },
+  ]
+}

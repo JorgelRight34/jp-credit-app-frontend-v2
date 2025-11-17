@@ -1,19 +1,20 @@
-import { useEntityForm } from "@/components/EntityForm";
-import FormLayout from "@/components/EntityForm/layouts/FormLayout";
-import { useReportsRunForm } from "../hooks/useReportsRunForm";
-import { Report } from "../models/report";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
-import Container from "@/components/ui/Container";
-import {
-  FileExplorer,
-  mapApiFileToDatatableFile,
-} from "@/components/FileUpload";
-import ReportsFormHelp from "./ReportsFormHelp";
-import FormSubscriptionWrapper from "@/components/EntityForm/components/FormSubscriptionWrapper";
 import { ReportRunFormFields } from "../lib/form";
 import { triggerDownload } from "@/utils/utils";
-import { useQueryParams } from "@/hooks/useQueryParams";
-import { MediumTitle, Subtitle } from "@/components";
+import {
+  Container,
+  FileExplorer,
+  FormBuilder,
+  FormLayout,
+  FormSubscriptionWrapper,
+  mapApiFileToDatatableFile,
+  MediumTitle,
+  Subtitle,
+  useEntityForm,
+} from "@/components";
+import { useReportsRunForm } from "../hooks/useReportsRunForm";
+import { useSearchParams } from "@/hooks/useSearchParams";
+import ReportsFormHelp from "./ReportsFormHelp";
+import { Report } from "../models/report";
 
 interface ReportsRunFormProps {
   report: Report;
@@ -23,10 +24,13 @@ const ReportsRunForm = ({ report }: ReportsRunFormProps) => {
   const { form, ref, onDirtyChange, ...methods } =
     useEntityForm<ReportRunFormFields>();
   const config = useReportsRunForm({ report });
-  const params = useQueryParams();
+  const params = useSearchParams();
 
   return (
-    <FormLayout {...methods} isDirty={params["key"] ? true : methods.isDirty}>
+    <FormLayout
+      {...methods}
+      isDirty={params.get("key") ? true : methods.isDirty}
+    >
       <div className="flex items-stretch gap-4">
         <div className="w-8/12">
           <FormBuilder<Report, ReportRunFormFields, Blob>

@@ -1,8 +1,8 @@
 import { CacheKey } from "@/models";
 import { EntityLayoutProps } from "../entity-layout/EntityLayout";
-import { ConfirmationModalProps } from "@/components";
 import FormPageLayoutContent from "./FormPageLayoutContent";
 import LayoutPermissionsWrapper from "../layout-permissions-permissions-wrapper/LayoutPermissionsWrapper";
+import { ConfirmationModalProps } from "@/components";
 
 export type FormPageLayoutProps = React.PropsWithChildren &
   EntityLayoutProps &

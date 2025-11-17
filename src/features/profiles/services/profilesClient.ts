@@ -1,6 +1,6 @@
-import { Loan } from "../../loans/models/loan";
+import { Loan } from "../../loans";
 import { Profile } from "../models/profile";
-import { fetchBlobWithQueryParams, fetchWithQueryParams } from "@/utils/utils";
+import { fetchBlobWithQueryParams, fetchEntity, fetchWithQueryParams } from "@/utils/utils";
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
 import { Query } from "@/models/query";
 import { ProfileStats } from "../models/profileStats";
@@ -9,6 +9,7 @@ import api from "@/services/api";
 import { ProfileRole } from "../models/profileRole";
 import { getProfilesEndpointForRole } from "../lib/utils";
 import { getModulePermissions } from "@/features/auth";
+import { profilesTag } from "../lib/constants";
 
 const baseUrl = "/profiles";
 
@@ -18,8 +19,7 @@ export const fetchProfileStats = async (id: number): Promise<ProfileStats> => {
 };
 
 export const getProfile = async (id: number): Promise<Profile> => {
-  const response = await api.get(`${baseUrl}/${id}`);
-  return response.data;
+  return await fetchEntity(`${baseUrl}/${id}`, [profilesTag, id.toString()])
 };
 
 export const createProfile = async (data: ProfileFormValues): Promise<Profile> => {
@@ -75,5 +75,10 @@ export const getProfilesReportBlob = async (role: ProfileRole, query?: Query) =>
 }
 
 export const profilesClient = {
-  getProfile
+  getProfile,
+  getProfiles,
+  createProfile,
+  editProfile,
+  deleteProfile,
+  fetchProfileStats
 }

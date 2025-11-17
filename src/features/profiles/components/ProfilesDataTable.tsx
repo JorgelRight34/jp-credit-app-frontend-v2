@@ -1,15 +1,18 @@
 import { ProfileQuery } from "../models/profileQuery";
 import { profilesQueryKey } from "../lib/constants";
-import { Column } from "@/components/DataTable/models/column";
 import { Profile } from "../models/profile";
-import { ProfileRole } from "@/features/Profiles/models/profileRole";
-import { EntityDataTableProps } from "@/models";
 import { getAge, getRandomName, toAllTitleCase } from "@/utils/utils";
 import { getProfiles } from "../services/profilesClient";
-import { EntityDataTable } from "@/components/DataTable";
 import { useRouter } from "@/hooks/useRouter";
-import { DateLabel, PhoneLink } from "@/components/ui";
 import { TEST } from "@/utils/constants";
+import {
+  Column,
+  DateLabel,
+  EntityDataTable,
+  EntityDataTableProps,
+  PhoneLink,
+} from "@/components";
+import { ProfileRole } from "../models/profileRole";
 
 type ProfilesDataTableProps = EntityDataTableProps<Profile, ProfileQuery> & {
   role?: ProfileRole;

@@ -1,17 +1,16 @@
-import { UseFileFormProps } from "@/components/FileUpload/hooks/useUploadFileForm";
 import { useMemo } from "react";
 import { uploadReport } from "../services/reportsClient";
-import { FormBuilderRef } from "@/components/EntityForm/models/formBuilder";
 import { ReportFormFields } from "../lib/form";
 import { Report } from "../models/report";
-import { createFile } from "@/components/FileUpload/services/fileUploadClient";
+import { FormBuilderRef } from "@/components/organisms/form-builder/models/formBuilder";
+import { createFile, UseUploadFileFormProps } from "@/components";
 
 interface UseReportFileForm {
     form: FormBuilderRef<ReportFormFields> | null;
     edit?: Report;
 }
 
-export const useReportFileForm = ({ edit, form }: UseReportFileForm): UseFileFormProps => {
+export const useReportFileForm = ({ edit, form }: UseReportFileForm): UseUploadFileFormProps<Report> => {
     const memoizedEditFiles = useMemo(
         () => (edit ? [edit?.document] : undefined),
         [edit],
@@ -32,7 +31,7 @@ export const useReportFileForm = ({ edit, form }: UseReportFileForm): UseFileFor
             form?.setValue("documentId", response.id!);
             form?.submit();
         },
-        editFiles: memoizedEditFiles,
+        initialFiles: memoizedEditFiles,
         filesMaxLength: 1,
         accept: "*/*",
     }

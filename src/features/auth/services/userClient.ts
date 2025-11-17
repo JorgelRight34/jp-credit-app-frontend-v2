@@ -39,8 +39,9 @@ export const getPermissions = async (id: number): Promise<UserPermissions> => {
   return response.data;
 };
 
-export const getModulePermissions = async (endpoint: string): Promise<ModulePermissions> => {
-  const response = await fetch(endpoint);  // USE REDIS CLIENT OR SOMETHING ELSE
+export const getModulePermissions = async (endpoint: string, tags: string[] = [], cache = 0)
+  : Promise<ModulePermissions> => {
+  const response = await fetch(endpoint, { next: { tags, revalidate: cache } });  // USE REDIS CLIENT OR SOMETHING ELSE
   return response.json();
 }
 

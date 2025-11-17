@@ -1,25 +1,18 @@
 import "../profiles.css";
 import ProfileInfoTable from "./ProfileInfoTable";
 import ProfileCard from "./ProfileCard";
-import LoanInfo from "../../Loans/components/LoanInfo";
-import useProfileStats from "../hooks/useProfileStats";
-import { Profile } from "../models/profile";
-import { Icon } from "@/components/ui";
-import useLoan from "@/features/Loans/hooks/useLoan";
-import useProfile from "../hooks/useProfile";
+import { Icon } from "@/components";
+import { loanClient, LoanInfo } from "@/features/loans";
+import { profilesClient } from "../services/profilesClient";
 
 interface ProfileInfoProps {
-  profile?: Profile;
-  id?: number;
+  id: number;
 }
 
-const ProfileInfo = ({ id }: ProfileInfoProps) => {
-  const { profile } = useProfile({ id });
-
-  const { stats } = useProfileStats(profile?.id);
-  const { loan: lastLoan } = useLoan({ id: stats?.lastLoan?.id });
-
-  if (!profile) return <></>;
+const ProfileInfo = async ({ id }: ProfileInfoProps) => {
+  const profile = await profilesClient.getProfile(id);
+  const stats = await profilesClient.fetchProfileStats(id);
+  const lastLoan = await loanClient.getLoan(stats.lastLoan.id);
 
   return (
     <>

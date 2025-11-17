@@ -1,5 +1,5 @@
-import { Loan } from "../../Loans/models/loan";
-import { Transaction } from "../../Transactions/models/transaction";
+import { Loan } from "@/features/loans";
+import { Transaction } from "@/features/transactions";
 
 export interface ProfileStats {
   lastLoan: Loan;

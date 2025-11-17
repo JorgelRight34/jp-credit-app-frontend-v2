@@ -23,12 +23,8 @@ export { default as ProfilesPage } from "./pages/ProfilesPage";
 // --------------------
 // Hooks (named exports)
 // --------------------
-export * from "./hooks/useAddToRole";
-export * from "./hooks/useProfile";
 export * from "./hooks/useProfileFilesForm";
 export * from "./hooks/useProfileForm";
-export * from "./hooks/useProfileStats";
-export * from "./hooks/useRemoveFromRole";
 
 // --------------------
 // Models (named exports)
@@ -55,8 +51,3 @@ export * from "./lib/utils";
 // Services (named exports)
 // --------------------
 export * from "./services/profilesClient";
-
-// --------------------
-// Routes (named exports)
-// --------------------
-export * from "./routes";

@@ -1,11 +1,10 @@
-import { UseEntityModuleFormProps } from "@/components/EntityForm/models/UseEntityModuleFormProps";
 import { ReportFormFields, reportsFormProvider } from "../lib/form";
 import { createReport, editReport } from "../services/reportsClient";
 import { toastService } from "@/services";
-import { UseEntityFormReturn } from "@/models";
 import { reportsCacheKey } from "../lib/constants";
 import { useMemo } from "react";
 import { Report } from "../models/report";
+import { UseEntityFormReturn, UseEntityModuleFormProps } from "@/components";
 
 type UseReportsFormProps = UseEntityModuleFormProps<Report, ReportFormFields>;
 
@@ -31,6 +30,7 @@ export const useReportsForm = ({ edit }: UseReportsFormProps): UseEntityFormRetu
         config: {
             formProvider: reportsFormProvider,
             cacheKeysToInvalidate: [reportsCacheKey],
+            tagsToInvalidate: [],
             defaultValues,
             resetValues: !!edit
         }

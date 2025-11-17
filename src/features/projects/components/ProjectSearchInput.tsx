@@ -18,7 +18,7 @@ const ProjectSearchInput = ({ ...props }: ProjectSearchInputProps) => {
       accesorFn={(p) => p?.id}
       visibleValueFn={(p) => p?.name}
       cacheKey={projectsQueryKey}
-      onSearch={projectsClient.fetchProject}
+      onSearch={projectsClient.getProject}
       {...props}
       render={(setValue) => (
         <ProjectSection allowSelect={false} table={{ onRowClick: setValue }} />

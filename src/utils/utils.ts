@@ -311,8 +311,8 @@ export const getDNIFromString = (str: string) => {
     return `${str.slice(0, 3)}-${str.slice(3, 10)}-${str.slice(10, 11)}`;
 };
 
-export const getPicWithInitials = (name: string, background = "random") => {
-    return `https://ui-avatars.com/api/?name=${name}background=${background}`;
+export const getPicWithInitials = (name: string, background = "random", color: string = "") => {
+    return `https://ui-avatars.com/api/?name=${name}background=${background}&color=${color.replace("#", "",)}`;
 };
 
 export const range = (length: number): number[] => {
@@ -367,3 +367,9 @@ export const getLocaleMonth = (dateInput: Date | string) => {
 
 export const isImage = (ft?: string) =>
     imageExtensions.includes(ft ?? "");
+
+
+export const TimeSpan = {
+    fromMinutes: (minutes: number) => 60 * minutes,
+    fromDays: (days: number) => 60 * 60 * days
+}

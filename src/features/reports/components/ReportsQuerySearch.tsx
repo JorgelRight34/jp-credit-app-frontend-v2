@@ -1,6 +1,9 @@
-import { QuerySearchInput, QuerySearchProps } from "@/models";
+import {
+  EntityQuerySearch,
+  QuerySearchInput,
+  QuerySearchProps,
+} from "@/components";
 import { ReportQuery } from "../models/reportQuery";
-import { EntityQuerySearch } from "@/components/EntityQuerySearch";
 
 type ReportsQuerySearchProps = QuerySearchProps<ReportQuery>;
 

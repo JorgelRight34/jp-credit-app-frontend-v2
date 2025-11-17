@@ -4,11 +4,11 @@ import {
   toAllTitleCase,
 } from "@/utils/utils";
 import { profilesPath } from "../lib/constants";
-import { AppLink } from "@/components/ui";
-import { User } from "@/features/Auth/models/user";
+import { Profile } from "../models/profile";
+import { AppLink } from "@/components";
 
 interface LinkToProfileProps {
-  profile?: User | string;
+  profile?: Profile | string;
   id?: number;
   fullName?: boolean;
   onClick?: (event: React.MouseEvent) => void;

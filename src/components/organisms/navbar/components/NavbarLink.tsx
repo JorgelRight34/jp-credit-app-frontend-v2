@@ -1,29 +1,28 @@
 import clsx from "clsx";
 import "./_navbar.css";
-import { useMatch } from "@/hooks/useMatch";
 import { useMemo } from "react";
 import { NavItem } from "../models/navItem";
 import { AppLink, Icon } from "@/components/atoms";
+import { usePathname } from "@/hooks/usePathname";
 
-export interface NavLinkProps {
+export interface NavbarLinkProps {
   option: NavItem;
   className?: string;
   onClick?: () => void;
   onExpand?: () => void;
 }
 
-const NavLink = ({
+const NavbarLink = ({
   option,
   className = "",
   onClick,
   onExpand,
-}: NavLinkProps) => {
-  const hasChildren = option?.children && option?.children.length > 0;
-  const routeWithWildcard = useMemo(
-    () => (option.route + "/*").replace(/\/+/g, "/"),
-    [option.route],
+}: NavbarLinkProps) => {
+  const pathname = usePathname();
+  const isActive = useMemo(
+    () => option.children?.some((child) => pathname.startsWith(child.route)),
+    [option.children, pathname],
   );
-  const isActive = useMatch(routeWithWildcard);
 
   return (
     <div className="nav-link-container position-relative" onClick={onClick}>
@@ -59,7 +58,7 @@ const NavLink = ({
             </div>
           </AppLink>
           {/* Menu trigger */}
-          {hasChildren && (
+          {option?.children && option?.children.length > 0 && (
             <div className="flex-shrink-0">
               <Icon
                 wrapperClassName="ml-2 cursor-pointer flex-shrink-0"
@@ -74,4 +73,4 @@ const NavLink = ({
   );
 };
 
-export default NavLink;
+export default NavbarLink;

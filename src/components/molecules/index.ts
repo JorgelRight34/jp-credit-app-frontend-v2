@@ -7,6 +7,7 @@ export { default as LoadingScreen } from "./loaders/LoadingScreen";
 export { default as LoadingSpinner } from "./loaders/LoadingSpinner";
 export { default as Carousel } from "./carousel/Carousel"
 export { default as LightBox } from "./light-box/LightBox"
+export { default as ImageWithLightBox } from "./light-box/ImageWithLightBox"
 export { default as FinancialCard } from "./financial-card/FinancialCard"
 
 // -------------------------------------

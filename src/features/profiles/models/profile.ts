@@ -1,4 +1,4 @@
-import { ApiFile } from "@/models";
+import { Photo } from "@/models";
 import { MaritalStatus } from "./maritalStatus";
 
 export interface Profile {
@@ -19,7 +19,7 @@ export interface Profile {
     landline: string;
     officePhone?: string;
     nationality: string;
-    photo?: ApiFile;
+    photo?: Photo;
     label?: string;
     createdAt: string;
     city: string;

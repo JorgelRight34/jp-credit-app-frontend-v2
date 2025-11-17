@@ -1,13 +1,11 @@
-import { NavLink } from "react-router";
-import InfoTable from "../../../components/DataTable/components/InfoTable";
-import PhoneLink from "../../../components/ui/PhoneLink";
-import { MaritalStatus } from "../models/maritalStatus";
 import { ProfileStats } from "../models/profileStats";
 import { maritalStatusSpanishTranslations } from "../lib/constants";
-import DateLabel from "../../../components/ui/DateLabel";
 import { Profile } from "../models/profile";
 import { getDNIFromString, toFormattedDate, toTitleCase } from "@/utils/utils";
 import { ND } from "@/utils/constants";
+import { DateLabel, InfoTable, PhoneLink } from "@/components";
+import { MaritalStatus } from "../models/maritalStatus";
+import { LinkToLoan } from "@/features/loans";
 
 interface ProfileInfoTableProps {
   profile: Profile;
@@ -22,7 +20,7 @@ const ProfileInfoTable = ({ profile, stats }: ProfileInfoTableProps) => {
           "Cédula",
           getDNIFromString(profile.dni),
           "Teléfono Oficina",
-          <PhoneLink phoneNumber={profile.officePhone} />,
+          <PhoneLink key="office" phoneNumber={profile.officePhone} />,
         ],
         ["Nombres", profile.firstName, "Apellidos", profile.lastName],
         ["Profesión", profile.profession ?? ND],
@@ -38,21 +36,25 @@ const ProfileInfoTable = ({ profile, stats }: ProfileInfoTableProps) => {
           toTitleCase(
             maritalStatusSpanishTranslations[
               profile.maritalStatus.toLowerCase() as MaritalStatus
-            ] || ""
+            ] || "",
           ),
           "Teléfono Casa",
-          <PhoneLink phoneNumber={profile.landline || ""} />,
+          <PhoneLink key="landline" phoneNumber={profile.landline || ""} />,
         ],
-        ["Teléfono", <PhoneLink phoneNumber={profile.phoneNumber || ""} />],
+        [
+          "Teléfono",
+          <PhoneLink key="phone" phoneNumber={profile.phoneNumber || ""} />,
+        ],
         [
           "Préstamo Actual",
-          <NavLink
-            to={stats?.lastLoan?.id ? `/loans/${stats?.lastLoan?.id}` : ""}
-          >
+          <LinkToLoan key="loan" id={stats?.lastLoan.id}>
             Préstamo No.{stats?.lastLoan?.id?.toString() || "---"}
-          </NavLink>,
+          </LinkToLoan>,
           "Último Pago",
-          <DateLabel date={stats?.lastTransaction?.date || "---"} />,
+          <DateLabel
+            key="lastPayment"
+            date={stats?.lastTransaction?.date || "---"}
+          />,
         ],
         stats
           ? ["Préstamos", stats.loanCount, "Garantías", stats.collateralCount]

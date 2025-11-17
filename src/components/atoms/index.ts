@@ -6,6 +6,7 @@ export { default as AccentBtn } from "./button/AccentBtn";
 export { default as SecondaryBtn } from "./button/SecondaryBtn";
 export { default as SearchBtn } from "./button/SearchBtn";
 export { default as SplitBtn } from "./button/SplitBtn";
+export * from "./button/SplitBtn"
 export { default as ToggleButtonGroup } from "./button/ToggleButtonGroup";
 export { default as LightBtn } from "./button/LightBtn";
 export * from "./navigation/AppLink"

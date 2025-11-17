@@ -6,7 +6,11 @@ import { useFormPage } from "./useFormPage";
 import EntityLayout from "../entity-layout/EntityLayout";
 import { toAllTitleCase } from "@/utils/utils";
 import { breadcrumbIcons } from "@/utils/constants";
-import { ConfirmationModal } from "@/components";
+import dynamic from "next/dynamic";
+
+const ConfirmationModal = dynamic(
+  () => import("@/components/organisms/modal/components/ConfirmationModal"),
+);
 
 const FormPageLayoutContent = ({
   title,

@@ -24,10 +24,7 @@ export const getLoan = async (id: number): Promise<Loan> => {
 };
 
 export const getFullLoan = async (id: number): Promise<Loan> => {
-  const loan = await getLoan(id);
-
-
-  return loan;
+  return await getLoan(id);
 }
 
 export const getLoans = async (query?: Query): Promise<PagedResponse<Loan>> => {

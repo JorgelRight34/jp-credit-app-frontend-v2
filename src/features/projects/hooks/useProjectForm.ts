@@ -1,40 +1,36 @@
-import { UseEntityFormReturn } from "../../../components/EntityForm/models/useEntityFormReturn";
+import { UseEntityFormReturn } from "@/components";
 import {
-  projectFormFields,
+  projectFormProvider,
   ProjectFormValues,
-  schema,
 } from "../lib/projectForm";
-import {
-  projectSettingsFormFields,
-  projectSettingsFormSchema,
-} from "../lib/projectSettingsForm";
 import { Project } from "../models/project";
-import useEditProject from "./useEditProject";
-import useNewProject from "./useNewProject";
+import { projectsClient } from "../services/projectService";
+import { projectsTag } from "../lib/constants";
 
 interface UseProjectFormProps {
   edit?: Project;
 }
 
-const useProjectForm = ({
-  edit,
+export const useProjectForm = ({
+  edit
 }: UseProjectFormProps): UseEntityFormReturn<Project, ProjectFormValues> => {
-  const { createProject } = useNewProject();
-  const { editProject } = useEditProject();
+  const onSubmit = async (data: ProjectFormValues) => {
+    return await projectsClient.createProject(data);
+  }
 
-  const handleOnSubmit = async (data: ProjectFormValues) => {
-    await (edit ? editProject({ data, id: edit.id }) : createProject(data));
-  };
+  const onEdit = async (data: ProjectFormValues) => {
+    return await projectsClient.editProject(data, edit!.id)
+  }
 
   return {
-    handleOnSubmit,
-    formConfig: {
-      formFields: edit ? projectSettingsFormFields : projectFormFields,
-      schema: edit ? projectSettingsFormSchema : schema,
-      defaultValues: edit ? { ...edit } : undefined,
+    onSubmit,
+    onEdit,
+    config: {
+      formProvider: projectFormProvider,
+      defaultValues: edit,
       resetValues: !edit,
+      tagsToInvalidate: [projectsTag],
+      cacheKeysToInvalidate: []
     },
   };
 };
-
-export default useProjectForm;

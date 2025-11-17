@@ -1,9 +1,10 @@
+"use client";
+
 import { createContext, useContext, useState } from "react";
 import { PROJECT_KEY } from "../utils/constants";
-import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "./AuthContext";
-import { Project } from "@/features/projects";
-import { fetchProject } from "@/features/projects/services/projectService";
+import { Project, projectsClient, projectsQueryKey } from "@/features/projects";
+import { useData } from "@/hooks/useData";
 
 type ProjectContextType = {
   project?: Project;
@@ -21,13 +22,13 @@ const ProjectProvider = ({ children }: React.PropsWithChildren) => {
     Number(localStorage.getItem(PROJECT_KEY)) || undefined,
   );
 
-  const { data: project } = useQuery({
-    queryKey: ["projects", projectId],
-    queryFn: async () => {
+  const { data: project } = useData({
+    key: [...projectsQueryKey, projectId],
+    getData: async () => {
       if (!projectId) {
         throw new Error("Project ID is required");
       }
-      return await fetchProject(projectId);
+      return await projectsClient.getProject(projectId);
     },
     enabled: !!user && projectId !== undefined,
   });

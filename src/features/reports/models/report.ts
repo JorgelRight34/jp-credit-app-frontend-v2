@@ -1,4 +1,4 @@
-import { ApiFile } from "@/models";
+import { FileModel } from "@/models/fileModel";
 import { ReportKey } from "./reportKey";
 
 export interface Report {
@@ -7,7 +7,7 @@ export interface Report {
     key: ReportKey;
     title: string;
     description: string;
-    document: ApiFile;
+    document: FileModel;
     createdAt?: string | Date;
     bookmark: boolean;
 }

@@ -9,7 +9,7 @@ import {
   loanModulePermissionsProvider,
 } from "@/features/loans";
 import { ProfileInfo } from "@/features/profiles";
-import { createReportLayoutOption } from "@/features/Reports/lib/utils";
+import { createReportLayoutOption } from "@/features/reports";
 import { TransactionSection } from "@/features/transactions";
 import { EntityLayout } from "@/layouts";
 import { AppPageProps } from "@/models/appPageProps";

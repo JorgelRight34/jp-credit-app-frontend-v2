@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import LoadingSpinner from "./LoadingSpinner";
+import { Image, LoadingSpinner } from "@/components";
 
 interface ProfilePicCardProps {
-  src?: string;
+  src: string;
   className?: string;
   showBorder?: boolean;
   style?: Record<string, string>;
@@ -22,11 +22,12 @@ const ProfilePicCard = ({
       })}
       style={style}
     >
-      <img
+      <Image
         src={src}
         className={clsx("rounded-circle profile-pic-card", {
           "!hidden": !src,
         })}
+        alt={src}
         style={style}
       />
       <LoadingSpinner style={style} className={clsx({ hidden: !!src })} />

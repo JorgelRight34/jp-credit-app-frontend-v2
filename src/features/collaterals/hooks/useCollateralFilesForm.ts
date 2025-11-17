@@ -1,4 +1,4 @@
-import { UseFileFormProps } from "@/components/FileUpload/hooks/useUploadFileForm";
+import { UseUploadFileFormProps } from "@/components";
 import { Collateral } from "../models/collateral";
 import { deleteCollateralFiles, uploadCollateralFiles } from "../services/collateralsClient";
 import { useMemo } from "react";
@@ -8,7 +8,7 @@ interface UseCollateralFilesFormProps {
 }
 
 export const useCollateralFilesForm = ({ collateral }: UseCollateralFilesFormProps):
-    UseFileFormProps<Collateral> => {
+    UseUploadFileFormProps<Collateral> => {
     const memoizedEditFiles = useMemo(
         () => [...(collateral?.files.map(f => f.fileUpload) ?? []), ...(collateral?.photos ?? [])], [collateral]
     )
@@ -16,7 +16,7 @@ export const useCollateralFilesForm = ({ collateral }: UseCollateralFilesFormPro
     return {
         onUpload: async (files, data) => uploadCollateralFiles(collateral ? collateral.id : data.id!, files),
         onDelete: async (files) => deleteCollateralFiles(files),
-        editFiles: memoizedEditFiles,
+        initialFiles: memoizedEditFiles,
         defaultData: collateral,
         filesMaxLength: 1,
         accept: "image/*"

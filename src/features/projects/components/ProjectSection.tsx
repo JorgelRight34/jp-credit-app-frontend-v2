@@ -2,19 +2,19 @@ import ProjectDataTable from "./ProjectDataTable";
 import { ProjectsQuery } from "../models/projectsQuery";
 import { Project } from "../models/project";
 import ProjectQuerySearch from "./ProjectQuerySearch";
-import { EntitySectionProps } from "@/components/EntitySection/models/EntitySectionProps";
-import EntitySection from "@/components/EntitySection/components/EntitySection";
+import { EntitySection, EntitySectionProps } from "@/components";
 
 interface ProjectSectionProps
   extends EntitySectionProps<Project, ProjectsQuery> {
   allowSelect?: boolean;
+  toast?: boolean;
 }
 
-const ProjectSection = ({ ...props }: ProjectSectionProps) => {
+const ProjectSection = ({ toast, ...props }: ProjectSectionProps) => {
   return (
     <EntitySection
       Search={ProjectQuerySearch}
-      DataTable={ProjectDataTable}
+      DataTable={(table) => ProjectDataTable({ ...table, toast })}
       {...props}
     />
   );

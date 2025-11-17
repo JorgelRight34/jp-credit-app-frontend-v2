@@ -1,6 +1,6 @@
-import { ProfilePicCard } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
-import { getFirstAndLastName } from "@/utils/utils";
+import ProfilePicCard from "./ProfilePicCard";
+import { getProfilePicWithInitials } from "../lib/utils";
 
 interface CurrentUserPicCardProps {
   className?: string;
@@ -26,17 +26,7 @@ const CurrentUserPicCard = ({
       className={className}
       style={{ height, width }}
       showBorder={showBorder}
-      src={
-        user
-          ? user?.photoUrl ??
-            `https://ui-avatars.com/api/?name=${getFirstAndLastName(
-              user
-            )}&background=${background.replace("#", "")}&color=${color.replace(
-              "#",
-              ""
-            )}`
-          : undefined
-      }
+      src={getProfilePicWithInitials(user, background, color)}
     />
   );
 };

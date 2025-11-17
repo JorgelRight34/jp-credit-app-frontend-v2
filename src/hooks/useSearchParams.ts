@@ -1,11 +1,3 @@
-import { useMemo } from "react";
-import { useLocation } from "react-router"
+import { useSearchParams as Next } from "next/navigation";
 
-export const useQueryParams = () => {
-    const { search } = useLocation();
-
-    return useMemo(() => {
-        const params = new URLSearchParams(search);
-        return Object.fromEntries(params);
-    }, [search])
-}
+export const useSearchParams = Next

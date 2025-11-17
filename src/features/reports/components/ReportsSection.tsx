@@ -1,9 +1,8 @@
-import { EntitySectionProps } from "@/components/EntitySection";
-import { Report } from "../models/report";
-import { ReportQuery } from "../models/reportQuery";
-import EntitySection from "@/components/EntitySection/components/EntitySection";
+import { EntitySection, EntitySectionProps } from "@/components";
 import ReportsDataTable from "./ReportsDataTable";
 import ReportsQuerySearch from "./ReportsQuerySearch";
+import { ReportQuery } from "../models/reportQuery";
+import { Report } from "../models/report";
 
 type ReportsSectionProps = EntitySectionProps<Report, ReportQuery>;
 

@@ -1,8 +1,11 @@
-import { QuerySearchInput, QuerySearchProps } from "@/models";
+import {
+  EntityQuerySearch,
+  QuerySearchInput,
+  QuerySearchProps,
+} from "@/components";
+import { getProfilesReportBlob } from "../services/profilesClient";
 import { ProfileQuery } from "../models/profileQuery";
 import { ProfileRole } from "../models/profileRole";
-import EntityQuerySearch from "@/components/EntityQuerySearch/components/EntityQuerySearch";
-import { getProfilesReportBlob } from "../services/profilesClient";
 
 interface ProfileQuerySearchProps extends QuerySearchProps<ProfileQuery> {
   role?: ProfileRole;

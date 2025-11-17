@@ -7,6 +7,7 @@ import { Query } from "@/models/query";
 
 
 export const profilesQueryKey: CacheKey = ["profiles"];
+export const profilesTag = "profiles"
 
 export const profileRolesSpanishTranslations: Record<ProfileRole, string> = {
   loanOfficer: "asesor",

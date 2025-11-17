@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { FormField } from "../../../models/formField";
 import { Project } from "../models/project";
-import { COMPOUND_OPTIONS } from "../../../utils/constants";
+import { FormField } from "@/components";
+import { COMPOUND_OPTIONS } from "@/utils/constants";
 
 export const projectSettingsFormSchema = z.object({
   name: z.string().optional(),

@@ -1,20 +1,20 @@
 import clsx from "clsx";
-import NavLink, { NavLinkProps } from "./NavLink";
+import NavbarLink, { NavbarLinkProps } from "./NavbarLink";
 import { NavItem } from "../models/navItem";
 
-type NavLinksContainerProps = React.HtmlHTMLAttributes<HTMLDivElement> &
-  Omit<NavLinkProps, "option" | "onExpand"> & {
+type NavbarLinksContainerProps = React.HtmlHTMLAttributes<HTMLDivElement> &
+  Omit<NavbarLinkProps, "option" | "onExpand"> & {
     options: NavItem[];
     onExpand: (option: NavItem) => void;
   };
 
-const NavLinksContainer = ({
+const NavbarLinksContainer = ({
   className,
   options,
   children,
   onExpand,
   ...props
-}: NavLinksContainerProps) => {
+}: NavbarLinksContainerProps) => {
   return (
     <div
       className={clsx("fade-in flex-1 overflow-y-auto", className)}
@@ -25,7 +25,7 @@ const NavLinksContainer = ({
       {children}
       <div className="flex flex-col px-3 pt-3">
         {options.map((option, index) => (
-          <NavLink
+          <NavbarLink
             key={index}
             className="mb-3"
             onExpand={() => onExpand?.(option)}
@@ -38,4 +38,4 @@ const NavLinksContainer = ({
   );
 };
 
-export default NavLinksContainer;
+export default NavbarLinksContainer;

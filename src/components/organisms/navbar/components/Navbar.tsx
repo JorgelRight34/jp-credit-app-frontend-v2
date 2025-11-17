@@ -21,7 +21,7 @@ import clsx from "clsx";
 import { NavItem } from "../models/navItem";
 import logo from "@/public/horizontal-logo.png";
 import { Icon } from "@/components/atoms";
-import NavLinksContainer from "./NavLinksContainer";
+import NavbarLinksContainer from "./NavbarLinksContainer";
 
 const options = [
   profileNavItem,
@@ -76,12 +76,12 @@ const Navbar = ({ onSelect }: NavbarProps) => {
         />
       </div>
       {/* Main Navigation Options */}
-      <NavLinksContainer
+      <NavbarLinksContainer
         className={clsx({ hidden: clickedNavOption?.children?.length })}
         options={searchResults.length > 0 ? searchResults : options}
         onExpand={handleOnSelect}
       />
-      <NavLinksContainer
+      <NavbarLinksContainer
         className={clsx({ hidden: !clickedNavOption?.children?.length })}
         options={clickedNavOption?.children || []}
         onExpand={handleOnSelect}
@@ -95,7 +95,7 @@ const Navbar = ({ onSelect }: NavbarProps) => {
             Atrás / {clickedNavOption?.name}
           </Icon>
         </div>
-      </NavLinksContainer>
+      </NavbarLinksContainer>
       <div className="w-full flex-shrink-0 p-3">
         <NavbarFooter className="bg-active-transparent shadow-sm" />
       </div>

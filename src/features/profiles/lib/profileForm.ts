@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { Country } from "country-state-city"
 import { countryTraductions } from "../../../utils/constants";
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
+import { FormProvider } from "@/components";
 
 export const baseUrl = "users";
 

@@ -1,6 +1,6 @@
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
 import { z } from "zod";
 import { ReportKey } from "../models/reportKey";
+import { FormProvider } from "@/components";
 
 const reportsFormSchema = z.object({
     title: z.string(),

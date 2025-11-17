@@ -1,4 +1,4 @@
-import { Query } from "../../../models/query";
+import { Query } from "@/models/query";
 import { Profile } from "./profile";
 import { ProfileRole } from "./profileRole";
 

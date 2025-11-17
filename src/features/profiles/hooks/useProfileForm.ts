@@ -1,12 +1,11 @@
 import { useMemo } from "react";
-import { profilesQueryKey } from "../lib/constants";
+import { profilesQueryKey, profilesTag } from "../lib/constants";
 import { createProfile, editProfile } from "../services/profilesClient";
 import { toastService } from "@/services";
 import { Profile } from "../models/profile";
-import { ProfileRole } from "@/features/Profiles/models/profileRole";
-import { UseEntityModuleFormProps } from "@/components/EntityForm/models/UseEntityModuleFormProps";
-import { UseEntityFormReturn } from "@/models";
 import { profileFormProvider, ProfileFormValues } from "../lib/profileForm";
+import { UseEntityFormReturn, UseEntityModuleFormProps } from "@/components";
+import { ProfileRole } from "../models/profileRole";
 
 
 interface UseProfileFormProps extends UseEntityModuleFormProps<Profile, ProfileFormValues> {
@@ -54,6 +53,7 @@ const useProfileForm = ({
       formProvider: profileFormProvider,
       resetValues: !edit,
       cacheKeysToInvalidate: [profilesQueryKey],
+      tagsToInvalidate: [profilesTag],
       defaultValues
     },
   };

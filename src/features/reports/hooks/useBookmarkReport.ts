@@ -8,7 +8,7 @@ export const useBookmarkReport = () => {
 
     const { mutateAsync, isPending, isError } = useDataMutation({
         mutationFn: ({ id, bookmark }: { id: number, bookmark: boolean }) => bookmarkReport(id, bookmark),
-        onSuccess: () => dataClient.invalidateQueries({ queryKey: reportsCacheKey })
+        onSuccess: () => dataClient.invalidate({ key: reportsCacheKey })
     })
 
     return { bookmark: mutateAsync, isPending, isError }

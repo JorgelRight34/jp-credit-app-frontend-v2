@@ -1,7 +1,9 @@
-import { QuerySearchProps } from "../../../components/EntityQuerySearch/models/querySearchProps";
+import {
+  EntityQuerySearch,
+  QuerySearchInput,
+  QuerySearchProps,
+} from "@/components";
 import { ProjectsQuery } from "../models/projectsQuery";
-import { QuerySearchInput } from "../../../components/EntityQuerySearch/models/querySearchInput";
-import EntityQuerySearch from "@/components/EntityQuerySearch/components/EntityQuerySearch";
 
 type ProjectQuerySearchProps = QuerySearchProps<ProjectsQuery>;
 
@@ -20,17 +22,8 @@ const fields: QuerySearchInput<ProjectsQuery>[] = [
   },
 ];
 
-const ProjectQuerySearch = ({
-  defaultValues,
-  onSubmit,
-}: ProjectQuerySearchProps) => {
-  return (
-    <EntityQuerySearch<ProjectsQuery>
-      fields={fields}
-      defaultValues={defaultValues}
-      onSubmit={onSubmit}
-    />
-  );
+const ProjectQuerySearch = ({ ...props }: ProjectQuerySearchProps) => {
+  return <EntityQuerySearch fields={fields} {...props} />;
 };
 
 export default ProjectQuerySearch;
