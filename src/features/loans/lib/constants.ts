@@ -1,8 +1,9 @@
 import { CacheKey } from "@/models";
-import { PERMISSIONS_ENDPOINT_SUFFIX } from "../../../utils/constants";
 import { LoanStatus } from "../models/loanStatus";
+import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
 
 export const loansQueryKey: CacheKey = ["loans"];
+export const loansTag = "loans"
 
 export const loanStatusSpanishTranslations: Record<LoanStatus, string> = {
   [LoanStatus.Active]: "activo",

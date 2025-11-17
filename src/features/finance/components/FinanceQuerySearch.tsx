@@ -1,8 +1,12 @@
-import { EntityQuerySearch } from "@/components/EntityQuerySearch";
-import { QuerySearchInput, QuerySearchProps, TimeUnit } from "@/models";
+import {
+  createDateRangeFormInterceptor,
+  EntityQuerySearch,
+  QuerySearchInput,
+  QuerySearchProps,
+} from "@/components";
 import { FinanceQuery } from "../models/financeQuery";
-import { exportProjections } from "../services/financeClient";
-import { createDateRangeFormInterceptor } from "@/components/EntityForm/utils/interceptors";
+import { TimeUnit } from "@/models";
+import { financeClient } from "../services/financeClient";
 
 type FinanceQuerySearchProps = QuerySearchProps<FinanceQuery>;
 
@@ -53,7 +57,7 @@ const FinanceQuerySearch = ({ ...props }: FinanceQuerySearchProps) => {
     <EntityQuerySearch<FinanceQuery, object>
       fields={fields}
       moreFields={moreFields}
-      onDownload={exportProjections}
+      onDownload={financeClient.exportProjections}
       reportTitle={"Proyección Pago de Mensualidades"}
       interceptors={[createDateRangeFormInterceptor(["start", "end"])]}
       {...props}

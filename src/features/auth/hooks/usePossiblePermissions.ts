@@ -1,10 +1,10 @@
-import { getAllPosiblePermissions } from "../services/userService";
+import { getAllPosiblePermissions } from "../services/userClient";
 import { useMemo } from "react";
-import { toAllTitleCase } from "../../../utils/utils";
-import { z } from "zod";
-import { permissionsQueryKey } from "../lib/constants";
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
 import { useData } from "@/hooks/useData";
+import { permissionsQueryKey } from "../lib/constants";
+import { toAllTitleCase } from "@/utils/utils";
+import z from 'zod'
+import { FormProvider } from "@/components";
 
 const usePossiblePermissions = () => {
   const { data } = useData({
@@ -45,7 +45,7 @@ const usePossiblePermissions = () => {
     return permissionsFormSchema;
   }, [permissionDomains]);
 
-  const permissionsFormProvider = useMemo<FormProvider<Permissions>>(() => ({
+  const permissionsFormProvider = useMemo<FormProvider>(() => ({
     schema: permissionsSchema,
     fields: permissionFormFields
   }), [permissionsSchema, permissionFormFields])

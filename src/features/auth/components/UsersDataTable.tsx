@@ -12,7 +12,7 @@ import {
   toAllTitleCase,
 } from "@/utils/utils";
 import { usersModuleRootPath, usersQueryKey } from "../lib/constants";
-import { getUserModulePermissions, getUsers } from "../services/userService";
+import { getUserModulePermissions, getUsers } from "../services/userClient";
 import { useRouter } from "@/hooks/useRouter";
 import { Column } from "@/components/DataTable/models/column";
 import { TEST } from "@/utils/constants";

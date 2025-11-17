@@ -1,14 +1,12 @@
 import { CacheKey } from "@/models";
 import { FinanceQuery } from "../models/financeQuery";
 import { FinancialComponentType } from "../models/financialComponentType";
-import { FinancialBreakdown } from "../models/financialBreakdown";
-import { Column } from "@/components/DataTable/models/column";
-import { toCurrency } from "@/utils/utils";
-import { getFooterTotalAsCurrency } from "@/components/EntityForm/utils/utils";
-import { DateLabel } from "@/components/ui";
 import { getDateGroupingLabel } from "./lib";
 import { HeaderContext } from "@tanstack/react-table";
-import { Transaction } from "@/features/Transactions/models/transaction";
+import { Transaction } from "@/features/transactions";
+import { FinancialBreakdown } from "../models/financialBreakdown";
+import { Column, DateLabel, getFooterTotalAsCurrency } from "@/components";
+import { toCurrency } from "@/utils/utils";
 
 export const incomesQueryKey = "incomes";
 

@@ -21,7 +21,7 @@ const FormBuilder = forwardRef(
       defaultValues: initialDefaultValues,
       ...props
     }: FormBuilderProps<T, TData, TR>,
-    ref: React.Ref<FormBuilderRef>
+    ref: React.Ref<FormBuilderRef>,
   ) => {
     const params = useSearchParams();
 
@@ -32,7 +32,7 @@ const FormBuilder = forwardRef(
         ...initialDefaultValues,
         ...params,
       }),
-      [config.defaultValues, formProvider.fields, initialDefaultValues, params]
+      [config.defaultValues, formProvider.fields, initialDefaultValues, params],
     );
 
     const { form, validation, state } = useFormBuilder({
@@ -83,7 +83,7 @@ const FormBuilder = forwardRef(
         </div>
       </FormProvider>
     );
-  }
+  },
 ) as FormBuilderComponent;
 
 FormBuilder.displayName = "FormBuilder";

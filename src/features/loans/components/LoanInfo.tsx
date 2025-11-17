@@ -1,23 +1,14 @@
-import { useMemo } from "react";
-import useLoan from "../hooks/useLoan";
 import { Loan } from "../models/loan";
 import LoanInfoTable from "./LoanInfoTable";
-import { LoadingSpinner } from "@/components/ui";
+import { loanClient } from "../services/loanClient";
 
 interface LoanInfoProps {
   loan?: Loan;
   id?: number;
 }
 
-const LoanInfo = ({ loan: givenLoan, id }: LoanInfoProps) => {
-  const { loan: fetchedLoan, isLoading } = useLoan({ id });
-  const loan = useMemo(
-    () => givenLoan ?? fetchedLoan,
-    [givenLoan, fetchedLoan]
-  );
-
-  if (isLoading) return <LoadingSpinner />;
-  if (!loan) return <></>;
+const LoanInfo = async ({ loan: givenLoan, id }: LoanInfoProps) => {
+  const loan = givenLoan ?? (await loanClient.getLoan(id!));
 
   return (
     <div className="flex flex-col">

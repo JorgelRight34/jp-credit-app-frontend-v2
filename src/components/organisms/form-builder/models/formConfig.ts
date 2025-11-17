@@ -23,4 +23,5 @@ export interface FormConfig<TData extends FieldValues> {
   defaultValues?: Partial<TData>;
 
   cacheKeysToInvalidate: CacheKey[];
+  tagsToInvalidate: string[]
 }

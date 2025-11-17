@@ -1,12 +1,13 @@
-import { useEntitySection } from "@/components/EntitySection/hooks/useEntitySection";
+
 import { FinanceReport } from "../models/financeReport";
 import { FinanceQuery } from "../models/financeQuery";
 import { useMemo } from "react";
 import { getDayTimeDifference } from "@/utils/utils";
 import { useFinancialReport } from "./useFinancialReport";
 import { addDays } from "date-fns";
-import { TransactionType } from "@/features/Transactions/models/transactionType";
 import { defaultFinanceQuery } from "../lib/constants";
+import { TransactionType } from "@/features/transactions";
+import { useEntitySection } from "@/components/organisms/entity-section";
 
 interface UseFinancesSectionProps {
     type: TransactionType;

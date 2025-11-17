@@ -1,12 +1,10 @@
 import { useMemo } from "react";
 import { getLocaleMonth, toCurrency, toTitleCase } from "@/utils/utils";
-import { EntityDataTableProps } from "@/models";
-import { Column } from "@/components/DataTable/models/column";
-import { DataTable } from "@/components/DataTable";
 import { addDays } from "date-fns";
 import { AmortizationPayment } from "../models/amortizationPayment";
 import { AmortizationCalculatorInput } from "../models/amortizationCalculatorInput";
-import useGenerateAmortization from "../hooks/useGenerateArmotization";
+import { useGenerateAmortization } from "../hooks/useGenerateArmotization";
+import { Column, DataTable, EntityDataTableProps } from "@/components";
 
 type AmortizationDataTableProps = EntityDataTableProps<
   AmortizationPayment,

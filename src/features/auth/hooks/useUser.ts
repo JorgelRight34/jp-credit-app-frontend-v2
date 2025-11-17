@@ -1,5 +1,5 @@
 import { usersQueryKey } from "../lib/constants";
-import { getUser } from "../services/userService";
+import { getUser } from "../services/userClient";
 import { useData } from "@/hooks/useData";
 
 interface UseUserProps {

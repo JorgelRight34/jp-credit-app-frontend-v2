@@ -1,17 +1,17 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { liquidateCollateral } from "../services/collateralsClient";
+import { useDataClient } from "@/hooks/useDataClient";
+import { useDataMutation } from "@/hooks/useMutate";
+import { collateralClient } from "../services/collateralsClient";
 import { collateralsQueryKey } from "../lib/constants";
 
-const useLiquidateCollateral = () => {
-  const queryClient = useQueryClient();
+export const useLiquidateCollateral = () => {
+  const dataClient = useDataClient();
 
-  const { mutateAsync, isPending, isError } = useMutation({
-    mutationFn: liquidateCollateral,
+  const { mutateAsync, isPending, isError } = useDataMutation({
+    mutationFn: collateralClient.liquidateCollateral,
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [collateralsQueryKey] }),
+      dataClient.invalidate({ key: collateralsQueryKey }),
   });
 
   return { liquidateCollateral: mutateAsync, isPending, isError };
 };
 
-export default useLiquidateCollateral;

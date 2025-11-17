@@ -108,7 +108,7 @@ export const getRandomName = () => {
     return `${first} ${last}`;
 };
 
-export const getFullName = (user?: Profile | null): string => {
+export const getFullName = (user?: Profile | User | null): string => {
     if (TEST) return getRandomName();
     if (!user) return "";
 
@@ -336,6 +336,11 @@ export const fetchWithQueryParams = async <T>(
     }
     const response = await api.get(`${endpoint}`, { ...config, params: query });
     return response.data;
+}
+
+export const fetchEntity = async (endpoint: string, tags: string[], cache = 60) => {
+    const response = await fetch(endpoint, { next: { revalidate: cache, tags: tags } })
+    return response.json();
 }
 
 export const fetchBlobWithQueryParams = async <T extends Query>(endpoint: string, query?: T, interceptors: FormInterceptor<T>[] = []): Promise<Blob> => {

@@ -1,4 +1,3 @@
-import useEntityDatatable from "@/components/DataTable/hooks/useEntityDatatable";
 import { useGroupedFinancialBreakdown } from "./useGroupedFinancialBreakdown";
 import { projectionsCacheKey } from "../lib/constants";
 import { getProjections } from "../services/financeClient";
@@ -7,6 +6,7 @@ import { useFinancePeriodNavigator, UseFinancePeriodNavigatorProps } from "./use
 import { useFinancePeriods } from "./useFinancePeriods";
 import { useState } from "react";
 import { Projection } from "../models/projection";
+import { useEntityDatatable } from "@/components";
 
 interface UseGroupedProjectionsProps extends Partial<UseFinancePeriodNavigatorProps> {
     query: FinanceQuery;

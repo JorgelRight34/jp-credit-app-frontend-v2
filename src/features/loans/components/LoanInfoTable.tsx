@@ -1,13 +1,12 @@
-import InfoTable from "../../../components/DataTable/components/InfoTable";
-import LinkToProfile from "../../Profiles/components/LinkToProfile";
+import { DateLabel, InfoTable } from "@/components";
 import { Loan } from "../models/loan";
 import {
+  getTimeUnitFromTimesInAYear,
   toCurrency,
   toTitleCase,
-  getTimeUnitFromTimesInAYear,
-} from "../../../utils/utils";
-import DateLabel from "../../../components/ui/DateLabel";
+} from "@/utils/utils";
 import { loanStatusSpanishTranslations } from "../lib/constants";
+import { LinkToProfile } from "@/features/profiles";
 
 interface LoanInfoTableProps {
   loan: Loan;
@@ -26,7 +25,11 @@ const LoanInfoTable = ({ loan }: LoanInfoTableProps) => {
         ],
         [
           "Cliente",
-          <LinkToProfile profile={loan.clientName} id={loan.clientProfileId} />,
+          <LinkToProfile
+            key={loan.clientId}
+            profile={loan.clientName}
+            id={loan.clientProfileId}
+          />,
           "Agente",
           loan.loanOfficerName ? (
             <LinkToProfile
@@ -37,7 +40,6 @@ const LoanInfoTable = ({ loan }: LoanInfoTableProps) => {
             "---"
           ),
         ],
-
         // === LOAN TERMS & STRUCTURE ===
         [
           "Monto Aprobado",
@@ -75,15 +77,18 @@ const LoanInfoTable = ({ loan }: LoanInfoTableProps) => {
         // === IMPORTANT DATES ===
         [
           "Fecha de Inicio",
-          <DateLabel date={loan.startDate?.toString()} />,
+          <DateLabel key="startDate" date={loan.startDate?.toString()} />,
           "Entrega",
-          <DateLabel date={loan.deliveryDate?.toString()} />,
+          <DateLabel key="endDate" date={loan.deliveryDate?.toString()} />,
         ],
         [
           "Último Pago",
-          <DateLabel date={loan.lastPaymentDate} />,
+          <DateLabel key="lastPaymentDate" date={loan.lastPaymentDate} />,
           "Siguiente Pago",
-          <DateLabel date={loan.effectivePaymentDate} />,
+          <DateLabel
+            key="effectivePaymentDate"
+            date={loan.effectivePaymentDate}
+          />,
         ],
         [
           "Cuotas Atrasadas",
@@ -98,6 +103,7 @@ const LoanInfoTable = ({ loan }: LoanInfoTableProps) => {
               [
                 "Garante",
                 <LinkToProfile
+                  key="guarantor"
                   profile={loan.guarantorName}
                   id={loan.guarantorProfileId}
                 />,

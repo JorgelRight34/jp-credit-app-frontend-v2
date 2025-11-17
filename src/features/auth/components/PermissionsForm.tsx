@@ -1,7 +1,6 @@
-import { EntityFormProps } from "@/components/EntityForm";
+import { EntityFormProps, FormBuilder } from "@/components";
 import usePermissionsForm from "../hooks/usePermissionsForm";
 import { User } from "../models/user";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
 
 interface PermissionsFormProps extends EntityFormProps<object> {
   edit?: User;
@@ -16,13 +15,7 @@ const PermissionsForm = ({
     profile: edit,
   });
 
-  return (
-    <FormBuilder<Permissions, object>
-      onDirtyChange={onDirtyChange}
-      {...config}
-      {...props}
-    />
-  );
+  return <FormBuilder onDirtyChange={onDirtyChange} {...config} {...props} />;
 };
 
 export default PermissionsForm;

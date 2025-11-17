@@ -10,6 +10,7 @@ export { default as UploadFileForm } from "./components/UploadFileForm";
 export * from "./hooks/useFileForm";
 export * from "./hooks/useUploadFileForm";
 export * from "./hooks/useUploadFilesInput";
+export * from "./components/UploadFileForm"
 
 // ICONS
 export { default as CsvIcon } from "./icons/CsvIcon";

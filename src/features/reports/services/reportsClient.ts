@@ -1,5 +1,5 @@
 import { ModulePermissions } from "@/features/Auth/models/modulePermissions"
-import { getModulePermissions } from "@/features/Auth/services/userService"
+import { getModulePermissions } from "@/features/auth/services/userClient"
 import { ReportFormFields, ReportRunFormFields } from "../lib/form"
 import api from "@/services/api"
 import { ApiFile, PagedResponse } from "@/models"

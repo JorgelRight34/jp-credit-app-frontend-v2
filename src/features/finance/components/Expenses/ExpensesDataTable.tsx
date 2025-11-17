@@ -1,18 +1,15 @@
-import { Column } from "@/components/DataTable/models/column";
+import { Column, DateLabel, getFooterTotalAsCurrency } from "@/components";
 import { FinancialBreakdown } from "../../models/financialBreakdown";
 import {
   financialBreakdownBaseColumns,
   transactionLoanColumnFooter,
 } from "../../lib/constants";
+import { Transaction, TransactionType } from "@/features/transactions";
 import { sortDateRows, toCurrency } from "@/utils/utils";
+import { LinkToLoan } from "@/features/loans";
 import FinanceGroupedTable, {
   FinancialBreakdownDataTableProps,
 } from "../FinanceGroupedTable";
-import { TransactionType } from "@/features/Transactions/models/transactionType";
-import { Transaction } from "@/features/Transactions/models/transaction";
-import { DateLabel } from "@/components/ui";
-import LinkToLoan from "@/features/Loans/components/LinkToLoan";
-import { getFooterTotalAsCurrency } from "@/components/EntityForm/utils/utils";
 
 const columns: Column<FinancialBreakdown>[] = [
   financialBreakdownBaseColumns[0],

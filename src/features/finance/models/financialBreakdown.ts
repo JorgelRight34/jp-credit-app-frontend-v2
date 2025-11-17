@@ -1,4 +1,4 @@
-import { Loan } from "@/features/Loans/models/loan";
+import { Loan } from "@/features/loans";
 
 export interface FinancialBreakdown<T = unknown> {
     date: Date | string;

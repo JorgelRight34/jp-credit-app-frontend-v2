@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import {
   downloadArmotizationAs,
   downloadAs,
-} from "../services/amortizationService";
+} from "../services/calculatorClient";
 
 type UseDownloadArmotizationReturn = [
   (body: string) => Promise<void>,

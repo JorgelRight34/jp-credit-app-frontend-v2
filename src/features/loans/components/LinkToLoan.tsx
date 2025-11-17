@@ -1,4 +1,4 @@
-import AppLink, { AppLinkProps } from "../../../components/ui/AppLink";
+import { AppLink, AppLinkProps } from "@/components";
 import { Loan } from "../models/loan";
 import clsx from "clsx";
 

@@ -1,8 +1,9 @@
-import { EntityFormProps } from "@/components/EntityForm";
-import { User } from "../models/user";
+"use client";
+
+import { EntityFormProps, FormBuilder } from "@/components";
 import { useChangePasswordForm } from "../hooks/useChangePassword";
 import { ChangeUserPasswordValues } from "../lib/form";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
+import { User } from "../models/user";
 
 export interface ChangePasswordFormProps
   extends EntityFormProps<ChangeUserPasswordValues> {

@@ -1,6 +1,8 @@
+"use client";
+
+import { FinancialCard } from "@/components";
+import { getPmt, getTotalInterest, toCurrency } from "@/utils/utils";
 import { useMemo } from "react";
-import { getPmt, getTotalInterest, toCurrency } from "../../../utils/utils";
-import FinancialCard from "../../../components/ui/FinancialCard";
 
 interface LoanFormDefaultProps {
   amount?: number;

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { UseFormSetValue } from "react-hook-form";
-import { paymentFrequencyToMonths } from "@/features/Transactions/lib/utils";
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
+import { paymentFrequencyToMonths } from "@/features/transactions";
+import { FormProvider } from "@/components";
 
 
 const changeStartDateWhenPaymentFrequencyChanges = (

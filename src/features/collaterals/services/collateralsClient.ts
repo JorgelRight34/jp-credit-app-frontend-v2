@@ -1,13 +1,14 @@
 
 import api from "@/services/api";
 import { Collateral } from "../models/collateral";
-import { fetchBlobWithQueryParams, fetchWithQueryParams } from "@/utils/utils";
+import { fetchBlobWithQueryParams, fetchEntity, fetchWithQueryParams } from "@/utils/utils";
 import { PagedResponse } from "@/models";
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
 import { Query } from "@/models/query";
 import { Collateralization } from "../models/collateralization";
 import { CollateralFormValues } from "../lib/form";
 import { CollateralQuery } from "../models/collateralQuery";
+import { collateralsTag } from "../lib/constants"
 import { FileModel } from "@/models/fileModel";
 import { getModulePermissions } from "@/features/auth";
 
@@ -36,8 +37,7 @@ export const deleteCollateralizationByCollateralId = async (
 };
 
 export const getCollateral = async (id: number): Promise<Collateral> => {
-  const response = await api.get(`${baseUrl}/${id}`);
-  return response.data;
+  return await fetchEntity(`${baseUrl}/${id}`, [collateralsTag, id.toString()]);
 };
 
 export const editCollateral = async (
@@ -82,5 +82,7 @@ export const getCollateralsReportBlob = async (query?: Query) => {
 export const collateralClient = {
   getCollateral,
   getCollaterals,
-  createCollateral
+  createCollateral,
+  liquidateCollateral,
+  deleteCollateral
 }

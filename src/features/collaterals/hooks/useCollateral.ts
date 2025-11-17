@@ -10,7 +10,7 @@ interface UseCollateralProps {
     id?: number | string;
 }
 
-const useCollateral = ({ id }: UseCollateralProps) => {
+export const useCollateral = ({ id }: UseCollateralProps) => {
     const numericId = Number(id);
     const { data, isLoading, isError } = useData<Collateral>({
         key: [collateralsQueryKey, numericId],
@@ -21,4 +21,3 @@ const useCollateral = ({ id }: UseCollateralProps) => {
     return { collateral: data, isError, isLoading };
 };
 
-export default useCollateral;

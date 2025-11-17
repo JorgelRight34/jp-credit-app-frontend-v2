@@ -1,5 +1,5 @@
-import { ApiFile } from "./apiFile";
+import { FileModel } from "./fileModel";
 
-export interface Photo extends ApiFile {
+export interface Photo extends FileModel {
     size?: ""
 }

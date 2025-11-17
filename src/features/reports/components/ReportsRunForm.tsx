@@ -13,6 +13,7 @@ import FormSubscriptionWrapper from "@/components/EntityForm/components/FormSubs
 import { ReportRunFormFields } from "../lib/form";
 import { triggerDownload } from "@/utils/utils";
 import { useQueryParams } from "@/hooks/useQueryParams";
+import { MediumTitle, Subtitle } from "@/components";
 
 interface ReportsRunFormProps {
   report: Report;
@@ -35,12 +36,12 @@ const ReportsRunForm = ({ report }: ReportsRunFormProps) => {
             {...config}
           />
           <Container className="mb-6 flex flex-col">
-            <h3 className="mb-2 text-2xl font-semibold text-gray-800">
+            <MediumTitle className="mb-2 text-2xl font-semibold">
               Descripción
-            </h3>
-            <p className="leading-relaxed text-gray-600">
+            </MediumTitle>
+            <Subtitle className="leading-relaxed">
               {report.description ?? "No hay descripción para este reporte."}
-            </p>
+            </Subtitle>
           </Container>
           <Container>
             <FileExplorer

@@ -1,6 +1,8 @@
 import { Tab, Tabs } from "@/components";
-import AdjusmentNoteSection from "@/features/adjustment-notes/components/AdjusmentNoteSection";
-import { adjustmenNotesPermissionsProvider } from "@/features/adjustment-notes/services/adjustmentNoteClient";
+import {
+  AdjusmentNoteSection,
+  adjustmenNotesPermissionsProvider,
+} from "@/features/adjustment-notes";
 import { EntityLayout } from "@/layouts";
 
 const Page = () => {

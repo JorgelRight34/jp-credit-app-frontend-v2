@@ -1,7 +1,8 @@
-import ArmotizationDataTable from "@/features/Armotizations/components/AmortizationDataTable";
-import useGenerateAmortization, {
+import {
+  AmortizationDataTable,
+  useGenerateAmortization,
   UseGenerateAmortizationProps,
-} from "@/features/Armotizations/hooks/useGenerateArmotization";
+} from "@/features/calculators";
 
 type LoanFormArmotizationProps = UseGenerateAmortizationProps;
 
@@ -11,7 +12,7 @@ const LoanFormArmotization = ({ ...props }: LoanFormArmotizationProps) => {
   });
 
   return (
-    <ArmotizationDataTable
+    <AmortizationDataTable
       defaultQuery={{}}
       data={amortization.amortizations}
       totalItems={amortization.amortizations.length}

@@ -6,15 +6,15 @@ import FormBuilder from "./FormBuilder";
 
 type EntityFormProps<
   T extends object,
-  TData extends FieldValues
+  TData extends FieldValues,
 > = FormBuilderProps<T, TData> &
   Omit<FormLayoutProps, "onSubmit" | "reset" | "children">;
 
 const EntityForm = <T extends object, TData extends FieldValues>({
-  onDelete,
-  onDirtyChange,
   renderLayout,
   showReset = true,
+  onDelete,
+  onDirtyChange,
   ...props
 }: EntityFormProps<T, TData>) => {
   const [isDirty, setIsDirty] = useState(false);
@@ -25,7 +25,7 @@ const EntityForm = <T extends object, TData extends FieldValues>({
       setIsDirty(val);
       onDirtyChange?.(val);
     },
-    [onDirtyChange]
+    [onDirtyChange],
   );
 
   return (

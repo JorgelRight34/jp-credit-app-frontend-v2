@@ -1,10 +1,11 @@
 import { Photo } from "@/models";
-import { CollateralAgreementType } from "./collateralAgreementType";
-import { CollateralCondition } from "./collateralCondition";
-import { CollateralStatus } from "./collateralStatus";
-import { CollateralFile } from "./collateralFile";
+
 import { Loan } from "@/features/Loans/models/loan";
 import { Profile } from "@/features/Profiles/models/profile";
+import { CollateralCondition } from "./collateralCondition";
+import { CollateralStatus } from "./collateralStatus";
+import { CollateralAgreementType } from "./collateralAgreementType";
+import { CollateralFile } from "./collateralFile";
 
 export interface Collateral {
   id: number;

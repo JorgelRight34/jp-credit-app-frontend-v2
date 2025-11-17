@@ -9,13 +9,14 @@ import { FormError } from "../models/formError";
 import { FormInterceptor } from "../models/formInterceptor";
 import { ApiError } from "../models/apiError";
 import { SchemaType } from "../models/schemaType";
-
+import { invalidateTags } from "@/app/actions/cache/invalidate-tag";
 
 export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
   schema?: SchemaType<TData>;
   defaultValues?: Record<string, unknown> | undefined;
   resetValues?: boolean;
   cacheKeysToInvalidate?: CacheKey[];
+  tagsToInvalidate?: string[];
   interceptors?: FormInterceptor<TData>[];
   onSuccess?: (data: TReturn) => void;
   onSubmit: ((data: TData) => Promise<TReturn>);
@@ -26,6 +27,7 @@ export const useFormBuilder = <T extends object, TData extends FieldValues, TRet
   schema,
   defaultValues,
   cacheKeysToInvalidate = [],
+  tagsToInvalidate,
   resetValues = true,
   interceptors = [],
   onSubmit,
@@ -40,9 +42,13 @@ export const useFormBuilder = <T extends object, TData extends FieldValues, TRet
       return await Promise.resolve(onSubmit(data));
     },
     onSuccess: async (data) => {
-      await onSuccess?.(data);
+      await Promise.all([
+        onSuccess?.(data),
+        invalidateTags(tagsToInvalidate)
+      ])
+
       for (const key of cacheKeysToInvalidate) {
-        dataClient.invalidateQueries({ queryKey: key })
+        dataClient.invalidate({ key })
       }
     }
   })

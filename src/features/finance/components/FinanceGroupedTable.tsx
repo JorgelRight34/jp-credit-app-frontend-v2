@@ -1,13 +1,10 @@
-import { DataTable } from "@/components/DataTable";
-import { Column } from "@/components/DataTable/models/column";
+import { Column, DataTable, EntityDataTableProps } from "@/components";
 import { dateToIsoString, WithRequired } from "@/utils/utils";
-import { EntityDataTableProps } from "@/models";
 import { FinancialBreakdown } from "../models/financialBreakdown";
 import { FinanceQuery } from "../models/financeQuery";
-import { TransactionType } from "@/features/Transactions/models/transactionType";
-import FinanceResultGroupTable from "./FinanceResultGroupTable";
-import { Transaction } from "@/features/Transactions/models/transaction";
+import { Transaction, TransactionType } from "@/features/transactions";
 import { getDateGroupingLabel } from "../lib/lib";
+import FinanceResultGroupTable from "./FinanceResultGroupTable";
 
 export interface FinancialBreakdownDataTableProps
   extends WithRequired<

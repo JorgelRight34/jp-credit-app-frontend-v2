@@ -13,11 +13,12 @@ import {
   CurrencyInput,
   PercentageInput,
 } from "@/components/atoms";
-import { ProfilesSearchInput } from "@/features/profiles";
+import { ProfileSearchInput } from "@/features/profiles";
 import { ProjectSearchInput } from "@/features/projects";
 import { LoanSearchInput } from "@/features/loans";
 import { TransactionSearchInput } from "@/features/transactions";
 import { CollateralSearchInput } from "@/features/collaterals";
+import { DateRangeInput } from "../../date-range-input";
 
 type Field = ControllerRenderProps<FieldValues, string> &
   FormField<FieldValues> &
@@ -36,11 +37,11 @@ export const inputRenderers: Record<
   percentage: PercentageInput,
 
   profile: ({ ...field }: Field) => (
-    <ProfilesSearchInput {...field} onChange={(p) => field.onChange(p.id)} />
+    <ProfileSearchInput {...field} onChange={(p) => field.onChange(p.id)} />
   ),
 
   client: ({ ...field }: Field) => (
-    <ProfilesSearchInput
+    <ProfileSearchInput
       role="client"
       {...field}
       onChange={(p) => field.onChange(p.id)}
@@ -48,7 +49,7 @@ export const inputRenderers: Record<
   ),
 
   guarantor: ({ ...field }: Field) => (
-    <ProfilesSearchInput
+    <ProfileSearchInput
       role="guarantor"
       {...field}
       onChange={(p) => field.onChange(p.id)}
@@ -56,7 +57,7 @@ export const inputRenderers: Record<
   ),
 
   loanOfficer: ({ ...field }: Field) => (
-    <ProfilesSearchInput
+    <ProfileSearchInput
       role="guarantor"
       {...field}
       onChange={(p) => field.onChange(p.id)}
@@ -89,8 +90,6 @@ export const inputRenderers: Record<
 
   date: DateInput,
 
-  "lazy-select": LazySelectInput,
-
   textarea: ({ ...field }: Field) => <Input type="text" {...field} multiline />,
 
   switch: () => <></>,
@@ -102,4 +101,7 @@ export const inputRenderers: Record<
   email: ({ ...field }: Field) => <Input type="email" {...field} />,
 
   default: ({ ...field }: Field) => <Input {...field} />,
+
+  "lazy-select": LazySelectInput,
+  "date-range": DateRangeInput,
 };

@@ -2,7 +2,7 @@ import { UseEntityFormReturn } from "../../../components/EntityForm/models/useEn
 import { toastService } from "@/services";
 import { User } from "../models/user";
 import { changePasswordFormProvider, ChangeUserPasswordValues } from "../lib/form";
-import { changePassword } from "../services/userService";
+import { changePassword } from "../services/userClient";
 
 interface UseChangeUserPasswordFormProps {
   user: User;

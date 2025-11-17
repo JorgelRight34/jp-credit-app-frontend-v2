@@ -6,10 +6,9 @@ import {
 } from "./constants";
 import { CollateralAgreementType } from "../models/collateralAgreementType";
 import { SelectOptions } from "@/models";
-import { getLoanMembers } from "@/features/Loans/services/loanClient";
-import { getLoanMembersSelectOptions } from "@/features/Loans/lib/utils";
 import { toTitleCase } from "@/utils/utils";
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
+import { FormProvider } from "@/components";
+import { getLoanMembers, getLoanMembersSelectOptions } from "@/features/loans";
 
 const generateOptions = (record: Record<string, string>) =>
   Object.keys(record)

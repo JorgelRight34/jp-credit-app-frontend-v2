@@ -1,9 +1,8 @@
-import CollateralsDataTable from "./CollateralsDataTable";
-import { CollateralQuery } from "../models/collateralQuery";
-import CollateralSearchQueryInput from "./CollateralSearchQueryInput";
+import { EntitySection, EntitySectionProps } from "@/components";
 import { Collateral } from "../models/collateral";
-import { EntitySectionProps } from "@/components/EntitySection/models/EntitySectionProps";
-import EntitySection from "@/components/EntitySection/components/EntitySection";
+import { CollateralQuery } from "../models/collateralQuery";
+import CollateralSearchQueryInput from "./CollateralQuerySearch";
+import CollateralsDataTable from "./CollateralsDataTable";
 
 type CollateralsSectionProps = EntitySectionProps<Collateral, CollateralQuery>;
 

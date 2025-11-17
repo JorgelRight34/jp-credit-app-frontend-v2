@@ -1,17 +1,16 @@
-import { UseEntityModuleFormProps } from "@/components/EntityForm/models/UseEntityModuleFormProps";
 import { AdjustmentNote } from "../models/adjusment-note";
 import { adjustmentNoteFormProvider, AdjustmentNoteFormValues } from "../lib/form";
-import { UseEntityFormReturn } from "@/models";
 import { createNote } from "../services/adjustmentNoteClient";
+import { UseEntityFormReturn, UseEntityModuleFormProps } from "@/components";
+import { adjustmentNoteTag } from "../lib/constants";
 
 type UseAdjustmentNoteFormProps = UseEntityModuleFormProps<AdjustmentNote, AdjustmentNoteFormValues>;
 
-// eslint-disable-next-line no-empty-pattern
-export const useAdjustmentNoteForm = ({ }: UseAdjustmentNoteFormProps = {}): UseEntityFormReturn<AdjustmentNote, AdjustmentNoteFormValues> => {
+export const useAdjustmentNoteForm = ({ }: UseAdjustmentNoteFormProps = {}):
+    UseEntityFormReturn<AdjustmentNote, AdjustmentNoteFormValues> => {
     const onSubmit = async (data: AdjustmentNoteFormValues) => {
-        const note = await createNote(data);
-        return note;
+        return await createNote(data);
     }
 
-    return { onSubmit, config: { formProvider: adjustmentNoteFormProvider, cacheKeysToInvalidate: [] } }
+    return { onSubmit, config: { formProvider: adjustmentNoteFormProvider, cacheKeysToInvalidate: [], tagsToInvalidate: [adjustmentNoteTag] } }
 }

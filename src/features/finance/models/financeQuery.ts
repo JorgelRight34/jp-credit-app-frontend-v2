@@ -1,5 +1,5 @@
-import { LoanQuery } from "@/features/Loans/models/loanQuery";
-import { TransactionType } from "@/features/Transactions/models/transactionType";
+import { LoanQuery } from "@/features/loans";
+import { TransactionType } from "@/features/transactions";
 import { TimeUnit } from "@/models";
 
 export type FinanceQuery = LoanQuery & {

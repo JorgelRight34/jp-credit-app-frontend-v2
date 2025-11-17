@@ -1,12 +1,11 @@
 import { ReactNode } from "react";
 import { FinanceReport } from "../../models/financeReport";
-import { Tab, Tabs } from "@/components/Tabs";
+import { AppLink, Icon, Tab, Tabs } from "@/components";
 import {
   dateToIsoString,
   getFullDateString,
   getUrlParams,
 } from "@/utils/utils";
-import { AppLink, Icon } from "@/components/ui";
 import { FinanceQuery } from "../../models/financeQuery";
 
 interface FinancePrincipalLayoutProps<T = FinanceReport> {
@@ -34,7 +33,7 @@ const FinancePrincipalLayout = <T,>({
           navigate={false}
         >
           {chart && (
-            <Tab path="chart" title="Gráfica" icon="show_chart">
+            <Tab eventKey="chart" title="Gráfica" icon="show_chart">
               {chart(report)}
               <div className="mt-6 flex w-fit flex-col rounded-xl border p-2 shadow-sm">
                 <div>
@@ -44,7 +43,7 @@ const FinancePrincipalLayout = <T,>({
                 <AppLink
                   className="text-accent"
                   to={{
-                    pathname: to,
+                    href: to,
                     search: getUrlParams({
                       startDate: dateToIsoString(query.start),
                       endDate: dateToIsoString(query.end),
@@ -58,7 +57,7 @@ const FinancePrincipalLayout = <T,>({
               </div>
             </Tab>
           )}
-          <Tab path="table" icon="table" title="Tabla">
+          <Tab eventKey="table" icon="table" title="Tabla">
             {table}
           </Tab>
         </Tabs>

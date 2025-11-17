@@ -1,7 +1,10 @@
-import { EntityQuerySearch } from "@/components/EntityQuerySearch";
-import { QuerySearchInput, QuerySearchProps } from "@/models";
+import {
+  dateRangeFormInterceptor,
+  EntityQuerySearch,
+  QuerySearchInput,
+  QuerySearchProps,
+} from "@/components";
 import { AdjustmentNoteQuery } from "../models/adjusment-note-query";
-import { dateRangeFormInterceptor } from "@/components/EntityForm/utils/interceptors";
 
 type AdjusmentNoteQuerySearchProps = QuerySearchProps<AdjustmentNoteQuery>;
 
@@ -15,7 +18,13 @@ const fields: QuerySearchInput<AdjustmentNoteQuery>[] = [
 const AdjusmentNoteQuerySearch = ({
   ...props
 }: AdjusmentNoteQuerySearchProps) => {
-  return <EntityQuerySearch fields={fields} {...props} interceptors={[dateRangeFormInterceptor()]} />;
+  return (
+    <EntityQuerySearch
+      fields={fields}
+      {...props}
+      interceptors={[dateRangeFormInterceptor()]}
+    />
+  );
 };
 
 export default AdjusmentNoteQuerySearch;

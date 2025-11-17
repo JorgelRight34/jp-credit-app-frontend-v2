@@ -1,4 +1,4 @@
-import { Loan } from "@/features/Loans/models/loan";
+import { Loan } from "@/features/loans";
 import { FinancialBreakdown } from "./financialBreakdown";
 
 

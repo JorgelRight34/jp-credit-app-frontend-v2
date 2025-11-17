@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { permissionsQueryKey } from "../lib/constants";
-import { getPermissions } from "../services/userService";
+import { getPermissions } from "../services/userClient";
 
 interface UseUserPermissionsProps {
   id?: number;

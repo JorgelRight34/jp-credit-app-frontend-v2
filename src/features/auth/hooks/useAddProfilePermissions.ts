@@ -1,29 +1,29 @@
 
-import { editPermission } from "../services/userService";
+"use client"
+
+import { editPermission } from "../services/userClient";
 import { toastService } from "@/services";
 import { useDataClient } from "@/hooks/useDataClient";
 import { NO_PERMISSION } from "../lib/form";
 import { profilesQueryKey } from "@/features/profiles";
+import { FieldValues } from "react-hook-form";
 
 interface UseAddProfilePermissionsProps {
   claims?: string[];
   username?: string;
 }
 
-const useAddProfilePermissions = ({
-  claims = [],
-  username,
-}: UseAddProfilePermissionsProps) => {
+export const useAddProfilePermissions = ({ claims = [], username }: UseAddProfilePermissionsProps) => {
   const dataClient = useDataClient()
 
-  const handleAddProfilePermissions = async (data: object) => {
-    if (!username) return;
+  const handleAddProfilePermissions = async (data: FieldValues) => {
+    if (!username) return data;
 
     const claimsToAdd = Object.values(data).filter(
       (d) => d !== "" && d !== NO_PERMISSION
     );
 
-    const payload = {
+    await editPermission({
       claimsToAdd,
       claimsToRemove: [
         // Remove claims from the current profile that:
@@ -38,13 +38,9 @@ const useAddProfilePermissions = ({
             claimsToAdd.includes(value) && value.split(".")[1] === NO_PERMISSION
         ) || []),
       ],
-    };
+    }, username);
 
-    await editPermission(payload, username);
-
-    dataClient.invalidateQueries({
-      queryKey: [...profilesQueryKey],
-    });
+    dataClient.invalidate({ key: [...profilesQueryKey], });
 
     toastService.success("Permisos actualizados!");
 
@@ -53,5 +49,3 @@ const useAddProfilePermissions = ({
 
   return { handleAddProfilePermissions };
 };
-
-export default useAddProfilePermissions;

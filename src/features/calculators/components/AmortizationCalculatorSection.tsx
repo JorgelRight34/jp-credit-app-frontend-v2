@@ -1,9 +1,8 @@
-import { EntitySectionProps } from "@/components/EntitySection/models/EntitySectionProps";
 import AmortizationDataTable from "./AmortizationDataTable";
 import AmortizationForm from "./AmortizationForm";
 import { AmortizationCalculatorInput } from "../models/amortizationCalculatorInput";
-import EntitySection from "@/components/EntitySection/components/EntitySection";
 import { AmortizationPayment } from "../models/amortizationPayment";
+import { EntitySection, EntitySectionProps } from "@/components";
 
 type AmortizationCalculatorProps = EntitySectionProps<
   AmortizationPayment,

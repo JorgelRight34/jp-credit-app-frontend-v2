@@ -1,15 +1,15 @@
 import api from "@/services/api";
 import { LoanFormValues } from "../lib/form";
-import { LoanQuery } from "../models/loanQuery";
-import { fetchBlobWithQueryParams, fetchWithQueryParams, getUrlParams } from "../../../utils/utils";
+import { LoanQuery } from "../models/loanQuery";;
 import { Loan } from "../models/loan";
 import { Query } from "@/models/query";
 import { PagedResponse } from "@/models";
 import { LoanMembers } from "../models/loanMembers";
-import { getModulePermissions } from "@/features/Auth/services/userService";
+import { getModulePermissions } from "@/features/auth";
 import { PermissionsProvider } from "@/models/permissionsProvider";
-import { loansQueryKey } from "../lib/constants";
+import { loansQueryKey, loansTag } from "../lib/constants";
 import { Transaction } from "@/features/transactions";
+import { fetchBlobWithQueryParams, fetchEntity, fetchWithQueryParams, getUrlParams } from "@/utils/utils";
 
 
 const baseUrl = "/loans";
@@ -20,8 +20,7 @@ export const createLoan = async (data: LoanFormValues): Promise<Loan> => {
 };
 
 export const getLoan = async (id: number): Promise<Loan> => {
-  const response = await api.get(`${baseUrl}/${id}`);
-  return response.data;
+  return await fetchEntity(`${baseUrl}/${id}`, [loansTag, id.toString()])
 };
 
 export const getFullLoan = async (id: number): Promise<Loan> => {
@@ -99,4 +98,6 @@ export const loanClient = {
   getLoan,
   getLoans,
   createLoan,
+  getLoansReportBlob,
+  deleteLoan
 }

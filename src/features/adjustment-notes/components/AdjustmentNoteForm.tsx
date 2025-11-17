@@ -1,19 +1,26 @@
-import { EntityFormProps, useEntityForm } from "@/components/EntityForm";
+import {
+  EntityFormProps,
+  FormBuilder,
+  FormLayout,
+  FormSubscriptionWrapper,
+  useEntityForm,
+} from "@/components";
 import { useAdjustmentNoteForm } from "../hooks/useAdjustmentNoteForm";
-import FormLayout from "@/components/EntityForm/layouts/FormLayout";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
 import { AdjustmentNoteFormValues } from "../lib/form";
-import FormSubscriptionWrapper from "@/components/EntityForm/components/FormSubscriptionWrapper";
 import AdjustmentNoteFormDetails from "./AdjusmentNoteFormDetails";
+import { AdjustmentNote } from "../models/adjusment-note";
 
-type AdjustmentNoteFormProps = EntityFormProps<AdjustmentNoteFormValues>;
+type AdjustmentNoteFormProps = EntityFormProps<
+  AdjustmentNoteFormValues,
+  AdjustmentNote
+>;
 
 const AdjustmentNoteForm = ({
   onDirtyChange,
   ...props
 }: AdjustmentNoteFormProps) => {
   const config = useAdjustmentNoteForm();
-  const { form, ref, ...methods } = useEntityForm({ onDirtyChange });
+  const { form, ref, ...methods } = useEntityForm();
 
   return (
     <FormLayout {...methods}>
@@ -24,13 +31,13 @@ const AdjustmentNoteForm = ({
         {...config}
         {...props}
       />
-      <div className="mt-6">
+      <section className="mt-6">
         <FormSubscriptionWrapper<AdjustmentNoteFormValues>
           form={form}
           subscribedNames={["loanId"]}
           render={({ loanId }) => <AdjustmentNoteFormDetails loanId={loanId} />}
         />
-      </div>
+      </section>
     </FormLayout>
   );
 };

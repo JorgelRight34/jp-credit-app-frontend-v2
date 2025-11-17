@@ -1,6 +1,6 @@
 import { armotizationsCacheKey } from "../lib/constants";
 import { useData } from "@/hooks/useData";
-import { getLoanArmotization } from "../services/amortizationService";
+import { getLoanArmotization } from "../services/calculatorClient";
 import { ArmotizationLoanQuery } from "../models/amortizationLoanQuery";
 import { useEffect } from "react";
 

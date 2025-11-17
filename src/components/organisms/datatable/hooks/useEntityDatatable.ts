@@ -24,7 +24,7 @@ export interface UseEntityDatatableProps<T extends Entity, TQuery> extends Parti
   loader: (q: TQuery) => Promise<PagedResponse<T>>
 }
 
-const useEntityDatatable = <T extends Entity, TQuery extends Query>({
+export const useEntityDatatable = <T extends Entity, TQuery extends Query>({
   columns: initialColumns = [],
   cacheKey,
   query = {} as TQuery,
@@ -90,4 +90,3 @@ const useEntityDatatable = <T extends Entity, TQuery extends Query>({
 
 useEntityDatatable.displayName = "useEntityDataTable"
 
-export default useEntityDatatable;

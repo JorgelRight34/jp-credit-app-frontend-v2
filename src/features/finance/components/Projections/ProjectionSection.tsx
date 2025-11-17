@@ -1,8 +1,4 @@
 import FinanceQuerySearch from "../FinanceQuerySearch";
-import { useEntitySection } from "@/components/EntitySection/hooks/useEntitySection";
-import { FinanceQuery } from "../../models/financeQuery";
-import { getFullDateString, getTodayWithDaysFromNow } from "@/utils/utils";
-import EntityDataTableLayout from "@/components/DataTable/layouts/EntityDataTableLayout";
 import FinanceStatCard from "../FinanceStatCard";
 import { useProjectedIncomes } from "../../hooks/useProjectedIncomes";
 import { FinanceReport } from "../../models/financeReport";
@@ -11,6 +7,10 @@ import { TimeUnit } from "@/models";
 import FinanceSectionLayout from "../../layouts/FinanceSectionLayout/FinanceSectionLayout";
 import { financialComponentTypesConfig } from "../../lib/constants";
 import { useProjectedIncomesByPeriod } from "../../hooks/useProjectedIncomesByPeriod";
+import { useEntitySection } from "@/components/organisms/entity-section";
+import { FinanceQuery } from "../../models/financeQuery";
+import { getTodayWithDaysFromNow } from "@/utils/utils";
+import { EntityDataTableLayout } from "@/components";
 
 const today = new Date();
 
@@ -82,50 +82,6 @@ const ProjectionSection = () => {
             )}
           ></FinanceSectionLayout.Secondary>
         </FinanceSectionLayout>
-      </EntityDataTableLayout.DataTable>
-    </EntityDataTableLayout>
-  );
-  return (
-    <EntityDataTableLayout>
-      <EntityDataTableLayout.QuerySearch>
-        <FinanceQuerySearch
-          defaultValues={defaultValues}
-          onSubmit={setQuery}
-          attributes={{
-            start: { min: today },
-            end: { min: today },
-          }}
-        />
-      </EntityDataTableLayout.QuerySearch>
-      <EntityDataTableLayout.DataTable>
-        <div className="flex">
-          <div className="w-9/12 pr-2">
-            <ProjectionsGroupedDataTable defaultQuery={query} query={query} />
-          </div>
-          <div className="w-3/12 pl-2">
-            <div className="mb-3">
-              <span>
-                Proyecciones desde {getFullDateString(query.start)} hasta{" "}
-                {getFullDateString(query.end)}
-              </span>
-            </div>
-            <FinanceStatCard
-              title="Capital"
-              className="mb-3"
-              value={summary.capital}
-            />
-            <FinanceStatCard
-              title="Intereses"
-              className="mb-3"
-              value={summary.interest}
-            />
-            <FinanceStatCard
-              title="Total"
-              className="mb-3"
-              value={summary.total}
-            />
-          </div>
-        </div>
       </EntityDataTableLayout.DataTable>
     </EntityDataTableLayout>
   );

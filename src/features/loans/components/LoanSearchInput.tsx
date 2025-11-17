@@ -1,8 +1,9 @@
 import { Loan } from "../models/loan";
 import { LoanQuery } from "../models/loanQuery";
-import { EntitySearchInput, EntitySearchInputProps } from "@/components";
 import { loansQueryKey } from "../lib/constants";
 import { loanClient } from "../services/loanClient";
+import { EntitySearchInput, EntitySearchInputProps } from "@/components";
+import LoansSection from "./LoansSection";
 
 type LoanSearchInputProps = EntitySearchInputProps<Loan, LoanQuery>;
 
@@ -12,7 +13,7 @@ const LoanSearchInput = ({
   ...props
 }: LoanSearchInputProps) => {
   return (
-    <EntitySearchInput<Loan, LoanQuery>
+    <EntitySearchInput
       cacheKey={loansQueryKey}
       modalProps={{
         title: "Buscar Préstamo",

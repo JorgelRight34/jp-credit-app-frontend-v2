@@ -1,6 +1,3 @@
-import { Column } from "@/components/DataTable/models/column";
-import LinkToLoan from "@/features/Loans/components/LinkToLoan";
-import { EntityDataTableProps } from "@/models";
 import {
   dateGroupingColumn,
   financialBreakdownBaseColumns,
@@ -9,9 +6,13 @@ import { FinanceQuery } from "../../models/financeQuery";
 import { Projection } from "../../models/projection";
 import { WithRequired } from "@/utils/utils";
 import { useGroupedProjections } from "../../hooks/useGroupedProjections";
-import GroupedDataTable from "@/components/DataTable/components/GroupedDataTable";
-import { PageSize } from "@/components/DataTable/models/pageSize";
-import { loanPaymentFrequencySymbols } from "@/features/Loans/lib/constants";
+import { LinkToLoan, loanPaymentFrequencySymbols } from "@/features/loans";
+import {
+  Column,
+  EntityDataTableProps,
+  PageSize,
+  GroupedDataTable,
+} from "@/components";
 
 type ProjectionsDataTableProps = WithRequired<
   EntityDataTableProps<Projection, FinanceQuery>,

@@ -1,17 +1,15 @@
-
-import { User } from "../models/user";
-import { UseEntityFormReturn } from "../../../components/EntityForm/models/useEntityFormReturn";
 import { userFormProvider, UserFormValues } from "../lib/form";
 import { toastService } from "@/services";
-import { UseEntityModuleFormProps } from "@/components/EntityForm/models/UseEntityModuleFormProps";
-import { createUser, editUser } from "../services/userService";
-import { usersQueryKey } from "../lib/constants";
+import { createUser, editUser } from "../services/userClient";
+import { usersQueryKey, usersTag } from "../lib/constants";
 import { useMemo } from "react";
+import { UseEntityFormReturn, UseEntityModuleFormProps } from "@/components";
+import { User } from "../models/user";
 
 export type UseUserFormProps = UseEntityModuleFormProps<User, UserFormValues>;
 
-const useUserForm = ({
-  edit,
+export const useUserForm = ({
+  edit
 }: UseUserFormProps): UseEntityFormReturn<User, UserFormValues> => {
   const defaultValues = useMemo(() => ({ ...edit }), [edit])
 
@@ -26,6 +24,8 @@ const useUserForm = ({
   const handleOnEdit = async (data: UserFormValues) => {
     await editUser(data, edit!.id)
     toastService.success("Ha sido editado exitosamente.");
+
+    return data;
   }
 
   return {
@@ -35,9 +35,9 @@ const useUserForm = ({
       formProvider: userFormProvider,
       resetValues: !edit,
       cacheKeysToInvalidate: [usersQueryKey],
+      tagsToInvalidate: edit ? [[usersTag, edit?.id.toString()]] : [],
       defaultValues
     },
   };
 };
 
-export default useUserForm;

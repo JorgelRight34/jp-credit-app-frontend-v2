@@ -1,9 +1,11 @@
-import { QuerySearchInput } from "../../../components/EntityQuerySearch/models/querySearchInput";
-import { COMPOUND_OPTIONS } from "../../../utils/constants";
-import { EntityQuerySearch } from "@/components/EntityQuerySearch";
-import { downloadAmortizationBlobAs } from "../services/amortizationService";
+import { calculatorClient } from "../services/calculatorClient";
 import { AmortizationCalculatorInput } from "../models/amortizationCalculatorInput";
-import { QuerySearchProps } from "@/models";
+import {
+  EntityQuerySearch,
+  QuerySearchInput,
+  QuerySearchProps,
+} from "@/components";
+import { COMPOUND_OPTIONS } from "@/utils/constants";
 
 type AmortizationFormProps = QuerySearchProps<AmortizationCalculatorInput>;
 
@@ -50,9 +52,9 @@ const fields: QuerySearchInput<AmortizationCalculatorInput>[] = [
 
 const AmortizationForm = ({ ...props }: AmortizationFormProps) => {
   return (
-    <EntityQuerySearch<AmortizationCalculatorInput>
+    <EntityQuerySearch
       fields={fields}
-      onDownload={downloadAmortizationBlobAs}
+      onDownload={calculatorClient.downloadAmortizationBlobAs}
       {...props}
     />
   );

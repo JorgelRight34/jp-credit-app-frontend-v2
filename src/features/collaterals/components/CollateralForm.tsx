@@ -1,15 +1,19 @@
 import { Collateral } from "../models/collateral";
 import { CollateralFormValues } from "../lib/form";
 import useCollateralForm from "../hooks/useCollateralForm";
-import { EntityFormProps, useEntityForm } from "@/components/EntityForm";
-import FormLayout from "@/components/EntityForm/layouts/FormLayout";
-import { Tab, Tabs } from "@/components/Tabs";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
-import { UploadFileForm } from "@/components/FileUpload";
 import { useCollateralFilesForm } from "../hooks/useCollateralFilesForm";
-import FileFormExplorer from "@/components/FileUpload/components/FileFormExplorer";
 import { useRef } from "react";
-import { UploadFileFormRef } from "@/components/FileUpload/components/UploadFileForm";
+import {
+  EntityFormProps,
+  FileFormExplorer,
+  FormBuilder,
+  FormLayout,
+  Tab,
+  Tabs,
+  UploadFileForm,
+  UploadFileFormRef,
+  useEntityForm,
+} from "@/components";
 
 type CollateralFormProps = EntityFormProps<CollateralFormValues, Collateral>;
 
@@ -23,7 +27,7 @@ const CollateralForm = ({ edit, ...props }: CollateralFormProps) => {
   return (
     <FormLayout {...methods}>
       <Tabs defaultActiveKey="data" navigate={false}>
-        <Tab path="data" title="Datos">
+        <Tab eventKey="data" title="Datos">
           <FormBuilder<Collateral, CollateralFormValues>
             ref={ref}
             layout={[
@@ -35,12 +39,12 @@ const CollateralForm = ({ edit, ...props }: CollateralFormProps) => {
             ]}
             edit={edit}
             onDirtyChange={onDirtyChange}
-            onSuccess={fileFormRef?.current?.submit}
+            onSuccess={() => fileFormRef?.current?.submit()}
             {...config}
             {...props}
           />
         </Tab>
-        <Tab path="files" title="Archivos">
+        <Tab eventKey="files" title="Archivos">
           <UploadFileForm
             ref={fileFormRef}
             {...fileFormConfig}

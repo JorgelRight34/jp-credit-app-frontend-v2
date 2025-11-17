@@ -1,14 +1,18 @@
-import { DataTableNavigation } from "@/components/DataTable";
-import DataTableBody from "@/components/DataTable/components/DataTableBody";
-import DataTableFooter from "@/components/DataTable/components/DataTableFooter";
-import DataTableHead from "@/components/DataTable/components/DataTableHead";
-import DataTableStateWrapper from "@/components/DataTable/components/DataTableStateWrapper";
-import useEntityDatatable from "@/components/DataTable/hooks/useEntityDatatable";
-import { Column } from "@/components/DataTable/models/column";
-import { transactionsCacheKey } from "@/features/Transactions/lib/constants";
-import { Transaction } from "@/features/Transactions/models/transaction";
-import { TransactionsQuery } from "@/features/Transactions/models/transactionsQuery";
-import { getTransactions } from "@/features/Transactions/services/transactionsClient";
+import {
+  Column,
+  DataTableBody,
+  DataTableFooter,
+  DataTableHead,
+  DataTableNavigation,
+  DataTableStateWrapper,
+} from "@/components";
+import { useEntityDatatable } from "@/components";
+import {
+  Transaction,
+  transactionClient,
+  transactionsCacheKey,
+  TransactionsQuery,
+} from "@/features/transactions";
 
 interface FinanceResultGroupTableProps {
   query: TransactionsQuery;
@@ -21,7 +25,7 @@ const FinanceResultGroupTable = ({
 }: FinanceResultGroupTableProps) => {
   const { data, fetchPage } = useEntityDatatable({
     cacheKey: transactionsCacheKey,
-    loader: getTransactions,
+    loader: transactionClient.getTransactions,
     retainDataWhileLoading: true,
     query,
   });

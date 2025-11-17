@@ -7,6 +7,11 @@ import { Compound } from "@/features/calculators";
 
 countries.registerLocale(esLocale);
 
+export const FORM_PAGE_TITLES = {
+  create: (title: string) => "Crear" + " " + title,
+  edit: (title: string) => "Editar" + " " + title
+}
+
 export const LOGOS = {
   horizontal: "/horizontal-logo.png",
   vertical: "/header.jpg",

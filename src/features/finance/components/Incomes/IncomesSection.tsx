@@ -1,11 +1,12 @@
-import EntityDataTableLayout from "@/components/DataTable/layouts/EntityDataTableLayout";
-import FinanceQuerySearch from "../FinanceQuerySearch";
-import FinanceStatCard from "../FinanceStatCard";
-import { TransactionType } from "@/features/Transactions/models/transactionType";
+"use client";
+
+import { EntityDataTableLayout } from "@/components";
 import { useFinancesSection } from "../../hooks/useFinancesSection";
-import FinanceSectionLayout from "../../layouts/FinanceSectionLayout/FinanceSectionLayout";
-import { financialComponentTypesConfig } from "../../lib/constants";
 import IncomesDataTable from "./IncomesDataTable";
+import { TransactionType } from "@/features/transactions";
+import FinanceQuerySearch from "../FinanceQuerySearch";
+import FinanceSectionLayout from "../../layouts/FinanceSectionLayout/FinanceSectionLayout";
+import { FinanceStatCard, financialComponentTypesConfig } from "../..";
 
 const IncomesSection = () => {
   const [report, lastReport, config] = useFinancesSection({

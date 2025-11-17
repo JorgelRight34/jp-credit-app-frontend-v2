@@ -1,7 +1,8 @@
 import { useCurrentProject } from "@/contexts/ProjectContext";
 import { Query } from "@/models/query";
 import clsx from "clsx";
-import useEntityDatatable, {
+import {
+  useEntityDatatable,
   UseEntityDatatableProps,
 } from "../hooks/useEntityDatatable";
 import DataTable from "./DataTable";

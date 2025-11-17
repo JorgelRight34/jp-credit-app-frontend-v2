@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { FormBuilderRef } from "../models/formBuilder";
+import { FieldValues } from "react-hook-form";
 
 type UseMultipleFormProps<T extends string> = readonly T[];
 
@@ -18,12 +19,13 @@ export const useMultipleForm = <T extends string = string>(
     const [isDirty, setIsDirty] = useState(false);
 
     const setFormRef = useCallback(
-        (key: T) => (ref: FormBuilderRef | null, replace: boolean = false) => {
-            setForms((prev) => {
-                if (replace === false && prev[key]) return prev;
-                return { ...prev, [key]: ref };
-            });
-        },
+        <T extends FieldValues>(key: string) =>
+            (ref: FormBuilderRef<T> | null, replace: boolean = false) => {
+                setForms((prev) => {
+                    if (!replace && prev[key as keyof typeof prev]) return prev;
+                    return { ...prev, [key]: ref };
+                });
+            },
         []
     );
 

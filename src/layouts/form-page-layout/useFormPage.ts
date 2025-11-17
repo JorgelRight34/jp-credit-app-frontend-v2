@@ -1,15 +1,22 @@
-import { usePermissions } from "@/features/auth";
-import { PermissionsProvider } from "@/models/permissionsProvider";
+import { useDataClient } from "@/hooks/useDataClient";
+import { useDataMutation } from "@/hooks/useMutate";
+import { CacheKey } from "@/models";
 
 interface UseFormPageProps {
-    permissionsProvider?: PermissionsProvider;
+    cacheKey?: CacheKey,
     onDelete?: () => void;
 }
 
-export const useFormPage = ({ permissionsProvider, onDelete }: UseFormPageProps) => {
-    const { permissions, isLoading, isError } = usePermissions({
-        ...permissionsProvider,
-    });
+export const useFormPage = ({ cacheKey, onDelete }: UseFormPageProps) => {
+    const dataClient = useDataClient();
 
-    return { permissions, isLoading, isError, onDelete, }
+    const { mutateAsync } = useDataMutation({
+        mutationFn: async () => await onDelete?.(),
+        onSuccess: () => {
+            if (!cacheKey || !onDelete) return;
+
+            dataClient.invalidate({ key: cacheKey })
+        },
+    })
+    return { onDelete: mutateAsync }
 }

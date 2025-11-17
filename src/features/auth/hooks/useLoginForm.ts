@@ -1,3 +1,5 @@
+"use client"
+
 import { useAuth } from "@/contexts/AuthContext";
 import { loginFormProvider, LoginFormValues } from "../lib/form";
 import { toastService } from "@/services";

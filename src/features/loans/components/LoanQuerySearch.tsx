@@ -1,11 +1,13 @@
-import { QuerySearchInput } from "../../../components/EntityQuerySearch/models/querySearchInput";
-import { QuerySearchProps } from "../../../components/EntityQuerySearch/models/querySearchProps";
+import {
+  dateRangeFormInterceptor,
+  EntityQuerySearch,
+  QuerySearchInput,
+  QuerySearchProps,
+} from "@/components";
 import { LoanQuery } from "../models/loanQuery";
-import { ProfileRole } from "@/features/Profiles/models/profileRole";
+import { ProfileRole } from "@/features/profiles";
 import { loanStatusSelectOptions } from "../lib/constants";
-import EntityQuerySearch from "@/components/EntityQuerySearch/components/EntityQuerySearch";
-import { getLoansReportBlob } from "../services/loanClient";
-import { dateRangeFormInterceptor } from "@/components/EntityForm/utils/interceptors";
+import { loanClient } from "../services/loanClient";
 
 interface LoanQuerySearchProps extends QuerySearchProps<LoanQuery> {
   roles?: ProfileRole[];
@@ -77,9 +79,9 @@ const moreFields: QuerySearchInput<LoanQuery>[] = [
 
 const LoanQuerySearch = ({ ...props }: LoanQuerySearchProps) => {
   return (
-    <EntityQuerySearch<LoanQuery>
+    <EntityQuerySearch
       fields={fields}
-      onDownload={getLoansReportBlob}
+      onDownload={loanClient.getLoansReportBlob}
       moreFields={moreFields}
       interceptors={[dateRangeFormInterceptor()]}
       {...props}

@@ -1,9 +1,6 @@
+import { toCurrency } from "@/utils/utils";
 import { Loan } from "../models/loan";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AppLink from "../../../components/ui/AppLink";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { toCurrency } from "../../../utils/utils";
-import DateLabel from "../../../components/ui/DateLabel";
+import { AppLink, DateLabel, Icon, Subtitle } from "@/components";
 
 interface LoanPreviewCardProps {
   loan: Loan;
@@ -12,19 +9,19 @@ interface LoanPreviewCardProps {
 
 const LoanPreviewCard = ({ loan, className = "" }: LoanPreviewCardProps) => {
   return (
-    <div className={`border rounded-lg ${className}`}>
-      <div className="p-3 border-bottom flex justify-between">
+    <div className={`rounded-lg border ${className}`}>
+      <div className="border-bottom flex justify-between p-3">
         <div className="flex items-center">
           <h6 className="mb-0">Préstamo #{loan.id}</h6>
           <AppLink className="ms-2" to={`/loans/${loan.id}`}>
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            <Icon icon="open_in_new" />
           </AppLink>
         </div>
-        <span className="text-muted">
+        <Subtitle>
           <DateLabel date={loan.startDate} />
-        </span>
+        </Subtitle>
       </div>
-      <div className="flex justify-between p-3">
+      <aside className="flex justify-between p-3">
         <div className="flex flex-col">
           <b>Mora</b>
           <span className="text-muted">{toCurrency(loan.paymentValue)}</span>
@@ -39,7 +36,7 @@ const LoanPreviewCard = ({ loan, className = "" }: LoanPreviewCardProps) => {
             {toCurrency(loan.principalBalance)}
           </span>
         </div>
-      </div>
+      </aside>
     </div>
   );
 };

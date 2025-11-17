@@ -1,8 +1,3 @@
-import { EntityDataTable } from "@/components/DataTable";
-import { Column } from "@/components/DataTable/models/column";
-import LinkToLoan from "@/features/Loans/components/LinkToLoan";
-import { EntityDataTableProps } from "@/models";
-import { DateLabel } from "@/components/ui";
 import { getProjections } from "../../services/financeClient";
 import {
   financialBreakdownBaseColumns,
@@ -10,6 +5,13 @@ import {
 } from "../../lib/constants";
 import { FinanceQuery } from "../../models/financeQuery";
 import { Projection } from "../../models/projection";
+import {
+  Column,
+  DateLabel,
+  EntityDataTable,
+  EntityDataTableProps,
+} from "@/components";
+import { LinkToLoan } from "@/features/loans";
 
 type ProjectionsDataTableProps = EntityDataTableProps<Projection, FinanceQuery>;
 

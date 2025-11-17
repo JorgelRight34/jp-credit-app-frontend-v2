@@ -1,9 +1,9 @@
 import { PagedResponse } from "@/models"
 import { AdjustmentNote } from "../models/adjusment-note"
-import { fetchWithQueryParams } from "@/utils/utils"
+import { fetchEntity, fetchWithQueryParams } from "@/utils/utils"
 import { Query } from "@/models/query"
 import { PermissionsProvider } from "@/models/permissionsProvider"
-import { adjustmentNoteCacheKey } from "../lib/constants"
+import { adjustmentNoteCacheKey, adjustmentNoteTag } from "../lib/constants"
 import { getModulePermissions } from "@/features/auth"
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants"
 import { AdjustmentNoteFormValues } from "../lib/form"
@@ -16,8 +16,7 @@ export const getNotes = async (query: Query): Promise<PagedResponse<AdjustmentNo
 }
 
 export const getNote = async (id: number): Promise<AdjustmentNote> => {
-    const response = await api.get(`${baseUrl}/${id}`);
-    return response.data;
+    return await fetchEntity(`${baseUrl}/${id}`, [adjustmentNoteTag, id.toString()])
 }
 
 export const createNote = async (data: AdjustmentNoteFormValues) => {

@@ -1,26 +1,18 @@
 import { useCallback, useMemo } from "react";
 import { User } from "../models/user";
-import useAddProfilePermissions from "./useAddProfilePermissions";
+import { useAddProfilePermissions } from "./useAddProfilePermissions";
 import usePossiblePermissions from "./usePossiblePermissions";
 import useUserPermissions from "./useUserPermissions";
 import { UseEntityFormReturn } from "@/components";
+import { ModulePermission } from "../models/modulePermission";
+import { FieldValues } from "react-hook-form";
 
 interface UsePermissionsFormProps {
-  /** The user profile for which permissions are being managed */
   profile?: User;
 }
 
-/**
- * Custom hook for managing permissions form functionality
- *
- * This hook provides form configuration and state management for user permissions.
- * It handles loading user claims, setting up form defaults, and managing form submission.
- *
- */
-const usePermissionsForm = ({ profile }: UsePermissionsFormProps): UseEntityFormReturn<Permissions, object> => {
-  const possiblePermissions =
-    usePossiblePermissions();
-
+const usePermissionsForm = ({ profile }: UsePermissionsFormProps): UseEntityFormReturn<ModulePermission, FieldValues, object> => {
+  const possiblePermissions = usePossiblePermissions();
   const { permissions } = useUserPermissions({ id: profile?.id });
   const { claims } = permissions;
 
@@ -41,7 +33,8 @@ const usePermissionsForm = ({ profile }: UsePermissionsFormProps): UseEntityForm
 
   const getClaimValueForDomain = useCallback((
     domain: (typeof possiblePermissions.permissionDomains)[number]
-  ): string => (profile ? findClaimByDomain(claims, domain) || "" : ""), [claims, findClaimByDomain, possiblePermissions, profile]);
+  ): string => (profile ? findClaimByDomain(claims, domain) || "" : ""),
+    [claims, findClaimByDomain, possiblePermissions, profile]);
 
 
   const defaultFormValues = useMemo(() => {

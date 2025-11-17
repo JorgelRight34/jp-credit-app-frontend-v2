@@ -8,7 +8,8 @@ const Page = () => {
   return (
     <FormPageLayout
       title="Ajuste"
-      edit={false} // Can't edit adjustment notes
+      edit={false}
+      isLoading={false}
       permissionsProvider={adjustmenNotesPermissionsProvider}
     >
       <AdjustmentNoteForm />

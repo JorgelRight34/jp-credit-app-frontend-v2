@@ -1,11 +1,11 @@
 import { useCurrentProject } from "@/contexts/ProjectContext";
 import { loanFormProvider, LoanFormValues } from "../lib/form";
 import { Loan } from "../models/loan";
-import { UseEntityFormReturn } from "@/models";
 import { useMemo } from "react";
 import { toastService } from "@/services";
 import { createLoan, editLoan } from "../services/loanClient";
-import { loansQueryKey } from "../lib/constants";
+import { loansQueryKey, loansTag } from "../lib/constants";
+import { UseEntityFormReturn } from "@/components";
 
 interface UseLoanFormProps {
   edit?: Loan;
@@ -54,6 +54,7 @@ const useLoanForm = ({
       formProvider: loanFormProvider,
       resetValues: !edit,
       cacheKeysToInvalidate: [loansQueryKey],
+      tagsToInvalidate: [loansTag],
       defaultValues
     },
   };

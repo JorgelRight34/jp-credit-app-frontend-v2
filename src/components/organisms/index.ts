@@ -5,6 +5,7 @@ export * from "./breadcrumb/Bread";
 export * from "./breadcrumb/Breadcrumb";
 export * from "./breadcrumb/breadcrumbSpec";
 export * from "./breadcrumb/useBreadCrumb";
+export { default as EntitySearchInput } from "./entity-search-input/EntitySearchInput"
 
 // -------------------------------------
 // Datatable (uses its own index.ts)
@@ -55,3 +56,4 @@ export * from "./tabs";
 export * from "./upload-form";
 
 export * from "./entity-query-search"
+export * from "./form-builder"

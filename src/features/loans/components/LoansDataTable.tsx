@@ -1,15 +1,19 @@
+"use client";
+
+import {
+  Column,
+  DateLabel,
+  EntityDataTable,
+  EntityDataTableProps,
+} from "@/components";
 import { Loan } from "../models/loan";
-import { EntityDataTableProps } from "../../../components/DataTable/models/entityDataTableProps";
-import EntityDataTable from "../../../components/DataTable/components/EntityDataTable";
-import { loansQueryKey } from "../lib/constants";
 import { LoanQuery } from "../models/loanQuery";
 import { LoanStatus } from "../models/loanStatus";
-import { getLoans } from "../services/loanClient";
-import { useRouter } from "@/hooks/useRouter";
-import { Column } from "@/components/DataTable/models/column";
+import { LinkToProfile } from "@/features/profiles";
 import { sortDateRows, toCurrency } from "@/utils/utils";
-import LinkToProfile from "@/features/Profiles/components/LinkToProfile";
-import { DateLabel } from "@/components/ui";
+import { useRouter } from "next/router";
+import { loansQueryKey } from "../lib/constants";
+import { loanClient } from "../services/loanClient";
 
 type LoansDataTableProps = EntityDataTableProps<Loan, LoanQuery> & {
   status?: LoanStatus;
@@ -80,12 +84,12 @@ const LoansDataTable = ({ query, ...props }: LoansDataTableProps) => {
   const router = useRouter();
 
   return (
-    <EntityDataTable<Loan, LoanQuery>
+    <EntityDataTable
       title="Préstamo"
       cacheKey={loansQueryKey}
       columns={columns}
       query={query}
-      loader={getLoans}
+      loader={loanClient.getLoans}
       validateProject={true}
       onRowClick={(l) => router.push(`/loans/${l.id}`)}
       onExpand={(row) => <>{row.original.overduePaymentsNumber}</>}

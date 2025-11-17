@@ -1,33 +1,39 @@
-import { LoanFormValues } from "../lib/form";
-import { Loan } from "../models/loan";
+"use client";
+
+import {
+  EntityFormProps,
+  FormBuilder,
+  FormLayout,
+  FormSubscriptionWrapper,
+  Tab,
+  Tabs,
+  useEntityForm,
+} from "@/components";
+import {
+  Loan,
+  LoanFormArmotization,
+  LoanFormDetails,
+  LoanFormValues,
+} from "..";
 import useLoanForm from "../hooks/useLoanForm";
-import { EntityFormProps } from "../../../components/EntityForm/models/entityFormProps";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
-import FormLayout from "@/components/EntityForm/layouts/FormLayout";
-import { useEntityForm } from "@/components/EntityForm";
-import FormSubscriptionWrapper from "@/components/EntityForm/components/FormSubscriptionWrapper";
-import LoanFormDetails from "./LoanFormDetails";
-import { Tab, Tabs } from "@/components/Tabs";
-import LoanFormArmotization from "./LoanFormArmotization";
 import { useState } from "react";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { SMALL_SCREEN_BREAKPOINT } from "@/utils/constants";
-import { Compound } from "@/features/Armotizations/models/compound";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { Compound } from "@/features/calculators";
 
-interface LoanFormDefaultProps extends EntityFormProps<LoanFormValues> {
-  edit?: Loan;
-}
+type LoanFormDefaultProps = EntityFormProps<LoanFormValues, Loan>;
 
-const LoanForm = ({ onDirtyChange, edit, ...props }: LoanFormDefaultProps) => {
+const LoanForm = ({ edit, ...props }: LoanFormDefaultProps) => {
   const config = useLoanForm({ edit });
-  const { form, ref, ...methods } = useEntityForm<LoanFormValues>();
+  const { form, ref, onDirtyChange, ...methods } =
+    useEntityForm<LoanFormValues>();
   const [activeTab, setActiveTab] = useState<string | null>(null);
   const isSmallScreen = useMediaQuery(SMALL_SCREEN_BREAKPOINT);
 
   return (
     <FormLayout {...methods}>
       <Tabs defaultActiveKey="form" navigate={false} onSelect={setActiveTab}>
-        <Tab path="form" title="Formulario">
+        <Tab eventKey="form" title="Formulario">
           <div className="flex">
             <div className="w-full md:w-7/12">
               <FormBuilder<Loan, LoanFormValues>
@@ -68,7 +74,7 @@ const LoanForm = ({ onDirtyChange, edit, ...props }: LoanFormDefaultProps) => {
           </div>
         </Tab>
         {isSmallScreen && (
-          <Tab path="details" title="Resúmen">
+          <Tab eventKey="details" title="Resúmen">
             <FormSubscriptionWrapper<LoanFormValues>
               form={form}
               subscribedNames={[
@@ -89,8 +95,7 @@ const LoanForm = ({ onDirtyChange, edit, ...props }: LoanFormDefaultProps) => {
             />
           </Tab>
         )}
-
-        <Tab path="armotization" title="Armotización">
+        <Tab eventKey="armotization" title="Armotización">
           <FormSubscriptionWrapper
             form={form}
             subscribedNames={[

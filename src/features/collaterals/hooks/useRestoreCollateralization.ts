@@ -1,14 +1,15 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCollateralizationByCollateralId } from "../services/collateralsClient";
 import { collateralsQueryKey } from "../lib/constants";
+import { useDataClient } from "@/hooks/useDataClient";
+import { useDataMutation } from "@/hooks/useMutate";
 
-const useRestoreCollateralization = () => {
-  const queryClient = useQueryClient();
+export const useRestoreCollateralization = () => {
+  const dataClient = useDataClient()
 
-  const { mutateAsync, isPending, isError } = useMutation({
+  const { mutateAsync, isPending, isError } = useDataMutation({
     mutationFn: deleteCollateralizationByCollateralId,
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [collateralsQueryKey] }),
+      dataClient.invalidate({ key: collateralsQueryKey }),
   });
 
   return { restoreCollateralization: mutateAsync, isPending, isError };

@@ -10,6 +10,7 @@ import { CacheKey } from "@/models";
 import { Collateral } from "../models/collateral";
 
 export const collateralsQueryKey: CacheKey = ["collaterals"];
+export const collateralsTag = "collaterals"
 
 export const defaultCollateralPhotoUrl = "/product-placeholder.png";
 

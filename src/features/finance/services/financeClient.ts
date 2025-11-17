@@ -1,21 +1,19 @@
 import { dateToIsoString, fetchBlobWithQueryParams, fetchWithQueryParams } from "@/utils/utils";
-import { LoanQuery } from "../../Loans/models/loanQuery";
 import { FinanceQuery } from "../models/financeQuery";
 import { FinanceReport } from "../models/financeReport";
-import { TransactionType } from "@/features/Transactions/models/transactionType";
-import { createDateRangeStringQueryInterceptor } from "@/components/EntityForm/utils/interceptors";
+import { createDateRangeStringQueryInterceptor } from "@/components";
 import { FinancialBreakdown } from "../models/financialBreakdown";
 import { Projection } from "../models/projection";
 import { PagedResponse } from "@/models";
 import { defaultFinanceQuery } from "../lib/constants";
+import { TransactionType } from "@/features/transactions";
+import { LoanQuery } from "@/features/loans";
 
 const baseUrl = "finance"
 
 export const getProjections = async (
   query: FinanceQuery = defaultFinanceQuery
 ): Promise<PagedResponse<Projection>> => {
-  console.log("client", JSON.stringify(query))
-  console.log("client", query)
   return await fetchWithQueryParams(
     `${baseUrl}/payment-projection`,
     query,
@@ -46,4 +44,12 @@ export const getProjectedIncomesByPeriod = async (data: FinanceQuery): Promise<F
 
 export const exportProjections = async (data: LoanQuery) => {
   return await fetchBlobWithQueryParams(`${baseUrl}/monthly-payment-projection/export`, data)
+}
+
+export const financeClient = {
+  exportProjections,
+  getProjectedIncomesByPeriod,
+  getProjectedIncomes,
+  getFinancialReport,
+  getProjections
 }

@@ -5,10 +5,10 @@ import {
 } from "../lib/form";
 import { createCollateral, editCollateral } from "../services/collateralsClient";
 import { toastService } from "@/services";
-import { Collateral } from "../models/collateral";
-import { UseEntityFormReturn } from "@/models";
 import { getPartialDateString } from "@/utils/utils";
-import { collateralsQueryKey } from "../lib/constants";
+import { Collateral } from "../models/collateral";
+import { UseEntityFormReturn } from "@/components";
+import { collateralsQueryKey, collateralsTag } from "../lib/constants";
 
 interface UseCollateralFormProps {
   edit?: Collateral;
@@ -56,6 +56,7 @@ const useCollateralForm = ({ edit }: UseCollateralFormProps): UseEntityFormRetur
       formProvider: collateralFormProvider,
       resetValues: edit ? false : true,
       cacheKeysToInvalidate: [collateralsQueryKey],
+      tagsToInvalidate: [collateralsTag],
       defaultValues,
     },
   };

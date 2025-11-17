@@ -2,8 +2,7 @@ import LoansDataTable from "./LoansDataTable";
 import { LoanQuery } from "../models/loanQuery";
 import LoanQuerySearch from "./LoanQuerySearch";
 import { Loan } from "../models/loan";
-import EntitySection from "@/components/EntitySection/components/EntitySection";
-import { EntitySectionProps } from "@/components/EntitySection/models/EntitySectionProps";
+import { EntitySection, EntitySectionProps } from "@/components";
 
 type LoanSectionProps = EntitySectionProps<Loan, LoanQuery>;
 

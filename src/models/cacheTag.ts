@@ -1,0 +1,1 @@
+export type CacheTag = (string[] | string)

@@ -1,13 +1,16 @@
-import useUserForm, { UseUserFormProps } from "../hooks/useUserForm";
-import { User } from "../models/user";
-import { EntityFormProps } from "../../../components/EntityForm/models/entityFormProps";
+import { UseUserFormProps, useUserForm } from "../hooks/useUserForm";
 import { UserFormValues } from "../lib/form";
-import { Tab, Tabs } from "@/components/Tabs";
 import PermissionsForm from "./PermissionsForm";
-import FormLayout from "@/components/EntityForm/layouts/FormLayout";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
 import ChangePasswordForm from "./ChangePasswordForm";
-import { useMultipleForm } from "@/components/EntityForm/hooks/useMultipleForm";
+import {
+  EntityFormProps,
+  FormBuilder,
+  FormLayout,
+  Tab,
+  Tabs,
+  useMultipleForm,
+} from "@/components";
+import { User } from "../models/user";
 
 type UserFormProps = UseUserFormProps & EntityFormProps<UserFormValues>;
 
@@ -23,7 +26,7 @@ const UserForm = ({ edit, ...props }: UserFormProps) => {
       {...methods}
     >
       <Tabs defaultActiveKey="data" navigate={false}>
-        <Tab path="data" title="Datos">
+        <Tab eventKey="data" title="Datos">
           <FormBuilder<User, UserFormValues>
             ref={setFormRef("user")}
             layout={[
@@ -38,7 +41,7 @@ const UserForm = ({ edit, ...props }: UserFormProps) => {
             {...props}
           />
         </Tab>
-        <Tab path="permissions" title="Permisos">
+        <Tab eventKey="permissions" title="Permisos">
           <PermissionsForm
             ref={setFormRef("permission")}
             edit={edit}
@@ -47,7 +50,7 @@ const UserForm = ({ edit, ...props }: UserFormProps) => {
           />
         </Tab>
         {edit && (
-          <Tab path="credentials" title="Credenciales">
+          <Tab eventKey="credentials" title="Credenciales">
             <ChangePasswordForm
               ref={setFormRef("password")}
               user={edit}
