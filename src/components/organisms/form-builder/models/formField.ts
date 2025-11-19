@@ -61,8 +61,8 @@ export interface BaseFormField<TData extends FieldValues> {
   // 🔹 Default / Fixed Values & Display Behavior
   // ─────────────────────────────────────────────
 
-  /** Whether the field should be shown during edit mode. */
-  showOnEdit?: boolean;
+  /** Whether the field should disable during edit mode. */
+  disabledOnEdit?: boolean;
 
   // ─────────────────────────────────────────────
   // 🔹 Conditional Logic Based on Watched Fields

@@ -9,7 +9,7 @@ import { getModulePermissions } from "@/features/auth";
 import { PermissionsProvider } from "@/models/permissionsProvider";
 import { loansQueryKey, loansTag } from "../lib/constants";
 import { Transaction } from "@/features/transactions";
-import { fetchBlobWithQueryParams, fetchEntity, fetchWithQueryParams, getUrlParams } from "@/utils/utils";
+import { fetchBlobWithQueryParams, fetchEntity, fetchWithQueryParams, getUrlParams } from "@/utils";
 
 
 const baseUrl = "/loans";
@@ -19,8 +19,8 @@ export const createLoan = async (data: LoanFormValues): Promise<Loan> => {
   return response.data;
 };
 
-export const getLoan = async (id: number): Promise<Loan> => {
-  return await fetchEntity(`${baseUrl}/${id}`, [loansTag, id.toString()])
+export const getLoan = async (id: number, cache?: number): Promise<Loan> => {
+  return await fetchEntity(`${baseUrl}/${id}`, [loansTag, id.toString()], cache)
 };
 
 export const getFullLoan = async (id: number): Promise<Loan> => {
@@ -94,6 +94,7 @@ export const loanModulePermissionsProvider: PermissionsProvider = {
 export const loanClient = {
   getLoan,
   getLoans,
+  getLoanMembers,
   createLoan,
   getLoansReportBlob,
   deleteLoan

@@ -16,12 +16,12 @@ const FormBuilderInputContainer = <T, TData extends FieldValues>({
   edit,
 }: FormBuilderInputContainer<T, TData>) => {
   const error = field ? errors[field?.name]?.message : "";
-  const hideIfEdit = edit && field?.showOnEdit === false;
+  const disableIfEdit = edit && field?.disabledOnEdit;
 
   return (
     <div
       className={clsx("flex flex-1 flex-col", {
-        "pointer-events-none order-last opacity-0": hideIfEdit,
+        "pointer-events-none order-last opacity-0": disableIfEdit,
         "!hidden": field?.type === "hidden",
       })}
     >
@@ -36,7 +36,6 @@ const FormBuilderInputContainer = <T, TData extends FieldValues>({
           <FormFieldInput
             formField={field}
             hideLabel={true}
-            edit={edit}
             error={error as string}
           />
           {error}

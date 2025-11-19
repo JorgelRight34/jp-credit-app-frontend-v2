@@ -3,16 +3,14 @@ import { getUser } from "../services/userClient";
 import { useData } from "@/hooks/useData";
 
 interface UseUserProps {
-    id?: number | string;
+    id?: number;
 }
 
 export const useUser = ({ id }: UseUserProps) => {
-    const numericId = Number(id);
-
     const { data, isLoading, isError } = useData({
-        key: [...usersQueryKey, numericId],
-        getData: () => getUser(numericId),
-        enabled: !!numericId
+        key: [...usersQueryKey, id],
+        getData: () => getUser(id!),
+        enabled: !!id
     })
 
     return { user: data, isLoading, isError }

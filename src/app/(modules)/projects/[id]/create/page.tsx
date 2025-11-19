@@ -1,4 +1,8 @@
-import { ProjectForm, projectsClient } from "@/features/projects";
+import {
+  ProjectForm,
+  projectsClient,
+  projectsPermissionProvider,
+} from "@/features/projects";
 import { FormPageLayout } from "@/layouts";
 import { AppPageProps } from "@/models/appPageProps";
 import { FORM_PAGE_TITLES } from "@/utils/constants";
@@ -15,6 +19,7 @@ const Page = async ({ params }: AppPageProps) => {
   return (
     <FormPageLayout
       title="Proyecto"
+      permissionsProvider={projectsPermissionProvider}
       edit={true}
       onDelete={() => projectsClient.deleteProject(params.id)}
     >

@@ -1,4 +1,4 @@
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
+import { FormProvider } from "@/components";
 import { z } from "zod";
 
 const followUpFormSchema = z.object({
@@ -20,7 +20,7 @@ export const followUpFormProvider: FormProvider<FollowUpFormValues> = {
       label: "Préstamo",
       id: "loanId",
       type: "loan",
-      showOnEdit: false,
+      disabledOnEdit: false,
     },
     {
       name: "body",

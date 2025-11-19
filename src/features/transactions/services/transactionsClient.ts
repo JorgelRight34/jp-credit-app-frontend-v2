@@ -1,17 +1,16 @@
 
-import { TransactionFormValues } from "../lib/form";
-import { ClosePeriodRequest } from "../models/closePeriodRequest";
-import { ClosedPeriodsQuery } from "../models/closedPeriodsQuery";
+import { ClosedPeriodFormValues, TransactionFormValues } from "../lib/form";
 import { ClosedPeriod } from "../models/closedPeriod";
 import { Transaction } from "../models/transaction";
-import { PagedResponse } from "../../../models/pagedResponse";
 import { Query } from "@/models/query";
 import { getModulePermissions } from "@/features/auth";
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
 import { transactionsCacheKey } from "../lib/constants";
 import { PermissionsProvider } from "@/models/permissionsProvider";
 import api from "@/services/api";
-import { fetchBlobWithQueryParams, fetchWithQueryParams } from "@/utils/utils";
+import { fetchBlobWithQueryParams, fetchEntity, fetchWithQueryParams } from "@/utils";
+import { TransactionTimeline } from "../models/transactionTimeline";
+import { PagedResponse } from "@/models";
 
 const baseUrl = `/transactions`;
 
@@ -22,16 +21,19 @@ export const createTransaction = async (
   return response.data;
 };
 
-export const closePeriod = async (data: ClosePeriodRequest) => {
+const getTransactionTimeline = async (id: number): Promise<TransactionTimeline> => {
+  return await fetchEntity(`transactions/${id}/timeline`, [], 0);
+}
+
+export const closePeriod = async (data: ClosedPeriodFormValues) => {
   const response = await api.post(`transactions/close-period`, data);
   return response.data;
 };
 
-export const getClosedPeriods = async (
-  query: ClosedPeriodsQuery
-): Promise<ClosedPeriod[]> => {
-  return await fetchWithQueryParams(`${baseUrl}/closed-periods/`, query)
-};
+export const getLastClosedPeriod = async (): Promise<ClosedPeriod> => {
+  const response = await api.get(`${baseUrl}/last-closed-period`);
+  return response.data;
+}
 
 export const deleteTransaction = async (id: number | string) => {
   if (!id) return;
@@ -66,7 +68,10 @@ export const transactionPermissionsProvider: PermissionsProvider = {
 
 export const transactionClient = {
   getTransaction,
+  getTransactionTimeline,
   getTransactions,
   createTransaction,
-  deleteTransaction
+  deleteTransaction,
+  closePeriod,
+  getLastClosedPeriod
 }

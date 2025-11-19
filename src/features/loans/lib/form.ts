@@ -78,7 +78,7 @@ export const loanFormProvider: FormProvider<LoanFormValues> = {
             name: "approvedAmount",
             id: "approvedAmount",
             label: "Monto Aprobado",
-            showOnEdit: false,
+            disabledOnEdit: false,
             type: "currency",
         },
         {
@@ -86,7 +86,7 @@ export const loanFormProvider: FormProvider<LoanFormValues> = {
             label: "Desembolsado",
             id: "disbursedAmount",
             type: "currency",
-            showOnEdit: false,
+            disabledOnEdit: false,
             watchedValues: ["approvedAmount"],
             changeWhen: (form, setValue) => {
                 if (!form.approvedAmount) return;

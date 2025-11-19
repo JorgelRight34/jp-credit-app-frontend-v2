@@ -1,5 +1,6 @@
+import { Loan } from "@/features/loans";
+import { TimeSpan } from "@/utils";
 import { useMemo } from "react";
-import { Loan } from "../../Loans/models/loan";
 
 interface UseLoanPaymentDetailsProps {
   loan?: Loan | null;
@@ -15,32 +16,30 @@ const useLoanPaymentDetails = ({
   daysOfGrace = 0,
 }: UseLoanPaymentDetailsProps) => {
   const penaltyFee = useMemo(() => {
-    // Total penalty fee between all payments
     if (!loan) return 0;
 
     const now = new Date();
     now.setDate(now.getDate() + daysOfGrace);
-    const dueDate = new Date(loan.nextPaymentDate);
+    const dueDate = new Date(loan.effectivePaymentDate);
 
     const diffInMs = now.getTime() - dueDate.getTime();
-    const lateDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24)); // Convert ms to full days
+    const lateDays = Math.floor(diffInMs / TimeSpan.fromDays(1));
 
     if (lateDays <= 0) return 0;
 
     return lateDays * penaltyRate;
-  }, [loan]);
+  }, [daysOfGrace, loan, penaltyRate]);
 
   const interests = useMemo(() => {
     if (!loan || !amount || amount === 0) return 0;
     return (
       loan.principalBalance * (loan.annualInterestRate / loan.paymentFrequency)
     );
-  }, [loan]);
+  }, [amount, loan]);
 
-  const capital = useMemo(() => {
-    if (!loan) return 0;
-    return amount - interests;
-  }, [amount, loan, interests]);
+  const capital = useMemo(() =>
+    loan ? amount - interests : 0
+    , [loan, amount, interests]);
 
   return { penaltyFee, interests, capital };
 };

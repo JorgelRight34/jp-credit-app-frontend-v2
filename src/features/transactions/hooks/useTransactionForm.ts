@@ -5,17 +5,15 @@ import {
 import { Transaction } from "../models/transaction";
 import { TransactionType } from "../models/transactionType";
 import { useMemo } from "react";
-import { useCurrentProject } from "../../../contexts/ProjectContext";
-import { UseEntityModuleFormProps } from "@/components/EntityForm/models/UseEntityModuleFormProps";
 import { createTransaction } from "../services/transactionsClient";
 import { toastService } from "@/services";
-import { UseEntityFormReturn } from "@/models";
-import { getTodayFormattedDate } from "@/utils/utils";
 import { transactionsCacheKey } from "../lib/constants";
+import { UseEntityFormReturn, UseEntityModuleFormProps } from "@/components";
+import { useCurrentProject } from "@/contexts/ProjectContext";
+import { getTodayFormattedDate } from "@/utils";
 
 type UseTransactionFormProps = UseEntityModuleFormProps<Transaction, TransactionFormValues>;
 
-// eslint-disable-next-line no-empty-pattern
 const useTransactionForm = ({ }: UseTransactionFormProps = {}): UseEntityFormReturn<Transaction, TransactionFormValues> => {
   const { project } = useCurrentProject();
 
@@ -41,6 +39,7 @@ const useTransactionForm = ({ }: UseTransactionFormProps = {}): UseEntityFormRet
     config: {
       formProvider: transactionFormProvider,
       cacheKeysToInvalidate: [transactionsCacheKey],
+      tagsToInvalidate: [],
       defaultValues,
     },
   };

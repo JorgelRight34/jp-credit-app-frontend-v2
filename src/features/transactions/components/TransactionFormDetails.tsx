@@ -1,10 +1,10 @@
-import { toCurrency } from "../../../utils/utils";
-import useLoan from "../../Loans/hooks/useLoan";
-import FinancialCard from "../../../components/ui/FinancialCard";
-import useLoanPaymentDetails from "../hooks/useLoanPaymentDetails";
-import { useCurrentProject } from "../../../contexts/ProjectContext";
-import { LoadingSpinner } from "@/components/ui";
+import { useCurrentProject } from "@/contexts/ProjectContext";
+import { loanClient } from "@/features/loans";
+import { useData } from "@/hooks/useData";
 import clsx from "clsx";
+import useLoanPaymentDetails from "../hooks/useLoanPaymentDetails";
+import { FinancialCard, LoadingSpinner } from "@/components";
+import { ND, toCurrency } from "@/utils";
 
 interface TransactionFormDetailsProps {
   loanId?: number;
@@ -14,12 +14,17 @@ interface TransactionFormDetailsProps {
 }
 
 const TransactionFormDetails = ({
-  amount = 0,
   loanId,
+  className,
+  amount = 0,
   penaltyRate = 0,
-  className = "",
 }: TransactionFormDetailsProps) => {
-  const { loan, isLoading } = useLoan({ id: loanId });
+  const { data: loan, isLoading } = useData({
+    key: ["transaction-form-details", loanId],
+    getData: () => loanClient.getLoan(loanId!),
+    enabled: !!loanId,
+  });
+
   const { project } = useCurrentProject();
   const { penaltyFee, interests, capital } = useLoanPaymentDetails({
     loan: loan,
@@ -44,14 +49,14 @@ const TransactionFormDetails = ({
         title={loanId ? `Prestamo #(${loanId})` : `Eliga un Préstamo`}
         orientation="row"
         subheading="Cuota"
-        heading={loan ? toCurrency(loan.paymentValue) : "ND"}
+        heading={loan ? toCurrency(loan.paymentValue) : ND}
         headers={[
-          ["Atraso", loan ? toCurrency(loan.paymentValue) : "ND"],
+          ["Atraso", loan ? toCurrency(loan.paymentValue) : ND],
           [
             "Interés Anual",
-            loan ? `${(loan.annualInterestRate * 100).toFixed(2)}%` : "ND",
+            loan ? `${(loan.annualInterestRate * 100).toFixed(2)}%` : ND,
           ],
-          ["Mora", loan ? toCurrency(loan.delinquency || 0) : "ND"],
+          ["Mora", loan ? toCurrency(loan.delinquency || 0) : ND],
         ]}
       />
       <FinancialCard

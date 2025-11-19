@@ -1,10 +1,9 @@
-import InfoTable from "../../../components/DataTable/components/InfoTable";
+import { InfoTable } from "@/components";
 import { Transaction } from "../models/transaction";
-import { toCurrency, toFormattedDate } from "../../../utils/utils";
-import LinkToProfile from "../../Profiles/components/LinkToProfile";
-import LinkToLoan from "../../Loans/components/LinkToLoan";
+import { LinkToLoan } from "@/features/loans";
+import { LinkToProfile } from "@/features/profiles";
+import { ND, toCurrency, toFormattedDate } from "@/utils";
 import { transactionTypesFullNames } from "../lib/constants";
-import { nullFieldLabel } from "../../../utils/constants";
 
 interface TransactionInfoTable {
   transaction: Transaction;
@@ -15,13 +14,13 @@ const TransactionInfoTable = ({ transaction }: TransactionInfoTable) => {
     <InfoTable
       data={[
         ["Id", transaction.id],
-        ["Préstamo", <LinkToLoan id={transaction.loanId} />],
+        ["Préstamo", <LinkToLoan key="loan" id={transaction.loanId} />],
         [
           "Cliente",
           transaction.payerId ? (
             <LinkToProfile id={transaction.payerId} fullName={true} />
           ) : (
-            nullFieldLabel
+            ND
           ),
         ],
         [

@@ -16,6 +16,7 @@ export interface Loan {
   totalFeePaid: number;
   outstandingAmount: number;
   client?: Client;
+  totalFees: number;
   guarantor?: Guarantor;
   loanOfficer?: LoanOfficer;
 

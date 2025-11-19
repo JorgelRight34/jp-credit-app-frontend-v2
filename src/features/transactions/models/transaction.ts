@@ -1,8 +1,7 @@
+import { Client, Profile } from "@/features/profiles";
 import { TransactionType } from "./transactionType";
-import { User } from "../../Auth/models/user";
-import { Client } from "../../Profiles/models/client";
-import { Loan } from "@/features/Loans/models/loan";
-import { Profile } from "@/features/Profiles/models/profile";
+import { User } from "@/features/auth";
+import { Loan } from "@/features/loans";
 
 export interface Transaction {
   id: number;

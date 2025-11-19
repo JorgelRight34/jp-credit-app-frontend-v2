@@ -1,42 +1,46 @@
 
+import { UseFormSetValue } from "react-hook-form";
 import { z } from "zod";
-import { User } from "../models/user";
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
-import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { generateUsername } from "./utils";
-import { LoginForm } from "@/models";
+import { FormProvider } from "@/components";
+import { LoginForm } from "../models/loginForm";
+
 
 const updateUsernameOnForm = (
     { lastName, firstName }: UserFormValues,
-    setValue: UseFormSetValue<FieldValues>
+    setValue: UseFormSetValue<UserFormValues>
 ) => {
     if (lastName && firstName) {
         setValue("username", generateUsername(firstName, lastName));
     }
 };
 
-export const userFormProvider: FormProvider<User> = {
-    schema: z
-        .object({
-            username: z.string(),
-            password: z.string().optional(),
-            confirmation: z.string().optional(),
-            firstName: z.string(),
-            lastName: z.string(),
-            email: z.string(),
-        })
-        .refine((data) => data.password === data.confirmation, {
-            message: "Las contraseñas no coinciden",
-            path: ["confirmation"],
-        })
-        .transform((data) => {
-            const { firstName, lastName } = data;
-            if (!firstName || !lastName) return data;
+const userSchema = z
+    .object({
+        username: z.string(),
+        password: z.string().optional(),
+        confirmation: z.string().optional(),
+        firstName: z.string(),
+        lastName: z.string(),
+        email: z.string(),
+    })
+    .refine((data) => data.password === data.confirmation, {
+        message: "Las contraseñas no coinciden",
+        path: ["confirmation"],
+    })
+    .transform((data) => {
+        const { firstName, lastName } = data;
+        if (!firstName || !lastName) return data;
 
-            const username = `${firstName[0]}${lastName.split(" ")[0]}`.toLowerCase();
+        const username = `${firstName[0]}${lastName.split(" ")[0]}`.toLowerCase();
 
-            return { ...data, username };
-        }),
+        return { ...data, username };
+    })
+
+export type UserFormValues = z.infer<typeof userSchema>;
+
+export const userFormProvider: FormProvider<UserFormValues> = {
+    schema: userSchema,
     fields: [
         {
             name: "firstName",
@@ -49,7 +53,7 @@ export const userFormProvider: FormProvider<User> = {
         {
             name: "password",
             label: "Contraseña",
-            showOnEdit: false,
+            disabledOnEdit: false,
             id: "password",
             type: "password",
         },
@@ -67,7 +71,7 @@ export const userFormProvider: FormProvider<User> = {
             label: "Confirmar Contraseña",
             id: "confirmation",
             type: "password",
-            showOnEdit: false,
+            disabledOnEdit: false,
         },
     ]
 }
@@ -95,16 +99,21 @@ export const loginFormProvider: FormProvider<LoginForm> = {
 
 export type LoginFormValues = z.infer<typeof loginFormProvider.schema>;
 
-export const changePasswordFormProvider: FormProvider<User> = {
-    schema:
-        z.object({
-            password: z.string(),
-            confirmation: z.string(),
-        })
-            .refine((data) => data.password === data.confirmation, {
-                message: "Las contraseñas no coinciden",
-                path: ["confirmation"],
-            }),
+const changePasswordSchema = z.object({
+    password: z.string(),
+    confirmation: z.string(),
+})
+    .refine((data) => data.password === data.confirmation, {
+        message: "Las contraseñas no coinciden",
+        path: ["confirmation"],
+    })
+
+export type ChangeUserPasswordValues = z.infer<
+    typeof changePasswordSchema
+>;
+
+export const changePasswordFormProvider: FormProvider<ChangeUserPasswordValues> = {
+    schema: changePasswordSchema,
     fields: [
         {
             name: "password",
@@ -120,10 +129,5 @@ export const changePasswordFormProvider: FormProvider<User> = {
         },
     ]
 }
-
-export type UserFormValues = z.infer<typeof userFormProvider.schema>;
-export type ChangeUserPasswordValues = z.infer<
-    typeof changePasswordFormProvider.schema
->;
 
 export const NO_PERMISSION = "";

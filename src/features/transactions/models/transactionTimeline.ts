@@ -1,7 +1,6 @@
 import { Transaction } from "./transaction";
 
-export interface TransactionStats {
+export interface TransactionTimeline {
   lastTransaction?: Transaction;
   nextTransaction?: Transaction;
-  nextTransactionDate?: string;
 }

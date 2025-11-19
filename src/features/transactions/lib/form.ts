@@ -1,8 +1,7 @@
 import { z } from "zod";
 import { TransactionType } from "../models/transactionType";
-import { FormProvider } from "@/components/EntityForm/models/formProvider";
-import { getLoanMembers } from "@/features/Loans/services/loanClient";
-import { getLoanMembersSelectOptions } from "@/features/Loans/lib/utils";
+import { FormProvider } from "@/components";
+import { getLoanMembersSelectOptions, loanClient } from "@/features/loans";
 
 export const transactionTypesOptions: [TransactionType, string][] = [
   [TransactionType.DS, "DS | Desembolso"],
@@ -33,18 +32,21 @@ export const transactionFormProvider: FormProvider<TransactionFormValues> = {
       id: "value",
       label: "Monto",
       type: "currency",
+      disabledOnEdit: true
     },
     {
       name: "date",
       id: "date",
       label: "Fecha",
       type: "date",
+      disabledOnEdit: true
     },
     {
       name: "loanId",
       id: "loanId",
       label: "Préstamo",
       type: "loan",
+      disabledOnEdit: true
     },
     {
       name: "payerId",
@@ -57,7 +59,7 @@ export const transactionFormProvider: FormProvider<TransactionFormValues> = {
       loadOptions: async ({ loanId }) => {
         if (!loanId) return []
 
-        const members = await getLoanMembers(loanId);
+        const members = await loanClient.getLoanMembers(loanId);
 
         return getLoanMembersSelectOptions(members)
       }
@@ -68,6 +70,7 @@ export const transactionFormProvider: FormProvider<TransactionFormValues> = {
       label: "Tipo",
       type: "select",
       options: transactionTypesOptions,
+      disabledOnEdit: true
     },
     {
       name: "penaltyRate",
@@ -75,6 +78,7 @@ export const transactionFormProvider: FormProvider<TransactionFormValues> = {
       label: `Penalidad (1-100)% días de gracia)`,
       type: "percentage",
       step: 0.01,
+      disabledOnEdit: true,
       watchedValues: ["type"],
       required: false,
       disabledWhen: ({ type }) => type === TransactionType.DS,
@@ -90,3 +94,29 @@ export const transactionFormProvider: FormProvider<TransactionFormValues> = {
 }
 
 export type TransactionFormValues = z.infer<typeof transactionFormSchema>;
+
+
+const closedPeriodSchema = z.object({
+  startDate: z.string(),
+  endDate: z.string()
+})
+
+export type ClosedPeriodFormValues = z.infer<typeof closedPeriodSchema>;
+
+export const closedPeriodFormProvider: FormProvider<ClosedPeriodFormValues> = {
+  schema: closedPeriodSchema,
+  fields: [
+    {
+      id: "startDate",
+      name: "startDate",
+      label: "Fecha Inicio",
+      type: "date"
+    },
+    {
+      id: "endDate",
+      name: "endDate",
+      label: "Fecha Fin",
+      type: "date"
+    }
+  ]
+}

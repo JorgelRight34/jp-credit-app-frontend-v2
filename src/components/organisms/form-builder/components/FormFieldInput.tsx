@@ -8,27 +8,24 @@ import { FormField } from "../models/formField";
 import { useEffect, useMemo } from "react";
 import { inputRenderers } from "../utils/input-renderers";
 
-interface FormFieldInputProps<T, TData extends FieldValues> {
+interface FormFieldInputProps<TData extends FieldValues> {
   formField: FormField<TData>;
   error?: string;
-  edit?: T;
   className?: string;
   hideLabel?: boolean;
 }
 
-const FormFieldInput = <T, TData extends FieldValues>({
+const FormFieldInput = <TData extends FieldValues>({
   formField: {
-    showOnEdit,
     watchedValues: valuesToWatch,
     disabledWhen,
     changeWhen,
     ...config
   },
-  edit,
   error,
   hideLabel = false,
   ...props
-}: FormFieldInputProps<T, TData>) => {
+}: FormFieldInputProps<TData>) => {
   const { getValues, setValue } = useFormContext<TData>();
 
   const watchedValues = useWatch({
@@ -47,8 +44,6 @@ const FormFieldInput = <T, TData extends FieldValues>({
       changeWhen(getValues(), setValue);
     }
   }, [changeWhen, getValues, setValue, watchedValues]);
-
-  if (edit && showOnEdit === false) return;
 
   return (
     <Controller

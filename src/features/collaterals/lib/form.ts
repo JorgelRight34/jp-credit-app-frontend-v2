@@ -120,7 +120,7 @@ export const collateralFormProvider: FormProvider<CollateralFormValues> = {
       id: "ownerId",
       placeholder: "---",
       watchedValues: ["loanId"],
-      showOnEdit: true,
+      disabledOnEdit: true,
       disabledWhen: ({ loanId }) => !loanId,
       loadOptions: async ({ loanId }) => {
         if (!loanId) return []
@@ -135,7 +135,7 @@ export const collateralFormProvider: FormProvider<CollateralFormValues> = {
       id: "loanId",
       label: "Préstamo",
       type: "loan",
-      showOnEdit: false,
+      disabledOnEdit: false,
     },
   ]
 }

@@ -2,11 +2,13 @@ import { TransactionFormValues } from "../lib/form";
 import { Transaction } from "../models/transaction";
 import TransactionFormDetails from "./TransactionFormDetails";
 import useTransactionForm from "../hooks/useTransactionForm";
-import { EntityFormProps } from "../../../components/EntityForm/models/entityFormProps";
-import { useEntityForm } from "@/components/EntityForm";
-import FormLayout from "@/components/EntityForm/layouts/FormLayout";
-import FormBuilder from "@/components/EntityForm/components/FormBuilder";
-import FormSubscriptionWrapper from "@/components/EntityForm/components/FormSubscriptionWrapper";
+import {
+  EntityFormProps,
+  FormBuilder,
+  FormLayout,
+  FormSubscriptionWrapper,
+  useEntityForm,
+} from "@/components";
 
 type TransactionFormProps = EntityFormProps<TransactionFormValues, Transaction>;
 
@@ -16,7 +18,6 @@ const TransactionForm = ({ onDirtyChange, ...props }: TransactionFormProps) => {
 
   return (
     <FormLayout {...methods}>
-      {JSON.stringify(config.defaultValues)}
       <div className="flex">
         <div className="w-7/12">
           <FormBuilder<Transaction, TransactionFormValues>

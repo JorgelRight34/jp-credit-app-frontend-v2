@@ -1,6 +1,6 @@
-import { ProfileRole } from "@/features/Profiles/models/profileRole";
-import { Query } from "../../../models/query";
+import { Query } from "@/models/query";
 import { TransactionType } from "./transactionType";
+import { ProfileRole } from "@/features/profiles";
 
 export interface TransactionsQuery extends Query {
   type?: TransactionType;
@@ -13,4 +13,5 @@ export interface TransactionsQuery extends Query {
   endDate?: string;
   profileId?: number;
   profileAs?: ProfileRole;
+  date?: [string | undefined, string | undefined]
 }

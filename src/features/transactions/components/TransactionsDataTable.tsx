@@ -1,16 +1,18 @@
 import { Transaction } from "../models/transaction";
-import { EntityDataTableProps } from "../../../components/DataTable/models/entityDataTableProps";
-import EntityDataTable from "../../../components/DataTable/components/EntityDataTable";
-import { TransactionsQuery } from "../models/transactionsQuery";
-import { getTransactions } from "../services/transactionsClient";
-import { transactionsCacheKey } from "../lib/constants";
-import { useRouter } from "@/hooks/useRouter";
-import { Column } from "@/components/DataTable/models/column";
-import LinkToProfile from "@/features/Profiles/components/LinkToProfile";
-import LinkToLoan from "@/features/Loans/components/LinkToLoan";
-import { sortDateRows, toCurrency } from "@/utils/utils";
-import { DateLabel } from "@/components/ui";
 import { getTransactionIdLabel } from "../lib/utils";
+import { TransactionsQuery } from "../models/transactionsQuery";
+import {
+  Column,
+  DateLabel,
+  EntityDataTable,
+  EntityDataTableProps,
+} from "@/components";
+import { sortDateRows, toCurrency } from "@/utils";
+import { LinkToProfile } from "@/features/profiles";
+import { LinkToLoan } from "@/features/loans";
+import { useRouter } from "@/hooks/useRouter";
+import { transactionClient } from "../services/transactionsClient";
+import { transactionsCacheKey } from "../lib/constants";
 
 type TransactionsDataTableProps = EntityDataTableProps<
   Transaction,
@@ -83,7 +85,7 @@ const TransactionsDataTable = ({
     <EntityDataTable<Transaction, TransactionsQuery>
       title="transacción"
       columns={columns}
-      loader={getTransactions}
+      loader={transactionClient.getTransactions}
       cacheKey={transactionsCacheKey}
       query={query}
       onRowClick={onRowClick ?? ((t) => router.push(`/transactions/${t.id}`))}

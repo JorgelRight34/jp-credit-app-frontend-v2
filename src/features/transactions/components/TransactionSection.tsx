@@ -1,9 +1,8 @@
 import TransactionsDataTable from "./TransactionsDataTable";
 import { TransactionsQuery } from "../models/transactionsQuery";
 import TransactionQuerySearch from "./TransactionQuerySearch";
-import { EntitySectionProps } from "@/components/EntitySection/models/EntitySectionProps";
 import { Transaction } from "../models/transaction";
-import EntitySection from "@/components/EntitySection/components/EntitySection";
+import { EntitySection, EntitySectionProps } from "@/components";
 
 type TransactionSectionProps = EntitySectionProps<
   Transaction,

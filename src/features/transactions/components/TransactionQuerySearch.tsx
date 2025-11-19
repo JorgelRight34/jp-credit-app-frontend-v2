@@ -1,13 +1,15 @@
 import { useMemo } from "react";
-import { QuerySearchInput } from "../../../components/EntityQuerySearch/models/querySearchInput";
-import { QuerySearchProps } from "../../../components/EntityQuerySearch/models/querySearchProps";
 import { TransactionsQuery } from "../models/transactionsQuery";
 import { TransactionType } from "../models/transactionType";
-import { profileRolesSpanishTranslations } from "@/features/Profiles/lib/constants";
-import { toTitleCase } from "@/utils/utils";
-import EntityQuerySearch from "@/components/EntityQuerySearch/components/EntityQuerySearch";
+import { toTitleCase } from "@/utils";
 import { getTransactionsReportBlob } from "../services/transactionsClient";
-import { dateRangeFormInterceptor } from "@/components/EntityForm/utils/interceptors";
+import {
+  dateRangeFormInterceptor,
+  EntityQuerySearch,
+  QuerySearchInput,
+  QuerySearchProps,
+} from "@/components";
+import { profileRolesSpanishTranslations } from "@/features/profiles";
 
 type TransactionQuerySearchProps = QuerySearchProps<TransactionsQuery> & {
   type?: TransactionType;

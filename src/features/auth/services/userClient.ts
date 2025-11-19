@@ -11,7 +11,6 @@ import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/utils/constants";
 import { Claim } from "../lib/claim";
 import { usersTag } from "../lib/constants";
 
-
 const baseUrl = "users"
 
 export const createUser = async (data: UserFormValues): Promise<User> => {
@@ -41,7 +40,7 @@ export const getPermissions = async (id: number): Promise<UserPermissions> => {
 
 export const getModulePermissions = async (endpoint: string, tags: string[] = [], cache = 0)
   : Promise<ModulePermissions> => {
-  const response = await fetch(endpoint, { next: { tags, revalidate: cache } });  // USE REDIS CLIENT OR SOMETHING ELSE
+  const response = await fetch(endpoint, { next: { tags, revalidate: cache } });
   return response.json();
 }
 

@@ -50,4 +50,5 @@ export const projectsClient = {
   deleteProject,
   createProject,
   editProject,
+  getProjectsModulePermissions
 }
