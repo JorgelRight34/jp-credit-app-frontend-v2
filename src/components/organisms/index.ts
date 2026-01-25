@@ -25,7 +25,6 @@ export * from "./entity-search-input/useEntitySearchInput";
 // Entity Section (uses its own index.ts)
 // -------------------------------------
 export { default as EntitySection } from "./entity-section/components/EntitySection";
-export * from "./entity-section/models/entitySectionProps"
 
 // -------------------------------------
 // Form Builder (uses its own index.ts)
@@ -57,3 +56,5 @@ export * from "./upload-form";
 
 export * from "./entity-query-search"
 export * from "./form-builder"
+
+export * from "./entity-datatable"

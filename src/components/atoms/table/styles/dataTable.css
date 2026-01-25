@@ -1,0 +1,21 @@
+/* Zebra stripes only for tbody */
+tbody tr:nth-child(odd) {
+  background-color: var(--background-color);
+}
+
+/* Hover effect only for tbody rows */
+tbody tr:hover {
+  background-color: rgba(208, 157, 12, 0.1);
+}
+
+
+/* Links inside table not hovered */
+table a {
+  color: var(--secondary-color);
+}
+
+/* Pagination styling */
+.page-item,
+.page-link {
+  color: var(--secondary-color);
+}

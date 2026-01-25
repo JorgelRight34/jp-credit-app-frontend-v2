@@ -1,4 +1,3 @@
-import "./dataTable.css";
 import DataTableNavigation from "./DataTableNavigation";
 import { ReactNode, useCallback } from "react";
 import { Row } from "../models/row";
@@ -15,10 +14,6 @@ export interface DataTableProps<TData>
   className?: string;
   totalItems?: number;
   infinitePagination?: boolean;
-  selectedId?: number | string;
-  showContainer?: boolean;
-  showFooter?: boolean;
-  showHeader?: boolean;
   onExpand?: (row: Row<TData>) => ReactNode;
   onRowClick?: (row: TData) => void;
   onLimitChange?: (limit: number) => void;
@@ -28,8 +23,8 @@ const DataTable = <TData,>({
   pageSize = 20,
   data,
   totalItems = data?.length,
-  className = "data-table",
   infinitePagination = false,
+  className,
   onRowClick,
   onExpand,
   onLimitChange,
@@ -75,7 +70,5 @@ const DataTable = <TData,>({
     />
   );
 };
-
-DataTable.whyDidYouRender = true;
 
 export default DataTable;

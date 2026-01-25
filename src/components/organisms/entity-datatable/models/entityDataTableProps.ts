@@ -1,6 +1,6 @@
 import { Query } from "@/models/query";
-import { DataTableProps } from "../components/DataTable";
-import { Column } from "./column";
+import { DataTableProps } from "../../datatable/components/DataTable";
+import { Column } from "../../datatable/models/column";
 
 /**
  * Props for rendering a generic entity-based data table.
@@ -21,13 +21,13 @@ export type EntityDataTableProps<T, TQuery extends Query> = Partial<DataTablePro
   // 🔹 UI Options
   // ───────────────────────────────
 
-  defaultQuery: TQuery;
+  defaultQuery?: TQuery;
 
   // ───────────────────────────────
   // 🔹 Interaction & Navigation
   // ───────────────────────────────
 
-  navigateCallback?: (page: number) => void;
+  onPageChange?: (page: number) => void;
 
   extraColumns?: Column<T>[];
   startInsertingExtraColumnsAt?: number;

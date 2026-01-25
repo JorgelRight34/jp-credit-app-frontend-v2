@@ -1,3 +1,4 @@
+import { TableData, TableFooter, TableRow } from "@/components/atoms";
 import { PageSize } from "../models/pageSize";
 import DataTableBody from "./DataTableBody";
 import DataTableFooter from "./DataTableFooter";
@@ -9,9 +10,9 @@ const DataTableGroupTable = <T,>({ table }: DataTableRenderProps<T>) => {
     <>
       <DataTableBody table={table} />
       <DataTableFooter className="[display:table-header-group]" table={table} />
-      <tfoot className="!m-0 [display:table-header-group] border-none !p-0">
-        <tr className="!m-0 border-none !p-0">
-          <td
+      <TableFooter className="!m-0 [display:table-header-group] border-none !p-0">
+        <TableRow className="!m-0 border-none !p-0">
+          <TableData
             colSpan={table.getVisibleFlatColumns().length}
             className="!m-0 border-none !p-0 align-top"
           >
@@ -23,9 +24,9 @@ const DataTableGroupTable = <T,>({ table }: DataTableRenderProps<T>) => {
                 totalItems={table.options.data.length}
               />
             </div>
-          </td>
-        </tr>
-      </tfoot>
+          </TableData>
+        </TableRow>
+      </TableFooter>
     </>
   );
 };

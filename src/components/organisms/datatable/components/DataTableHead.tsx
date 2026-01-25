@@ -1,7 +1,5 @@
-import { Icon } from "@/components/atoms";
+import { Icon, TableHead, TableHeader, TableRow } from "@/components/atoms";
 import { flexRender, Table } from "@tanstack/react-table";
-import clsx from "clsx";
-
 interface DataTableHeadProps<T> {
   table: Table<T>;
   className?: string;
@@ -9,12 +7,11 @@ interface DataTableHeadProps<T> {
 
 const DataTableHead = <T,>({ table, className }: DataTableHeadProps<T>) => {
   return (
-    <thead className={clsx("border-bottom rounded-xl", className)}>
-      {/* Get all header groups from table */}
+    <TableHeader className={className}>
       {table.getHeaderGroups().map((headerGroup) => (
-        <tr key={headerGroup.id} className="cursor-pointer">
+        <TableRow key={headerGroup.id} className="cursor-pointer">
           {headerGroup.headers.map((header) => (
-            <th key={header.id}>
+            <TableHead className="px-4 py-2 whitespace-normal" key={header.id}>
               <div
                 {...{
                   className: header.column.getCanSort()
@@ -25,7 +22,7 @@ const DataTableHead = <T,>({ table, className }: DataTableHeadProps<T>) => {
               >
                 {flexRender(
                   header.column.columnDef.header,
-                  header.getContext()
+                  header.getContext(),
                 )}
                 {header.column.getCanSort() && (
                   <Icon
@@ -34,18 +31,18 @@ const DataTableHead = <T,>({ table, className }: DataTableHeadProps<T>) => {
                       header.column.getIsSorted() === "asc"
                         ? "arrow_upward"
                         : header.column.getIsSorted() === "desc"
-                        ? "arrow_downward"
-                        : ""
+                          ? "arrow_downward"
+                          : ""
                     }
                   />
                 )}
               </div>
-            </th>
+            </TableHead>
           ))}
           {table.getCanSomeRowsExpand() && <th>&nbsp;</th>}
-        </tr>
+        </TableRow>
       ))}
-    </thead>
+    </TableHeader>
   );
 };
 

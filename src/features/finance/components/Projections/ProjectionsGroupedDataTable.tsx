@@ -50,7 +50,7 @@ const ProjectionsGroupedDataTable = ({ query }: ProjectionsDataTableProps) => {
   return (
     <GroupedDataTable
       columns={[dateGroupingColumn(query) as Column<Projection>, ...columns]}
-      navigateCallback={fetchPage}
+      onPageChange={fetchPage}
       pageSize={pageSize as PageSize} // JUST FOR THE TEST
       totalItems={periods.length}
       onLimitChange={onLimitChange}

@@ -1,10 +1,10 @@
 import { Column, DataTable, EntityDataTableProps } from "@/components";
-import { dateToIsoString, WithRequired } from "@/utils/utils";
 import { FinancialBreakdown } from "../models/financialBreakdown";
 import { FinanceQuery } from "../models/financeQuery";
 import { Transaction, TransactionType } from "@/features/transactions";
 import { getDateGroupingLabel } from "../lib/lib";
 import FinanceResultGroupTable from "./FinanceResultGroupTable";
+import { dateToIsoString, WithRequired } from "@/utils";
 
 export interface FinancialBreakdownDataTableProps
   extends WithRequired<
@@ -16,10 +16,7 @@ export interface FinancialBreakdownDataTableProps
 
 export interface FinanceGroupedTableProps
   extends WithRequired<
-    Omit<
-      EntityDataTableProps<FinancialBreakdown, FinanceQuery>,
-      "defaultQuery"
-    >,
+    EntityDataTableProps<FinancialBreakdown, FinanceQuery>,
     "columns" | "query"
   > {
   data?: FinancialBreakdown[];

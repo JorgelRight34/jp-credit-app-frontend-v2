@@ -1,19 +1,17 @@
 import { useCurrentProject } from "@/contexts/ProjectContext";
-import { loanFormProvider, LoanFormValues } from "../lib/form";
+import { loanFormSchema, LoanFormValues } from "../lib/form";
 import { Loan } from "../models/loan";
 import { useMemo } from "react";
 import { toastService } from "@/services";
 import { createLoan, editLoan } from "../services/loanClient";
 import { loansQueryKey, loansTag } from "../lib/constants";
-import { UseEntityFormReturn } from "@/components";
+import { UseEntityModuleFormProps, useFormBuilder } from "@/components";
 
-interface UseLoanFormProps {
-  edit?: Loan;
-}
+type UseLoanFormProps = UseEntityModuleFormProps<Loan, LoanFormValues>
 
 const useLoanForm = ({
-  edit,
-}: UseLoanFormProps): UseEntityFormReturn<Loan, LoanFormValues> => {
+  edit, defaultValues: initialDefValues, ...props
+}: UseLoanFormProps) => {
   const { project } = useCurrentProject();
 
   const defaultValues = useMemo<Partial<LoanFormValues>>(() => {
@@ -29,8 +27,8 @@ const useLoanForm = ({
       }
     }
 
-    return { projectId, paymentFrequency: 12, numberOfPayments: 1 }
-  }, [edit, project]);
+    return { projectId, paymentFrequency: 12, numberOfPayments: 1, ...initialDefValues }
+  }, [edit, initialDefValues, project?.id]);
 
 
   const handleOnSubmit = async (data: LoanFormValues): Promise<Loan> => {
@@ -47,17 +45,17 @@ const useLoanForm = ({
     return edit!;
   }
 
-  return {
+  return useFormBuilder({
     onSubmit: handleOnSubmit,
     onEdit: handleOnEdit,
-    config: {
-      formProvider: loanFormProvider,
-      resetValues: !edit,
-      cacheKeysToInvalidate: [loansQueryKey],
-      tagsToInvalidate: [loansTag],
-      defaultValues
-    },
-  };
+    edit: !!edit,
+    cacheKeysToInvalidate: [loansQueryKey],
+    tagsToInvalidate: [loansTag],
+    schema: loanFormSchema,
+    resetValues: !edit,
+    defaultValues,
+    ...props
+  });
 };
 
 export default useLoanForm;

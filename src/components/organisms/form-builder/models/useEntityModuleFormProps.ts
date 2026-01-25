@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-export type UseEntityModuleFormProps<TEntity, _FormValues> = {
+export type UseEntityModuleFormProps<TEntity, FormValues> = {
     edit?: TEntity;
+    defaultValues?: Partial<FormValues>;
     onDirtyChange?: (isDirty: boolean) => void;
 }

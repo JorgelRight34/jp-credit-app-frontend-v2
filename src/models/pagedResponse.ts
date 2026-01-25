@@ -1,4 +1,4 @@
-import { PageSize } from "@/components/DataTable/models/pageSize";
+import { PageSize } from "@/components";
 
 export interface PagedResponse<T> {
   items: T[];

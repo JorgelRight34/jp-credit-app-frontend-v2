@@ -5,18 +5,18 @@ import { toastService } from "@/services";
 import FilenameDataTableColumn from "./FilenameDataTableColumn";
 import { DatatableFile } from "../models/datatableFile";
 import { Column } from "../../datatable/models/column";
-import { isImage, toFormattedDate } from "@/utils/utils";
 import DateLabel from "@/components/atoms/date-label/DateLabel";
 import { FileModel } from "@/models/fileModel";
 import { DataTable } from "../../datatable";
 import { LightBox } from "@/components/molecules";
+import { isImage, toFormattedDate } from "@/utils";
 
 interface FileExplorerProps {
   showLink?: boolean;
   extraColumns?: Column<DatatableFile>[];
   files: DatatableFile[];
   showType?: boolean;
-  navigateCallBack?: (page: number) => void;
+  onPageChange?: (page: number) => void;
 }
 
 const columns: Column<DatatableFile>[] = [

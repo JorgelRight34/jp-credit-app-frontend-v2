@@ -2,12 +2,11 @@
 
 import { Table } from "@tanstack/react-table";
 import { useCallback, useMemo } from "react";
-import PageSizeSelector from "./PageSizeSelector";
 import { DataTableProps } from "./DataTable";
 import { defaultPageSize } from "@/utils/constants";
 import clsx from "clsx";
 import { PageSize } from "../models/pageSize";
-import { Pagination } from "@/components/molecules";
+import { PageSizeSelector, Pagination } from "@/components/molecules";
 import { Subtitle } from "@/components/atoms";
 
 interface DataTableNavigationProps<TData> {
@@ -23,15 +22,15 @@ const DataTableNavigation = <TData,>({
   table,
   totalItems = 0,
   className,
-  onLimitChange,
   pageSize = defaultPageSize,
+  onLimitChange,
 }: DataTableNavigationProps<TData>) => {
   const page = table.getState().pagination.pageIndex + 1;
   const currentRows = table.getRowModel().rows.length;
 
   const totalPages = useMemo(
     () => Math.ceil(totalItems / pageSize),
-    [totalItems, pageSize]
+    [totalItems, pageSize],
   );
 
   const handlePageSizeChange = useCallback(
@@ -40,12 +39,12 @@ const DataTableNavigation = <TData,>({
       table.setPageSize(numericVal);
       onLimitChange?.(numericVal);
     },
-    [onLimitChange, table]
+    [onLimitChange, table],
   );
 
   const handlePageChange = useCallback(
     (page: number) => table.setPageIndex(page - 1),
-    [table]
+    [table],
   );
 
   return (

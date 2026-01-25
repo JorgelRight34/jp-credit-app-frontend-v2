@@ -10,7 +10,7 @@ export * from "./hooks/useEntityForm"
 export * from "./models/formField";
 export * from "./models/formInterceptor";
 export * from "./models/formProvider";
-export * from "./models/useEntityFormReturn";
+export * from "./models/UseFormBuilderReturn"
 export * from "./models/entityFormProps"
 export { default as FormLayout } from "./layouts/FormLayout"
 export { default as FormBuilder } from "./components/FormBuilder"

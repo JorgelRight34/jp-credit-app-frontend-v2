@@ -21,14 +21,14 @@ const GroupedDataTable = <T,>({
   groupPageSize,
   pageSize,
   totalItems,
-  navigateCallback,
+  onPageChange,
   render = DataTableGroupTable,
   onLimitChange,
 }: GroupedDataTableProps<T>) => {
   return (
     <DataTableStateWrapper
       columns={columns}
-      navigateCallback={navigateCallback}
+      onPageChange={onPageChange}
       pageSize={pageSize}
       render={({ table }) => (
         <DataTableContainer

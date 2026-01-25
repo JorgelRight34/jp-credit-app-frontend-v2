@@ -6,7 +6,7 @@ import { useFinancePeriodNavigator, UseFinancePeriodNavigatorProps } from "./use
 import { useFinancePeriods } from "./useFinancePeriods";
 import { useState } from "react";
 import { Projection } from "../models/projection";
-import { useEntityDatatable } from "@/components";
+import { useEntityDataTable } from "@/components";
 
 interface UseGroupedProjectionsProps extends Partial<UseFinancePeriodNavigatorProps> {
     query: FinanceQuery;
@@ -20,7 +20,7 @@ export const useGroupedProjections = ({ query, data: initialData, periodsOfMargi
         query, periods, periodsOfMargin: controlledPeriodsOfMargin
     });
 
-    const { data, limit } = useEntityDatatable({
+    const { data, limit } = useEntityDataTable({
         cacheKey: [...projectionsCacheKey, "projections"],
         loader: getProjections,
         query: period as FinanceQuery,

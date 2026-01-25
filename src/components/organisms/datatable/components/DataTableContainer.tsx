@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { Table } from "@/components/atoms";
 import { ReactNode } from "react";
 
 type DataTableContainerProps = React.HtmlHTMLAttributes<HTMLDivElement> & {
@@ -21,15 +21,12 @@ const DataTableContainer = ({
       className="flex h-full flex-col rounded-xl border shadow-sm"
       {...props}
     >
-      <div className="table-wrapper flex w-full flex-col overflow-x-auto">
-        <table
-          className={clsx(className)}
-          style={{ width: "max-content", minWidth: "100%" }}
-        >
+      <div className="flex w-full flex-col overflow-x-auto">
+        <Table className={className}>
           {head}
           {table}
           {footer}
-        </table>
+        </Table>
       </div>
       <div className="border-top flex-shrink-0">{navigation}</div>
     </div>

@@ -93,3 +93,5 @@ export { default as NavLink } from "./navigation/NavLink";
 export { default as PhoneLink } from "./navigation/PhoneLink";
 export { default as DateLabel } from "./date-label/DateLabel"
 export { default as Container } from "./container/Container"
+
+export * from "./table"

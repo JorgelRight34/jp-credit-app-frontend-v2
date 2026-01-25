@@ -5,8 +5,8 @@ import {
   DataTableHead,
   DataTableNavigation,
   DataTableStateWrapper,
+  useEntityDataTable,
 } from "@/components";
-import { useEntityDatatable } from "@/components";
 import {
   Transaction,
   transactionClient,
@@ -23,10 +23,9 @@ const FinanceResultGroupTable = ({
   query,
   columns,
 }: FinanceResultGroupTableProps) => {
-  const { data, fetchPage } = useEntityDatatable({
+  const { data, fetchPage } = useEntityDataTable({
     cacheKey: transactionsCacheKey,
     loader: transactionClient.getTransactions,
-    retainDataWhileLoading: true,
     query,
   });
 
@@ -35,7 +34,7 @@ const FinanceResultGroupTable = ({
       <DataTableStateWrapper
         columns={columns}
         data={data.items}
-        navigateCallback={fetchPage}
+        onPageChange={fetchPage}
         {...data}
         render={({ table }) => (
           <div>

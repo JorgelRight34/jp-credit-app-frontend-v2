@@ -117,15 +117,13 @@ export const showColumnsIfAssertion = <T,>(
     return value ? columns : defaultColumns;
 };
 
-export const getUrlParams = (obj: object) => {
-    const params = new URLSearchParams();
+export const getUrlParams = (params: Record<string, unknown>) =>
+    new URLSearchParams(
+        Object.entries(params)
+            .filter(([, value]) => value != null && value !== "")
+            .map(([key, value]) => [key, String(value)])
+    ).toString();
 
-    for (const [key, value] of Object.entries(obj)) {
-        if (value != null && value !== "") params.append(key, String(value));
-    }
-
-    return params.toString();
-};
 
 export const getSpanishYesOrNo = (value: boolean) => {
     return value ? "Sí" : "No";

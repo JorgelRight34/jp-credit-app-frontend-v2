@@ -1,7 +1,6 @@
 import { FieldValues, FormProvider } from "react-hook-form";
-import React, { forwardRef, useImperativeHandle, useMemo } from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import FormErrors from "./FormErrors";
-import { useFormBuilder } from "../hooks/useFormBuilder";
 import { useFormBuilderLayout } from "../hooks/useFormBuilderLayout";
 import FormBuilderInputContainer from "./FormBuilderInputContainer";
 import {
@@ -9,67 +8,45 @@ import {
   FormBuilderProps,
   FormBuilderRef,
 } from "../models/formBuilder";
-import { getDefaultValues } from "../utils/utils";
-import { useSearchParams } from "next/navigation";
 
 const FormBuilder = forwardRef(
-  <T extends object, TData extends FieldValues, TR>(
+  <T extends object, TData extends FieldValues>(
     {
-      config: { formProvider, ...config },
+      form: { form, state, validation },
+      layout,
+      fields,
       grid,
-      layout: propsLayout,
-      defaultValues: initialDefaultValues,
-      ...props
-    }: FormBuilderProps<T, TData, TR>,
-    ref: React.Ref<FormBuilderRef>,
+      edit,
+    }: FormBuilderProps<T, TData>,
+    ref: React.Ref<FormBuilderRef<TData>>,
   ) => {
-    const params = useSearchParams();
-
-    const defaultValues = useMemo(
-      () => ({
-        ...getDefaultValues(formProvider.fields),
-        ...config.defaultValues,
-        ...initialDefaultValues,
-        ...params,
-      }),
-      [config.defaultValues, formProvider.fields, initialDefaultValues, params],
-    );
-
-    const { form, validation, state } = useFormBuilder({
-      ...formProvider,
-      ...config,
-      ...props,
-      defaultValues,
-      onSubmit: props.onEdit ? props.onEdit : props.onSubmit,
-    });
-
-    const { layout, fieldsMap } = useFormBuilderLayout({
-      fields: formProvider.fields,
-      layout: propsLayout,
+    const { layout: calculatedLayout, fieldsMap } = useFormBuilderLayout({
+      fields,
+      layout,
       grid,
     });
 
     useImperativeHandle(ref, () => ({
+      control: form.control,
+      isDirty: state.isDirty,
+      setValue: form.setValue,
+      watch: form.watch,
       submit: () => form.handleSubmit(),
       reset: () => form.reset(),
       validate: () => true,
-      setValue: form.setValue,
-      watch: form.watch,
-      control: form.control,
-      isDirty: state.isDirty,
     }));
 
     return (
       <FormProvider {...form.methods}>
         <div className="flex flex-col space-y-3 pt-3">
-          {layout.map((row, i) => (
+          {calculatedLayout.map((row, i) => (
             <div className="flex flex-col flex-wrap gap-2 md:flex-row" key={i}>
               {row.map((column, j) => (
                 <FormBuilderInputContainer
                   key={j}
                   field={fieldsMap.get(column)}
                   errors={validation.errors}
-                  edit={props.edit}
+                  edit={edit}
                 />
               ))}
             </div>

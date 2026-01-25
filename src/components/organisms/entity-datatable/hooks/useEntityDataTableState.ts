@@ -9,7 +9,7 @@ interface UseDatatableStateProps {
     pageSize?: number
 }
 
-export const useEntityDatatableState = ({ cacheKey, pageSize }: UseDatatableStateProps) => {
+export const useEntityDataTableState = ({ cacheKey, pageSize }: UseDatatableStateProps) => {
     const [page, setPage] = useState(1);
     const [order, setOrder] = useState<{ orderBy: string, orderDesc: boolean } | undefined>();
     const identifier = useMemo(() => JSON.stringify(cacheKey), [cacheKey])

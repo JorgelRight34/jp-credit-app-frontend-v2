@@ -15,7 +15,7 @@ const EmptyMessage = ({
     <div className={className}>
       <div className="flex justify-center">
         <Icon
-          icon={"battery_android_frame_1"}
+          icon="battery_android_frame_1"
           className="mx-auto mb-5 text-gray-700"
         />
       </div>

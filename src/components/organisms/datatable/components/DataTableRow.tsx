@@ -1,12 +1,13 @@
 import clsx from "clsx";
 import { Row } from "../models/row";
 import { flexRender } from "@tanstack/react-table";
-import { Icon } from "@/components/atoms";
+import { Icon, TableData, TableRow } from "@/components/atoms";
 
 export interface DataTableRowProps<TData> {
   row: Row<TData>;
   className?: string;
   canExpand?: boolean;
+  expand?: boolean;
   onRowClick?: (row: Row<TData>, event: React.MouseEvent) => void;
 }
 
@@ -16,7 +17,7 @@ const DataTableRow = <TData,>({
   onRowClick,
 }: DataTableRowProps<TData>) => {
   return (
-    <tr
+    <TableRow
       key={row.id}
       className={clsx("bg-accent-hover cursor-pointer", className, {
         "bg-accent": row.getIsSelected(),
@@ -24,12 +25,12 @@ const DataTableRow = <TData,>({
       onClick={(e) => onRowClick?.(row, e)}
     >
       {row.getVisibleCells().map((cell) => (
-        <td key={cell.id}>
+        <TableData key={cell.id}>
           {flexRender(cell.column.columnDef.cell, cell.getContext())}
-        </td>
+        </TableData>
       ))}
       {row.getCanExpand() && (
-        <td>
+        <TableData>
           <Icon
             icon={row.getIsExpanded() ? "do_not_disturb_on" : "add_circle"}
             onClick={(event) => {
@@ -37,9 +38,9 @@ const DataTableRow = <TData,>({
               row.toggleExpanded();
             }}
           />
-        </td>
+        </TableData>
       )}
-    </tr>
+    </TableRow>
   );
 };
 

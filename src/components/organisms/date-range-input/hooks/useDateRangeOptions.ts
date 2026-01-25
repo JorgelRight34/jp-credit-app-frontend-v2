@@ -1,7 +1,7 @@
-import { DateOption } from "@/models"
 import dayjs from "dayjs"
 import { useEffect, useState } from "react";
 import { RangeKeyDict } from "react-date-range";
+import { DateOption } from "../models/dateInput";
 
 const options: DateOption[] =
     [

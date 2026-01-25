@@ -2,7 +2,7 @@ import { useData } from "@/hooks/useData"
 import { projectionsCacheKey } from "../lib/constants"
 import { getProjectedIncomes } from "../services/financeClient"
 import { FinanceQuery } from "../models/financeQuery"
-import { dateToIsoString } from "@/utils/utils"
+import { dateToIsoString } from "@/utils"
 
 interface UseProjectedIncomes {
     query: FinanceQuery

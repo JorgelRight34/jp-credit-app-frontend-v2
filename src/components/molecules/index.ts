@@ -21,4 +21,4 @@ export * from "./menu/MenuItem";
 // -------------------------------------
 // Pagination
 // -------------------------------------
-export { default as Pagination } from "./pagination/Pagination";
+export * from "./pagination"

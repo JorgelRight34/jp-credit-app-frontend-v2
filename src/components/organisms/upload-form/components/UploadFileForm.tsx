@@ -40,7 +40,7 @@ const UploadFileForm = forwardRef(
       isDirty,
       reset,
       onChange: config.onChange,
-      submit: () => {},
+      submit: () => config.onSubmit,
       validate: () => true,
       setValue: () => {},
     }));

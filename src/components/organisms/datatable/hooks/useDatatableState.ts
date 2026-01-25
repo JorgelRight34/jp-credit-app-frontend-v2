@@ -2,17 +2,17 @@
 "use client"
 "use no memo"
 
-import { useUpdateEffect } from "@/hooks/useUpdateEffect";
 import {
+    ExpandedState,
     getCoreRowModel, getExpandedRowModel, getPaginationRowModel,
     getSortedRowModel, PaginationState, RowSelectionState,
     SortingState, useReactTable
 } from "@tanstack/react-table";
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { Column } from "../models/column";
-import { Row } from "../models/row";
 import { defaultPageSize } from "@/utils/constants";
 import { PageSize } from "../models/pageSize";
+import { getUpdaterOrValue } from "../lib/utils";
 
 export interface UseDatatableStateProps<TData> {
     data?: TData[];
@@ -20,40 +20,35 @@ export interface UseDatatableStateProps<TData> {
     columns: Column<TData>[];
     selectBehavior?: "single" | "multiple"
     allowExpand?: boolean;
-    navigateCallback?: (page: number) => void;
+    onPageChange?: (page: number) => void;
     onSortingChange?: (sort: SortingState) => void;
-    getInitialSelection?: (rows: Row<TData>[]) => Row<TData>[];
 }
 
-export const useDatatableState = <T,>({
-    pageSize,
+export const useDataTableState = <T,>({
+    pageSize = defaultPageSize,
     data,
     columns,
     selectBehavior = "multiple",
     allowExpand = false,
-    navigateCallback,
+    onPageChange,
     onSortingChange,
-    getInitialSelection
 }: UseDatatableStateProps<T>) => {
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
-        pageSize: pageSize ?? defaultPageSize,
+        pageSize: pageSize,
     });
-    const { pageIndex } = pagination;
 
     const [sorting, setSorting] = useState<SortingState>([]);
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-    const [expanded, setExpanded] = useState({});
-
-    const memoizedColumns = useMemo(() => columns, [columns]);
+    const [expanded, setExpanded] = useState<ExpandedState>({});
 
     const table = useReactTable({
         data: data ?? [],
-        columns: memoizedColumns,
-        manualPagination: !!navigateCallback,
-        getPaginationRowModel: navigateCallback ? undefined : getPaginationRowModel(),
+        columns,
+        manualPagination: !!onPageChange,
         state: { pagination, sorting, rowSelection, expanded },
         enableRowSelection: true,
+        getPaginationRowModel: onPageChange ? undefined : getPaginationRowModel(),
         onExpandedChange: (updater) => {
             const newExpandedState = typeof updater === 'function' ? updater(expanded) : updater;
             if (selectBehavior === "single") {
@@ -70,14 +65,21 @@ export const useDatatableState = <T,>({
             }
         },
         onRowSelectionChange: setRowSelection,
-        onPaginationChange: setPagination,
+        onPaginationChange: (updaterOrValue) => {
+            setPagination((prev) => {
+                const next = getUpdaterOrValue(updaterOrValue, prev)
+                onPageChange?.(next.pageIndex + 1);
+
+                return next;
+            });
+        },
         getExpandedRowModel: getExpandedRowModel(),
         getRowCanExpand: () => allowExpand,
         onSortingChange: (updaterOrValue) => {
             setSorting((prev) => {
-                const next = typeof updaterOrValue === "function" ? updaterOrValue(prev) : updaterOrValue;
-
+                const next = getUpdaterOrValue(updaterOrValue, prev)
                 onSortingChange?.(next);
+
                 return next;
             });
         },
@@ -85,22 +87,5 @@ export const useDatatableState = <T,>({
         getSortedRowModel: getSortedRowModel(),
     });
 
-    useEffect(() => {
-        if (!getInitialSelection) return;
-
-        const initialSelectedRows = getInitialSelection(table.getRowModel().rows);
-
-        if (initialSelectedRows) {
-            setRowSelection(prev => ({ ...prev, ...Object.fromEntries(initialSelectedRows.map(row => [row.id, true])) }))
-        }
-    }, [getInitialSelection, table])
-
-    useUpdateEffect(() => {
-        navigateCallback?.(pageIndex + 1);
-    }, [pageIndex]);
-
     return { table, rowSelection, setRowSelection };
 };
-
-
-useDatatableState.displayName = "useDatatableState"

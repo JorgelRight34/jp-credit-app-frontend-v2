@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { UseFormSetValue } from "react-hook-form";
 import { paymentFrequencyToMonths } from "@/features/transactions";
-import { FormProvider } from "@/components";
+import { FormField } from "@/components";
 
 
 const changeStartDateWhenPaymentFrequencyChanges = (
@@ -19,7 +19,7 @@ const changeStartDateWhenPaymentFrequencyChanges = (
     setValue("startDate", newDate.toISOString().split("T")[0]);
 };
 
-const loanFormSchema = z
+export const loanFormSchema = z
     .object({
         approvedAmount: z.preprocess(
             (val) => Number(val),
@@ -72,118 +72,115 @@ const loanFormSchema = z
     });
 
 
-export const loanFormProvider: FormProvider<LoanFormValues> = {
-    fields: [
-        {
-            name: "approvedAmount",
-            id: "approvedAmount",
-            label: "Monto Aprobado",
-            disabledOnEdit: false,
-            type: "currency",
+export const loanFormFields: FormField<LoanFormValues>[] = [
+    {
+        name: "approvedAmount",
+        id: "approvedAmount",
+        label: "Monto Aprobado",
+        disabledOnEdit: false,
+        type: "currency",
+    },
+    {
+        name: "disbursedAmount",
+        label: "Desembolsado",
+        id: "disbursedAmount",
+        type: "currency",
+        disabledOnEdit: false,
+        watchedValues: ["approvedAmount"],
+        changeWhen: (form, setValue) => {
+            if (!form.approvedAmount) return;
+            setValue("disbursedAmount", form.approvedAmount);
         },
-        {
-            name: "disbursedAmount",
-            label: "Desembolsado",
-            id: "disbursedAmount",
-            type: "currency",
-            disabledOnEdit: false,
-            watchedValues: ["approvedAmount"],
-            changeWhen: (form, setValue) => {
-                if (!form.approvedAmount) return;
-                setValue("disbursedAmount", form.approvedAmount);
-            },
-        },
-        {
-            name: "interestRate",
-            id: "interestRate",
-            label: "Tasa Interés Anual (1-100)%",
-            type: "percentage",
-            min: 0,
-            step: 0.001,
-        },
-        {
-            name: "startDate",
-            id: "startDate",
-            label: "Fecha de Inicio",
-            type: "date",
-            watchedValues: ["paymentFrequency"],
-            changeWhen: changeStartDateWhenPaymentFrequencyChanges,
-        },
-        {
-            name: "paymentFrequency",
-            id: "paymentFrequency",
-            label: "Frecuencia de Pago",
-            type: "select",
-            options: [
-                [12, "Mensual"],
-                [1, "Anual"],
-                [4, "Trimestral"],
-                [2, "Semestral"],
-            ],
-        },
-        {
-            name: "numberOfPayments",
-            label: "Número de Cuotas",
-            id: "numberOfPayments",
-            type: "number",
-            min: 0,
-            step: 0.001,
-        },
-        {
-            name: "deliveryDate",
-            id: "deliveryDate",
-            label: "Fecha de Entrega",
-            type: "date",
-        },
-        {
-            name: "clientId",
-            id: "clientId",
-            label: "Cliente",
-            type: "profile",
-        },
-        {
-            name: "loanOfficerId",
-            id: "loanOfficerId",
-            type: "profile",
-            label: "Agente",
-        },
-        {
-            name: "guarantorId",
-            id: "guarantorId",
-            type: "profile",
-            label: "Garante",
-        },
-        {
-            name: "status",
-            id: "status",
-            label: "Estado",
-            type: "select",
-            options: [
-                ["active", "Activo"],
-                ["inactive", "Inactivo"],
-                ["notified", "Notificado"],
-                ["punished", "Castigado"],
-                ["legal", "legal"],
-                ["judicial", "Judicial"],
-                ["agreement", "Acuerdo"],
-                ["overdue", "Atrasado"]
-            ],
-        },
-        {
-            name: "description",
-            id: "description",
-            label: "Descripción",
-            rows: 3,
-            type: "textarea",
-        },
-        {
-            name: "projectId",
-            id: "projectId",
-            label: "Proyecto",
-            type: "text",
-        },
-    ],
-    schema: loanFormSchema
-}
+    },
+    {
+        name: "interestRate",
+        id: "interestRate",
+        label: "Tasa Interés Anual (1-100)%",
+        type: "percentage",
+        min: 0,
+        step: 0.001,
+    },
+    {
+        name: "startDate",
+        id: "startDate",
+        label: "Fecha de Inicio",
+        type: "date",
+        watchedValues: ["paymentFrequency"],
+        changeWhen: changeStartDateWhenPaymentFrequencyChanges,
+    },
+    {
+        name: "paymentFrequency",
+        id: "paymentFrequency",
+        label: "Frecuencia de Pago",
+        type: "select",
+        options: [
+            [12, "Mensual"],
+            [1, "Anual"],
+            [4, "Trimestral"],
+            [2, "Semestral"],
+        ],
+    },
+    {
+        name: "numberOfPayments",
+        label: "Número de Cuotas",
+        id: "numberOfPayments",
+        type: "number",
+        min: 0,
+        step: 0.001,
+    },
+    {
+        name: "deliveryDate",
+        id: "deliveryDate",
+        label: "Fecha de Entrega",
+        type: "date",
+    },
+    {
+        name: "clientId",
+        id: "clientId",
+        label: "Cliente",
+        type: "profile",
+    },
+    {
+        name: "loanOfficerId",
+        id: "loanOfficerId",
+        type: "profile",
+        label: "Agente",
+    },
+    {
+        name: "guarantorId",
+        id: "guarantorId",
+        type: "profile",
+        label: "Garante",
+    },
+    {
+        name: "status",
+        id: "status",
+        label: "Estado",
+        type: "select",
+        options: [
+            ["active", "Activo"],
+            ["inactive", "Inactivo"],
+            ["notified", "Notificado"],
+            ["punished", "Castigado"],
+            ["legal", "legal"],
+            ["judicial", "Judicial"],
+            ["agreement", "Acuerdo"],
+            ["overdue", "Atrasado"]
+        ],
+    },
+    {
+        name: "description",
+        id: "description",
+        label: "Descripción",
+        rows: 3,
+        type: "textarea",
+    },
+    {
+        name: "projectId",
+        id: "projectId",
+        label: "Proyecto",
+        type: "text",
+    },
+]
 
 export type LoanFormValues = z.infer<typeof loanFormSchema>;

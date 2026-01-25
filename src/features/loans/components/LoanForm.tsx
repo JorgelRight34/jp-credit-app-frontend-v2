@@ -23,10 +23,10 @@ import { Compound } from "@/features/calculators";
 
 type LoanFormDefaultProps = EntityFormProps<LoanFormValues, Loan>;
 
-const LoanForm = ({ edit, ...props }: LoanFormDefaultProps) => {
-  const config = useLoanForm({ edit });
+const LoanForm = ({ edit, ...props }: LoanFormDefaultProps) => { 
   const { form, ref, onDirtyChange, ...methods } =
     useEntityForm<LoanFormValues>();
+  const config = useLoanForm({ edit, onDirtyChange });
   const [activeTab, setActiveTab] = useState<string | null>(null);
   const isSmallScreen = useMediaQuery(SMALL_SCREEN_BREAKPOINT);
 
@@ -36,7 +36,8 @@ const LoanForm = ({ edit, ...props }: LoanFormDefaultProps) => {
         <Tab eventKey="form" title="Formulario">
           <div className="flex">
             <div className="w-full md:w-7/12">
-              <FormBuilder<Loan, LoanFormValues>
+              <FormBuilder
+                form={config}
                 ref={ref}
                 layout={[
                   ["approvedAmount", "disbursedAmount", "interestRate"],
@@ -45,9 +46,6 @@ const LoanForm = ({ edit, ...props }: LoanFormDefaultProps) => {
                   ["clientId", "loanOfficerId", "guarantorId"],
                   ["description"],
                 ]}
-                onDirtyChange={onDirtyChange}
-                edit={edit}
-                {...config}
                 {...props}
               />
             </div>

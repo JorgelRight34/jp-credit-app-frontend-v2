@@ -1,7 +1,6 @@
 import FinanceQuerySearch from "../FinanceQuerySearch";
 import FinanceStatCard from "../FinanceStatCard";
 import { useProjectedIncomes } from "../../hooks/useProjectedIncomes";
-import { FinanceReport } from "../../models/financeReport";
 import ProjectionsGroupedDataTable from "./ProjectionsGroupedDataTable";
 import { TimeUnit } from "@/models";
 import FinanceSectionLayout from "../../layouts/FinanceSectionLayout/FinanceSectionLayout";
@@ -9,16 +8,13 @@ import { financialComponentTypesConfig } from "../../lib/constants";
 import { useProjectedIncomesByPeriod } from "../../hooks/useProjectedIncomesByPeriod";
 import { useEntitySection } from "@/components/organisms/entity-section";
 import { FinanceQuery } from "../../models/financeQuery";
-import { getTodayWithDaysFromNow } from "@/utils/utils";
 import { EntityDataTableLayout } from "@/components";
+import { getTodayWithDaysFromNow } from "@/utils";
 
 const today = new Date();
 
 const ProjectionSection = () => {
-  const [query, setQuery, defaultValues] = useEntitySection<
-    FinanceReport,
-    FinanceQuery
-  >({
+  const [query, setQuery, defaultValues] = useEntitySection<FinanceQuery>({
     start: today,
     end: getTodayWithDaysFromNow(120),
     timeUnit: TimeUnit.month,

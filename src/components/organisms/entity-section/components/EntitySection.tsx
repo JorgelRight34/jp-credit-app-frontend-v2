@@ -1,9 +1,23 @@
 import { Query } from "@/models/query";
 import { ReactNode } from "react";
-import { EntitySectionProps } from "../models/entitySectionProps";
-import { QuerySearchProps } from "../../entity-query-search";
-import { EntityDataTableProps, EntityDataTableLayout } from "../../datatable";
+import { QuerySearchInput, QuerySearchProps } from "../../entity-query-search";
 import { useEntitySection } from "../hooks/useEntitySection";
+import {
+  EntityDataTableLayout,
+  EntityDataTableProps,
+} from "../../entity-datatable";
+import { Params } from "@/models/params";
+
+export type EntitySectionProps<
+  TEntity,
+  TQuery extends Omit<Query, "id">,
+> = TQuery & {
+  reportTitle?: string;
+  navigate?: boolean;
+  table?: Partial<EntityDataTableProps<TEntity, TQuery>>;
+  search?: { extraOptions?: QuerySearchInput<TQuery>[] };
+  params?: Params;
+};
 
 export type BaseEntitySectionProps<
   TEntity,
@@ -19,19 +33,17 @@ const EntitySection = <TEntity, TQuery extends Query>({
   table,
   Search,
   DataTable,
-  ...query
+  ...defaultQuery
 }: BaseEntitySectionProps<TEntity, TQuery>) => {
-  const [controlledQuery, setQuery, defaultValues] = useEntitySection<
-    TEntity,
-    TQuery
-  >(query as TQuery);
+  const [controlledQuery, onSearchSubmit, defaultValues] =
+    useEntitySection<TQuery>(defaultQuery as TQuery);
 
   return (
     <EntityDataTableLayout>
       <EntityDataTableLayout.QuerySearch>
         <Search
           defaultValues={defaultValues}
-          onSubmit={setQuery}
+          onSubmit={onSearchSubmit}
           showIfSelectedProject={true}
           {...search}
         />

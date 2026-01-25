@@ -1,10 +1,11 @@
 import React, { ReactNode, useMemo } from "react";
-import "./dataTable.css";
 import clsx from "clsx";
+import "./dataTable.css";
+import { Table, TableBody, TableData, TableRow } from "@/components/atoms";
 
 interface InfoTableProps {
-  data: (string | number | ReactNode)[][];
-  footerRows?: (string | number | ReactNode)[][];
+  data: ReactNode[][];
+  footerRows?: ReactNode[][];
   className?: string;
 }
 
@@ -22,20 +23,15 @@ const InfoTable = ({
     () =>
       data.reduce(
         (acc, curr) => (acc.length > curr.length ? acc : curr),
-        data[0]
+        data[0],
       ),
-    [data]
+    [data],
   );
 
   return (
-    <div
-      className={clsx(
-        `table-wrapper px-0 w-full border rounded-3 shadow-sm`,
-        className
-      )}
-    >
-      <table className="data-table w-full">
-        <tbody>
+    <div className={clsx(`rounded-3 w-full border px-0 shadow-sm`, className)}>
+      <Table>
+        <TableBody>
           {data.map((row, i) => {
             const paddedRow = [
               ...row,
@@ -43,7 +39,7 @@ const InfoTable = ({
             ];
 
             return (
-              <tr key={i}>
+              <TableRow key={i}>
                 {paddedRow
                   .fill(null, row.length, longestRow.length)
                   .map((col, key) => (
@@ -51,25 +47,25 @@ const InfoTable = ({
                       {key % 2 == 0 ? <th>{col}</th> : <td>{col}</td>}{" "}
                     </React.Fragment>
                   ))}
-              </tr>
+              </TableRow>
             );
           })}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
       {footerRows.length > 0 && (
-        <table className="w-100">
-          <tbody>
+        <Table>
+          <TableBody>
             {footerRows.map((row, i) => (
-              <tr key={i}>
+              <TableData key={i}>
                 {row.map((col, key) => (
                   <React.Fragment key={key}>
                     {key % 2 == 0 ? <th>{col}</th> : <td>{col}</td>}
                   </React.Fragment>
                 ))}
-              </tr>
+              </TableData>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       )}
     </div>
   );

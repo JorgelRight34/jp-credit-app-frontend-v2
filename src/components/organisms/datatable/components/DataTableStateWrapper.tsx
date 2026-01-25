@@ -1,8 +1,8 @@
 import { Table } from "@tanstack/react-table";
 import {
-  useDatatableState,
+  useDataTableState,
   UseDatatableStateProps,
-} from "../hooks/useDatatableState";
+} from "../hooks/useDataTableState";
 import { ReactNode } from "react";
 
 export type DataTableRenderProps<T> = {
@@ -19,7 +19,7 @@ const DataTableStateWrapper = <T,>({
   render,
   ...config
 }: DataTableStateWrapperProps<T>) => {
-  const { table } = useDatatableState({
+  const { table } = useDataTableState({
     data,
     pageSize,
     ...config,

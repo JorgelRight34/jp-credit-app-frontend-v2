@@ -32,11 +32,7 @@ const IncomesSection = () => {
               />
             )}
             table={
-              <IncomesDataTable
-                data={report?.items}
-                query={config.query}
-                defaultQuery={config.defaultValues}
-              />
+              <IncomesDataTable data={report?.items} query={config.query} />
             }
           />
           <FinanceSectionLayout.Secondary

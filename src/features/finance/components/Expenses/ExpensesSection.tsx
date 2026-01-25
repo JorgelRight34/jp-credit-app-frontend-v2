@@ -30,11 +30,7 @@ const ExpensesSection = () => {
               />
             )}
             table={
-              <ExpensesDataTable
-                data={report?.items}
-                query={config.query}
-                defaultQuery={config.defaultValues}
-              />
+              <ExpensesDataTable data={report?.items} query={config.query} />
             }
           />
           <FinanceSectionLayout.Secondary

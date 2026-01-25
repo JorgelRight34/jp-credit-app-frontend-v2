@@ -10,16 +10,19 @@ import { FormInterceptor } from "../models/formInterceptor";
 import { ApiError } from "../models/apiError";
 import { SchemaType } from "../models/schemaType";
 import { invalidateTags } from "@/app/actions/cache/invalidate-tag";
+import { UseFormBuilderReturn } from "../models/UseFormBuilderReturn";
 
 export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
   schema?: SchemaType<TData>;
-  defaultValues?: Record<string, unknown> | undefined;
+  defaultValues?: Partial<TData>;
   resetValues?: boolean;
   cacheKeysToInvalidate?: CacheKey[];
   tagsToInvalidate?: string[];
   interceptors?: FormInterceptor<TData>[];
+  shouldEdit?: boolean;
   onSuccess?: (data: TReturn) => void;
   onSubmit: ((data: TData) => Promise<TReturn>);
+  onEdit?: ((data: TData) => Promise<TReturn>);
   onDirtyChange?: (val: boolean) => void;
 }
 
@@ -30,16 +33,23 @@ export const useFormBuilder = <T extends object, TData extends FieldValues, TRet
   tagsToInvalidate,
   resetValues = true,
   interceptors = [],
+  shouldEdit,
   onSubmit,
+  onEdit,
   onDirtyChange,
   onSuccess,
-}: UseFormBuilderProps<TData, TReturn>) => {
+}: UseFormBuilderProps<TData, TReturn>): UseFormBuilderReturn<TData> => {
   const [apiErrors, setApiErrors] = useState<string[]>([]);
   const dataClient = useDataClient();
 
   const { mutateAsync, isPending, isError } = useDataMutation({
     mutationFn: async (data: TData) => {
-      return await Promise.resolve(onSubmit(data));
+      if (shouldEdit && onEdit) {
+        const res = await onEdit(data);
+        reset(data)
+        return res;
+      }
+      return await onSubmit(data)
     },
     onSuccess: async (data) => {
       await Promise.all([
@@ -55,7 +65,7 @@ export const useFormBuilder = <T extends object, TData extends FieldValues, TRet
 
   const methods = useForm({
     resolver: schema ? zodResolver(schema) : undefined,
-    defaultValues: defaultValues,
+    defaultValues: defaultValues as Record<string, unknown>,
   });
 
   const {
@@ -154,7 +164,7 @@ export const useFormBuilder = <T extends object, TData extends FieldValues, TRet
       formErrors,
       apiErrors,
     },
-  };
+  } as UseFormBuilderReturn<TData>;
 
 };
 

@@ -1,27 +1,26 @@
 import { useCurrentProject } from "@/contexts/ProjectContext";
 import { Query } from "@/models/query";
 import clsx from "clsx";
-import {
-  useEntityDatatable,
-  UseEntityDatatableProps,
-} from "../hooks/useEntityDatatable";
-import DataTable from "./DataTable";
+import DataTable from "../../datatable/components/DataTable";
 import { CacheKey } from "@/models/cacheKey";
 import { PagedResponse } from "@/models";
 import { toAllTitleCase } from "@/utils/utils";
-import { useRouter } from "@/hooks/useRouter";
-import { Column } from "../models/column";
-import EmptyMessage from "./EmptyMessage";
+import { Column } from "../../datatable/models/column";
 import { Entity } from "@/models/entity";
 import { EntityDataTableProps } from "../models/entityDataTableProps";
 import ChooseProjectPrompt from "@/features/projects/components/ChooseProjectPrompt";
-import { LoadingSpinner } from "@/components";
+import {
+  EmptyMessage,
+  LoadingSpinner,
+  useEntityDataTable,
+  UseEntityDataTableProps,
+} from "@/components";
 
 type ThisEntityDataTableProps<
   T extends Entity,
   TQuery extends Query,
 > = EntityDataTableProps<T, TQuery> &
-  Partial<UseEntityDatatableProps<T, TQuery>> & {
+  Partial<UseEntityDataTableProps<T, TQuery>> & {
     columns: Column<T>[];
     cacheKey: CacheKey;
     title: string;
@@ -33,14 +32,12 @@ type ThisEntityDataTableProps<
 const EntityDataTable = <T extends Entity, TQuery extends Query>({
   validateProject = true,
   displayEmptyMessage,
-  retainDataWhileLoading,
   title,
   query,
   onRowClick,
   onExpand,
   ...props
 }: ThisEntityDataTableProps<T, TQuery>) => {
-  const router = useRouter();
   const { projectId } = useCurrentProject();
   const {
     data: { items, pageSize, totalItems },
@@ -49,8 +46,7 @@ const EntityDataTable = <T extends Entity, TQuery extends Query>({
     fetchPage,
     setLimit,
     sort,
-    getInitialSelection,
-  } = useEntityDatatable<T, TQuery>({
+  } = useEntityDataTable<T, TQuery>({
     query,
     ...props,
   });
@@ -62,8 +58,7 @@ const EntityDataTable = <T extends Entity, TQuery extends Query>({
       <ChooseProjectPrompt className="mx-auto w-full p-3 md:w-3/5 md:p-5" />
     );
 
-  if (isLoading && items.length === 0 && retainDataWhileLoading)
-    return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
@@ -74,11 +69,10 @@ const EntityDataTable = <T extends Entity, TQuery extends Query>({
           data={items}
           pageSize={pageSize}
           totalItems={totalItems}
-          navigateCallback={fetchPage}
+          onPageChange={fetchPage}
           onLimitChange={setLimit}
           onSortingChange={sort}
           columns={columns}
-          getInitialSelection={getInitialSelection}
           onExpand={onExpand}
         />
       </div>

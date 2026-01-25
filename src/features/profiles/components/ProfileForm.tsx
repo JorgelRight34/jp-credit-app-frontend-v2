@@ -14,6 +14,7 @@ import { useRef } from "react";
 import { ProfileRole } from "../models/profileRole";
 import { Profile } from "../models/profile";
 import useProfileForm from "../hooks/useProfileForm";
+import { useProfileFilesForm } from "../hooks/useProfileFilesForm";
 
 interface ProfileFormProps extends EntityFormProps<ProfileFormValues> {
   role?: ProfileRole;

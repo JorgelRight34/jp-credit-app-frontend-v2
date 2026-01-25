@@ -2,12 +2,12 @@
 import { FinanceReport } from "../models/financeReport";
 import { FinanceQuery } from "../models/financeQuery";
 import { useMemo } from "react";
-import { getDayTimeDifference } from "@/utils/utils";
 import { useFinancialReport } from "./useFinancialReport";
 import { addDays } from "date-fns";
 import { defaultFinanceQuery } from "../lib/constants";
 import { TransactionType } from "@/features/transactions";
 import { useEntitySection } from "@/components/organisms/entity-section";
+import { getDayTimeDifference } from "@/utils";
 
 interface UseFinancesSectionProps {
     type: TransactionType;
@@ -16,14 +16,11 @@ interface UseFinancesSectionProps {
 type UseFinanceSectionReturn = [
     FinanceReport | undefined,
     FinanceReport | undefined,
-    { onSubmit: (q: FinanceQuery) => Promise<FinanceQuery>, defaultValues: FinanceQuery, query: FinanceQuery }
+    { onSubmit: (q: FinanceQuery) => Promise<FinanceQuery>, query: FinanceQuery }
 ]
 
 export const useFinancesSection = ({ type }: UseFinancesSectionProps): UseFinanceSectionReturn => {
-    const [query, setQuery, defaultValues] = useEntitySection<
-        FinanceReport,
-        FinanceQuery
-    >(defaultFinanceQuery);
+    const [query, setQuery] = useEntitySection<FinanceQuery>(defaultFinanceQuery);
 
     const handleOnSubmit = async (q: FinanceQuery) => {
         Promise.resolve(setQuery(q))
@@ -47,5 +44,5 @@ export const useFinancesSection = ({ type }: UseFinancesSectionProps): UseFinanc
         type,
     });
 
-    return [report, lastReport, { onSubmit: handleOnSubmit, defaultValues, query }]
+    return [report, lastReport, { onSubmit: handleOnSubmit, query }]
 }

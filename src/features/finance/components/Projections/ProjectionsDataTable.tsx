@@ -44,7 +44,6 @@ const ProjectionsDataTable = ({
       loader={getProjections}
       cacheKey={projectionsCacheKey}
       displayEmptyMessage={true}
-      retainDataWhileLoading={false}
       query={query}
       infinitePagination={true}
       loadInitialSelection={false}

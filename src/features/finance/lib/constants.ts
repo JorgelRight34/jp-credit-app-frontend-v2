@@ -6,7 +6,7 @@ import { HeaderContext } from "@tanstack/react-table";
 import { Transaction } from "@/features/transactions";
 import { FinancialBreakdown } from "../models/financialBreakdown";
 import { Column, DateLabel, getFooterTotalAsCurrency } from "@/components";
-import { toCurrency } from "@/utils/utils";
+import { toCurrency } from "@/utils";
 
 export const incomesQueryKey = "incomes";
 

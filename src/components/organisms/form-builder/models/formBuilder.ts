@@ -1,22 +1,15 @@
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form";
-import { FormConfig } from "./formConfig";
-import { FormGrid } from "./formGrid";
 import { FormLayout } from "./formLayout";
-import { FormInterceptor } from "./formInterceptor";
+import { UseFormBuilderReturn } from "./UseFormBuilderReturn";
+import { FormField } from "./formField";
+import { FormGrid } from "./formGrid";
 
-export interface FormBuilderProps<T extends object, TData extends FieldValues, TReturn = T> {
-    config: FormConfig<TData>;
+export interface FormBuilderProps<T extends object, TData extends FieldValues> {
+    form: UseFormBuilderReturn<TData>;
+    fields: FormField<TData>[];
+    grid?: FormGrid;
     layout?: FormLayout<TData>;
     edit?: T;
-    defaultValues?: Partial<TData>;
-    grid?: FormGrid;
-    interceptors?: FormInterceptor<TData>[]
-    onDirtyChange?: (val: boolean) => void;
-    onWatch?: (values: FieldValues) => void;
-    onDelete?: () => void;
-    onSubmit: (data: TData) => Promise<TReturn>;
-    onEdit?: (data: TData) => Promise<TReturn>;
-    onSuccess?: (data: TReturn) => void;
 }
 
 export interface FormBuilderRef<T extends FieldValues = FieldValues> {
@@ -29,15 +22,9 @@ export interface FormBuilderRef<T extends FieldValues = FieldValues> {
 }
 
 export type FormBuilderComponent = {
-    <T extends object, TData extends FieldValues = FieldValues, TReturn = T>(
-        props: FormBuilderProps<T, TData, TReturn> & { ref?: React.Ref<FormBuilderRef> }
+    <T extends object, TData extends FieldValues = FieldValues>(
+        props: FormBuilderProps<T, TData> & { ref?: React.Ref<FormBuilderRef> }
     ): React.ReactElement;
 
     displayName?: string;
 };
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-export type UseEntityModuleFormProps<TEntity, _FormValues> = {
-    edit?: TEntity;
-    onDirtyChange?: (isDirty: boolean) => void;
-}
