@@ -14,7 +14,6 @@ const EntityLayoutOptionsContainer = ({
 }: EntityLayoutOptionsContainerProps) => {
   return (
     <>
-      {/* Options */}
       <div className="hidden items-center gap-3 md:flex">
         {options.map((option, index) => (
           <EntityLayoutOption key={index} option={option} />
