@@ -1,11 +1,4 @@
-import countries from "i18n-iso-countries";
-import "i18n-iso-countries/langs/es.json";
-import esLocale from "i18n-iso-countries/langs/es.json";
-import { PagedResponse } from "../../models/pagedResponse";
-import { IconName } from "@/models";
-import { Compound } from "@/features/calculators";
-
-countries.registerLocale(esLocale);
+import type { PagedResponse } from "@/models";
 
 export const FORM_PAGE_TITLES = {
   create: (title: string) => "Crear" + " " + title,
@@ -22,11 +15,6 @@ export const IS_DEV_MODE = !(process.env.VITE_MODE === "PROD")
 export const ND = "N/D"
 
 export const SMALL_SCREEN_BREAKPOINT = 500;
-
-export const breadcrumbIcons: Record<string, IconName> = {
-  create: "add",
-  edit: "edit"
-}
 
 export const PERMISSIONS_ENDPOINT_SUFFIX = "permissions"
 
@@ -53,8 +41,6 @@ export const secondaryColor = "#9c6334";
 export const PROJECT_KEY = "project";
 export const ACCESS_TOKEN = "accessToken";
 
-export const countryTraductions = countries;
-
 export const PROJECT_URL_PARAM = "projectId";
 
 export const defaultPageSize = 20;
@@ -72,17 +58,6 @@ export const getMonthYearAfterAddingDays = (
   };
 
   return dateCopy.toLocaleDateString(undefined, options); // Format in Spanish
-};
-
-export const COMPOUND_VALUES: Record<Compound, number> = {
-  [Compound.Annually]: 1,
-  [Compound.SemiAnnually]: 2,
-  [Compound.Quarterly]: 4,
-  [Compound.Monthly]: 12,
-  [Compound.SemiMonthly]: 24,
-  [Compound.Biweekly]: 26,
-  [Compound.Weekly]: 52,
-  [Compound.Daily]: 365,
 };
 
 export const COMPOUND_OPTIONS = [

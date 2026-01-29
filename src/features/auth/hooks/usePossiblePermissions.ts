@@ -1,3 +1,4 @@
+/*
 import { getAllPosiblePermissions } from "../services/userClient";
 import { useMemo } from "react";
 import { useData } from "@/hooks/useData";
@@ -54,3 +55,9 @@ const usePossiblePermissions = () => {
 };
 
 export default usePossiblePermissions;
+*/
+export const Default = () => {
+  return {}
+}
+
+export default Default

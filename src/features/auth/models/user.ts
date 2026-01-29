@@ -1,4 +1,4 @@
-import { ApiFile } from "@/models";
+import type { FileModel } from "@/models/fileModel";
 
 
 export interface User {
@@ -8,6 +8,6 @@ export interface User {
   lastName: string;
   photoUrl?: string;
   email: string;
-  photo?: ApiFile;
+  photo?: FileModel;
   createdAt: string;
 }

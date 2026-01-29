@@ -11,8 +11,8 @@ const Modal = ({
   showCloseBtn = true,
   width = '50dvw',
   height = '95dvh',
-  icon,
   className,
+  icon,
   onHide,
 }: ModalProps & React.PropsWithChildren) => {
   const [hasMountedOnce, setHasMountedOnce] = useState(show)

@@ -1,4 +1,4 @@
-import { ProfileRole } from "@/features/profiles";
+import { ProfileRole } from "bk/profiles";
 
 export type Query = {
   id?: number;

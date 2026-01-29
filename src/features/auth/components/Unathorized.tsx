@@ -1,5 +1,11 @@
-import AccentBtn from "@/components/ui/AccentBtn";
-import SecondaryBtn from "@/components/ui/SecondaryBtn";
+import {
+  AccentBtn,
+  ArrowBackIcon,
+  BigTitle,
+  HomeIcon,
+  Paragraph,
+  SecondaryBtn,
+} from '@/components'
 
 const Unauthorized = () => {
   return (
@@ -30,37 +36,35 @@ const Unauthorized = () => {
         </div>
 
         {/* Main Heading */}
-        <h1 className="mb-4 text-3xl font-bold text-gray-900">
+        <BigTitle className="mb-4 text-3xl font-bold text-gray-900">
           Acceso Denegado
-        </h1>
+        </BigTitle>
 
         {/* Description */}
-        <p className="mb-4 leading-relaxed text-gray-600">
+        <Paragraph className="eading-relaxed ">
           No tienes permiso para acceder a este recurso. Por favor contacte a su
           administrador o regresar a una página a la que tenga acceso.
-        </p>
-
+        </Paragraph>
         {/* Action Buttons */}
         <div className="space-y-3">
           <AccentBtn
             onClick={() => window.history.back()}
             className="mb-3 w-full rounded-lg"
-            icon={"arrow_back"}
+            icon={ArrowBackIcon}
           >
             <span className="text-lg">Ir Atrás</span>
           </AccentBtn>
-
           <SecondaryBtn
-            onClick={() => (window.location.href = "/")}
+            onClick={() => (window.location.href = '/')}
             className="w-full rounded-lg !bg-white"
-            icon={"home"}
+            icon={HomeIcon}
           >
             <span className="text-lg">Volver al Inicio</span>
           </SecondaryBtn>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Unauthorized;
+export default Unauthorized

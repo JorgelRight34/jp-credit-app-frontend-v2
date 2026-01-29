@@ -3,7 +3,7 @@
 import { createContext, useContext, useState } from 'react'
 import { PROJECT_KEY } from '../lib/utils/constants'
 import { useAuth } from './auth-context'
-import { Project, projectsClient, projectsQueryKey } from '@/features/projects'
+import { Project, projectsClient, projectsQueryKey } from 'bk/projects'
 import { useData } from '@/hooks/useData'
 
 type ProjectContextType = {

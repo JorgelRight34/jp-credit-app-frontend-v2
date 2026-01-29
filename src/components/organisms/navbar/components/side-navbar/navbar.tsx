@@ -18,9 +18,8 @@ import {
 import NavbarLinksContainer from '../navbar-link/navbar-links-container'
 import NavbarHeader from './navbar-header'
 import NavbarFooter from './navbar-footer'
-import NavbarSearch from './NavbarSearch'
+import NavbarSearch from './navbar-search'
 import type { NavItem } from '../../models/navItem'
-import logo from '@/public/horizontal-logo.png'
 import { ArrowBackIcon, Icon } from '@/components/atoms'
 
 const options = [
@@ -42,12 +41,6 @@ interface NavbarProps {
   onSelect?: (link: NavItem) => void
 }
 
-/**
- * A navbar component that displays a list of navigation options and a logout button.
- * It uses React Router for navigation and Redux for state management.
- * @component
- * @returns {JSX.Element} The rendered navbar component.
- */
 const Navbar = ({ onSelect }: NavbarProps) => {
   const [clickedNavOption, setClickedNavOption] = useState<NavItem | null>(null)
   const [searchResults, setSearchResults] = useState<Array<NavItem>>([])
@@ -60,7 +53,11 @@ const Navbar = ({ onSelect }: NavbarProps) => {
   return (
     <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-white shadow-sm">
       <div className="border-bottom flex-shrink-0">
-        <NavbarHeader src={logo} alt="logo" className="mb-0" />
+        <NavbarHeader
+          src="/horizontal-logo.png?url"
+          alt="logo"
+          className="mb-0"
+        />
       </div>
       <div className="flex-shrink-0 p-3">
         <NavbarSearch

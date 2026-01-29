@@ -1,3 +1,4 @@
+/*
 import { QuerySearchInput, QuerySearchProps } from "@/models";
 import { UserQuery } from "../models/userQuery";
 import EntityQuerySearch from "@/components/EntityQuerySearch/components/EntityQuerySearch";
@@ -27,3 +28,7 @@ const UserQuerySearch = ({ ...props }: UserQuerySearchProps) => {
 };
 
 export default UserQuerySearch;
+*/
+const Default = () => <></>
+
+export default Default

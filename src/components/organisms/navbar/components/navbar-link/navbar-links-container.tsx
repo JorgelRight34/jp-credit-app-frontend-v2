@@ -24,11 +24,10 @@ const NavbarLinksContainer = ({
       }}
     >
       {children}
-      <div className="flex flex-col px-3 pt-3">
+      <div className="flex flex-col gap-5 px-3 pt-3">
         {options.map((option, index) => (
           <NavbarLink
             key={index}
-            className="mb-3"
             onExpand={() => onExpand(option)}
             option={option}
             {...props}

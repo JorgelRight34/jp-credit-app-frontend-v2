@@ -1,3 +1,4 @@
+/*
 import { useFileForm } from '../hooks/useFileForm'
 import { EntityForm } from '../../../../../bk/form-builder'
 import type { UseEntityModuleFormProps } from '../../../../../bk/form-builder'
@@ -18,3 +19,8 @@ const FileForm = ({ onSubmit, ...props }: FileFormProps) => {
 }
 
 export default FileForm
+*/
+
+const Hola = () => 'div'
+
+export default Hola

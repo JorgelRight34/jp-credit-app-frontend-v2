@@ -1,5 +1,6 @@
-import { CacheKey } from "@/models";
-import { useMutation, UseMutationOptions, MutationFunction } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import type { MutationFunction, UseMutationOptions } from "@tanstack/react-query";
+import type { CacheKey } from "@/models";
 
 export interface UseDataMutationProps<TData, TVariables>
     extends Omit<

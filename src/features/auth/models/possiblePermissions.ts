@@ -1,5 +1,5 @@
-import { ModulePermission } from "./modulePermission";
+import type { ModulePermission } from "./modulePermission";
 
 export interface PossiblePermissions {
-  possiblePermissions: ModulePermission[];
+  possiblePermissions: Array<ModulePermission>;
 }

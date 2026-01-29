@@ -1,3 +1,8 @@
+const Default = () => <></>
+
+export default Default
+
+/*
 import { EntityFormProps, FormBuilder } from '@/components'
 import usePermissionsForm from '../../hooks/usePermissionsForm'
 import { User } from '../../models/user'
@@ -19,3 +24,4 @@ const PermissionsForm = ({
 }
 
 export default PermissionsForm
+*/

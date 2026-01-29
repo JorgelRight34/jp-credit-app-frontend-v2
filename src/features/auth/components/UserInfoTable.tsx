@@ -1,19 +1,19 @@
-import { InfoTable } from "@/components/DataTable";
-import { User } from "../models/user";
+import type { User } from '../models/user'
+import { KeyValueTable } from '@/components'
 
 interface UserInfoTableProps {
-  user: User;
+  user: User
 }
 
 const UserInfoTable = ({ user }: UserInfoTableProps) => {
   return (
-    <InfoTable
+    <KeyValueTable
       data={[
-        ["Usuario", user.username, "Id", user.id, "Correo", user.email],
-        ["Nombres", user.firstName, "Apellidos", user.lastName],
+        ['Usuario', user.username, 'Id', user.id, 'Correo', user.email],
+        ['Nombres', user.firstName, 'Apellidos', user.lastName],
       ]}
     />
-  );
-};
+  )
+}
 
-export default UserInfoTable;
+export default UserInfoTable

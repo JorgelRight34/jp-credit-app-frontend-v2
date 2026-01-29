@@ -14,8 +14,6 @@ interface KeyValueTableProps {
 
 /**
  * KeyValueTable component displays a table with alternating header and data cells.
- * @param {KeyValueTableProps} props - Props containing the data to be displayed in the table.
- * @returns {JSX.Element} - A JSX element representing the KeyValueTable.
  */
 const KeyValueTable = ({
   data,

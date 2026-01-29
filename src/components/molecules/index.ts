@@ -9,6 +9,7 @@ export { default as Carousel } from "./carousel/carousel"
 export { default as LightBox } from "./light-box/lightbox"
 export { default as ImageWithLightBox } from "./light-box/image-lightbox"
 export { default as FinancialCard } from "./financial-card/financial-card"
+export { default as NotFound } from "./pages/not-found"
 
 // -------------------------------------
 

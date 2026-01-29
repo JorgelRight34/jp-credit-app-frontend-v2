@@ -17,17 +17,17 @@ const Button = ({
   as: Component = 'button',
   children,
   className,
-  icon,
   type = 'button',
   disabled,
   labelClassName,
+  icon,
   onClick,
   ...props
 }: ButtonProps) => {
   return (
     <Component
       className={clsx(
-        `flex inline items-center justify-center !rounded-xl p-2 text-white shadow-sm`,
+        `flex cursor-pointer w-full inline items-center justify-center !rounded-xl p-2 text-white shadow-sm`,
         className,
         { '!pointer-events-none !cursor-not-allowed !opacity-50': disabled },
       )}
@@ -40,7 +40,7 @@ const Button = ({
       {icon ? (
         <Icon
           icon={icon}
-          wrapperClassName="justify-center"
+          wrapperClassName="justify-center !bg-red-500"
           label={children}
           labelClassName={labelClassName}
         />

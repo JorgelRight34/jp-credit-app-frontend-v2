@@ -1,16 +1,22 @@
-"use client"
-
 import { useState } from "react";
+import type { FileUploads } from "./useUploadFilesInput";
+import type { FileAccept } from "../models/fileAccept";
+import type { FileModel } from "@/models/fileModel";
+import type { FileFormFieldValues } from "../lib/form";
 import { useDataMutation } from "@/hooks/useMutate";
-import { FileUploads } from "./useUploadFilesInput";
-import { FileInputConfig } from "../../../../../bk/form-builder/models/fileInputConfig";
 
-export type UseUploadFileFormProps<T = object> = FileInputConfig<T> & {
+export type UseUploadFileFormProps<T = object> = {
+    initialFiles?: Array<FileModel>;
+    filesMaxLength?: number;
+    accept: FileAccept
     defaultData?: T;
+    onUpload: (files: Array<File>, data: Partial<T>) => Promise<unknown>;
+    onDelete?: (files: Array<FileModel>, data: Partial<T>) => Promise<void>;
+    onCreate?: (fileData: Array<FileFormFieldValues>, data: Partial<T>) => Promise<void>;
 };
 
 export const useUploadFileForm = <T = object>(
-    { defaultData, initialFiles, filesMaxLength, onUpload, onDelete, onCreate }: UseUploadFileFormProps<T>
+    { initialFiles, filesMaxLength, onUpload, onDelete, onCreate }: UseUploadFileFormProps<T>
 ) => {
     const [fileUploads, setFileUploads] = useState<FileUploads>({
         loaded: initialFiles ?? [],
@@ -22,13 +28,11 @@ export const useUploadFileForm = <T = object>(
     })
     const [isDirty, setIsDirty] = useState(false);
 
-    const handleSubmit = async (data?: T) => {
-        const response = data ?? defaultData ?? {} as T;
-
+    const handleSubmit = async (data: T) => {
         await Promise.all([
-            processUploads(response),
-            processDeletions(response),
-            processCreations(response)
+            processUploads(data),
+            processDeletions(data),
+            processCreations(data)
         ])
 
         setFileUploads(prev => ({ ...prev, deleted: [] }))
@@ -38,10 +42,7 @@ export const useUploadFileForm = <T = object>(
         mutationFn: handleSubmit
     })
 
-
     const processUploads = async (response: T) => {
-        if (!onUpload) return;
-
         const filesToUpload = fileUploads.uploaded;
         if (filesToUpload.length === 0) return;
 
@@ -84,7 +85,7 @@ export const useUploadFileForm = <T = object>(
         isPending,
         isDirty,
         onDirtyChange: setIsDirty,
-        onSubmit: (data?: T) => mutateAsync(data),
+        onSubmit: mutateAsync,
         onChange: setFileUploads,
         reset: init
     }

@@ -1,11 +1,11 @@
-
+/*
 "use client"
 
 import { editPermission } from "../services/userClient";
 import { toastService } from "@/lib/services";
 import { useDataClient } from "@/hooks/useDataClient";
 import { NO_PERMISSION } from "../lib/form";
-import { profilesQueryKey } from "@/features/profiles";
+import { profilesQueryKey } from "bk/profiles";
 import { FieldValues } from "react-hook-form";
 
 interface UseAddProfilePermissionsProps {
@@ -49,3 +49,9 @@ export const useAddProfilePermissions = ({ claims = [], username }: UseAddProfil
 
   return { handleAddProfilePermissions };
 };
+*/
+export const Default = () => {
+  return {}
+}
+
+export default Default

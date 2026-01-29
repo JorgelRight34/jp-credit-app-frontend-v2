@@ -1,8 +1,8 @@
 export interface ModulePermission {
   name: string;
   formName: string;
-  claims: {
+  claims: Array<{
     name: string;
     label: string;
-  }[];
+  }>;
 }

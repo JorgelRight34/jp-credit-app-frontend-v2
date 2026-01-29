@@ -1,71 +1,27 @@
-import { createContext, PropsWithChildren, useContext, useState } from 'react'
-import { ACCESS_TOKEN } from '../lib/utils/constants'
-import {
-  UseMutateAsyncFunction,
-  useMutation,
-  useQuery,
-} from '@tanstack/react-query'
-import {
-  getMe,
-  login as handleLogin,
-} from '../features/auth/services/authService'
-import { User, LoginFormValues } from '@/features/auth'
+import { createContext, useContext } from 'react'
+import type { PropsWithChildren } from 'react'
+import type { User } from '@/features/auth'
+import { ACCESS_TOKEN } from '@/lib/utils'
 
 type AuthContextType = {
   user?: User | null
-  isLoading: boolean
-  isError: boolean
-  login: UseMutateAsyncFunction<
-    { user: User; token: string },
-    Error,
-    LoginFormValues,
-    unknown
-  >
-  logout: () => void
-  loadUser: () => void
+  logout: () => Promise<void>
 }
 
-type AuthProviderProps = PropsWithChildren
+type AuthProviderProps = PropsWithChildren & {
+  user: User
+}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-  const {
-    data: currentUser,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ['me'],
-    queryFn: getMe,
-    enabled: isAuthenticated,
-  })
-
-  const { mutateAsync: login } = useMutation({
-    mutationFn: handleLogin,
-    onSuccess: ({ token }) => {
-      localStorage.setItem(ACCESS_TOKEN, token)
-      setIsAuthenticated(true)
-    },
-  })
-
-  const logout = () => {
+export const AuthProvider = ({ user, children }: AuthProviderProps) => {
+  const logout = async () => {
     localStorage.removeItem(ACCESS_TOKEN)
     window.location.href = '/login'
   }
 
   return (
-    <AuthContext.Provider
-      value={{
-        user: currentUser,
-        isLoading,
-        isError,
-        login,
-        logout,
-        loadUser: () => setIsAuthenticated(true),
-      }}
-    >
+    <AuthContext.Provider value={{ user, logout }}>
       {children}
     </AuthContext.Provider>
   )

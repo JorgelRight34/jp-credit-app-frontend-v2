@@ -7,15 +7,6 @@
 // -------------------------------------
 export * from "./datatable";
 
-
-// -------------------------------------
-// Entity Search Input
-// -------------------------------------
-export * from "./entity-search-input/EntitySearchInput";
-export * from "./entity-search-input/entitySearchInputProps";
-export * from "./entity-search-input/entitySearchInputService";
-export * from "./entity-search-input/useEntitySearchInput";
-
 // -------------------------------------
 // Entity Section (uses its own index.ts)
 // -------------------------------------
@@ -23,7 +14,7 @@ export * from "./entity-search-input/useEntitySearchInput";
 // -------------------------------------
 // Form Builder (uses its own index.ts)
 // -------------------------------------
-export * from "../../../bk/form-builder";
+export * from "./form"
 
 // -------------------------------------
 // Modal (uses its own index.ts)
@@ -47,6 +38,5 @@ export * from "./tabs";
 // -------------------------------------
 export * from "./upload-form";
 
-export * from "../../../bk/form-builder"
 
 export * from "./table"

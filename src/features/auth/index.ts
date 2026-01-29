@@ -21,8 +21,6 @@ export * from "./hooks/useChangePassword";
 export * from "./hooks/useLoginForm";
 export { default as usePermissionsForm } from "./hooks/usePermissionsForm";
 export { default as usePossiblePermissions } from "./hooks/usePossiblePermissions";
-export * from "./hooks/useUser";
-export { useUserForm } from "./hooks/useUserForm";
 export { default as useUserPermissions } from "./hooks/useUserPermissions";
 
 // ----------------------

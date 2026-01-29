@@ -3,12 +3,12 @@ import type { IconName } from "@/components/atoms/icon/iconName";
 
 export interface LayoutOption {
     title?: string;
-    icon?: IconName;
-    onClick?: () => void;
     href?: string;
     disabled?: boolean;
     variation?: "secondary" | "accent" | "light"
     show?: boolean;
     tooltip?: string;
+    icon?: IconName;
+    onClick?: () => void;
     component: ElementType;
 } 

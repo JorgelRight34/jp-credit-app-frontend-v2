@@ -7,16 +7,16 @@ import { useDataMutation } from '@/hooks/useMutate'
 interface FormSubmitBtnProps<T extends FieldValues> {
   form?: UseFormBuilderReturn<T>
   text?: string
-  icon?: IconName
   isDirty?: boolean
+  icon?: IconName
   onSubmit?: (...args: Array<unknown>) => unknown
 }
 
 const FormSubmitBtn = <T extends FieldValues>({
   form,
   text = 'Ok',
-  icon = SendIcon,
   isDirty,
+  icon = SendIcon,
   onSubmit,
 }: FormSubmitBtnProps<T>) => {
   const { mutateAsync } = useDataMutation({

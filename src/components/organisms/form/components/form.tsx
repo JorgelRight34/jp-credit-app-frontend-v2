@@ -9,14 +9,12 @@ import type { ReactElement } from 'react'
 type FormProps<T extends FieldValues> = {
   children: React.ReactNode
   form: UseFormBuilderReturn<T>
-  footer?: React.ReactNode
   className?: string
 }
 
 function InnerForm<T extends FieldValues>(
   {
     children,
-    footer,
     className = 'h-full',
     form: { form, validation, state },
   }: FormProps<T>,
@@ -39,7 +37,6 @@ function InnerForm<T extends FieldValues>(
       <FormProvider {...form.methods}>
         <aside className="flex-1 overflow-y-auto">{children}</aside>
         <FormErrors validation={validation} />
-        {footer}
       </FormProvider>
     </form>
   )

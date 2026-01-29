@@ -1,5 +1,5 @@
+import type { FileFormFieldValues } from "../lib/form";
 import api from "@/lib/services/api"
-import { FileFormFieldValues } from "../lib/form";
 
 export const uploadFileTo = async (url: string, data: FormData) => {
     const response = await api.post(url, data)

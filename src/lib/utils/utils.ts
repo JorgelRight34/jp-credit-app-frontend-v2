@@ -5,8 +5,6 @@ import {
     imageExtensions,
 } from "./constants";
 import type { Column } from "@/components";
-import type { Profile } from "@/features/profiles";
-import type { User } from "@/features/auth";
 
 export const getProjectId = () => {
     return localStorage.getItem(PROJECT_KEY)
@@ -35,14 +33,14 @@ export const getRandomName = () => {
     return `${first} ${last}`;
 };
 
-export const getFullName = (user?: Profile | User | null): string => {
+export const getFullName = (user?: { firstName: string; lastName: string; }): string => {
     if (TEST) return getRandomName();
     if (!user) return "";
 
     return `${user?.firstName} ${user?.lastName}`;
 };
 
-export const getFirstAndLastName = (user?: User | Profile): string => {
+export const getFirstAndLastName = (user?: { firstName: string; lastName: string; }): string => {
     if (TEST) return getRandomName();
     if (!user) return "";
     const firstName = user.firstName.split(" ")[0];

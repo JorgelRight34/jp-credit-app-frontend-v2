@@ -6,7 +6,7 @@ import Tab from './tab'
 import type { UseTabsProps } from '../hooks/useTabs'
 import type { ReactNode } from 'react'
 import 'react-tabs/style/react-tabs.css'
-import './tabs.css'
+// import './tabs.css'
 import type { VariationKey } from '../lib/variations'
 
 interface EntityTabsProps extends UseTabsProps {

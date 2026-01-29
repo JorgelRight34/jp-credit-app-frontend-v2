@@ -1,5 +1,5 @@
 import { FileModel } from "@/models/fileModel";
-import { DatatableFile } from "../models/datatableFile";
+import { DatatableFile } from "../models/tableFile";
 import { FileFormFieldValues } from "./form";
 import { FormInterceptor } from "../../../../../bk/form-builder";
 

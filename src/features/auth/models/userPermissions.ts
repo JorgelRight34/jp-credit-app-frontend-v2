@@ -1,4 +1,4 @@
 export interface UserPermissions {
-  claims: string[];
-  roles: string[];
+  claims: Array<string>;
+  roles: Array<string>;
 }

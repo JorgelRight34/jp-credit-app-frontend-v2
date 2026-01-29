@@ -9,6 +9,7 @@ import "./styles/dataTable.css";
 export { default as Table } from "./components/table-builder";
 export { default as TableContainer } from "./components/table";
 export { default as TableStateWrapper } from "./components/table-state-wrapper";
+export { default as KeyValueTable } from "./components/key-value-table"
 
 // ==============================
 // Head / Header

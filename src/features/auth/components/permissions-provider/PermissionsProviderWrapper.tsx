@@ -1,7 +1,8 @@
+/*
 import { PermissionsProvider } from '@/models/permissionsProvider'
 import { ReactNode } from 'react'
 import { ModulePermissions } from '../../models/modulePermissions'
-import Unauthorized from '../Unathorized'
+import Unauthorized from '../unathorized'
 
 export interface PermissionsProviderWrapperProps {
   provider?: PermissionsProvider
@@ -33,3 +34,11 @@ const PermissionsProviderWrapper = async ({
 }
 
 export default PermissionsProviderWrapper
+*/
+export interface PermissionsProviderWrapperProps {}
+
+const Default = () => {
+  return 'permissions'
+}
+
+export default Default

@@ -1,3 +1,4 @@
+/*
 import { lazy } from "react";
 import { Routes } from "../../models/route";
 import { usersQueryKey } from "./lib/constants";
@@ -56,3 +57,4 @@ const authRoutes: Routes = [
 ]
 
 export default authRoutes
+*/

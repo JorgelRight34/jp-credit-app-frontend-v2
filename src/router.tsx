@@ -4,6 +4,7 @@ import * as TanstackQuery from './contexts/root-provider'
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
+import { NotFound } from './components'
 
 // Create a new router instance
 export const getRouter = () => {
@@ -13,8 +14,9 @@ export const getRouter = () => {
     routeTree,
     context: {
       ...rqContext,
+      user: null,
     },
-
+    defaultNotFoundComponent: NotFound,
     defaultPreload: 'intent',
   })
 

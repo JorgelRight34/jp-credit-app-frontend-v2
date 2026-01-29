@@ -1,14 +1,14 @@
-import DataTableOption from '../../datatable/components/data-table-option'
+import { TableOptionCell } from '../../table'
 import FileExplorer from './file-explorer'
 import type { FileUploads } from '../hooks/useUploadFilesInput'
-import type { DatatableFile } from '../models/datatableFile'
+import type { TableFile } from '../models/tableFile'
 import { MediumTitle } from '@/components/atoms'
 
 interface FileFormExplorerTabContentProps {
   createdLabel: string
   deletedLabel: string
-  created: Array<DatatableFile>
-  deleted: Array<DatatableFile>
+  created: Array<TableFile>
+  deleted: Array<TableFile>
   onRemove: (index: number, key: keyof FileUploads) => void
   onRecover: (index: number, key: keyof FileUploads) => void
 }
@@ -32,11 +32,11 @@ const FileFormExplorerTabPanel = ({
             {
               header: 'Opciones',
               cell: ({ row }) => (
-                <DataTableOption
+                <TableOptionCell
                   onClick={() => onRemove(row.index, row.original.key)}
                 >
                   Remover
-                </DataTableOption>
+                </TableOptionCell>
               ),
             },
           ]}
@@ -53,11 +53,11 @@ const FileFormExplorerTabPanel = ({
             {
               header: 'Opciones',
               cell: ({ row }) => (
-                <DataTableOption
+                <TableOptionCell
                   onClick={() => onRecover(row.index, row.original.key)}
                 >
                   Recuperar
-                </DataTableOption>
+                </TableOptionCell>
               ),
             },
           ]}

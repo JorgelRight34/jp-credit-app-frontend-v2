@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { useEffect, useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm as useRHFForm } from "react-hook-form";
 import type { SchemaType } from "../models/schemaType";
 import type { ApiError } from "../models/apiError";
 import type { UseFormBuilderReturn } from "../models/useFormBuilderReturn";
@@ -21,7 +21,7 @@ export interface UseFormBuilderProps<TData, TReturn> {
     tagsToInvalidate?: Array<string>;
     shouldEdit?: boolean;
     interceptors?: Array<FormInterceptor<TData>>;
-    toastMessage?: string;
+    toastMessage?: (data: TReturn) => string;
     onSuccess?: (data: TReturn) => void;
     onDelete?: () => void;
     onSubmit: ((data: TData) => Promise<TReturn>);
@@ -29,7 +29,7 @@ export interface UseFormBuilderProps<TData, TReturn> {
     onDirtyChange?: (val: boolean) => void;
 }
 
-export const useFormBuilder = <T extends object, TData extends FieldValues, TReturn = T>({
+export const useForm = <T extends object, TData extends FieldValues, TReturn = T>({
     schema,
     shouldEdit,
     defaultValues,
@@ -58,7 +58,7 @@ export const useFormBuilder = <T extends object, TData extends FieldValues, TRet
         },
         onSuccess: async (data) => {
             if (toastMessage) {
-                toastService.success(toastMessage)
+                toastService.success(toastMessage(data))
             }
 
             await onSuccess?.(data)
@@ -77,7 +77,7 @@ export const useFormBuilder = <T extends object, TData extends FieldValues, TRet
         onError: (err) => handleError(err)
     })
 
-    const methods = useForm({
+    const methods = useRHFForm({
         resolver: schema ? zodResolver(schema) : undefined,
         defaultValues: defaultValues as Record<string, unknown>
     });

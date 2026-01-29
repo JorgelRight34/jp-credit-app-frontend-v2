@@ -10,6 +10,7 @@ export { default as LightBtn } from "./button/components/light-btn";
 export { default as Icon } from "./icon/icon";
 export { default as Subtitle } from "./text/subtitle";
 export { default as FormLabel } from "./form-label/form-label";
+export { default as Paragraph } from "./text/paragraph"
 
 // -------------------------------------
 // Inputs - Global Constants

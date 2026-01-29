@@ -2,7 +2,7 @@ import { Controller } from 'react-hook-form'
 import type { ReactNode } from 'react'
 import type { InputProps } from '@/components/atoms'
 
-interface FormInputProps extends InputProps {
+export interface FormInputProps extends InputProps {
   name: string
   as: (props: { onChange: (e: unknown) => unknown }) => ReactNode
 }

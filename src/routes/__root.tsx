@@ -9,14 +9,17 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
+import type { User } from '@/features/auth'
 import {
   Provider,
   TanStackQueryDevtools,
   getContext,
 } from '@/contexts/root-provider'
+import { LoadingBar, LoadingScreen } from '@/components'
 
 interface MyRouterContext {
   dataClient: QueryClient
+  user: User | null
 }
 
 const context = getContext()
@@ -52,6 +55,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <LoadingBar />
+        <LoadingScreen />
         <Provider dataClient={context.dataClient}>{children}</Provider>
         <TanStackDevtools
           config={{

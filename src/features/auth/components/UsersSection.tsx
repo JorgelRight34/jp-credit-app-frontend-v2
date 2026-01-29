@@ -1,3 +1,4 @@
+/*
 import UsersDataTable from "./UsersDataTable";
 import { User } from "../models/user";
 import UserQuerySearch from "./UserQuerySearch";
@@ -18,3 +19,7 @@ const UsersSection = ({ ...props }: UsersSectionProps) => {
 };
 
 export default UsersSection;
+*/
+const Default = () => <></>
+
+export default Default

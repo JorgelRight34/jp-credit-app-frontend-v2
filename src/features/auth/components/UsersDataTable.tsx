@@ -1,3 +1,4 @@
+/*
 import { Role } from '../models/role'
 import { User } from '../models/user'
 import { useState } from 'react'
@@ -121,3 +122,7 @@ const UsersDataTable = ({ role = 'admin', ...props }: UsersDataTableProps) => {
 }
 
 export default UsersDataTable
+*/
+const Default = () => <></>
+
+export default Default

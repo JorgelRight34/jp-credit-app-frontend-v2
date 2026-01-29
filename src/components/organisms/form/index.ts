@@ -4,6 +4,7 @@ export { default as FormSubmitBtn } from "./components/form-submit-btn";
 export { default as FormDeleteBtn } from "./components/form-delete-btn"
 export { default as FormButtonsContainer } from "./components/form-buttons-container"
 export { default as FormGroup } from "./components/form-group"
+export { default as FormContainer } from "./components/form-container"
 
 export * from "./hooks/useForm"
 export * from "./models/apiError"
@@ -13,3 +14,4 @@ export * from "./models/formInterceptor"
 export * from "./models/useDataFormProps"
 export * from "./models/useDataModuleFormProps"
 export * from "./models/fomRef"
+export * from "./models/useFormBuilderReturn"

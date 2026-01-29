@@ -1,22 +1,23 @@
 import { useChangePasswordForm } from '../../hooks/useChangePassword'
-import type { EntityFormProps } from '@/components'
 import type { User } from '../../models/user'
-import type { ChangeUserPasswordValues } from '../../lib/form'
-import { FormBuilder } from '@/components'
+import { Form, FormGroup, PasswordInput } from '@/components'
 
-export interface ChangePasswordFormProps extends EntityFormProps<ChangeUserPasswordValues> {
+export interface ChangePasswordFormProps {
   user: User
 }
 
-const ChangePasswordForm = ({ user, ...props }: ChangePasswordFormProps) => {
-  const config = useChangePasswordForm({ user })
+const ChangePasswordForm = ({ user }: ChangePasswordFormProps) => {
+  const form = useChangePasswordForm({ user })
 
   return (
-    <FormBuilder<User, ChangeUserPasswordValues>
-      layout={[['password'], ['confirmation']]}
-      {...config}
-      {...props}
-    />
+    <Form form={form}>
+      <FormGroup name="password" label="Contraseña" input={PasswordInput} />
+      <FormGroup
+        name="confirmation"
+        label="Confirmación"
+        input={PasswordInput}
+      />
+    </Form>
   )
 }
 

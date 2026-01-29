@@ -28,26 +28,18 @@ const Image = ({
   ...props
 }: ImageProps) => {
   return (
-    <div
+    <UnpicImage
+      {...props}
+      layout="fullWidth"
+      src={src}
+      alt={alt}
       className={clsx(
-        'relative w-full overflow-hidden',
-        `aspect-${aspect}`,
+        'w-full',
+        fit === 'cover' ? 'object-cover' : 'object-contain',
         className,
+        imgClassName,
       )}
-      style={style}
-    >
-      <UnpicImage
-        {...props}
-        layout="fullWidth"
-        src={src}
-        alt={alt}
-        className={clsx(
-          'absolute inset-0 h-full w-full',
-          fit === 'cover' ? 'object-cover' : 'object-contain',
-          imgClassName,
-        )}
-      />
-    </div>
+    />
   )
 }
 

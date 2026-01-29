@@ -59,7 +59,7 @@ const FileFormExplorer = ({
                 name={name ?? ''}
                 accept={accept}
                 disabled={reachedLimit}
-                onChange={upload.handleOnFileChange}
+                onChange={upload.addFile}
               />
               Subir
             </label>
@@ -74,7 +74,7 @@ const FileFormExplorer = ({
               name={name ?? ''}
               accept={accept}
               disabled={reachedLimit}
-              onChange={upload.handleOnFileChange}
+              onChange={upload.addFile}
             />
             <button type="button">Subir</button>
           </label>

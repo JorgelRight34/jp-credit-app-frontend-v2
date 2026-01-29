@@ -1,1 +1,0 @@
-export type AdjusmentNoteType = "nc" | "nd" | "NC" | "ND"

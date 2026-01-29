@@ -68,13 +68,14 @@ const Icon = ({
    * @returns JSX span element containing the icon
    */
   const Component = as ?? 'span'
+  const IconComponent = icon
 
   const renderIcon = () => {
-    const LazyIconComponent = 'div'
+    if (!IconComponent) return
 
     return (
       <Suspense fallback={null}>
-        <LazyIconComponent
+        <IconComponent
           className={clsx('google-icon', className, iconClassName)}
           style={style}
         />
@@ -88,7 +89,7 @@ const Icon = ({
       title={props['data-title' as keyof typeof props] || dataTitle || title}
       onClick={onClick}
     >
-      <div className="relative flex items-center">
+      <span className="relative flex items-center justify-center">
         {/* Render icon on the left side */}
         {orientation === 'left' && renderIcon()}
 
@@ -118,7 +119,7 @@ const Icon = ({
 
         {/* Render icon on the right side */}
         {orientation === 'right' && renderIcon()}
-      </div>
+      </span>
     </Component>
   )
 }

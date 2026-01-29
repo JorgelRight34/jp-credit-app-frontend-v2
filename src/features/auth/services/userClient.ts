@@ -1,15 +1,14 @@
-import api from "@/lib/services/api";
-import { PossiblePermissions } from "../models/possiblePermissions";
-import { ModulePermissions } from "../models/modulePermissions";
-import { UserPermissions } from "../models/userPermissions";
-import { ChangeUserPasswordValues, UserFormValues } from "../lib/form";
-import { User } from "../models/user";
-import { fetchEntity, fetchWithQueryParams } from "@/lib/utils/utils";
-import { UserQuery } from "../models/userQuery";
-import { PagedResponse } from "@/models";
+import type { UserQuery } from "../models/userQuery";
+import type { PossiblePermissions } from "../models/possiblePermissions";
+import type { ModulePermissions } from "../models/modulePermissions";
+import type { UserPermissions } from "../models/userPermissions";
+import type { UserFormValues } from "../lib/form";
+import type { User } from "../models/user";
+import type { PagedResponse } from "@/models";
+import type { Claim } from "../lib/claim";
+import type { ChangePasswordSchemaType } from "../lib/schemas/changePasswordSchema";
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/lib/utils/constants";
-import { Claim } from "../lib/claim";
-import { usersTag } from "../lib/constants";
+import api from "@/lib/services/api";
 
 const baseUrl = "users"
 
@@ -19,10 +18,10 @@ export const createUser = async (data: UserFormValues): Promise<User> => {
 }
 
 export const getUser = async (id: number): Promise<User> => {
-  return await fetchEntity(`${baseUrl}/${id}`, [usersTag, id.toString()]);
+  return await api.get(`${baseUrl}/${id}`);
 }
 
-export const getUserClaims = async (username: string): Promise<Claim[]> => {
+export const getUserClaims = async (username: string): Promise<Array<Claim>> => {
   const response = await api.get(`${baseUrl}/${username}/claims`);
   return response.data;
 };
@@ -38,14 +37,14 @@ export const getPermissions = async (id: number): Promise<UserPermissions> => {
   return response.data;
 };
 
-export const getModulePermissions = async (endpoint: string, tags: string[] = [], cache = 0)
+export const getModulePermissions = async (endpoint: string)
   : Promise<ModulePermissions> => {
-  const response = await fetch(endpoint, { next: { tags, revalidate: cache } });
+  const response = await fetch(endpoint);
   return response.json();
 }
 
 export const changePassword = async (
-  data: ChangeUserPasswordValues,
+  data: ChangePasswordSchemaType,
   UserUsername: string
 ) => {
   const response = await api.put(
@@ -64,7 +63,7 @@ export const editUser = async (
 };
 
 export const editPermission = async (
-  payload: { claimsToAdd: string[]; claimsToRemove: string[] },
+  payload: { claimsToAdd: Array<string>; claimsToRemove: Array<string> },
   id: string
 ) => {
   const response = await api.put(
@@ -74,9 +73,9 @@ export const editPermission = async (
   return response.data;
 };
 
-export const getUsers = async (query?: UserQuery): Promise<PagedResponse<User>> => {
-  const response = await fetchWithQueryParams("users", query)
-  return response;
+export const getUsers = async (params?: UserQuery): Promise<PagedResponse<User>> => {
+  const { data } = await api.get("users", { params })
+  return data;
 }
 
 export const getUserModulePermissions = async () => {

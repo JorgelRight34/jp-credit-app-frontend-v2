@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { useDataTable } from '../hooks/useDataTable'
 import type { UseDataTableProps } from '../hooks/useDataTable'
 import type { Column, Row } from '@/components'
@@ -37,35 +36,32 @@ const DataTable = <T, TQuery extends Query = Query>({
   onExpand,
   ...props
 }: ThisDataTableProps<T, TQuery>) => {
-  const { data, columns, isLoading, fetchPage, setLimit, sort } = useDataTable<
-    T,
-    TQuery
-  >({
+  const { data, columns, isLoading, fetchPage, setLimit, sort } = useDataTable({
     query,
     ...props,
   })
 
-  if (isLoading && data?.items.length === 0) return <LoadingSpinner />
+  if (isLoading || data === undefined) return <LoadingSpinner />
 
   return (
     <>
-      <div className={clsx('overflow-x-auto')}>
-        {(data?.items.length ?? 0) > 0 && (
+      <div className="overflow-x-auto">
+        {data.items.length > 0 && (
           <TableBuilder
             {...props}
             onRowClick={onRowClick}
-            data={data?.items}
-            pageSize={data?.pageSize}
-            totalItems={data?.totalItems}
+            data={data.items}
+            columns={columns}
+            pageSize={data.pageSize}
+            totalItems={data.totalItems}
             onPageChange={fetchPage}
             onLimitChange={setLimit}
             onSortingChange={sort}
-            columns={columns}
             onExpand={onExpand}
           />
         )}
       </div>
-      {!isLoading && data?.items.length === 0 && !displayEmptyMessage && (
+      {data.items.length === 0 && displayEmptyMessage && (
         <EmptyMessage title={toTitleCase(title)} className="mx-auto w-75 p-5" />
       )}
     </>

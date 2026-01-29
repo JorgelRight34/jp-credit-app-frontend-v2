@@ -1,34 +1,20 @@
-"use client"
+import { loginSchema } from "../lib/schemas/loginSchema";
+import { login } from "../services/authService";
+import type { LoginSchemaType } from "../lib/schemas/loginSchema";
+import type { UseDataModuleFormProps, UseFormBuilderReturn } from "@/components";
+import { useForm } from "@/components";
+import { ACCESS_TOKEN } from "@/lib/utils";
 
-import { useAuth } from "@/contexts/auth-context";
-import { loginFormProvider, LoginFormValues } from "../lib/form";
-import { toastService } from "@/lib/services";
-import { useRouter } from "@/hooks/useRouter";
-import { LoginForm } from "../models/loginForm";
-import { UseEntityFormReturn } from "@/components";
+export const useLoginForm = ({ ...props }: UseDataModuleFormProps): UseFormBuilderReturn<LoginSchemaType> => {
 
-export const useLoginForm = (): UseEntityFormReturn<
-    LoginForm,
-    LoginFormValues
-> => {
-    const router = useRouter();
-    const { login } = useAuth();
-
-    const handleOnSubmit = async (data: LoginFormValues) => {
-        const response = await login(data);
-
-        toastService.success(`Bienvenido ${response.user.firstName}!`);
-
-        router.push("/");
-
-        return data;
-    };
-
-    return {
-        onSubmit: handleOnSubmit,
-        config: {
-            formProvider: loginFormProvider,
-            cacheKeysToInvalidate: [],
+    return useForm({
+        ...props,
+        onSubmit: login,
+        defaultValues: { username: "", password: "" },
+        schema: loginSchema,
+        toastMessage: () => `Bienvenido!`,
+        onSuccess: ({ token }) => {
+            localStorage.setItem(ACCESS_TOKEN, token)
         },
-    };
+    });
 };

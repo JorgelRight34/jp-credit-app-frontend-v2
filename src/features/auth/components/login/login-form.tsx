@@ -1,15 +1,25 @@
+import { useState } from 'react'
 import { useLoginForm } from '../../hooks/useLoginForm'
-import { EntityForm } from '@/components'
+import {
+  Form,
+  FormContainer,
+  FormGroup,
+  FormSubmitBtn,
+  Input,
+  PasswordInput,
+} from '@/components'
 
 const LoginForm = () => {
-  const methods = useLoginForm()
+  const [isDirty, setIsDirty] = useState(false)
+  const form = useLoginForm({ onDirtyChange: setIsDirty })
 
   return (
-    <EntityForm
-      layout={[['username'], ['password']]}
-      {...methods}
-      showReset={false}
-    />
+    <Form form={form}>
+      <FormContainer footer={<FormSubmitBtn form={form} isDirty={isDirty} />}>
+        <FormGroup label="Usuario" name="username" input={Input} />
+        <FormGroup label="Contraseña" name="password" input={PasswordInput} />
+      </FormContainer>
+    </Form>
   )
 }
 

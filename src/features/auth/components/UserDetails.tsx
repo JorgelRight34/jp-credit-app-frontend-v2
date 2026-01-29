@@ -1,8 +1,8 @@
-import { User } from "../models/user";
-import UserInfoTable from "./UserInfoTable";
+import UserInfoTable from './UserInfoTable'
+import type { User } from '../models/user'
 
 interface UserDetailsProps {
-  user: User;
+  user: User
 }
 
 const UserDetails = ({ user }: UserDetailsProps) => {
@@ -10,7 +10,7 @@ const UserDetails = ({ user }: UserDetailsProps) => {
     <div className="flex p-3">
       <UserInfoTable user={user} />
     </div>
-  );
-};
+  )
+}
 
-export default UserDetails;
+export default UserDetails

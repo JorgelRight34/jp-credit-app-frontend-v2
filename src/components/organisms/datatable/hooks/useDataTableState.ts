@@ -11,7 +11,7 @@ interface UseDatatableStateProps {
 
 export const useDataTableState = ({ cacheKey, pageSize }: UseDatatableStateProps) => {
     const [page, setPage] = useState(1);
-    const [order, setOrder] = useState<{ orderBy: string, orderDesc: boolean } | undefined>();
+    const [order, setOrder] = useState<{ orderBy: string, orderDesc: boolean } | null>(null);
     const identifier = useMemo(() => JSON.stringify(cacheKey), [cacheKey])
     const [limit, setLimit] = useState(
         PaginationLimitManager.getLimit(identifier) || pageSize || defaultPageSize
@@ -29,10 +29,8 @@ export const useDataTableState = ({ cacheKey, pageSize }: UseDatatableStateProps
         [identifier]
     );
 
-    const onSortingChange = useCallback((state: SortingState) => {
-        const columnToOrder = state[0]
-
-        setOrder({ orderBy: columnToOrder.id, orderDesc: columnToOrder.desc })
+    const onSortingChange = useCallback(([state]: SortingState) => {
+        setOrder({ orderBy: state.id, orderDesc: state.desc })
     }, []);
 
     return { page, order, limit, fetchPage, sort: onSortingChange, setLimit: handleLimitChange }

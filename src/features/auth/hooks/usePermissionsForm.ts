@@ -1,3 +1,4 @@
+/*
 import { useCallback, useMemo } from "react";
 import { User } from "../models/user";
 import { useAddProfilePermissions } from "./useAddProfilePermissions";
@@ -62,3 +63,9 @@ const usePermissionsForm = ({ profile }: UsePermissionsFormProps): UseEntityForm
 };
 
 export default usePermissionsForm;
+*/
+export const Default = () => {
+  return {}
+}
+
+export default Default

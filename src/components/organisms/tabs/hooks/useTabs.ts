@@ -1,6 +1,6 @@
 import { Children, isValidElement, useMemo, useState } from "react";
 import type { ReactNode } from "react";
-import type { TabProps } from "../components/Tab";
+import type { TabProps } from "../components/tab";
 
 export interface UseTabsProps {
   children: ReactNode;

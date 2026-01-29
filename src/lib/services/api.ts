@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { jwtDecode } from "jwt-decode";
 import { ACCESS_TOKEN, IS_DEV_MODE } from "../utils/constants";
+import { isJwtValid } from "../utils/auth-utils";
 import errorHandler from "./errorHandler";
 import type { InternalAxiosRequestConfig } from "axios";
 
@@ -18,12 +18,7 @@ api.interceptors.request.use(
   ): InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig> => {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     if (accessToken) {
-      const decoded = jwtDecode(accessToken);
-
-      const tokenExpiration = decoded.exp;
-      const now = Date.now() / 1000;
-
-      if (tokenExpiration && tokenExpiration > now) {
+      if (isJwtValid(accessToken)) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
     }

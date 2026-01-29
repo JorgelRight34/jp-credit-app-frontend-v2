@@ -1,5 +1,5 @@
-import { Query } from "@/models/query";
-import { Role } from "./role";
+import type { Role } from "./role";
+import type { Query } from "@/models/query";
 
 export interface UserQuery extends Query {
     username?: string;

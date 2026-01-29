@@ -12,10 +12,10 @@ export type ConfirmationModalProps = ModalProps & {
   title?: string
   confirmationMessage: string
   cacheKey?: CacheKey
-  destructive?: boolean // For dangerous actions (delete, remove, etc.)
-  confirmText?: string // Custom confirm button text
-  cancelText?: string // Custom cancel button text
-  description?: string | ReactNode // Additional description text
+  destructive?: boolean
+  confirmText?: string
+  cancelText?: string
+  description?: string | ReactNode
   onConfirm: () => Promise<void>
 }
 

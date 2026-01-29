@@ -1,3 +1,4 @@
+/*
 import { usersQueryKey } from "../lib/constants";
 import { getUser } from "../services/userClient";
 import { useData } from "@/hooks/useData";
@@ -15,3 +16,9 @@ export const useUser = ({ id }: UseUserProps) => {
 
     return { user: data, isLoading, isError }
 }
+    */
+export const Default = () => {
+    return {}
+}
+
+export default Default

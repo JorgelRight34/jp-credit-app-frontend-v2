@@ -1,1 +1,0 @@
-export type FinancialComponentType = "capital" | "interest" | "fee" | "total" | "totalItems"

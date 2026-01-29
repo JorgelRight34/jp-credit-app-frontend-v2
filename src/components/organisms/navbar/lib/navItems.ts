@@ -37,7 +37,7 @@ export const accountStatusNavItem: NavItem = {
 };
 
 export const accessControlNavItem: NavItem = {
-  name: "Control Acceso",
+  name: "Accesos",
   icon: LockIcon,
   route: "access-control",
   children: [

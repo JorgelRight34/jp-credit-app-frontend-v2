@@ -1,8 +1,9 @@
-import { UseEntityFormReturn } from "../../../components/EntityForm/models/useEntityFormReturn";
-import { toastService } from "@/lib/services";
-import { User } from "../models/user";
-import { changePasswordFormProvider, ChangeUserPasswordValues } from "../lib/form";
 import { changePassword } from "../services/userClient";
+import { changePasswordSchema } from "../lib/schemas/changePasswordSchema";
+import type { UseFormBuilderReturn } from "@/components";
+import type { User } from "../models/user";
+import type { ChangePasswordSchemaType } from "../lib/schemas/changePasswordSchema";
+import { useForm } from "@/components";
 
 interface UseChangeUserPasswordFormProps {
   user: User;
@@ -10,24 +11,14 @@ interface UseChangeUserPasswordFormProps {
 
 export const useChangePasswordForm = ({
   user,
-}: UseChangeUserPasswordFormProps): UseEntityFormReturn<
-  User,
-  ChangeUserPasswordValues
+}: UseChangeUserPasswordFormProps): UseFormBuilderReturn<
+  ChangePasswordSchemaType
 > => {
-  const handleOnSubmit = async (data: ChangeUserPasswordValues) => {
-    const response = await changePassword(data, user.username);
-    toastService.success("Contraseña cambiada.");
-
-    return response;
-  };
-
-  return {
-    onSubmit: handleOnSubmit,
-    config: {
-      formProvider: changePasswordFormProvider,
-      resetValues: true,
-      cacheKeysToInvalidate: []
-    },
-  };
+  return useForm({
+    resetValues: true,
+    schema: changePasswordSchema,
+    onSubmit: (data) => changePassword(data, user.username),
+    toastMessage: () => "Contraseña cambiada."
+  });
 };
 

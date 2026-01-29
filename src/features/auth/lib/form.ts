@@ -1,9 +1,7 @@
 
-import { UseFormSetValue } from "react-hook-form";
 import { z } from "zod";
 import { generateUsername } from "./utils";
-import { FormProvider } from "@/components";
-import { LoginForm } from "../models/loginForm";
+import type { UseFormSetValue } from "react-hook-form";
 
 
 const updateUsernameOnForm = (
@@ -39,7 +37,7 @@ const userSchema = z
 
 export type UserFormValues = z.infer<typeof userSchema>;
 
-export const userFormProvider: FormProvider<UserFormValues> = {
+export const userFormProvider = {
     schema: userSchema,
     fields: [
         {
@@ -76,58 +74,5 @@ export const userFormProvider: FormProvider<UserFormValues> = {
     ]
 }
 
-export const loginFormProvider: FormProvider<LoginForm> = {
-    schema: z.object({
-        username: z.string(),
-        password: z.string()
-    }),
-    fields: [
-        {
-            label: "Usuario",
-            id: "username",
-            icon: { icon: "person", iconDirection: "right" },
-            name: "username"
-        },
-        {
-            label: "Contraseña",
-            id: "password",
-            type: "password",
-            name: "password",
-        },
-    ]
-}
-
-export type LoginFormValues = z.infer<typeof loginFormProvider.schema>;
-
-const changePasswordSchema = z.object({
-    password: z.string(),
-    confirmation: z.string(),
-})
-    .refine((data) => data.password === data.confirmation, {
-        message: "Las contraseñas no coinciden",
-        path: ["confirmation"],
-    })
-
-export type ChangeUserPasswordValues = z.infer<
-    typeof changePasswordSchema
->;
-
-export const changePasswordFormProvider: FormProvider<ChangeUserPasswordValues> = {
-    schema: changePasswordSchema,
-    fields: [
-        {
-            name: "password",
-            label: "Nueva Contraseña",
-            id: "password",
-            type: "password",
-        },
-        {
-            name: "confirmation",
-            label: "Confirmar Contraseña",
-            id: "confirmation",
-            type: "password",
-        },
-    ]
-}
 
 export const NO_PERMISSION = "";

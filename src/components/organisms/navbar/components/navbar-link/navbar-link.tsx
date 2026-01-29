@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import './_navbar.css'
+import '../_navbar.css'
 import NavbarLinkContainer from './navbar-link-container'
 import NavbarLinkExpandTrigger from './navbar-link-expand-trigger'
 import type { NavItem } from '../../models/navItem'
@@ -15,7 +15,7 @@ export interface NavbarLinkProps extends PropsWithChildren {
 
 const NavbarLink = ({
   option,
-  className = '',
+  className,
   onClick,
   onExpand,
 }: NavbarLinkProps) => {
@@ -42,11 +42,10 @@ const NavbarLink = ({
                 <Icon
                   icon={option.icon}
                   label={option.name}
-                  labelClassName="truncate flex-1 min-w-0"
+                  labelClassName="truncate flex-1 truncate min-w-0"
                 />
               </div>
             </div>
-            {/* Expand trigger (does NOT navigate) */}
             <NavbarLinkExpandTrigger option={option} onExpand={onExpand} />
           </span>
         </NavbarLinkContainer>

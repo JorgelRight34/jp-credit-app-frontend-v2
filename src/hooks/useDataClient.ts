@@ -1,6 +1,6 @@
 
-import { CacheKey } from "@/models";
 import { useQueryClient } from "@tanstack/react-query";
+import type { CacheKey } from "@/models";
 
 
 export const useDataClient = () => {

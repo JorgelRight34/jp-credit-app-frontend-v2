@@ -1,7 +1,4 @@
-import { useParams as useReactRouterParams } from "react-router"
+import { useParams as useTanstackParams } from "@tanstack/react-router"
 
-export const useParams = () => {
-    const params = useReactRouterParams()
 
-    return params
-}
+export const useParams = useTanstackParams

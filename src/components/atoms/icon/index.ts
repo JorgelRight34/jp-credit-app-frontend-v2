@@ -116,6 +116,7 @@ export { default as AttachMoneyIcon } from "@mui/icons-material/AttachMoneyOutli
 export { default as PaymentIcon } from "@mui/icons-material/PaymentOutlined"
 export { default as ErrorIcon } from "@mui/icons-material/ErrorOutlined"
 export { default as VisibilityOffIcon } from "@mui/icons-material/VisibilityOffOutlined"
+export { default as ArrowForwardIcon } from '@mui/icons-material/KeyboardArrowRightOutlined';
 
 // Loans
 export { default as MailIcon } from "@mui/icons-material/MailOutlined";
@@ -142,5 +143,7 @@ export { default as AccountBalanceWalletIcon } from "@mui/icons-material/Account
 export { default as UploadIcon } from "@mui/icons-material/UploadFileOutlined"
 export { default as ImageIcon } from "@mui/icons-material/ImageOutlined"
 export { default as EmptyIcon } from "@mui/icons-material/HourglassEmpty"
+export { default as DeleteIcon } from "@mui/icons-material/DeleteOutline"
+
 
 export { default as Icon } from "./icon";

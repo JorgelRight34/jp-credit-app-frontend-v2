@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { DataTable } from '../../datatable'
-import FilenameDataTableColumn from './FilenameDataTableColumn'
-import type { DatatableFile } from '../models/datatableFile'
+import { Table } from '../../table'
+import FilenameDataTableColumn from './filename-table-cell'
 import type { Column } from '../../table/models/column'
 import type { FileModel } from '@/models/fileModel'
+import type { TableFile } from '../models/tableFile'
 import DateLabel from '@/components/atoms/date-label/date-label'
 import { toastService } from '@/lib/services'
 import { LightBox } from '@/components/molecules'
@@ -11,13 +11,13 @@ import { isImage, toFormattedDate } from '@/lib/utils'
 
 interface FileExplorerProps {
   showLink?: boolean
-  extraColumns?: Array<Column<DatatableFile>>
-  files: Array<DatatableFile>
+  extraColumns?: Array<Column<TableFile>>
+  files: Array<TableFile>
   showType?: boolean
   onPageChange?: (page: number) => void
 }
 
-const columns: Array<Column<DatatableFile>> = [
+const columns: Array<Column<TableFile>> = [
   {
     accessorKey: 'name',
     header: 'Nombre',
@@ -60,7 +60,7 @@ const FileExplorer = ({ files = [], extraColumns = [] }: FileExplorerProps) => {
   const [lightBoxFiles, setLightBoxFiles] = useState<Array<FileModel>>([])
   const [showlightBox, setShowLightBox] = useState(false)
 
-  const onRowClick = (file: DatatableFile) => {
+  const onRowClick = (file: TableFile) => {
     const type = file.fileType
 
     if (isImage(type)) {
@@ -79,7 +79,7 @@ const FileExplorer = ({ files = [], extraColumns = [] }: FileExplorerProps) => {
 
   return (
     <>
-      <DataTable
+      <Table
         className="documents-table"
         columns={[...columns, ...extraColumns]}
         data={files}

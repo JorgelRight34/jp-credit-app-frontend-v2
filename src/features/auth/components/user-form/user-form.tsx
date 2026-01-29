@@ -1,3 +1,4 @@
+/*
 import { useUserForm } from '../../hooks/useUserForm'
 import PermissionsForm from '../permissions-form/permissions-form'
 import ChangePasswordForm from '../change-password/change-password-form'
@@ -66,3 +67,7 @@ const UserForm = ({ edit, ...props }: UserFormProps) => {
 }
 
 export default UserForm
+*/
+const Default = () => <></>
+
+export default Default

@@ -1,4 +1,6 @@
 import { jwtDecode } from "jwt-decode";
+import { getFirstAndLastName, getPicWithInitials } from "./utils";
+import { defaultProfilePic } from ".";
 
 export function isJwtValid(token?: string) {
     if (!token) return false;
@@ -11,3 +13,11 @@ export function isJwtValid(token?: string) {
         return false;
     }
 }
+
+export const getProfilePicWithInitials = (
+    profile?: { firstName: string; lastName: string; } | null,
+    background = "random",
+    color = ""
+) => {
+    return profile ? getPicWithInitials(getFirstAndLastName(profile), background, color) : defaultProfilePic;
+};
