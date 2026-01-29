@@ -1,0 +1,1 @@
+export type ReportKey = "loan" | "collateral" | "profile" | "transaction" | "note"

@@ -1,0 +1,146 @@
+export { default as FolderOpenIcon } from "@mui/icons-material/FolderOpenOutlined";
+export { default as EventIcon } from "@mui/icons-material/EventOutlined";
+export { default as ScheduleIcon } from "@mui/icons-material/ScheduleOutlined";
+export { default as PersonIcon } from "@mui/icons-material/PersonOutlined";
+export { default as ArrowRightAltIcon } from "@mui/icons-material/ArrowRightAltOutlined";
+export { default as InfoIcon } from "@mui/icons-material/InfoOutlined";
+export { default as MyLocationIcon } from "@mui/icons-material/MyLocationOutlined";
+export { default as MenuBookIcon } from "@mui/icons-material/MenuBookOutlined";
+export { default as SchoolIcon } from "@mui/icons-material/SchoolOutlined";
+export { default as CloseIcon } from "@mui/icons-material/CloseOutlined";
+export { default as AnalyticsIcon } from "@mui/icons-material/AnalyticsOutlined";
+export { default as SavingsIcon } from "@mui/icons-material/SavingsOutlined";
+export { default as ChairIcon } from "@mui/icons-material/ChairOutlined";
+export { default as AirlineSeatReclineNormalIcon } from "@mui/icons-material/AirlineSeatReclineNormalOutlined";
+export { default as KeyIcon } from "@mui/icons-material/KeyOutlined";
+export { default as StarIcon } from "@mui/icons-material/StarOutlined";
+export { default as AssessmentIcon } from "@mui/icons-material/AssessmentOutlined";
+export { default as TrendingDownIcon } from "@mui/icons-material/TrendingDownOutlined";
+export { default as ExitToAppIcon } from "@mui/icons-material/ExitToAppOutlined";
+export { default as GroupIcon } from "@mui/icons-material/GroupOutlined";
+export { default as ReplayIcon } from "@mui/icons-material/ReplayOutlined";
+export { default as CheckCircleIcon } from "@mui/icons-material/CheckCircleOutlined";
+export { default as SaveAsIcon } from "@mui/icons-material/SaveAsOutlined";
+export { default as ShareIcon } from "@mui/icons-material/ShareOutlined";
+export { default as DownloadIcon } from "@mui/icons-material/DownloadOutlined";
+export { default as SettingsIcon } from "@mui/icons-material/SettingsOutlined";
+export { default as CalendarMonthIcon } from "@mui/icons-material/CalendarMonthOutlined";
+export { default as ArrowBackIcon } from "@mui/icons-material/ArrowBackOutlined";
+export { default as PinDropIcon } from "@mui/icons-material/PinDropOutlined";
+export { default as VideocamIcon } from "@mui/icons-material/VideocamOutlined";
+export { default as LoginIcon } from "@mui/icons-material/LoginOutlined";
+export { default as LogoutIcon } from "@mui/icons-material/LogoutOutlined";
+export { default as PaletteIcon } from "@mui/icons-material/PaletteOutlined";
+export { default as ComputerIcon } from "@mui/icons-material/ComputerOutlined";
+export { default as MonitorIcon } from "@mui/icons-material/MonitorOutlined";
+export { default as VpnKeyIcon } from "@mui/icons-material/VpnKeyOutlined";
+export { default as HelpIcon } from "@mui/icons-material/HelpOutlined";
+export { default as LightModeIcon } from "@mui/icons-material/LightModeOutlined";
+export { default as DarkModeIcon } from "@mui/icons-material/DarkModeOutlined";
+export { default as EventBusyIcon } from "@mui/icons-material/EventBusyOutlined";
+export { default as VisibilityIcon } from "@mui/icons-material/VisibilityOutlined";
+export { default as DehazeIcon } from "@mui/icons-material/DehazeOutlined";
+export { default as TaskAltIcon } from "@mui/icons-material/TaskAltOutlined";
+export { default as AssignmentLateIcon } from "@mui/icons-material/AssignmentLateOutlined";
+export { default as ViewColumnIcon } from "@mui/icons-material/ViewColumnOutlined";
+export { default as ViewListIcon } from "@mui/icons-material/ViewListOutlined";
+export { default as SearchIcon } from "@mui/icons-material/SearchOutlined";
+export { default as ClearIcon } from "@mui/icons-material/ClearOutlined";
+export { default as KeyboardArrowDownIcon } from "@mui/icons-material/KeyboardArrowDownOutlined";
+export { default as MenuIcon } from "@mui/icons-material/MenuOutlined";
+export { default as WarningIcon } from "@mui/icons-material/WarningOutlined";
+export { default as HowToRegIcon } from "@mui/icons-material/HowToRegOutlined";
+export { default as FormatBoldIcon } from "@mui/icons-material/FormatBoldOutlined";
+export { default as FormatItalicIcon } from "@mui/icons-material/FormatItalicOutlined";
+export { default as LooksOneIcon } from "@mui/icons-material/LooksOneOutlined";
+export { default as LooksTwoIcon } from "@mui/icons-material/LooksTwoOutlined";
+export { default as Looks3Icon } from "@mui/icons-material/Looks3Outlined";
+export { default as Looks4Icon } from "@mui/icons-material/Looks4Outlined";
+export { default as Looks5Icon } from "@mui/icons-material/Looks5Outlined";
+export { default as Looks6Icon } from "@mui/icons-material/Looks6Outlined";
+export { default as FormatListBulletedIcon } from "@mui/icons-material/FormatListBulletedOutlined";
+export { default as FormatListNumberedIcon } from "@mui/icons-material/FormatListNumberedOutlined";
+export { default as FormatQuoteIcon } from "@mui/icons-material/FormatQuoteOutlined";
+export { default as HorizontalRuleIcon } from "@mui/icons-material/HorizontalRuleOutlined";
+export { default as UndoIcon } from "@mui/icons-material/UndoOutlined";
+export { default as AddBusinessIcon } from "@mui/icons-material/AddBusinessOutlined";
+export { default as CodeIcon } from "@mui/icons-material/CodeOutlined";
+export { default as FormatStrikethroughIcon } from "@mui/icons-material/FormatStrikethroughOutlined";
+export { default as EmailIcon } from "@mui/icons-material/EmailOutlined";
+export { default as RedoIcon } from "@mui/icons-material/RedoOutlined";
+export { default as SendIcon } from "@mui/icons-material/SendOutlined";
+export { default as AddIcon } from "@mui/icons-material/AddOutlined";
+export { default as SportsTennisIcon } from "@mui/icons-material/SportsTennisOutlined";
+export { default as EditIcon } from "@mui/icons-material/EditOutlined";
+export { default as DoneAllIcon } from "@mui/icons-material/DoneAllOutlined";
+export { default as BusinessIcon } from "@mui/icons-material/BusinessOutlined";
+export { default as DomainIcon } from "@mui/icons-material/DomainOutlined";
+export { default as GavelIcon } from "@mui/icons-material/GavelOutlined";
+export { default as AccountBalanceIcon } from "@mui/icons-material/AccountBalanceOutlined";
+export { default as HealthAndSafetyIcon } from "@mui/icons-material/HealthAndSafetyOutlined";
+export { default as LibraryBooksIcon } from "@mui/icons-material/LibraryBooksOutlined";
+export { default as RocketLaunchIcon } from "@mui/icons-material/RocketLaunchOutlined";
+export { default as HistoryEduIcon } from "@mui/icons-material/HistoryEduOutlined";
+export { default as TerminalIcon } from "@mui/icons-material/TerminalOutlined";
+export { default as EngineeringIcon } from "@mui/icons-material/EngineeringOutlined";
+export { default as FactoryIcon } from "@mui/icons-material/FactoryOutlined";
+export { default as TranslateIcon } from "@mui/icons-material/TranslateOutlined";
+export { default as CalculateIcon } from "@mui/icons-material/CalculateOutlined";
+export { default as CampaignIcon } from "@mui/icons-material/CampaignOutlined";
+export { default as MedicalInformationIcon } from "@mui/icons-material/MedicalInformationOutlined";
+export { default as SupervisorAccountIcon } from "@mui/icons-material/SupervisorAccountOutlined";
+export { default as ScienceIcon } from "@mui/icons-material/ScienceOutlined";
+export { default as EmojiPeopleIcon } from "@mui/icons-material/EmojiPeopleOutlined";
+export { default as PetsIcon } from "@mui/icons-material/PetsOutlined";
+export { default as MoreVertIcon } from "@mui/icons-material/MoreVertOutlined";
+export { default as ContentCopyIcon } from "@mui/icons-material/ContentCopyOutlined";
+export { default as BadgeIcon } from "@mui/icons-material/BadgeOutlined";
+export { default as HomeIcon } from "@mui/icons-material/HomeOutlined";
+export { default as DoNotDisturbOnIcon } from "@mui/icons-material/DoNotDisturbOnOutlined";
+export { default as AddCircleIcon } from "@mui/icons-material/AddCircleOutlineOutlined";
+export { default as ArrowUpwardIcon } from "@mui/icons-material/ArrowUpwardOutlined";
+export { default as ArrowDownwardIcon } from "@mui/icons-material/ArrowDownwardOutlined";
+export { default as AccountBoxIcon } from "@mui/icons-material/AccountBoxOutlined";
+export { default as LinkedInIcon } from "@mui/icons-material/LinkedIn";
+export { default as GroupsIcon } from "@mui/icons-material/GroupsOutlined";
+export { default as ManageAccountsIcon } from "@mui/icons-material/ManageAccountsOutlined";
+export { default as PublicIcon } from "@mui/icons-material/PublicOutlined"
+export { default as LockIcon } from "@mui/icons-material/LockOutline"
+export { default as PersonAddIcon } from "@mui/icons-material/PersonAddOutlined"
+export { default as DirectionsCarIcon } from "@mui/icons-material/DirectionsCarOutlined"
+export { default as ApartmentIcon } from "@mui/icons-material/ApartmentOutlined"
+export { default as GrassIcon } from "@mui/icons-material/GrassOutlined";
+export { default as ReceiptLongIcon } from "@mui/icons-material/ReceiptLongOutlined"
+export { default as CreditCardIcon } from "@mui/icons-material/CreditCardOutlined"
+export { default as AttachMoneyIcon } from "@mui/icons-material/AttachMoneyOutlined";
+export { default as PaymentIcon } from "@mui/icons-material/PaymentOutlined"
+export { default as ErrorIcon } from "@mui/icons-material/ErrorOutlined"
+export { default as VisibilityOffIcon } from "@mui/icons-material/VisibilityOffOutlined"
+
+// Loans
+export { default as MailIcon } from "@mui/icons-material/MailOutlined";
+export { default as PlayCircleIcon } from "@mui/icons-material/PlayCircleOutlined";
+
+// Notes
+export { default as StickyNote2Icon } from "@mui/icons-material/StickyNote2Outlined";
+export { default as ArrowCircleUpIcon } from "@mui/icons-material/ArrowCircleUpOutlined";
+export { default as ArrowCircleDownIcon } from "@mui/icons-material/ArrowCircleDownOutlined";
+
+// Amortizations
+export { default as ListAltIcon } from "@mui/icons-material/ListAltOutlined";
+
+// Follow ups
+export { default as AssignmentIcon } from "@mui/icons-material/AssignmentOutlined";
+
+// Reports
+export { default as HomeStorageIcon } from "@mui/icons-material/StorageOutlined"
+
+// Finance
+export { default as QueryStatsIcon } from "@mui/icons-material/QueryStatsOutlined";
+export { default as TrendingUpIcon } from "@mui/icons-material/TrendingUpOutlined";
+export { default as AccountBalanceWalletIcon } from "@mui/icons-material/AccountBalanceWalletOutlined";
+export { default as UploadIcon } from "@mui/icons-material/UploadFileOutlined"
+export { default as ImageIcon } from "@mui/icons-material/ImageOutlined"
+export { default as EmptyIcon } from "@mui/icons-material/HourglassEmpty"
+
+export { default as Icon } from "./icon";

@@ -1,0 +1,48 @@
+import { FieldErrors, FieldValues } from "react-hook-form";
+import { FormField } from "../models/formField";
+import FormFieldInput from "./FormFieldInput";
+import clsx from "clsx";
+import { FormLabel } from "@/components/atoms";
+
+interface FormBuilderInputContainer<T, TData extends FieldValues> {
+  field?: FormField<TData> | null;
+  errors: FieldErrors<FieldValues>;
+  edit?: T;
+}
+
+const FormBuilderInputContainer = <T, TData extends FieldValues>({
+  field,
+  errors,
+  edit,
+}: FormBuilderInputContainer<T, TData>) => {
+  const error = field ? errors[field?.name]?.message : "";
+  const disableIfEdit = edit && field?.disabledOnEdit;
+
+  return (
+    <div
+      className={clsx("flex flex-1 flex-col", {
+        "pointer-events-none order-last opacity-0": disableIfEdit,
+        "!hidden": field?.type === "hidden",
+      })}
+    >
+      {field && (
+        <>
+          <FormLabel>
+            {field.label}
+            {field.required !== false && (
+              <span className="text-red-500">*</span>
+            )}
+          </FormLabel>
+          <FormFieldInput
+            formField={field}
+            hideLabel={true}
+            error={error as string}
+          />
+          {error}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default FormBuilderInputContainer;
