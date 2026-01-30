@@ -12,7 +12,7 @@ const NavLink = ({ to, children, className }: NavLinkProps) => {
   const pathname = usePathname()
 
   const isActive = useMemo(
-    () => pathname.startsWith(to?.toString()),
+    () => !!(to && pathname.startsWith(to.toString())),
     [pathname, to],
   )
 

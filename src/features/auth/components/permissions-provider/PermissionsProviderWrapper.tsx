@@ -1,44 +1,31 @@
-/*
-import { PermissionsProvider } from '@/models/permissionsProvider'
-import { ReactNode } from 'react'
-import { ModulePermissions } from '../../models/modulePermissions'
-import Unauthorized from '../unathorized'
+import type { ReactNode } from 'react'
+import type { ModulePermissions } from '../../models/modulePermissions'
+import type { PermissionsProvider } from '@/models/permissionsProvider'
+import Unauthorized from '@/components/molecules/pages/unathorized'
+import { useSuspenseData } from '@/hooks/useData'
 
 export interface PermissionsProviderWrapperProps {
-  provider?: PermissionsProvider
+  provider: PermissionsProvider
   fetchedPermissions?: ModulePermissions
   children: ReactNode
-  cookiesToValidate?: string[]
   isAuthorizedFn: (permissions: ModulePermissions) => boolean
-  onSuccess?: (
-    provider: PermissionsProvider,
-    permissions: ModulePermissions,
-  ) => void
 }
 
-const PermissionsProviderWrapper = async ({
+const PermissionsProviderWrapper = ({
   provider,
   children,
   fetchedPermissions,
   isAuthorizedFn,
-  onSuccess,
 }: PermissionsProviderWrapperProps) => {
-  const permissions = fetchedPermissions
-    ? await provider?.getPermissions()
-    : fetchedPermissions
+  const { data: permissions } = useSuspenseData({
+    key: provider.cacheKey,
+    loader: provider.loader,
+    initialData: fetchedPermissions,
+  })
 
-  if (permissions && !isAuthorizedFn(permissions)) return <Unauthorized />
-  if (permissions && onSuccess) onSuccess(provider!, permissions)
+  if (!isAuthorizedFn(permissions)) return <Unauthorized />
 
   return children
 }
 
 export default PermissionsProviderWrapper
-*/
-export interface PermissionsProviderWrapperProps {}
-
-const Default = () => {
-  return 'permissions'
-}
-
-export default Default

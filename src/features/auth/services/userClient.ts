@@ -1,11 +1,10 @@
 import type { UserQuery } from "../models/userQuery";
 import type { PossiblePermissions } from "../models/possiblePermissions";
-import type { ModulePermissions } from "../models/modulePermissions";
 import type { UserPermissions } from "../models/userPermissions";
 import type { UserFormValues } from "../lib/form";
 import type { User } from "../models/user";
 import type { PagedResponse } from "@/models";
-import type { Claim } from "../lib/claim";
+import type { Claim } from "../models/claim";
 import type { ChangePasswordSchemaType } from "../lib/schemas/changePasswordSchema";
 import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/lib/utils/constants";
 import api from "@/lib/services/api";
@@ -37,11 +36,6 @@ export const getPermissions = async (id: number): Promise<UserPermissions> => {
   return response.data;
 };
 
-export const getModulePermissions = async (endpoint: string)
-  : Promise<ModulePermissions> => {
-  const response = await fetch(endpoint);
-  return response.json();
-}
 
 export const changePassword = async (
   data: ChangePasswordSchemaType,
@@ -76,10 +70,6 @@ export const editPermission = async (
 export const getUsers = async (params?: UserQuery): Promise<PagedResponse<User>> => {
   const { data } = await api.get("users", { params })
   return data;
-}
-
-export const getUserModulePermissions = async () => {
-  return await getModulePermissions(`${baseUrl}/${PERMISSIONS_ENDPOINT_SUFFIX}`)
 }
 
 export const deleteUser = async (id: number) => {

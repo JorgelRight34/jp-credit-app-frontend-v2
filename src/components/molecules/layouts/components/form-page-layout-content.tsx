@@ -14,18 +14,24 @@ const FormPageLayoutContent = ({
   breadcrumbs,
   children,
   mode,
+  permissionProvider,
   ...props
 }: FormPageLayoutProps) => {
   switch (mode) {
     case 'create':
       return (
-        <CreateFormPageLayoutContent title={title} breadcrumbs={breadcrumbs}>
+        <CreateFormPageLayoutContent
+          permissionProvider={permissionProvider}
+          title={title}
+          breadcrumbs={breadcrumbs}
+        >
           {children}
         </CreateFormPageLayoutContent>
       )
     case 'edit':
       return (
         <EditFormPageLayoutContent
+          permissionProvider={permissionProvider}
           title={title}
           breadcrumbs={breadcrumbs}
           {...props}
@@ -40,10 +46,15 @@ const CreateFormPageLayoutContent = ({
   title,
   breadcrumbs = [],
   children,
-}: Pick<FormPageLayoutProps, 'title' | 'breadcrumbs' | 'children'>) => {
+  permissionProvider,
+}: Pick<
+  FormPageLayoutProps,
+  'title' | 'breadcrumbs' | 'children' | 'permissionProvider'
+>) => {
   return (
     <EntityLayout
       title={toAllTitleCase('Crear' + ' ' + title)}
+      permissionProvider={permissionProvider}
       breadcrumbs={breadcrumbs.concat({
         title: 'Crear',
         icon: AddIcon,

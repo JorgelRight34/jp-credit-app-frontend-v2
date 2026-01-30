@@ -5,11 +5,15 @@ import { getCurrentUserFromServer } from '@/features/auth/services/authServerSer
 import { getCurrentUser } from '@/features/auth/services/authService'
 import { AuthProvider } from '@/contexts/auth-context'
 import { CookieService } from '@/lib/services/cookieService'
-import { isJwtValid } from '@/lib/utils/auth-utils'
+import { getAuthorizationFromClient, isJwtValid } from '@/lib/utils/auth-utils'
 
 const getCurrentUserFn = createIsomorphicFn()
   .server(getCurrentUserFromServer)
   .client(getCurrentUser)
+
+const getAuthorizationFn = createIsomorphicFn()
+  .server(() => CookieService.getAuthorization())
+  .client(() => getAuthorizationFromClient())
 
 export const Route = createFileRoute('/(modules)')({
   component: RouteComponent,
@@ -17,7 +21,7 @@ export const Route = createFileRoute('/(modules)')({
     return await getCurrentUserFn()
   },
   beforeLoad: () => {
-    const accessToken = CookieService.getAuthorization()
+    const accessToken = getAuthorizationFn()
     if (!accessToken || !isJwtValid(accessToken)) {
       throw redirect({ to: '/login' })
     }

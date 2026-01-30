@@ -5,8 +5,8 @@ import errorHandler from "./errorHandler";
 import type { InternalAxiosRequestConfig } from "axios";
 
 const URLS = {
-  PROD: "https://jp-credit-app.onrender.com/api",
-  DEV: "http://localhost:5270/api",
+  PROD: "https://jp-credit-app.onrender.com/api/",
+  DEV: "http://localhost:5270/api/",
 };
 
 export const baseURL = IS_DEV_MODE ? URLS.DEV : URLS.PROD;

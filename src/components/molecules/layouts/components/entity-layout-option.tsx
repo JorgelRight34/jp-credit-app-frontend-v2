@@ -1,5 +1,5 @@
 import type { LayoutOption } from '../models/entityLayoutOption'
-import { Icon } from '@/components/atoms'
+import { Icon, Link } from '@/components/atoms'
 
 type EntityLayoutOptionProps = {
   option: LayoutOption
@@ -9,9 +9,11 @@ const EntityLayoutOption = ({ option }: EntityLayoutOptionProps) => {
   const Component = option.component
 
   return (
-    <Component>
-      <Icon icon={option.icon}>{option.title}</Icon>
-    </Component>
+    <Link to={option.to ?? '.'}>
+      <Component>
+        <Icon icon={option.icon}>{option.title}</Icon>
+      </Component>
+    </Link>
   )
 }
 

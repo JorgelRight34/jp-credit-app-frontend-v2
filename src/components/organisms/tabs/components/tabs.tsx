@@ -51,7 +51,7 @@ const Tabs = ({
             <Tab
               className={clsx(variationClasses.tab, tabClassName)}
               {...tab.props}
-              active={index === activeIndex}
+              isActive={index === activeIndex}
               key={index}
             >
               {tab.props.title}

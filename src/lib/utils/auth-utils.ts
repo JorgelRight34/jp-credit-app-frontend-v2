@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { getFirstAndLastName, getPicWithInitials } from "./utils";
-import { defaultProfilePic } from ".";
+import { ACCESS_TOKEN, defaultProfilePic } from ".";
 
 export function isJwtValid(token?: string) {
     if (!token) return false;
@@ -21,3 +21,5 @@ export const getProfilePicWithInitials = (
 ) => {
     return profile ? getPicWithInitials(getFirstAndLastName(profile), background, color) : defaultProfilePic;
 };
+
+export const getAuthorizationFromClient = () => localStorage.getItem(ACCESS_TOKEN)

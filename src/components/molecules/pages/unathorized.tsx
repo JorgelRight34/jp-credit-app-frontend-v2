@@ -9,7 +9,7 @@ import {
 
 const Unauthorized = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
+    <div className="flex h-full items-center justify-center p-4">
       <div className="w-full max-w-md text-center">
         {/* Lock SVG Icon */}
         <div className="mb-8 flex justify-center">
@@ -36,14 +36,14 @@ const Unauthorized = () => {
         </div>
 
         {/* Main Heading */}
-        <BigTitle className="mb-4 text-3xl font-bold text-gray-900">
+        <BigTitle className="mb-6 text-3xl font-bold text-gray-900">
           Acceso Denegado
         </BigTitle>
 
         {/* Description */}
-        <Paragraph className="eading-relaxed ">
-          No tienes permiso para acceder a este recurso. Por favor contacte a su
-          administrador o regresar a una página a la que tenga acceso.
+        <Paragraph className="leading-relaxed mb-6">
+          No tienes permiso para acceder a este recurso. Por favor contactae a
+          su administrador o regresar a una página a la que tenga acceso.
         </Paragraph>
         {/* Action Buttons */}
         <div className="space-y-3">
@@ -52,14 +52,14 @@ const Unauthorized = () => {
             className="mb-3 w-full rounded-lg"
             icon={ArrowBackIcon}
           >
-            <span className="text-lg">Ir Atrás</span>
+            <span className="text-lg">Atrás</span>
           </AccentBtn>
           <SecondaryBtn
             onClick={() => (window.location.href = '/')}
             className="w-full rounded-lg !bg-white"
             icon={HomeIcon}
           >
-            <span className="text-lg">Volver al Inicio</span>
+            <span className="text-lg">Inicio</span>
           </SecondaryBtn>
         </div>
       </div>

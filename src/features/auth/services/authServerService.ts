@@ -1,5 +1,5 @@
 import type { User } from "../models/user";
-import type { LoginResult } from "../lib/loginResult";
+import type { LoginResult } from "../models/loginResult";
 import { baseURL } from "@/lib/services"
 import { CookieService } from "@/lib/services/cookieService";
 
@@ -13,7 +13,7 @@ export const loginWithIdp = async (data: { username: string; password: string; }
 }
 
 export const getCurrentUserFromServer = async (): Promise<User> => {
-    const response = await fetch(`${baseURL}/users/me`, {
+    const response = await fetch(baseURL + "users/me", {
         headers: {
             "Authorization": `Bearer ${CookieService.getAuthorization()}`
         }

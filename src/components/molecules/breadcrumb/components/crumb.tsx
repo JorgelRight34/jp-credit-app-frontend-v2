@@ -19,7 +19,7 @@ const Crumb = ({ isLast, breadcrumb, ...props }: CrumbProps) => {
       underline="none"
       color={isLast ? '' : 'inherit'}
       aria-current={isLast ? 'page' : undefined}
-      to={breadcrumb.disabled ? '' : breadcrumb.pathname}
+      to={breadcrumb.disabled ? '.' : breadcrumb.pathname}
       {...props}
     >
       <Icon

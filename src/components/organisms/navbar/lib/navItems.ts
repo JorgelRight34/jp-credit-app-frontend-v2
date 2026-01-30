@@ -16,7 +16,7 @@ const allRouteBase: NavItem = {
 export const accountStatusNavItem: NavItem = {
   name: "Estados de Cuenta",
   icon: AccountBalanceIcon,
-  route: "account-statements",
+  route: "/account-statements",
   children: [
     {
       name: "General",
@@ -39,7 +39,7 @@ export const accountStatusNavItem: NavItem = {
 export const accessControlNavItem: NavItem = {
   name: "Accesos",
   icon: LockIcon,
-  route: "access-control",
+  route: "/access-control",
   children: [
     {
       ...allRouteBase,
@@ -65,7 +65,7 @@ export const accessControlNavItem: NavItem = {
 export const profileNavItem: NavItem = {
   name: "Pérfiles",
   icon: PersonIcon,
-  route: "profiles",
+  route: "/profiles",
   children: [
     {
       ...allRouteBase,
@@ -96,7 +96,7 @@ export const profileNavItem: NavItem = {
 export const collateralsNavItem: NavItem = {
   name: "Garantías",
   icon: FolderOpenIcon,
-  route: "collaterals",
+  route: "/collaterals",
   children: [
     {
       ...allRouteBase,
@@ -132,7 +132,7 @@ export const collateralsNavItem: NavItem = {
 export const transactionsNavItem: NavItem = {
   name: "Transacciones",
   icon: CreditCardIcon,
-  route: "transactions",
+  route: "/transactions",
   children: [
     {
       ...allRouteBase,

@@ -26,7 +26,7 @@ export { default as useUserPermissions } from "./hooks/useUserPermissions";
 // ----------------------
 // Lib
 // ----------------------
-export * from "./lib/claim";
+export * from "./models/claim";
 export * from "./lib/constants";
 export * from "./lib/form";
 export * from "./lib/utils";
@@ -49,6 +49,7 @@ export * from "./models/userQuery";
 // ----------------------
 export { default as PermissionsProviderWrapper } from "./components/permissions-provider/PermissionsProviderWrapper"
 export { default as LoginPanel } from "./components/login/login-panel"
+export { default as AccessControlPage } from "./pages/access-control-page"
 
 // ----------------------
 // Services

@@ -1,4 +1,5 @@
-
+import { redirect } from "@tanstack/react-router";
+import { CookieService } from "./cookieService";
 
 type HttpClientConfig = RequestInit & {
     baseURL?: string;
@@ -30,7 +31,7 @@ export class HttpClient {
         const { headers, request, baseURL, ensureSuccessOverride, ...rest } = config;
         const url = (baseURL ?? this.baseURL) + endpoint;
 
-        const authHeader = request?.headers.get("authorization");
+        const authHeader = `Bearer ${CookieService.getAuthorization()}`;
         const res = await fetch(url, {
             ...rest,
             headers: {
@@ -40,11 +41,14 @@ export class HttpClient {
             },
         })
 
-        const text = await res.text();
-        if ((this.ensureSuccess || ensureSuccessOverride) && !res.ok) {
-            throw new Error(`Error on ${url}, ${text}`)
+        if (res.status === 401) {
+            throw redirect({ to: "/login" })
         }
 
+        const text = await res.text();
+        if ((this.ensureSuccess || ensureSuccessOverride) && !res.ok) {
+            throw new Error(`Error (${res.status}) ${res.statusText} on ${url}, ${text}`)
+        }
         return {
             data: text ? JSON.parse(text) : null,
             status: res.status,

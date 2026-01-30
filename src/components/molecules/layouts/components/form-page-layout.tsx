@@ -1,9 +1,10 @@
 import FormPageLayoutContent from './form-page-layout-content'
-import LayoutPermissionsWrapper from './layout-permissions-wrapper'
 import type { EntityLayoutProps } from './entity-layout'
 import type { CacheKey } from '@/models'
 import type { FormPageMode } from '../models/formPageMode'
 import type { ConfirmationModalProps } from '@/components/organisms'
+import type { PermissionsProvider } from '@/models/permissionsProvider'
+import { PermissionsProviderWrapper } from '@/features/auth'
 
 export type FormPageLayoutProps = React.PropsWithChildren &
   EntityLayoutProps &
@@ -11,27 +12,32 @@ export type FormPageLayoutProps = React.PropsWithChildren &
     mode?: FormPageMode
     cacheKey?: CacheKey
     deleteConfirmationMessage?: string
+    permissionProvider: PermissionsProvider
     onDelete?: () => Promise<void>
   }
 
 const FormPageLayout = ({
-  permissionsProvider,
+  permissionProvider,
   children,
   mode = 'create',
   ...props
 }: FormPageLayoutProps) => {
   return (
-    <LayoutPermissionsWrapper
-      provider={permissionsProvider}
+    <PermissionsProviderWrapper
+      provider={permissionProvider}
       isAuthorizedFn={(permissions) =>
         (mode === 'edit' && permissions.canEdit) ||
         (mode === 'create' && permissions.canCreate)
       }
     >
-      <FormPageLayoutContent mode={mode} {...props}>
+      <FormPageLayoutContent
+        permissionProvider={permissionProvider}
+        mode={mode}
+        {...props}
+      >
         {children}
       </FormPageLayoutContent>
-    </LayoutPermissionsWrapper>
+    </PermissionsProviderWrapper>
   )
 }
 
