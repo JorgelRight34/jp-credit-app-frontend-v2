@@ -1,20 +1,23 @@
 import { loginSchema } from "../lib/schemas/loginSchema";
 import { login } from "../services/authService";
+import type { LoginResult } from "../models/loginResult";
 import type { LoginSchemaType } from "../lib/schemas/loginSchema";
 import type { UseDataModuleFormProps, UseFormBuilderReturn } from "@/components";
 import { useForm } from "@/components";
 import { ACCESS_TOKEN } from "@/lib/utils";
 
-export const useLoginForm = ({ ...props }: UseDataModuleFormProps): UseFormBuilderReturn<LoginSchemaType> => {
-
+export const useLoginForm = ({ onSuccess, ...props }: UseDataModuleFormProps<LoginResult, LoginSchemaType>): UseFormBuilderReturn<LoginSchemaType> => {
     return useForm({
         ...props,
         onSubmit: login,
         defaultValues: { username: "", password: "" },
         schema: loginSchema,
+        resetValues: false,
         toastMessage: () => `Bienvenido!`,
-        onSuccess: ({ token }) => {
-            localStorage.setItem(ACCESS_TOKEN, token)
+        onSuccess: (data) => {
+            localStorage.setItem(ACCESS_TOKEN, data.token)
+            alert("Redirecting")
+            onSuccess?.(data);
         },
     });
 };

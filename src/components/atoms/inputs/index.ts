@@ -1,31 +1,18 @@
 // Components
-import { default as CitizenIdInput } from './citizen-id-input/citizen-id-input';
-import { default as CurrencyInput } from './currency-input/currency-input';
-import { default as DateInput } from './date-input/date-input';
-import { default as Input } from './input/components/input';
-import { default as MaskedInput } from './masked-input/masked-input';
-import { default as MonthSelect } from './month-select/month-select';
-import { default as PasswordInput } from './password-input/password-input';
-import { default as PercentageInput } from './percentage-input/percentage-input';
-import { default as PhoneInput } from './phone-input/phone-input';
-import { default as Select } from './select/select';
-import { default as LazySelect } from './select/lazy-select';
-import { default as YearSelect } from './select/year-select';
+export { default as CitizenIdInput } from './citizen-id-input/citizen-id-input';
+export { default as CurrencyInput } from './currency-input/currency-input';
+export { default as DateInput } from './date-input/date-input';
+export { default as Input } from './input/components/input';
+export { default as MaskedInput } from './masked-input/masked-input';
+export { default as MonthSelect } from './month-select/month-select';
+export { default as PasswordInput } from './password-input/password-input';
+export { default as PercentageInput } from './percentage-input/percentage-input';
+export { default as PhoneInput } from './phone-input/phone-input';
+export { default as Select } from './select/select';
+export { default as LazySelect } from './select/lazy-select';
+export { default as YearSelect } from './select/year-select';
+export { default as TransferList } from "./transfer-list/transfer-list"
 
-export {
-    CitizenIdInput,
-    CurrencyInput,
-    DateInput,
-    Input,
-    MaskedInput,
-    MonthSelect,
-    PasswordInput,
-    PercentageInput,
-    PhoneInput,
-    Select,
-    LazySelect,
-    YearSelect,
-};
 
 export { default as SearchableComboBox } from "./searchable-combo-box/searchable-combo-box"
 

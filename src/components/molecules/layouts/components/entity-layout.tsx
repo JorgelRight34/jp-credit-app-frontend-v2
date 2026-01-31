@@ -1,12 +1,11 @@
 import EntityLayoutContent from './entity-layout-content'
 import EntityLayoutOptionsContainer from './entity-layout-options-container'
+import EntityLayoutBreadcrumb from './entity-layout-breadcrumb'
 import type { ReactNode } from 'react'
 import type { PermissionsProvider } from '@/models/permissionsProvider'
 import type { BreadcrumbSpec } from '@/components'
 import type { LayoutOption } from '../models/entityLayoutOption'
-import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils/constants'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { BigTitle, Breadcrumb, HomeIcon } from '@/components'
+import { BigTitle } from '@/components'
 
 export interface EntityLayoutProps {
   children: ReactNode
@@ -46,25 +45,6 @@ const EntityLayout = ({
         <EntityLayoutContent {...props}>{children}</EntityLayoutContent>
       </div>
     </div>
-  )
-}
-
-const homeBreadcrumbs: Array<BreadcrumbSpec> = [
-  { title: 'Home', icon: () => <HomeIcon />, pathname: '/' },
-]
-
-const EntityLayoutBreadcrumb = ({
-  breadcrumbs,
-}: {
-  breadcrumbs: Array<BreadcrumbSpec>
-}) => {
-  const isSmallScreen = useMediaQuery(SMALL_SCREEN_BREAKPOINT)
-
-  return (
-    <Breadcrumb
-      maxItems={isSmallScreen ? 3 : 4}
-      breadcrumbs={homeBreadcrumbs.concat(breadcrumbs)}
-    />
   )
 }
 

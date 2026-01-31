@@ -1,4 +1,4 @@
-import LoginForm from './login-form'
+import LoginForm from '../components/login/login-form'
 import {
   BigTitle,
   Container,
@@ -7,8 +7,11 @@ import {
   InfoIcon,
   Subtitle,
 } from '@/components'
+import { useRouter } from '@/hooks/useRouter'
 
 const LoginPanel = () => {
+  const router = useRouter()
+
   return (
     <main className="flex items-center justify-center border h-screen">
       <Container className="w-[95dvw] md:w-[75dvw] rounded-xl py-5 flex shadow-sm">
@@ -35,12 +38,12 @@ const LoginPanel = () => {
         <section className="md:p-5 flex w-full flex-col justify-center p-3 md:w-6/12">
           <figure className="flex justify-center">
             <Image
-              className="img-fluid mb-3 hidden object-contain md:block"
+              className="mb-3 hidden object-contain md:block"
               src="/horizontal-logo.png?url"
               alt="header"
             />
             <Image
-              className="img-fluid mb-5 block object-contain md:hidden"
+              className="mb-5 block object-contain md:hidden"
               src="/header.jpg?url"
               alt="header"
             />
@@ -51,7 +54,11 @@ const LoginPanel = () => {
               Ingresa tus credenciales para acceder al sistema.
             </Subtitle>
           </header>
-          <LoginForm />
+          <LoginForm
+            onSuccess={() => {
+              router.navigate({ to: '/' })
+            }}
+          />
         </section>
       </Container>
     </main>

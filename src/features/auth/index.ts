@@ -11,24 +11,20 @@ export { default as UserInfoTable } from "./components/UserInfoTable";
 export { default as UserQuerySearch } from "./components/UserQuerySearch";
 export { default as UsersDataTable } from "./components/UsersDataTable";
 // export { default as UsersSection } from "./components/UsersSection";
-export * from "./components/permissions-provider/PermissionsProviderWrapper"
+export * from "./components/permissions-provider/permission-provider-wrapper"
 
 // ----------------------
 // Hooks
 // ----------------------
-export * from "./hooks/useAddProfilePermissions";
 export * from "./hooks/useChangePassword";
 export * from "./hooks/useLoginForm";
-export { default as usePermissionsForm } from "./hooks/usePermissionsForm";
-export { default as usePossiblePermissions } from "./hooks/usePossiblePermissions";
-export { default as useUserPermissions } from "./hooks/useUserPermissions";
+export * from "./hooks/usePermissionsForm";
 
 // ----------------------
 // Lib
 // ----------------------
-export * from "./models/claim";
+export * from "./models/claimPair";
 export * from "./lib/constants";
-export * from "./lib/form";
 export * from "./lib/utils";
 
 // ----------------------
@@ -47,11 +43,13 @@ export * from "./models/userQuery";
 // ----------------------
 // Pages (default)
 // ----------------------
-export { default as PermissionsProviderWrapper } from "./components/permissions-provider/PermissionsProviderWrapper"
-export { default as LoginPanel } from "./components/login/login-panel"
+export { default as PermissionsProviderWrapper } from "./components/permissions-provider/permission-provider-wrapper"
+export { default as LoginPanel } from "./pages/login-panel"
 export { default as AccessControlPage } from "./pages/access-control-page"
+export { default as UserFormPage } from "./pages/user-form-page"
 
 // ----------------------
 // Services
 // ----------------------
 export * from "./services/userClient";
+export * from './lib/query-keys'

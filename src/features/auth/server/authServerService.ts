@@ -1,0 +1,28 @@
+import type { User } from "../models/user";
+import type { LoginResult } from "../models/loginResult";
+import type { UserPermissions } from "../models/userPermissions";
+import { baseURL } from "@/lib/services"
+import { CookieService } from "@/lib/services/cookieService";
+import { serverClient } from "@/lib/services/serverClient";
+
+export const loginWithIdp = async (data: { username: string; password: string; }) => {
+    const response = await serverClient.post<LoginResult>(`users/login`, data);
+    return response
+}
+
+export const getCurrentUserFromServer = async (): Promise<User> => {
+    const response = await fetch(baseURL + "users/me", {
+        headers: {
+            "Authorization": `Bearer ${CookieService.getAuthorization()}`
+        }
+    });
+    return await response.json()
+}
+
+export const getUserFromServer = async (username: string): Promise<User> => {
+    return serverClient.get(`users/${username}`)
+}
+
+export const getUserPermissionsFromServer = async (username: string) => {
+    return await serverClient.get<UserPermissions>(`users/${username}/permissions`);
+}

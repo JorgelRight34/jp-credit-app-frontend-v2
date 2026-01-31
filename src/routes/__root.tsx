@@ -55,9 +55,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <LoadingBar />
-        <LoadingScreen />
-        <Provider dataClient={context.dataClient}>{children}</Provider>
+        <Provider dataClient={context.dataClient}>
+          <LoadingBar />
+          <LoadingScreen />
+          {children}
+        </Provider>
         <TanStackDevtools
           config={{
             position: 'bottom-right',

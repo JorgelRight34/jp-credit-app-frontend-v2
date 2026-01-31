@@ -1,16 +1,22 @@
 import { useChangePasswordForm } from '../../hooks/useChangePassword'
-import type { User } from '../../models/user'
+import type { Ref } from 'react'
+import type { ChangePasswordSchemaType } from '../../lib/schemas/changePasswordSchema'
+import type { FormRef, UseDataModuleFormProps } from '@/components'
 import { Form, FormGroup, PasswordInput } from '@/components'
 
-export interface ChangePasswordFormProps {
-  user: User
-}
+export type ChangePasswordFormProps = UseDataModuleFormProps<
+  null,
+  ChangePasswordSchemaType
+>
 
-const ChangePasswordForm = ({ user }: ChangePasswordFormProps) => {
-  const form = useChangePasswordForm({ user })
+const ChangePasswordForm = ({
+  initialValues,
+  ref,
+}: ChangePasswordFormProps) => {
+  const form = useChangePasswordForm({ initialValues })
 
   return (
-    <Form form={form}>
+    <Form ref={ref as Ref<FormRef<ChangePasswordSchemaType>>} form={form}>
       <FormGroup name="password" label="Contraseña" input={PasswordInput} />
       <FormGroup
         name="confirmation"

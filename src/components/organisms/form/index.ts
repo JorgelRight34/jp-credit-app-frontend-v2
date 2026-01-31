@@ -4,7 +4,11 @@ export { default as FormSubmitBtn } from "./components/form-submit-btn";
 export { default as FormDeleteBtn } from "./components/form-delete-btn"
 export { default as FormButtonsContainer } from "./components/form-buttons-container"
 export { default as FormGroup } from "./components/form-group"
+export { default as FormWatchGroup } from "./components/form-watch-group"
 export { default as FormContainer } from "./components/form-container"
+export { default as FormWatchInput } from "./components/form-watch-input"
+export { default as FormColumn } from "./components/form-column";
+export { default as FormRow } from "./components/form-row"
 
 export * from "./hooks/useForm"
 export * from "./models/apiError"
@@ -15,3 +19,4 @@ export * from "./models/useDataFormProps"
 export * from "./models/useDataModuleFormProps"
 export * from "./models/fomRef"
 export * from "./models/useFormBuilderReturn"
+export * from "./hooks/useMultipleForms"

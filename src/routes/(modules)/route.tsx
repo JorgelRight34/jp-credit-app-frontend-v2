@@ -1,15 +1,15 @@
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 import { BottomNavbar, Navbar } from '@/components'
-import { getCurrentUserFromServer } from '@/features/auth/services/authServerService'
-import { getCurrentUser } from '@/features/auth/services/authService'
 import { AuthProvider } from '@/contexts/auth-context'
 import { CookieService } from '@/lib/services/cookieService'
 import { getAuthorizationFromClient, isJwtValid } from '@/lib/utils/auth-utils'
+import { getCurrentUser } from '@/features/auth/services/authService'
+import { getCurrentUserFromServer } from '@/features/auth/server/authServerService'
 
 const getCurrentUserFn = createIsomorphicFn()
-  .server(getCurrentUserFromServer)
-  .client(getCurrentUser)
+  .server(() => getCurrentUserFromServer())
+  .client(() => getCurrentUser())
 
 const getAuthorizationFn = createIsomorphicFn()
   .server(() => CookieService.getAuthorization())
@@ -17,9 +17,7 @@ const getAuthorizationFn = createIsomorphicFn()
 
 export const Route = createFileRoute('/(modules)')({
   component: RouteComponent,
-  loader: async () => {
-    return await getCurrentUserFn()
-  },
+  loader: () => getCurrentUserFn(),
   beforeLoad: () => {
     const accessToken = getAuthorizationFn()
     if (!accessToken || !isJwtValid(accessToken)) {

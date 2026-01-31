@@ -1,12 +1,10 @@
+import type { UserFormValues } from "../lib/schemas/userFormSchema";
 import type { UserQuery } from "../models/userQuery";
 import type { PossiblePermissions } from "../models/possiblePermissions";
 import type { UserPermissions } from "../models/userPermissions";
-import type { UserFormValues } from "../lib/form";
 import type { User } from "../models/user";
 import type { PagedResponse } from "@/models";
-import type { Claim } from "../models/claim";
 import type { ChangePasswordSchemaType } from "../lib/schemas/changePasswordSchema";
-import { PERMISSIONS_ENDPOINT_SUFFIX } from "@/lib/utils/constants";
 import api from "@/lib/services/api";
 
 const baseUrl = "users"
@@ -16,12 +14,13 @@ export const createUser = async (data: UserFormValues): Promise<User> => {
   return response.data;
 }
 
-export const getUser = async (id: number): Promise<User> => {
-  return await api.get(`${baseUrl}/${id}`);
-}
+export const getUser = (async (username: string): Promise<User> => {
+  const { data } = await api.get(`${baseUrl}/${username}`);
+  return data;
+});
 
-export const getUserClaims = async (username: string): Promise<Array<Claim>> => {
-  const response = await api.get(`${baseUrl}/${username}/claims`);
+export const getUserPermissions = async (username: string): Promise<UserPermissions> => {
+  const response = await api.get(`${baseUrl}/${username}/permissions`);
   return response.data;
 };
 
@@ -38,11 +37,11 @@ export const getPermissions = async (id: number): Promise<UserPermissions> => {
 
 
 export const changePassword = async (
+  username: string,
   data: ChangePasswordSchemaType,
-  UserUsername: string
 ) => {
   const response = await api.put(
-    `users/${UserUsername}/change-password`,
+    `users/${username}/change-password`,
     data
   );
   return response.data;
@@ -51,9 +50,9 @@ export const changePassword = async (
 export const editUser = async (
   data: UserFormValues,
   id: number
-): Promise<User> => {
-  const response = await api.put(`${baseUrl}/${id}`, data);
-  return response.data;
+) => {
+  await api.put(`${baseUrl}/${id}`, data);
+  return data;
 };
 
 export const editPermission = async (

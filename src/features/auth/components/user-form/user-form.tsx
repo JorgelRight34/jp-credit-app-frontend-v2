@@ -1,73 +1,74 @@
-/*
-import { useUserForm } from '../../hooks/useUserForm'
-import PermissionsForm from '../permissions-form/permissions-form'
+import { Suspense, useState } from 'react'
 import ChangePasswordForm from '../change-password/change-password-form'
-import type { UseUserFormProps } from '../../hooks/useUserForm'
-import type { EntityFormProps } from '@/components'
-import type { User } from '../../models/user'
-import type { UserFormValues } from '../../lib/form'
+import UserAccessForm from './user-access-form'
+import UserFormPermissions from './user-form-permissions'
+import type { UserAccessFormProps } from './user-access-form'
+import type { UserPermissions } from '../../models/userPermissions'
 import {
-  FormBuilder,
-  FormLayout,
+  FormContainer,
+  FormSubmitBtn,
   Tab,
   Tabs,
-  useMultipleForm,
+  useMultipleForms,
 } from '@/components'
 
-type UserFormProps = UseUserFormProps & EntityFormProps<UserFormValues>
+type UserFormProps = UserAccessFormProps & {
+  initialPermissions?: UserPermissions
+}
 
-const UserForm = ({ edit, ...props }: UserFormProps) => {
-  const config = useUserForm({ edit })
-
-  const { forms, setFormRef, submitAllForms, onDirtyChange, ...methods } =
-    useMultipleForm(['user', 'permission', 'password'])
+const UserForm = ({
+  user,
+  shouldEdit,
+  initialPermissions,
+  ...props
+}: UserFormProps) => {
+  const [isDirty, setIsDirty] = useState(false)
+  const { forms, setFormRef, handleSubmit } = useMultipleForms([
+    'user',
+    'permissions',
+    'password',
+  ])
 
   return (
-    <FormLayout
-      onSubmit={edit ? forms.user?.submit : submitAllForms}
-      {...methods}
+    <FormContainer
+      footer={<FormSubmitBtn isDirty={isDirty} onSubmit={handleSubmit} />}
     >
       <Tabs defaultActiveKey="data" navigate={false}>
-        <Tab eventKey="data" title="Datos">
-          <FormBuilder<User, UserFormValues>
+        <Tab eventKey="data" title="Overview">
+          <UserAccessForm
             ref={setFormRef('user')}
-            layout={[
-              ['firstName', 'lastName'],
-              ['username', 'email'],
-              ['password', 'confirmation'],
-            ]}
-            edit={edit}
-            onSuccess={edit ? () => forms.permission?.submit() : undefined}
-            onDirtyChange={onDirtyChange}
-            {...config}
+            onSuccess={(data) => {
+              forms['permissions']?.setValue('username', data.username)
+              forms['permissions']?.submit()
+            }}
+            onDirtyChange={setIsDirty}
+            user={user}
+            shouldEdit={shouldEdit}
             {...props}
           />
         </Tab>
         <Tab eventKey="permissions" title="Permisos">
-          <PermissionsForm
-            ref={setFormRef('permission')}
-            edit={edit}
-            renderLayout={false}
-            onDirtyChange={onDirtyChange}
-          />
+          <Suspense fallback="...">
+            <UserFormPermissions
+              ref={setFormRef('permissions')}
+              username={user?.username}
+              initialPermissions={initialPermissions}
+              onDirtyChange={setIsDirty}
+            />
+          </Suspense>
         </Tab>
-        {edit && (
+        {shouldEdit && (
           <Tab eventKey="credentials" title="Credenciales">
             <ChangePasswordForm
               ref={setFormRef('password')}
-              user={edit}
-              renderLayout={false}
-              onDirtyChange={onDirtyChange}
+              initialValues={{ username: user?.username }}
+              onDirtyChange={setIsDirty}
             />
           </Tab>
         )}
       </Tabs>
-    </FormLayout>
+    </FormContainer>
   )
 }
 
 export default UserForm
-*/
-const Default = () => <></>
-
-export default Default

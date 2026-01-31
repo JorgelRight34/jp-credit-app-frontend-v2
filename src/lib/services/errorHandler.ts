@@ -1,10 +1,10 @@
-import { AxiosError } from "axios";
 import { toastService } from "./toastService";
+import type { AxiosError } from "axios";
 
 const errorHandler = (error: AxiosError<{ message?: string }>) => {
-  const errorMsg = error.response?.data?.message || error.response?.data;
+  const errorMsg = error.response?.data.message || error.response?.data;
   if (typeof errorMsg === "string" && errorMsg !== "") {
-    toastService.error(errorMsg.slice(100));
+    toastService.error(errorMsg);
     return;
   }
 
@@ -16,13 +16,11 @@ const errorHandler = (error: AxiosError<{ message?: string }>) => {
       toastService.error("Oops!, error interno.");
       break;
     case "ERR_BAD_REQUEST":
+      console.log("Error.response.status", error.response?.status)
+      console.log("Response", error.response)
       switch (error.response?.status) {
         case 400:
           toastService.error("Mala solicitud.");
-          break;
-        case 401:
-          alert("debe")
-          toastService.error("Debe iniciar sesión.");
           break;
         case 404:
           toastService.error("No encontrado")

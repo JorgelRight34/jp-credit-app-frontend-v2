@@ -6,9 +6,9 @@ type FormContainerProps = PropsWithChildren & {
 
 const FormContainer = ({ children, footer }: FormContainerProps) => {
   return (
-    <section>
-      <div className="flex gap-6 flex-col">{children}</div>
-      <div className="pt-6">{footer}</div>
+    <section className="h-full flex flex-col">
+      <div className="flex flex-1 gap-6 flex-col">{children}</div>
+      <div className="pt-6 flex-shrink-0">{footer}</div>
     </section>
   )
 }

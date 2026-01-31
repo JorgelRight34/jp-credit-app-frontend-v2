@@ -1,18 +1,29 @@
 import { Controller } from 'react-hook-form'
+import type { FieldValues } from 'react-hook-form'
 import type { ReactNode } from 'react'
 import type { InputProps } from '@/components/atoms'
 
-export interface FormInputProps extends InputProps {
-  name: string
-  as: (props: { onChange: (e: unknown) => unknown }) => ReactNode
+export interface FormInputProps<T extends FieldValues> extends Omit<
+  InputProps,
+  'name'
+> {
+  name: keyof T
+  as: (props: {
+    value: unknown
+    onChange: (e: unknown) => unknown
+  }) => ReactNode
 }
 
-const FormInput = ({ as, name, ...props }: FormInputProps) => {
+const FormInput = <T extends FieldValues>({
+  as,
+  name,
+  ...props
+}: FormInputProps<T>) => {
   const Component = as
 
   return (
     <Controller
-      name={name}
+      name={name as string}
       render={({ field }) => {
         return <Component {...props} {...field} />
       }}

@@ -1,7 +1,6 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { ACCESS_TOKEN, IS_DEV_MODE } from "../utils/constants";
 import { isJwtValid } from "../utils/auth-utils";
-import errorHandler from "./errorHandler";
 import type { InternalAxiosRequestConfig } from "axios";
 
 const URLS = {
@@ -26,16 +25,6 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
-    return Promise.reject(error);
-  }
-);
-
-api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    if (error instanceof AxiosError) errorHandler(error);
     return Promise.reject(error);
   }
 );

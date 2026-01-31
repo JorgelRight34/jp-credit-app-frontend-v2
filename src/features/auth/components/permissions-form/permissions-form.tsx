@@ -1,27 +1,39 @@
-const Default = () => <></>
+import { useIdentityClaims } from '../../hooks/useIdentityClaims'
+import { usePermissionsForm } from '../../hooks/usePermissionsForm'
+import type { Ref } from 'react'
+import type { FormRef, UseDataModuleFormProps } from '@/components'
+import type { PermissionsFormValues } from '../../lib/schemas/permissionsFormSchema'
+import { Form, FormInput, TransferList } from '@/components'
 
-export default Default
-
-/*
-import { EntityFormProps, FormBuilder } from '@/components'
-import usePermissionsForm from '../../hooks/usePermissionsForm'
-import { User } from '../../models/user'
-
-interface PermissionsFormProps extends EntityFormProps<object> {
-  edit?: User
-}
+export type PermissionsFormProps = UseDataModuleFormProps<
+  null,
+  PermissionsFormValues
+>
 
 const PermissionsForm = ({
-  edit,
   onDirtyChange,
+  ref,
   ...props
 }: PermissionsFormProps) => {
-  const config = usePermissionsForm({
-    profile: edit,
-  })
+  const form = usePermissionsForm({ ...props })
+  const { claims } = useIdentityClaims()
 
-  return <FormBuilder onDirtyChange={onDirtyChange} {...config} {...props} />
+  return (
+    <Form ref={ref as Ref<FormRef<PermissionsFormValues>>} form={form}>
+      <FormInput
+        name="claims"
+        as={({ value, ...inputProps }) =>
+          TransferList({
+            items: claims,
+            value: value as Array<string>,
+            leftTitle: 'Disponibles',
+            rightTitle: 'Seleccionados',
+            ...inputProps,
+          })
+        }
+      />
+    </Form>
+  )
 }
 
 export default PermissionsForm
-*/
