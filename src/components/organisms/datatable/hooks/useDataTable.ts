@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useDataTableState } from "./useDataTableState";
 import type { CacheKey, PagedResponse } from "@/models";
-import type { Query } from "@/models/query";
+import type { Query } from "@/components/organisms/search-form/models/query";
 import type { Column, PageSize } from "../../table";
 import { useData } from "@/hooks/useData";
 

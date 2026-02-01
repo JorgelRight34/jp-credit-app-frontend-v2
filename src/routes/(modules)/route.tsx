@@ -24,6 +24,8 @@ export const Route = createFileRoute('/(modules)')({
       throw redirect({ to: '/login' })
     }
   },
+  staticData: {},
+  shouldReload: false,
 })
 
 function RouteComponent() {

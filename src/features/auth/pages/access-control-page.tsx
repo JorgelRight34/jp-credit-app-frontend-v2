@@ -1,5 +1,6 @@
+import UsersDataTable from '../components/users-datatable'
 import { accessControlBreadcrumb } from '../lib/breadcrumbs'
-import { accessControlPermissionProvider } from '../lib/permissionProvider'
+import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import { EntityLayout, Tab, Tabs, getEntityLayoutOptions } from '@/components'
 
 const AccessControlPage = () => {
@@ -14,7 +15,7 @@ const AccessControlPage = () => {
     >
       <Tabs defaultActiveKey="users">
         <Tab eventKey="users" title="Accesos">
-          ...
+          <UsersDataTable />
         </Tab>
         <Tab eventKey="other" title="Otros">
           ...

@@ -10,9 +10,7 @@ import { BigTitle } from '@/components'
 export interface EntityLayoutProps {
   children: ReactNode
   title: string
-  height?: string
   permissionProvider: PermissionsProvider
-  showTopOptions?: boolean
   breadcrumbs?: Array<BreadcrumbSpec>
   options: Array<LayoutOption>
   validateProject?: boolean
@@ -26,10 +24,7 @@ const EntityLayout = ({
   ...props
 }: EntityLayoutProps) => {
   return (
-    <div
-      className="flex !h-full w-full flex-col overflow-y-auto border !bg-white px-6 pb-6 shadow-sm"
-      {...props}
-    >
+    <div className="flex !h-full w-full flex-col overflow-y-auto border !bg-white px-6 pb-6 shadow-sm">
       <div className="border-b mb-3 w-full bg-white p-2">
         <EntityLayoutBreadcrumb breadcrumbs={breadcrumbs} />
       </div>

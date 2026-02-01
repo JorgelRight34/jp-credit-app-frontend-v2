@@ -1,5 +1,5 @@
+import type { ModulePermissions } from '../models/modulePermissions'
 import type { ReactNode } from 'react'
-import type { ModulePermissions } from '../../models/modulePermissions'
 import type { PermissionsProvider } from '@/models/permissionsProvider'
 import Unauthorized from '@/components/molecules/pages/unathorized'
 import { useSuspenseData } from '@/hooks/useData'

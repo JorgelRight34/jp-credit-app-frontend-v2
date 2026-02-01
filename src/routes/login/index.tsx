@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { setCookie } from '@tanstack/react-start/server'
 import { loginWithIdp } from '@/features/auth/server/authServerService'
 import { COOKIES } from '@/lib/constants/cookies'
 import { LoginPanel } from '@/features/auth'
@@ -13,12 +14,15 @@ export const Route = createFileRoute('/login/')({
           const body = await request.json()
           const response = await loginWithIdp(body)
 
-          return new Response(JSON.stringify(response), {
-            headers: {
-              'Set-Cookie': `${COOKIES.ACCESS_TOKEN}=${response.token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=604800`,
-              'Content-Type': 'application/json',
-            },
+          setCookie(COOKIES.ACCESS_TOKEN, response.token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
+            path: '/',
+            maxAge: 604800,
           })
+
+          return Response.json(response)
         })
       },
     },

@@ -19,3 +19,6 @@ export type { UseDataTableReturn } from "./models/useDataTableReturn";
 // ==============================
 export { PaginationLimitManager } from "./services/paginationLimitManager";
 
+export * from "./models/dataTableConfig"
+
+export { default as DataTableContainer } from './components/data-table-container'

@@ -2,9 +2,9 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import clsx from 'clsx'
 import { muiSxConfig } from '../constants'
 import { getIconInputSlot } from '../input/lib/react-utils'
+import type { SelectOptions } from './select-option'
 import type { InputProps } from '../input/components/input'
 import type { ReactNode } from 'react'
-import type { SelectOptions } from '@/models'
 import { toTitleCase } from '@/lib/utils/utils'
 
 export type SelectInputProps = Omit<

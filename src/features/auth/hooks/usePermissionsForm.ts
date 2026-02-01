@@ -14,23 +14,24 @@ export const usePermissionsForm = ({ initialValues, ...config }: UsePermissionsF
   UseFormBuilderReturn<PermissionsFormValues> => {
   return useForm({
     schema: permissionsFormSchema,
-    onSubmit: async ({ username, claims }) => {
-      await updateUserClaims(username, {
+    onSubmit: async ({ id, claims }) => {
+      await updateUserClaims(id, {
         add: getClaimPairsFromStringArray(claims),
         remove: []
       });
       return null;
     },
-    onEdit: async ({ username, claims }) => {
+    onEdit: async ({ id, claims }) => {
       const removedClaims = initialValues?.claims?.filter(c => !claims.includes(c));
-      await updateUserClaims(username, {
-        add: getClaimPairsFromStringArray(claims),
+      const claimsToAdd = claims.filter(c => !initialValues?.claims?.includes(c));
+      await updateUserClaims(id, {
+        add: getClaimPairsFromStringArray(claimsToAdd),
         remove: removedClaims ? getClaimPairsFromStringArray(removedClaims) : []
       })
 
       return null;
     },
-    defaultValues: initialValues,
+    defaultValues: { claims: [], roles: [], ...initialValues },
     ...config
   })
 }

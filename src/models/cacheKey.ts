@@ -1,3 +1,3 @@
-import { QueryKey } from "@tanstack/react-query";
+import type { QueryKey } from "@tanstack/react-query";
 
 export type CacheKey = QueryKey

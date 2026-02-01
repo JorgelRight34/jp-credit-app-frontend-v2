@@ -1,8 +1,8 @@
-import { useIdentityClaims } from '../../hooks/useIdentityClaims'
-import { usePermissionsForm } from '../../hooks/usePermissionsForm'
+import { usePermissionsForm } from '../hooks/usePermissionsForm'
+import { useIdentityClaims } from '../hooks/useIdentityClaims'
 import type { Ref } from 'react'
 import type { FormRef, UseDataModuleFormProps } from '@/components'
-import type { PermissionsFormValues } from '../../lib/schemas/permissionsFormSchema'
+import type { PermissionsFormValues } from '../lib/schemas/permissionsFormSchema'
 import { Form, FormInput, TransferList } from '@/components'
 
 export type PermissionsFormProps = UseDataModuleFormProps<
@@ -10,11 +10,7 @@ export type PermissionsFormProps = UseDataModuleFormProps<
   PermissionsFormValues
 >
 
-const PermissionsForm = ({
-  onDirtyChange,
-  ref,
-  ...props
-}: PermissionsFormProps) => {
+const PermissionsForm = ({ ref, ...props }: PermissionsFormProps) => {
   const form = usePermissionsForm({ ...props })
   const { claims } = useIdentityClaims()
 

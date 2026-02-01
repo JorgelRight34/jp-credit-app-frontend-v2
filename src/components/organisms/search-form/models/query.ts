@@ -1,5 +1,3 @@
-import { ProfileRole } from "bk/profiles";
-
 export type Query = {
   id?: number;
   startDate?: string;
@@ -12,6 +10,6 @@ export type Query = {
   profileId?: number;
   loanId?: number;
   createdBy?: number;
-  profileAs?: ProfileRole;
+  profileAs?: any;
   limit?: number;
 }

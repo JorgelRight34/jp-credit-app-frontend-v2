@@ -8,5 +8,5 @@ export type UseDataModuleFormProps<T = object, TData extends FieldValues = Field
     reset?: boolean;
     shouldEdit?: boolean;
     onDirtyChange?: (isDirty: boolean) => void;
-    onSuccess?: (data: TData) => void;
+    onSuccess?: (data: T) => void;
 }

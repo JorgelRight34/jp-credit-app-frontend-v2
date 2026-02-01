@@ -1,5 +1,7 @@
-import { MenuItem } from "@mui/material";
+import { MenuItem } from '@mui/material'
 
-const SelectOption = MenuItem;
+export type SelectOptions = Array<Array<string | number | null>>
 
-export default SelectOption;
+const SelectOption = MenuItem
+
+export default SelectOption

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { useLoginForm } from '../../hooks/useLoginForm'
+import { useLoginForm } from '../hooks/useLoginForm'
+import type { LoginResult } from '../models/loginResult'
+import type { LoginSchemaType } from '../lib/schemas/loginSchema'
 import type { UseDataModuleFormProps } from '@/components'
-import type { LoginResult } from '../../models/loginResult'
-import type { LoginSchemaType } from '../../lib/schemas/loginSchema'
 import {
   Form,
   FormContainer,

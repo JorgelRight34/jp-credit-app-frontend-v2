@@ -29,10 +29,10 @@ export const getAllPossibleClaims = async (): Promise<IdentityClaims> => {
 }
 
 export const updateUserClaims = async (
-    username: string,
+    id: number,
     body: { add: Array<ClaimPair>; remove: Array<ClaimPair> }
 ) => {
-    await api.patch("users/" + username + "/claims", body);
+    await api.patch("users/" + id + "/claims", body);
 }
 
 export const getModulePermissions = createIsomorphicFn()

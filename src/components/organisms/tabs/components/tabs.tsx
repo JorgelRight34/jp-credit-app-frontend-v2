@@ -6,7 +6,6 @@ import Tab from './tab'
 import type { UseTabsProps } from '../hooks/useTabs'
 import type { ReactNode } from 'react'
 import 'react-tabs/style/react-tabs.css'
-// import './tabs.css'
 import type { VariationKey } from '../lib/variations'
 
 interface EntityTabsProps extends UseTabsProps {
@@ -59,10 +58,12 @@ const Tabs = ({
           ))}
         </TabList>
         {tabsArray.map((tab, index) => (
-          <TabPanel key={index} forceRender={renderedTabs.includes(index)}>
-            <div
-              className={clsx('fade-in h-full flex-1 pb-3', tabPanelClassName)}
-            >
+          <TabPanel
+            className="react-tabs__tab-panel h-full"
+            key={index}
+            forceRender={renderedTabs.includes(index)}
+          >
+            <div className={clsx('fade-in  h-full flex-1', tabPanelClassName)}>
               {tab.props.children}
             </div>
           </TabPanel>

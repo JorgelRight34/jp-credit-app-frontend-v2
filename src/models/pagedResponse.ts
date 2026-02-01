@@ -1,7 +1,7 @@
-import { PageSize } from "@/components";
+import type { PageSize } from "@/components";
 
 export interface PagedResponse<T> {
-  items: T[];
+  items: Array<T>;
   page: number;
   pageSize: PageSize;
   totalItems: number;

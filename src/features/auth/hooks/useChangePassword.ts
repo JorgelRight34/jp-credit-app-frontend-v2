@@ -11,13 +11,13 @@ export const useChangePasswordForm = ({
 }: UseChangeUserPasswordFormProps): UseFormBuilderReturn<
   ChangePasswordSchemaType
 > => {
-  if (!initialValues?.username) throw new Error("Must provide initial values.");
+  if (!initialValues?.id) throw new Error("Must provide initial values.");
 
   return useForm({
     resetValues: true,
     schema: changePasswordSchema,
-    defaultValues: { username: initialValues.username, password: "", confirmation: "" },
-    onSubmit: (data) => changePassword(data.username, data),
+    defaultValues: { id: initialValues.id, password: "", confirmation: "" },
+    onSubmit: (data) => changePassword(data.id, data),
     toastMessage: () => "Contraseña cambiada."
   });
 };

@@ -6,6 +6,7 @@ import {
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
+import { CssBaseline } from '@mui/material'
 import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
@@ -54,10 +55,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="antialiased">
         <Provider dataClient={context.dataClient}>
           <LoadingBar />
           <LoadingScreen />
+          <CssBaseline />
           {children}
         </Provider>
         <TanStackDevtools

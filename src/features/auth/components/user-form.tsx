@@ -1,9 +1,9 @@
-import { useUserForm } from '../../hooks/useUserForm'
-import { updateUsernameOnForm } from '../../lib/form-utils'
-import type { Ref } from 'react'
+import { useUserForm } from '../hooks/useUserForm'
+import { updateUsernameOnForm } from '../lib/form-utils'
+import type { User } from '../models/user'
+import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import type { FormRef, UseDataModuleFormProps } from '@/components'
-import type { User } from '../../models/user'
-import type { UserFormValues } from '../../lib/schemas/userFormSchema'
+import type { Ref } from 'react'
 import {
   Form,
   FormGroup,
@@ -13,14 +13,11 @@ import {
   PasswordInput,
 } from '@/components'
 
-export type UserAccessFormProps = UseDataModuleFormProps<
-  User,
-  UserFormValues
-> & {
+export type UserFormProps = UseDataModuleFormProps<User, UserFormValues> & {
   user?: User
 }
 
-const UserAccessForm = ({ shouldEdit, ref, ...props }: UserAccessFormProps) => {
+const UserForm = ({ ref, ...props }: UserFormProps) => {
   const form = useUserForm(props)
 
   return (
@@ -39,18 +36,22 @@ const UserAccessForm = ({ shouldEdit, ref, ...props }: UserAccessFormProps) => {
         />
         <FormGroup label="Email" name="email" type="email" input={Input} />
       </FormRow>
-      {!shouldEdit && (
-        <FormRow>
-          <FormGroup label="Contraseña" name="password" input={PasswordInput} />
-          <FormGroup
-            label="Confirmación"
-            name="confirmation"
-            input={PasswordInput}
-          />
-        </FormRow>
-      )}
+      <FormRow>
+        <FormGroup
+          label="Contraseña"
+          autoComplete="new-password"
+          name="password"
+          input={PasswordInput}
+        />
+        <FormGroup
+          label="Confirmación"
+          autoComplete="new-password"
+          name="confirmation"
+          input={PasswordInput}
+        />
+      </FormRow>
     </Form>
   )
 }
 
-export default UserAccessForm
+export default UserForm

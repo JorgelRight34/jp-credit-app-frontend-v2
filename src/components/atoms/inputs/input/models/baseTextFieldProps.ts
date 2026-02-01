@@ -18,4 +18,5 @@ export type BaseTextFieldProps = Pick<
     | "autoFocus"
     | "onBlur"
     | "name"
+    | "autoComplete"
 > 

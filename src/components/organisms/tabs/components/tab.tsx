@@ -12,7 +12,14 @@ export type TabProps = Omit<RTabProps, 'title'> & {
   icon?: IconName
 }
 
-const Tab = ({ title, icon, className, isActive, ...props }: TabProps) => {
+const Tab = ({
+  title,
+  eventKey,
+  icon,
+  className,
+  isActive,
+  ...props
+}: TabProps) => {
   return (
     <RTab
       {...props}

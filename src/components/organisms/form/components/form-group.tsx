@@ -17,11 +17,18 @@ const FormGroup = <T extends FieldValues>({
   className,
   type,
   input,
+  ...props
 }: FormGroupProps<T>) => {
   return (
     <div className={clsx('flex flex-1 items-start flex-col gap-2', className)}>
       <FormLabel htmlFor={name as string}>{label}</FormLabel>
-      <FormInput className="w-full" type={type} name={name} as={input} />
+      <FormInput
+        {...props}
+        className="w-full"
+        type={type}
+        name={name}
+        as={input}
+      />
     </div>
   )
 }

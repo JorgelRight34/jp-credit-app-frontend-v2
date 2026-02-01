@@ -1,6 +1,7 @@
 import { flexRender } from '@tanstack/react-table'
 import TableHead from './table-head'
 import TableRow from './table-row'
+import TableHeadCell from './table-head-cell'
 import type { Table } from '@tanstack/react-table'
 import { ArrowDownwardIcon, ArrowUpwardIcon, Icon } from '@/components/atoms'
 
@@ -15,7 +16,10 @@ const TableHeadCompositor = <T,>({ table, className }: TableHeadProps<T>) => {
       {table.getHeaderGroups().map((headerGroup) => (
         <TableRow key={headerGroup.id} className="cursor-pointer">
           {headerGroup.headers.map((header) => (
-            <TableHead className="px-4 py-2 whitespace-normal" key={header.id}>
+            <TableHeadCell
+              className="px-4 py-2 whitespace-normal"
+              key={header.id}
+            >
               <div
                 {...{
                   className: header.column.getCanSort()
@@ -41,7 +45,7 @@ const TableHeadCompositor = <T,>({ table, className }: TableHeadProps<T>) => {
                   />
                 )}
               </div>
-            </TableHead>
+            </TableHeadCell>
           ))}
           {table.getCanSomeRowsExpand() && <th>&nbsp;</th>}
         </TableRow>

@@ -14,7 +14,10 @@ export const useMultipleForms = <
 
     const handleSubmit = () => {
         for (const name of names) {
-            formRefs.current[name as TNames[number]]?.submit()
+            const form = formRefs.current[name as TNames[number]];
+            if (form?.isDirty()) {
+                form.submit()
+            }
         }
     }
 

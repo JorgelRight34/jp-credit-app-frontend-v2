@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const changePasswordSchema = z.object({
-    username: z.string(),
+    id: z.number(),
     password: z.string(),
     confirmation: z.string(),
 })

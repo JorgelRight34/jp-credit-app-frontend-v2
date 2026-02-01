@@ -1,6 +1,7 @@
 import SelectInput from './select'
+import type { SelectOptions } from './select-option'
 import type { SelectInputProps } from './select'
-import type { CacheKey, SelectOptions } from '@/models'
+import type { CacheKey } from '@/models'
 import { useData } from '@/hooks/useData'
 
 export type LazySelectInputProps = Omit<SelectInputProps, 'options'> & {

@@ -1,4 +1,4 @@
 export type ClaimPair = {
-    type: string;
-    value: string;
+    claimType: string;
+    claimValue: string;
 }

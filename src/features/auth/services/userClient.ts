@@ -37,11 +37,11 @@ export const getPermissions = async (id: number): Promise<UserPermissions> => {
 
 
 export const changePassword = async (
-  username: string,
+  id: User["id"],
   data: ChangePasswordSchemaType,
 ) => {
   const response = await api.put(
-    `users/${username}/change-password`,
+    `users/${id}/change-password`,
     data
   );
   return response.data;

@@ -1,1 +1,1 @@
-export type CacheTag = (string[] | string)
+export type CacheTag = (Array<string> | string)

@@ -7,6 +7,6 @@ export const updateUsernameOnForm = (
     setValue: UseFormSetValue<UserFormValues>
 ) => {
     if (lastName && firstName) {
-        setValue("username", generateUsername(firstName, lastName));
+        setValue("username", generateUsername(firstName.trim(), lastName.trim()));
     }
 };

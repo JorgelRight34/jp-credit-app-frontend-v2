@@ -1,5 +1,5 @@
 import { FormInterceptor } from "@/components";
-import { Query } from "@/models/query";
+import { Query } from "@/components/organisms/search-form/models/query";
 import api from "@/lib/services/api";
 import { AxiosRequestConfig } from "axios";
 import { cache } from "react";

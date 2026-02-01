@@ -4,6 +4,6 @@ export const createUserQueryKey = (username: string) => {
     return [usersQueryKey, username]
 }
 
-export const createUserPermissionsQueryKey = (username: string) => {
-    return [usersQueryKey, username, claimsQueryKey]
+export const createUserPermissionsQueryKey = (userId: number) => {
+    return [usersQueryKey, userId, claimsQueryKey]
 }

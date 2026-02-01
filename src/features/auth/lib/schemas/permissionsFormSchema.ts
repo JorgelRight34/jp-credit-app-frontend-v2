@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const permissionsFormSchema = z.object({
-    username: z.string(),
+    id: z.number(),
     claims: z.string().array().default([]),
     roles: z.string().array().default([])
 })

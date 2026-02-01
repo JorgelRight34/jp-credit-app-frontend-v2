@@ -1,31 +1,15 @@
-import UserForm from '../components/user-form/user-form'
-import { accessControlPermissionProvider } from '../lib/permissionProvider'
-import type { User } from '../models/user'
-import type { UserPermissions } from '../models/userPermissions'
+import UserForm from '../components/user-access-form'
+import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import { FormPageLayout } from '@/components'
 
-type UserFormPageProps = {
-  user?: User
-  title: string
-  initialPermissions?: UserPermissions
-}
-
-const UserFormPage = ({
-  title,
-  user,
-  initialPermissions,
-}: UserFormPageProps) => {
+const UserFormPage = () => {
   return (
     <FormPageLayout
-      title={title}
+      title="Crear Acceso"
       permissionProvider={accessControlPermissionProvider}
       options={[]}
     >
-      <UserForm
-        shouldEdit={!!user}
-        user={user}
-        initialPermissions={initialPermissions}
-      />
+      <UserForm />
     </FormPageLayout>
   )
 }
