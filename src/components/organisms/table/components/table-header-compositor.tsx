@@ -47,7 +47,9 @@ const TableHeadCompositor = <T,>({ table, className }: TableHeadProps<T>) => {
               </div>
             </TableHeadCell>
           ))}
-          {table.getCanSomeRowsExpand() && <th>&nbsp;</th>}
+          {table.getCanSomeRowsExpand() && (
+            <TableHeadCell colSpan={1}>&nbsp;</TableHeadCell>
+          )}
         </TableRow>
       ))}
     </TableHead>

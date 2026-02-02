@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import Button from './button'
 import type { ButtonProps } from './button'
 
-type LightBtnProps = ButtonProps
+export type LightBtnProps = ButtonProps
 
 /**
  * Accent-styled button component.

@@ -4,8 +4,7 @@ import type { UseDataTableProps } from '../hooks/useDataTable'
 import type { CacheKey, PagedResponse } from '@/models'
 import type { ReactNode } from 'react'
 import type { Column, Query, Row } from '@/components'
-import { EmptyMessage, TableBuilder } from '@/components'
-import { toTitleCase } from '@/lib/utils'
+import { TableBuilder } from '@/components'
 
 export type DataTableProps<T, TQuery extends Query> = Partial<
   UseDataTableProps<T, TQuery>
@@ -42,11 +41,6 @@ const DataTable = <T, TQuery extends Query = Query>({
       placeholderData,
       ...props,
     })
-
-  if (data && data.items.length === 0)
-    return (
-      <EmptyMessage title={toTitleCase(title)} className="mx-auto w-75 p-5" />
-    )
 
   return (
     <div className="overflow-x-auto">

@@ -9,6 +9,7 @@ import {
   FormGroup,
   FormSubmitBtn,
   Input,
+  LoginIcon,
   PasswordInput,
 } from '@/components'
 
@@ -20,9 +21,23 @@ const LoginForm = (
 
   return (
     <Form form={form}>
-      <FormContainer footer={<FormSubmitBtn form={form} isDirty={isDirty} />}>
+      <FormContainer
+        footer={
+          <FormSubmitBtn
+            form={form}
+            isDirty={isDirty}
+            text="Iniciar sesión"
+            icon={LoginIcon}
+          />
+        }
+      >
         <FormGroup label="Usuario" name="username" input={Input} />
-        <FormGroup label="Contraseña" name="password" input={PasswordInput} />
+        <FormGroup
+          label="Contraseña"
+          name="password"
+          autoComplete="new-password"
+          input={PasswordInput}
+        />
       </FormContainer>
     </Form>
   )

@@ -1,9 +1,8 @@
-import { userSearchConfig } from '../lib/config/searchFormConfig'
-import { usersDatatableConfig } from '../lib/config/dataTableConfig'
+import { userSearchConfig } from '../lib/config/users-search-form-config'
+import { usersDatatableConfig } from '../lib/config/users-datatable-config'
 import { DataTableContainer } from '@/components'
 
 const UsersDataTable = () => {
-  console.log('hey')
   return (
     <DataTableContainer
       searchConfig={userSearchConfig}

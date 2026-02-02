@@ -1,4 +1,4 @@
-import { Children, isValidElement, startTransition, useMemo, useState } from "react";
+import { Children, isValidElement, startTransition, useMemo, useState, useTransition } from "react";
 import type { ReactNode } from "react";
 import type { TabProps } from "../components/tab";
 
@@ -18,30 +18,30 @@ export const useTabs = ({ defaultActiveKey, children, onSelect, getDefaultActive
     [children],
   );
 
-  const defaultActiveIndex = useMemo(() => {
+  const [activeIndex, setActiveIndex] = useState(() => {
     const key = getDefaultActiveKey?.() ?? defaultActiveKey;
-    if (key)
-      return (
-        tabsArray.findIndex((el) => el.props.eventKey === key)
-      );
-    return 0;
-  }, [tabsArray, defaultActiveKey, getDefaultActiveKey]);
-
-  const [activeIndex, setActiveIndex] = useState<number | undefined>(defaultActiveIndex);
-  const [renderedTabs, setRenderedTabs] = useState<Array<number | string>>([defaultActiveIndex])
+    return key ? tabsArray.findIndex((el) => el.props.eventKey === key) : 0
+  });
+  const [renderedTabs, setRenderedTabs] = useState<Record<number, boolean>>({ [activeIndex]: true });
+  const [panelIndex, setPanelIndex] = useState(activeIndex);
+  const [isPending, startTransitionForPanelIndex] = useTransition();
 
   const handleOnSelect = (index: number) => {
-    const eventKey = tabsArray[index].props.eventKey;
-    if (!eventKey) return;
     setActiveIndex(index)
 
+    if (renderedTabs[index] === true) {
+      setPanelIndex(index)
+    } else {
+      startTransitionForPanelIndex(() => {
+        setPanelIndex(index);
+        setRenderedTabs(prev => ({ ...prev, [index]: true }));
+      })
+    }
+
     startTransition(() => {
-      onSelect?.(eventKey, index);
-      setRenderedTabs(prev => (
-        renderedTabs.includes(index) ? prev : [...prev, index]
-      ))
+      onSelect?.(tabsArray[index].props.eventKey ?? null, index);
     })
   }
 
-  return { activeIndex, renderedTabs, tabsArray, handleOnSelect };
+  return { activeIndex, renderedTabs, tabsArray, isPending, panelIndex, handleOnSelect };
 };

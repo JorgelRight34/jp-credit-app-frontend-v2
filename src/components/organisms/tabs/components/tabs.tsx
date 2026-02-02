@@ -27,13 +27,14 @@ const Tabs = ({
   children,
   ...props
 }: TabsProps) => {
-  const { activeIndex, tabsArray, renderedTabs, handleOnSelect } = useTabs({
-    children,
-    ...props,
-  })
+  const { activeIndex, tabsArray, renderedTabs, isPending, handleOnSelect } =
+    useTabs({
+      children,
+      ...props,
+    })
   const variationClasses = variations[variation ?? 'default']
 
-  if (activeIndex === undefined) return null
+  console.log('my name is tabs')
 
   return (
     <div className={clsx('h-full', className)}>
@@ -61,10 +62,10 @@ const Tabs = ({
           <TabPanel
             className="react-tabs__tab-panel h-full"
             key={index}
-            forceRender={renderedTabs.includes(index)}
+            forceRender={renderedTabs[index]}
           >
             <div className={clsx('fade-in  h-full flex-1', tabPanelClassName)}>
-              {tab.props.children}
+              {activeIndex === index && isPending ? null : tab.props.children}
             </div>
           </TabPanel>
         ))}

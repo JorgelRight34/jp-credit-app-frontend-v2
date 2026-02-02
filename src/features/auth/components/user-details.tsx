@@ -27,7 +27,6 @@ const UserDetails = ({ user, userPermissions, ...props }: UserDetailsProps) => {
         <Suspense fallback="...">
           <UserFormPermissions
             userId={user.id}
-            username={user.username}
             userPermissions={userPermissions}
           />
         </Suspense>

@@ -1,6 +1,7 @@
 import { lazy, useState } from 'react'
 import { useFormPage } from '../hooks/useFormPage'
 import EntityLayout from './entity-layout'
+import EntityLayoutBreadcrumb from './entity-layout-breadcrumb'
 import type { FormPageLayoutProps } from './form-page-layout'
 import { toAllTitleCase } from '@/lib/utils/utils'
 import { AccentBtn, AddIcon, DeleteIcon, EditIcon } from '@/components'
@@ -49,17 +50,21 @@ const CreateFormPageLayoutContent = ({
   permissionProvider,
 }: Pick<
   FormPageLayoutProps,
-  'title' | 'breadcrumbs' | 'children' | 'permissionProvider'
+  'title' | 'children' | 'breadcrumbs' | 'permissionProvider'
 >) => {
   return (
     <EntityLayout
       title={toAllTitleCase(title)}
       permissionProvider={permissionProvider}
-      breadcrumbs={breadcrumbs.concat({
-        title: 'Crear',
-        icon: AddIcon,
-        pathname: '.',
-      })}
+      breadcrumb={
+        <EntityLayoutBreadcrumb
+          breadcrumbs={breadcrumbs.concat({
+            title: 'Crear',
+            icon: AddIcon,
+            pathname: '.',
+          })}
+        />
+      }
       options={[]}
     >
       {children}
@@ -85,11 +90,15 @@ const EditFormPageLayoutContent = ({
       <EntityLayout
         {...props}
         title={toAllTitleCase(title)}
-        breadcrumbs={breadcrumbs.concat({
-          title: 'Editar',
-          icon: EditIcon,
-          pathname: '.',
-        })}
+        breadcrumb={
+          <EntityLayoutBreadcrumb
+            breadcrumbs={breadcrumbs.concat({
+              title: 'Editar',
+              icon: EditIcon,
+              pathname: '.',
+            })}
+          />
+        }
         options={[
           {
             title: 'Borrar',

@@ -12,12 +12,10 @@ import { FormContainer, FormSubmitBtn } from '@/components'
 
 interface UserFormPermissionsProps extends PermissionsFormProps {
   userId: User['id']
-  username: string
   userPermissions: UserPermissions
 }
 
 const UserFormPermissions = ({
-  username,
   userId,
   userPermissions,
   ...props
@@ -26,10 +24,12 @@ const UserFormPermissions = ({
   const form = useRef<FormRef>(null)
   const { data } = useSuspenseData({
     key: createUserPermissionsQueryKey(userId),
-    loader: () => getUserPermissions(username),
+    loader: () => getUserPermissions(userId),
     enabled: !!userId,
     initialData: userPermissions,
   })
+
+  console.log('form permissions')
 
   return (
     <FormContainer

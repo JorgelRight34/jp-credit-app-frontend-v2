@@ -1,10 +1,10 @@
 import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import UserDetails from '../components/user-details'
-import { accessControlBreadcrumb } from '../lib/breadcrumbs'
+import { accessControlBreadcrumb } from '../lib/config/breadcrumbs'
 import type { User } from '../models/user'
 import type { UserPermissions } from '../models/userPermissions'
 import { getFullName } from '@/lib/utils'
-import { EntityLayout, PersonIcon } from '@/components'
+import { EntityLayout, EntityLayoutBreadcrumb, PersonIcon } from '@/components'
 
 type UserPageProps = {
   user: User
@@ -16,10 +16,14 @@ const UserPage = ({ user, userPermissions }: UserPageProps) => {
     <EntityLayout
       title={`${getFullName(user)} - ${user.username}`}
       permissionProvider={accessControlPermissionProvider}
-      breadcrumbs={[
-        accessControlBreadcrumb,
-        { icon: PersonIcon, title: user.username, pathname: '.' },
-      ]}
+      breadcrumb={
+        <EntityLayoutBreadcrumb
+          breadcrumbs={[
+            accessControlBreadcrumb,
+            { icon: PersonIcon, title: user.username, pathname: '.' },
+          ]}
+        />
+      }
     >
       <UserDetails
         shouldEdit={true}

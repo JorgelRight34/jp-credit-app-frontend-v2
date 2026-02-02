@@ -1,5 +1,5 @@
 import type { NavItem } from "../models/navItem";
-import { AccountBalanceIcon, AccountBalanceWalletIcon, AddIcon, AdminPanelSettings, ApartmentIcon, ArrowCircleDownIcon, ArrowCircleUpIcon, AssignmentIcon, AttachMoneyIcon, BadgeIcon, CheckCircleIcon, CreditCardIcon, DirectionsCarIcon, ErrorIcon, FolderOpenIcon, GrassIcon, GroupIcon, GroupsIcon, HomeStorageIcon, ListAltIcon, LockIcon, MailIcon, PaymentIcon, PersonAddIcon, PersonIcon, PlayCircleIcon, PublicIcon, QueryStatsIcon, ReceiptLongIcon, SettingsIcon, StickyNote2Icon, TrendingUpIcon } from "@/components/atoms";
+import { AccountBalanceIcon, AccountBalanceWalletIcon, AddIcon, AdminPanelSettingsIcon, ApartmentIcon, ArrowCircleDownIcon, ArrowCircleUpIcon, AssignmentIcon, AttachMoneyIcon, BadgeIcon, CheckCircleIcon, CreditCardIcon, DirectionsCarIcon, ErrorIcon, FolderOpenIcon, GrassIcon, GroupIcon, GroupsIcon, HomeStorageIcon, ListAltIcon, LockIcon, MailIcon, PaymentIcon, PersonAddIcon, PersonIcon, PlayCircleIcon, PublicIcon, QueryStatsIcon, ReceiptLongIcon, SettingsIcon, StickyNote2Icon, TrendingUpIcon } from "@/components/atoms";
 
 const addRouteBase: NavItem = {
   name: "Añadir",
@@ -45,13 +45,13 @@ export const accessControlNavItem: NavItem = {
       name: "Usuarios",
       icon: GroupsIcon,
       route: "/access-control",
-      search: { defaultTab: "users" }
+      search: { tab: "users" }
     },
     {
       name: "Roles",
-      icon: AdminPanelSettings,
+      icon: AdminPanelSettingsIcon,
       route: "/access-control",
-      search: { defaultTab: "roles" }
+      search: { tab: "roles" }
     },
     {
       ...addRouteBase,

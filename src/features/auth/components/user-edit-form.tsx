@@ -29,6 +29,8 @@ const UserEditForm = ({ ...props }: UserFormProps) => {
     ...props,
   })
 
+  console.log('userEditForm')
+
   return (
     <FormContainer footer={<FormSubmitBtn isDirty={isDirty} form={form} />}>
       <Form form={form}>

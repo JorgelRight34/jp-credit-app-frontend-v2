@@ -1,30 +1,67 @@
+import RolesDataTable from '../components/roles-datatable'
 import UsersDataTable from '../components/users-datatable'
-import { accessControlBreadcrumb } from '../lib/breadcrumbs'
+import { accessControlBreadcrumb } from '../lib/config/breadcrumbs'
 import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
-import { EntityLayout, Tab, Tabs, getEntityLayoutOptions } from '@/components'
-import { useSearchParams } from '@/hooks/useSearchParams'
+import type { RouteBreadcrumbMap } from '@/components'
+import {
+  AddIcon,
+  AdminPanelSettingsIcon,
+  EntityLayout,
+  LightPillBtn,
+  PersonIcon,
+  Tab,
+  TabsRouter,
+  TabsRouterBreadcrumb,
+  TabsRouterProvider,
+  getEntityLayoutOptions,
+} from '@/components'
+
+const tabBreadcrumbMap: RouteBreadcrumbMap = {
+  users: {
+    icon: () => <PersonIcon />,
+    title: 'Usuarios',
+    pathname: '.',
+  },
+  roles: {
+    icon: () => <AdminPanelSettingsIcon />,
+    title: 'Roles',
+    pathname: '.',
+  },
+}
 
 const AccessControlPage = () => {
-  const search = useSearchParams()
-
   return (
-    <EntityLayout
-      title="Accesos"
-      breadcrumbs={[accessControlBreadcrumb]}
-      options={getEntityLayoutOptions({
-        createPath: '/access-control/create',
-      })}
-      permissionProvider={accessControlPermissionProvider}
-    >
-      <Tabs defaultActiveKey={search.get('defaultTab') ?? 'users'}>
-        <Tab eventKey="users" title="Accesos">
-          <UsersDataTable />
-        </Tab>
-        <Tab eventKey="roles" title="Roles">
-          ...
-        </Tab>
-      </Tabs>
-    </EntityLayout>
+    <TabsRouterProvider defaultActive="users">
+      <EntityLayout
+        title="Accesos"
+        breadcrumb={
+          <TabsRouterBreadcrumb
+            tabBreadcrumbMap={tabBreadcrumbMap}
+            baseBreadcrumbs={[accessControlBreadcrumb]}
+          />
+        }
+        options={[
+          {
+            title: 'Roles',
+            icon: AddIcon,
+            component: LightPillBtn,
+          },
+          ...getEntityLayoutOptions({
+            createPath: '/access-control/create',
+          }),
+        ]}
+        permissionProvider={accessControlPermissionProvider}
+      >
+        <TabsRouter>
+          <Tab eventKey="users" title="Usuarios">
+            <UsersDataTable />
+          </Tab>
+          <Tab eventKey="roles" title="Roles">
+            <RolesDataTable />
+          </Tab>
+        </TabsRouter>
+      </EntityLayout>
+    </TabsRouterProvider>
   )
 }
 

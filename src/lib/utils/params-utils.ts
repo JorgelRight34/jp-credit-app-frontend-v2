@@ -8,11 +8,17 @@ export const getHashTab = (defaultTab: string) => {
 }
 
 
-export const setTabSearchParam = async (tab: string | null) => {
+export const setTabSearchParam = (tab: string | null) => {
     if (!tab) return;
 
     const url = new URL(window.location.href);
     url.searchParams.set("tab", tab);
+    window.history.replaceState(null, '', url)
+}
 
+export const setTabSearchParamFromUrl = (url: URL, tab: string | null) => {
+    if (!tab) return;
+
+    url.searchParams.set("tab", tab);
     window.history.replaceState(null, '', url)
 }

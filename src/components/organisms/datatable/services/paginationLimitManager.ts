@@ -3,6 +3,8 @@ export class PaginationLimitManager {
     static limits: Record<string, number> = this.loadLimits();
 
     private static loadLimits(): Record<string, number> {
+        if (typeof localStorage === "undefined") return {};
+
         try {
             const stored = localStorage.getItem(this.storageKey);
             return stored ? JSON.parse(stored) : {};

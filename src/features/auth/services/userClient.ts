@@ -7,7 +7,7 @@ import type { PagedResponse } from "@/models";
 import type { ChangePasswordSchemaType } from "../lib/schemas/changePasswordSchema";
 import api from "@/lib/services/api";
 
-const baseUrl = "users"
+const baseUrl = "auth/users"
 
 export const createUser = async (data: UserFormValues): Promise<User> => {
   const response = await api.post(baseUrl, data);
@@ -19,8 +19,8 @@ export const getUser = (async (username: string): Promise<User> => {
   return data;
 });
 
-export const getUserPermissions = async (username: string): Promise<UserPermissions> => {
-  const response = await api.get(`${baseUrl}/${username}/permissions`);
+export const getUserPermissions = async (id: number): Promise<UserPermissions> => {
+  const response = await api.get(`${baseUrl}/${id}/permissions`);
   return response.data;
 };
 
@@ -41,7 +41,7 @@ export const changePassword = async (
   data: ChangePasswordSchemaType,
 ) => {
   const response = await api.put(
-    `users/${id}/change-password`,
+    `${baseUrl}/${id}/change-password`,
     data
   );
   return response.data;
@@ -67,7 +67,7 @@ export const editPermission = async (
 };
 
 export const getUsers = async (params?: UserQuery): Promise<PagedResponse<User>> => {
-  const { data } = await api.get("users", { params })
+  const { data } = await api.get(baseUrl, { params })
   return data;
 }
 

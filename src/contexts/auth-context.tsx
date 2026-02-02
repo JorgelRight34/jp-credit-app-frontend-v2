@@ -5,7 +5,7 @@ import { ACCESS_TOKEN } from '@/lib/utils'
 
 type AuthContextType = {
   user?: User | null
-  logout: () => Promise<void>
+  logout: () => void
 }
 
 type AuthProviderProps = PropsWithChildren & {
@@ -15,7 +15,7 @@ type AuthProviderProps = PropsWithChildren & {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ user, children }: AuthProviderProps) => {
-  const logout = async () => {
+  const logout = () => {
     localStorage.removeItem(ACCESS_TOKEN)
     window.location.href = '/login'
   }

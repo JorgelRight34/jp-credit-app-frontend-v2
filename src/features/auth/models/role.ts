@@ -1,1 +1,6 @@
-export type Role = "user" | "admin"
+export type Role = {
+    id: number;
+    name: string;
+    normalizedName: string;
+    usersCount: number;
+}
