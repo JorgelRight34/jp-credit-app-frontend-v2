@@ -8,7 +8,7 @@ const getUserFn = createIsomorphicFn()
   .server((username) => getUserFromServer(username))
   .client((username) => getUser(username))
 
-export const Route = createFileRoute('/(modules)/access-control/users/$username/')({
+export const Route = createFileRoute('/(main)/(modules)/access-control/users/$username/')({
   head: ({ params }) => ({ meta: [{ title: params.username }] }),
   component: RouteComponent,
 })

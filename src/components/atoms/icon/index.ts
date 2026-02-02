@@ -144,6 +144,7 @@ export { default as UploadIcon } from "@mui/icons-material/UploadFileOutlined"
 export { default as ImageIcon } from "@mui/icons-material/ImageOutlined"
 export { default as EmptyIcon } from "@mui/icons-material/HourglassEmpty"
 export { default as DeleteIcon } from "@mui/icons-material/DeleteOutline"
+export { default as AdminPanelSettings } from "@mui/icons-material/AdminPanelSettingsOutlined"
 
 
 export { default as Icon } from "./icon";

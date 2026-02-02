@@ -1,46 +1,40 @@
-import { useMemo } from "react";
 import { useDataTableState } from "./useDataTableState";
 import type { CacheKey, PagedResponse } from "@/models";
 import type { Query } from "@/components/organisms/search-form/models/query";
 import type { Column, PageSize } from "../../table";
+import type { UseDataProps } from "@/hooks/useData";
 import { useData } from "@/hooks/useData";
 
-export interface UseDataTableProps<T, TQuery> {
+export interface UseDataTableProps<T, TQuery extends Query> {
     cacheKey: CacheKey;
     query?: TQuery;
     columns?: Array<Column<T>>;
-    hiddenColumnIds?: Array<string>;
     pageSize?: PageSize;
     loadInitialSelection?: boolean;
     enabled?: boolean
     initialData?: PagedResponse<T>;
+    placeholderData?: UseDataProps<PagedResponse<T>>["placeholderData"]
     loader: (q: TQuery) => Promise<PagedResponse<T>>
 }
 
 export const useDataTable = <T, TQuery extends Query>({
-    columns: initialColumns = [],
+    columns = [],
     cacheKey,
-    hiddenColumnIds,
     query = {} as TQuery,
     pageSize,
     enabled = true,
     initialData,
+    placeholderData,
     loader,
 }: UseDataTableProps<T, TQuery>) => {
     const { page, limit, order, fetchPage, sort, setLimit } = useDataTableState({ cacheKey, pageSize })
 
-    const columns = useMemo(() => {
-        if (!hiddenColumnIds || hiddenColumnIds.length === 0) return initialColumns;
-
-        return initialColumns.filter((col) => !col.id || !hiddenColumnIds.includes(col.id));
-    }, [initialColumns, hiddenColumnIds]);
-
     const { data, isLoading, isError } = useData<PagedResponse<T>>({
-        key: cacheKey.concat({ limit, order, query }),
+        key: cacheKey.concat({ limit, page, order, query }),
         loader: () => loader({ ...query, ...order, page, limit }),
         initialData,
         enabled,
-        keepPreviousData: true
+        placeholderData
     });
 
     return {

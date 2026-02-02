@@ -12,7 +12,7 @@ export interface EntityLayoutProps {
   title: string
   permissionProvider: PermissionsProvider
   breadcrumbs?: Array<BreadcrumbSpec>
-  options: Array<LayoutOption>
+  options?: Array<LayoutOption>
   validateProject?: boolean
 }
 
@@ -20,7 +20,7 @@ const EntityLayout = ({
   children,
   title,
   breadcrumbs = [],
-  options,
+  options = [],
   ...props
 }: EntityLayoutProps) => {
   return (

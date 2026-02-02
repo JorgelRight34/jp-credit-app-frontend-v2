@@ -6,7 +6,7 @@ import type { PropsWithChildren } from 'react'
 import type { SchemaType } from '../../form'
 import type { SearchFormOption } from '../models/searchFormOption'
 import type { Query } from '../models/query'
-import { AccentBtn, Button, MenuIcon, SearchIcon } from '@/components/atoms'
+import { AccentBtn, LightBtn, MenuIcon, SearchIcon } from '@/components/atoms'
 
 interface SearchFormProps<T extends Query> {
   options: Array<SearchFormOption<T>>
@@ -35,10 +35,10 @@ const SearchForm = <T extends Query>({
 
   return (
     <Form form={form}>
-      <section>
+      <section className="py-1">
         <div className="flex flex-col items-center overflow-y-visible">
           <div className="flex w-full !overflow-y-visible">
-            <div className="flex w-12/14 items-center !overflow-y-visible">
+            <div className="flex w-12/13 items-center !overflow-y-visible">
               {options.map((option) => (
                 <SearchFormGroupContainer
                   width={option.width}
@@ -53,16 +53,16 @@ const SearchForm = <T extends Query>({
                 </SearchFormGroupContainer>
               ))}
             </div>
-            <div className="flex w-2/14 items-center gap-2">
+            <div className="flex w-1/13 items-center gap-1">
               <AccentBtn
                 disabled={!isDirty}
                 icon={SearchIcon}
                 className="shadow-sm"
                 onClick={form.form.handleSubmit}
               />
-              <Button
+              <LightBtn
                 icon={MenuIcon}
-                className="!rounded-xl border shadow-sm"
+                className="border shadow-sm"
                 type="button"
                 onClick={() => {
                   if (advanced.length > 0) setShowAdvanced((prev) => !prev)
@@ -71,7 +71,7 @@ const SearchForm = <T extends Query>({
             </div>
           </div>
           <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
-            <div className="rounded-3 mt-3 flex w-full flex-wrap items-center space-y-3 border bg-white p-3 shadow-sm">
+            <div className="rounded-xl mt-3 flex w-full flex-wrap items-center space-y-3 shadow-sm border bg-white p-3">
               {advanced.map((option) => (
                 <SearchFormGroupContainer
                   width={option.width}

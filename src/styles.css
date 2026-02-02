@@ -14,7 +14,6 @@
 #root {
   height: 100dvh;
   font-family: Arial;
-  background-color: var(--background-color);
   color: var(--text-color);
 }
 
@@ -22,7 +21,7 @@
   all: unset !important;
 }
 
-.border, .border-b, .border-t, .border-l, .border-r {
+.border, .border-b, .border-t, .border-l, .border-r, .border-x {
   border-color: var(--bs-border-color) !important;
 }
 
@@ -249,17 +248,4 @@ input:focus {
 
 .mb-auto {
   margin-bottom: auto;
-}
-
-
-@media (max-width: 500px) {
-  .entity-layout {
-    max-height: 100dvh;
-    width: 100dvw;
-  }
-
-  .tab-pane {
-    padding-inline: 0 !important;
-    padding-bottom: 0 !important;
-  }
 }

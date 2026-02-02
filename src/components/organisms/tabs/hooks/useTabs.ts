@@ -1,14 +1,15 @@
-import { Children, isValidElement, useMemo, useState } from "react";
+import { Children, isValidElement, startTransition, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import type { TabProps } from "../components/tab";
 
 export interface UseTabsProps {
   children: ReactNode;
-  defaultActiveKey: string;
-  onSelect?: (tab: string | null, index: number) => Promise<void | boolean>;
+  defaultActiveKey?: string;
+  getDefaultActiveKey?: () => string;
+  onSelect?: (tab: string | null, index: number) => unknown;
 }
 
-export const useTabs = ({ defaultActiveKey, children, onSelect }: UseTabsProps) => {
+export const useTabs = ({ defaultActiveKey, children, onSelect, getDefaultActiveKey }: UseTabsProps) => {
   const tabsArray = useMemo(
     () =>
       Children.toArray(children).filter(
@@ -18,27 +19,28 @@ export const useTabs = ({ defaultActiveKey, children, onSelect }: UseTabsProps) 
   );
 
   const defaultActiveIndex = useMemo(() => {
-    if (defaultActiveKey)
+    const key = getDefaultActiveKey?.() ?? defaultActiveKey;
+    if (key)
       return (
-        tabsArray.findIndex((el) => el.props.eventKey === defaultActiveKey)
+        tabsArray.findIndex((el) => el.props.eventKey === key)
       );
     return 0;
-  }, [tabsArray, defaultActiveKey]);
+  }, [tabsArray, defaultActiveKey, getDefaultActiveKey]);
 
   const [activeIndex, setActiveIndex] = useState<number | undefined>(defaultActiveIndex);
   const [renderedTabs, setRenderedTabs] = useState<Array<number | string>>([defaultActiveIndex])
 
-  const handleOnSelect = async (index: number) => {
+  const handleOnSelect = (index: number) => {
     const eventKey = tabsArray[index].props.eventKey;
     if (!eventKey) return;
-
-    const shouldSelect = await onSelect?.(eventKey, index);
-    if (shouldSelect === false) return;
-
     setActiveIndex(index)
-    setRenderedTabs(prev => (
-      renderedTabs.includes(index) ? prev : [...prev, index]
-    ))
+
+    startTransition(() => {
+      onSelect?.(eventKey, index);
+      setRenderedTabs(prev => (
+        renderedTabs.includes(index) ? prev : [...prev, index]
+      ))
+    })
   }
 
   return { activeIndex, renderedTabs, tabsArray, handleOnSelect };

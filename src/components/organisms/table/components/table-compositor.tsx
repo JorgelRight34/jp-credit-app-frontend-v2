@@ -21,14 +21,14 @@ const TableCompositor = ({
       className="flex h-full flex-col rounded-xl border shadow-sm"
       {...props}
     >
-      <div className="flex w-full flex-col overflow-x-auto">
+      <div className="flex w-full flex-col !overflow-hidden rounded-xl">
         <Table className={className}>
           {head}
           {body}
           {footer}
         </Table>
       </div>
-      <div className="border-top flex-shrink-0">{navigation}</div>
+      <div className="flex-shrink-0 border-t">{navigation}</div>
     </div>
   )
 }

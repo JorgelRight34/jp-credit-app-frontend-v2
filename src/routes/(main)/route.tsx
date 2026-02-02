@@ -15,7 +15,7 @@ const getAuthorizationFn = createIsomorphicFn()
   .server(() => CookieService.getAuthorization())
   .client(() => getAuthorizationFromClient())
 
-export const Route = createFileRoute('/(modules)')({
+export const Route = createFileRoute('/(main)')({
   component: RouteComponent,
   loader: () => getCurrentUserFn(),
   beforeLoad: () => {
@@ -24,7 +24,6 @@ export const Route = createFileRoute('/(modules)')({
       throw redirect({ to: '/login' })
     }
   },
-  staticData: {},
   shouldReload: false,
 })
 

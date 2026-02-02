@@ -1,11 +1,6 @@
 // ==============================
 // Core table components
 // ==============================
-// ==============================
-// Styles (side-effect import)
-// ==============================
-import "./styles/dataTable.css";
-
 export { default as Table } from "./components/table-builder";
 export { default as TableContainer } from "./components/table";
 export { default as TableStateWrapper } from "./components/table-state-wrapper";
@@ -36,6 +31,7 @@ export { default as TableNavigation } from "./components/table-navigation";
 export { default as TableGroup } from './components/table-group';
 export { default as TableOptionCell } from './components/table-option-cell';
 export { default as TablePhotoCell } from "./components/table-photo-cell"
+export { default as TableBuilder } from "./components/table-builder"
 
 // ==============================
 // Hooks
@@ -55,3 +51,4 @@ export * from "./components/table-builder";
 // ==============================
 export * from "./lib/utils";
 export * from "./models/sortingState"
+export * from "./lib/jsx-utils"

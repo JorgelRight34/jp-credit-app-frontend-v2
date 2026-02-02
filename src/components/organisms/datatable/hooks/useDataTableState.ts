@@ -1,4 +1,4 @@
-import { startTransition, useCallback, useMemo, useState } from "react";
+import { startTransition, useMemo, useState } from "react";
 import { PaginationLimitManager } from "../services/paginationLimitManager";
 import type { CacheKey } from "@/models";
 import type { SortingState } from "../../table";
@@ -13,25 +13,22 @@ export const useDataTableState = ({ cacheKey, pageSize }: UseDatatableStateProps
     const [page, setPage] = useState(1);
     const [order, setOrder] = useState<{ orderBy: string, orderDesc: boolean } | null>(null);
     const identifier = useMemo(() => JSON.stringify(cacheKey), [cacheKey])
-    const [limit, setLimit] = useState(
+    const [limit, setLimit] = useState(() =>
         PaginationLimitManager.getLimit(identifier) || pageSize || defaultPageSize
     );
 
-    const fetchPage = useCallback((receivedPage: number) => {
+    const fetchPage = (receivedPage: number) => {
         startTransition(() => setPage(receivedPage))
-    }, []);
+    };
 
-    const handleLimitChange = useCallback(
-        (receivedLimit: number) => {
-            setLimit(limit);
-            PaginationLimitManager.setLimit(identifier, receivedLimit);
-        },
-        [identifier]
-    );
+    const handleLimitChange = (receivedLimit: number) => {
+        setLimit(receivedLimit);
+        PaginationLimitManager.setLimit(identifier, receivedLimit);
+    }
 
-    const onSortingChange = useCallback(([state]: SortingState) => {
+    const onSortingChange = ([state]: SortingState) => {
         setOrder({ orderBy: state.id, orderDesc: state.desc })
-    }, []);
+    };
 
     return { page, order, limit, fetchPage, sort: onSortingChange, setLimit: handleLimitChange }
 }

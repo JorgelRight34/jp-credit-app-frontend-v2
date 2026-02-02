@@ -4,7 +4,10 @@ type TableHeaderProps = HTMLAttributes<HTMLTableSectionElement>
 
 const TableHead = ({ children, ...props }: TableHeaderProps) => {
   return (
-    <thead className="border-bottom rounded-xl" {...props}>
+    <thead
+      className="border-b bg-stone-50 !overflow-hidden rounded-xl"
+      {...props}
+    >
       {children}
     </thead>
   )

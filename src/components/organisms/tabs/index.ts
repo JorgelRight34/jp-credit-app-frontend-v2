@@ -7,3 +7,5 @@ export * from "./hooks/useTabs";
 
 // lib
 export * from "./lib/variations";
+
+export * from "./components/tabs"

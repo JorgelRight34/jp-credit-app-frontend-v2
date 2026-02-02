@@ -3,10 +3,12 @@ import '../_navbar.css'
 import NavbarLinkContainer from './navbar-link-container'
 import NavbarLinkExpandTrigger from './navbar-link-expand-trigger'
 import type { NavItem } from '../../models/navItem'
-import type { PropsWithChildren } from 'react'
+import type { ReactNode } from 'react'
+import type { LinkProps } from '@/components/atoms'
 import { Icon, Link } from '@/components/atoms'
 
-export interface NavbarLinkProps extends PropsWithChildren {
+export interface NavbarLinkProps extends Partial<LinkProps> {
+  children?: ReactNode
   option: NavItem
   className?: string
   onClick?: () => void
@@ -16,11 +18,13 @@ export interface NavbarLinkProps extends PropsWithChildren {
 const NavbarLink = ({
   option,
   className,
+  activeOptions,
   onClick,
   onExpand,
+  ...linkProps
 }: NavbarLinkProps) => {
   return (
-    <Link to={option.route} className="block">
+    <Link to={option.route} className="block" {...linkProps}>
       {({ isActive }) => (
         <NavbarLinkContainer
           option={option}

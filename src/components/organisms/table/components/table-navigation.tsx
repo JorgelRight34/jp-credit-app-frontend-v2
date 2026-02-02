@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import clsx from 'clsx'
 import type { TableBuilderProps } from './table-builder'
 import type { Table } from '@tanstack/react-table'
@@ -31,22 +31,13 @@ const TableNavigation = <TData,>({
     [totalItems, pageSize],
   )
 
-  const handlePageSizeChange = useCallback(
-    (val: string) => {
-      const numericVal = Number(val)
-      table.setPageSize(numericVal)
-      onLimitChange?.(numericVal)
-    },
-    [onLimitChange, table],
-  )
-
-  const handlePageChange = useCallback(
-    (val: number) => table.setPageIndex(val - 1),
-    [table],
-  )
+  const handlePageSizeChange = (val: number) => {
+    table.setPageSize(val)
+    onLimitChange?.(val)
+  }
 
   return (
-    <div className={clsx('w-full border bg-white', className)}>
+    <div className={clsx('w-full rounded-b-xl bg-white', className)}>
       <div className="flex w-full flex-col justify-center p-3 py-2 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-2">
           <Subtitle>
@@ -60,7 +51,7 @@ const TableNavigation = <TData,>({
           </Subtitle>
           <span className="inline md:hidden">
             <PageSizeSelector
-              onChange={handlePageSizeChange}
+              onChange={(val) => handlePageSizeChange(+val)}
               value={pageSize}
             />
           </span>
@@ -69,7 +60,7 @@ const TableNavigation = <TData,>({
           {/* Items per page selector */}
           <div className="hidden flex-shrink-0 md:block">
             <PageSizeSelector
-              onChange={handlePageSizeChange}
+              onChange={(val) => handlePageSizeChange(+val)}
               value={pageSize < 10 ? 10 : pageSize}
             />
           </div>
@@ -77,7 +68,7 @@ const TableNavigation = <TData,>({
             <Pagination
               count={totalPages}
               page={table.getState().pagination.pageIndex + 1}
-              onChange={(_, val) => handlePageChange(val)}
+              onChange={(_, val) => table.setPageIndex(val - 1)}
             />
           </div>
         </div>

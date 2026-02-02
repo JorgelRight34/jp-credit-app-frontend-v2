@@ -55,7 +55,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="antialiased">
+      <body className="antialiased bg-stone-50">
         <Provider dataClient={context.dataClient}>
           <LoadingBar />
           <LoadingScreen />

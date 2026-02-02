@@ -15,6 +15,7 @@ export interface TableBuilderProps<TData> extends Omit<
   className?: string
   totalItems?: number
   infinitePagination?: boolean
+  isLoading?: boolean
   onExpand?: (row: Row<TData>) => ReactNode
   onRowClick?: (row: TData) => void
   onLimitChange?: (limit: number) => void
@@ -26,6 +27,7 @@ const TableBuilder = <TData,>({
   totalItems = data?.length,
   infinitePagination = false,
   className,
+  isLoading,
   onRowClick,
   onExpand,
   onLimitChange,
@@ -44,6 +46,7 @@ const TableBuilder = <TData,>({
           body={
             <TableBodyCompositor<TData>
               table={table}
+              isLoading={isLoading}
               onRowClick={(r) => onRowClick?.(r.original)}
               onExpand={onExpand}
             />

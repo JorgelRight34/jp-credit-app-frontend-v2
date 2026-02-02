@@ -7,7 +7,6 @@ const UserFormPage = () => {
     <FormPageLayout
       title="Crear Acceso"
       permissionProvider={accessControlPermissionProvider}
-      options={[]}
     >
       <UserForm />
     </FormPageLayout>

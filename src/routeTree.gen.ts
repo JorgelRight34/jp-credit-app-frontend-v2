@@ -9,15 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as modulesRouteRouteImport } from './routes/(modules)/route'
+import { Route as mainRouteRouteImport } from './routes/(main)/route'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
-import { Route as modulesIndexRouteImport } from './routes/(modules)/index'
-import { Route as modulesAccessControlIndexRouteImport } from './routes/(modules)/access-control/index'
-import { Route as modulesAccessControlCreateIndexRouteImport } from './routes/(modules)/access-control/create/index'
-import { Route as modulesAccessControlUsersUsernameIndexRouteImport } from './routes/(modules)/access-control/users/$username/index'
+import { Route as mainIndexRouteImport } from './routes/(main)/index'
+import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/route'
+import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
+import { Route as mainmodulesAccessControlCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/create/index'
+import { Route as mainmodulesAccessControlUsersUsernameIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/index'
 
-const modulesRouteRoute = modulesRouteRouteImport.update({
-  id: '/(modules)',
+const mainRouteRoute = mainRouteRouteImport.update({
+  id: '/(main)',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginIndexRoute = LoginIndexRouteImport.update({
@@ -25,52 +26,57 @@ const LoginIndexRoute = LoginIndexRouteImport.update({
   path: '/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const modulesIndexRoute = modulesIndexRouteImport.update({
+const mainIndexRoute = mainIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => modulesRouteRoute,
+  getParentRoute: () => mainRouteRoute,
 } as any)
-const modulesAccessControlIndexRoute =
-  modulesAccessControlIndexRouteImport.update({
+const mainmodulesRouteRoute = mainmodulesRouteRouteImport.update({
+  id: '/(modules)',
+  getParentRoute: () => mainRouteRoute,
+} as any)
+const mainmodulesAccessControlIndexRoute =
+  mainmodulesAccessControlIndexRouteImport.update({
     id: '/access-control/',
     path: '/access-control/',
-    getParentRoute: () => modulesRouteRoute,
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const modulesAccessControlCreateIndexRoute =
-  modulesAccessControlCreateIndexRouteImport.update({
+const mainmodulesAccessControlCreateIndexRoute =
+  mainmodulesAccessControlCreateIndexRouteImport.update({
     id: '/access-control/create/',
     path: '/access-control/create/',
-    getParentRoute: () => modulesRouteRoute,
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const modulesAccessControlUsersUsernameIndexRoute =
-  modulesAccessControlUsersUsernameIndexRouteImport.update({
+const mainmodulesAccessControlUsersUsernameIndexRoute =
+  mainmodulesAccessControlUsersUsernameIndexRouteImport.update({
     id: '/access-control/users/$username/',
     path: '/access-control/users/$username/',
-    getParentRoute: () => modulesRouteRoute,
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof modulesIndexRoute
+  '/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
-  '/access-control/': typeof modulesAccessControlIndexRoute
-  '/access-control/create/': typeof modulesAccessControlCreateIndexRoute
-  '/access-control/users/$username/': typeof modulesAccessControlUsersUsernameIndexRoute
+  '/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/access-control/create/': typeof mainmodulesAccessControlCreateIndexRoute
+  '/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof modulesIndexRoute
+  '/': typeof mainIndexRoute
   '/login': typeof LoginIndexRoute
-  '/access-control': typeof modulesAccessControlIndexRoute
-  '/access-control/create': typeof modulesAccessControlCreateIndexRoute
-  '/access-control/users/$username': typeof modulesAccessControlUsersUsernameIndexRoute
+  '/access-control': typeof mainmodulesAccessControlIndexRoute
+  '/access-control/create': typeof mainmodulesAccessControlCreateIndexRoute
+  '/access-control/users/$username': typeof mainmodulesAccessControlUsersUsernameIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/(modules)': typeof modulesRouteRouteWithChildren
-  '/(modules)/': typeof modulesIndexRoute
+  '/(main)': typeof mainRouteRouteWithChildren
+  '/(main)/(modules)': typeof mainmodulesRouteRouteWithChildren
+  '/(main)/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
-  '/(modules)/access-control/': typeof modulesAccessControlIndexRoute
-  '/(modules)/access-control/create/': typeof modulesAccessControlCreateIndexRoute
-  '/(modules)/access-control/users/$username/': typeof modulesAccessControlUsersUsernameIndexRoute
+  '/(main)/(modules)/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/(main)/(modules)/access-control/create/': typeof mainmodulesAccessControlCreateIndexRoute
+  '/(main)/(modules)/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -89,26 +95,27 @@ export interface FileRouteTypes {
     | '/access-control/users/$username'
   id:
     | '__root__'
-    | '/(modules)'
-    | '/(modules)/'
+    | '/(main)'
+    | '/(main)/(modules)'
+    | '/(main)/'
     | '/login/'
-    | '/(modules)/access-control/'
-    | '/(modules)/access-control/create/'
-    | '/(modules)/access-control/users/$username/'
+    | '/(main)/(modules)/access-control/'
+    | '/(main)/(modules)/access-control/create/'
+    | '/(main)/(modules)/access-control/users/$username/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  modulesRouteRoute: typeof modulesRouteRouteWithChildren
+  mainRouteRoute: typeof mainRouteRouteWithChildren
   LoginIndexRoute: typeof LoginIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/(modules)': {
-      id: '/(modules)'
+    '/(main)': {
+      id: '/(main)'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof modulesRouteRouteImport
+      preLoaderRoute: typeof mainRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login/': {
@@ -118,58 +125,77 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(modules)/': {
-      id: '/(modules)/'
+    '/(main)/': {
+      id: '/(main)/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof modulesIndexRouteImport
-      parentRoute: typeof modulesRouteRoute
+      preLoaderRoute: typeof mainIndexRouteImport
+      parentRoute: typeof mainRouteRoute
     }
-    '/(modules)/access-control/': {
-      id: '/(modules)/access-control/'
+    '/(main)/(modules)': {
+      id: '/(main)/(modules)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof mainmodulesRouteRouteImport
+      parentRoute: typeof mainRouteRoute
+    }
+    '/(main)/(modules)/access-control/': {
+      id: '/(main)/(modules)/access-control/'
       path: '/access-control'
       fullPath: '/access-control/'
-      preLoaderRoute: typeof modulesAccessControlIndexRouteImport
-      parentRoute: typeof modulesRouteRoute
+      preLoaderRoute: typeof mainmodulesAccessControlIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(modules)/access-control/create/': {
-      id: '/(modules)/access-control/create/'
+    '/(main)/(modules)/access-control/create/': {
+      id: '/(main)/(modules)/access-control/create/'
       path: '/access-control/create'
       fullPath: '/access-control/create/'
-      preLoaderRoute: typeof modulesAccessControlCreateIndexRouteImport
-      parentRoute: typeof modulesRouteRoute
+      preLoaderRoute: typeof mainmodulesAccessControlCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(modules)/access-control/users/$username/': {
-      id: '/(modules)/access-control/users/$username/'
+    '/(main)/(modules)/access-control/users/$username/': {
+      id: '/(main)/(modules)/access-control/users/$username/'
       path: '/access-control/users/$username'
       fullPath: '/access-control/users/$username/'
-      preLoaderRoute: typeof modulesAccessControlUsersUsernameIndexRouteImport
-      parentRoute: typeof modulesRouteRoute
+      preLoaderRoute: typeof mainmodulesAccessControlUsersUsernameIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
   }
 }
 
-interface modulesRouteRouteChildren {
-  modulesIndexRoute: typeof modulesIndexRoute
-  modulesAccessControlIndexRoute: typeof modulesAccessControlIndexRoute
-  modulesAccessControlCreateIndexRoute: typeof modulesAccessControlCreateIndexRoute
-  modulesAccessControlUsersUsernameIndexRoute: typeof modulesAccessControlUsersUsernameIndexRoute
+interface mainmodulesRouteRouteChildren {
+  mainmodulesAccessControlIndexRoute: typeof mainmodulesAccessControlIndexRoute
+  mainmodulesAccessControlCreateIndexRoute: typeof mainmodulesAccessControlCreateIndexRoute
+  mainmodulesAccessControlUsersUsernameIndexRoute: typeof mainmodulesAccessControlUsersUsernameIndexRoute
 }
 
-const modulesRouteRouteChildren: modulesRouteRouteChildren = {
-  modulesIndexRoute: modulesIndexRoute,
-  modulesAccessControlIndexRoute: modulesAccessControlIndexRoute,
-  modulesAccessControlCreateIndexRoute: modulesAccessControlCreateIndexRoute,
-  modulesAccessControlUsersUsernameIndexRoute:
-    modulesAccessControlUsersUsernameIndexRoute,
+const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
+  mainmodulesAccessControlIndexRoute: mainmodulesAccessControlIndexRoute,
+  mainmodulesAccessControlCreateIndexRoute:
+    mainmodulesAccessControlCreateIndexRoute,
+  mainmodulesAccessControlUsersUsernameIndexRoute:
+    mainmodulesAccessControlUsersUsernameIndexRoute,
 }
 
-const modulesRouteRouteWithChildren = modulesRouteRoute._addFileChildren(
-  modulesRouteRouteChildren,
+const mainmodulesRouteRouteWithChildren =
+  mainmodulesRouteRoute._addFileChildren(mainmodulesRouteRouteChildren)
+
+interface mainRouteRouteChildren {
+  mainmodulesRouteRoute: typeof mainmodulesRouteRouteWithChildren
+  mainIndexRoute: typeof mainIndexRoute
+}
+
+const mainRouteRouteChildren: mainRouteRouteChildren = {
+  mainmodulesRouteRoute: mainmodulesRouteRouteWithChildren,
+  mainIndexRoute: mainIndexRoute,
+}
+
+const mainRouteRouteWithChildren = mainRouteRoute._addFileChildren(
+  mainRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  modulesRouteRoute: modulesRouteRouteWithChildren,
+  mainRouteRoute: mainRouteRouteWithChildren,
   LoginIndexRoute: LoginIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,14 +1,13 @@
+import { keepPreviousData } from '@tanstack/react-query'
 import { useDataTable } from '../hooks/useDataTable'
 import type { UseDataTableProps } from '../hooks/useDataTable'
-import type { Column, Row } from '@/components'
 import type { CacheKey, PagedResponse } from '@/models'
-import type { Query } from '@/components/organisms/search-form/models/query'
 import type { ReactNode } from 'react'
+import type { Column, Query, Row } from '@/components'
+import { EmptyMessage, TableBuilder } from '@/components'
 import { toTitleCase } from '@/lib/utils'
-import { EmptyMessage, LoadingSpinner } from '@/components'
-import TableBuilder from '@/components/organisms/table/components/table-builder'
 
-type ThisDataTableProps<T, TQuery extends Query> = Partial<
+export type DataTableProps<T, TQuery extends Query> = Partial<
   UseDataTableProps<T, TQuery>
 > & {
   query?: TQuery
@@ -32,39 +31,39 @@ const DataTable = <T, TQuery extends Query = Query>({
   displayEmptyMessage,
   title,
   query,
+  placeholderData = keepPreviousData,
   onRowClick,
   onExpand,
   ...props
-}: ThisDataTableProps<T, TQuery>) => {
-  const { data, columns, isLoading, fetchPage, setLimit, sort } = useDataTable({
-    query,
-    ...props,
-  })
+}: DataTableProps<T, TQuery>) => {
+  const { data, columns, limit, isLoading, fetchPage, setLimit, sort } =
+    useDataTable({
+      query,
+      placeholderData,
+      ...props,
+    })
 
-  if (isLoading || data === undefined) return <LoadingSpinner />
+  if (data && data.items.length === 0)
+    return (
+      <EmptyMessage title={toTitleCase(title)} className="mx-auto w-75 p-5" />
+    )
 
   return (
-    <>
-      <div className="overflow-x-auto">
-        {data.items.length > 0 && (
-          <TableBuilder
-            {...props}
-            onRowClick={onRowClick}
-            data={data.items}
-            columns={columns}
-            pageSize={data.pageSize}
-            totalItems={data.totalItems}
-            onPageChange={fetchPage}
-            onLimitChange={setLimit}
-            onSortingChange={sort}
-            onExpand={onExpand}
-          />
-        )}
-      </div>
-      {data.items.length === 0 && displayEmptyMessage && (
-        <EmptyMessage title={toTitleCase(title)} className="mx-auto w-75 p-5" />
-      )}
-    </>
+    <div className="overflow-x-auto">
+      <TableBuilder
+        {...props}
+        onRowClick={onRowClick}
+        data={data?.items ?? []}
+        columns={columns}
+        pageSize={limit}
+        totalItems={data?.totalItems ?? 0}
+        isLoading={isLoading}
+        onPageChange={fetchPage}
+        onLimitChange={setLimit}
+        onSortingChange={sort}
+        onExpand={onExpand}
+      />
+    </div>
   )
 }
 

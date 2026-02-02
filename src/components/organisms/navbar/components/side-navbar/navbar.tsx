@@ -42,11 +42,11 @@ interface NavbarProps {
 }
 
 const Navbar = ({ onSelect }: NavbarProps) => {
-  const [clickedNavOption, setClickedNavOption] = useState<NavItem | null>(null)
+  const [activeNav, setActiveNav] = useState<NavItem | null>(null)
   const [searchResults, setSearchResults] = useState<Array<NavItem>>([])
 
   const handleOnSelect = (option: NavItem) => {
-    setClickedNavOption(option)
+    setActiveNav(option)
     onSelect?.(option)
   }
 
@@ -71,23 +71,36 @@ const Navbar = ({ onSelect }: NavbarProps) => {
         />
       </div>
       <NavbarLinksContainer
-        className={clsx({ hidden: clickedNavOption?.children?.length })}
+        className={clsx({ hidden: activeNav?.children?.length })}
         options={searchResults.length > 0 ? searchResults : options}
         onExpand={handleOnSelect}
       />
       <NavbarLinksContainer
-        className={clsx({ hidden: !clickedNavOption?.children?.length })}
-        options={clickedNavOption?.children || []}
+        className={clsx({ hidden: !activeNav?.children?.length })}
+        options={activeNav?.children || []}
         onExpand={handleOnSelect}
+        activeOptions={{ includeSearch: true }}
       >
-        <div className="border-bottom border-top bg-active-transparent p-3 shadow-sm">
-          <Icon
-            className="hover-accent cursor-pointer text-center"
-            icon={ArrowBackIcon}
-            onClick={() => setClickedNavOption(null)}
-          >
-            Atrás / {clickedNavOption?.name}
-          </Icon>
+        {/* imrpove this ui */}
+        <div className="flex justify-between border-b border-t bg-active-transparent p-3 shadow-sm">
+          <div className="border-left-accent">
+            <Icon
+              className="text-accent-secondary cursor-pointer"
+              icon={ArrowBackIcon}
+              onClick={() => setActiveNav(null)}
+            />
+          </div>
+
+          <div className="flex items-center">
+            <Icon
+              className="text-sm text-link-active"
+              orientation="right"
+              icon={activeNav?.icon}
+            >
+              /&nbsp;
+              {activeNav?.name}
+            </Icon>
+          </div>
         </div>
       </NavbarLinksContainer>
       <div className="w-full flex-shrink-0 p-3">

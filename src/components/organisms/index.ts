@@ -15,6 +15,7 @@ export * from "./datatable";
 // Form Builder (uses its own index.ts)
 // -------------------------------------
 export * from "./form"
+export * from "./search-form"
 
 // -------------------------------------
 // Modal (uses its own index.ts)

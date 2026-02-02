@@ -8,7 +8,7 @@ import type { ReactNode } from 'react'
 import 'react-tabs/style/react-tabs.css'
 import type { VariationKey } from '../lib/variations'
 
-interface EntityTabsProps extends UseTabsProps {
+export interface TabsProps extends UseTabsProps {
   children: ReactNode
   tabListClassName?: string
   tabClassName?: string
@@ -26,7 +26,7 @@ const Tabs = ({
   variation,
   children,
   ...props
-}: EntityTabsProps) => {
+}: TabsProps) => {
   const { activeIndex, tabsArray, renderedTabs, handleOnSelect } = useTabs({
     children,
     ...props,

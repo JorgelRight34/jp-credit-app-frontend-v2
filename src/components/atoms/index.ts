@@ -89,3 +89,6 @@ export { default as Container } from "./container/container"
 export * from "./navigation/link"
 
 export * from "./icon"
+
+export { default as Skeleton } from "./skeleton/Skeleton"
+export { default as ParagraphSkeleton } from "./skeleton/Skeleton"

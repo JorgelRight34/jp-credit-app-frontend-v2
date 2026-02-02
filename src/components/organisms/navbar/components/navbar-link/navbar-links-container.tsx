@@ -30,6 +30,7 @@ const NavbarLinksContainer = ({
             key={index}
             onExpand={() => onExpand(option)}
             option={option}
+            search={option.search}
             {...props}
           />
         ))}

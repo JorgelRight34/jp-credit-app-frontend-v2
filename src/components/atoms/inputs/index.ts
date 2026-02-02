@@ -12,6 +12,7 @@ export { default as Select } from './select/select';
 export { default as LazySelect } from './select/lazy-select';
 export { default as YearSelect } from './select/year-select';
 export { default as TransferList } from "./transfer-list/transfer-list"
+export { default as Checkbox } from "./checkbox/checkbox"
 
 
 export { default as SearchableComboBox } from "./searchable-combo-box/searchable-combo-box"

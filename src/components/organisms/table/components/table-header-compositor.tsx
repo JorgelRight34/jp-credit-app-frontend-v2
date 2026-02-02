@@ -14,7 +14,7 @@ const TableHeadCompositor = <T,>({ table, className }: TableHeadProps<T>) => {
   return (
     <TableHead className={className}>
       {table.getHeaderGroups().map((headerGroup) => (
-        <TableRow key={headerGroup.id} className="cursor-pointer">
+        <TableRow key={headerGroup.id} className="cursor-pointer border-b">
           {headerGroup.headers.map((header) => (
             <TableHeadCell
               className="px-4 py-2 whitespace-normal"

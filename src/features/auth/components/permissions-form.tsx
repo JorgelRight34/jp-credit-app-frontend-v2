@@ -24,6 +24,8 @@ const PermissionsForm = ({ ref, ...props }: PermissionsFormProps) => {
             value: value as Array<string>,
             leftTitle: 'Disponibles',
             rightTitle: 'Seleccionados',
+            rightSubtitle: `Elija los permisos seleccionándolos y luego seleccione el botón de flecha "Elegir".`,
+            leftSubtitle: `Elimine permisos seleccionándolos y luego seleccione el botón de flecha "Eliminar".`,
             ...inputProps,
           })
         }
