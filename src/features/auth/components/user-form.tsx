@@ -2,7 +2,7 @@ import { useUserForm } from '../hooks/useUserForm'
 import { updateUsernameOnForm } from '../lib/form-utils'
 import type { User } from '../models/user'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
-import type { FormRef, UseDataModuleFormProps } from '@/components'
+import type { DataModuleFormProps, FormRef } from '@/components'
 import type { Ref } from 'react'
 import {
   Form,
@@ -13,7 +13,7 @@ import {
   PasswordInput,
 } from '@/components'
 
-export type UserFormProps = UseDataModuleFormProps<User, UserFormValues> & {
+export type UserFormProps = DataModuleFormProps<User, UserFormValues> & {
   user?: User
 }
 

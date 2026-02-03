@@ -1,4 +1,5 @@
 import { createIsomorphicFn } from "@tanstack/react-start";
+import type { RoleFormSchemaValues } from "../lib/schemas/roleFormSchema";
 import type { RoleQuery } from "../models/roleQuery";
 import type { ClaimPair } from "../models/claimPair";
 import type { ModulePermissions } from "../models/modulePermissions";
@@ -40,6 +41,11 @@ export const updateUserClaims = async (
 
 export const getRoles = async (params: RoleQuery): Promise<PagedResponse<Role>> => {
     const { data } = await api.get("auth/roles", { params })
+    return data;
+}
+
+export const createRole = async (body: RoleFormSchemaValues): Promise<Role> => {
+    const { data } = await api.post('auth/roles', body);
     return data;
 }
 

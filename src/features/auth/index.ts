@@ -6,8 +6,7 @@ export { default as ChangePasswordForm } from "./components/change-password-form
 export { default as LoginForm } from "./components/login-form";
 export { default as PermissionsForm } from "./components/permissions-form";
 export { default as UserForm } from "./components/user-access-form";
-export { default as UserQuerySearch } from "./components/trash/UserQuerySearch";
-export { default as UsersDataTable } from "./components/trash/UsersDataTable";
+export { default as RoleFormPage } from "./pages/role-form-page"
 // export { default as UsersSection } from "./components/UsersSection";
 export * from "./components/permission-provider-wrapper"
 

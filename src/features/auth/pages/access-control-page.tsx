@@ -44,10 +44,11 @@ const AccessControlPage = () => {
           {
             title: 'Roles',
             icon: AddIcon,
+            to: '/access-control/roles/create',
             component: LightPillBtn,
           },
           ...getEntityLayoutOptions({
-            createPath: '/access-control/create',
+            createPath: '/access-control/users/create',
           }),
         ]}
         permissionProvider={accessControlPermissionProvider}

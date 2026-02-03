@@ -1,6 +1,8 @@
+import { getRoles } from "../../services/authService";
+import { rolesQueryKey } from "../constants";
 import type { UserQuery } from "../../models/userQuery";
-import type { SearchFormConfig } from "@/components";
-import { Input } from "@/components";
+import type { SearchFormConfig, SelectOptions } from "@/components";
+import { Input, LazySelect } from "@/components";
 
 export const userSearchConfig: SearchFormConfig<UserQuery> = {
     options: [
@@ -9,5 +11,20 @@ export const userSearchConfig: SearchFormConfig<UserQuery> = {
         { name: 'firstName', label: 'Nombres', width: 3, type: (props) => Input(props) },
         { name: 'lastName', label: 'Apellidos', width: 3, type: (props) => Input(props) },
     ],
-    advanced: [{ name: 'email', label: 'Email', width: 12, type: (props) => Input(props) }],
+    advanced: [
+        { name: 'email', label: 'Email', width: 12, type: (props) => Input(props) },
+        {
+            name: "role",
+            label: "Rol",
+            width: 12, type: (props) => LazySelect({
+                ...props,
+                loader: getRolesSelectOptions,
+                cacheKey: [rolesQueryKey, "select-options"]
+            })
+        }],
+}
+
+const getRolesSelectOptions = async (): Promise<SelectOptions> => {
+    const { items } = await getRoles({ all: true });
+    return items.map(r => [r.normalizedName, `${r.id} - ${r.name}`]);
 }

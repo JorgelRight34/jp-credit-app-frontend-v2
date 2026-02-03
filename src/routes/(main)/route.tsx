@@ -36,7 +36,7 @@ function RouteComponent() {
         <div className="w-full md:w-2/14 hidden md:block h-full p-0 shadow-sm">
           <Navbar />
         </div>
-        <div className="flex-1 p-0 overflow-y-auto">
+        <div className="flex-1 p-0 [scrollbar-gutter:stable] overflow-y-auto">
           <Outlet />
         </div>
         <div className="flex-shrink-0">

@@ -12,4 +12,5 @@ export type Query = {
   createdBy?: number;
   profileAs?: any;
   limit?: number;
+  all?: boolean;
 }

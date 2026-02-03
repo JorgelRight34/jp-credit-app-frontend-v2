@@ -15,7 +15,9 @@ const SearchContainer = <T extends Query>({
   search,
   render,
 }: SearchContainerProps<T>) => {
-  const [controlledQuery, onSearchSubmit] = useSearchContainer<T>()
+  const [controlledQuery, onSearchSubmit] = useSearchContainer<T>(
+    initialValues as T,
+  )
 
   return (
     <section>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useLoginForm } from '../hooks/useLoginForm'
 import type { LoginResult } from '../models/loginResult'
 import type { LoginSchemaType } from '../lib/schemas/loginSchema'
-import type { UseDataModuleFormProps } from '@/components'
+import type { DataModuleFormProps } from '@/components'
 import {
   Form,
   FormContainer,
@@ -14,7 +14,7 @@ import {
 } from '@/components'
 
 const LoginForm = (
-  props: UseDataModuleFormProps<LoginResult, LoginSchemaType>,
+  props: DataModuleFormProps<LoginResult, LoginSchemaType>,
 ) => {
   const [isDirty, setIsDirty] = useState(false)
   const form = useLoginForm({ onDirtyChange: setIsDirty, ...props })

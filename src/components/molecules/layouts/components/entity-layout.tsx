@@ -22,7 +22,7 @@ const EntityLayout = ({
   ...props
 }: EntityLayoutProps) => {
   return (
-    <div className="flex !h-full w-full flex-col overflow-y-auto border !bg-white px-6 pb-6 shadow-sm">
+    <div className="flex !h-full w-full flex-col border !bg-white px-6 pb-6 shadow-sm">
       <div className="border-b mb-3 w-full bg-white p-2">{breadcrumb}</div>
       <div className="pt-lg-0 px-lg-3 flex w-full flex-shrink-0 items-center justify-between pb-6 flex-shrink-0">
         {/* Title */}

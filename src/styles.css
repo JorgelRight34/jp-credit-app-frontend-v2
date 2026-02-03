@@ -21,7 +21,7 @@
   all: unset !important;
 }
 
-.border, .border-b, .border-t, .border-l, .border-r, .border-x {
+.border, .border-b, .border-t, .border-l, .border-r, .border-x, .border-y {
   border-color: var(--bs-border-color) !important;
 }
 

@@ -25,6 +25,7 @@ const SearchForm = <T extends Query>({
 }: SearchFormProps<T>) => {
   const [isDirty, setIsDirty] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
+  const [hasOpenedAdvanced, setHasOpenedAdvanced] = useState(false)
   const form = useForm({
     schema,
     defaultValues: initialValues,
@@ -65,25 +66,29 @@ const SearchForm = <T extends Query>({
                 className="border shadow-sm"
                 type="button"
                 onClick={() => {
-                  if (advanced.length > 0) setShowAdvanced((prev) => !prev)
+                  if (advanced.length > 0) {
+                    setShowAdvanced((prev) => !prev)
+                    if (!hasOpenedAdvanced) setHasOpenedAdvanced(true)
+                  }
                 }}
               />
             </div>
           </div>
           <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
             <div className="rounded-xl mt-3 flex w-full flex-wrap items-center space-y-3 shadow-sm border bg-white p-3">
-              {advanced.map((option) => (
-                <SearchFormGroupContainer
-                  width={option.width}
-                  key={option.name.toString()}
-                >
-                  <FormGroup
-                    label={option.label}
-                    name={option.name as string}
-                    input={option.type}
-                  />
-                </SearchFormGroupContainer>
-              ))}
+              {hasOpenedAdvanced &&
+                advanced.map((option) => (
+                  <SearchFormGroupContainer
+                    width={option.width}
+                    key={option.name.toString()}
+                  >
+                    <FormGroup
+                      label={option.label}
+                      name={option.name as string}
+                      input={option.type}
+                    />
+                  </SearchFormGroupContainer>
+                ))}
             </div>
           </Activity>
         </div>

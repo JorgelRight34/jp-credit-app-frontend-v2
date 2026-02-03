@@ -1,6 +1,6 @@
 import { useChangePasswordForm } from '../hooks/useChangePassword'
 import type { ChangePasswordSchemaType } from '../lib/schemas/changePasswordSchema'
-import type { UseDataModuleFormProps } from '@/components'
+import type { DataModuleFormProps } from '@/components'
 import {
   Form,
   FormContainer,
@@ -10,7 +10,7 @@ import {
   PasswordInput,
 } from '@/components'
 
-export type ChangePasswordFormProps = UseDataModuleFormProps<
+export type ChangePasswordFormProps = DataModuleFormProps<
   null,
   ChangePasswordSchemaType
 >
