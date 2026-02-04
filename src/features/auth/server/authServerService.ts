@@ -1,6 +1,7 @@
 import type { User } from "../models/user";
 import type { LoginResult } from "../models/loginResult";
-import type { UserPermissions } from "../models/userPermissions";
+import type { IdentityPermissions } from "../models/identityPermissions";
+import type { Role } from "../models/role";
 import { CookieService } from "@/lib/services/cookieService";
 import { serverClient } from "@/lib/services/serverClient";
 
@@ -22,5 +23,9 @@ export const getUserFromServer = async (username: string): Promise<User> => {
 }
 
 export const getUserPermissionsFromServer = async (username: string) => {
-    return await serverClient.get<UserPermissions>(`auth/users/${username}/permissions`);
+    return await serverClient.get<IdentityPermissions>(`auth/users/${username}/permissions`);
+}
+
+export const getRoleFromServer = async (id: number) => {
+    return await serverClient.get<Role>('auth/roles/' + id)
 }

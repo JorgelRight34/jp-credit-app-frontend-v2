@@ -25,7 +25,12 @@ const FormSubmitBtn = <T extends FieldValues>({
   })
 
   return (
-    <AccentBtn disabled={!isDirty} icon={icon} onClick={mutateAsync}>
+    <AccentBtn
+      type="submit"
+      disabled={!isDirty}
+      icon={icon}
+      onClick={mutateAsync}
+    >
       {text}
     </AccentBtn>
   )

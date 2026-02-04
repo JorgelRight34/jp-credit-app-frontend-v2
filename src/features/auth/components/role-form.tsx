@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import { Suspense, useRef, useState } from 'react'
 import { useRoleForm } from '../hooks/useRoleForm'
+import { updateRoleClaims } from '../services/authService'
+import PermissionsForm from './permissions-form'
+import type { PermissionsFormRef } from './permissions-form'
 import type { DataModuleFormProps } from '@/components'
 import type { Role } from '../models/role'
 import type { RoleFormSchemaValues } from '../lib/schemas/roleFormSchema'
@@ -13,14 +16,25 @@ import {
 
 const RoleForm = (props: DataModuleFormProps<Role, RoleFormSchemaValues>) => {
   const [isDirty, setIsDirty] = useState(false)
-  const form = useRoleForm({ ...props, onDirtyChange: setIsDirty })
+  const permissionFormRef = useRef<PermissionsFormRef>(null)
+  const form = useRoleForm({
+    ...props,
+    onSuccess: (data) => {
+      permissionFormRef.current?.setValue('id', data.id)
+      permissionFormRef.current?.submit()
+    },
+    onDirtyChange: setIsDirty,
+  })
 
   return (
-    <Form form={form}>
-      <FormContainer footer={<FormSubmitBtn isDirty={isDirty} />}>
+    <FormContainer footer={<FormSubmitBtn isDirty={isDirty} form={form} />}>
+      <Form form={form}>
         <FormGroup name="name" label="Nombre" input={Input} />
-      </FormContainer>
-    </Form>
+      </Form>
+      <Suspense fallback="...">
+        <PermissionsForm ref={permissionFormRef} handler={updateRoleClaims} />
+      </Suspense>
+    </FormContainer>
   )
 }
 

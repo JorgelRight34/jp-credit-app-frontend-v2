@@ -3,9 +3,11 @@ import type { BreadcrumbSpec } from '../../breadcrumb'
 import type { EntityLayoutProps } from './entity-layout'
 import type { CacheKey } from '@/models'
 import type { FormPageMode } from '../models/formPageMode'
-import type { ConfirmationModalProps } from '@/components/organisms'
-import type { PermissionsProvider } from '@/models/permissionsProvider'
-import { PermissionsProviderWrapper } from '@/features/auth'
+import type {
+  ConfirmationModalProps,
+  PermissionsProvider,
+} from '@/components/organisms'
+import { ProtectedComponent } from '@/components/organisms'
 
 export type FormPageLayoutProps = React.PropsWithChildren &
   EntityLayoutProps &
@@ -25,7 +27,7 @@ const FormPageLayout = ({
   ...props
 }: FormPageLayoutProps) => {
   return (
-    <PermissionsProviderWrapper
+    <ProtectedComponent
       provider={permissionProvider}
       isAuthorizedFn={(permissions) =>
         (mode === 'edit' && permissions.canEdit) ||
@@ -39,7 +41,7 @@ const FormPageLayout = ({
       >
         {children}
       </FormPageLayoutContent>
-    </PermissionsProviderWrapper>
+    </ProtectedComponent>
   )
 }
 

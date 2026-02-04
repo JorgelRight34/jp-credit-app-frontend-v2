@@ -1,5 +1,10 @@
-import { Row } from "@/components";
 import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime"
+import type { Row } from "@/components";
+import "dayjs/locale/es"
+
+dayjs.extend(relativeTime)
+dayjs.locale("es")
 
 /** Normalize date to 00:00:00 */
 export const normalizeDate = (d: Date) => {
@@ -146,6 +151,10 @@ export const getLocaleMonth = (dateInput: Date | string) => {
 
 /** Current year */
 export const getCurrentYear = () => new Date().getFullYear();
+
+export const getDateLabelSinceDate = (date: Date | string) => {
+    return dayjs(date).fromNow()
+}
 
 
 export const TimeSpan = {

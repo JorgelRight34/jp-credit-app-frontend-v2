@@ -1,31 +1,33 @@
+import { createPermissionQueryKey } from '../lib/query-keys'
+import type { PermissionsProvider } from '../models/permissionsProvider'
 import type { ModulePermissions } from '../models/modulePermissions'
 import type { ReactNode } from 'react'
-import type { PermissionsProvider } from '@/models/permissionsProvider'
-import Unauthorized from '@/components/molecules/pages/unathorized'
 import { useSuspenseData } from '@/hooks/useData'
 
-export interface PermissionsProviderWrapperProps {
+export interface ProtectedComponentProps {
   provider: PermissionsProvider
   fetchedPermissions?: ModulePermissions
   children: ReactNode
+  fallback?: ReactNode
   isAuthorizedFn: (permissions: ModulePermissions) => boolean
 }
 
-const PermissionsProviderWrapper = ({
+const ProtectedComponent = ({
   provider,
   children,
   fetchedPermissions,
+  fallback = null,
   isAuthorizedFn,
-}: PermissionsProviderWrapperProps) => {
+}: ProtectedComponentProps) => {
   const { data: permissions } = useSuspenseData({
-    key: provider.cacheKey,
+    key: createPermissionQueryKey(provider),
     loader: provider.loader,
     initialData: fetchedPermissions,
   })
 
-  if (!isAuthorizedFn(permissions)) return <Unauthorized />
+  if (!isAuthorizedFn(permissions)) return fallback
 
   return children
 }
 
-export default PermissionsProviderWrapper
+export default ProtectedComponent

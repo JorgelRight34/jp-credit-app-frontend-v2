@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useChangePasswordForm } from '../hooks/useChangePassword'
 import type { ChangePasswordSchemaType } from '../lib/schemas/changePasswordSchema'
 import type { DataModuleFormProps } from '@/components'
@@ -16,13 +17,21 @@ export type ChangePasswordFormProps = DataModuleFormProps<
 >
 
 const ChangePasswordForm = ({ initialValues }: ChangePasswordFormProps) => {
-  const form = useChangePasswordForm({ initialValues })
+  const [isDirty, setIsDirty] = useState(false)
+  const form = useChangePasswordForm({
+    initialValues,
+    onDirtyChange: setIsDirty,
+  })
 
   return (
-    <FormContainer footer={<FormSubmitBtn form={form} />}>
+    <FormContainer footer={<FormSubmitBtn isDirty={isDirty} form={form} />}>
       <Form form={form}>
         <FormRow>
-          <FormGroup name="password" label="Contraseña" input={PasswordInput} />
+          <FormGroup
+            name="password"
+            label="Nueva contraseña"
+            input={PasswordInput}
+          />
         </FormRow>
         <FormRow>
           <FormGroup

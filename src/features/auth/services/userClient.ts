@@ -1,10 +1,10 @@
 import type { UserFormValues } from "../lib/schemas/userFormSchema";
 import type { UserQuery } from "../models/userQuery";
-import type { PossiblePermissions } from "../models/possiblePermissions";
-import type { UserPermissions } from "../models/userPermissions";
+import type { IdentityPermissions } from "../models/identityPermissions";
 import type { User } from "../models/user";
 import type { PagedResponse } from "@/models";
 import type { ChangePasswordSchemaType } from "../lib/schemas/changePasswordSchema";
+import type { UpdatePermissionsHandler } from "../hooks/usePermissionsForm";
 import api from "@/lib/services/api";
 
 const baseUrl = "auth/users"
@@ -19,18 +19,13 @@ export const getUser = (async (username: string): Promise<User> => {
   return data;
 });
 
-export const getUserPermissions = async (id: number): Promise<UserPermissions> => {
+export const getUserPermissions = async (id: number): Promise<IdentityPermissions> => {
   const response = await api.get(`${baseUrl}/${id}/permissions`);
   return response.data;
 };
 
-export const getAllPosiblePermissions =
-  async (): Promise<PossiblePermissions> => {
-    const response = await api.get(`permissions/possible-permissions`);
-    return response.data;
-  };
 
-export const getPermissions = async (id: number): Promise<UserPermissions> => {
+export const getPermissions = async (id: number): Promise<IdentityPermissions> => {
   const response = await api.get(`${baseUrl}/${id}/permissions/`);
   return response.data;
 };
@@ -73,6 +68,14 @@ export const getUsers = async (params?: UserQuery): Promise<PagedResponse<User>>
 
 export const deleteUser = async (id: number) => {
   await api.delete(`${baseUrl}/${id}`)
+}
+
+export const updateUserClaims: UpdatePermissionsHandler = async (id, body) => {
+  await api.patch("auth/users/" + id + "/claims", body);
+}
+
+export const updateUserRoles = async (id: User["id"], body: { add: Array<string>, remove: Array<string> }) => {
+  await api.patch("auth/users/" + id + "/roles", body);
 }
 
 export const userClient = {

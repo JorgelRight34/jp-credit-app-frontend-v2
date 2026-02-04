@@ -51,7 +51,7 @@ const TransferListBox = ({
             return (
               <FormLabel
                 key={item.id}
-                className={clsx('flex !p-3 items-center hover:bg-stone-100', {
+                className={clsx('flex !p-2 items-center hover:bg-stone-100', {
                   'opacity-50 cursor-not-allowed': isDisabled,
                 })}
               >

@@ -1,21 +1,22 @@
 import { useState } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
-import { updateUsernameOnForm } from '../lib/form-utils'
+import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import type { User } from '../models/user'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
-import type { UseDataModuleFormProps } from '@/components'
+import type { DataModuleFormProps } from '@/components'
 import {
   Form,
+  FormCheckboxGroup,
   FormContainer,
   FormGroup,
   FormRow,
   FormSubmitBtn,
-  FormWatchGroup,
   Input,
+  ProtectedComponent,
 } from '@/components'
 
 export type UserFormProps = Omit<
-  UseDataModuleFormProps<User, UserFormValues>,
+  DataModuleFormProps<User, UserFormValues>,
   'shouldEdit'
 > & {
   user?: User
@@ -29,8 +30,6 @@ const UserEditForm = ({ ...props }: UserFormProps) => {
     ...props,
   })
 
-  console.log('userEditForm')
-
   return (
     <FormContainer footer={<FormSubmitBtn isDirty={isDirty} form={form} />}>
       <Form form={form}>
@@ -41,15 +40,17 @@ const UserEditForm = ({ ...props }: UserFormProps) => {
           <FormGroup label="Apellidos" name="lastName" input={Input} />
         </FormRow>
         <FormRow>
-          <FormWatchGroup
-            watchedValues={['firstName', 'lastName']}
-            onWacthedValuesChange={updateUsernameOnForm}
-            label="Usuario"
-            name="username"
-            input={Input}
-          />
+          <FormGroup label="Usuario" name="username" input={Input} />
         </FormRow>
-        <FormGroup label="Email" name="email" type="email" input={Input} />
+        <FormRow>
+          <FormGroup label="Email" name="email" type="email" input={Input} />
+        </FormRow>
+        <ProtectedComponent
+          provider={accessControlPermissionProvider}
+          isAuthorizedFn={(p) => p.canEdit}
+        >
+          <FormCheckboxGroup label="Habilitado" name="isActive" />
+        </ProtectedComponent>
       </Form>
     </FormContainer>
   )

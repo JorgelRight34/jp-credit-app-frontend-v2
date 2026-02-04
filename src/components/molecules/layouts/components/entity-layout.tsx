@@ -1,8 +1,8 @@
 import EntityLayoutContent from './entity-layout-content'
 import EntityLayoutOptionsContainer from './entity-layout-options-container'
 import type { ReactNode } from 'react'
-import type { PermissionsProvider } from '@/models/permissionsProvider'
 import type { LayoutOption } from '../models/entityLayoutOption'
+import type { IsAuthorizedFn, PermissionsProvider } from '@/components'
 import { BigTitle } from '@/components'
 
 export interface EntityLayoutProps {
@@ -12,6 +12,7 @@ export interface EntityLayoutProps {
   options?: Array<LayoutOption>
   validateProject?: boolean
   breadcrumb?: ReactNode
+  isAuthorizedFn?: IsAuthorizedFn
 }
 
 const EntityLayout = ({
@@ -22,7 +23,7 @@ const EntityLayout = ({
   ...props
 }: EntityLayoutProps) => {
   return (
-    <div className="flex !h-full w-full flex-col border !bg-white px-6 pb-6 shadow-sm">
+    <div className="flex min-h-full flex-1 w-full flex-col  px-6 pb-6 shadow-sm">
       <div className="border-b mb-3 w-full bg-white p-2">{breadcrumb}</div>
       <div className="pt-lg-0 px-lg-3 flex w-full flex-shrink-0 items-center justify-between pb-6 flex-shrink-0">
         {/* Title */}

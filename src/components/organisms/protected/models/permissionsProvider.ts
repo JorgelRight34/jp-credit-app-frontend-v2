@@ -1,5 +1,5 @@
-import type { ModulePermissions } from "@/features/auth";
-import type { CacheKey } from "./cacheKey";
+import type { ModulePermissions } from "./modulePermissions";
+import type { CacheKey } from "@/models";
 
 export type PermissionsProvider = {
     cacheKey: CacheKey;

@@ -7,7 +7,7 @@ import { useForm } from "@/components";
 type UseChangeUserPasswordFormProps = UseDataFormProps<null, ChangePasswordSchemaType>;
 
 export const useChangePasswordForm = ({
-  initialValues
+  initialValues, ...props
 }: UseChangeUserPasswordFormProps): UseFormBuilderReturn<
   ChangePasswordSchemaType
 > => {
@@ -18,7 +18,8 @@ export const useChangePasswordForm = ({
     schema: changePasswordSchema,
     defaultValues: { id: initialValues.id, password: "", confirmation: "" },
     onSubmit: (data) => changePassword(data.id, data),
-    toastMessage: () => "Contraseña cambiada."
+    toastMessage: () => "Contraseña cambiada.",
+    ...props
   });
 };
 

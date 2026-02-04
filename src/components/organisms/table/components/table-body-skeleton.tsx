@@ -11,7 +11,7 @@ interface TableBodySkeletonProps {
 }
 
 const TableBodySkeleton = ({
-  pageSize,
+  pageSize = 10,
   columnsLength,
 }: TableBodySkeletonProps) => {
   return (

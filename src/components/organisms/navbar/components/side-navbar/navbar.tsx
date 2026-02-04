@@ -51,7 +51,7 @@ const Navbar = ({ onSelect }: NavbarProps) => {
   }
 
   return (
-    <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-white shadow-sm">
+    <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-white border-r shadow-sm">
       <div className="border-bottom flex-shrink-0">
         <NavbarHeader
           src="/horizontal-logo.png?url"

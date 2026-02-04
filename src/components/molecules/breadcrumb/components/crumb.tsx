@@ -11,15 +11,15 @@ interface CrumbProps extends LinkProps {
 const Crumb = ({ isLast, breadcrumb, ...props }: CrumbProps) => {
   return (
     <Link
-      className={clsx('flex items-center', {
+      className={clsx('flex text-sm text-active items-center', {
         '!cursor-pointer': !isLast,
-        'text-accent-secondary': isLast,
-        'opacity-50': breadcrumb.disabled,
+        'opacity-50': isLast,
       })}
       underline="none"
       color={isLast ? '' : 'inherit'}
       aria-current={isLast ? 'page' : undefined}
       to={breadcrumb.disabled ? '.' : breadcrumb.pathname}
+      search={breadcrumb.search}
       {...props}
     >
       <Icon

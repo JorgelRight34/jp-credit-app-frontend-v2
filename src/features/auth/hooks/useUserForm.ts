@@ -19,6 +19,7 @@ export const useUserForm = ({ user, initialValues, ...props }: UseUserFormProps)
       firstName: user?.firstName ?? "",
       lastName: user?.lastName ?? "",
       email: user?.email ?? "",
+      isActive: user?.isActive ?? true,
       ...initialValues
     },
     onSubmit: createUser,

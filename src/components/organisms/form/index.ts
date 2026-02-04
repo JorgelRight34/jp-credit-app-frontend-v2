@@ -9,6 +9,8 @@ export { default as FormContainer } from "./components/form-container"
 export { default as FormWatchInput } from "./components/form-watch-input"
 export { default as FormColumn } from "./components/form-column";
 export { default as FormRow } from "./components/form-row"
+export { default as FormGroupHorizontal } from './components/form-group-horizontal'
+export { default as FormCheckboxGroup } from "./components/form-checkbox-group"
 
 export * from "./hooks/useForm"
 export * from "./models/apiError"

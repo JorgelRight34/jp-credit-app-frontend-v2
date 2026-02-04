@@ -56,12 +56,14 @@ const CreateFormPageLayoutContent = ({
     <EntityLayout
       title={toAllTitleCase(title)}
       permissionProvider={permissionProvider}
+      isAuthorizedFn={(p) => p.canCreate}
       breadcrumb={
         <EntityLayoutBreadcrumb
           breadcrumbs={breadcrumbs.concat({
             title: 'Crear',
             icon: AddIcon,
             pathname: '.',
+            disabled: true,
           })}
         />
       }
@@ -90,12 +92,14 @@ const EditFormPageLayoutContent = ({
       <EntityLayout
         {...props}
         title={toAllTitleCase(title)}
+        isAuthorizedFn={(p) => p.canEdit}
         breadcrumb={
           <EntityLayoutBreadcrumb
             breadcrumbs={breadcrumbs.concat({
               title: 'Editar',
               icon: EditIcon,
               pathname: '.',
+              disabled: true,
             })}
           />
         }

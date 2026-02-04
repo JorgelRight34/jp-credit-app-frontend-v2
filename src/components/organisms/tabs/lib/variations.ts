@@ -10,7 +10,7 @@ export const variations = {
     },
     minimal: {
         list: "flex justify-end",
-        tab: "bg-white border p-2 shadow-sm rounded-pill ml-3 px-3 cursor-pointer",
+        tab: "bg-white border rounded-full px-4 mb-3 p-2 shadow-sm rounded-pill ml-3 cursor-pointer",
     },
 } as const satisfies Record<string, Variation>;
 

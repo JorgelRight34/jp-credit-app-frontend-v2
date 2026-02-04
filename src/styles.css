@@ -176,24 +176,6 @@ background-color: var(---white-2) !important;
   color: var(--active-color) !important;
 }
 
-.text-header {
-  color: var(--active-color);
-}
-
-.transparent-accent-bg {
-  position: relative;
-}
-
-.transparent-accent-bg::before {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background-color: var(--primary-color);
-  opacity: 0.7;
-  border-radius: 0.5rem;
-  z-index: -1;
-}
-
 input:focus {
   box-shadow: 0 0 0 0.01rem var(--active-color) !important; /* Indigo ring */
   border-color: var(
@@ -205,6 +187,38 @@ input:focus {
 .link-reset {
   color: inherit;
   text-decoration: none;
+}
+
+.text-active {
+  color: var(--active-color);
+}
+
+.text-header {
+  color: var(--active-color);
+}
+
+.text-link-active {
+  color: var(--active-color) !important;
+}
+
+.bg-active-transparent {
+  background-color: rgba(88, 57, 6, 0.025) !important;
+}
+
+
+.transparent-accent-bg::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background-color: var(--primary-color);
+  opacity: 0.7;
+  border-radius: 0.5rem;
+  z-index: -1;
+}
+
+
+.transparent-accent-bg {
+  position: relative;
 }
 
 .text-accent {

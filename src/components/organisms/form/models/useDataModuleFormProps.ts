@@ -4,7 +4,7 @@ import type { FieldValues } from "react-hook-form";
 import type { FormRef } from "./fomRef";
 
 export type DataModuleFormProps<T = object, TData extends FieldValues = FieldValues> = UseDataFormProps<T, TData> & {
-    ref?: Ref<FormRef>;
+    ref?: Ref<FormRef<TData>>;
     reset?: boolean;
     shouldEdit?: boolean;
     onDirtyChange?: (isDirty: boolean) => void;

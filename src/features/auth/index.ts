@@ -8,7 +8,6 @@ export { default as PermissionsForm } from "./components/permissions-form";
 export { default as UserForm } from "./components/user-access-form";
 export { default as RoleFormPage } from "./pages/role-form-page"
 // export { default as UsersSection } from "./components/UsersSection";
-export * from "./components/permission-provider-wrapper"
 
 // ----------------------
 // Hooks
@@ -27,24 +26,19 @@ export * from "./lib/utils";
 // ----------------------
 // Models
 // ----------------------
-export * from "./models/login";
-export * from "./models/loginForm";
-export * from "./models/modulePermission";
-export * from "./models/modulePermissions";
-export * from "./models/possiblePermissions";
 export * from "./models/role";
 export * from "./models/user";
-export * from "./models/userPermissions";
+export * from "./models/identityPermissions";
 export * from "./models/userQuery";
 
 // ----------------------
 // Pages (default)
 // ----------------------
-export { default as PermissionsProviderWrapper } from "./components/permission-provider-wrapper"
 export { default as LoginPanel } from "./pages/login-panel"
 export { default as AccessControlPage } from "./pages/access-control-page"
 export { default as UserFormPage } from "./pages/user-form-page"
 export { default as UserPage } from './pages/user-page'
+export { default as RolePage } from './pages/role-page'
 
 // ----------------------
 // Services

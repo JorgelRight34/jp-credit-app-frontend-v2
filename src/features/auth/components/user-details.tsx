@@ -1,38 +1,42 @@
 import { Suspense } from 'react'
-import ChangePasswordForm from './change-password-form'
-import UserFormPermissions from './user-form-permissions'
 import UserEditForm from './user-edit-form'
-import type { UserFormProps } from './user-form'
-import type { UserPermissions } from '../models/userPermissions'
+import UserEditFormPermissions from './user-edit-form-permissions'
+import UserRolesForm from './user-roles-form'
+import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import type { User } from '../models/user'
-import { Tab, Tabs } from '@/components'
+import type { IdentityPermissions } from '../models/identityPermissions'
+import type { DataModuleFormProps } from '@/components'
+import { AccessTimeIcon, Icon, Tab, Tabs } from '@/components'
+import { getDateLabelSinceDate } from '@/lib/utils'
 
-type UserDetailsProps = UserFormProps & {
+type UserDetailsProps = DataModuleFormProps<User, UserFormValues> & {
   user: User
-  userPermissions: UserPermissions
+  userPermissions: IdentityPermissions
 }
 
 const UserDetails = ({ user, userPermissions, ...props }: UserDetailsProps) => {
   return (
     <Tabs defaultActiveKey="data" navigate={false}>
       <Tab eventKey="data" title="Overview">
-        <div className="flex h-full">
-          <div className="flex w-5/12"></div>
-          <div className="flex bg-white w-7/12">
-            <UserEditForm user={user} {...props} />
+        <div className="h-full pb-3">
+          <div className="flex justify-end">
+            <Icon icon={AccessTimeIcon}>
+              Ultimo acceso: {getDateLabelSinceDate(user.lastLogin)}
+            </Icon>
           </div>
+          <UserEditForm user={user} {...props} />
         </div>
       </Tab>
       <Tab eventKey="permissions" title="Permisos">
         <Suspense fallback="...">
-          <UserFormPermissions
+          <UserEditFormPermissions
             userId={user.id}
-            userPermissions={userPermissions}
+            claims={userPermissions.claims}
           />
         </Suspense>
       </Tab>
-      <Tab eventKey="credentials" title="Credenciales">
-        <ChangePasswordForm initialValues={{ id: user.id }} />
+      <Tab eventKey="roles" title="Roles">
+        <UserRolesForm user={user} userRoles={userPermissions.roles} />
       </Tab>
     </Tabs>
   )

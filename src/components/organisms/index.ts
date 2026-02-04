@@ -6,6 +6,7 @@
 // Datatable (uses its own index.ts)
 // -------------------------------------
 export * from "./datatable";
+export * from "./protected"
 
 // -------------------------------------
 // Entity Section (uses its own index.ts)

@@ -8,6 +8,7 @@ export const userFormSchema = z
         firstName: z.string(),
         lastName: z.string(),
         email: z.string(),
+        isActive: z.boolean().optional()
     })
     .refine((data) => data.password === data.confirmation, {
         message: "Las contraseñas no coinciden",

@@ -63,6 +63,8 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
 
             await onSuccess?.(data)
             invalidateKeys();
+
+            if (resetValues) handleReset();
         },
         onError: (err) => {
             handleError(err)
@@ -102,8 +104,6 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
         await mutateAsync(applyInterceptors(data as TData));
 
         clearApiErrors();
-
-        if (resetValues) handleReset();
     };
 
     const handleError = (err: unknown) => {

@@ -14,7 +14,12 @@ const Breadcrumb = ({
 }: BreadcrumbProps) => {
   return (
     <div role="presentation" {...props}>
-      <Breadcrumbs aria-label="breadcrumb" maxItems={maxItems} {...props}>
+      <Breadcrumbs
+        className="opacity-70"
+        aria-label="breadcrumb"
+        maxItems={maxItems}
+        {...props}
+      >
         {breadcrumbs?.map((bread, index) => {
           return (
             <Crumb

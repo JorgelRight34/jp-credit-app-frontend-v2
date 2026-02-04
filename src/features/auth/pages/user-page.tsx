@@ -1,14 +1,17 @@
 import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import UserDetails from '../components/user-details'
-import { accessControlBreadcrumb } from '../lib/config/breadcrumbs'
+import {
+  accessControlBreadcrumb,
+  usersModuleBreadcrumb,
+} from '../lib/config/breadcrumbs'
 import type { User } from '../models/user'
-import type { UserPermissions } from '../models/userPermissions'
+import type { IdentityPermissions } from '../models/identityPermissions'
 import { getFullName } from '@/lib/utils'
 import { EntityLayout, EntityLayoutBreadcrumb, PersonIcon } from '@/components'
 
 type UserPageProps = {
   user: User
-  userPermissions: UserPermissions
+  userPermissions: IdentityPermissions
 }
 
 const UserPage = ({ user, userPermissions }: UserPageProps) => {
@@ -20,7 +23,12 @@ const UserPage = ({ user, userPermissions }: UserPageProps) => {
         <EntityLayoutBreadcrumb
           breadcrumbs={[
             accessControlBreadcrumb,
-            { icon: PersonIcon, title: user.username, pathname: '.' },
+            usersModuleBreadcrumb,
+            {
+              icon: PersonIcon,
+              title: user.username,
+              pathname: '.',
+            },
           ]}
         />
       }

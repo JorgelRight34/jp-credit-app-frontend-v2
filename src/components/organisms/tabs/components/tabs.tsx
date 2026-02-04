@@ -34,8 +34,6 @@ const Tabs = ({
     })
   const variationClasses = variations[variation ?? 'default']
 
-  console.log('my name is tabs')
-
   return (
     <div className={clsx('h-full', className)}>
       <RTabs

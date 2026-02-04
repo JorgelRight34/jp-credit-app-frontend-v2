@@ -1,8 +1,8 @@
 import { createIsomorphicFn } from "@tanstack/react-start";
+import type { UpdatePermissionsHandler } from "../hooks/usePermissionsForm";
 import type { RoleFormSchemaValues } from "../lib/schemas/roleFormSchema";
 import type { RoleQuery } from "../models/roleQuery";
-import type { ClaimPair } from "../models/claimPair";
-import type { ModulePermissions } from "../models/modulePermissions";
+import type { ModulePermissions } from "../../../components/organisms/protected/models/modulePermissions";
 import type { LoginResult } from "../models/loginResult";
 import type { LoginSchemaType } from "../lib/schemas/loginSchema";
 import type { User } from "../models/user";
@@ -32,15 +32,17 @@ export const getAllPossibleClaims = async (): Promise<IdentityClaims> => {
     return data;
 }
 
-export const updateUserClaims = async (
-    id: number,
-    body: { add: Array<ClaimPair>; remove: Array<ClaimPair> }
-) => {
-    await api.patch("auth/users/" + id + "/claims", body);
+export const updateRoleClaims: UpdatePermissionsHandler = async (id, body) => {
+    await api.patch("auth/roles/" + id + "/claims", body);
 }
 
 export const getRoles = async (params: RoleQuery): Promise<PagedResponse<Role>> => {
     const { data } = await api.get("auth/roles", { params })
+    return data;
+}
+
+export const getRole = async (id: number): Promise<Role> => {
+    const { data } = await api.get("auth/roles/" + id);
     return data;
 }
 

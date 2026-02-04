@@ -13,6 +13,7 @@ export const useRoleForm = ({ initialValues, ...config }: UseDataFormProps<Role,
         onSubmit: createRole,
         onEdit: () => { throw new Error("not implemented") },
         keysToInvalidate: [[rolesQueryKey]],
+        toastMessage: (data) => `Se ha creado el rol (${data.id}) [${data.name}]`,
         ...config
     })
 }

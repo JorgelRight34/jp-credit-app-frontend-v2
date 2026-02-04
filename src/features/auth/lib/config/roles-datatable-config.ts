@@ -14,7 +14,7 @@ export const rolesDataTableConfig: DataTableConfig<Role> = {
             accessorKey: "name",
             header: "NOMBRE",
             enableSorting: true,
-            cell: ({ row }) => createLinkDataCell(row.original.name, {})
+            cell: ({ row }) => createLinkDataCell(row.original.name, { to: "/access-control/roles/$id", params: { id: row.original.id.toString() } })
         },
         { id: "usersCount", accessorKey: "usersCount", header: "USUARIOS", enableSorting: true },
         { id: "id", accessorKey: "id", header: "ID", enableSorting: true },

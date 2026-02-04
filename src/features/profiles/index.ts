@@ -1,0 +1,1 @@
+export { default as ProfilesPage } from "./pages/profiles-page"
