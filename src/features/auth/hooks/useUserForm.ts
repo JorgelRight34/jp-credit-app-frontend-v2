@@ -25,7 +25,6 @@ export const useUserForm = ({ user, initialValues, ...props }: UseUserFormProps)
     onSubmit: createUser,
     onEdit: async (data) => {
       await editUser(data, user!.id)
-      return user!;
     },
     toastMessage: () => "Ha sido agregado exitosamente",
     ...props

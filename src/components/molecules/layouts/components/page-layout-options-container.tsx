@@ -1,32 +1,32 @@
 import { useRef } from 'react'
 import Menu from '../../menu/menu'
-import EntityLayoutOption from './entity-layout-option'
+import PageLayoutOption from './page-layout-option'
 import type { MenuRef } from '../../menu/menu'
-import type { LayoutOption } from '../models/entityLayoutOption'
+import type { LayoutOption } from '../models/pageLayoutOption'
 import { ArrowDownwardIcon, LightBtn } from '@/components/atoms'
 
-export type EntityLayoutOptionsContainerProps = {
+export type PageLayoutOptionsContainerProps = {
   options: Array<LayoutOption>
 }
 
-const EntityLayoutOptionsContainer = ({
+const PageLayoutOptionsContainer = ({
   options,
-}: EntityLayoutOptionsContainerProps) => {
+}: PageLayoutOptionsContainerProps) => {
   return (
     <>
       <div className="hidden items-center gap-3 md:flex">
         {options.map((option, index) => (
-          <EntityLayoutOption key={index} option={option} />
+          <PageLayoutOption key={index} option={option} />
         ))}
       </div>
       <div className="ml-auto block md:hidden">
-        <EntityLayoutOptionsMenu options={options} />
+        <PageLayoutOptionsMenu options={options} />
       </div>
     </>
   )
 }
 
-const EntityLayoutOptionsMenu = ({
+const PageLayoutOptionsMenu = ({
   options,
 }: {
   options: Array<LayoutOption>
@@ -51,4 +51,4 @@ const EntityLayoutOptionsMenu = ({
   )
 }
 
-export default EntityLayoutOptionsContainer
+export default PageLayoutOptionsContainer

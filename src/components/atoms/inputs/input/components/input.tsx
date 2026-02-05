@@ -33,7 +33,7 @@ const Input = ({
 }: InputProps) => {
   return (
     <TextField
-      className={clsx('rounded-xl border-gray-200', className, {
+      className={clsx('rounded-xl', className, {
         'bg-white': !disabled,
         'bg-gray-100': disabled,
       })}

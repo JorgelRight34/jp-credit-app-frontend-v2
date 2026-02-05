@@ -40,9 +40,9 @@ const SelectInput = ({
         value={value}
         onChange={(e) => props.onChange?.(e.target.value as string)}
         sx={{ width: 'auto', minWidth: 'fit-content', ...muiSxConfig }}
-        slotProps={getIconInputSlot(icon)}
+        {...getIconInputSlot(icon)}
       >
-        {allowNoOption && <MenuItem value={undefined}>---</MenuItem>}
+        {allowNoOption && <MenuItem value="">---</MenuItem>}
         {options &&
           options.map((option, key) => (
             <MenuItem key={key} value={option[0] ?? ''}>

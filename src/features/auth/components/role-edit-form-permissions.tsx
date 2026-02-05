@@ -5,7 +5,7 @@ import PermissionsForm from './permissions-form'
 import type { Role } from '../models/role'
 import type { PermissionsFormProps } from './permissions-form'
 import type { IdentityPermissions } from '../models/identityPermissions'
-import { FormContainer, FormSubmitBtn } from '@/components'
+import { FormContainer, FormContainerButtons } from '@/components'
 
 interface RoleEditFormPermissionsProps extends Omit<
   PermissionsFormProps,
@@ -23,7 +23,7 @@ const RoleEditFormPermissions = ({
   const [isDirty, setIsDirty] = useState(false)
 
   return (
-    <FormContainer footer={<FormSubmitBtn isDirty={isDirty} />}>
+    <FormContainer footer={<FormContainerButtons isDirty={isDirty} />}>
       <PermissionsForm
         {...props}
         handler={updateRoleClaims}

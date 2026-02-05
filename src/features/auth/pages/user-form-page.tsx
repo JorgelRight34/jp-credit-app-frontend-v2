@@ -9,7 +9,7 @@ import { FormPageLayout } from '@/components'
 const UserFormPage = () => {
   return (
     <FormPageLayout
-      title="Crear Acceso"
+      title="Crear acceso"
       permissionProvider={accessControlPermissionProvider}
       breadcrumbs={[accessControlBreadcrumb, usersModuleBreadcrumb]}
     >

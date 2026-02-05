@@ -1,12 +1,12 @@
 import type { Route } from "@/components/atoms";
-import type { LayoutOption } from "../models/entityLayoutOption";
+import type { LayoutOption } from "../models/pageLayoutOption";
 import { AccentPillBtn, AddIcon } from "@/components/atoms";
 
-type GetEntityLayoutOptionsArgument = {
+type GetPageLayoutOptionsArgument = {
     createPath?: Route; deletePath?: Route;
 }
 
-export const getEntityLayoutOptions = ({ createPath }: GetEntityLayoutOptionsArgument): Array<LayoutOption> => {
+export const getPageLayoutOptions = ({ createPath }: GetPageLayoutOptionsArgument): Array<LayoutOption> => {
     const options: Array<LayoutOption> = [];
 
     if (createPath) {

@@ -1,4 +1,4 @@
-import type { LayoutOption } from '../models/entityLayoutOption'
+import type { LayoutOption } from '../models/pageLayoutOption'
 import { Icon, Link } from '@/components/atoms'
 
 type EntityLayoutOptionProps = {

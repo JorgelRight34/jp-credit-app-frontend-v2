@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { startTransition, useMemo } from 'react'
 import clsx from 'clsx'
 import type { TableBuilderProps } from './table-builder'
 import type { Table } from '@tanstack/react-table'
@@ -33,7 +33,7 @@ const TableNavigation = <TData,>({
 
   const handlePageSizeChange = (val: number) => {
     table.setPageSize(val)
-    onLimitChange?.(val)
+    startTransition(() => onLimitChange?.(val))
   }
 
   return (

@@ -1,10 +1,10 @@
 import type { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
 import type { FieldValues } from 'react-hook-form'
 import type { IconName } from '@/components/atoms/icon/iconName'
-import { AccentBtn, SendIcon } from '@/components/atoms'
+import { AccentBtn, CheckCircleIcon } from '@/components/atoms'
 import { useDataMutation } from '@/hooks/useMutate'
 
-interface FormSubmitBtnProps<T extends FieldValues> {
+export interface FormSubmitBtnProps<T extends FieldValues> {
   form?: UseFormBuilderReturn<T>
   text?: string
   isDirty?: boolean
@@ -14,9 +14,9 @@ interface FormSubmitBtnProps<T extends FieldValues> {
 
 const FormSubmitBtn = <T extends FieldValues>({
   form,
-  text = 'Ok',
+  text = 'Confirmar',
   isDirty,
-  icon = SendIcon,
+  icon = CheckCircleIcon,
   onSubmit,
 }: FormSubmitBtnProps<T>) => {
   const { mutateAsync } = useDataMutation({

@@ -18,7 +18,6 @@ export interface UseDataTableProps<T, TQuery extends Query> {
 }
 
 export const useDataTable = <T, TQuery extends Query>({
-    columns = [],
     cacheKey,
     query = {} as TQuery,
     pageSize,
@@ -38,7 +37,6 @@ export const useDataTable = <T, TQuery extends Query>({
     });
 
     return {
-        columns,
         data: data,
         isLoading,
         isError,

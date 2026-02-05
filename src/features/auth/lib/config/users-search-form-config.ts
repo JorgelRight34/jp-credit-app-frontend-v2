@@ -2,7 +2,7 @@ import { getRoles } from "../../services/authService";
 import { rolesQueryKey } from "../constants";
 import type { UserQuery } from "../../models/userQuery";
 import type { SearchFormConfig, SelectOptions } from "@/components";
-import { Input, LazySelect } from "@/components";
+import { EmailInput, Input, LazySelect } from "@/components";
 
 export const userSearchConfig: SearchFormConfig<UserQuery> = {
     options: [
@@ -12,7 +12,7 @@ export const userSearchConfig: SearchFormConfig<UserQuery> = {
         { name: 'lastName', label: 'Apellidos', width: 3, type: (props) => Input(props) },
     ],
     advanced: [
-        { name: 'email', label: 'Email', width: 12, type: (props) => Input(props) },
+        { name: 'email', label: 'Email', width: 12, type: (props) => EmailInput(props) },
         {
             name: "role",
             label: "Rol",

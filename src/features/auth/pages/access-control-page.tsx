@@ -6,14 +6,12 @@ import type { RouteBreadcrumbMap } from '@/components'
 import {
   AddIcon,
   AdminPanelSettingsIcon,
-  EntityLayout,
   LightPillBtn,
+  PageRouterLayout,
   PersonIcon,
   Tab,
   TabsRouter,
-  TabsRouterBreadcrumb,
-  TabsRouterProvider,
-  getEntityLayoutOptions,
+  getPageLayoutOptions,
 } from '@/components'
 
 const tabBreadcrumbMap: RouteBreadcrumbMap = {
@@ -31,38 +29,35 @@ const tabBreadcrumbMap: RouteBreadcrumbMap = {
 
 const AccessControlPage = () => {
   return (
-    <TabsRouterProvider defaultActive="users">
-      <EntityLayout
-        title="Accesos"
-        breadcrumb={
-          <TabsRouterBreadcrumb
-            tabBreadcrumbMap={tabBreadcrumbMap}
-            baseBreadcrumbs={[accessControlBreadcrumb]}
-          />
-        }
-        options={[
-          {
-            title: 'Roles',
-            icon: AddIcon,
-            to: '/access-control/roles/create',
-            component: LightPillBtn,
-          },
-          ...getEntityLayoutOptions({
-            createPath: '/access-control/users/create',
-          }),
-        ]}
-        permissionProvider={accessControlPermissionProvider}
-      >
-        <TabsRouter>
-          <Tab eventKey="users" title="Usuarios">
-            <UsersDataTable />
-          </Tab>
-          <Tab eventKey="roles" title="Roles">
-            <RolesDataTable />
-          </Tab>
-        </TabsRouter>
-      </EntityLayout>
-    </TabsRouterProvider>
+    <PageRouterLayout
+      title="Accesos"
+      options={[
+        {
+          title: 'Roles',
+          icon: AddIcon,
+          to: '/access-control/roles/create',
+          component: LightPillBtn,
+        },
+        ...getPageLayoutOptions({
+          createPath: '/access-control/users/create',
+        }),
+      ]}
+      permissionProvider={accessControlPermissionProvider}
+      routerConfig={{
+        defaultActive: 'users',
+        tabBreadcrumbMap,
+        baseBreadcrumbs: [accessControlBreadcrumb],
+      }}
+    >
+      <TabsRouter>
+        <Tab eventKey="users" title="Usuarios">
+          <UsersDataTable />
+        </Tab>
+        <Tab eventKey="roles" title="Roles">
+          <RolesDataTable />
+        </Tab>
+      </TabsRouter>
+    </PageRouterLayout>
   )
 }
 

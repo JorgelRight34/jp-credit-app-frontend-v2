@@ -6,7 +6,7 @@ import RoleDetails from '../components/role-details'
 import { rolesPermissionProvider } from '../lib/config/permissionProvider'
 import type { Role } from '../models/role'
 import type { IdentityPermissions } from '../models/identityPermissions'
-import { BadgeIcon, EntityLayout, EntityLayoutBreadcrumb } from '@/components'
+import { BadgeIcon, PageLayout, PageLayoutBreadcrumb } from '@/components'
 
 type RolePageProps = {
   role: Role
@@ -15,10 +15,10 @@ type RolePageProps = {
 
 const RolePage = ({ role, rolePermissions }: RolePageProps) => {
   return (
-    <EntityLayout
+    <PageLayout
       title={`${role.id} - ${role.name}`}
       breadcrumb={
-        <EntityLayoutBreadcrumb
+        <PageLayoutBreadcrumb
           breadcrumbs={[
             accessControlBreadcrumb,
             rolesModuleBreadcrumb,
@@ -34,7 +34,7 @@ const RolePage = ({ role, rolePermissions }: RolePageProps) => {
       permissionProvider={rolesPermissionProvider}
     >
       <RoleDetails role={role} rolePermissions={rolePermissions} />
-    </EntityLayout>
+    </PageLayout>
   )
 }
 

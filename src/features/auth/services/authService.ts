@@ -51,6 +51,10 @@ export const createRole = async (body: RoleFormSchemaValues): Promise<Role> => {
     return data;
 }
 
+export const updateRole = async (id: Role["id"], body: RoleFormSchemaValues) => {
+    await api.put(`auth/roles/${id}`, body);
+}
+
 export const getModulePermissions = createIsomorphicFn()
     .server(async (endpoint: string)
         : Promise<ModulePermissions> => {
@@ -60,4 +64,4 @@ export const getModulePermissions = createIsomorphicFn()
         : Promise<ModulePermissions> => {
         const { data } = await api.get(endpoint);
         return data;
-    })
+    });

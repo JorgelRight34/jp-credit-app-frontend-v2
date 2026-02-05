@@ -2,7 +2,7 @@ import {
     getCoreRowModel, getExpandedRowModel, getPaginationRowModel,
     getSortedRowModel, useReactTable
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import { getUpdaterOrValue } from "../lib/utils";
 import type { PageSize } from "../models/pageSize";
 import type { Column } from "../models/column";
@@ -65,19 +65,21 @@ export const useTableState = <T,>({
         },
         onRowSelectionChange: setRowSelection,
         onPaginationChange: (updaterOrValue) => {
-            setPagination((prev) => {
-                const next = getUpdaterOrValue(updaterOrValue, prev)
-                onPageChange?.(next.pageIndex + 1);
+            startTransition(() => {
+                setPagination((prev) => {
+                    const next = getUpdaterOrValue(updaterOrValue, prev)
+                    startTransition(() => onPageChange?.(next.pageIndex + 1));
 
-                return next;
-            });
+                    return next;
+                });
+            })
         },
         getExpandedRowModel: getExpandedRowModel(),
         getRowCanExpand: () => allowExpand,
         onSortingChange: (updaterOrValue) => {
             setSorting((prev) => {
                 const next = getUpdaterOrValue(updaterOrValue, prev)
-                onSortingChange?.(next);
+                startTransition(() => onSortingChange?.(next));
 
                 return next;
             });

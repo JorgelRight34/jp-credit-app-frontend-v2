@@ -7,13 +7,15 @@ const TabsRouteActionsContext = createContext<
 >(undefined)
 const TabsRouteUnreactiveContext = createContext<string | undefined>(undefined)
 
+export type TabsRouterProviderProps = {
+  children: React.ReactNode
+  defaultActive: string
+}
+
 export function TabsRouterProvider({
   children,
   defaultActive,
-}: {
-  children: React.ReactNode
-  defaultActive: string
-}) {
+}: TabsRouterProviderProps) {
   const search = useSearchParams()
   const activeRoute = search.get('tab') ?? defaultActive
   const [defaultActiveRoute] = useState(

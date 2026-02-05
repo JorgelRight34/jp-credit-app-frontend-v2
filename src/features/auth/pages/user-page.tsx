@@ -7,7 +7,7 @@ import {
 import type { User } from '../models/user'
 import type { IdentityPermissions } from '../models/identityPermissions'
 import { getFullName } from '@/lib/utils'
-import { EntityLayout, EntityLayoutBreadcrumb, PersonIcon } from '@/components'
+import { PageLayout, PageLayoutBreadcrumb, PersonIcon } from '@/components'
 
 type UserPageProps = {
   user: User
@@ -16,11 +16,11 @@ type UserPageProps = {
 
 const UserPage = ({ user, userPermissions }: UserPageProps) => {
   return (
-    <EntityLayout
+    <PageLayout
       title={`${getFullName(user)} - ${user.username}`}
       permissionProvider={accessControlPermissionProvider}
       breadcrumb={
-        <EntityLayoutBreadcrumb
+        <PageLayoutBreadcrumb
           breadcrumbs={[
             accessControlBreadcrumb,
             usersModuleBreadcrumb,
@@ -38,7 +38,7 @@ const UserPage = ({ user, userPermissions }: UserPageProps) => {
         user={user}
         userPermissions={userPermissions}
       />
-    </EntityLayout>
+    </PageLayout>
   )
 }
 

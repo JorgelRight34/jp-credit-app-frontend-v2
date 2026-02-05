@@ -2,11 +2,11 @@ import { loginSchema } from "../lib/schemas/loginSchema";
 import { login } from "../services/authService";
 import type { LoginResult } from "../models/loginResult";
 import type { LoginSchemaType } from "../lib/schemas/loginSchema";
-import type { UseDataModuleFormProps, UseFormBuilderReturn } from "@/components";
+import type { UseDataFormProps, UseFormBuilderReturn } from "@/components";
 import { useForm } from "@/components";
 import { ACCESS_TOKEN } from "@/lib/utils";
 
-export const useLoginForm = ({ onSuccess, ...props }: UseDataModuleFormProps<LoginResult, LoginSchemaType>): UseFormBuilderReturn<LoginSchemaType> => {
+export const useLoginForm = ({ onSuccess, ...props }: UseDataFormProps<LoginResult, LoginSchemaType>): UseFormBuilderReturn<LoginSchemaType> => {
     return useForm({
         ...props,
         onSubmit: login,

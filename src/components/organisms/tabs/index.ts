@@ -14,3 +14,5 @@ export * from "./hooks/useTabs";
 export * from "./lib/variations";
 
 export * from "./components/tabs"
+export * from "./components/tabs-router-breadcrumb"
+export * from "./contexts/tabs-router-context";

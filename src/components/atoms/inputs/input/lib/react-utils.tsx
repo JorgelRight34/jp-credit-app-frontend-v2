@@ -17,14 +17,14 @@ export const getIconInputSlot = ({
 
   return {
     [isDirectionRight ? 'endAdornment' : 'startAdornment']: icon ? (
-      <InputAdornment position={isDirectionRight ? 'end' : 'start'}>
+      <InputAdornment position={'start'}>
         <IconButton
           onClick={onClick}
           onMouseDown={(e) => e.preventDefault()}
           edge={isDirectionRight ? 'end' : 'start'}
           size="small"
           sx={{
-            ml: isDirectionRight ? 0 : -1, // pull closer to the input
+            ml: isDirectionRight ? 1 : 0, // pull closer to the input
             mr: isDirectionRight ? -1 : 0, // reduce spacing on opposite side
           }}
         >

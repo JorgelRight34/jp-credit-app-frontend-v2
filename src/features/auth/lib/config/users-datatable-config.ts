@@ -2,7 +2,7 @@ import { usersQueryKey } from "../constants"
 import { getUsers } from "../../services/userClient"
 import type { User } from "../../models/user"
 import type { DataTableConfig } from "@/components";
-import { createDateDataCell, createLinkDataCell } from "@/components"
+import { createDateDataCell, createIsActiveDataCell, createLinkDataCell } from "@/components"
 
 export const usersDatatableConfig: DataTableConfig<User> = {
     title: 'Accesos',
@@ -36,6 +36,12 @@ export const usersDatatableConfig: DataTableConfig<User> = {
             header: "FECHA",
             accessorKey: "createdAt",
             cell: ({ row }) => createDateDataCell(row.original.createdAt)
+        },
+        {
+            id: "isActive",
+            header: "ESTADO",
+            accessorKey: "isActive",
+            cell: ({ row }) => createIsActiveDataCell(row.original.isActive)
         }
     ],
     loader: getUsers,

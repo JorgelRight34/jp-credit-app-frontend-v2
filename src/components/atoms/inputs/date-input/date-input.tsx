@@ -20,13 +20,19 @@ const DateInput = ({ value, min, onChange, ...props }: DateInputProps) => {
         {...props}
         minDate={min ? dayjs(min.toString()) : undefined}
         value={dayjs(value)}
-        onChange={(e) => onChange?.(e?.toDate())}
-        sx={muiSxConfig}
+        onChange={(e) => onChange?.(e?.format('YYYY-MM-DD'))}
         slotProps={{
           textField: {
             size: 'small',
-            className: '!rounded-xl',
+            className: '!rounded-xl border',
             fullWidth: true,
+            sx: muiSxConfig,
+          },
+          desktopPaper: {
+            sx: {
+              border: 'none',
+              borderRadius: '0.5rem',
+            },
           },
         }}
       />

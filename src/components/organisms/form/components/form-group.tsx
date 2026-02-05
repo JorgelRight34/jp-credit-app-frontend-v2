@@ -9,8 +9,8 @@ export type FormGroupProps<T extends FieldValues> =
   HTMLAttributes<HTMLDivElement> &
     Omit<FormInputProps<T>, 'as'> & {
       label: string
-      required?: boolean
       inputClassName?: string
+      optional?: boolean
       input: FormInputProps<T>['as']
     }
 
@@ -19,7 +19,7 @@ const FormGroup = <T extends FieldValues>({
   label,
   className,
   type,
-  required,
+  optional = false,
   inputClassName = 'w-full',
   input,
   ...props
@@ -27,8 +27,7 @@ const FormGroup = <T extends FieldValues>({
   return (
     <div className={clsx('flex flex-1 items-start flex-col gap-2', className)}>
       <FormLabel htmlFor={name as string}>
-        {label}{' '}
-        {!required && <span className="text-accent">&nbsp;*&nbsp;</span>}
+        {label} {optional && <span className="text-accent">&nbsp;*&nbsp;</span>}
       </FormLabel>
       <FormInput
         {...props}

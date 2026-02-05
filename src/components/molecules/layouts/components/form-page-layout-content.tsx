@@ -1,9 +1,8 @@
 import { lazy, useState } from 'react'
 import { useFormPage } from '../hooks/useFormPage'
-import EntityLayout from './entity-layout'
-import EntityLayoutBreadcrumb from './entity-layout-breadcrumb'
+import PageLayout from './page-layout'
+import PageLayoutBreadcrumb from './page-layout-breadcrumb'
 import type { FormPageLayoutProps } from './form-page-layout'
-import { toAllTitleCase } from '@/lib/utils/utils'
 import { AccentBtn, AddIcon, DeleteIcon, EditIcon } from '@/components'
 
 const ConfirmationModal = lazy(
@@ -53,12 +52,12 @@ const CreateFormPageLayoutContent = ({
   'title' | 'children' | 'breadcrumbs' | 'permissionProvider'
 >) => {
   return (
-    <EntityLayout
-      title={toAllTitleCase(title)}
+    <PageLayout
+      title={title}
       permissionProvider={permissionProvider}
       isAuthorizedFn={(p) => p.canCreate}
       breadcrumb={
-        <EntityLayoutBreadcrumb
+        <PageLayoutBreadcrumb
           breadcrumbs={breadcrumbs.concat({
             title: 'Crear',
             icon: AddIcon,
@@ -70,7 +69,7 @@ const CreateFormPageLayoutContent = ({
       options={[]}
     >
       {children}
-    </EntityLayout>
+    </PageLayout>
   )
 }
 
@@ -89,12 +88,12 @@ const EditFormPageLayoutContent = ({
 
   return (
     <>
-      <EntityLayout
+      <PageLayout
         {...props}
-        title={toAllTitleCase(title)}
+        title={title}
         isAuthorizedFn={(p) => p.canEdit}
         breadcrumb={
-          <EntityLayoutBreadcrumb
+          <PageLayoutBreadcrumb
             breadcrumbs={breadcrumbs.concat({
               title: 'Editar',
               icon: EditIcon,
@@ -113,7 +112,7 @@ const EditFormPageLayoutContent = ({
         ]}
       >
         {children}
-      </EntityLayout>
+      </PageLayout>
       <ConfirmationModal
         height="auto"
         destructive={true}

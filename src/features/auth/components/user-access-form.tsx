@@ -10,9 +10,9 @@ import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import {
   Form,
   FormContainer,
+  FormContainerButtons,
   FormGroup,
   FormRow,
-  FormSubmitBtn,
   FormWatchGroup,
   Input,
   PasswordInput,
@@ -36,7 +36,9 @@ const UserAccessForm = ({ ...props }: UserAccessFormProps) => {
   })
 
   return (
-    <FormContainer footer={<FormSubmitBtn isDirty={isDirty} form={form} />}>
+    <FormContainer
+      footer={<FormContainerButtons isDirty={isDirty} form={form} />}
+    >
       <Tabs defaultActiveKey="data" navigate={false}>
         <Tab eventKey="data" title="Datos">
           <Form form={form}>

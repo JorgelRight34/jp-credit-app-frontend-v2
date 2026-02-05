@@ -11,6 +11,7 @@ export { default as ImageWithLightBox } from "./light-box/image-lightbox"
 export { default as FinancialCard } from "./financial-card/financial-card"
 export { default as NotFound } from "./pages/not-found"
 export { default as Unathorized } from "./pages/unathorized"
+export { default as ErrorDocument } from './pages/error-document'
 
 // -------------------------------------
 

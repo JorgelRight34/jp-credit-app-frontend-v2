@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { startTransition, useEffect, useMemo, useState } from "react";
 import { useForm as useRHFForm } from "react-hook-form";
 import type { SchemaType } from "../models/schemaType";
 import type { ApiError } from "../models/apiError";
@@ -21,11 +21,11 @@ export interface UseFormBuilderProps<TData, TReturn> {
     tagsToInvalidate?: Array<string>;
     shouldEdit?: boolean;
     interceptors?: Array<FormInterceptor<TData>>;
-    toastMessage?: (data: TReturn) => string;
+    toastMessage?: (data: TReturn | undefined) => string;
     onSuccess?: (data: TReturn) => void;
     onDelete?: () => void;
     onSubmit: ((data: TData) => Promise<TReturn>);
-    onEdit?: ((data: TData) => Promise<TReturn>);
+    onEdit?: ((data: TData) => Promise<void>);
     onDirtyChange?: (val: boolean) => void;
 }
 
@@ -58,10 +58,10 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
         },
         onSuccess: async (data) => {
             if (toastMessage) {
-                toastService.success(toastMessage(data))
+                toastService.success(toastMessage(data ?? undefined))
             }
 
-            await onSuccess?.(data)
+            if (data) await onSuccess?.(data)
             invalidateKeys();
 
             if (resetValues) handleReset();
@@ -150,7 +150,7 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     };
 
     useEffect(() => {
-        memoizedOnDirtyChange(isDirty)
+        startTransition(() => memoizedOnDirtyChange(isDirty));
     }, [isDirty, memoizedOnDirtyChange])
 
     return {

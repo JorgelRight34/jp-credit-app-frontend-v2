@@ -8,19 +8,19 @@ import type {
 import { getProjectId } from '@/lib/utils'
 import { ProtectedComponent } from '@/components/organisms'
 
-interface EntityLayoutContentProps {
+interface PageLayoutContentProps {
   permissionProvider: PermissionsProvider
   children: ReactNode
-  isAuthorizedFn?: IsAuthorizedFn
   validateProject?: boolean
+  isAuthorizedFn?: IsAuthorizedFn
 }
 
-const EntityLayoutContent = ({
+const PageLayoutContent = ({
   permissionProvider,
   validateProject,
   children,
   isAuthorizedFn = (p) => p.canView,
-}: EntityLayoutContentProps) => {
+}: PageLayoutContentProps) => {
   return (
     <div className="px-lg-3 flex flex-1 flex-col p-0">
       <Suspense fallback={'loading...'}>
@@ -38,4 +38,4 @@ const EntityLayoutContent = ({
   )
 }
 
-export default EntityLayoutContent
+export default PageLayoutContent

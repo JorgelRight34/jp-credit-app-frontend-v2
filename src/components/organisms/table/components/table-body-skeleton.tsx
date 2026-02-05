@@ -16,7 +16,7 @@ const TableBodySkeleton = ({
 }: TableBodySkeletonProps) => {
   return (
     <TableBody>
-      {range(pageSize).map((i) => (
+      {range(10).map((i) => (
         <React.Fragment key={i}>
           <TableRow>
             {range(columnsLength).map((j) => (

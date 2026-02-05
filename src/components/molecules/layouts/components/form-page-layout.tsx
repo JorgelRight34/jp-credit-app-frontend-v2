@@ -1,6 +1,6 @@
 import FormPageLayoutContent from './form-page-layout-content'
 import type { BreadcrumbSpec } from '../../breadcrumb'
-import type { EntityLayoutProps } from './entity-layout'
+import type { PageLayoutProps } from './page-layout'
 import type { CacheKey } from '@/models'
 import type { FormPageMode } from '../models/formPageMode'
 import type {
@@ -10,7 +10,7 @@ import type {
 import { ProtectedComponent } from '@/components/organisms'
 
 export type FormPageLayoutProps = React.PropsWithChildren &
-  EntityLayoutProps &
+  PageLayoutProps &
   Partial<ConfirmationModalProps> & {
     mode?: FormPageMode
     cacheKey?: CacheKey

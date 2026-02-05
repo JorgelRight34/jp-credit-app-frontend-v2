@@ -1,11 +1,10 @@
-import { Suspense, useRef, useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useRoleForm } from '../hooks/useRoleForm'
 import RoleEditFormPermissions from './role-edit-form-permissions'
 import UsersDataTable from './users-datatable'
 import type { RoleFormSchemaValues } from '../lib/schemas/roleFormSchema'
 import type { IdentityPermissions } from '../models/identityPermissions'
 import type { Role } from '../models/role'
-import type { PermissionsFormRef } from './permissions-form'
 import type { DataModuleFormProps } from '@/components'
 import {
   Form,
@@ -24,7 +23,11 @@ type RoleDetailsProps = DataModuleFormProps<Role, RoleFormSchemaValues> & {
 
 const RoleDetails = ({ role, rolePermissions, ...props }: RoleDetailsProps) => {
   const [isDirty, setIsDirty] = useState(false)
-  const form = useRoleForm({ ...props, initialValues: role })
+  const form = useRoleForm({
+    ...props,
+    role,
+    onDirtyChange: setIsDirty,
+  })
 
   return (
     <Tabs defaultActiveKey="overview">

@@ -9,7 +9,7 @@ import { FormPageLayout } from '@/components'
 const RoleFormPage = () => {
   return (
     <FormPageLayout
-      title="Roles"
+      title="Crear grupo"
       permissionProvider={rolesPermissionProvider}
       breadcrumbs={[accessControlBreadcrumb, rolesModuleBreadcrumb]}
     >

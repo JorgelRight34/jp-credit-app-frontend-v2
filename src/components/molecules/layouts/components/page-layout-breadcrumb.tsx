@@ -8,7 +8,7 @@ const homeBreadcrumbs: Array<BreadcrumbSpec> = [
   { title: 'Home', icon: () => <HomeIcon />, pathname: '/' },
 ]
 
-const EntityLayoutBreadcrumb = ({
+const PageLayoutBreadcrumb = ({
   breadcrumbs,
 }: {
   breadcrumbs: Array<BreadcrumbSpec>
@@ -23,4 +23,4 @@ const EntityLayoutBreadcrumb = ({
   )
 }
 
-export default EntityLayoutBreadcrumb
+export default PageLayoutBreadcrumb

@@ -43,29 +43,31 @@ export class HttpClient {
                 },
             });
         } catch (err) {
-            console.log("hubo un error...")
             // network/runtime error (no HTTP status available)
             throw new HttpClientError({
                 status: 502,
-                message: err instanceof Error ? err.message : "Upstream request failed",
-            });
+                message: JSON.stringify({ status: 502, message: err instanceof Error ? `${err.message} (${JSON.stringify(err, null, 2)})` : "Upstream request failed" })
+            })
         }
 
         const text = await res.text();
         const data = safeJsonParse(text);
 
         if (res.ok) {
-            console.log(JSON.stringify(data, null, 2))
             return (data as T) ?? (null as T);
         }
 
         // reflect upstream status & payload
-        console.log("Returning http error")
         throw new HttpClientError({
             status: res.status,
-            message: (data && typeof data === "object" && "message" in data && typeof (data as any).message === "string")
-                ? (data as any).message
-                : text || res.statusText,
+            message: JSON.stringify({
+                status: res.status,
+                message: (data && typeof data === "object" && "message" in data && typeof (data as any).message === "string")
+                    ? (data as any).message
+                    : text || res.statusText,
+                text,
+                data
+            }),
             text,
             data,
         });

@@ -8,9 +8,9 @@ import {
   Form,
   FormCheckboxGroup,
   FormContainer,
+  FormContainerButtons,
   FormGroup,
   FormRow,
-  FormSubmitBtn,
   Input,
   ProtectedComponent,
 } from '@/components'
@@ -31,7 +31,9 @@ const UserEditForm = ({ ...props }: UserFormProps) => {
   })
 
   return (
-    <FormContainer footer={<FormSubmitBtn isDirty={isDirty} form={form} />}>
+    <FormContainer
+      footer={<FormContainerButtons isDirty={isDirty} form={form} />}
+    >
       <Form form={form}>
         <FormRow>
           <FormGroup label="Nombres" name="firstName" input={Input} />

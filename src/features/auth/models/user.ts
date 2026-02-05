@@ -13,5 +13,5 @@ export interface User {
   claims: Array<ClaimPair>;
   roles: Array<string>;
   lastLogin: string;
-  isActive?: boolean;
+  isActive: boolean;
 }

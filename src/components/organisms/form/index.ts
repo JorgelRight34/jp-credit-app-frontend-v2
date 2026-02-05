@@ -11,6 +11,7 @@ export { default as FormColumn } from "./components/form-column";
 export { default as FormRow } from "./components/form-row"
 export { default as FormGroupHorizontal } from './components/form-group-horizontal'
 export { default as FormCheckboxGroup } from "./components/form-checkbox-group"
+export { default as FormContainerButtons } from "./components/form-container-buttons"
 
 export * from "./hooks/useForm"
 export * from "./models/apiError"

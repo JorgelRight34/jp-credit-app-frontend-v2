@@ -13,7 +13,7 @@ export interface Profile {
     photoUrl?: string;
     address: string;
     email: string;
-    dateOfBirth: string | Date;
+    dateOfBirth: string;
     maritalStatus: MaritalStatus;
     dni: string;
     landline: string;

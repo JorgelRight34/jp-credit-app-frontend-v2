@@ -13,9 +13,13 @@ export { default as LazySelect } from './select/lazy-select';
 export { default as YearSelect } from './select/year-select';
 export { default as TransferList } from "./transfer-list/transfer-list"
 export { default as Checkbox } from "./checkbox/checkbox"
+export { default as NumericInput } from './numeric-input/numeric-input'
+export { default as EmailInput } from './email-input/email-input'
 
 
 export { default as SearchableComboBox } from "./searchable-combo-box/searchable-combo-box"
+export { default as GenderSelect } from "./select/gender-select"
+export { default as CivilStatusSelect } from "./select/civil-status-select"
 
 // Models and Utils
 export * from './input/models/baseTextFieldProps';
