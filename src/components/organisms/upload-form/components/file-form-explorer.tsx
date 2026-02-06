@@ -1,16 +1,12 @@
-import { useMemo } from 'react'
+import { useId, useMemo } from 'react'
 import clsx from 'clsx'
-import {
-  mapApiFileToDatatableFile,
-  mapFileFormFieldValuesToDatatableFile,
-  mapFileToDatatableFile,
-} from '../lib/utils'
+import { mapApiFileToDatatableFile, mapFileToDatatableFile } from '../lib/utils'
 import { Tab, Tabs } from '../../tabs'
 import FileFormExplorerTabPanel from './file-form-explorer-tab-panel'
-import type { UseUploadFilesInputReturn } from '../models/useMultipleFilesInputProp'
-import { DownloadIcon, UploadIcon } from '@/components/atoms'
+import type { UseFileAttachmentsReturn } from '../hooks/useFileAttachments'
+import { DeleteIcon, DownloadIcon, Icon, UploadIcon } from '@/components/atoms'
 
-type FileFormExplorerProps = UseUploadFilesInputReturn & {
+type FileFormExplorerProps = UseFileAttachmentsReturn & {
   showLimitWarning?: boolean
   className?: string
   accept?: string
@@ -27,86 +23,62 @@ const FileFormExplorer = ({
   className,
   showLimitWarning,
 }: FileFormExplorerProps) => {
-  const { uploadedLoaded, uploadedCreated, uploadedUploaded } = useMemo(() => {
-    return {
-      uploadedLoaded: upload.loaded.map(mapApiFileToDatatableFile),
-      uploadedCreated: upload.created.map(
-        mapFileFormFieldValuesToDatatableFile,
-      ),
-      uploadedUploaded: upload.uploaded.map(mapFileToDatatableFile),
-    }
-  }, [upload.loaded, upload.created, upload.uploaded])
+  const id = useId()
+  const uploaded = useMemo(
+    () => [
+      ...upload.loaded.map(mapApiFileToDatatableFile),
+      ...upload.uploaded.map(mapFileToDatatableFile),
+    ],
+    [upload.loaded, upload.uploaded],
+  )
 
-  const { removedDeleted, removedFiles, removedCreations } = useMemo(() => {
-    return {
-      removedDeleted: remove.deleted.map(mapApiFileToDatatableFile),
-      removedFiles: remove.removedFiles.map(mapFileToDatatableFile),
-      removedCreations: remove.removedCreations.map(
-        mapFileFormFieldValuesToDatatableFile,
-      ),
-    }
-  }, [remove.deleted, remove.removedFiles, remove.removedCreations])
+  const removed = useMemo(
+    () => [
+      ...remove.deleted.map(mapApiFileToDatatableFile),
+      ...remove.removedFiles.map(mapFileToDatatableFile),
+    ],
+    [remove.deleted, remove.removedFiles],
+  )
 
   return (
     <div className={clsx('flex h-full flex-col', className)}>
-      <Tabs defaultActiveKey="uploaded" variation="minimal" navigate={false}>
-        <Tab
-          title={
-            <label>
-              <input
-                type="file"
-                className="hidden"
-                name={name ?? ''}
-                accept={accept}
-                disabled={reachedLimit}
-                onChange={upload.addFile}
-              />
-              Subir
-            </label>
-          }
-          icon={UploadIcon}
-          disabled={reachedLimit}
-        >
-          <label>
-            <input
-              type="file"
-              className="hidden"
-              name={name ?? ''}
-              accept={accept}
-              disabled={reachedLimit}
-              onChange={upload.addFile}
-            />
-            <button type="button">Subir</button>
-          </label>
-        </Tab>
-        <Tab eventKey="uploaded" title="Ver Subidos" icon={DownloadIcon}>
+      <Tabs defaultActiveKey="uploaded" variation="minimal">
+        <Tab eventKey="uploaded" title="Subidos" icon={DownloadIcon}>
           <FileFormExplorerTabPanel
-            createdLabel="Subidos"
-            deletedLabel="Removidos"
-            created={uploadedUploaded}
-            deleted={removedFiles}
-            onRemove={remove.removeFile}
-            onRecover={remove.recoverFile}
+            label="Subidos"
+            optionLabel="Borrar"
+            files={uploaded}
+            onOptionClick={remove.removeFile}
+            buttons={
+              <>
+                <input
+                  type="file"
+                  className="hidden"
+                  name={name ?? ''}
+                  id={id}
+                  accept={accept}
+                  disabled={reachedLimit}
+                  onChange={upload.addFile}
+                />
+                <label
+                  htmlFor={id}
+                  className={clsx('cursor-pointer', {
+                    'pointer-events-none cursor-not-allowed opacity-50':
+                      reachedLimit,
+                  })}
+                >
+                  <Icon icon={UploadIcon}>Subir</Icon>
+                </label>
+              </>
+            }
           />
         </Tab>
-        <Tab eventKey="loaded" title="Ver Iniciales" icon={DownloadIcon}>
+        <Tab eventKey="removed" title="Eliminados" icon={DeleteIcon}>
           <FileFormExplorerTabPanel
-            createdLabel="Iniciales"
-            deletedLabel="Removidos"
-            created={uploadedLoaded}
-            deleted={removedDeleted}
-            onRemove={remove.removeFile}
-            onRecover={remove.recoverFile}
-          />
-        </Tab>
-        <Tab eventKey="created" title="Ver Creados" icon={DownloadIcon}>
-          <FileFormExplorerTabPanel
-            createdLabel="Creados"
-            deletedLabel="Removidos"
-            created={uploadedCreated}
-            deleted={removedCreations}
-            onRemove={remove.removeFile}
-            onRecover={remove.recoverFile}
+            label="Eliminados"
+            optionLabel="Recuperar"
+            files={removed}
+            onOptionClick={remove.recoverFile}
           />
         </Tab>
       </Tabs>

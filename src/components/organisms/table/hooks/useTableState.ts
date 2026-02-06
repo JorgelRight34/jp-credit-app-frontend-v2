@@ -22,6 +22,8 @@ export interface UseTableStateProps<TData> {
     onSortingChange?: (sort: SortingState) => void;
 }
 
+const EMPTY: [] = []
+
 export const useTableState = <T,>({
     pageSize = defaultPageSize,
     data,
@@ -41,7 +43,7 @@ export const useTableState = <T,>({
     const [expanded, setExpanded] = useState<ExpandedState>({});
 
     const table = useReactTable({
-        data: data ?? [],
+        data: data ?? EMPTY,
         columns,
         manualPagination: !!onPageChange,
         state: { pagination, sorting, rowSelection, expanded },

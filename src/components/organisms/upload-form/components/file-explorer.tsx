@@ -19,24 +19,13 @@ interface FileExplorerProps {
 
 const columns: Array<Column<TableFile>> = [
   {
-    accessorKey: 'name',
-    header: 'Nombre',
-    enableSorting: true,
-    cell: ({ row }) => (
-      <FilenameDataTableColumn
-        name={row.original.name ?? '---'}
-        fileType={row.original.fileType}
-      />
-    ),
-  },
-  {
     accessorKey: 'fileType',
-    header: 'Tipo',
+    header: 'TIPO',
     enableSorting: true,
   },
   {
     accessorKey: 'lastModified',
-    header: 'Modificado',
+    header: 'MODIFICADO',
     enableSorting: true,
     cell: ({ row }) =>
       row.original.lastModified
@@ -45,7 +34,7 @@ const columns: Array<Column<TableFile>> = [
   },
   {
     accessorKey: 'createdAt',
-    header: 'Creado',
+    header: 'CREADO',
     enableSorting: true,
     cell: ({ row }) =>
       row.original.createdAt ? (
@@ -80,8 +69,22 @@ const FileExplorer = ({ files = [], extraColumns = [] }: FileExplorerProps) => {
   return (
     <>
       <Table
-        className="documents-table"
-        columns={[...columns, ...extraColumns]}
+        columns={[
+          {
+            accessorKey: 'name',
+            header: 'NOMBRE',
+            enableSorting: true,
+            cell: ({ row }) => (
+              <FilenameDataTableColumn
+                onClick={() => onRowClick(row.original)}
+                name={row.original.name ?? '---'}
+                fileType={row.original.fileType}
+              />
+            ),
+          },
+          ...columns,
+          ...extraColumns,
+        ]}
         data={files}
         onRowClick={onRowClick}
       />

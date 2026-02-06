@@ -147,6 +147,7 @@ export { default as EmptyIcon } from "@mui/icons-material/HourglassEmpty"
 export { default as DeleteIcon } from "@mui/icons-material/DeleteOutline"
 export { default as AdminPanelSettingsIcon } from "@mui/icons-material/AdminPanelSettingsOutlined"
 export { default as AccessTimeIcon } from "@mui/icons-material/AccessTimeOutlined";
+export { default as DashboardIcon } from "@mui/icons-material/DashboardOutlined";
 
 
 export { default as Icon } from "./icon";

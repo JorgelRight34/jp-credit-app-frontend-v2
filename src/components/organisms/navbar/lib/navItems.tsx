@@ -129,7 +129,7 @@ export const profileNavItem: NavItem = {
     },
     {
       ...addRouteBase,
-      route: '/profiles',
+      route: '/profiles/create',
     },
   ],
 }

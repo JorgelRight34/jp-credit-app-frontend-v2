@@ -23,7 +23,7 @@ const SelectInput = ({
   children,
   label,
   allowNoOption = true,
-  value,
+  value = '',
   icon,
   ...props
 }: SelectInputProps) => {

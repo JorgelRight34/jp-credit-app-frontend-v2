@@ -1,106 +1,72 @@
 import { useState } from 'react'
 import { useProfileForm } from '../hooks/useProfileForm'
+import { useProfileFileAttachmentsForm } from '../hooks/useProfileFileAttachmentsForm'
+import ProfileDataForm from './profile-data-form'
 import type { DataModuleFormProps } from '@/components'
 import type { Profile } from '../models/profile'
 import type { ProfileFormValues } from '../lib/schemas/profileFormSchema'
 import {
-  CitizenIdInput,
-  CivilStatusSelect,
-  DateInput,
-  EmailInput,
-  Form,
+  FileAttachmentsForm,
+  FileFormExplorer,
   FormContainer,
   FormContainerButtons,
-  FormGroup,
-  FormRow,
-  GenderSelect,
-  Input,
-  PhoneInput,
   Tab,
   Tabs,
-  UploadFileForm,
 } from '@/components'
 
-const ProfileForm = ({
-  ...props
-}: DataModuleFormProps<Profile, ProfileFormValues>) => {
+type ProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues> & {
+  profile?: Profile
+}
+
+const ProfileForm = ({ profile, ...props }: ProfileFormProps) => {
   const [isDirty, setIsDirty] = useState(false)
-  const form = useProfileForm({ ...props, onDirtyChange: setIsDirty })
+  const fileAttachmentsForm = useProfileFileAttachmentsForm({ profile })
+  const form = useProfileForm({
+    onDirtyChange: setIsDirty,
+    onSuccess: fileAttachmentsForm.submit,
+    ...props,
+  })
 
   return (
-    <Tabs defaultActiveKey="profile">
-      <Tab eventKey="profile" title="Pérfil">
-        <FormContainer
-          footer={<FormContainerButtons isDirty={isDirty} form={form} />}
-        >
-          <Form form={form}>
-            <FormRow>
-              <FormGroup label="Nombres" name="firstName" input={Input} />
-              <FormGroup label="Apellidos" name="lastName" input={Input} />
-              <FormGroup
-                label="Email"
-                name="email"
-                input={EmailInput}
-                optional
-              />
-            </FormRow>
-            <FormRow>
-              <FormGroup label="Género" name="gender" input={GenderSelect} />
-              <FormGroup
-                label="Nacimiento"
-                name="dateOfBirth"
-                input={DateInput}
-              />
-              <FormGroup
-                name="maritalStatus"
-                label="Estado civil"
-                input={CivilStatusSelect}
-                optional
-              />
-            </FormRow>
-            <FormRow>
-              <FormGroup label="Cédula" name="dni" input={CitizenIdInput} />
-              <FormGroup
-                label="Dirección"
-                name="address"
-                input={Input}
-                optional
-              />
-              <FormGroup
-                label="Profesión"
-                name="profession"
-                input={Input}
-                optional
-              />
-            </FormRow>
-            <FormRow>
-              <FormGroup
-                label="Teléfono casa"
-                name="landline"
-                input={PhoneInput}
-                optional
-              />
-              <FormGroup
-                label="Célular"
-                name="phoneNumber"
-                input={PhoneInput}
-                optional
-              />
-              <FormGroup
-                label="Nacionalidad"
-                name="nationality"
-                input={Input}
-                optional
-              />
-            </FormRow>
-          </Form>
-        </FormContainer>
-      </Tab>
-      <Tab eventKey="files" title="Archivos">
-        <UploadFileForm />
-      </Tab>
-    </Tabs>
+    <FormContainer
+      footer={<FormContainerButtons isDirty={isDirty} form={form} />}
+    >
+      <Tabs defaultActiveKey="profile">
+        <Tab eventKey="profile" title="Pérfil">
+          <ProfileDataForm form={form} />
+        </Tab>
+        <Tab eventKey="files" title="Archivos">
+          <FileAttachmentsForm
+            ref={fileAttachmentsForm.formRef}
+            form={fileAttachmentsForm.form}
+            render={FileFormExplorer}
+          />
+        </Tab>
+      </Tabs>
+    </FormContainer>
   )
 }
 
 export default ProfileForm
+
+/* <button
+            type="button"
+            className="hidden border w-[20px] p-3"
+            onClick={() => {
+              form.form.setValue('firstName', 'Jorge  ')
+              form.form.setValue('lastName', 'Perez')
+              form.form.setValue(
+                'dni',
+                `12345676${Math.floor(200 + Math.random() * 900)}`,
+              )
+              form.form.setValue('gender', 'M')
+              form.form.setValue('dateOfBirth', '1990-01-01')
+              form.form.setValue('email', 'jorge.perez@example.com')
+              form.form.setValue('landline', '021234567')
+              form.form.setValue('phoneNumber', '099876543')
+              form.form.setValue('address', 'Calle Falsa 123')
+              form.form.setValue('maritalStatus', 'single')
+            }}
+          >
+            Generar valores
+          </button> */

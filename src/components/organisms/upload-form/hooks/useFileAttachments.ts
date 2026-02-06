@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import type { FileFormFieldValues } from "../lib/form";
-import type { UseMultipleFilesInputProps, UseUploadFilesInputReturn } from "../models/useMultipleFilesInputProp";
 import type { FileModel } from "@/models/fileModel";
 
 export type FileUploads = {
@@ -8,8 +8,6 @@ export type FileUploads = {
   loaded: Array<FileModel>
   /* These are files uploaded via the form as File objects */
   uploaded: Array<File>;
-  /* These are the files created via a form to create the database model from scratch */
-  created: Array<FileFormFieldValues>,
   /* Represents the removed created files */
   removedCreations: Array<FileFormFieldValues>,
   /* Represents the removed uploaded files */
@@ -18,15 +16,38 @@ export type FileUploads = {
   deleted: Array<FileModel>;
 }
 
+export interface UseFileAttachmentsProps {
+  filesMaxLength?: number;
+  value: FileUploads;
+  onChange: Dispatch<SetStateAction<FileUploads>>;
+}
+
+export interface UseFileAttachmentsReturn {
+  upload: {
+    uploaded: Array<File>;
+    loaded: Array<FileModel>;
+    addFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  };
+  remove: {
+    removedFiles: Array<File>;
+    deleted: Array<FileModel>;
+    removeFile: (index: number, key: keyof FileUploads) => void;
+    recoverFile: (index: number, key: keyof FileUploads) => void;
+  };
+  isDirty: boolean;
+  reachedLimit: boolean;
+  onChange: Dispatch<SetStateAction<FileUploads>>;
+}
+
+
 const deleteMap: Partial<Record<keyof FileUploads, keyof FileUploads>> = {
   loaded: "deleted",
   uploaded: "removed",
-  created: "removedCreations"
 };
 
 
-export const useUploadFilesInput = ({ filesMaxLength = 10, value: fileUploads, onChange }
-  : UseMultipleFilesInputProps): UseUploadFilesInputReturn => {
+export const useFileAttachments = ({ filesMaxLength = 10, value: fileUploads, onChange }
+  : UseFileAttachmentsProps): UseFileAttachmentsReturn => {
   const [isDirty, setIsDirty] = useState(false);
 
   const reachedLimit = useMemo(
@@ -77,14 +98,12 @@ export const useUploadFilesInput = ({ filesMaxLength = 10, value: fileUploads, o
   return {
     upload: {
       uploaded: fileUploads.uploaded,
-      created: fileUploads.created,
       loaded: fileUploads.loaded,
       addFile,
     },
     remove: {
       removedFiles: fileUploads.removed,
       deleted: fileUploads.deleted,
-      removedCreations: fileUploads.removedCreations,
       removeFile,
       recoverFile,
     },

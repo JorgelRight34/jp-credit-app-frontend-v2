@@ -4,13 +4,13 @@ export { default as FileExplorer } from "./components/file-explorer";
 export { default as FileFormTrigger } from "./components/file-form-trigger";
 export { default as FileFormExplorer } from "./components/file-form-explorer";
 export { default as FilenameDataTableColumn } from "./components/filename-table-cell";
-export { default as UploadFileForm } from "./components/upload-file-form";
+export { default as FileAttachmentsForm } from "./components/file-attachments-form";
 
 // HOOKS
 export * from "./hooks/useFileForm";
-export * from "./hooks/useUploadFileForm";
-export * from "./hooks/useUploadFilesInput";
-export * from "./components/upload-file-form"
+export * from "./hooks/useFileAttachmentsForm";
+export * from "./hooks/useFileAttachments";
+export * from "./components/file-attachments-form"
 
 // ICONSs
 export { default as CsvIcon } from "./icons/csv-icon";
@@ -25,7 +25,7 @@ export * from "./lib/utils";
 // MODELS
 export * from "./models/tableFile";
 export * from "./models/fileAccept";
-export * from "./models/useMultipleFilesInputProp";
 
 // SERVICES
 export * from "./services/fileUploadClient";
+export * from "./models/useDeferredFileAttachmentsFormReturn";  

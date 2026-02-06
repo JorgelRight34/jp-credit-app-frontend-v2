@@ -90,5 +90,5 @@ export * from "./navigation/link"
 
 export * from "./icon"
 
-export { default as Skeleton } from "./skeleton/Skeleton"
-export { default as ParagraphSkeleton } from "./skeleton/Skeleton"
+export { default as Skeleton } from "./skeleton/skeleton"
+export { default as ParagraphSkeleton } from "./skeleton/skeleton"

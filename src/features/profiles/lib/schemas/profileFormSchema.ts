@@ -12,9 +12,6 @@ export const profileFormSchema = z.object({
     landline: z.string().optional(),
     officePhone: z.string().optional(),
     phoneNumber: z.string().optional(),
-    profession: z.string().optional(),
-    nationality: z.string().optional(),
-    city: z.string().optional(),
 });
 
 export type ProfileFormValues = z.infer<typeof profileFormSchema>;

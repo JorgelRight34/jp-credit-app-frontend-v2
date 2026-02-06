@@ -2,7 +2,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import dayjs from 'dayjs'
-import { muiSxConfig } from '../constants'
+import { SX_CONFIG } from '../../constants'
 import type { DateFieldProps } from '@mui/x-date-pickers/DateField'
 
 interface DateInputProps extends Omit<
@@ -18,21 +18,16 @@ const DateInput = ({ value, min, onChange, ...props }: DateInputProps) => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         {...props}
+        enableAccessibleFieldDOMStructure={false}
         minDate={min ? dayjs(min.toString()) : undefined}
-        value={dayjs(value)}
+        value={!value ? null : dayjs(value)}
         onChange={(e) => onChange?.(e?.format('YYYY-MM-DD'))}
         slotProps={{
           textField: {
             size: 'small',
             className: '!rounded-xl border',
             fullWidth: true,
-            sx: muiSxConfig,
-          },
-          desktopPaper: {
-            sx: {
-              border: 'none',
-              borderRadius: '0.5rem',
-            },
+            sx: SX_CONFIG,
           },
         }}
       />

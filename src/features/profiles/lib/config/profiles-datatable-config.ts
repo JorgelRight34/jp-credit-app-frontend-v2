@@ -22,7 +22,7 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
             accessorKey: 'firstName',
             header: 'NOMBRES',
             enableSorting: true,
-            cell: ({ row }) => createLinkDataCell(row.original.firstName, { to: "/profiles" }),
+            cell: ({ row }) => createLinkDataCell(row.original.firstName, { to: "/profiles/$id", params: { id: row.original.id.toString() } }),
         },
         {
             accessorKey: 'lastName',

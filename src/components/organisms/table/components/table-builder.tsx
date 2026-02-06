@@ -22,7 +22,7 @@ export interface TableBuilderProps<TData> extends Omit<
 }
 
 const TableBuilder = <TData,>({
-  pageSize = 20,
+  pageSize,
   data,
   totalItems = data?.length,
   infinitePagination = false,
@@ -33,6 +33,7 @@ const TableBuilder = <TData,>({
   onLimitChange,
   ...config
 }: TableBuilderProps<TData>) => {
+  console.log("i'm the rerender!!")
   return (
     <TableStateWrapper
       pageSize={pageSize}

@@ -16,6 +16,7 @@ import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
 import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
 import { Route as mainmodulesProfilesCreateIndexRouteImport } from './routes/(main)/(modules)/profiles/create/index'
+import { Route as mainmodulesProfilesIdIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/index'
 import { Route as mainmodulesAccessControlUsersCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/users/create/index'
 import { Route as mainmodulesAccessControlUsersUsernameIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/index'
 import { Route as mainmodulesAccessControlRolesCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/create/index'
@@ -57,6 +58,12 @@ const mainmodulesProfilesCreateIndexRoute =
     path: '/profiles/create/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesProfilesIdIndexRoute =
+  mainmodulesProfilesIdIndexRouteImport.update({
+    id: '/profiles/$id/',
+    path: '/profiles/$id/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesAccessControlUsersCreateIndexRoute =
   mainmodulesAccessControlUsersCreateIndexRouteImport.update({
     id: '/access-control/users/create/',
@@ -87,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/login/': typeof LoginIndexRoute
   '/access-control/': typeof mainmodulesAccessControlIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
+  '/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginIndexRoute
   '/access-control': typeof mainmodulesAccessControlIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
+  '/profiles/$id': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create': typeof mainmodulesProfilesCreateIndexRoute
   '/access-control/roles/$id': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create': typeof mainmodulesAccessControlRolesCreateIndexRoute
@@ -112,6 +121,7 @@ export interface FileRoutesById {
   '/login/': typeof LoginIndexRoute
   '/(main)/(modules)/access-control/': typeof mainmodulesAccessControlIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
+  '/(main)/(modules)/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/(main)/(modules)/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/(main)/(modules)/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/(main)/(modules)/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
     | '/login/'
     | '/access-control/'
     | '/profiles/'
+    | '/profiles/$id/'
     | '/profiles/create/'
     | '/access-control/roles/$id/'
     | '/access-control/roles/create/'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/access-control'
     | '/profiles'
+    | '/profiles/$id'
     | '/profiles/create'
     | '/access-control/roles/$id'
     | '/access-control/roles/create'
@@ -149,6 +161,7 @@ export interface FileRouteTypes {
     | '/login/'
     | '/(main)/(modules)/access-control/'
     | '/(main)/(modules)/profiles/'
+    | '/(main)/(modules)/profiles/$id/'
     | '/(main)/(modules)/profiles/create/'
     | '/(main)/(modules)/access-control/roles/$id/'
     | '/(main)/(modules)/access-control/roles/create/'
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesProfilesCreateIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/profiles/$id/': {
+      id: '/(main)/(modules)/profiles/$id/'
+      path: '/profiles/$id'
+      fullPath: '/profiles/$id/'
+      preLoaderRoute: typeof mainmodulesProfilesIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/access-control/users/create/': {
       id: '/(main)/(modules)/access-control/users/create/'
       path: '/access-control/users/create'
@@ -246,6 +266,7 @@ declare module '@tanstack/react-router' {
 interface mainmodulesRouteRouteChildren {
   mainmodulesAccessControlIndexRoute: typeof mainmodulesAccessControlIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
+  mainmodulesProfilesIdIndexRoute: typeof mainmodulesProfilesIdIndexRoute
   mainmodulesProfilesCreateIndexRoute: typeof mainmodulesProfilesCreateIndexRoute
   mainmodulesAccessControlRolesIdIndexRoute: typeof mainmodulesAccessControlRolesIdIndexRoute
   mainmodulesAccessControlRolesCreateIndexRoute: typeof mainmodulesAccessControlRolesCreateIndexRoute
@@ -256,6 +277,7 @@ interface mainmodulesRouteRouteChildren {
 const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesAccessControlIndexRoute: mainmodulesAccessControlIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
+  mainmodulesProfilesIdIndexRoute: mainmodulesProfilesIdIndexRoute,
   mainmodulesProfilesCreateIndexRoute: mainmodulesProfilesCreateIndexRoute,
   mainmodulesAccessControlRolesIdIndexRoute:
     mainmodulesAccessControlRolesIdIndexRoute,

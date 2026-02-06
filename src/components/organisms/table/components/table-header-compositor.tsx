@@ -22,9 +22,9 @@ const TableHeadCompositor = <T,>({ table, className }: TableHeadProps<T>) => {
             >
               <div
                 {...{
-                  className: header.column.getCanSort()
-                    ? 'cursor-pointer hover flex items-center'
-                    : '',
+                  className:
+                    'flex items-center' +
+                    (header.column.getCanSort() ? ' cursor-pointer hover' : ''),
                   onClick: header.column.getToggleSortingHandler(),
                 }}
               >

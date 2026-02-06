@@ -17,17 +17,17 @@ interface DocumentIconProps {
 }
 
 const icons = {
-  '.pdf': (props: FileIconProps) => <PdfIcon {...props} color="#e74c3c" />,
-  '.docx': (props: FileIconProps) => <WordIcon {...props} color="#2b579a" />,
-  '.xlsx': (props: FileIconProps) => <ExcelIcon {...props} color="#217346" />,
-  '.txt': (props: { className?: string; size: number; color: string }) => (
+  pdf: (props: FileIconProps) => <PdfIcon {...props} color="#e74c3c" />,
+  docx: (props: FileIconProps) => <WordIcon {...props} color="#2b579a" />,
+  xlsx: (props: FileIconProps) => <ExcelIcon {...props} color="#217346" />,
+  txt: (props: { className?: string; size: number; color: string }) => (
     <TxtIcon {...props} />
   ),
-  '.png': (props: FileIconProps) => <PngIcon {...props} color="#3498db" />,
-  '.jpg': (props: FileIconProps) => <JpgIcon {...props} color="#3498db" />,
-  '.jpeg': (props: FileIconProps) => <JpegIcon {...props} color="#3498db" />,
-  '.zip': (props: FileIconProps) => <ZipIcon {...props} color="#9b59b6" />,
-  '.csv': (props: FileIconProps) => <CsvIcon {...props} color="#3498db" />,
+  png: (props: FileIconProps) => <PngIcon {...props} color="#3498db" />,
+  jpg: (props: FileIconProps) => <JpgIcon {...props} color="#3498db" />,
+  jpeg: (props: FileIconProps) => <JpegIcon {...props} color="#3498db" />,
+  zip: (props: FileIconProps) => <ZipIcon {...props} color="#9b59b6" />,
+  csv: (props: FileIconProps) => <CsvIcon {...props} color="#3498db" />,
 } as const
 
 const DocumentIcon = ({
@@ -36,8 +36,13 @@ const DocumentIcon = ({
   className,
   color = '#555',
 }: DocumentIconProps) => {
-  const IconRenderer = icons[type as keyof typeof icons]
-  return <IconRenderer className={className} size={size} color={color} />
+  const IconRenderer = icons[type?.split('/')[1] as keyof typeof icons]
+
+  if (IconRenderer) {
+    return <IconRenderer className={className} size={size} color={color} />
+  }
+
+  return <span>{JSON.stringify({ type, size, className, color })}</span>
 }
 
 export default DocumentIcon

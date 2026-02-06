@@ -5,11 +5,28 @@ import type { ProfileFormValues } from "../lib/schemas/profileFormSchema";
 import type { Profile } from "../models/profile"
 import { useForm } from "@/components"
 
-export const useProfileForm = ({ initialValues, ...config }: UseDataFormProps<Profile, ProfileFormValues>):
+interface UseProfileFormProps extends UseDataFormProps<Profile, ProfileFormValues> {
+    profile?: Profile
+}
+
+export const useProfileForm = ({ profile, initialValues, ...config }: UseProfileFormProps):
     UseFormBuilderReturn<ProfileFormValues> => {
     return useForm({
         schema: profileFormSchema,
-        defaultValues: {
+        defaultValues: profile ? {
+            firstName: profile.firstName,
+            lastName: profile.lastName,
+            email: profile.email,
+            gender: profile.gender,
+            dateOfBirth: profile.dateOfBirth,
+            maritalStatus: profile.maritalStatus,
+            dni: profile.dni,
+            address: profile.address,
+            landline: profile.landline,
+            officePhone: profile.officePhone,
+            phoneNumber: profile.phoneNumber,
+            ...initialValues,
+        } : {
             firstName: "",
             lastName: "",
             email: "",
@@ -21,9 +38,6 @@ export const useProfileForm = ({ initialValues, ...config }: UseDataFormProps<Pr
             landline: "",
             officePhone: "",
             phoneNumber: "",
-            profession: "",
-            nationality: "",
-            city: "",
             ...initialValues,
         },
         onSubmit: createProfile,

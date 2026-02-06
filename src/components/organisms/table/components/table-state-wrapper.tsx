@@ -23,6 +23,8 @@ const TableStateWrapper = <T,>({
     ...config,
   })
 
+  console.log(`TableStateWrapper render ${typeof window}`)
+
   return render({ table })
 }
 

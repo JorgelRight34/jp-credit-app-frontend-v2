@@ -3,24 +3,32 @@ import type { FieldValues } from 'react-hook-form'
 import type { FormSubmitBtnProps } from './form-submit-btn'
 import { SecondaryBtn } from '@/components/atoms'
 
-type FormContainerButtonsProps<T extends FieldValues> = FormSubmitBtnProps<T>
+type FormContainerButtonsProps<T extends FieldValues> =
+  FormSubmitBtnProps<T> & {
+    onReset?: () => void
+  }
 
 const FormContainerButtons = <T extends FieldValues>({
   isDirty,
-  icon,
+  form,
   text,
   onSubmit,
-  form,
+  onReset,
+  icon,
 }: FormContainerButtonsProps<T>) => {
   return (
     <div className="flex items-center gap-3">
-      <SecondaryBtn disabled={!isDirty} onClick={() => form?.form.reset()}>
+      <SecondaryBtn
+        disabled={!isDirty}
+        onClick={() => (form ? form.form.reset() : onReset?.())}
+      >
         Resetear
       </SecondaryBtn>
       <FormSubmitBtn
         isDirty={isDirty}
         icon={icon}
         text={text}
+        form={form}
         onSubmit={onSubmit}
       />
     </div>

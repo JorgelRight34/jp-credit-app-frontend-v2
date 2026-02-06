@@ -23,3 +23,19 @@ export const createProfile = async (body: ProfileFormValues): Promise<Profile> =
 export const updateProfile = async (body: ProfileFormValues) => {
     await api.post(baseUrl, body);
 }
+
+export const uploadProfilePhoto = async (id: number, file: File) => {
+    const data = new FormData();
+    data.append("file", file);
+
+    await api.post(`${baseUrl}/${id}/photo`, data)
+}
+
+export const deleteProfilePhoto = async (id: number, publicId: string) => {
+    await api.delete(`${baseUrl}/${id}/photo/${publicId}`);
+}
+
+export const getProfile = async (id: number): Promise<Profile> => {
+    const { data } = await api.get(`${baseUrl}/${id}`);
+    return data;
+}

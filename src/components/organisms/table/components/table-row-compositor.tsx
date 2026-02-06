@@ -16,7 +16,6 @@ export interface TableRowCompositorProps<TData> {
 const TableRowCompositor = <TData,>({
   row,
   className,
-  onRowClick,
 }: TableRowCompositorProps<TData>) => {
   return (
     <TableRow
@@ -24,10 +23,6 @@ const TableRowCompositor = <TData,>({
       className={clsx('bg-accent-hover cursor-pointer', className, {
         'bg-accent': row.getIsSelected(),
       })}
-      onClick={(e) => {
-        e.preventDefault()
-        onRowClick?.(row, e)
-      }}
     >
       {row.getVisibleCells().map((cell) => (
         <TableDataCell key={cell.id}>

@@ -14,7 +14,7 @@ export const SX_CONFIG = {
             borderColor: '#6366f1',
             borderWidth: 2,
         },
-        // Chrome, Safari, Edge
+        /* Chrome, Safari, Edge
         '& input[type="date"]::-webkit-calendar-picker-indicator': {
             display: 'none',
             '-WebkitAppearance': 'none',

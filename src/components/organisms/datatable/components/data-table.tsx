@@ -30,17 +30,17 @@ const DataTable = <T, TQuery extends Query = Query>({
   displayEmptyMessage,
   title,
   query,
-  columns,
   placeholderData = keepPreviousData,
   onRowClick,
   onExpand,
   ...props
 }: DataTableProps<T, TQuery>) => {
-  const { data, limit, isLoading, fetchPage, setLimit, sort } = useDataTable({
-    query,
-    placeholderData,
-    ...props,
-  })
+  const { data, columns, limit, isLoading, fetchPage, setLimit, sort } =
+    useDataTable({
+      query,
+      placeholderData,
+      ...props,
+    })
 
   return (
     <div className="overflow-x-auto">
