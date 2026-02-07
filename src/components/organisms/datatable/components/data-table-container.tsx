@@ -1,5 +1,6 @@
 import { SearchContainer } from '../../search-form'
 import DataTable from './data-table'
+import type { InitialTableState } from '../../table/hooks/useTableState'
 import type { DataTableConfig } from '../models/dataTableConfig'
 import type { Query, SearchFormConfig } from '../../search-form'
 import type { PagedResponse } from '@/models'
@@ -9,6 +10,7 @@ export type DataTableContainerProps<TEntity extends object, T extends Query> = {
   datatableConfig: DataTableConfig<TEntity>
   initialData?: PagedResponse<TEntity>
   initialQuery?: Partial<T>
+  initialState?: InitialTableState<TEntity>
 }
 
 export type DataTableContainerOverrides<
@@ -20,6 +22,7 @@ const DataTableContainer = <TEntity extends object, TQuery extends Query>({
   datatableConfig,
   initialData,
   searchConfig,
+  initialState,
   initialQuery,
 }: DataTableContainerProps<TEntity, TQuery>) => {
   return (
@@ -32,6 +35,7 @@ const DataTableContainer = <TEntity extends object, TQuery extends Query>({
           columns={datatableConfig.columns}
           cacheKey={datatableConfig.cacheKey}
           initialData={initialData}
+          initialState={initialState}
           query={query}
           loader={datatableConfig.loader}
           onExpand={datatableConfig.onExpand}

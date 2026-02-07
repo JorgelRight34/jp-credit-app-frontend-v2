@@ -29,7 +29,7 @@ export const useDataTable = <T, TQuery extends Query>({
     loader,
 }: UseDataTableProps<T, TQuery>) => {
     const { page, limit, order, fetchPage, sort, setLimit } = useDataTableState({ cacheKey, pageSize })
-    const memoizedColumns = useMemo(() => columns ?? [], []);
+    const memoizedColumns = useMemo(() => columns ?? [], [columns]);
 
     const { data, isLoading, isError } = useData<PagedResponse<T>>({
         key: cacheKey.concat({ limit, page, order, query }),

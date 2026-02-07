@@ -6,12 +6,12 @@ import ProfileEditFilesForm from '../components/profile-edit-files-form'
 import type { RouteBreadcrumbMap } from '@/components'
 import type { Profile } from '../models/profile'
 import {
-  DashboardIcon,
-  DownloadIcon,
+  OverviewIcon,
   PageRouterLayout,
   PersonIcon,
   Tab,
   TabsRouter,
+  UploadIcon,
 } from '@/components'
 
 interface ProfilePageProps {
@@ -19,8 +19,8 @@ interface ProfilePageProps {
 }
 
 const tabBreadcrumbMap: RouteBreadcrumbMap = {
-  overview: { title: 'Resumen', pathname: '.', icon: DashboardIcon },
-  files: { title: 'Archivos', pathname: '.', icon: DownloadIcon },
+  overview: { title: 'Overview', icon: OverviewIcon },
+  files: { title: 'Archivos', icon: UploadIcon },
 }
 
 const ProfilePage = ({ profile }: ProfilePageProps) => {
@@ -33,10 +33,7 @@ const ProfilePage = ({ profile }: ProfilePageProps) => {
       routerConfig={{
         defaultActive: 'overview',
         tabBreadcrumbMap,
-        baseBreadcrumbs: [
-          profilesBreadcrumb,
-          { title, pathname: '.', icon: PersonIcon },
-        ],
+        baseBreadcrumbs: [profilesBreadcrumb, { title, icon: PersonIcon }],
       }}
     >
       <TabsRouter>

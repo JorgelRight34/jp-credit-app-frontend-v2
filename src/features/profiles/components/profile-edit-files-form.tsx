@@ -3,10 +3,10 @@ import { useProfileFileAttachmentsForm } from '../hooks/useProfileFileAttachment
 import type { Profile } from '../models/profile'
 import {
   FileAttachmentsForm,
-  FileFormExplorer,
   FormContainer,
   FormContainerButtons,
 } from '@/components'
+import { FileAttachmentsPanel } from '@/components/organisms/file-attachments-panel'
 
 interface ProfileEditFilesFormProps {
   profile: Profile
@@ -30,7 +30,7 @@ const ProfileEditFilesForm = ({ profile }: ProfileEditFilesFormProps) => {
         ref={form.formRef}
         form={form.form}
         onDirtyChange={setIsDirty}
-        render={FileFormExplorer}
+        render={FileAttachmentsPanel}
       />
     </FormContainer>
   )

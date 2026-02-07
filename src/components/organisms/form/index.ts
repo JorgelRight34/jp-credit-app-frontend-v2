@@ -12,6 +12,7 @@ export { default as FormRow } from "./components/form-row"
 export { default as FormGroupHorizontal } from './components/form-group-horizontal'
 export { default as FormCheckboxGroup } from "./components/form-checkbox-group"
 export { default as FormContainerButtons } from "./components/form-container-buttons"
+export { default as FormSelectGroup } from "./components/form-select-group"
 
 export * from "./hooks/useForm"
 export * from "./models/apiError"

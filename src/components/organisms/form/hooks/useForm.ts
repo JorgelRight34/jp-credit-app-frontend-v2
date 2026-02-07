@@ -26,6 +26,7 @@ export interface UseFormBuilderProps<TData, TReturn> {
     onDelete?: () => void;
     onSubmit: ((data: TData) => Promise<TReturn>);
     onEdit?: ((data: TData) => Promise<void>);
+    onIsValidChange?: (val: boolean) => void;
     onDirtyChange?: (val: boolean) => void;
 }
 
@@ -37,6 +38,7 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     interceptors,
     keysToInvalidate,
     toastMessage,
+    onIsValidChange,
     onDirtyChange,
     onEdit,
     onDelete,
@@ -45,6 +47,7 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
 }: UseFormBuilderProps<TData, TReturn>): UseFormBuilderReturn<TData> => {
     const [apiErrors, setApiErrors] = useState<Array<string>>([]);
     const [memoizedOnDirtyChange] = useState(() => (isDirty: boolean) => onDirtyChange?.(isDirty))
+    const [memoizedOnIsValidChange] = useState(() => (isValid: boolean) => onIsValidChange?.(isValid))
     const dataClient = useDataClient();
 
     const { mutateAsync, isPending, isError } = useDataMutation({
@@ -86,7 +89,7 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
 
     const {
         control,
-        formState: { errors, isDirty },
+        formState: { errors, isDirty, isValid },
         handleSubmit,
         reset,
         clearErrors,
@@ -152,6 +155,10 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     useEffect(() => {
         startTransition(() => memoizedOnDirtyChange(isDirty));
     }, [isDirty, memoizedOnDirtyChange])
+
+    useEffect(() => {
+        startTransition(() => memoizedOnIsValidChange(isValid))
+    }, [isValid, memoizedOnIsValidChange])
 
     return {
         form: {

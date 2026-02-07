@@ -20,17 +20,17 @@ const LoginForm = (
   const form = useLoginForm({ onDirtyChange: setIsDirty, ...props })
 
   return (
-    <Form form={form}>
-      <FormContainer
-        footer={
-          <FormSubmitBtn
-            form={form}
-            isDirty={isDirty}
-            text="Iniciar sesión"
-            icon={LoginIcon}
-          />
-        }
-      >
+    <FormContainer
+      footer={
+        <FormSubmitBtn
+          form={form}
+          isDirty={isDirty}
+          text="Iniciar sesión"
+          icon={LoginIcon}
+        />
+      }
+    >
+      <Form form={form}>
         <FormGroup label="Usuario" name="username" input={Input} />
         <FormGroup
           label="Contraseña"
@@ -38,8 +38,8 @@ const LoginForm = (
           autoComplete="new-password"
           input={PasswordInput}
         />
-      </FormContainer>
-    </Form>
+      </Form>
+    </FormContainer>
   )
 }
 

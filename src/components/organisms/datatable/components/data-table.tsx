@@ -1,5 +1,6 @@
 import { keepPreviousData } from '@tanstack/react-query'
 import { useDataTable } from '../hooks/useDataTable'
+import type { InitialTableState } from '../../table/hooks/useTableState'
 import type { UseDataTableProps } from '../hooks/useDataTable'
 import type { CacheKey, PagedResponse } from '@/models'
 import type { ReactNode } from 'react'
@@ -20,6 +21,7 @@ export type DataTableProps<T, TQuery extends Query> = Partial<
   cacheKey: CacheKey
   title: string
   displayEmptyMessage?: boolean
+  initialState?: InitialTableState<T>
   loader: (options: TQuery) => Promise<PagedResponse<T>>
   onPageChange?: (page: number) => void
   onExpand?: (row: Row<T>) => ReactNode
@@ -31,6 +33,7 @@ const DataTable = <T, TQuery extends Query = Query>({
   title,
   query,
   placeholderData = keepPreviousData,
+  initialState,
   onRowClick,
   onExpand,
   ...props
@@ -46,6 +49,7 @@ const DataTable = <T, TQuery extends Query = Query>({
     <div className="overflow-x-auto">
       <TableBuilder
         {...props}
+        initialState={initialState}
         onRowClick={onRowClick}
         data={data?.items ?? []}
         columns={columns}

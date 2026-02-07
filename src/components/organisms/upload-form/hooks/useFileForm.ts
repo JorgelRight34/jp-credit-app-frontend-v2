@@ -1,5 +1,4 @@
 import { fileFormProvider } from "../lib/form";
-import { transformCloudDocUrlToDownloadUrlFormInterceptor } from "../lib/utils";
 import type { FileFormFieldValues } from "../lib/form";
 import type { FileModel } from "@/models/fileModel";
 
@@ -14,6 +13,5 @@ export const useFileForm = ({ onSubmit }: UseFileFormProps) => {
             formProvider: fileFormProvider,
             cacheKeysToInvalidate: [],
         },
-        interceptors: [transformCloudDocUrlToDownloadUrlFormInterceptor]
     }
 }

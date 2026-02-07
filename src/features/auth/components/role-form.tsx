@@ -14,7 +14,14 @@ import {
   Input,
 } from '@/components'
 
-const RoleForm = (props: DataModuleFormProps<Role, RoleFormSchemaValues>) => {
+interface RoleFormProps extends DataModuleFormProps<
+  Role,
+  RoleFormSchemaValues
+> {
+  role: Role
+}
+
+const RoleForm = (props: RoleFormProps) => {
   const [isDirty, setIsDirty] = useState(false)
   const permissionFormRef = useRef<PermissionsFormRef>(null)
   const form = useRoleForm({

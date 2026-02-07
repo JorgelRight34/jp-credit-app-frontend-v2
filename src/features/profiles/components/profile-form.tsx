@@ -7,12 +7,12 @@ import type { Profile } from '../models/profile'
 import type { ProfileFormValues } from '../lib/schemas/profileFormSchema'
 import {
   FileAttachmentsForm,
-  FileFormExplorer,
   FormContainer,
   FormContainerButtons,
   Tab,
   Tabs,
 } from '@/components'
+import { FileAttachmentsPanel } from '@/components/organisms/file-attachments-panel'
 
 type ProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues> & {
   profile?: Profile
@@ -39,7 +39,7 @@ const ProfileForm = ({ profile, ...props }: ProfileFormProps) => {
           <FileAttachmentsForm
             ref={fileAttachmentsForm.formRef}
             form={fileAttachmentsForm.form}
-            render={FileFormExplorer}
+            render={FileAttachmentsPanel}
           />
         </Tab>
       </Tabs>
@@ -48,25 +48,3 @@ const ProfileForm = ({ profile, ...props }: ProfileFormProps) => {
 }
 
 export default ProfileForm
-
-/* <button
-            type="button"
-            className="hidden border w-[20px] p-3"
-            onClick={() => {
-              form.form.setValue('firstName', 'Jorge  ')
-              form.form.setValue('lastName', 'Perez')
-              form.form.setValue(
-                'dni',
-                `12345676${Math.floor(200 + Math.random() * 900)}`,
-              )
-              form.form.setValue('gender', 'M')
-              form.form.setValue('dateOfBirth', '1990-01-01')
-              form.form.setValue('email', 'jorge.perez@example.com')
-              form.form.setValue('landline', '021234567')
-              form.form.setValue('phoneNumber', '099876543')
-              form.form.setValue('address', 'Calle Falsa 123')
-              form.form.setValue('maritalStatus', 'single')
-            }}
-          >
-            Generar valores
-          </button> */

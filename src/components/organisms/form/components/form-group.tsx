@@ -31,6 +31,7 @@ const FormGroup = <T extends FieldValues>({
       </FormLabel>
       <FormInput
         {...props}
+        required={!optional}
         className={inputClassName}
         type={type}
         name={name}

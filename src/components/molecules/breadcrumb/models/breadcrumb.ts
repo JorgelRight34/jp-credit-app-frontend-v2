@@ -6,7 +6,7 @@ export interface BreadcrumbSpec {
     className?: string;
     labelClassName?: string;
     disabled?: boolean;
-    pathname: Route;
+    pathname?: Route;
     search?: Search;
     icon: IconName;
 }

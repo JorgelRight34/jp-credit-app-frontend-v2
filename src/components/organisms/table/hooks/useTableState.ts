@@ -8,9 +8,12 @@ import type { PageSize } from "../models/pageSize";
 import type { Column } from "../models/column";
 import type {
     ExpandedState, PaginationState, RowSelectionState,
-    SortingState
+    SortingState,
+    TableOptions
 } from "@tanstack/react-table";
 import { defaultPageSize } from "@/lib/utils/constants";
+
+export type InitialTableState<TData> = TableOptions<TData>["initialState"]
 
 export interface UseTableStateProps<TData> {
     data?: Array<TData>;
@@ -18,6 +21,7 @@ export interface UseTableStateProps<TData> {
     columns: Array<Column<TData>>;
     selectBehavior?: "single" | "multiple"
     allowExpand?: boolean;
+    initialState?: InitialTableState<TData>;
     onPageChange?: (page: number) => void;
     onSortingChange?: (sort: SortingState) => void;
 }
@@ -28,8 +32,9 @@ export const useTableState = <T,>({
     pageSize = defaultPageSize,
     data,
     columns,
-    selectBehavior = "multiple",
+    selectBehavior,
     allowExpand = false,
+    initialState,
     onPageChange,
     onSortingChange,
 }: UseTableStateProps<T>) => {
@@ -44,6 +49,7 @@ export const useTableState = <T,>({
 
     const table = useReactTable({
         data: data ?? EMPTY,
+        initialState,
         columns,
         manualPagination: !!onPageChange,
         state: { pagination, sorting, rowSelection, expanded },
@@ -51,7 +57,7 @@ export const useTableState = <T,>({
         getPaginationRowModel: onPageChange ? undefined : getPaginationRowModel(),
         onExpandedChange: (updater) => {
             const newExpandedState = typeof updater === 'function' ? updater(expanded) : updater;
-            if (selectBehavior === "single") {
+            if ((selectBehavior ?? "multiple") === "single") {
                 const expandedRowId = Object.keys(newExpandedState).find(
                     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                     id => newExpandedState[id as keyof typeof newExpandedState]

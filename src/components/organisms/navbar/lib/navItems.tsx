@@ -11,6 +11,7 @@ import {
   AttachMoneyIcon,
   BadgeIcon,
   CheckCircleIcon,
+  CollateralIcon,
   CreditCardIcon,
   DirectionsCarIcon,
   ErrorIcon,
@@ -19,6 +20,7 @@ import {
   GroupIcon,
   GroupsIcon,
   HomeStorageIcon,
+  InventoryIcon,
   ListAltIcon,
   LockIcon,
   MailIcon,
@@ -136,7 +138,7 @@ export const profileNavItem: NavItem = {
 
 export const collateralsNavItem: NavItem = {
   name: 'Garantías',
-  icon: () => <FolderOpenIcon />,
+  icon: () => <CollateralIcon />,
   route: '/collaterals',
   children: [
     {
@@ -159,8 +161,8 @@ export const collateralsNavItem: NavItem = {
       route: 'collaterals/farm',
     },
     {
-      name: 'Liquidados',
-      icon: () => <ReceiptLongIcon />,
+      name: 'Inventario',
+      icon: () => <InventoryIcon />,
       route: 'collaterals/collateralizations',
     },
     {

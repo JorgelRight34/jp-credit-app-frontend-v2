@@ -15,6 +15,7 @@ export { default as TransferList } from "./transfer-list/transfer-list"
 export { default as Checkbox } from "./checkbox/checkbox"
 export { default as NumericInput } from './numeric-input/numeric-input'
 export { default as EmailInput } from './email-input/email-input'
+export { default as FileInputWrapper } from './file-input-wrapper/file-input-wrapper'
 
 
 export { default as SearchableComboBox } from "./searchable-combo-box/searchable-combo-box"

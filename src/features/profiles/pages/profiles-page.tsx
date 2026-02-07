@@ -3,22 +3,21 @@ import { profilesBreadcrumb } from '../lib/config/breadcrumb'
 import ProfilesDataTable from '../components/profiles-datatable'
 import type { RouteBreadcrumbMap } from '@/components'
 import {
+  AllIcon,
   GroupIcon,
   PageRouterLayout,
-  PublicIcon,
   Tab,
   TabsRouter,
   getPageLayoutOptions,
 } from '@/components'
 
 const tabBreadcrumbMap: RouteBreadcrumbMap = {
-  all: { title: 'Todos', icon: () => <PublicIcon />, pathname: '.' },
-  clients: { title: 'Clientes', icon: () => <GroupIcon />, pathname: '.' },
-  guarantors: { title: 'Garantes', icon: () => <GroupIcon />, pathname: '.' },
+  all: { title: 'Todos', icon: () => <AllIcon /> },
+  clients: { title: 'Clientes', icon: () => <GroupIcon /> },
+  guarantors: { title: 'Garantes', icon: () => <GroupIcon /> },
   'loan-officers': {
     title: 'Agentes',
     icon: () => <GroupIcon />,
-    pathname: '.',
   },
 }
 

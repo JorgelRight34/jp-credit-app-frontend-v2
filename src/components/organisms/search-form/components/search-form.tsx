@@ -47,7 +47,7 @@ const SearchForm = <T extends Query>({
                 >
                   <FormInput
                     label={option.label}
-                    className="w-full shadow-sm"
+                    className="w-full"
                     name={option.name as string}
                     as={option.type}
                   />
@@ -75,7 +75,7 @@ const SearchForm = <T extends Query>({
             </div>
           </div>
           <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
-            <div className="rounded-xl mt-3 flex w-full flex-wrap items-center space-y-3 shadow-sm border bg-white p-3">
+            <div className="rounded-xl mt-3 flex w-full flex-wrap  space-y-3 shadow-sm border bg-white p-3">
               {hasOpenedAdvanced &&
                 advanced.map((option) => (
                   <SearchFormGroupContainer

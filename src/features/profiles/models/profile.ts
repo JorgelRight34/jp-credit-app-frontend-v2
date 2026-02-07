@@ -1,5 +1,6 @@
 import type { MaritalStatus } from "./maritalStatus";
 import type { Photo } from "@/models";
+import type { FileModel } from "@/models/fileModel";
 
 export interface Profile {
     id: number;
@@ -10,7 +11,7 @@ export interface Profile {
     lastName: string;
     profession?: string;
     gender: string;
-    photoUrl?: string;
+    files: Array<FileModel>;
     address: string;
     email: string;
     dateOfBirth: string;

@@ -16,7 +16,6 @@ export const useLoginForm = ({ onSuccess, ...props }: UseDataFormProps<LoginResu
         toastMessage: () => `Bienvenido!`,
         onSuccess: (data) => {
             localStorage.setItem(ACCESS_TOKEN, data.token)
-            alert("Redirecting")
             onSuccess?.(data);
         },
     });

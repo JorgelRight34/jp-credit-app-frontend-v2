@@ -5,5 +5,6 @@ export interface UseDataFormProps<T, TData extends FieldValues> {
     shouldEdit?: boolean;
     toastMessage?: () => string;
     onDirtyChange?: (isDirty: boolean) => void;
+    onIsValidChange?: (isValid: boolean) => void;
     onSuccess?: (data: T) => void;
 }

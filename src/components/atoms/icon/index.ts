@@ -148,6 +148,11 @@ export { default as DeleteIcon } from "@mui/icons-material/DeleteOutline"
 export { default as AdminPanelSettingsIcon } from "@mui/icons-material/AdminPanelSettingsOutlined"
 export { default as AccessTimeIcon } from "@mui/icons-material/AccessTimeOutlined";
 export { default as DashboardIcon } from "@mui/icons-material/DashboardOutlined";
+export { default as OverviewIcon } from "@mui/icons-material/DashboardOutlined"
+export { default as PermissionIcon } from "@mui/icons-material/VerifiedUserOutlined";
+export { default as CollateralIcon } from "@mui/icons-material/DirectionsCarOutlined";
+export { default as AllIcon } from "@mui/icons-material/PublicOutlined"
+export { default as InventoryIcon } from '@mui/icons-material/InventoryOutlined';
 
 
 export { default as Icon } from "./icon";

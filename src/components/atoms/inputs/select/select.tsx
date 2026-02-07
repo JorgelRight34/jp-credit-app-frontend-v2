@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import clsx from 'clsx'
-import { muiSxConfig } from '../constants'
 import { getIconInputSlot } from '../input/lib/react-utils'
+import { SX_CONFIG } from '../../constants'
 import type { SelectOptions } from './select-option'
 import type { InputProps } from '../input/components/input'
 import type { ReactNode } from 'react'
@@ -39,7 +39,7 @@ const SelectInput = ({
         labelId={label?.toString()}
         value={value}
         onChange={(e) => props.onChange?.(e.target.value as string)}
-        sx={{ width: 'auto', minWidth: 'fit-content', ...muiSxConfig }}
+        sx={{ width: 'auto', minWidth: 'fit-content', ...SX_CONFIG }}
         {...getIconInputSlot(icon)}
       >
         {allowNoOption && <MenuItem value="">---</MenuItem>}

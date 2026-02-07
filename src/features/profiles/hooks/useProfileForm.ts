@@ -1,5 +1,6 @@
 import { profileFormSchema } from "../lib/schemas/profileFormSchema"
 import { createProfile, updateProfile } from "../services/profileClient";
+import { profilesQueryKey } from "../lib/constants";
 import type { UseDataFormProps, UseFormBuilderReturn } from "@/components";
 import type { ProfileFormValues } from "../lib/schemas/profileFormSchema";
 import type { Profile } from "../models/profile"
@@ -20,7 +21,7 @@ export const useProfileForm = ({ profile, initialValues, ...config }: UseProfile
             gender: profile.gender,
             dateOfBirth: profile.dateOfBirth,
             maritalStatus: profile.maritalStatus,
-            dni: profile.dni,
+            dni: profile.dni.replace('-', '').replace("-", ""),  // REMOVE THIS WHEN API SEEDS AGAIN WITH RIGHT FORMAT
             address: profile.address,
             landline: profile.landline,
             officePhone: profile.officePhone,
@@ -41,7 +42,9 @@ export const useProfileForm = ({ profile, initialValues, ...config }: UseProfile
             ...initialValues,
         },
         onSubmit: createProfile,
-        onEdit: updateProfile,
+        onEdit: (body) => updateProfile(profile!.id, body),
+        keysToInvalidate: [[profilesQueryKey]],
+        shouldEdit: !!profile,
         ...config
     })
 }

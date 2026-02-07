@@ -7,7 +7,7 @@ export interface FileModel {
   publicId?: string;
 
   /** Optional internal database ID */
-  id?: number;
+  id: number;
 
   /** Optional original or display name of the file */
   name?: string;
@@ -20,4 +20,9 @@ export interface FileModel {
 
   /** Optional type or file extension */
   fileType: string;
+  metadata?: string;
+}
+
+export const FileModelMetadata = {
+  mainpic: "mainpic"
 }

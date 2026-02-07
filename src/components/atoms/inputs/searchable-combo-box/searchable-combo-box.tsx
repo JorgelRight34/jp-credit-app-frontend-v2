@@ -2,15 +2,15 @@ import { useState } from 'react'
 import Modal from '../../../organisms/modal/components/modal'
 import type { ReactNode } from 'react'
 import type { CacheKey } from '@/models'
+import type { InputProps } from '@/components/atoms'
 import { Input } from '@/components/atoms'
 import { useData } from '@/hooks/useData'
 
-type SearchableComboBoxComponentProps<T> = {
+interface SearchableComboBoxProps<T> extends Omit<InputProps, 'ref'> {
   placeholder?: string
-  label?: string
+  label?: ReactNode
   className?: string
   isDisabled?: boolean
-  value?: string | number
   error?: boolean
   modalProps: { title: string; height: string; width: string }
   cacheKey: CacheKey
@@ -36,7 +36,7 @@ const SearchableComboBox = <T,>({
   accesorFn,
   visibleValueFn,
   ...props
-}: SearchableComboBoxComponentProps<T>) => {
+}: SearchableComboBoxProps<T>) => {
   return (
     <>
       <input
@@ -77,7 +77,7 @@ const DisplayInput = <T,>({
   visibleValueFn,
   render,
   loader,
-}: Omit<SearchableComboBoxComponentProps<T>, 'accesorFn'>) => {
+}: Omit<SearchableComboBoxProps<T>, 'accesorFn'>) => {
   const [showModal, setShowModal] = useState(false)
   const [selected, setSelected] = useState<T>()
 

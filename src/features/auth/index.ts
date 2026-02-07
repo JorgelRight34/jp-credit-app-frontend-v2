@@ -8,6 +8,7 @@ export { default as PermissionsForm } from "./components/permissions-form";
 export { default as UserForm } from "./components/user-access-form";
 export { default as RoleFormPage } from "./pages/role-form-page"
 // export { default as UsersSection } from "./components/UsersSection";
+export * from "./services/authService"
 
 // ----------------------
 // Hooks

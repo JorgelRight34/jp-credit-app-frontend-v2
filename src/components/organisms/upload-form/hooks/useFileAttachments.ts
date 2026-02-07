@@ -1,20 +1,20 @@
 import { useMemo, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import type { FileFormFieldValues } from "../lib/form";
 import type { FileModel } from "@/models/fileModel";
 
 export type FileUploads = {
-  /* These are the initial files returned from the api, these represent the database model of the already uploaded file */
-  loaded: Array<FileModel>
-  /* These are files uploaded via the form as File objects */
-  uploaded: Array<File>;
-  /* Represents the removed created files */
-  removedCreations: Array<FileFormFieldValues>,
-  /* Represents the removed uploaded files */
-  removed: Array<File>,
-  /* Representes the deleted loaded files */
-  deleted: Array<FileModel>;
-}
+  /** Files already stored in the backend */
+  existing: Array<FileModel>;
+
+  /** New files added in the UI (not persisted yet) */
+  pending: Array<File>;
+
+  /** Pending files removed before upload (undoable) */
+  removedPending: Array<File>;
+
+  /** Existing files marked for deletion */
+  deletedExisting: Array<FileModel>;
+};
 
 export interface UseFileAttachmentsProps {
   filesMaxLength?: number;
@@ -23,14 +23,14 @@ export interface UseFileAttachmentsProps {
 }
 
 export interface UseFileAttachmentsReturn {
-  upload: {
-    uploaded: Array<File>;
-    loaded: Array<FileModel>;
+  add: {
+    pendingFiles: Array<File>;
+    existingFiles: Array<FileModel>;
     addFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
   remove: {
-    removedFiles: Array<File>;
-    deleted: Array<FileModel>;
+    removedPendingFiles: Array<File>;
+    deletedExistingFiles: Array<FileModel>;
     removeFile: (index: number, key: keyof FileUploads) => void;
     recoverFile: (index: number, key: keyof FileUploads) => void;
   };
@@ -39,37 +39,37 @@ export interface UseFileAttachmentsReturn {
   onChange: Dispatch<SetStateAction<FileUploads>>;
 }
 
-
 const deleteMap: Partial<Record<keyof FileUploads, keyof FileUploads>> = {
-  loaded: "deleted",
-  uploaded: "removed",
+  existing: "deletedExisting",
+  pending: "removedPending",
 };
 
-
-export const useFileAttachments = ({ filesMaxLength = 10, value: fileUploads, onChange }
-  : UseFileAttachmentsProps): UseFileAttachmentsReturn => {
+export const useFileAttachments = (
+  { filesMaxLength = 10, value: fileUploads, onChange }: UseFileAttachmentsProps,
+): UseFileAttachmentsReturn => {
   const [isDirty, setIsDirty] = useState(false);
 
   const reachedLimit = useMemo(
-    () => fileUploads.uploaded.length >= filesMaxLength,
-    [fileUploads, filesMaxLength]);
+    () => fileUploads.pending.length + fileUploads.existing.length >= filesMaxLength,
+    [fileUploads, filesMaxLength],
+  );
 
   const markDirty = () => setIsDirty(true);
 
   const addFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const uploadedFile = event.target.files?.[0];
+    const pendingFile = event.target.files?.[0];
     event.target.value = "";
 
-    if (!uploadedFile) return;
+    if (!pendingFile) return;
 
-    if (fileUploads.uploaded.length >= filesMaxLength) {
+    if (fileUploads.pending.length >= filesMaxLength) {
       throw Error(`Solo ${filesMaxLength} archivos son permitidos.`);
     }
 
-    onChange(prev => ({
+    onChange((prev) => ({
       ...prev,
-      uploaded: [...prev.uploaded, uploadedFile]
-    }))
+      pending: [...prev.pending, pendingFile],
+    }));
 
     markDirty();
   };
@@ -84,11 +84,13 @@ export const useFileAttachments = ({ filesMaxLength = 10, value: fileUploads, on
     const target = deleteMap[key];
     if (!target) return;
 
-    onChange(prev => ({
+    onChange((prev) => ({
       ...prev,
-      [key]: reverse ? [...prev[key], prev[target][index]]
+      [key]: reverse
+        ? [...prev[key], prev[target][index]]
         : prev[key].filter((_, i) => i !== index),
-      [target]: reverse ? prev[target].filter((_, i) => i !== index)
+      [target]: reverse
+        ? prev[target].filter((_, i) => i !== index)
         : [...prev[target], prev[key][index]],
     }));
 
@@ -96,14 +98,14 @@ export const useFileAttachments = ({ filesMaxLength = 10, value: fileUploads, on
   };
 
   return {
-    upload: {
-      uploaded: fileUploads.uploaded,
-      loaded: fileUploads.loaded,
+    add: {
+      pendingFiles: fileUploads.pending,
+      existingFiles: fileUploads.existing,
       addFile,
     },
     remove: {
-      removedFiles: fileUploads.removed,
-      deleted: fileUploads.deleted,
+      removedPendingFiles: fileUploads.removedPending,
+      deletedExistingFiles: fileUploads.deletedExisting,
       removeFile,
       recoverFile,
     },
@@ -112,4 +114,3 @@ export const useFileAttachments = ({ filesMaxLength = 10, value: fileUploads, on
     onChange,
   };
 };
-

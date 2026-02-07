@@ -10,6 +10,7 @@ type FormContainerButtonsProps<T extends FieldValues> =
 
 const FormContainerButtons = <T extends FieldValues>({
   isDirty,
+  isValid,
   form,
   text,
   onSubmit,
@@ -26,6 +27,7 @@ const FormContainerButtons = <T extends FieldValues>({
       </SecondaryBtn>
       <FormSubmitBtn
         isDirty={isDirty}
+        isValid={isValid}
         icon={icon}
         text={text}
         form={form}

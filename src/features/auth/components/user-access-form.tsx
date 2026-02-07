@@ -22,7 +22,7 @@ import {
 
 type UserAccessFormProps = DataModuleFormProps<User, UserFormValues>
 
-const UserAccessForm = ({ ...props }: UserAccessFormProps) => {
+const UserAccessForm = (props: UserAccessFormProps) => {
   const [isDirty, setIsDirty] = useState(false)
   const permissionFormRef = useRef<FormRef<PermissionsFormValues>>(null)
 

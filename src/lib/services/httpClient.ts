@@ -34,6 +34,7 @@ export class HttpClient {
 
         let res: Response;
         try {
+            console.log("HTTP Request:", { url, ...rest });
             res = await fetch(url, {
                 ...rest,
                 headers: {
@@ -44,6 +45,7 @@ export class HttpClient {
             });
         } catch (err) {
             // network/runtime error (no HTTP status available)
+            console.error("HTTP Request Failed:", err);
             throw new HttpClientError({
                 status: 502,
                 message: JSON.stringify({ status: 502, message: err instanceof Error ? `${err.message} (${JSON.stringify(err, null, 2)})` : "Upstream request failed" })
@@ -58,6 +60,7 @@ export class HttpClient {
         }
 
         // reflect upstream status & payload
+        console.error("HTTP Request Error:", { status: res.status, text, data });
         throw new HttpClientError({
             status: res.status,
             message: JSON.stringify({
@@ -78,7 +81,6 @@ export class HttpClient {
     }
 
     public post<T>(endpoint: string, body?: unknown, config?: HttpClientConfig): Promise<T> {
-        console.log("this is my body", body)
         return this.request<T>(endpoint, {
             ...config,
             method: "POST",

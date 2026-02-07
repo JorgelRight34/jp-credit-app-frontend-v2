@@ -35,7 +35,7 @@ function InnerForm<T extends FieldValues>(
   return (
     <form className={clsx('flex w-full flex-col', className)}>
       <FormProvider {...form.methods}>
-        <aside className="flex-1 overflow-y-auto">{children}</aside>
+        <aside className="flex-1">{children}</aside>
         <FormErrors validation={validation} />
       </FormProvider>
     </form>

@@ -14,9 +14,12 @@ import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as mainIndexRouteImport } from './routes/(main)/index'
 import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/route'
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
+import { Route as mainmodulesCollateralsIndexRouteImport } from './routes/(main)/(modules)/collaterals/index'
 import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
 import { Route as mainmodulesProfilesCreateIndexRouteImport } from './routes/(main)/(modules)/profiles/create/index'
 import { Route as mainmodulesProfilesIdIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/index'
+import { Route as mainmodulesCollateralsCreateIndexRouteImport } from './routes/(main)/(modules)/collaterals/create/index'
+import { Route as mainmodulesCollateralsIdIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/index'
 import { Route as mainmodulesAccessControlUsersCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/users/create/index'
 import { Route as mainmodulesAccessControlUsersUsernameIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/index'
 import { Route as mainmodulesAccessControlRolesCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/create/index'
@@ -46,6 +49,12 @@ const mainmodulesProfilesIndexRoute =
     path: '/profiles/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesCollateralsIndexRoute =
+  mainmodulesCollateralsIndexRouteImport.update({
+    id: '/collaterals/',
+    path: '/collaterals/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesAccessControlIndexRoute =
   mainmodulesAccessControlIndexRouteImport.update({
     id: '/access-control/',
@@ -62,6 +71,18 @@ const mainmodulesProfilesIdIndexRoute =
   mainmodulesProfilesIdIndexRouteImport.update({
     id: '/profiles/$id/',
     path: '/profiles/$id/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsCreateIndexRoute =
+  mainmodulesCollateralsCreateIndexRouteImport.update({
+    id: '/collaterals/create/',
+    path: '/collaterals/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsIdIndexRoute =
+  mainmodulesCollateralsIdIndexRouteImport.update({
+    id: '/collaterals/$id/',
+    path: '/collaterals/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesAccessControlUsersCreateIndexRoute =
@@ -93,7 +114,10 @@ export interface FileRoutesByFullPath {
   '/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
   '/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/collaterals/': typeof mainmodulesCollateralsIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
+  '/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
+  '/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
   '/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
@@ -105,7 +129,10 @@ export interface FileRoutesByTo {
   '/': typeof mainIndexRoute
   '/login': typeof LoginIndexRoute
   '/access-control': typeof mainmodulesAccessControlIndexRoute
+  '/collaterals': typeof mainmodulesCollateralsIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
+  '/collaterals/$id': typeof mainmodulesCollateralsIdIndexRoute
+  '/collaterals/create': typeof mainmodulesCollateralsCreateIndexRoute
   '/profiles/$id': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create': typeof mainmodulesProfilesCreateIndexRoute
   '/access-control/roles/$id': typeof mainmodulesAccessControlRolesIdIndexRoute
@@ -120,7 +147,10 @@ export interface FileRoutesById {
   '/(main)/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
   '/(main)/(modules)/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/(main)/(modules)/collaterals/': typeof mainmodulesCollateralsIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
+  '/(main)/(modules)/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
+  '/(main)/(modules)/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
   '/(main)/(modules)/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/(main)/(modules)/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/(main)/(modules)/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
@@ -134,7 +164,10 @@ export interface FileRouteTypes {
     | '/'
     | '/login/'
     | '/access-control/'
+    | '/collaterals/'
     | '/profiles/'
+    | '/collaterals/$id/'
+    | '/collaterals/create/'
     | '/profiles/$id/'
     | '/profiles/create/'
     | '/access-control/roles/$id/'
@@ -146,7 +179,10 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/access-control'
+    | '/collaterals'
     | '/profiles'
+    | '/collaterals/$id'
+    | '/collaterals/create'
     | '/profiles/$id'
     | '/profiles/create'
     | '/access-control/roles/$id'
@@ -160,7 +196,10 @@ export interface FileRouteTypes {
     | '/(main)/'
     | '/login/'
     | '/(main)/(modules)/access-control/'
+    | '/(main)/(modules)/collaterals/'
     | '/(main)/(modules)/profiles/'
+    | '/(main)/(modules)/collaterals/$id/'
+    | '/(main)/(modules)/collaterals/create/'
     | '/(main)/(modules)/profiles/$id/'
     | '/(main)/(modules)/profiles/create/'
     | '/(main)/(modules)/access-control/roles/$id/'
@@ -211,6 +250,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesProfilesIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/collaterals/': {
+      id: '/(main)/(modules)/collaterals/'
+      path: '/collaterals'
+      fullPath: '/collaterals/'
+      preLoaderRoute: typeof mainmodulesCollateralsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/access-control/': {
       id: '/(main)/(modules)/access-control/'
       path: '/access-control'
@@ -230,6 +276,20 @@ declare module '@tanstack/react-router' {
       path: '/profiles/$id'
       fullPath: '/profiles/$id/'
       preLoaderRoute: typeof mainmodulesProfilesIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/create/': {
+      id: '/(main)/(modules)/collaterals/create/'
+      path: '/collaterals/create'
+      fullPath: '/collaterals/create/'
+      preLoaderRoute: typeof mainmodulesCollateralsCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/$id/': {
+      id: '/(main)/(modules)/collaterals/$id/'
+      path: '/collaterals/$id'
+      fullPath: '/collaterals/$id/'
+      preLoaderRoute: typeof mainmodulesCollateralsIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/access-control/users/create/': {
@@ -265,7 +325,10 @@ declare module '@tanstack/react-router' {
 
 interface mainmodulesRouteRouteChildren {
   mainmodulesAccessControlIndexRoute: typeof mainmodulesAccessControlIndexRoute
+  mainmodulesCollateralsIndexRoute: typeof mainmodulesCollateralsIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
+  mainmodulesCollateralsIdIndexRoute: typeof mainmodulesCollateralsIdIndexRoute
+  mainmodulesCollateralsCreateIndexRoute: typeof mainmodulesCollateralsCreateIndexRoute
   mainmodulesProfilesIdIndexRoute: typeof mainmodulesProfilesIdIndexRoute
   mainmodulesProfilesCreateIndexRoute: typeof mainmodulesProfilesCreateIndexRoute
   mainmodulesAccessControlRolesIdIndexRoute: typeof mainmodulesAccessControlRolesIdIndexRoute
@@ -276,7 +339,11 @@ interface mainmodulesRouteRouteChildren {
 
 const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesAccessControlIndexRoute: mainmodulesAccessControlIndexRoute,
+  mainmodulesCollateralsIndexRoute: mainmodulesCollateralsIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
+  mainmodulesCollateralsIdIndexRoute: mainmodulesCollateralsIdIndexRoute,
+  mainmodulesCollateralsCreateIndexRoute:
+    mainmodulesCollateralsCreateIndexRoute,
   mainmodulesProfilesIdIndexRoute: mainmodulesProfilesIdIndexRoute,
   mainmodulesProfilesCreateIndexRoute: mainmodulesProfilesCreateIndexRoute,
   mainmodulesAccessControlRolesIdIndexRoute:

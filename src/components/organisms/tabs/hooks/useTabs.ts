@@ -11,10 +11,11 @@ export interface UseTabsProps {
 
 export const useTabs = ({ defaultActiveKey, children, onSelect, getDefaultActiveKey }: UseTabsProps) => {
   const tabsArray = useMemo(
-    () =>
-      Children.toArray(children).filter(
+    () => {
+      return Children.toArray(children).filter(
         isValidElement<TabProps>,
-      ),
+      )
+    },
     [children],
   );
 

@@ -14,33 +14,33 @@ export type UseFileAttachmentsFormProps = {
     onCreate?: (fileData: Array<FileFormFieldValues>) => Promise<void>;
 };
 
-export const useFileAttachmentsForm = (
-    { initialFiles, filesMaxLength, onUpload, onDelete }: UseFileAttachmentsFormProps
-) => {
+export const useFileAttachmentsForm = ({
+    initialFiles,
+    filesMaxLength,
+    onUpload,
+    onDelete,
+}: UseFileAttachmentsFormProps) => {
     const [fileUploads, setFileUploads] = useState<FileUploads>({
-        loaded: initialFiles ?? [],
-        uploaded: [],
-        removed: [],
-        deleted: [],
-        removedCreations: []
-    })
+        existing: initialFiles ?? [],
+        pending: [],
+        removedPending: [],
+        deletedExisting: [],
+    });
+
     const [isDirty, setIsDirty] = useState(false);
 
     const handleSubmit = async () => {
-        await Promise.all([
-            processUploads(),
-            processDeletions(),
-        ])
+        await Promise.all([processUploads(), processDeletions()]);
 
-        setFileUploads(prev => ({ ...prev, deleted: [] }))
-    }
+        setFileUploads((prev) => ({ ...prev, deletedExisting: [] }));
+    };
 
     const { mutateAsync, isPending } = useDataMutation({
-        mutationFn: handleSubmit
-    })
+        mutationFn: handleSubmit,
+    });
 
     const processUploads = async () => {
-        const filesToUpload = fileUploads.uploaded;
+        const filesToUpload = fileUploads.pending;
         if (filesToUpload.length === 0) return;
 
         await onUpload(filesToUpload);
@@ -49,8 +49,7 @@ export const useFileAttachmentsForm = (
     const processDeletions = async () => {
         if (!onDelete) return;
 
-        const filesToDelete = fileUploads.deleted;
-
+        const filesToDelete = fileUploads.deletedExisting;
         if (filesToDelete.length === 0) return;
 
         await onDelete(filesToDelete);
@@ -58,13 +57,12 @@ export const useFileAttachmentsForm = (
 
     const init = () => {
         setFileUploads({
-            uploaded: [],
-            removed: [],
-            deleted: [],
-            loaded: initialFiles ?? [],
-            removedCreations: []
-        })
-    }
+            pending: [],
+            removedPending: [],
+            deletedExisting: [],
+            existing: initialFiles ?? [],
+        });
+    };
 
     return {
         value: fileUploads,
@@ -74,6 +72,6 @@ export const useFileAttachmentsForm = (
         onDirtyChange: setIsDirty,
         onSubmit: mutateAsync,
         onChange: setFileUploads,
-        reset: init
-    }
-}
+        reset: init,
+    };
+};

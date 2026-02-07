@@ -1,7 +1,8 @@
+import { useDeferredValue } from 'react'
 import { useSearchContainer } from '../hooks/useSearchContainer'
 import SearchForm from './search-form'
-import type { SearchFormConfig } from '../models/searchFormOption'
 import type { ReactNode } from 'react'
+import type { SearchFormConfig } from '../models/searchFormOption'
 import type { Query } from '../models/query'
 
 export interface SearchContainerProps<T extends Query> {
@@ -18,6 +19,7 @@ const SearchContainer = <T extends Query>({
   const [controlledQuery, onSearchSubmit] = useSearchContainer<T>(
     initialValues as T,
   )
+  const deferredQuery = useDeferredValue(controlledQuery)
 
   return (
     <section>
@@ -30,7 +32,7 @@ const SearchContainer = <T extends Query>({
           schema={search.schema}
         />
       </div>
-      <div>{render(controlledQuery)}</div>
+      <div>{render(deferredQuery)}</div>
     </section>
   )
 }

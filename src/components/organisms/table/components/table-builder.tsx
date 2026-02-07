@@ -33,7 +33,6 @@ const TableBuilder = <TData,>({
   onLimitChange,
   ...config
 }: TableBuilderProps<TData>) => {
-  console.log("i'm the rerender!!")
   return (
     <TableStateWrapper
       pageSize={pageSize}

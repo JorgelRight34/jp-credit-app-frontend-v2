@@ -5,7 +5,7 @@ import { HomeIcon } from '@/components/atoms'
 import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 
 const homeBreadcrumbs: Array<BreadcrumbSpec> = [
-  { title: 'Home', icon: () => <HomeIcon />, pathname: '/' },
+  { title: 'Inicio', icon: () => <HomeIcon />, pathname: '/' },
 ]
 
 const PageLayoutBreadcrumb = ({

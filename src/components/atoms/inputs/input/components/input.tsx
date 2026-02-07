@@ -10,6 +10,8 @@ import { SX_CONFIG } from '@/components/atoms/constants'
 export type InputProps = BaseTextFieldProps & {
   icon?: IconInputSlotProps
   readOnly?: boolean
+  value?: any
+  defaultValue?: any
   min?: number
   max?: number
   step?: number

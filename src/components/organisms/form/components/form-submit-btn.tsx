@@ -8,6 +8,7 @@ export interface FormSubmitBtnProps<T extends FieldValues> {
   form?: UseFormBuilderReturn<T>
   text?: string
   isDirty?: boolean
+  isValid?: boolean
   icon?: IconName
   onSubmit?: (...args: Array<unknown>) => unknown
 }
@@ -16,6 +17,7 @@ const FormSubmitBtn = <T extends FieldValues>({
   form,
   text = 'Confirmar',
   isDirty,
+  isValid,
   icon = CheckCircleIcon,
   onSubmit,
 }: FormSubmitBtnProps<T>) => {
@@ -27,7 +29,7 @@ const FormSubmitBtn = <T extends FieldValues>({
   return (
     <AccentBtn
       type="submit"
-      disabled={!isDirty}
+      disabled={isValid !== undefined ? !isDirty || !isValid : !isDirty}
       icon={icon}
       onClick={mutateAsync}
     >

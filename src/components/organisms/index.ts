@@ -42,3 +42,5 @@ export * from "./upload-form";
 
 
 export * from "./table"
+
+export * from "./editor"

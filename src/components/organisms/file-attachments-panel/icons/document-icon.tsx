@@ -36,13 +36,9 @@ const DocumentIcon = ({
   className,
   color = '#555',
 }: DocumentIconProps) => {
-  const IconRenderer = icons[type?.split('/')[1] as keyof typeof icons]
+  const IconRenderer = icons[type as keyof typeof icons]
 
-  if (IconRenderer) {
-    return <IconRenderer className={className} size={size} color={color} />
-  }
-
-  return <span>{JSON.stringify({ type, size, className, color })}</span>
+  return <IconRenderer className={className} size={size} color={color} />
 }
 
 export default DocumentIcon

@@ -8,19 +8,19 @@ export const useProfileFileAttachmentsForm = ({ profile }: { profile?: Profile }
     const formRef = useRef<FileAttachmentsFormRef>(null)
 
     const memoizedProfileFiles = useMemo(() => {
-        return profile?.photo ? [profile.photo] : undefined
+        return profile?.files ? profile.files : undefined
     }, [profile])
 
     return {
         form: {
             onUpload: (files) => uploadProfilePhoto(profileRef.current!.id, files[0]),
-            onDelete: (files) => deleteProfilePhoto(profileRef.current!.id, files[0].publicId!),
+            onDelete: (files) => deleteProfilePhoto(files[0].id),
             filesMaxLength: 1,
             accept: "image/*",
             initialFiles: memoizedProfileFiles,
         },
-        setRef: (value: Profile | undefined) => profileRef.current = value,
-        submit: async (value: Profile | undefined) => {
+        setRef: (value) => profileRef.current = value,
+        submit: async (value) => {
             profileRef.current = value;
             await formRef.current?.submit();
         },
