@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import {
     getCoreRowModel, getExpandedRowModel, getPaginationRowModel,
     getSortedRowModel, useReactTable
@@ -20,8 +21,10 @@ export interface UseTableStateProps<TData> {
     pageSize?: PageSize;
     columns: Array<Column<TData>>;
     selectBehavior?: "single" | "multiple"
+    selectRowBehavior?: "single" | "multiple";
     allowExpand?: boolean;
     initialState?: InitialTableState<TData>;
+    onRowSelection?: (data?: TData) => void;
     onPageChange?: (page: number) => void;
     onSortingChange?: (sort: SortingState) => void;
 }
@@ -29,20 +32,21 @@ export interface UseTableStateProps<TData> {
 const EMPTY: [] = []
 
 export const useTableState = <T,>({
-    pageSize = defaultPageSize,
+    pageSize,
     data,
     columns,
     selectBehavior,
-    allowExpand = false,
+    selectRowBehavior,
+    allowExpand,
     initialState,
+    onRowSelection,
     onPageChange,
     onSortingChange,
 }: UseTableStateProps<T>) => {
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
-        pageSize: pageSize,
+        pageSize: pageSize ?? defaultPageSize,
     });
-
     const [sorting, setSorting] = useState<SortingState>([]);
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
     const [expanded, setExpanded] = useState<ExpandedState>({});
@@ -57,21 +61,36 @@ export const useTableState = <T,>({
         getPaginationRowModel: onPageChange ? undefined : getPaginationRowModel(),
         onExpandedChange: (updater) => {
             const newExpandedState = typeof updater === 'function' ? updater(expanded) : updater;
+
             if ((selectBehavior ?? "multiple") === "single") {
                 const expandedRowId = Object.keys(newExpandedState).find(
-                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                     id => newExpandedState[id as keyof typeof newExpandedState]
                 );
-                if (expandedRowId !== undefined) {
-                    setExpanded({ [expandedRowId]: true });
-                } else {
-                    setExpanded({});
-                }
+                setExpanded(expandedRowId ? { [expandedRowId]: true } : {});
             } else {
                 setExpanded(newExpandedState);
             }
         },
-        onRowSelectionChange: setRowSelection,
+        onRowSelectionChange: (updater) => {
+            startTransition(() => {
+                const next = typeof updater === "function" ? updater(rowSelection) : updater;
+
+                const selectedRowIds = Object.keys(next).filter(id => next[id]);
+                const lastSelectedRowId = selectedRowIds[selectedRowIds.length - 1];
+
+                const selectedRow = lastSelectedRowId
+                    ? table.getRowModel().rowsById[lastSelectedRowId]?.original
+                    : undefined;
+
+                onRowSelection?.(selectedRow)
+
+                if ((selectRowBehavior ?? "single") === "single") {
+                    setRowSelection(lastSelectedRowId ? { [lastSelectedRowId]: true } : {});
+                } else {
+                    setRowSelection(next);
+                }
+            });
+        },
         onPaginationChange: (updaterOrValue) => {
             startTransition(() => {
                 setPagination((prev) => {
@@ -83,7 +102,7 @@ export const useTableState = <T,>({
             })
         },
         getExpandedRowModel: getExpandedRowModel(),
-        getRowCanExpand: () => allowExpand,
+        getRowCanExpand: () => allowExpand ?? false,
         onSortingChange: (updaterOrValue) => {
             setSorting((prev) => {
                 const next = getUpdaterOrValue(updaterOrValue, prev)

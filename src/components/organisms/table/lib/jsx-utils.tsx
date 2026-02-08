@@ -21,6 +21,14 @@ export const createDateDataCell = (date: string) => {
   return <DateLabel date={date} />
 }
 
+export const createSingleSelectCell = (onClick: () => void) => {
+  return (
+    <span className="text-accent" onClick={onClick}>
+      Seleccionar
+    </span>
+  )
+}
+
 export const createIsActiveDataCell = (isActive: boolean) => {
   return (
     <span className="inline-flex items-center gap-2">

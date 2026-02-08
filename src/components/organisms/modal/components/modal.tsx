@@ -1,8 +1,12 @@
 import './modal.css'
 import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
+import { createPortal } from 'react-dom'
 import type { ModalProps } from '../models/modalProps'
 import { AccentBtn, CloseIcon, Icon } from '@/components/atoms'
+
+const modalRoot =
+  typeof window !== 'undefined' ? document.getElementById('modal-root') : null
 
 const Modal = ({
   children,
@@ -26,7 +30,7 @@ const Modal = ({
 
   if (!hasMountedOnce && !show) return null
 
-  return (
+  const modal = (
     <div
       className={clsx('modal-overlay', {
         'pointer-events-auto opacity-100': show,
@@ -68,6 +72,8 @@ const Modal = ({
       </div>
     </div>
   )
+
+  return createPortal(modal, modalRoot!)
 }
 
 export default Modal

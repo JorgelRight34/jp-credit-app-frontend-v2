@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useDataTableState } from "./useDataTableState";
 import type { CacheKey, PagedResponse } from "@/models";
 import type { Query } from "@/components/organisms/search-form/models/query";
@@ -20,20 +19,19 @@ export interface UseDataTableProps<T, TQuery extends Query> {
 
 export const useDataTable = <T, TQuery extends Query>({
     cacheKey,
-    query = {} as TQuery,
+    query,
     pageSize,
-    enabled = true,
+    enabled,
     initialData,
     columns,
     placeholderData,
     loader,
 }: UseDataTableProps<T, TQuery>) => {
     const { page, limit, order, fetchPage, sort, setLimit } = useDataTableState({ cacheKey, pageSize })
-    const memoizedColumns = useMemo(() => columns ?? [], [columns]);
 
     const { data, isLoading, isError } = useData<PagedResponse<T>>({
         key: cacheKey.concat({ limit, page, order, query }),
-        loader: () => loader({ ...query, ...order, page, limit }),
+        loader: () => loader({ ...(query ?? {} as TQuery), ...order, page, limit }),
         initialData,
         enabled,
         placeholderData
@@ -45,7 +43,7 @@ export const useDataTable = <T, TQuery extends Query>({
         isError,
         page,
         limit,
-        columns: memoizedColumns,
+        columns,
         fetchPage,
         sort,
         setLimit

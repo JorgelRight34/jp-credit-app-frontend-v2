@@ -18,7 +18,7 @@ interface SearchableComboBoxProps<T> extends Omit<InputProps, 'ref'> {
   accesorFn: (val: T | null) => any
   visibleValueFn: (val: T | null) => string | undefined
   render: (setValue: (val: T) => void) => ReactNode
-  loader: (val: any) => Promise<T>
+  loader: (val: T) => Promise<T>
 }
 
 const SearchableComboBox = <T,>({
@@ -84,7 +84,7 @@ const DisplayInput = <T,>({
   const { data: fetchedDefaultValue } = useData<T>({
     key: cacheKey,
     loader: () => loader(controlledValue),
-    enabled: !!selected,
+    enabled: selected !== undefined && controlledValue,
   })
 
   const handleSelect = (val: T) => {

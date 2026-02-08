@@ -15,6 +15,7 @@ interface TableBodyCompositorProps<T> extends Omit<
 > {
   table: Table<T>
   isLoading?: boolean
+  onRowSelection?: (data?: T) => void
   onExpand?: (row: Row<T>) => ReactNode
 }
 

@@ -1,5 +1,6 @@
 import { SearchContainer } from '../../search-form'
 import DataTable from './data-table'
+import type { Column } from '../../table'
 import type { InitialTableState } from '../../table/hooks/useTableState'
 import type { DataTableConfig } from '../models/dataTableConfig'
 import type { Query, SearchFormConfig } from '../../search-form'
@@ -11,6 +12,7 @@ export type DataTableContainerProps<TEntity extends object, T extends Query> = {
   initialData?: PagedResponse<TEntity>
   initialQuery?: Partial<T>
   initialState?: InitialTableState<TEntity>
+  extraColumns: Array<Column<TEntity>>
 }
 
 export type DataTableContainerOverrides<

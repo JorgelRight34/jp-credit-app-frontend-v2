@@ -6,7 +6,7 @@ import { SearchableComboBox } from '@/components'
 
 const LoanSearchInput = (props: InputProps) => {
   return (
-    <SearchableComboBox
+    <SearchableComboBox<Loan>
       modalProps={{
         title: 'Préstamos',
         height: '90dvh',
@@ -22,7 +22,7 @@ const LoanSearchInput = (props: InputProps) => {
           </button>
         </>
       )}
-      loader={getLoan}
+      loader={(l) => getLoan(l.id)}
       {...props}
     />
   )

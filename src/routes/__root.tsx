@@ -61,6 +61,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <LoadingScreen />
           <CssBaseline />
           {children}
+          <div id="modal-root"></div>
         </Provider>
         <TanStackDevtools
           config={{
