@@ -6,10 +6,8 @@ export interface Collateral {
     title: string;
     description: string;
     value: number;
-    ownerId: number;
     condition: string;
     createdAt: string;
-    status: string;
     ownerName?: string;
     loanId: number;
     type: CollateralType;

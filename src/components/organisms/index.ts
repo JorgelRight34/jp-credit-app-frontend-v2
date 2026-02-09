@@ -21,9 +21,7 @@ export * from "./search-form"
 // -------------------------------------
 // Modal (uses its own index.ts)
 // -------------------------------------
-export { default as ConfirmationModal } from "./modal/components/confirmation-modal"
-export * from "./modal/components/confirmation-modal"
-export { default as Modal } from "./modal/components/modal"
+export * from "./modal"
 
 // -------------------------------------
 // Navbar (uses its own index.ts)

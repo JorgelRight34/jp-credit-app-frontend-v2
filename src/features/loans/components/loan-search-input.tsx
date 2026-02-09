@@ -1,12 +1,19 @@
 import { loansQueryKey } from '../lib/constants'
 import { getLoan } from '../services/loanClient'
+import { loanSearchConfig } from '../lib/config/loan-search-config'
+import { createLoanSearchInputDataTableConfig } from '../lib/config/loan-datatable-config'
+import type { LoanQuery } from '../models/loanQuery'
 import type { Loan } from '../models/loan'
-import type { InputProps } from '@/components'
-import { SearchableComboBox } from '@/components'
+import type { DataTableContainerOverrides, InputProps } from '@/components'
+import { DataTableContainer, SearchableComboBox } from '@/components'
 
-const LoanSearchInput = (props: InputProps) => {
+interface LoanSearchInputProps extends InputProps {
+  datatable?: DataTableContainerOverrides<Loan, LoanQuery>
+}
+
+const LoanSearchInput = ({ datatable, ...props }: LoanSearchInputProps) => {
   return (
-    <SearchableComboBox<Loan>
+    <SearchableComboBox<Loan, number>
       modalProps={{
         title: 'Préstamos',
         height: '90dvh',
@@ -16,13 +23,13 @@ const LoanSearchInput = (props: InputProps) => {
       accesorFn={(l) => l?.id ?? 0}
       visibleValueFn={(l) => (l ? `Préstamo No.${l.id}` : '---')}
       render={(setValue) => (
-        <>
-          <button type="button" onClick={() => setValue({ id: 1 } as Loan)}>
-            test
-          </button>
-        </>
+        <DataTableContainer
+          searchConfig={loanSearchConfig}
+          datatableConfig={createLoanSearchInputDataTableConfig(setValue)}
+          {...datatable}
+        />
       )}
-      loader={(l) => getLoan(l.id)}
+      loader={(id) => getLoan(id)}
       {...props}
     />
   )

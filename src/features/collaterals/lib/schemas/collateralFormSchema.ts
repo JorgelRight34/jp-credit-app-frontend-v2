@@ -24,12 +24,6 @@ export const collateralFormSchema = z.object({
         .min(1, "La condición es obligatoria")
         .max(40, "La condición no puede exceder 40 caracteres"),
 
-    status: z
-        .string()
-        .trim()
-        .min(1, "El estado es obligatorio")
-        .max(40, "El estado no puede exceder 40 caracteres"),
-
     type: z
         .string()
         .trim()
@@ -46,13 +40,11 @@ export const collateralFormSchema = z.object({
     expirationDate: z
         .string()
         .trim()
-        .optional()
+        .nullable()
         .refine(
             (val) => !val || !Number.isNaN(new Date(val).getTime()),
             "La fecha de expiración no es válida",
         ),
-
-    ownerId: z.number().refine(val => val > 0, "Debes selecionar un propietario"),
 
     loanId: z.number().refine(val => val > 0, "Debes selecionar un préstamo")
 });

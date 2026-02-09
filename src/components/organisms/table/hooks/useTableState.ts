@@ -8,7 +8,7 @@ import { getUpdaterOrValue } from "../lib/utils";
 import type { PageSize } from "../models/pageSize";
 import type { Column } from "../models/column";
 import type {
-    ExpandedState, PaginationState, RowSelectionState,
+    ExpandedState, PaginationState,
     SortingState,
     TableOptions
 } from "@tanstack/react-table";
@@ -21,10 +21,8 @@ export interface UseTableStateProps<TData> {
     pageSize?: PageSize;
     columns: Array<Column<TData>>;
     selectBehavior?: "single" | "multiple"
-    selectRowBehavior?: "single" | "multiple";
     allowExpand?: boolean;
     initialState?: InitialTableState<TData>;
-    onRowSelection?: (data?: TData) => void;
     onPageChange?: (page: number) => void;
     onSortingChange?: (sort: SortingState) => void;
 }
@@ -36,10 +34,8 @@ export const useTableState = <T,>({
     data,
     columns,
     selectBehavior,
-    selectRowBehavior,
     allowExpand,
     initialState,
-    onRowSelection,
     onPageChange,
     onSortingChange,
 }: UseTableStateProps<T>) => {
@@ -48,7 +44,6 @@ export const useTableState = <T,>({
         pageSize: pageSize ?? defaultPageSize,
     });
     const [sorting, setSorting] = useState<SortingState>([]);
-    const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
     const [expanded, setExpanded] = useState<ExpandedState>({});
 
     const table = useReactTable({
@@ -56,7 +51,7 @@ export const useTableState = <T,>({
         initialState,
         columns,
         manualPagination: !!onPageChange,
-        state: { pagination, sorting, rowSelection, expanded },
+        state: { pagination, sorting, expanded },
         enableRowSelection: true,
         getPaginationRowModel: onPageChange ? undefined : getPaginationRowModel(),
         onExpandedChange: (updater) => {
@@ -70,26 +65,6 @@ export const useTableState = <T,>({
             } else {
                 setExpanded(newExpandedState);
             }
-        },
-        onRowSelectionChange: (updater) => {
-            startTransition(() => {
-                const next = typeof updater === "function" ? updater(rowSelection) : updater;
-
-                const selectedRowIds = Object.keys(next).filter(id => next[id]);
-                const lastSelectedRowId = selectedRowIds[selectedRowIds.length - 1];
-
-                const selectedRow = lastSelectedRowId
-                    ? table.getRowModel().rowsById[lastSelectedRowId]?.original
-                    : undefined;
-
-                onRowSelection?.(selectedRow)
-
-                if ((selectRowBehavior ?? "single") === "single") {
-                    setRowSelection(lastSelectedRowId ? { [lastSelectedRowId]: true } : {});
-                } else {
-                    setRowSelection(next);
-                }
-            });
         },
         onPaginationChange: (updaterOrValue) => {
             startTransition(() => {
@@ -115,5 +90,5 @@ export const useTableState = <T,>({
         getSortedRowModel: getSortedRowModel(),
     });
 
-    return { table, rowSelection, setRowSelection };
+    return { table };
 };

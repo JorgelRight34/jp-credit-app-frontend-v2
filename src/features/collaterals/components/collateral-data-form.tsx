@@ -1,6 +1,5 @@
 import {
   collateralConditionsOptions,
-  collateralStatusOptions,
   collateralTypeOptions,
 } from '../lib/constants'
 import type { useCollateralForm } from '../hooks/useCollateralForm'
@@ -12,7 +11,6 @@ import {
   FormRow,
   FormSelectGroup,
   Input,
-  NumericInput,
   RichTextEditor,
 } from '@/components'
 import { LoanSearchInput } from '@/features/loans'
@@ -29,11 +27,7 @@ const CollateralDataForm = ({ form }: CollateralDataFormProps) => {
       </FormRow>
       <FormRow>
         <FormGroup label="Valor" name="value" input={CurrencyInput} />
-        <FormSelectGroup
-          options={collateralTypeOptions}
-          name="type"
-          label="Tipo"
-        />
+        <FormGroup name="loanId" label="Préstamo" input={LoanSearchInput} />
       </FormRow>
       <FormRow>
         <FormSelectGroup
@@ -42,9 +36,9 @@ const CollateralDataForm = ({ form }: CollateralDataFormProps) => {
           label="Condición"
         />
         <FormSelectGroup
-          options={collateralStatusOptions}
-          name="status"
-          label="Estado"
+          options={collateralTypeOptions}
+          name="type"
+          label="Tipo"
         />
       </FormRow>
       <FormRow>
@@ -55,10 +49,6 @@ const CollateralDataForm = ({ form }: CollateralDataFormProps) => {
           input={DateInput}
           optional
         />
-      </FormRow>
-      <FormRow>
-        <FormGroup name="ownerId" label="Propietario" input={NumericInput} />
-        <FormGroup name="loanId" label="Préstamo" input={LoanSearchInput} />
       </FormRow>
       <FormGroup
         name="description"

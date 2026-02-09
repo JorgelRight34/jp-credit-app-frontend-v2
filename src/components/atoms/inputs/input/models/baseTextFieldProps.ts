@@ -18,4 +18,5 @@ export type BaseTextFieldProps = Pick<
     | "name"
     | "autoComplete"
     | "required"
+    | "onChange"
 > 

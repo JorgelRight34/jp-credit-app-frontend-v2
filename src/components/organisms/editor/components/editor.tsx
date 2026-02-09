@@ -2,7 +2,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
 import clsx from 'clsx'
-import React from 'react'
+import React, { useEffect } from 'react'
 import EditorToolBar from './editor-toolbar'
 import type { UseEditorOptions } from '@tiptap/react'
 
@@ -38,6 +38,12 @@ const Editor = ({
     immediatelyRender: false,
     onUpdate,
   })
+
+  useEffect(() => {
+    if (!content && editor?.getHTML()) {
+      editor.commands.setContent('')
+    }
+  }, [content])
 
   return (
     <div className={clsx('flex h-full flex-col bg-white', className)}>

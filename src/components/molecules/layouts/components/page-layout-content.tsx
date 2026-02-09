@@ -23,7 +23,7 @@ const PageLayoutContent = ({
 }: PageLayoutContentProps) => {
   return (
     <div className="px-lg-3 flex flex-1 flex-col p-0">
-      <Suspense fallback={'loading...'}>
+      <Suspense fallback={null}>
         <ProtectedComponent
           provider={permissionProvider}
           isAuthorizedFn={isAuthorizedFn}

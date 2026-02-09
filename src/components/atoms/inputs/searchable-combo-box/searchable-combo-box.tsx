@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import Modal from '../../../organisms/modal/components/modal'
+import { useCallback, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import type { CacheKey } from '@/models'
 import type { InputProps } from '@/components/atoms'
+import type { ModalTriggerRef } from '@/components/organisms'
 import { Input } from '@/components/atoms'
 import { useData } from '@/hooks/useData'
+import { ModalTrigger } from '@/components/organisms'
 
-interface SearchableComboBoxProps<T> extends Omit<InputProps, 'ref'> {
+interface SearchableComboBoxProps<T, TValue> extends Omit<InputProps, 'ref'> {
   placeholder?: string
   label?: ReactNode
   className?: string
@@ -14,14 +15,14 @@ interface SearchableComboBoxProps<T> extends Omit<InputProps, 'ref'> {
   error?: boolean
   modalProps: { title: string; height: string; width: string }
   cacheKey: CacheKey
-  onChange?: (entity: T) => void
-  accesorFn: (val: T | null) => any
+  onChange?: (val: TValue) => TValue
+  accesorFn: (val: T | null) => TValue
   visibleValueFn: (val: T | null) => string | undefined
   render: (setValue: (val: T) => void) => ReactNode
-  loader: (val: T) => Promise<T>
+  loader: (val: TValue) => Promise<T>
 }
 
-const SearchableComboBox = <T,>({
+const SearchableComboBox = <T, TValue>({
   value,
   placeholder,
   label = '',
@@ -36,7 +37,7 @@ const SearchableComboBox = <T,>({
   accesorFn,
   visibleValueFn,
   ...props
-}: SearchableComboBoxProps<T>) => {
+}: SearchableComboBoxProps<T, TValue>) => {
   return (
     <>
       <input
@@ -47,6 +48,7 @@ const SearchableComboBox = <T,>({
         readOnly
       />
       <DisplayInput
+        accesorFn={accesorFn}
         cacheKey={cacheKey}
         className={className}
         placeholder={placeholder}
@@ -64,7 +66,7 @@ const SearchableComboBox = <T,>({
   )
 }
 
-const DisplayInput = <T,>({
+const DisplayInput = <T, TValue>({
   cacheKey,
   className,
   placeholder,
@@ -73,45 +75,54 @@ const DisplayInput = <T,>({
   error,
   value: controlledValue,
   modalProps,
+  accesorFn,
   onChange,
   visibleValueFn,
   render,
   loader,
-}: Omit<SearchableComboBoxProps<T>, 'accesorFn'>) => {
-  const [showModal, setShowModal] = useState(false)
+}: SearchableComboBoxProps<T, TValue>) => {
   const [selected, setSelected] = useState<T>()
+  const modalTriggerRef = useRef<ModalTriggerRef>(null)
 
   const { data: fetchedDefaultValue } = useData<T>({
     key: cacheKey,
     loader: () => loader(controlledValue),
-    enabled: selected !== undefined && controlledValue,
+    enabled: Boolean(controlledValue && selected === undefined),
   })
 
-  const handleSelect = (val: T) => {
-    onChange?.(val)
-    setSelected(val)
-    setShowModal(false)
-  }
+  const handleSelect = useCallback(
+    (val: T) => {
+      onChange?.(accesorFn(val))
+      setSelected(val)
+      modalTriggerRef.current?.hide()
+    },
+    [onChange],
+  )
 
   return (
     <>
-      <Input
-        className={className}
-        onClick={() => setShowModal(true)}
-        placeholder={placeholder}
-        value={visibleValueFn(selected ?? fetchedDefaultValue ?? null) ?? ''}
-        disabled={isDisabled}
-        label={label}
-        error={error}
-        readOnly={true}
-      />
-      <Modal
+      <ModalTrigger
         {...modalProps}
-        onHide={() => setShowModal(false)}
-        show={showModal}
+        ref={modalTriggerRef}
+        trigger={
+          <Input
+            className={className}
+            placeholder={placeholder}
+            value={
+              controlledValue
+                ? (visibleValueFn(selected ?? fetchedDefaultValue ?? null) ??
+                  '')
+                : ''
+            }
+            disabled={isDisabled}
+            label={label}
+            error={error}
+            readOnly={true}
+          />
+        }
       >
         {render(handleSelect)}
-      </Modal>
+      </ModalTrigger>
     </>
   )
 }

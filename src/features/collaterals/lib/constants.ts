@@ -1,9 +1,7 @@
 import { CollateralTypeMap } from "../models/collateralType";
-import { CollateralStatusMap } from "../models/collateralStatus";
 import { CollateralConditionMap } from "../models/collateralCondition";
 import type { CollateralType } from "../models/collateralType";
 import type { CollateralCondition } from "../models/collateralCondition";
-import type { CollateralStatus } from "../models/collateralStatus";
 import type { SelectOptions } from "@/components";
 
 export const collateralsQueryKey = "collaterals"
@@ -30,24 +28,6 @@ export const collateralConditionTranslations: Record<
     [CollateralConditionMap.APPRECIATING]: "apreciando",
     [CollateralConditionMap.DIVERSIFIED]: "diversificado",
     [CollateralConditionMap.CONCENTRATED]: "concentrado",
-};
-
-export const collateralStatusTranslations: Record<
-    CollateralStatus,
-    string
-> = {
-    [CollateralStatusMap.PENDING]: "pendiente",
-    [CollateralStatusMap.APPROVED]: "aprobado",
-    [CollateralStatusMap.REJECTED]: "rechazado",
-    [CollateralStatusMap.UNDER_REVIEW]: "en revisión",
-    [CollateralStatusMap.ACTIVE]: "activo",
-    [CollateralStatusMap.INACTIVE]: "inactivo",
-    [CollateralStatusMap.SEIZED]: "incautado",
-    [CollateralStatusMap.RELEASED]: "liberado",
-    [CollateralStatusMap.DEFAULTED]: "incumplido",
-    [CollateralStatusMap.EXPIRED]: "vencido",
-    [CollateralStatusMap.ON_HOLD]: "en espera",
-    [CollateralStatusMap.USED_FOR_SETTLEMENT]: "liquidado",
 };
 
 export const collateralTypeTranslations: Record<
@@ -163,10 +143,6 @@ const generateOptions = (record: Record<string, string>) =>
             record[String(key)] || "",
         ])
         .sort((a, b) => a[1].localeCompare(b[1])) as SelectOptions;
-
-export const collateralStatusOptions = generateOptions(
-    collateralStatusTranslations
-);
 
 export const collateralConditionsOptions = generateOptions(
     collateralConditionTranslations

@@ -1,5 +1,5 @@
 import { NumericFormat } from 'react-number-format'
-import Input from '../input/components/input'
+import BaseInput from '../input/components/base-input'
 import type { InputProps } from '../input/components/input'
 
 type CurrencyInputProps = Omit<InputProps, 'type'>
@@ -14,19 +14,20 @@ const CurrencyInput = ({
 }: CurrencyInputProps) => {
   return (
     <NumericFormat
-      {...props}
-      customInput={Input}
+      customInput={BaseInput}
       label={label}
       thousandSeparator
       valueIsNumericString
       prefix="$"
       defaultValue={props.defaultValue as string | null | undefined}
-      value={(value as string | number | null | undefined) ?? ''}
+      value={value ?? ''}
       name={name}
       onValueChange={(values) => {
+        console.log(values)
         onChange?.(values.value)
       }}
       onBlur={onBlur}
+      {...props}
     />
   )
 }
