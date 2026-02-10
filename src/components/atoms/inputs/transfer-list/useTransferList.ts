@@ -55,8 +55,6 @@ export const useTransferList = ({ value, items, onChange }: UseTransferListProps
         )
         if (!movable.length) return
 
-        console.log(value);
-        console.log(movable)
         onChange?.([...value, ...movable])
         setLeftChecked(new Set())
     }

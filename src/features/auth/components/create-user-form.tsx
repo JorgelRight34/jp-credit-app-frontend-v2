@@ -19,28 +19,35 @@ type UserAccessFormProps = DataModuleFormProps<User, UserFormValues> & {
 }
 
 const UserAccessForm = ({ user, ...props }: UserAccessFormProps) => {
-  const { forms, setFormRef, handleSubmit, isDirty, onDirtyChange } =
+  const { forms, isDirty, setFormRef, handleSubmit, onDirtyChange, reset } =
     useMultipleForms(['data', 'permissions', 'roles'])
 
   const form = useUserForm({
-    ...props,
     user,
-    onSuccess: async (data) => {
-      forms.permissions?.setValue('id', data.id)
-      forms.permissions?.submit()
+    onSuccess: async ({ id, username }) => {
+      const { permissions, roles } = forms;
 
-      forms.roles?.setValue('username', data.username)
-      forms.roles?.setValue('userId', data.id)
+      permissions?.setValue('id', id)
 
-      await Promise.all([forms.permissions?.submit(), forms.roles?.submit()])
+      roles?.setValue('userId', id)
+      roles?.setValue('username', username)
+
+      await Promise.all([permissions?.submit(), roles?.submit()])
     },
     onDirtyChange,
+    ...props,
   })
 
   return (
     <FormContainer
       footer={
-        <FormContainerButtons isDirty={isDirty} onSubmit={handleSubmit} />
+        <FormContainerButtons 
+          form={form}
+          toastMessage='Exito'
+          shouldSubmitAll={!!user} 
+          isDirty={isDirty} 
+          onSubmitAll={handleSubmit} 
+          onReset={reset} />
       }
     >
       <Tabs defaultActiveKey="data" navigate={false}>
@@ -48,9 +55,10 @@ const UserAccessForm = ({ user, ...props }: UserAccessFormProps) => {
           <UserDataFormPanel edit={!!user} form={form} />
         </Tab>
         <Tab eventKey="permissions" title="Permisos">
-          <UserPermissionsFormPanel
-            user={user}
-            toastMessage={() => 'Permisos actualizados!'}
+          <UserPermissionsFormPanel 
+            user={user} 
+            ref={setFormRef('permissions')}               
+            onDirtyChange={onDirtyChange}
           />
         </Tab>
         <Tab eventKey="roles" title="Roles">
@@ -58,7 +66,7 @@ const UserAccessForm = ({ user, ...props }: UserAccessFormProps) => {
             <UserRolesFormPanel
               user={user}
               ref={setFormRef('roles')}
-              toastMessage={() => 'Roles actualizados!'}
+              onDirtyChange={onDirtyChange}
             />
           </Suspense>
         </Tab>

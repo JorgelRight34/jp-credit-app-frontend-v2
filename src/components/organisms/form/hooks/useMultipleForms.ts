@@ -24,5 +24,29 @@ export const useMultipleForms = <
         }
     }
 
-    return { forms: formRefs.current, setFormRef, handleSubmit, isDirty, onDirtyChange: setIsDirty }
+    const handleSetIsDirty = (value: boolean) => {
+        console.log(value)
+        for (const name of names) {
+            const form = formRefs.current[name as TNames[number]];
+            // console.log("checking ", name)
+            if (form?.isDirty()) {
+                //  console.log(`${name} is dirty`)
+                setIsDirty(true)
+                return
+            }
+            //  console.log(`${name} is not dirty`)
+        }
+
+        //  console.log("none of the forms are dirty, so i will set is as ", value)
+        setIsDirty(value)
+    }
+
+    const reset = () => {
+        for (const name of names) {
+            const form = formRefs.current[name as TNames[number]];
+            form?.reset()
+        }
+    }
+
+    return { forms: formRefs.current, isDirty, setFormRef, handleSubmit, reset, onDirtyChange: handleSetIsDirty }
 }

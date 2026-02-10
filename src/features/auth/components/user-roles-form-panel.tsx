@@ -22,7 +22,6 @@ const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
       })),
     [data],
   )
-
   const form = useUserRolesForm(props)
 
   return (

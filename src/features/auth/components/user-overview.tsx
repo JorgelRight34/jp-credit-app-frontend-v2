@@ -32,22 +32,20 @@ const UserOverview = ({ user }: UserFormProps) => {
           name="username"
           value={user.username}
         />
-      </FormRow>
-      <FormRow>
         <FormReadOnlyGroup label="Email" name="email" value={user.email} />
       </FormRow>
       <FormRow>
+        <FormReadOnlyGroup
+        label="Habilitado"
+        name="isActive"
+        value={user.isActive ? 'Activo' : 'Deshabilitado'}
+      />
         <FormReadOnlyGroup
           name="lastAccess"
           label="Ultimo acceso"
           value={getDateLabelSinceDate(user.lastLogin)}
         />
       </FormRow>
-      <FormReadOnlyGroup
-        label="Habilitado"
-        name="isActive"
-        value={user.isActive ? 'Activo' : 'Deshabilitado'}
-      />
     </section>
   )
 }

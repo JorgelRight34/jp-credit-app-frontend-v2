@@ -5,7 +5,7 @@
 export { default as ChangePasswordForm } from "./components/change-password-form";
 export { default as LoginForm } from "./components/login-form";
 export { default as PermissionsForm } from "./components/permissions-form";
-export { default as UserForm } from "./components/user-access-form";
+export { default as UserForm } from "./components/create-user-form";
 export { default as RoleFormPage } from "./pages/role-form-page"
 // export { default as UsersSection } from "./components/UsersSection";
 export * from "./services/authService"
@@ -37,7 +37,7 @@ export * from "./models/userQuery";
 // ----------------------
 export { default as LoginPanel } from "./pages/login-panel"
 export { default as AccessControlPage } from "./pages/access-control-page"
-export { default as UserFormPage } from "./pages/user-form-page"
+export { default as UserFormPage } from "./pages/create-user-form-page"
 export { default as UserPage } from './pages/user-page'
 export { default as RolePage } from './pages/role-page'
 

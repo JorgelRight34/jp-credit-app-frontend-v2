@@ -13,8 +13,8 @@ const UserPermissionsFormPanel = ({
   user,
   ...props
 }: UserPermissionsFormPanelProps) => {
-  const permissionsFormInitialValues = useMemo(
-    () => (user ? { claims: user.claims.map(claimPairToString) } : undefined),
+  const permissionsFormInitialValues = useMemo<PermissionsFormProps["initialValues"]>(
+    () => (user ? { claims: user.claims.map(claimPairToString), id: user.id, roles: [] } : undefined),
     [user],
   )
 

@@ -14,7 +14,7 @@ export type PermissionsFormProps = DataModuleFormProps<
 export type PermissionsFormRef = FormRef<PermissionsFormValues>
 
 const PermissionsForm = ({ ref, ...props }: PermissionsFormProps) => {
-  const { form, claimListOptions } = usePermissionsForm({ ...props })
+  const { form, claimListOptions } = usePermissionsForm(props)
 
   return (
     <Form ref={ref} form={form}>
