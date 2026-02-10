@@ -1,7 +1,6 @@
 import type { useProfileForm } from '../hooks/useProfileForm'
 import {
   CitizenIdInput,
-  CivilStatusSelect,
   DateInput,
   EmailInput,
   Form,
@@ -22,20 +21,16 @@ const ProfileDataForm = ({ form }: ProfileDataFormProps) => {
       <FormRow>
         <FormGroup label="Nombres" name="firstName" input={Input} />
         <FormGroup label="Apellidos" name="lastName" input={Input} />
-        <FormGroup label="Email" name="email" input={EmailInput} optional />
       </FormRow>
       <FormRow>
         <FormGroup label="Género" name="gender" input={GenderSelect} />
         <FormGroup label="Nacimiento" name="dateOfBirth" input={DateInput} />
-        <FormGroup
-          name="maritalStatus"
-          label="Estado civil"
-          input={CivilStatusSelect}
-          optional
-        />
       </FormRow>
       <FormRow>
         <FormGroup label="Cédula" name="dni" input={CitizenIdInput} />
+        <FormGroup label="Email" name="email" input={EmailInput} optional />
+      </FormRow>
+      <FormRow>
         <FormGroup
           label="Teléfono casa"
           name="landline"
@@ -43,7 +38,7 @@ const ProfileDataForm = ({ form }: ProfileDataFormProps) => {
           optional
         />
         <FormGroup
-          label="Célular"
+          label="Teléfono célular"
           name="phoneNumber"
           input={PhoneInput}
           optional

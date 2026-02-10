@@ -1,21 +1,21 @@
 import { useActiveTabRoute } from '../contexts/tabs-router-context'
-import type { BreadcrumbSpec, RouteBreadcrumbMap } from '@/components/molecules'
+import type { BreadcrumbSpec, BreadcrumbsByRoute } from '@/components/molecules'
 import EntityLayoutBreadcrumb from '@/components/molecules/layouts/components/page-layout-breadcrumb'
 
 export interface TabsRouterBreadcrumbProps {
-  tabBreadcrumbMap: RouteBreadcrumbMap
+  breadcrumbsByRoute: BreadcrumbsByRoute
   baseBreadcrumbs: Array<BreadcrumbSpec>
 }
 
 const TabsRouterBreadcrumb = ({
-  tabBreadcrumbMap,
+  breadcrumbsByRoute,
   baseBreadcrumbs,
 }: TabsRouterBreadcrumbProps) => {
   const activeRoute = useActiveTabRoute()
 
   return (
     <EntityLayoutBreadcrumb
-      breadcrumbs={baseBreadcrumbs.concat(tabBreadcrumbMap[activeRoute])}
+      breadcrumbs={baseBreadcrumbs.concat(breadcrumbsByRoute[activeRoute])}
     />
   )
 }

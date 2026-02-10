@@ -1,32 +1,25 @@
-import { useMemo } from "react";
 import { userRolesFormSchema } from "../lib/schemas/userRolesFormSchema";
 import { updateUserRoles } from "../services/userClient";
-import { rolesQueryKey } from "../lib/constants";
-import { getRoles } from "../services/authService";
-import { getRoleString } from "../lib/utils";
-import { createUserQueryKey } from "../lib/query-keys";
-import type { TransferItem, UseDataFormProps } from "@/components";
+import { usersQueryKey } from "../lib/constants";
+import type { User } from "../models/user";
+import type { UseDataFormProps } from "@/components";
 import type { UserRolesFormValues } from "../lib/schemas/userRolesFormSchema";
-import type { Role } from "../models/role";
 import { useForm } from "@/components";
-import { useSuspenseData } from "@/hooks/useData";
 
 type UseUserRolesFormProps = UseDataFormProps<null, UserRolesFormValues> & {
-    userId: number;
-    username: string;
-    userRoles: Array<Role>
-}
+    user?: User
+};
 
-export const useUserRolesForm = ({ userId, username, userRoles, ...props }: UseUserRolesFormProps) => {
-    const { data } = useSuspenseData({
-        key: [rolesQueryKey, "form-list-options"],
-        loader: () => getRoles({ all: true })
-    });
-
-    const form = useForm<any, UserRolesFormValues>({
+export const useUserRolesForm = ({ user, initialValues, ...props }: UseUserRolesFormProps) => {
+    return useForm<any, UserRolesFormValues>({
         schema: userRolesFormSchema,
-        defaultValues: { roles: userRoles.map((r) => r.normalizedName) },
-        onSubmit: async ({ roles }) => {
+        defaultValues: user ? {
+            userId: user.id,
+            roles: user.roles.map(r => r.normalizedName),
+            userRoles: user.roles,
+            username: user.username
+        } : { roles: [], userRoles: [] },
+        onSubmit: async ({ roles, userRoles, userId }) => {
             const add = roles.filter(r => !userRoles.some(ur => ur.normalizedName === r))
             const remove = userRoles.filter(ur => !roles.includes(ur.normalizedName)).map(r => r.normalizedName)
 
@@ -34,13 +27,7 @@ export const useUserRolesForm = ({ userId, username, userRoles, ...props }: UseU
             return null;
         },
         resetValues: false,
-        keysToInvalidate: [createUserQueryKey(username)],
+        keysToInvalidate: [[usersQueryKey]],
         ...props
     })
-
-    const rolesListClaims = useMemo<Array<TransferItem>>(() => (
-        data.items.map(item => ({ id: item.normalizedName, label: getRoleString(item) }))
-    ), [data])
-
-    return { form, rolesListClaims }
 }

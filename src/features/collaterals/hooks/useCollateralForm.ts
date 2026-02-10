@@ -21,6 +21,7 @@ export const useCollateralForm = ({ collateral, initialValues, ...config }: UseC
             type: collateral.type,
             location: collateral.location,
             expirationDate: collateral.expirationDate,
+            loanId: collateral.loanId
         } : {
             title: "",
             description: "",

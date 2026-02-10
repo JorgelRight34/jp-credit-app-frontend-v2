@@ -1,0 +1,21 @@
+import { createFileRoute } from '@tanstack/react-router'
+import { getCollateralFn } from '..'
+import { createCollateralKey } from '@/features/collaterals/lib/query-keys'
+import { useSuspenseData } from '@/hooks/useData'
+import { CollateralFormPage } from '@/features/collaterals'
+
+export const Route = createFileRoute('/(main)/(modules)/collaterals/$id/edit/')(
+  {
+    component: RouteComponent,
+  },
+)
+
+function RouteComponent() {
+  const { id } = Route.useParams()
+  const { data: collateral } = useSuspenseData({
+    key: createCollateralKey(+id),
+    loader: () => getCollateralFn(+id),
+  })
+
+  return <CollateralFormPage collateral={collateral} />
+}

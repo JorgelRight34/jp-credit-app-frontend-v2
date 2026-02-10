@@ -1,9 +1,8 @@
 import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
 import { collateralsBreadcrumb } from '../lib/config/breadcrumbs'
 import CollateralsDataTable from '../components/collaterals-datatable'
-import { CollateralStatusMap } from '../models/collateralStatus'
 import { CollateralTypeMap } from '../models/collateralType'
-import type { RouteBreadcrumbMap } from '@/components'
+import type { BreadcrumbsByRoute } from '@/components'
 import {
   AllIcon,
   ApartmentIcon,
@@ -16,7 +15,7 @@ import {
   getPageLayoutOptions,
 } from '@/components'
 
-const tabBreadcrumbMap: RouteBreadcrumbMap = {
+const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: { title: 'Todos', icon: () => <AllIcon /> },
   inventory: { title: 'Inventario', icon: () => <InventoryIcon /> },
   vehicles: { title: 'Vehículos', icon: () => <DirectionsCarIcon /> },
@@ -33,7 +32,7 @@ const CollateralsPage = () => {
       routerConfig={{
         defaultActive: 'all',
         baseBreadcrumbs: [collateralsBreadcrumb],
-        tabBreadcrumbMap,
+        breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
@@ -60,7 +59,7 @@ const CollateralsPage = () => {
         </Tab>
         <Tab eventKey="inventory" title="Inventario">
           <CollateralsDataTable
-            initialQuery={{ status: CollateralStatusMap.USED_FOR_SETTLEMENT }}
+            initialQuery={{ isActive: false }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </Tab>

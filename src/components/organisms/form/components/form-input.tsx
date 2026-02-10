@@ -8,7 +8,11 @@ export interface FormInputProps<T extends FieldValues> extends Omit<
   'name'
 > {
   name: keyof T
-  as: (props: { value: any; onChange: (e: unknown) => unknown }) => ReactNode
+  as: (props: {
+    value: any
+    readOnly?: boolean
+    onChange: (e: unknown) => unknown
+  }) => ReactNode
 }
 
 const FormInput = <T extends FieldValues>({

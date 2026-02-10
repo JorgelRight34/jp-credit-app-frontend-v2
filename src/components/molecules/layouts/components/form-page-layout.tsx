@@ -3,10 +3,8 @@ import type { BreadcrumbSpec } from '../../breadcrumb'
 import type { PageLayoutProps } from './page-layout'
 import type { CacheKey } from '@/models'
 import type { FormPageMode } from '../models/formPageMode'
-import type {
-  ConfirmationModalProps,
-  PermissionsProvider,
-} from '@/components/organisms'
+import type { PermissionsProvider } from '@/components/organisms'
+import type { ConfirmationModalProps } from '@/components/organisms/modal/components/confirmation-modal'
 import { ProtectedComponent } from '@/components/organisms'
 
 export type FormPageLayoutProps = React.PropsWithChildren &

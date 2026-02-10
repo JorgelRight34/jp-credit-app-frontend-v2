@@ -1,6 +1,6 @@
 import type { ElementType } from "react";
 import type { IconName } from "@/components/atoms/icon/iconName";
-import type { Route } from "@/components/atoms";
+import type { Route, RouteParams } from "@/components/atoms";
 
 export interface LayoutOption {
     title?: string;
@@ -12,5 +12,6 @@ export interface LayoutOption {
     icon?: IconName;
     onClick?: () => void;
     to?: Route;
+    params?: RouteParams;
     component: ElementType;
 } 

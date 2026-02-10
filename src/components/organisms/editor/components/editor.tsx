@@ -10,6 +10,7 @@ type EditorProps = Partial<UseEditorOptions> &
   React.PropsWithChildren & {
     className?: string
     placeholder?: string
+    readOnly?: boolean
   }
 
 const Editor = ({
@@ -17,6 +18,7 @@ const Editor = ({
   className,
   content,
   placeholder,
+  readOnly,
   children,
   onUpdate,
 }: EditorProps) => {
@@ -28,6 +30,7 @@ const Editor = ({
       }),
       ...extensions,
     ],
+    editable: readOnly === true ? false : true,
     content,
     editorProps: {
       attributes: {
@@ -46,11 +49,14 @@ const Editor = ({
   }, [content])
 
   return (
-    <div className={clsx('flex h-full flex-col bg-white', className)}>
+    <div
+      className={clsx('flex h-full flex-col bg-white rounded-xl', className)}
+    >
       <EditorToolBar
         className="flex-shrink-0 rounded-t-xl border"
         editor={editor}
       />
+
       <EditorContent
         editor={editor}
         className="flex-1 border [&_ProseMirror]:overflow-y-auto"

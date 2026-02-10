@@ -30,7 +30,6 @@ import {
   PlayCircleIcon,
   PublicIcon,
   QueryStatsIcon,
-  ReceiptLongIcon,
   SettingsIcon,
   StickyNote2Icon,
   TrendingUpIcon,

@@ -17,7 +17,7 @@ type PageRouterLayoutProps = Omit<PageLayoutProps, 'breadcrumb'> & {
 }
 
 const PageRouterLayout = ({
-  routerConfig: { defaultActive, tabBreadcrumbMap, baseBreadcrumbs },
+  routerConfig: { defaultActive, breadcrumbsByRoute, baseBreadcrumbs },
   children,
   ...props
 }: PageRouterLayoutProps) => {
@@ -27,7 +27,7 @@ const PageRouterLayout = ({
         {...props}
         breadcrumb={
           <TabsRouterBreadcrumb
-            tabBreadcrumbMap={tabBreadcrumbMap}
+            breadcrumbsByRoute={breadcrumbsByRoute}
             baseBreadcrumbs={baseBreadcrumbs}
           />
         }

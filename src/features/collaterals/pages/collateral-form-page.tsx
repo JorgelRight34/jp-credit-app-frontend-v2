@@ -1,16 +1,29 @@
 import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
-import { collateralsBreadcrumb } from '../lib/config/breadcrumbs'
+import {
+  collateralsBreadcrumb,
+  createCollateralBreadcrumb,
+} from '../lib/config/breadcrumbs'
 import CollateralForm from '../components/collateral-form'
+import type { Collateral } from '../models/collateral'
 import { FormPageLayout } from '@/components'
 
-const CollateralFormPage = () => {
+interface CollateralFormPageProps {
+  collateral?: Collateral
+}
+
+const CollateralFormPage = ({ collateral }: CollateralFormPageProps) => {
   return (
     <FormPageLayout
-      title="Crear garantía"
-      breadcrumbs={[collateralsBreadcrumb]}
+      title={collateral ? collateral.title : 'garantía'}
+      mode={collateral ? 'edit' : 'create'}
+      breadcrumbs={
+        collateral
+          ? [collateralsBreadcrumb, createCollateralBreadcrumb(collateral)]
+          : [collateralsBreadcrumb]
+      }
       permissionProvider={collateralsPermissionProvider}
     >
-      <CollateralForm />
+      <CollateralForm collateral={collateral} />
     </FormPageLayout>
   )
 }

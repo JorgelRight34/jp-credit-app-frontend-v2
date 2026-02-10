@@ -14,14 +14,14 @@ const FormWatchInput = <T extends FieldValues>({
   onWacthedValuesChange,
   ...props
 }: FormWatchInputProps<T>) => {
-  const { control, getValues, setValue } = useFormContext<T>()
+  const { control, formState, getValues, setValue } = useFormContext<T>()
   const watch = useWatch({
     name: watchedValues,
     control,
   })
 
   useEffect(() => {
-    onWacthedValuesChange(getValues(), setValue)
+    if (formState.isDirty) onWacthedValuesChange(getValues(), setValue)
   }, [watch])
 
   return <FormInput {...props} />

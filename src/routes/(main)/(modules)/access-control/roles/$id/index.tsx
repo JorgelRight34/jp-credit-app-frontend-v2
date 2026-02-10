@@ -5,7 +5,7 @@ import { getRoleFromServer } from '@/features/auth/server/authServerService'
 import { getRole } from '@/features/auth/services/authService'
 import { useSuspenseData } from '@/hooks/useData'
 
-const getRoleFn = createIsomorphicFn()
+export const getRoleFn = createIsomorphicFn()
   .server((id: number) => getRoleFromServer(id))
   .client((id: number) => getRole(id))
 
@@ -17,7 +17,6 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { id } = Route.useParams()
-
   const { data: role } = useSuspenseData({
     key: createRoleQueryKey(id),
     loader: () => getRoleFn(+id),

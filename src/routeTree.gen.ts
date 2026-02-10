@@ -20,10 +20,14 @@ import { Route as mainmodulesProfilesCreateIndexRouteImport } from './routes/(ma
 import { Route as mainmodulesProfilesIdIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/index'
 import { Route as mainmodulesCollateralsCreateIndexRouteImport } from './routes/(main)/(modules)/collaterals/create/index'
 import { Route as mainmodulesCollateralsIdIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/index'
+import { Route as mainmodulesProfilesIdEditIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/edit/index'
+import { Route as mainmodulesCollateralsIdEditIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/edit/index'
 import { Route as mainmodulesAccessControlUsersCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/users/create/index'
 import { Route as mainmodulesAccessControlUsersUsernameIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/index'
 import { Route as mainmodulesAccessControlRolesCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/create/index'
 import { Route as mainmodulesAccessControlRolesIdIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/index'
+import { Route as mainmodulesAccessControlUsersUsernameEditIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/edit/index'
+import { Route as mainmodulesAccessControlRolesIdEditIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/edit/index'
 
 const mainRouteRoute = mainRouteRouteImport.update({
   id: '/(main)',
@@ -85,6 +89,18 @@ const mainmodulesCollateralsIdIndexRoute =
     path: '/collaterals/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesProfilesIdEditIndexRoute =
+  mainmodulesProfilesIdEditIndexRouteImport.update({
+    id: '/profiles/$id/edit/',
+    path: '/profiles/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsIdEditIndexRoute =
+  mainmodulesCollateralsIdEditIndexRouteImport.update({
+    id: '/collaterals/$id/edit/',
+    path: '/collaterals/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesAccessControlUsersCreateIndexRoute =
   mainmodulesAccessControlUsersCreateIndexRouteImport.update({
     id: '/access-control/users/create/',
@@ -109,6 +125,18 @@ const mainmodulesAccessControlRolesIdIndexRoute =
     path: '/access-control/roles/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesAccessControlUsersUsernameEditIndexRoute =
+  mainmodulesAccessControlUsersUsernameEditIndexRouteImport.update({
+    id: '/access-control/users/$username/edit/',
+    path: '/access-control/users/$username/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesAccessControlRolesIdEditIndexRoute =
+  mainmodulesAccessControlRolesIdEditIndexRouteImport.update({
+    id: '/access-control/roles/$id/edit/',
+    path: '/access-control/roles/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof mainIndexRoute
@@ -124,6 +152,10 @@ export interface FileRoutesByFullPath {
   '/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/access-control/users/create/': typeof mainmodulesAccessControlUsersCreateIndexRoute
+  '/collaterals/$id/edit/': typeof mainmodulesCollateralsIdEditIndexRoute
+  '/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
+  '/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
+  '/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof mainIndexRoute
@@ -139,6 +171,10 @@ export interface FileRoutesByTo {
   '/access-control/roles/create': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/access-control/users/create': typeof mainmodulesAccessControlUsersCreateIndexRoute
+  '/collaterals/$id/edit': typeof mainmodulesCollateralsIdEditIndexRoute
+  '/profiles/$id/edit': typeof mainmodulesProfilesIdEditIndexRoute
+  '/access-control/roles/$id/edit': typeof mainmodulesAccessControlRolesIdEditIndexRoute
+  '/access-control/users/$username/edit': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -157,6 +193,10 @@ export interface FileRoutesById {
   '/(main)/(modules)/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/(main)/(modules)/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/(main)/(modules)/access-control/users/create/': typeof mainmodulesAccessControlUsersCreateIndexRoute
+  '/(main)/(modules)/collaterals/$id/edit/': typeof mainmodulesCollateralsIdEditIndexRoute
+  '/(main)/(modules)/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
+  '/(main)/(modules)/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
+  '/(main)/(modules)/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -174,6 +214,10 @@ export interface FileRouteTypes {
     | '/access-control/roles/create/'
     | '/access-control/users/$username/'
     | '/access-control/users/create/'
+    | '/collaterals/$id/edit/'
+    | '/profiles/$id/edit/'
+    | '/access-control/roles/$id/edit/'
+    | '/access-control/users/$username/edit/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -189,6 +233,10 @@ export interface FileRouteTypes {
     | '/access-control/roles/create'
     | '/access-control/users/$username'
     | '/access-control/users/create'
+    | '/collaterals/$id/edit'
+    | '/profiles/$id/edit'
+    | '/access-control/roles/$id/edit'
+    | '/access-control/users/$username/edit'
   id:
     | '__root__'
     | '/(main)'
@@ -206,6 +254,10 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/access-control/roles/create/'
     | '/(main)/(modules)/access-control/users/$username/'
     | '/(main)/(modules)/access-control/users/create/'
+    | '/(main)/(modules)/collaterals/$id/edit/'
+    | '/(main)/(modules)/profiles/$id/edit/'
+    | '/(main)/(modules)/access-control/roles/$id/edit/'
+    | '/(main)/(modules)/access-control/users/$username/edit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -292,6 +344,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesCollateralsIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/profiles/$id/edit/': {
+      id: '/(main)/(modules)/profiles/$id/edit/'
+      path: '/profiles/$id/edit'
+      fullPath: '/profiles/$id/edit/'
+      preLoaderRoute: typeof mainmodulesProfilesIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/$id/edit/': {
+      id: '/(main)/(modules)/collaterals/$id/edit/'
+      path: '/collaterals/$id/edit'
+      fullPath: '/collaterals/$id/edit/'
+      preLoaderRoute: typeof mainmodulesCollateralsIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/access-control/users/create/': {
       id: '/(main)/(modules)/access-control/users/create/'
       path: '/access-control/users/create'
@@ -320,6 +386,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesAccessControlRolesIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/access-control/users/$username/edit/': {
+      id: '/(main)/(modules)/access-control/users/$username/edit/'
+      path: '/access-control/users/$username/edit'
+      fullPath: '/access-control/users/$username/edit/'
+      preLoaderRoute: typeof mainmodulesAccessControlUsersUsernameEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/access-control/roles/$id/edit/': {
+      id: '/(main)/(modules)/access-control/roles/$id/edit/'
+      path: '/access-control/roles/$id/edit'
+      fullPath: '/access-control/roles/$id/edit/'
+      preLoaderRoute: typeof mainmodulesAccessControlRolesIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
   }
 }
 
@@ -335,6 +415,10 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesAccessControlRolesCreateIndexRoute: typeof mainmodulesAccessControlRolesCreateIndexRoute
   mainmodulesAccessControlUsersUsernameIndexRoute: typeof mainmodulesAccessControlUsersUsernameIndexRoute
   mainmodulesAccessControlUsersCreateIndexRoute: typeof mainmodulesAccessControlUsersCreateIndexRoute
+  mainmodulesCollateralsIdEditIndexRoute: typeof mainmodulesCollateralsIdEditIndexRoute
+  mainmodulesProfilesIdEditIndexRoute: typeof mainmodulesProfilesIdEditIndexRoute
+  mainmodulesAccessControlRolesIdEditIndexRoute: typeof mainmodulesAccessControlRolesIdEditIndexRoute
+  mainmodulesAccessControlUsersUsernameEditIndexRoute: typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
 }
 
 const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
@@ -354,6 +438,13 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
     mainmodulesAccessControlUsersUsernameIndexRoute,
   mainmodulesAccessControlUsersCreateIndexRoute:
     mainmodulesAccessControlUsersCreateIndexRoute,
+  mainmodulesCollateralsIdEditIndexRoute:
+    mainmodulesCollateralsIdEditIndexRoute,
+  mainmodulesProfilesIdEditIndexRoute: mainmodulesProfilesIdEditIndexRoute,
+  mainmodulesAccessControlRolesIdEditIndexRoute:
+    mainmodulesAccessControlRolesIdEditIndexRoute,
+  mainmodulesAccessControlUsersUsernameEditIndexRoute:
+    mainmodulesAccessControlUsersUsernameEditIndexRoute,
 }
 
 const mainmodulesRouteRouteWithChildren =

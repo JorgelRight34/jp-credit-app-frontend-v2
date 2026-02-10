@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { permissionsFormSchema } from "../lib/schemas/permissionsFormSchema";
-import { getClaimPairsFromStringArray } from "../lib/utils";
-import { getAllPossibleClaims } from "../services/authService";
+import { getClaimPairsFromStringArray, mapIdentityClaimsToTransferItems } from "../lib/utils";
+import { allPossibleClaimsQueryOptions } from "../lib/query-keys";
 import type { ClaimPair } from "../models/claimPair";
 import type { TransferItem, UseDataFormProps } from "@/components";
 import type { PermissionsFormValues } from "../lib/schemas/permissionsFormSchema";
@@ -18,10 +18,7 @@ export type UsePermissionsFormProps = UseDataFormProps<
 }
 
 export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePermissionsFormProps) => {
-  const { data: identityClaims } = useSuspenseData({
-    key: ['identity-claims'],
-    loader: getAllPossibleClaims,
-  })
+  const { data: identityClaims } = useSuspenseData(allPossibleClaimsQueryOptions)
 
   const form = useForm<any, PermissionsFormValues>({
     schema: permissionsFormSchema,
@@ -41,19 +38,14 @@ export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePer
         remove: removedClaims ? getClaimPairsFromStringArray(removedClaims) : []
       })
 
-      return null;
+      return;
     },
     defaultValues: { claims: [], roles: [], ...initialValues },
     ...config
   })
 
   const claimListOptions = useMemo<Array<TransferItem>>(() => {
-    return Object.entries(identityClaims.claims).flatMap(([type, values]) =>
-      values.map(({ value, description }) => ({
-        label: `${type} | ${value} | ${description}`,
-        id: value,
-      })),
-    )
+    return mapIdentityClaimsToTransferItems(identityClaims.claims)
   }, [identityClaims.claims])
 
   return { form, claimListOptions }

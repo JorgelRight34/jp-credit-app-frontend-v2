@@ -1,12 +1,18 @@
 import clsx from 'clsx'
 import { Activity, useState } from 'react'
-import { Form, FormGroup, FormInput, useForm } from '../../form'
+import { Form, FormInput, useForm } from '../../form'
 import { WIDTH_CLASS_MAP } from '../lib/constants'
 import type { PropsWithChildren } from 'react'
 import type { SchemaType } from '../../form'
 import type { SearchFormOption } from '../models/searchFormOption'
 import type { Query } from '../models/query'
-import { AccentBtn, LightBtn, MenuIcon, SearchIcon } from '@/components/atoms'
+import {
+  AccentBtn,
+  FormLabel,
+  LightBtn,
+  MenuIcon,
+  SearchIcon,
+} from '@/components/atoms'
 
 interface SearchFormProps<T extends Query> {
   options: Array<SearchFormOption<T>>
@@ -78,16 +84,10 @@ const SearchForm = <T extends Query>({
             <div className="rounded-xl mt-3 flex w-full flex-wrap  space-y-3 shadow-sm border bg-white p-3">
               {hasOpenedAdvanced &&
                 advanced.map((option) => (
-                  <SearchFormGroupContainer
-                    width={option.width}
+                  <AdvancedSearchFormGroup
+                    option={option}
                     key={option.name.toString()}
-                  >
-                    <FormGroup
-                      label={option.label}
-                      name={option.name as string}
-                      input={option.type}
-                    />
-                  </SearchFormGroupContainer>
+                  />
                 ))}
             </div>
           </Activity>
@@ -102,6 +102,23 @@ const SearchFormGroupContainer = ({
   children,
 }: { width: number } & PropsWithChildren) => {
   return <div className={clsx('px-1', WIDTH_CLASS_MAP[width])}>{children}</div>
+}
+
+const AdvancedSearchFormGroup = <T,>({
+  option,
+}: {
+  option: SearchFormOption<T>
+}) => {
+  return (
+    <SearchFormGroupContainer width={option.width}>
+      <div className="flex flex-1 items-start flex-col gap-2">
+        <FormLabel htmlFor={option.name as string}>
+          {option.label} <span className="text-accent">&nbsp;*&nbsp;</span>
+        </FormLabel>
+        <FormInput name={option.name as string} as={option.type} />
+      </div>
+    </SearchFormGroupContainer>
+  )
 }
 
 export default SearchForm

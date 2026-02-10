@@ -1,3 +1,4 @@
+import type { Role } from "./role";
 import type { FileModel } from "@/models/fileModel";
 import type { ClaimPair } from "./claimPair";
 
@@ -11,7 +12,7 @@ export interface User {
   photo?: FileModel;
   createdAt: string;
   claims: Array<ClaimPair>;
-  roles: Array<string>;
+  roles: Array<Role>;
   lastLogin: string;
   isActive: boolean;
 }

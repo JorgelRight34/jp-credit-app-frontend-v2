@@ -25,6 +25,7 @@ const SelectInput = ({
   allowNoOption = true,
   value = '',
   icon,
+  readOnly,
   ...props
 }: SelectInputProps) => {
   return (
@@ -40,6 +41,8 @@ const SelectInput = ({
         value={value}
         onChange={(e) => props.onChange?.(e.target.value as string)}
         sx={{ width: 'auto', minWidth: 'fit-content', ...SX_CONFIG }}
+        IconComponent={readOnly ? () => null : undefined}
+        readOnly={readOnly}
         {...getIconInputSlot(icon)}
       >
         {allowNoOption && <MenuItem value="">---</MenuItem>}

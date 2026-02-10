@@ -1,16 +1,26 @@
 import { profilesPermissionProvider } from '../lib/config/permissionProvider'
-import { profilesBreadcrumb } from '../lib/config/breadcrumb'
+import {
+  createProfileBreadcrumb,
+  profilesBreadcrumb,
+} from '../lib/config/breadcrumb'
 import ProfileForm from '../components/profile-form'
+import type { Profile } from '../models/profile'
 import { FormPageLayout } from '@/components'
+import { getFullName } from '@/lib/utils'
 
-const ProfileFormPage = () => {
+const ProfileFormPage = ({ profile }: { profile?: Profile }) => {
   return (
     <FormPageLayout
-      title="Crear pérfil"
-      breadcrumbs={[profilesBreadcrumb]}
+      title={profile ? getFullName(profile) : 'pérfil'}
+      mode={profile ? 'edit' : 'create'}
+      breadcrumbs={
+        profile
+          ? [profilesBreadcrumb, createProfileBreadcrumb(profile)]
+          : [profilesBreadcrumb]
+      }
       permissionProvider={profilesPermissionProvider}
     >
-      <ProfileForm />
+      <ProfileForm profile={profile} />
     </FormPageLayout>
   )
 }

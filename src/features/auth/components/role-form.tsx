@@ -18,7 +18,7 @@ interface RoleFormProps extends DataModuleFormProps<
   Role,
   RoleFormSchemaValues
 > {
-  role: Role
+  role?: Role
 }
 
 const RoleForm = (props: RoleFormProps) => {

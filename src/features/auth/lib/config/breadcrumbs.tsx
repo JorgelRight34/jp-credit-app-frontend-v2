@@ -1,5 +1,12 @@
+import type { Role } from '../../models/role'
+import type { User } from '../../models/user'
 import type { BreadcrumbSpec } from '@/components'
-import { AdminPanelSettingsIcon, LockIcon, PersonIcon } from '@/components'
+import {
+  AdminPanelSettingsIcon,
+  BadgeIcon,
+  LockIcon,
+  PersonIcon,
+} from '@/components'
 
 export const accessControlBreadcrumb: BreadcrumbSpec = {
   icon: () => <LockIcon />,
@@ -20,3 +27,17 @@ export const usersModuleBreadcrumb: BreadcrumbSpec = {
   pathname: '/access-control',
   search: { tab: 'users' },
 }
+
+export const createUserBreadcrumb = (user: User): BreadcrumbSpec => ({
+  icon: PersonIcon,
+  title: user.username,
+  pathname: '/access-control/users/$username',
+  params: { username: user.username },
+})
+
+export const createRoleBreadcrumb = (role: Role): BreadcrumbSpec => ({
+  title: role.name,
+  icon: BadgeIcon,
+  pathname: '/access-control/roles/$id',
+  params: { id: role.id.toString() },
+})

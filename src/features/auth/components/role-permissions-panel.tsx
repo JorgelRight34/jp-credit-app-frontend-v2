@@ -7,7 +7,7 @@ import type { PermissionsFormProps } from './permissions-form'
 import type { IdentityPermissions } from '../models/identityPermissions'
 import { FormContainer, FormContainerButtons } from '@/components'
 
-interface RoleEditFormPermissionsProps extends Omit<
+interface RolePermissionsPanelProps extends Omit<
   PermissionsFormProps,
   'handler'
 > {
@@ -15,11 +15,11 @@ interface RoleEditFormPermissionsProps extends Omit<
   rolePermissions: IdentityPermissions
 }
 
-const RoleEditFormPermissions = ({
+const RolePermissionsPanel = ({
   roleId,
   rolePermissions,
   ...props
-}: RoleEditFormPermissionsProps) => {
+}: RolePermissionsPanelProps) => {
   const [isDirty, setIsDirty] = useState(false)
 
   return (
@@ -38,4 +38,4 @@ const RoleEditFormPermissions = ({
   )
 }
 
-export default RoleEditFormPermissions
+export default RolePermissionsPanel

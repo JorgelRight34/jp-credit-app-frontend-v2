@@ -13,6 +13,7 @@ export { default as FormGroupHorizontal } from './components/form-group-horizont
 export { default as FormCheckboxGroup } from "./components/form-checkbox-group"
 export { default as FormContainerButtons } from "./components/form-container-buttons"
 export { default as FormSelectGroup } from "./components/form-select-group"
+export { default as FormReadOnlyGroup } from './components/form-detail-group'
 
 export * from "./hooks/useForm"
 export * from "./models/apiError"

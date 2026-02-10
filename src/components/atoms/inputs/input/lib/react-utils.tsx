@@ -31,6 +31,6 @@ export const getIconInputSlot = ({
           <Icon icon={icon} />
         </IconButton>
       </InputAdornment>
-    ) : undefined,
+    ) : null,
   }
 }

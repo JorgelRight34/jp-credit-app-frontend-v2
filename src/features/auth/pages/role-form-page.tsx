@@ -1,19 +1,30 @@
 import RoleForm from '../components/role-form'
 import {
   accessControlBreadcrumb,
+  createRoleBreadcrumb,
   rolesModuleBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import { rolesPermissionProvider } from '../lib/config/permissionProvider'
+import type { Role } from '../models/role'
 import { FormPageLayout } from '@/components'
 
-const RoleFormPage = () => {
+const RoleFormPage = ({ role }: { role?: Role }) => {
   return (
     <FormPageLayout
-      title="Crear grupo"
+      title={role ? role.name : 'grupo'}
+      mode={role ? 'edit' : 'create'}
       permissionProvider={rolesPermissionProvider}
-      breadcrumbs={[accessControlBreadcrumb, rolesModuleBreadcrumb]}
+      breadcrumbs={
+        role
+          ? [
+              accessControlBreadcrumb,
+              rolesModuleBreadcrumb,
+              createRoleBreadcrumb(role),
+            ]
+          : [accessControlBreadcrumb, rolesModuleBreadcrumb]
+      }
     >
-      <RoleForm />
+      <RoleForm role={role} />
     </FormPageLayout>
   )
 }

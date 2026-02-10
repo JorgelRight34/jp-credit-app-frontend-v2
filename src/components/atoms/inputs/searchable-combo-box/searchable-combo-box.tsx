@@ -36,17 +36,12 @@ const SearchableComboBox = <T, TValue>({
   onChange,
   accesorFn,
   visibleValueFn,
+  icon,
   ...props
 }: SearchableComboBoxProps<T, TValue>) => {
   return (
     <>
-      <input
-        type="hidden"
-        value={value ?? ''}
-        {...props}
-        className="hidden"
-        readOnly
-      />
+      <input type="hidden" value={value ?? ''} className="hidden" readOnly />
       <DisplayInput
         accesorFn={accesorFn}
         cacheKey={cacheKey}
@@ -61,6 +56,8 @@ const SearchableComboBox = <T, TValue>({
         visibleValueFn={visibleValueFn}
         render={render}
         loader={loader}
+        icon={icon}
+        {...props}
       />
     </>
   )
@@ -80,6 +77,7 @@ const DisplayInput = <T, TValue>({
   visibleValueFn,
   render,
   loader,
+  ...props
 }: SearchableComboBoxProps<T, TValue>) => {
   const [selected, setSelected] = useState<T>()
   const modalTriggerRef = useRef<ModalTriggerRef>(null)
@@ -118,6 +116,7 @@ const DisplayInput = <T, TValue>({
             label={label}
             error={error}
             readOnly={true}
+            {...props}
           />
         }
       >

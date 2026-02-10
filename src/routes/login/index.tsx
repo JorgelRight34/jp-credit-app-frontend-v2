@@ -7,6 +7,7 @@ import { withErrorHandler } from '@/lib/utils/server-utils'
 
 export const Route = createFileRoute('/login/')({
   component: RouteComponent,
+  head: () => ({ meta: [{ title: 'Iniciar sesión' }] }),
   server: {
     handlers: {
       POST: async ({ request }) => {

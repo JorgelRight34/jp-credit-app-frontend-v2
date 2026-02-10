@@ -7,4 +7,5 @@ export type CollateralQuery = Query & {
     type?: CollateralType
     minValue?: number;
     maxValue?: number;
+    isActive?: boolean;
 }

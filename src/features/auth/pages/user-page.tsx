@@ -1,26 +1,25 @@
-import { Suspense } from 'react'
 import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import {
   accessControlBreadcrumb,
+  createUserBreadcrumb,
   usersModuleBreadcrumb,
 } from '../lib/config/breadcrumbs'
-import UserEditForm from '../components/user-edit-form'
-import UserEditFormPermissions from '../components/user-edit-form-permissions'
-import UserRolesForm from '../components/user-roles-form'
+import UserOverview from '../components/user-overview'
+import { rolesTableColumns } from '../lib/config/roles-datatable-config'
+import { claimsTableColumns } from '../lib/constants'
 import type { User } from '../models/user'
 import type { IdentityPermissions } from '../models/identityPermissions'
-import type { RouteBreadcrumbMap } from '@/components'
-import { getDateLabelSinceDate, getFullName } from '@/lib/utils'
+import type { BreadcrumbsByRoute } from '@/components'
+import { getFullName } from '@/lib/utils'
 import {
-  AccessTimeIcon,
   GroupsIcon,
-  Icon,
   OverviewIcon,
   PageRouterLayout,
   PermissionIcon,
-  PersonIcon,
   Tab,
+  TableBuilder,
   TabsRouter,
+  getPageLayoutOptions,
 } from '@/components'
 
 type UserPageProps = {
@@ -28,7 +27,7 @@ type UserPageProps = {
   userPermissions: IdentityPermissions
 }
 
-const tabBreadcrumbMap: RouteBreadcrumbMap = {
+const breadcrumbsByRoute: BreadcrumbsByRoute = {
   overview: { title: 'Overview', icon: OverviewIcon },
   permissions: { title: 'Permisos', icon: PermissionIcon },
   roles: { title: 'Roles', icon: GroupsIcon },
@@ -39,40 +38,38 @@ const UserPage = ({ user, userPermissions }: UserPageProps) => {
     <PageRouterLayout
       title={`${getFullName(user)} - ${user.username}`}
       permissionProvider={accessControlPermissionProvider}
+      options={getPageLayoutOptions({
+        editPath: '/access-control/users/$username/edit',
+        params: { username: user.username },
+      })}
       routerConfig={{
         defaultActive: 'overview',
         baseBreadcrumbs: [
           accessControlBreadcrumb,
           usersModuleBreadcrumb,
-          {
-            icon: PersonIcon,
-            title: user.username,
-          },
-        ],
-        tabBreadcrumbMap,
+        ].concat(createUserBreadcrumb(user)),
+        breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
         <Tab eventKey="overview" title="Overview">
-          <div className="h-full pb-3">
-            <div className="flex justify-end">
-              <Icon icon={AccessTimeIcon}>
-                Ultimo acceso: {getDateLabelSinceDate(user.lastLogin)}
-              </Icon>
-            </div>
-            <UserEditForm user={user} />
-          </div>
+          <UserOverview user={user} />
         </Tab>
         <Tab eventKey="permissions" title="Permisos">
-          <Suspense fallback="...">
-            <UserEditFormPermissions
-              userId={user.id}
-              claims={userPermissions.claims}
+          <section>
+            <TableBuilder
+              columns={claimsTableColumns}
+              data={userPermissions.claims}
             />
-          </Suspense>
+          </section>
         </Tab>
         <Tab eventKey="roles" title="Roles">
-          <UserRolesForm user={user} userRoles={userPermissions.roles} />
+          <section>
+            <TableBuilder
+              columns={rolesTableColumns}
+              data={userPermissions.roles}
+            />
+          </section>
         </Tab>
       </TabsRouter>
     </PageRouterLayout>

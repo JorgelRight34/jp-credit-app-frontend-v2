@@ -1,5 +1,5 @@
 import type { IconName } from "@/components/atoms/icon/iconName";
-import type { Route, Search } from "@/components/atoms";
+import type { Route, RouteParams, Search } from "@/components/atoms";
 
 export interface BreadcrumbSpec {
     title?: string | number;
@@ -7,6 +7,7 @@ export interface BreadcrumbSpec {
     labelClassName?: string;
     disabled?: boolean;
     pathname?: Route;
+    params?: RouteParams;
     search?: Search;
     icon: IconName;
 }

@@ -22,7 +22,7 @@ const FormPageLayoutContent = ({
       return (
         <CreateFormPageLayoutContent
           permissionProvider={permissionProvider}
-          title={title}
+          title={'Crear ' + title}
           breadcrumbs={breadcrumbs}
         >
           {children}
@@ -90,7 +90,7 @@ const EditFormPageLayoutContent = ({
     <>
       <PageLayout
         {...props}
-        title={title}
+        title={'Editar ' + title}
         isAuthorizedFn={(p) => p.canEdit}
         breadcrumb={
           <PageLayoutBreadcrumb

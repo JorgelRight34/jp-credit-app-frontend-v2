@@ -12,6 +12,11 @@ export const getCollaterals = async (params: CollateralQuery): Promise<PagedResp
     return data;
 }
 
+export const getCollateral = async (id: number): Promise<Collateral> => {
+    const { data } = await api.get(baseUrl + "/" + id);
+    return data;
+}
+
 export const createCollateral = async (body: CollateralFormValues): Promise<Collateral> => {
     const { data } = await api.post(baseUrl, body);
     return data;

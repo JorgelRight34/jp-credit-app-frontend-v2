@@ -17,11 +17,12 @@ import { LoanSearchInput } from '@/features/loans'
 
 interface CollateralDataFormProps {
   form: ReturnType<typeof useCollateralForm>
+  readOnly?: boolean
 }
 
-const CollateralDataForm = ({ form }: CollateralDataFormProps) => {
+const CollateralDataForm = ({ form, readOnly }: CollateralDataFormProps) => {
   return (
-    <Form form={form}>
+    <Form form={form} readOnly={readOnly}>
       <FormRow>
         <FormGroup label="Título" name="title" input={Input} />
       </FormRow>

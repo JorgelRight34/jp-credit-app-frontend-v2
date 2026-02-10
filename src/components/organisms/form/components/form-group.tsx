@@ -1,18 +1,17 @@
-import clsx from 'clsx'
+import { useIsFormReadonly } from '../providers/form-status-provider'
 import FormInput from './form-input'
+import FormGroupLayout from './fom-group-layout'
+import type { FormGroupLayoutProps } from './fom-group-layout'
 import type { FieldValues } from 'react-hook-form'
 import type { FormInputProps } from './form-input'
-import type { HTMLAttributes } from 'react'
-import { FormLabel } from '@/components/atoms'
 
-export type FormGroupProps<T extends FieldValues> =
-  HTMLAttributes<HTMLDivElement> &
-    Omit<FormInputProps<T>, 'as'> & {
-      label: string
-      inputClassName?: string
-      optional?: boolean
-      input: FormInputProps<T>['as']
-    }
+export type FormGroupProps<T extends FieldValues> = FormGroupLayoutProps &
+  Omit<FormInputProps<T>, 'as'> & {
+    label: string
+    inputClassName?: string
+    optional?: boolean
+    input: FormInputProps<T>['as']
+  }
 
 const FormGroup = <T extends FieldValues>({
   name,
@@ -24,20 +23,29 @@ const FormGroup = <T extends FieldValues>({
   input,
   ...props
 }: FormGroupProps<T>) => {
+  const readOnly = useIsFormReadonly()
+
   return (
-    <div className={clsx('flex flex-1 items-start flex-col gap-2', className)}>
-      <FormLabel htmlFor={name as string}>
-        {label} {optional && <span className="text-accent">&nbsp;*&nbsp;</span>}
-      </FormLabel>
+    <FormGroupLayout
+      name={name}
+      className={className}
+      label={
+        <>
+          {label}{' '}
+          {optional && <span className="text-accent">&nbsp;*&nbsp;</span>}{' '}
+        </>
+      }
+    >
       <FormInput
         {...props}
+        readOnly={readOnly}
         required={!optional}
         className={inputClassName}
         type={type}
         name={name}
         as={input}
       />
-    </div>
+    </FormGroupLayout>
   )
 }
 

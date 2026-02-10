@@ -1,87 +1,64 @@
-import { Suspense, useRef, useState } from 'react'
-import { updateUserClaims } from '../services/userClient'
-import { updateUsernameOnForm } from '../lib/form-utils'
+import { Suspense } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
-import PermissionsForm from './permissions-form'
+import UserRolesFormPanel from './user-roles-form-panel'
+import UserDataFormPanel from './user-data-form-panel'
+import UserPermissionsFormPanel from './user-permissions-form-panel'
 import type { User } from '../models/user'
-import type { PermissionsFormValues } from '../lib/schemas/permissionsFormSchema'
-import type { DataModuleFormProps, FormRef } from '@/components'
+import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import {
-  Form,
   FormContainer,
   FormContainerButtons,
-  FormGroup,
-  FormRow,
-  FormWatchGroup,
-  Input,
-  PasswordInput,
   Tab,
   Tabs,
+  useMultipleForms,
 } from '@/components'
 
-type UserAccessFormProps = DataModuleFormProps<User, UserFormValues>
+type UserAccessFormProps = DataModuleFormProps<User, UserFormValues> & {
+  user?: User
+}
 
-const UserAccessForm = (props: UserAccessFormProps) => {
-  const [isDirty, setIsDirty] = useState(false)
-  const permissionFormRef = useRef<FormRef<PermissionsFormValues>>(null)
+const UserAccessForm = ({ user, ...props }: UserAccessFormProps) => {
+  const { forms, setFormRef, handleSubmit, isDirty, onDirtyChange } =
+    useMultipleForms(['data', 'permissions', 'roles'])
 
   const form = useUserForm({
     ...props,
-    onSuccess: (data) => {
-      permissionFormRef.current?.setValue('id', data.id)
-      permissionFormRef.current?.submit()
+    user,
+    onSuccess: async (data) => {
+      forms.permissions?.setValue('id', data.id)
+      forms.permissions?.submit()
+
+      forms.roles?.setValue('username', data.username)
+      forms.roles?.setValue('userId', data.id)
+
+      await Promise.all([forms.permissions?.submit(), forms.roles?.submit()])
     },
-    onDirtyChange: setIsDirty,
+    onDirtyChange,
   })
 
   return (
     <FormContainer
-      footer={<FormContainerButtons isDirty={isDirty} form={form} />}
+      footer={
+        <FormContainerButtons isDirty={isDirty} onSubmit={handleSubmit} />
+      }
     >
       <Tabs defaultActiveKey="data" navigate={false}>
         <Tab eventKey="data" title="Datos">
-          <Form form={form}>
-            <FormRow>
-              <FormGroup label="Nombres" name="firstName" input={Input} />
-              <FormGroup label="Apellidos" name="lastName" input={Input} />
-            </FormRow>
-            <FormRow>
-              <FormWatchGroup
-                watchedValues={['firstName', 'lastName']}
-                onWacthedValuesChange={updateUsernameOnForm}
-                label="Usuario"
-                name="username"
-                input={Input}
-              />
-              <FormGroup
-                label="Email"
-                name="email"
-                type="email"
-                input={Input}
-              />
-            </FormRow>
-            <FormRow>
-              <FormGroup
-                label="Contraseña"
-                autoComplete="new-password"
-                name="password"
-                input={PasswordInput}
-              />
-              <FormGroup
-                label="Confirmación"
-                autoComplete="new-password"
-                name="confirmation"
-                input={PasswordInput}
-              />
-            </FormRow>
-          </Form>
+          <UserDataFormPanel edit={!!user} form={form} />
         </Tab>
         <Tab eventKey="permissions" title="Permisos">
+          <UserPermissionsFormPanel
+            user={user}
+            toastMessage={() => 'Permisos actualizados!'}
+          />
+        </Tab>
+        <Tab eventKey="roles" title="Roles">
           <Suspense fallback="...">
-            <PermissionsForm
-              handler={updateUserClaims}
-              ref={permissionFormRef}
+            <UserRolesFormPanel
+              user={user}
+              ref={setFormRef('roles')}
+              toastMessage={() => 'Roles actualizados!'}
             />
           </Suspense>
         </Tab>

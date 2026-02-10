@@ -24,6 +24,7 @@ const ProfileForm = ({ profile, ...props }: ProfileFormProps) => {
   const form = useProfileForm({
     onDirtyChange: setIsDirty,
     onSuccess: fileAttachmentsForm.submit,
+    profile,
     ...props,
   })
 

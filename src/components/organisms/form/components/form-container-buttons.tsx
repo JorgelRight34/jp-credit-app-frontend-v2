@@ -5,6 +5,7 @@ import { SecondaryBtn } from '@/components/atoms'
 
 type FormContainerButtonsProps<T extends FieldValues> =
   FormSubmitBtnProps<T> & {
+    readOnly?: boolean
     onReset?: () => void
   }
 
@@ -13,10 +14,13 @@ const FormContainerButtons = <T extends FieldValues>({
   isValid,
   form,
   text,
+  readOnly,
   onSubmit,
   onReset,
   icon,
 }: FormContainerButtonsProps<T>) => {
+  if (readOnly) return null
+
   return (
     <div className="flex items-center gap-3">
       <SecondaryBtn

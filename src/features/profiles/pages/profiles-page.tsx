@@ -1,7 +1,7 @@
 import { profilesPermissionProvider } from '../lib/config/permissionProvider'
 import { profilesBreadcrumb } from '../lib/config/breadcrumb'
 import ProfilesDataTable from '../components/profiles-datatable'
-import type { RouteBreadcrumbMap } from '@/components'
+import type { BreadcrumbsByRoute } from '@/components'
 import {
   AllIcon,
   GroupIcon,
@@ -11,7 +11,7 @@ import {
   getPageLayoutOptions,
 } from '@/components'
 
-const tabBreadcrumbMap: RouteBreadcrumbMap = {
+const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: { title: 'Todos', icon: () => <AllIcon /> },
   clients: { title: 'Clientes', icon: () => <GroupIcon /> },
   guarantors: { title: 'Garantes', icon: () => <GroupIcon /> },
@@ -30,7 +30,7 @@ const ProfilesPage = () => {
       routerConfig={{
         baseBreadcrumbs: [profilesBreadcrumb],
         defaultActive: 'all',
-        tabBreadcrumbMap,
+        breadcrumbsByRoute,
       }}
     >
       <TabsRouter>

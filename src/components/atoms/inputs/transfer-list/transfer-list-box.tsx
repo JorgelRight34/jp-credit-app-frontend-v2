@@ -51,6 +51,7 @@ const TransferListBox = ({
             return (
               <FormLabel
                 key={item.id}
+                onClick={() => onToggle(item.id, item)}
                 className={clsx('flex !p-2 items-center hover:bg-stone-100', {
                   'opacity-50 cursor-not-allowed': isDisabled,
                 })}
@@ -58,7 +59,6 @@ const TransferListBox = ({
                 <Checkbox
                   checked={checked.has(item.id)}
                   disabled={isDisabled}
-                  onChange={() => onToggle(item.id, item)}
                 />
                 <span>{item.label}</span>
               </FormLabel>

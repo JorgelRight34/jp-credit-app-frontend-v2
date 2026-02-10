@@ -4,18 +4,19 @@ import { UserPage, createUserQueryKey, getUser } from '@/features/auth'
 import { useSuspenseData } from '@/hooks/useData'
 import { getUserFromServer } from '@/features/auth/server/authServerService'
 
-const getUserFn = createIsomorphicFn()
+export const getUserFn = createIsomorphicFn()
   .server((username) => getUserFromServer(username))
   .client((username) => getUser(username))
 
-export const Route = createFileRoute('/(main)/(modules)/access-control/users/$username/')({
+export const Route = createFileRoute(
+  '/(main)/(modules)/access-control/users/$username/',
+)({
   head: ({ params }) => ({ meta: [{ title: params.username }] }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
   const { username } = Route.useParams()
-
   const { data: user } = useSuspenseData({
     key: createUserQueryKey(username),
     loader: () => getUserFn(username),
