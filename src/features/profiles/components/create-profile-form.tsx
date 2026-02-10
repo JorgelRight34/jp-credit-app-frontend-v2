@@ -14,17 +14,14 @@ import {
 } from '@/components'
 import { FileAttachmentsPanel } from '@/components/organisms/file-attachments-panel'
 
-type ProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues> & {
-  profile?: Profile
-}
+type CreateProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues>
 
-const ProfileForm = ({ profile, ...props }: ProfileFormProps) => {
+const CreateProfileForm = (props: CreateProfileFormProps) => {
   const [isDirty, setIsDirty] = useState(false)
-  const fileAttachmentsForm = useProfileFileAttachmentsForm({ profile })
+  const fileAttachmentsForm = useProfileFileAttachmentsForm({})
   const form = useProfileForm({
     onDirtyChange: setIsDirty,
     onSuccess: fileAttachmentsForm.submit,
-    profile,
     ...props,
   })
 
@@ -48,4 +45,4 @@ const ProfileForm = ({ profile, ...props }: ProfileFormProps) => {
   )
 }
 
-export default ProfileForm
+export default CreateProfileForm

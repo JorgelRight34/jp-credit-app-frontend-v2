@@ -1,73 +1,53 @@
-import { Suspense } from 'react'
+import { Suspense, useRef, useState } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
-import UserRolesFormPanel from './user-roles-form-panel'
-import UserDataFormPanel from './user-data-form-panel'
-import UserPermissionsFormPanel from './user-permissions-form-panel'
+import UserRolesFormPanel, { UserRolesFormRef } from './user-roles-form-panel'
 import type { User } from '../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
-import {
-  FormContainer,
-  FormContainerButtons,
-  Tab,
-  Tabs,
-  useMultipleForms,
-} from '@/components'
+import { FormContainer, FormContainerButtons, Tab, Tabs } from '@/components'
+import PermissionsForm, { PermissionsFormRef } from './permissions-form'
+import { updateUserClaims } from '../services/userClient'
+import UserDataFormPanel from './user-data-form-panel'
 
-type UserAccessFormProps = DataModuleFormProps<User, UserFormValues> & {
-  user?: User
-}
+type CreateUserAccessFormProps = DataModuleFormProps<User, UserFormValues>
 
-const UserAccessForm = ({ user, ...props }: UserAccessFormProps) => {
-  const { forms, isDirty, setFormRef, handleSubmit, onDirtyChange, reset } =
-    useMultipleForms(['data', 'permissions', 'roles'])
+const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
+  const [isDirty, setIsDirty] = useState(false)
+  const permissionsFormRef = useRef<PermissionsFormRef>(null)
+  const rolesFormRef = useRef<UserRolesFormRef>(null)
 
   const form = useUserForm({
-    user,
     onSuccess: async ({ id, username }) => {
-      const { permissions, roles } = forms;
+      permissionsFormRef.current?.setValue('id', id)
 
-      permissions?.setValue('id', id)
+      rolesFormRef.current?.setValue('userId', id)
+      rolesFormRef.current?.setValue('username', username)
 
-      roles?.setValue('userId', id)
-      roles?.setValue('username', username)
-
-      await Promise.all([permissions?.submit(), roles?.submit()])
+      await Promise.all([
+        permissionsFormRef.current?.submit(),
+        rolesFormRef.current?.submit(),
+      ])
     },
-    onDirtyChange,
+    onDirtyChange: setIsDirty,
     ...props,
   })
 
   return (
     <FormContainer
-      footer={
-        <FormContainerButtons 
-          form={form}
-          toastMessage='Exito'
-          shouldSubmitAll={!!user} 
-          isDirty={isDirty} 
-          onSubmitAll={handleSubmit} 
-          onReset={reset} />
-      }
+      footer={<FormContainerButtons form={form} isDirty={isDirty} />}
     >
       <Tabs defaultActiveKey="data" navigate={false}>
         <Tab eventKey="data" title="Datos">
-          <UserDataFormPanel edit={!!user} form={form} />
+          <UserDataFormPanel form={form} />
         </Tab>
         <Tab eventKey="permissions" title="Permisos">
-          <UserPermissionsFormPanel 
-            user={user} 
-            ref={setFormRef('permissions')}               
-            onDirtyChange={onDirtyChange}
-          />
+          <Suspense fallback="...">
+            <PermissionsForm handler={updateUserClaims} />
+          </Suspense>
         </Tab>
         <Tab eventKey="roles" title="Roles">
           <Suspense fallback="...">
-            <UserRolesFormPanel
-              user={user}
-              ref={setFormRef('roles')}
-              onDirtyChange={onDirtyChange}
-            />
+            <UserRolesFormPanel />
           </Suspense>
         </Tab>
       </Tabs>
@@ -75,4 +55,4 @@ const UserAccessForm = ({ user, ...props }: UserAccessFormProps) => {
   )
 }
 
-export default UserAccessForm
+export default CreateUserAccessForm

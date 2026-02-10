@@ -1,5 +1,5 @@
+import { CreateCollateralFormPage } from '@/features/collaterals'
 import { createFileRoute } from '@tanstack/react-router'
-import { CollateralFormPage } from '@/features/collaterals'
 
 export const Route = createFileRoute('/(main)/(modules)/collaterals/create/')({
   head: () => ({ meta: [{ title: 'Crear garantía' }] }),
@@ -7,5 +7,5 @@ export const Route = createFileRoute('/(main)/(modules)/collaterals/create/')({
 })
 
 function RouteComponent() {
-  return <CollateralFormPage />
+  return <CreateCollateralFormPage />
 }

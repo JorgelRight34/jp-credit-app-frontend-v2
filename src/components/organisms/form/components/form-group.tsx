@@ -1,4 +1,3 @@
-import { useIsFormReadonly } from '../providers/form-status-provider'
 import FormInput from './form-input'
 import FormGroupLayout from './fom-group-layout'
 import type { FormGroupLayoutProps } from './fom-group-layout'
@@ -23,8 +22,6 @@ const FormGroup = <T extends FieldValues>({
   input,
   ...props
 }: FormGroupProps<T>) => {
-  const readOnly = useIsFormReadonly()
-
   return (
     <FormGroupLayout
       name={name}
@@ -38,7 +35,6 @@ const FormGroup = <T extends FieldValues>({
     >
       <FormInput
         {...props}
-        readOnly={readOnly}
         required={!optional}
         className={inputClassName}
         type={type}

@@ -32,4 +32,8 @@ export const uploadCollateralFiles = async (id: Collateral["id"], files: Array<F
 
 export const deleteCollateralFiles = async (ids: Array<number>) => {
     await FileStorageService.delete(ids);
-} 
+}
+
+export const deleteCollateral = async (id: Collateral["id"]) => {
+    await api.delete(baseUrl + "/" + id)
+}

@@ -6,22 +6,17 @@ import { SecondaryBtn } from '@/components/atoms'
 import { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
 
 type FormContainerButtonsProps<T extends FieldValues> =
-  Omit<FormSubmitBtnProps, "onSubmit"> & {
-    form: UseFormBuilderReturn<T>;
-    shouldSubmitAll?: boolean
-    resetOnSubmitOne?: boolean;
-    onSubmitAll?: () => unknown
+  Partial<FormSubmitBtnProps> & {
+    form?: UseFormBuilderReturn<T>;
     onReset?: () => void
   }
 
 const FormContainerButtons = <T extends FieldValues>({
-  shouldSubmitAll = false,
-  resetOnSubmitOne=true,
   isDirty,
   isValid,
   form,
   text,
-  onSubmitAll,
+  onSubmit,
   onReset,
   icon,
 }: FormContainerButtonsProps<T>) => {
@@ -34,15 +29,10 @@ const FormContainerButtons = <T extends FieldValues>({
   }, [form, onReset])
 
   const submitHandler = useCallback(
-    async () => {
-      if (shouldSubmitAll) {
-        await onSubmitAll?.();
-      } else {
-        await form?.form.handleSubmit()
-        if (resetOnSubmitOne) onReset?.();
-      } 
-    },
-    [shouldSubmitAll, onSubmitAll],
+    async () =>
+      await (form ? form.form.handleSubmit : onSubmit)?.()
+    ,
+    [form],
   )
 
   return (

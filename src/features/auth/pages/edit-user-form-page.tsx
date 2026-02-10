@@ -1,4 +1,4 @@
-import UserForm from '../components/create-user-form'
+import EditUserAccessForm from '../components/edit-user-form'
 import {
   accessControlBreadcrumb,
   createUserBreadcrumb,
@@ -6,7 +6,7 @@ import {
 } from '../lib/config/breadcrumbs'
 import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import type { User } from '../models/user'
-import { FormPageLayout } from '@/components'
+import { EditFormPageLayout } from '@/components'
 
 interface EditUserFormPageProps {
   user: User
@@ -14,16 +14,15 @@ interface EditUserFormPageProps {
 
 const EditUserFormPage = ({ user }: EditUserFormPageProps) => {
   return (
-    <FormPageLayout
+    <EditFormPageLayout
       title={user.username}
-      mode="edit"
       permissionProvider={accessControlPermissionProvider}
-      breadcrumbs={
-        [accessControlBreadcrumb, usersModuleBreadcrumb].concat(createUserBreadcrumb(user))
-      }
+      breadcrumbs={[accessControlBreadcrumb, usersModuleBreadcrumb].concat(
+        createUserBreadcrumb(user),
+      )}
     >
-      <UserForm user={user} />
-    </FormPageLayout>
+      <EditUserAccessForm user={user} />
+    </EditFormPageLayout>
   )
 }
 

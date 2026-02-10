@@ -25,7 +25,6 @@ export const useMultipleForms = <
     }
 
     const handleSetIsDirty = (value: boolean) => {
-        console.log(value)
         for (const name of names) {
             const form = formRefs.current[name as TNames[number]];
             // console.log("checking ", name)

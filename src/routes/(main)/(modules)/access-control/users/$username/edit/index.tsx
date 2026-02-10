@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { getUserFn } from '..'
-import { UserFormPage, createUserQueryKey } from '@/features/auth'
+import { EditUserFormPage, createUserQueryKey } from '@/features/auth'
 import { useSuspenseData } from '@/hooks/useData'
 
 export const Route = createFileRoute(
@@ -16,5 +16,5 @@ function RouteComponent() {
     loader: () => getUserFn(username),
   })
 
-  return <UserFormPage user={user} />
+  return <EditUserFormPage user={user} />
 }

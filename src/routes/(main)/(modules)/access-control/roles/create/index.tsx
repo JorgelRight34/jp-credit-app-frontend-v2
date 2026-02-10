@@ -1,5 +1,5 @@
+import { CreateRoleFormPage } from '@/features/auth'
 import { createFileRoute } from '@tanstack/react-router'
-import { RoleFormPage } from '@/features/auth'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/access-control/roles/create/',
@@ -9,5 +9,5 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  return <RoleFormPage />
+  return <CreateRoleFormPage />
 }

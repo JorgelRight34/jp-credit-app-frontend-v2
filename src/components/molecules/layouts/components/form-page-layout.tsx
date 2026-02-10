@@ -1,16 +1,23 @@
-import FormPageLayoutContent from './form-page-layout-content'
 import type { BreadcrumbSpec } from '../../breadcrumb'
 import type { PageLayoutProps } from './page-layout'
 import type { CacheKey } from '@/models'
-import type { FormPageMode } from '../models/formPageMode'
 import type { PermissionsProvider } from '@/components/organisms'
 import type { ConfirmationModalProps } from '@/components/organisms/modal/components/confirmation-modal'
-import { ProtectedComponent } from '@/components/organisms'
+import { ConfirmationModal } from '@/components/organisms'
+import PageLayout from './page-layout'
+import {
+  AccentPillBtn,
+  AddIcon,
+  DeleteIcon,
+  EditIcon,
+} from '@/components/atoms'
+import PageLayoutBreadcrumb from './page-layout-breadcrumb'
+import { useState } from 'react'
+import { useFormPage } from '../hooks/useFormPage'
 
 export type FormPageLayoutProps = React.PropsWithChildren &
   PageLayoutProps &
   Partial<ConfirmationModalProps> & {
-    mode?: FormPageMode
     cacheKey?: CacheKey
     deleteConfirmationMessage?: string
     permissionProvider: PermissionsProvider
@@ -18,29 +25,89 @@ export type FormPageLayoutProps = React.PropsWithChildren &
     onDelete?: () => Promise<void>
   }
 
-const FormPageLayout = ({
+export const CreateFormPageLayout = ({
   permissionProvider,
+  title,
+  breadcrumbs,
   children,
-  mode = 'create',
-  ...props
 }: FormPageLayoutProps) => {
   return (
-    <ProtectedComponent
-      provider={permissionProvider}
-      isAuthorizedFn={(permissions) =>
-        (mode === 'edit' && permissions.canEdit) ||
-        (mode === 'create' && permissions.canCreate)
+    <PageLayout
+      title={title}
+      permissionProvider={permissionProvider}
+      isAuthorizedFn={(p) => p.canCreate}
+      breadcrumb={
+        <PageLayoutBreadcrumb
+          breadcrumbs={breadcrumbs.concat({
+            title: 'Crear',
+            icon: AddIcon,
+            pathname: '.',
+          })}
+        />
       }
+      options={[]}
     >
-      <FormPageLayoutContent
-        permissionProvider={permissionProvider}
-        mode={mode}
-        {...props}
-      >
-        {children}
-      </FormPageLayoutContent>
-    </ProtectedComponent>
+      {children}
+    </PageLayout>
   )
 }
 
-export default FormPageLayout
+export const EditFormPageLayout = ({
+  permissionProvider,
+  title,
+  breadcrumbs,
+  onDelete,
+  cacheKey,
+  deleteConfirmationMessage,
+  description,
+  children,
+  ...props
+}: FormPageLayoutProps) => {
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+  const { onDelete: handleOnDelete } = useFormPage({ onDelete })
+
+  return (
+    <>
+      <PageLayout
+        {...props}
+        title={title}
+        permissionProvider={permissionProvider}
+        isAuthorizedFn={(p) => p.canEdit}
+        breadcrumb={
+          <PageLayoutBreadcrumb
+            breadcrumbs={breadcrumbs.concat({
+              title: 'Editar',
+              icon: EditIcon,
+              pathname: '.',
+              disabled: true,
+            })}
+          />
+        }
+        options={
+          onDelete
+            ? [
+                {
+                  title: 'Borrar',
+                  component: AccentPillBtn,
+                  icon: DeleteIcon,
+                  onClick: () => setShowConfirmationModal(true),
+                },
+              ]
+            : []
+        }
+      >
+        {children}
+      </PageLayout>
+      <ConfirmationModal
+        height="auto"
+        destructive={true}
+        show={showConfirmationModal}
+        onHide={() => setShowConfirmationModal(false)}
+        description={description}
+        onConfirm={handleOnDelete}
+        cacheKey={cacheKey}
+        confirmationMessage={deleteConfirmationMessage ?? ''}
+      />
+    </>
+  )
+}

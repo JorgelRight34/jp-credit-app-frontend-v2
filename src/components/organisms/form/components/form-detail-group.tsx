@@ -5,6 +5,7 @@ import { ContentCopyIcon, Input } from '@/components/atoms'
 interface FormReadOnlyProps extends FormGroupLayoutProps {
   value?: string | number
   optional?: boolean
+  disabled?: boolean
 }
 
 export const readOnlyIconForInput = {
@@ -17,6 +18,7 @@ const FormReadOnlyGroup = ({
   value,
   label,
   optional,
+  disabled,
 }: FormReadOnlyProps) => {
   return (
     <FormGroupLayout
@@ -32,6 +34,7 @@ const FormReadOnlyGroup = ({
         className="w-full"
         value={value ?? 'N/D'}
         icon={readOnlyIconForInput}
+        disabled={disabled}
         readOnly
       />
     </FormGroupLayout>

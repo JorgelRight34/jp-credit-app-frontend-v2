@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { UserFormPage } from '@/features/auth'
+import { CreateUserFormPage } from '@/features/auth'
 
 export const Route = createFileRoute('/(main)/(modules)/access-control/users/create/')({
   head: () => ({ meta: [{ title: 'Crear acceso' }] }),
@@ -7,5 +7,5 @@ export const Route = createFileRoute('/(main)/(modules)/access-control/users/cre
 })
 
 function RouteComponent() {
-  return <UserFormPage />
+  return <CreateUserFormPage />
 }

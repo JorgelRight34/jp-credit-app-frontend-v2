@@ -13,22 +13,25 @@ import {
   Input,
   RichTextEditor,
 } from '@/components'
-import { LoanSearchInput } from '@/features/loans'
+import { ReactNode } from 'react'
 
 interface CollateralDataFormProps {
   form: ReturnType<typeof useCollateralForm>
-  readOnly?: boolean
+  loanFormGroup: ReactNode
 }
 
-const CollateralDataForm = ({ form, readOnly }: CollateralDataFormProps) => {
+const CollateralDataForm = ({
+  form,
+  loanFormGroup,
+}: CollateralDataFormProps) => {
   return (
-    <Form form={form} readOnly={readOnly}>
+    <Form form={form}>
       <FormRow>
         <FormGroup label="Título" name="title" input={Input} />
       </FormRow>
       <FormRow>
         <FormGroup label="Valor" name="value" input={CurrencyInput} />
-        <FormGroup name="loanId" label="Préstamo" input={LoanSearchInput} />
+        {loanFormGroup}
       </FormRow>
       <FormRow>
         <FormSelectGroup

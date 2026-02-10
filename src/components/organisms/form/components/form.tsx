@@ -1,7 +1,6 @@
 import React, { forwardRef, useImperativeHandle } from 'react'
 import { FormProvider } from 'react-hook-form'
 import clsx from 'clsx'
-import { FormStatusProvider } from '../providers/form-status-provider'
 import type { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
 import type { FormRef } from '../models/fomRef'
 import type { FieldValues } from 'react-hook-form'
@@ -10,7 +9,6 @@ import type { ReactElement } from 'react'
 type FormProps<T extends FieldValues> = {
   children: React.ReactNode
   form: UseFormBuilderReturn<T>
-  readOnly?: boolean
   className?: string
 }
 
@@ -19,7 +17,6 @@ function InnerForm<T extends FieldValues>(
     children,
     className = 'h-full',
     form: { form, validation, state },
-    readOnly,
   }: FormProps<T>,
   ref: React.Ref<FormRef<T>>,
 ) {
@@ -38,11 +35,7 @@ function InnerForm<T extends FieldValues>(
   return (
     <form className={clsx('flex w-full flex-col', className)}>
       <aside className="flex-1">
-        <FormProvider {...form.methods}>
-          <FormStatusProvider readOnly={readOnly ?? false}>
-            {children}
-          </FormStatusProvider>
-        </FormProvider>
+        <FormProvider {...form.methods}>{children}</FormProvider>
       </aside>
       <FormErrors validation={validation} />
     </form>

@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useUserRolesForm } from '../hooks/useUserRolesForm'
 import { getRoleString } from '../lib/utils'
 import { allRolesQueryOptions } from '../lib/query-keys'
-import type { DataModuleFormProps, TransferItem } from '@/components'
+import type { DataModuleFormProps, FormRef, TransferItem } from '@/components'
 import type { UserRolesFormValues } from '../lib/schemas/userRolesFormSchema'
 import type { User } from '../models/user'
 import { Form, FormInput, TransferList } from '@/components'
@@ -12,7 +12,9 @@ type UserRolesFormProps = DataModuleFormProps<null, UserRolesFormValues> & {
   user?: User
 }
 
-const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
+export type UserRolesFormRef = FormRef<UserRolesFormValues>
+
+const UserRolesFormPanel = ({ ref, ...props }: UserRolesFormProps) => {
   const { data } = useSuspenseData(allRolesQueryOptions)
   const rolesListClaims = useMemo<Array<TransferItem>>(
     () =>
@@ -44,4 +46,4 @@ const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
   )
 }
 
-export default UserRolesForm
+export default UserRolesFormPanel

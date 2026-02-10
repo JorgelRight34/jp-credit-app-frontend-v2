@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { getRoleFn } from '..'
-import { RoleFormPage, createRoleQueryKey } from '@/features/auth'
+import { EditRoleFormPage, createRoleQueryKey } from '@/features/auth'
 import { useSuspenseData } from '@/hooks/useData'
 
 export const Route = createFileRoute(
@@ -16,5 +16,5 @@ function RouteComponent() {
     loader: () => getRoleFn(+id),
   })
 
-  return <RoleFormPage role={role} />
+  return <EditRoleFormPage role={role} />
 }

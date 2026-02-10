@@ -1,3 +1,4 @@
 export { default as CollateralsPage } from "./pages/collaterals-page"
-export { default as CollateralFormPage } from './pages/collateral-form-page'
+export { default as CreateCollateralFormPage } from './pages/create-collateral-form-page'
+export { default as EditCollateralFormPage } from './pages/edit-collateral-form-page'
 export { default as CollateralPage } from './pages/collateral-page'

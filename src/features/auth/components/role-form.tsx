@@ -9,8 +9,8 @@ import type { RoleFormSchemaValues } from '../lib/schemas/roleFormSchema'
 import {
   Form,
   FormContainer,
+  FormContainerButtons,
   FormGroup,
-  FormSubmitBtn,
   Input,
 } from '@/components'
 
@@ -34,7 +34,7 @@ const RoleForm = (props: RoleFormProps) => {
   })
 
   return (
-    <FormContainer footer={<FormSubmitBtn isDirty={isDirty} form={form} />}>
+    <FormContainer footer={<FormContainerButtons isDirty={isDirty} form={form} />}>
       <Form form={form}>
         <FormGroup name="name" label="Nombre" input={Input} />
       </Form>
