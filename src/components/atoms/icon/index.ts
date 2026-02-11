@@ -153,6 +153,7 @@ export { default as PermissionIcon } from "@mui/icons-material/VerifiedUserOutli
 export { default as CollateralIcon } from "@mui/icons-material/DirectionsCarOutlined";
 export { default as AllIcon } from "@mui/icons-material/PublicOutlined"
 export { default as InventoryIcon } from '@mui/icons-material/InventoryOutlined';
+export { default as LoanIcon } from "@mui/icons-material/MailOutline"
 
 
 export { default as Icon } from "./icon";

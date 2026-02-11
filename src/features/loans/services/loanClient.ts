@@ -2,6 +2,7 @@ import type { Loan } from "../models/loan"
 import type { LoanQuery } from "../models/loanQuery"
 import type { PagedResponse } from "@/models"
 import api from "@/lib/services/api"
+import { LoanFormValues } from "../lib/schemas/loanFormSchema"
 
 const baseUrl = "loans"
 
@@ -12,5 +13,10 @@ export const getLoans = async (params: LoanQuery): Promise<PagedResponse<Loan>> 
 
 export const getLoan = async (id: Loan["id"]) => {
     const { data } = await api.get(baseUrl + "/" + id);
+    return data;
+}
+
+export const createLoan = async (body: LoanFormValues): Promise<Loan> => {
+    const { data } = await api.post(baseUrl, body);
     return data;
 }

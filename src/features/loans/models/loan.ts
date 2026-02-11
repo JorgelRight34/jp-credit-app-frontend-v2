@@ -10,7 +10,7 @@ export interface Loan {
     lastTransactionDate?: Date | string;
     totalFeePaid: number;
     outstandingAmount: number;
-    client?: LoanMember;
+    client: LoanMember;
     totalFees: number;
     guarantor?: LoanMember;
     loanOfficer?: LoanMember;
@@ -29,7 +29,6 @@ export interface Loan {
     annualInterestRate: number;
     numberOfPayments: number;
     paymentFrequency: number;
-    overdue: number;
     expirationDate: Date | string;
     latePaymentCredit: number; // Abono de mora (mora pagada)
     accruedCapital: number;

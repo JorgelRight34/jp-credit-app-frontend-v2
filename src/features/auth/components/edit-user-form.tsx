@@ -4,15 +4,7 @@ import UserRolesFormPanel, { UserRolesFormRef } from './user-roles-form-panel'
 import type { User } from '../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
-import {
-  FormContainer,
-  FormContainerButtons,
-  FormGroup,
-  FormRow,
-  PasswordInput,
-  Tab,
-  Tabs,
-} from '@/components'
+import { FormContainer, FormContainerButtons, Tab, Tabs } from '@/components'
 import UserDataFormPanel from './user-data-form-panel'
 import PermissionsForm, {
   PermissionsFormProps,
@@ -53,22 +45,7 @@ const UserDataForm = ({ user, ...props }: EditUserFormProps) => {
     <FormContainer
       footer={<FormContainerButtons isDirty={isDirty} form={form} />}
     >
-      <UserDataFormPanel form={form}>
-        <FormRow>
-          <FormGroup
-            label="Contraseña"
-            autoComplete="new-password"
-            name="password"
-            input={PasswordInput}
-          />
-          <FormGroup
-            label="Confirmación"
-            autoComplete="new-password"
-            name="confirmation"
-            input={PasswordInput}
-          />
-        </FormRow>
-      </UserDataFormPanel>
+      <UserDataFormPanel form={form} />
     </FormContainer>
   )
 }

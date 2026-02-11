@@ -4,7 +4,15 @@ import UserRolesFormPanel, { UserRolesFormRef } from './user-roles-form-panel'
 import type { User } from '../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
-import { FormContainer, FormContainerButtons, Tab, Tabs } from '@/components'
+import {
+  FormContainer,
+  FormContainerButtons,
+  FormGroup,
+  FormRow,
+  PasswordInput,
+  Tab,
+  Tabs,
+} from '@/components'
 import PermissionsForm, { PermissionsFormRef } from './permissions-form'
 import { updateUserClaims } from '../services/userClient'
 import UserDataFormPanel from './user-data-form-panel'
@@ -38,7 +46,22 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
     >
       <Tabs defaultActiveKey="data" navigate={false}>
         <Tab eventKey="data" title="Datos">
-          <UserDataFormPanel form={form} />
+          <UserDataFormPanel form={form}>
+            <FormRow>
+              <FormGroup
+                label="Contraseña"
+                autoComplete="new-password"
+                name="password"
+                input={PasswordInput}
+              />
+              <FormGroup
+                label="Confirmación"
+                autoComplete="new-password"
+                name="confirmation"
+                input={PasswordInput}
+              />
+            </FormRow>
+          </UserDataFormPanel>
         </Tab>
         <Tab eventKey="permissions" title="Permisos">
           <Suspense fallback="...">

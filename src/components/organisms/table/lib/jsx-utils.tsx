@@ -17,7 +17,7 @@ export const createImageDataCell = (props: TablePhotoCellProps) => {
   return <TablePhotoCell {...props} />
 }
 
-export const createDateDataCell = (date: string) => {
+export const createDateDataCell = (date?: string) => {
   return <DateLabel date={date} />
 }
 

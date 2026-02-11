@@ -115,7 +115,11 @@ const AdvancedSearchFormGroup = <T,>({
         <FormLabel htmlFor={option.name as string}>
           {option.label} <span className="text-accent">&nbsp;*&nbsp;</span>
         </FormLabel>
-        <FormInput name={option.name as string} as={option.type} />
+        <FormInput
+          className="w-full"
+          name={option.name as string}
+          as={option.type}
+        />
       </div>
     </SearchFormGroupContainer>
   )

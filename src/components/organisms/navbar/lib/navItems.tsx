@@ -211,7 +211,7 @@ export const projectsNavItem: NavItem = {
 export const loansNavItem: NavItem = {
   name: 'Préstamos',
   icon: () => <MailIcon />,
-  route: 'loans',
+  route: '/loans',
   children: [
     {
       ...allRouteBase,
