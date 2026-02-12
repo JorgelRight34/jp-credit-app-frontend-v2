@@ -13,7 +13,7 @@ export const loanDataTableConfig: DataTableConfig<Loan> = {
             header: "CLIENTE",
             accessorFn: (row) => row.client?.name,
             enableSorting: true,
-            cell: ({ row }) => createLinkDataCell(row.original.client?.name, { to: "/profiles/$id", params: { id: row.original.clientId.toString() } }),
+            cell: ({ row }) => createLinkDataCell(row.original.client?.name, { to: "/loans/$id", params: { id: row.original.id.toString() } }),
         },
         {
             accessorKey: "disbursedAmount",
@@ -69,6 +69,24 @@ export const createLoanSearchInputDataTableConfig = (onRowClick: (loan: Loan) =>
         title: "Préstamos",
         columns: [
             { id: "id", header: "ID", enableSorting: true },
+            {
+                header: "CLIENTE",
+                accessorFn: (row) => row.client?.name,
+                enableSorting: true,
+                cell: ({ row }) => createLinkDataCell(row.original.client?.name, { to: "/profiles/$id", params: { id: row.original.clientId.toString() } }),
+            },
+            {
+                accessorKey: "disbursedAmount",
+                header: "DESEMBOLSADO",
+                enableSorting: true,
+                cell: ({ row }) => toCurrency(row.original.disbursedAmount),
+            },
+            {
+                accessorKey: "paymentValue",
+                header: "CUOTA",
+                enableSorting: true,
+                cell: ({ row }) => toCurrency(row.original.paymentValue),
+            },
             { id: "select", cell: ({ row }) => createSingleSelectCell(() => onRowClick(row.original)) }
         ],
         cacheKey: [loansQueryKey],

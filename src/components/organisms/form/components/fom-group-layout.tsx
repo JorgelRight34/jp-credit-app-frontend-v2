@@ -15,10 +15,25 @@ const FormGroupLayout = ({
 }: FormGroupLayoutProps) => {
   return (
     <div className={clsx('flex flex-1 items-start flex-col gap-2', className)}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+      <FormLabel className="w-full" htmlFor={name}>
+        {label}
+      </FormLabel>
       {children}
     </div>
   )
 }
+
+export const FormGroupLabel = ({
+  label,
+  optional,
+}: {
+  label: ReactNode
+  optional?: boolean
+}) => (
+  <>
+    {label}{' '}
+    {optional && <span className="text-accent">&nbsp;*&nbsp;</span>}{' '}
+  </>
+)
 
 export default FormGroupLayout

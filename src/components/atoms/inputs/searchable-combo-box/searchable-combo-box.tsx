@@ -13,13 +13,13 @@ interface SearchableComboBoxProps<T, TValue> extends Omit<InputProps, 'ref'> {
   className?: string
   isDisabled?: boolean
   error?: boolean
-  modalProps: { title: string; height: string; width: string }
+  modalProps: { title: ReactNode }
   cacheKey: CacheKey
   onChange?: (val: TValue) => TValue
   accesorFn: (val: T | null) => TValue
   visibleValueFn: (val: T | null) => string | undefined
   render: (setValue: (val: T) => void) => ReactNode
-  loader: (val: TValue) => Promise<T>
+  loader: (val: TValue) => Promise<T> | T
 }
 
 const SearchableComboBox = <T, TValue>({
@@ -101,6 +101,7 @@ const DisplayInput = <T, TValue>({
     <>
       <ModalTrigger
         {...modalProps}
+        width="auto"
         ref={modalTriggerRef}
         trigger={
           <Input

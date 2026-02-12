@@ -44,8 +44,8 @@ const SearchForm = <T extends Query>({
     <Form form={form}>
       <section className="py-1">
         <div className="flex flex-col items-center overflow-y-visible">
-          <div className="flex w-full !overflow-y-visible">
-            <div className="flex w-12/13 items-center !overflow-y-visible">
+          <div className="flex w-full min-w-0">
+            <div className="flex flex-1 min-w-0 items-center">
               {options.map((option) => (
                 <SearchFormGroupContainer
                   width={option.width}
@@ -53,14 +53,14 @@ const SearchForm = <T extends Query>({
                 >
                   <FormInput
                     label={option.label}
-                    className="w-full"
+                    className="w-full min-w-0"
                     name={option.name as string}
                     as={option.type}
                   />
                 </SearchFormGroupContainer>
               ))}
             </div>
-            <div className="flex w-1/13 items-center gap-1">
+            <div className="flex shrink-0 items-center gap-1 pl-1">
               <AccentBtn
                 disabled={!isDirty}
                 icon={SearchIcon}

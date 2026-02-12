@@ -3,10 +3,21 @@ import { CollateralConditionMap } from "../models/collateralCondition";
 import type { CollateralType } from "../models/collateralType";
 import type { CollateralCondition } from "../models/collateralCondition";
 import type { SelectOptions } from "@/components";
+import { FileModel } from "@/models/fileModel";
+import { ND } from "@/lib/utils";
 
 export const collateralsQueryKey = "collaterals"
 
 export const collateralMainPicFallback = "/product-placeholder.png?url"
+
+export const defaultCollateralPicFileModel: FileModel = {
+    isImage: true,
+    publicId: ND,
+    id: 0,
+    name: "Default",
+    url: collateralMainPicFallback,
+    fileType: "png"
+}
 
 export const collateralConditionTranslations: Record<
     CollateralCondition,

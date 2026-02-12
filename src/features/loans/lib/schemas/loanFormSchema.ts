@@ -6,10 +6,6 @@ export const loanFormSchema = z
             (val) => Number(val),
             z.number().positive("Debe ser positivo.")
         ),
-        disbursedAmount: z.preprocess(
-            (val) => Number(val),
-            z.number().positive("Debe ser positivo.")
-        ),
         description: z.string(),
         interestRate: z.union([
             z.string().transform((val) => Number(val)),
@@ -46,10 +42,6 @@ export const loanFormSchema = z
         ]),
         status: z.string(),
         annualInterestRate: z.number().optional(),
-    })
-    .refine((data) => data.approvedAmount >= data.disbursedAmount, {
-        message: `El monto desembolsado no puede ser mayor al aprobado.`,
-        path: ["disbursedAmount"],
     });
 
 export type LoanFormValues = z.infer<typeof loanFormSchema>;

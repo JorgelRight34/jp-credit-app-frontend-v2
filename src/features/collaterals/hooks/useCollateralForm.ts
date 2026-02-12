@@ -25,12 +25,11 @@ export const useCollateralForm = ({ collateral, initialValues, ...config }: UseC
         } : {
             title: "",
             description: "",
-            value: 0,
+            value: '',
             condition: "",
             type: "",
             location: "",
-            expirationDate: null,
-            ...initialValues
+            expirationDate: '',
         },
         onSubmit: createCollateral,
         onEdit: (body) => updateCollateral(collateral!.id, body),

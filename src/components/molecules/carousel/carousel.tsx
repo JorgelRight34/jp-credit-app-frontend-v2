@@ -65,4 +65,20 @@ const Carousel = ({ children, height = 300 }: CarouselProps) => {
   )
 }
 
+Carousel.Item = ({ children }: PropsWithChildren) => {
+  return (
+    <Box
+      sx={{
+        flex: '0 0 100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+      }}
+    >
+      {children}
+    </Box>
+  )
+}
+
 export default Carousel

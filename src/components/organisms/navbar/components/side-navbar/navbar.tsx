@@ -11,6 +11,7 @@ import {
   loansNavItem,
   notesNavItem,
   profileNavItem,
+  projectsNavItem,
   reportsNavItem,
   settingsNavItem,
   transactionsNavItem,
@@ -33,6 +34,7 @@ const options = [
   followUpsNavItem,
   financesNavItem,
   reportsNavItem,
+  projectsNavItem,
   armotizationsNavItem,
   settingsNavItem,
 ]

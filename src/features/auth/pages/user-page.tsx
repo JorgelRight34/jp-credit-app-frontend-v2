@@ -5,7 +5,7 @@ import {
   usersModuleBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import UserOverview from '../components/user-overview'
-import { rolesTableColumns } from '../lib/config/roles-datatable-config'
+import { userRolesTableColumns } from '../lib/config/roles-datatable-config'
 import { claimsTableColumns } from '../lib/constants'
 import type { User } from '../models/user'
 import type { IdentityPermissions } from '../models/identityPermissions'
@@ -66,7 +66,7 @@ const UserPage = ({ user, userPermissions }: UserPageProps) => {
         <Tab eventKey="roles" title="Roles">
           <section>
             <TableBuilder
-              columns={rolesTableColumns}
+              columns={userRolesTableColumns}
               data={userPermissions.roles}
             />
           </section>

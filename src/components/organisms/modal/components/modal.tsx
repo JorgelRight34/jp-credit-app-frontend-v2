@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { createPortal } from 'react-dom'
 import type { ModalProps } from '../models/modalProps'
-import { AccentBtn, CloseIcon, Icon } from '@/components/atoms'
+import { CloseIcon, Icon } from '@/components/atoms'
 
 const modalRoot =
   typeof window !== 'undefined' ? document.getElementById('modal-root') : null
@@ -39,8 +39,8 @@ const Modal = ({
       onClick={onHide}
     >
       <div
-        className="my-modal rounded-3 flex flex-col p-3"
-        style={{ width, height }}
+        className="my-modal rounded-xl flex flex-col p-3"
+        style={{ height, width }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="border-bottom flex flex-shrink-0 items-center pb-3">
@@ -51,19 +51,18 @@ const Modal = ({
             label={title}
           />
           {showCloseBtn && (
-            <AccentBtn
-              type="button"
+            <Icon
               onClick={onHide}
-              className="ml-auto"
+              className="!cursor-pointer text-accent-secondary ml-auto"
               icon={CloseIcon}
             >
               Cerrar
-            </AccentBtn>
+            </Icon>
           )}
         </div>
         <div
           className={clsx(
-            'my-modal-content flex-1 overflow-y-auto p-3',
+            'flex-1 overflow-y-auto !w-fit overflow-x-auto p-3',
             className,
           )}
         >

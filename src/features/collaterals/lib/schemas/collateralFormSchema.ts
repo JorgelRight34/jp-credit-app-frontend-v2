@@ -41,6 +41,7 @@ export const collateralFormSchema = z.object({
         .string()
         .trim()
         .nullable()
+        .optional()
         .refine(
             (val) => !val || !Number.isNaN(new Date(val).getTime()),
             "La fecha de expiración no es válida",

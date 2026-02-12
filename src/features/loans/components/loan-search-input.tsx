@@ -1,5 +1,4 @@
 import { loansQueryKey } from '../lib/constants'
-import { getLoan } from '../services/loanClient'
 import { loanSearchConfig } from '../lib/config/loan-search-config'
 import { createLoanSearchInputDataTableConfig } from '../lib/config/loan-datatable-config'
 import type { LoanQuery } from '../models/loanQuery'
@@ -13,7 +12,7 @@ interface LoanSearchInputProps extends InputProps {
 
 const LoanSearchInput = ({ datatable, ...props }: LoanSearchInputProps) => {
   return (
-    <SearchableComboBox<Loan, number>
+    <SearchableComboBox<{ id: number }, number>
       modalProps={{
         title: 'Préstamos',
         height: '90dvh',
@@ -29,7 +28,7 @@ const LoanSearchInput = ({ datatable, ...props }: LoanSearchInputProps) => {
           {...datatable}
         />
       )}
-      loader={(id) => getLoan(id)}
+      loader={(id) => ({ id })}
       {...props}
     />
   )

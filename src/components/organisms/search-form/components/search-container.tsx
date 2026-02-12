@@ -1,4 +1,3 @@
-import { useDeferredValue } from 'react'
 import { useSearchContainer } from '../hooks/useSearchContainer'
 import SearchForm from './search-form'
 import type { ReactNode } from 'react'
@@ -21,7 +20,7 @@ const SearchContainer = <T extends Query>({
   )
 
   return (
-    <section>
+    <section className="flex flex-col w-full">
       <div className="mb-3">
         <SearchForm
           onSubmit={onSearchSubmit}

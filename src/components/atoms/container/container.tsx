@@ -1,17 +1,20 @@
-import clsx from "clsx";
-import React from "react";
+import clsx from 'clsx'
+import React from 'react'
 
-type ContainerProps = React.HTMLAttributes<HTMLDivElement>;
+export type ContainerProps = React.HTMLAttributes<HTMLDivElement>
 
 const Container = ({ className, children, ...props }: ContainerProps) => {
   return (
     <div
-      className={clsx("rounded-3 border bg-white p-3", className)}
+      className={clsx(
+        'flex flex-col rounded-xl border bg-white p-3',
+        className,
+      )}
       {...props}
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default Container;
+export default Container

@@ -15,7 +15,7 @@ export class FileStorageService {
             formData.append(key, String(value));
         });
 
-        const { data } = await api.post("files/upload")
+        const { data } = await api.post("files/upload", formData)
         return data;
     }
 

@@ -1,0 +1,1 @@
+export const createLoanQueryKey = (id: number) => ["loans", id]

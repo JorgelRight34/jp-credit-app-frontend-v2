@@ -154,6 +154,7 @@ export { default as CollateralIcon } from "@mui/icons-material/DirectionsCarOutl
 export { default as AllIcon } from "@mui/icons-material/PublicOutlined"
 export { default as InventoryIcon } from '@mui/icons-material/InventoryOutlined';
 export { default as LoanIcon } from "@mui/icons-material/MailOutline"
-
+export { default as RestoreIcon } from "@mui/icons-material/RestoreOutlined"
+export { default as TodayIcon } from "@mui/icons-material/TodayOutlined"
 
 export { default as Icon } from "./icon";

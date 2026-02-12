@@ -15,7 +15,7 @@ import { toastService } from "@/lib/services";
 
 export interface UseFormBuilderProps<TData, TReturn> {
     schema?: SchemaType<TData>;
-    defaultValues?: Partial<TData>;
+    defaultValues?: Partial<TData> | Partial<{ [K in keyof TData]: '' }>;
     resetValues?: boolean;
     keysToInvalidate?: Array<CacheKey>;
     tagsToInvalidate?: Array<string>;
@@ -92,7 +92,6 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
         formState: { errors, isDirty, isValid },
         handleSubmit,
         reset,
-        clearErrors,
         setError,
     } = methods;
 
@@ -148,7 +147,6 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     }
 
     const handleReset = () => {
-        clearErrors();
         reset(defaultValues, { keepErrors: false, keepDirty: false });
     };
 

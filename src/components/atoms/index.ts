@@ -86,6 +86,7 @@ export { default as NavLink } from "./navigation/nav-link";
 export { default as PhoneLink } from "./navigation/phone-link";
 export { default as DateLabel } from "./date-label/date-label"
 export { default as Container } from "./container/container"
+export * from "./container/container"
 export * from "./navigation/link"
 
 export * from "./icon"

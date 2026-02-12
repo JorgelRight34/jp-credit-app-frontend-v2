@@ -2,8 +2,8 @@ import { flexRender } from '@tanstack/react-table'
 import clsx from 'clsx'
 import TableFooter from './table-footer'
 import TableRow from './table-row'
-import TableHead from './table-head'
 import type { Table } from '@tanstack/react-table'
+import TableDataCell from './table-data-cell'
 
 interface TableFooterCompositorProps<T> {
   table: Table<T>
@@ -20,18 +20,18 @@ const TableFooterCompositor = <T,>({
       .some((group) =>
         group.headers.some((header) => header.column.columnDef.footer),
       ) && (
-      <TableFooter className={clsx('border-top', className)}>
+      <TableFooter className={clsx('border-t', className)}>
         {table.getFooterGroups().map((footerGroup) => (
           <TableRow key={footerGroup.id}>
             {footerGroup.headers.map((header) => (
-              <TableHead key={header.id}>
+              <TableDataCell key={header.id}>
                 {header.isPlaceholder
                   ? null
                   : flexRender(
                       header.column.columnDef.footer,
                       header.getContext(),
                     )}
-              </TableHead>
+              </TableDataCell>
             ))}
           </TableRow>
         ))}

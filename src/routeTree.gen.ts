@@ -13,6 +13,7 @@ import { Route as mainRouteRouteImport } from './routes/(main)/route'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as mainIndexRouteImport } from './routes/(main)/index'
 import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/route'
+import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(modules)/projects/index'
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
 import { Route as mainmodulesCollateralsIndexRouteImport } from './routes/(main)/(modules)/collaterals/index'
@@ -20,6 +21,7 @@ import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(mai
 import { Route as mainmodulesProfilesCreateIndexRouteImport } from './routes/(main)/(modules)/profiles/create/index'
 import { Route as mainmodulesProfilesIdIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/index'
 import { Route as mainmodulesLoansCreateIndexRouteImport } from './routes/(main)/(modules)/loans/create/index'
+import { Route as mainmodulesLoansIdIndexRouteImport } from './routes/(main)/(modules)/loans/$id/index'
 import { Route as mainmodulesCollateralsCreateIndexRouteImport } from './routes/(main)/(modules)/collaterals/create/index'
 import { Route as mainmodulesCollateralsIdIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/index'
 import { Route as mainmodulesProfilesIdEditIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/edit/index'
@@ -49,6 +51,12 @@ const mainmodulesRouteRoute = mainmodulesRouteRouteImport.update({
   id: '/(modules)',
   getParentRoute: () => mainRouteRoute,
 } as any)
+const mainmodulesProjectsIndexRoute =
+  mainmodulesProjectsIndexRouteImport.update({
+    id: '/projects/',
+    path: '/projects/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesProfilesIndexRoute =
   mainmodulesProfilesIndexRouteImport.update({
     id: '/profiles/',
@@ -90,6 +98,11 @@ const mainmodulesLoansCreateIndexRoute =
     path: '/loans/create/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesLoansIdIndexRoute = mainmodulesLoansIdIndexRouteImport.update({
+  id: '/loans/$id/',
+  path: '/loans/$id/',
+  getParentRoute: () => mainmodulesRouteRoute,
+} as any)
 const mainmodulesCollateralsCreateIndexRoute =
   mainmodulesCollateralsCreateIndexRouteImport.update({
     id: '/collaterals/create/',
@@ -158,8 +171,10 @@ export interface FileRoutesByFullPath {
   '/collaterals/': typeof mainmodulesCollateralsIndexRoute
   '/loans/': typeof mainmodulesLoansIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
+  '/projects/': typeof mainmodulesProjectsIndexRoute
   '/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
   '/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
+  '/loans/$id/': typeof mainmodulesLoansIdIndexRoute
   '/loans/create/': typeof mainmodulesLoansCreateIndexRoute
   '/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
@@ -179,8 +194,10 @@ export interface FileRoutesByTo {
   '/collaterals': typeof mainmodulesCollateralsIndexRoute
   '/loans': typeof mainmodulesLoansIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
+  '/projects': typeof mainmodulesProjectsIndexRoute
   '/collaterals/$id': typeof mainmodulesCollateralsIdIndexRoute
   '/collaterals/create': typeof mainmodulesCollateralsCreateIndexRoute
+  '/loans/$id': typeof mainmodulesLoansIdIndexRoute
   '/loans/create': typeof mainmodulesLoansCreateIndexRoute
   '/profiles/$id': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create': typeof mainmodulesProfilesCreateIndexRoute
@@ -203,8 +220,10 @@ export interface FileRoutesById {
   '/(main)/(modules)/collaterals/': typeof mainmodulesCollateralsIndexRoute
   '/(main)/(modules)/loans/': typeof mainmodulesLoansIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
+  '/(main)/(modules)/projects/': typeof mainmodulesProjectsIndexRoute
   '/(main)/(modules)/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
   '/(main)/(modules)/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
+  '/(main)/(modules)/loans/$id/': typeof mainmodulesLoansIdIndexRoute
   '/(main)/(modules)/loans/create/': typeof mainmodulesLoansCreateIndexRoute
   '/(main)/(modules)/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/(main)/(modules)/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
@@ -226,8 +245,10 @@ export interface FileRouteTypes {
     | '/collaterals/'
     | '/loans/'
     | '/profiles/'
+    | '/projects/'
     | '/collaterals/$id/'
     | '/collaterals/create/'
+    | '/loans/$id/'
     | '/loans/create/'
     | '/profiles/$id/'
     | '/profiles/create/'
@@ -247,8 +268,10 @@ export interface FileRouteTypes {
     | '/collaterals'
     | '/loans'
     | '/profiles'
+    | '/projects'
     | '/collaterals/$id'
     | '/collaterals/create'
+    | '/loans/$id'
     | '/loans/create'
     | '/profiles/$id'
     | '/profiles/create'
@@ -270,8 +293,10 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/collaterals/'
     | '/(main)/(modules)/loans/'
     | '/(main)/(modules)/profiles/'
+    | '/(main)/(modules)/projects/'
     | '/(main)/(modules)/collaterals/$id/'
     | '/(main)/(modules)/collaterals/create/'
+    | '/(main)/(modules)/loans/$id/'
     | '/(main)/(modules)/loans/create/'
     | '/(main)/(modules)/profiles/$id/'
     | '/(main)/(modules)/profiles/create/'
@@ -320,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesRouteRouteImport
       parentRoute: typeof mainRouteRoute
     }
+    '/(main)/(modules)/projects/': {
+      id: '/(main)/(modules)/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof mainmodulesProjectsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/profiles/': {
       id: '/(main)/(modules)/profiles/'
       path: '/profiles'
@@ -367,6 +399,13 @@ declare module '@tanstack/react-router' {
       path: '/loans/create'
       fullPath: '/loans/create/'
       preLoaderRoute: typeof mainmodulesLoansCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/$id/': {
+      id: '/(main)/(modules)/loans/$id/'
+      path: '/loans/$id'
+      fullPath: '/loans/$id/'
+      preLoaderRoute: typeof mainmodulesLoansIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/collaterals/create/': {
@@ -447,8 +486,10 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesCollateralsIndexRoute: typeof mainmodulesCollateralsIndexRoute
   mainmodulesLoansIndexRoute: typeof mainmodulesLoansIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
+  mainmodulesProjectsIndexRoute: typeof mainmodulesProjectsIndexRoute
   mainmodulesCollateralsIdIndexRoute: typeof mainmodulesCollateralsIdIndexRoute
   mainmodulesCollateralsCreateIndexRoute: typeof mainmodulesCollateralsCreateIndexRoute
+  mainmodulesLoansIdIndexRoute: typeof mainmodulesLoansIdIndexRoute
   mainmodulesLoansCreateIndexRoute: typeof mainmodulesLoansCreateIndexRoute
   mainmodulesProfilesIdIndexRoute: typeof mainmodulesProfilesIdIndexRoute
   mainmodulesProfilesCreateIndexRoute: typeof mainmodulesProfilesCreateIndexRoute
@@ -467,9 +508,11 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesCollateralsIndexRoute: mainmodulesCollateralsIndexRoute,
   mainmodulesLoansIndexRoute: mainmodulesLoansIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
+  mainmodulesProjectsIndexRoute: mainmodulesProjectsIndexRoute,
   mainmodulesCollateralsIdIndexRoute: mainmodulesCollateralsIdIndexRoute,
   mainmodulesCollateralsCreateIndexRoute:
     mainmodulesCollateralsCreateIndexRoute,
+  mainmodulesLoansIdIndexRoute: mainmodulesLoansIdIndexRoute,
   mainmodulesLoansCreateIndexRoute: mainmodulesLoansCreateIndexRoute,
   mainmodulesProfilesIdIndexRoute: mainmodulesProfilesIdIndexRoute,
   mainmodulesProfilesCreateIndexRoute: mainmodulesProfilesCreateIndexRoute,

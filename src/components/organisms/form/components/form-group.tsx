@@ -1,5 +1,5 @@
 import FormInput from './form-input'
-import FormGroupLayout from './fom-group-layout'
+import FormGroupLayout, { FormGroupLabel } from './fom-group-layout'
 import type { FormGroupLayoutProps } from './fom-group-layout'
 import type { FieldValues } from 'react-hook-form'
 import type { FormInputProps } from './form-input'
@@ -26,12 +26,7 @@ const FormGroup = <T extends FieldValues>({
     <FormGroupLayout
       name={name}
       className={className}
-      label={
-        <>
-          {label}{' '}
-          {optional && <span className="text-accent">&nbsp;*&nbsp;</span>}{' '}
-        </>
-      }
+      label={<FormGroupLabel label={label} optional={optional} />}
     >
       <FormInput
         {...props}

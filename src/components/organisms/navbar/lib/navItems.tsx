@@ -205,7 +205,7 @@ export const transactionsNavItem: NavItem = {
 export const projectsNavItem: NavItem = {
   name: 'Proyectos',
   icon: () => <FolderOpenIcon />,
-  route: 'projects',
+  route: '/projects',
 }
 
 export const loansNavItem: NavItem = {

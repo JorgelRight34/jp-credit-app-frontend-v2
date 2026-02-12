@@ -5,7 +5,7 @@ import type { ProfileQuery } from "../../models/profileQuery";
 import type { Profile } from "../../models/profile";
 import type { DataTableConfig } from "@/components";
 import type { PagedResponse } from "@/models";
-import { createDateDataCell, createLinkDataCell } from "@/components";
+import { createDateDataCell, createLinkDataCell, createSingleSelectCell } from "@/components";
 import { toAllTitleCase } from "@/lib/utils";
 
 const loadersMap: Record<ProfileRole, (q: ProfileQuery) => Promise<PagedResponse<Profile>>> = {
@@ -29,6 +29,11 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
             header: 'APELLIDOS',
             enableSorting: true,
             cell: ({ row }) => toAllTitleCase(row.original.lastName),
+        },
+        {
+            accessorKey: "dni",
+            header: "DOCUMENTO",
+            enableSorting: true
         },
         {
             accessorKey: 'dateOfBirth',
@@ -57,3 +62,35 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
     cacheKey: [profilesQueryKey, role],
     loader: loadersMap[role]
 })
+
+export const createProfileSearchInputDataTableConfig = (onSelect: (profile: Profile) => void): DataTableConfig<Profile> => {
+    return {
+        title: "Buscar pérfil",
+        columns: [{
+            accessorKey: 'firstName',
+            header: 'NOMBRES',
+            enableSorting: true,
+            cell: ({ row }) => createLinkDataCell(row.original.firstName, { to: "/profiles/$id", params: { id: row.original.id.toString() } }),
+        },
+        {
+            accessorKey: 'lastName',
+            header: 'APELLIDOS',
+            enableSorting: true,
+            cell: ({ row }) => toAllTitleCase(row.original.lastName),
+        },
+        {
+            accessorKey: "dni",
+            header: "DOCUMENTO",
+            enableSorting: true
+        },
+        {
+            accessorKey: 'id',
+            header: 'ID',
+            enableSorting: true,
+        },
+        { id: "select", cell: ({ row }) => createSingleSelectCell(() => onSelect(row.original)) }
+        ],
+        cacheKey: [profilesQueryKey],
+        loader: getProfiles
+    }
+}

@@ -22,10 +22,7 @@ const CurrencyInput = ({
       defaultValue={props.defaultValue as string | null | undefined}
       value={value ?? ''}
       name={name}
-      onValueChange={(values) => {
-        console.log(values)
-        onChange?.(values.value)
-      }}
+      onValueChange={(values) => onChange?.(values.value)}
       onBlur={onBlur}
       {...props}
     />

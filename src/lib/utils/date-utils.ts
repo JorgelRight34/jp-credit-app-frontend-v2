@@ -157,6 +157,10 @@ export const getDateLabelSinceDate = (date: Date | string) => {
 }
 
 
+export const addDays = (date: Date, days: number) => {
+    return dayjs(date).add(days, 'day').toDate()
+}
+
 export const TimeSpan = {
     fromMinutes: (minutes: number) => 60 * minutes,
     fromDays: (days: number) => 60 * 60 * days

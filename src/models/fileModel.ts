@@ -5,6 +5,7 @@ export interface FileModel {
   /** URL to access or download the file */
   url: string;
   publicId?: string;
+  isImage: boolean;
 
   /** Optional internal database ID */
   id: number;
