@@ -5,18 +5,19 @@ import type { LoanQuery } from '../models/loanQuery'
 import type { Loan } from '../models/loan'
 import type { DataTableContainerOverrides, InputProps } from '@/components'
 import { DataTableContainer, SearchableComboBox } from '@/components'
+import { useProjectId } from '@/features/projects'
 
 interface LoanSearchInputProps extends InputProps {
   datatable?: DataTableContainerOverrides<Loan, LoanQuery>
 }
 
 const LoanSearchInput = ({ datatable, ...props }: LoanSearchInputProps) => {
+  const [projectId] = useProjectId()
+
   return (
     <SearchableComboBox<{ id: number }, number>
       modalProps={{
         title: 'Préstamos',
-        height: '90dvh',
-        width: '50dvw',
       }}
       cacheKey={[loansQueryKey]}
       accesorFn={(l) => l?.id ?? 0}
@@ -25,6 +26,7 @@ const LoanSearchInput = ({ datatable, ...props }: LoanSearchInputProps) => {
         <DataTableContainer
           searchConfig={loanSearchConfig}
           datatableConfig={createLoanSearchInputDataTableConfig(setValue)}
+          cacheKey={[loansQueryKey, projectId]}
           {...datatable}
         />
       )}

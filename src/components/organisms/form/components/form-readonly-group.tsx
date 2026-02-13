@@ -1,6 +1,16 @@
+import { PropsWithChildren, useCallback } from 'react'
 import FormGroupLayout, { FormGroupLabel } from './fom-group-layout'
 import type { FormGroupLayoutProps } from './fom-group-layout'
-import { ContentCopyIcon, Input } from '@/components/atoms'
+import {
+  ContentCopyIcon,
+  Icon,
+  Input,
+  Link,
+  LinkProps,
+  OpenInNewIcon,
+} from '@/components/atoms'
+import { copyToClipboard } from '@/lib/utils'
+import { toastService } from '@/lib/services'
 
 export interface FormReadOnlyProps extends FormGroupLayoutProps {
   value?: string | number
@@ -9,7 +19,7 @@ export interface FormReadOnlyProps extends FormGroupLayoutProps {
 }
 
 export const readOnlyIconForInput = {
-  icon: () => <ContentCopyIcon />,
+  icon: () => <ReadOnlyIcon />,
   iconDirection: 'right',
 }
 
@@ -28,12 +38,45 @@ const FormReadOnlyGroup = ({
       <Input
         className="w-full"
         value={value ?? 'N/D'}
-        icon={readOnlyIconForInput}
+        icon={{
+          icon: () => <ReadOnlyIcon value={value?.toString()} />,
+          iconDirection: 'right',
+        }}
         disabled={disabled}
         readOnly
       />
     </FormGroupLayout>
   )
+}
+
+export const FormReadonlyGroupLabelLink = ({
+  children,
+  ...props
+}: Omit<LinkProps, 'children'> & PropsWithChildren) => {
+  return (
+    <FormGroupLabel
+      label={
+        <Link {...props}>
+          <div className="flex items-center gap-3">
+            <span>{children}</span>
+            <Icon className="!text-sm" icon={OpenInNewIcon} />
+          </div>
+        </Link>
+      }
+    />
+  )
+}
+
+const ReadOnlyIcon = ({ value }: { value?: string }) => {
+  const handleOnCopy = useCallback(async () => {
+    if (value) {
+      if (await copyToClipboard(value)) {
+        toastService.success('Copiado')
+      }
+    }
+  }, [])
+
+  return <ContentCopyIcon onClick={handleOnCopy} />
 }
 
 export default FormReadOnlyGroup

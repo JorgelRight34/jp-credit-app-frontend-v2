@@ -1,11 +1,9 @@
 import {
   CurrencyInput,
   DataModuleFormProps,
-  DataTable,
   DateInput,
   Form,
   FormContainer,
-  FormContainerButtons,
   FormGroup,
   FormRow,
   FormSelectGroup,
@@ -17,13 +15,12 @@ import {
   Tabs,
 } from '@/components'
 import { useLoanForm } from '../hooks/useLoanForm'
-import { useState } from 'react'
 import { loanPaymentFrequencySelectOptions } from '../lib/constants'
-import { ProfileSearchInput } from '@/features/profiles'
-import CreateLoanFormPreview from './create-loan-preview'
+import { LoanOfficerSearchInput, ProfileSearchInput } from '@/features/profiles'
+import LoanProjectionCard from './loan-projection-card'
 import { Loan } from '../models/loan'
 import { LoanFormValues } from '../lib/schemas/loanFormSchema'
-import { amortizationDatatableConfig } from '@/features/amortizations'
+import LoanAmortizationPreview from './loan-amortization-preview'
 
 interface CreateLoanFormProps extends DataModuleFormProps<
   Loan,
@@ -31,15 +28,11 @@ interface CreateLoanFormProps extends DataModuleFormProps<
 > {}
 
 const CreateLoanForm = (props: CreateLoanFormProps) => {
-  const [isDirty, setIsDirty] = useState(false)
-  const [activeTab, setActiveTab] = useState<string | null>('data')
-  const form = useLoanForm({ onDirtyChange: setIsDirty, ...props })
+  const form = useLoanForm(props)
 
   return (
-    <FormContainer
-      footer={<FormContainerButtons isDirty={isDirty} form={form} />}
-    >
-      <Tabs onSelect={setActiveTab}>
+    <FormContainer form={form}>
+      <Tabs>
         <Tab eventKey="data" title="Datos">
           <Form form={form}>
             <div className="flex">
@@ -83,21 +76,21 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                 </FormRow>
                 <FormRow>
                   <FormGroup
-                    name="clientId"
+                    name="clientProfileId"
                     label="Cliente"
                     input={ProfileSearchInput}
                   />
                   <FormGroup
-                    name="guarantorId"
+                    name="guarantorProfileId"
                     label="Garante"
                     input={ProfileSearchInput}
                   />
                 </FormRow>
                 <FormRow>
                   <FormGroup
-                    name="loanOfficerId"
+                    name="loanOfficerProfileId"
                     label="Oficial"
-                    input={ProfileSearchInput}
+                    input={LoanOfficerSearchInput}
                   />
                 </FormRow>
               </div>
@@ -111,7 +104,7 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                     'paymentFrequency',
                   ]}
                   render={(values) => (
-                    <CreateLoanFormPreview
+                    <LoanProjectionCard
                       className="w-full h-full shadow-sm"
                       amount={values[0]}
                       nPer={values[1]}
@@ -130,7 +123,7 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
             />
           </Form>
         </Tab>
-        <Tab eventKey="amortization" title="Amortización">
+        <Tab eventKey="amortization" title="Amortización" forceRender>
           <FormWatch
             form={form}
             names={[
@@ -138,17 +131,17 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
               'annualInterestRate',
               'paymentFrequency',
               'numberOfPayments',
+              'startDate',
             ]}
             render={(values) => (
-              <DataTable
-                query={{
-                  principalBalance: values[0],
-                  annualInterestRate: values[1],
-                  paymentFrequency: values[2],
-                  numberOfPayments: values[3],
+              <LoanAmortizationPreview
+                calculationInput={{
+                  principalBalance: +values[0],
+                  annualInterestRate: +values[1],
+                  paymentFrequency: +values[2],
+                  numberOfPayments: +values[3],
                 }}
-                enabled={activeTab === 'amortization'}
-                {...amortizationDatatableConfig}
+                startDate={values[4]}
               />
             )}
           />

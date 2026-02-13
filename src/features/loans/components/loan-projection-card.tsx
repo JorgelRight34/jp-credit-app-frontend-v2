@@ -2,7 +2,7 @@ import { FinancialCard, InfoIcon } from '@/components'
 import { getPmt, getTotalInterest, toCurrency } from '@/lib/utils'
 import { useMemo } from 'react'
 
-interface CreateLoanFormPreviewProps {
+interface LoanProjectionCardProps {
   amount: number
   annualInterestRate: number
   nPer: number
@@ -10,13 +10,13 @@ interface CreateLoanFormPreviewProps {
   className?: string
 }
 
-const CreateLoanFormPreview = ({
+const LoanProjectionCard = ({
   amount,
   nPer,
   annualInterestRate,
   paymentFrequency,
   className = '',
-}: CreateLoanFormPreviewProps) => {
+}: LoanProjectionCardProps) => {
   const details = useMemo<{ pmt: number; totalInterest: number }>(() => {
     if (!nPer || nPer === 0 || !amount) return { pmt: 0, totalInterest: 0 }
 
@@ -55,4 +55,4 @@ const CreateLoanFormPreview = ({
   )
 }
 
-export default CreateLoanFormPreview
+export default LoanProjectionCard

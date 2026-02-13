@@ -5,6 +5,7 @@ import type { ProfileQuery } from '../models/profileQuery'
 import type { DataTableContainerOverrides } from '@/components'
 import type { ProfileRole } from '../models/profileRole'
 import { DataTableContainer } from '@/components'
+import { profilesQueryKey } from '../lib/constants'
 
 interface ProfilesDataTableProps extends DataTableContainerOverrides<
   Profile,
@@ -16,14 +17,13 @@ interface ProfilesDataTableProps extends DataTableContainerOverrides<
 const ProfilesDataTable = ({
   role = 'profile',
   ...props
-}: ProfilesDataTableProps) => {
-  return (
-    <DataTableContainer
-      searchConfig={profileSearchConfig}
-      datatableConfig={createProfilesDataTableConfig(role)}
-      {...props}
-    />
-  )
-}
+}: ProfilesDataTableProps) => (
+  <DataTableContainer
+    searchConfig={profileSearchConfig}
+    datatableConfig={createProfilesDataTableConfig(role)}
+    cacheKey={[profilesQueryKey, role]}
+    {...props}
+  />
+)
 
 export default ProfilesDataTable

@@ -5,16 +5,20 @@ import {
 } from '../lib/config/breadcrumbs'
 import { rolesPermissionProvider } from '../lib/config/permissionProvider'
 import type { Role } from '../models/role'
-import { CreateFormPageLayout } from '@/components'
+import { CreateFormPageLayout, Tab, Tabs } from '@/components'
 
 const CreateRoleFormPage = ({ role }: { role?: Role }) => {
   return (
     <CreateFormPageLayout
-      title="grupo"
+      title="Grupo"
       permissionProvider={rolesPermissionProvider}
       breadcrumbs={[accessControlBreadcrumb, rolesModuleBreadcrumb]}
     >
-      <RoleForm role={role} />
+      <Tabs defaultActiveKey="form">
+        <Tab eventKey="form" title="Formulario">
+          <RoleForm role={role} />
+        </Tab>
+      </Tabs>
     </CreateFormPageLayout>
   )
 }

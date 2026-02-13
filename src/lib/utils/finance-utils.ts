@@ -28,3 +28,10 @@ export const toCurrency = (money: number | undefined): string | number => {
 
     return formattedAmount;
 };
+
+export const toPercentage = (number: number): string => {
+    return `${(number * 100).toFixed(2)}%`
+}
+
+export const isFiniteNumber = (n: unknown): n is number =>
+    typeof n === 'number' && Number.isFinite(n)

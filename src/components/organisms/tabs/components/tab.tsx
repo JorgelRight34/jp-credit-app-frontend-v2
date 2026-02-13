@@ -9,6 +9,7 @@ export type TabProps = Omit<RTabProps, 'title'> & {
   eventKey?: string
   title?: ReactNode
   isActive?: boolean
+  forceRender?: boolean
   icon?: IconName
 }
 

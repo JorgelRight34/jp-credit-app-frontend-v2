@@ -1,4 +1,3 @@
-import { usersQueryKey } from "../constants"
 import { getUsers } from "../../services/userClient"
 import type { User } from "../../models/user"
 import type { DataTableConfig } from "@/components";
@@ -6,7 +5,6 @@ import { createDateDataCell, createIsActiveDataCell, createLinkDataCell } from "
 
 export const usersDatatableConfig: DataTableConfig<User> = {
     title: 'Accesos',
-    cacheKey: [usersQueryKey],
     columns: [
         {
             id: 'username',

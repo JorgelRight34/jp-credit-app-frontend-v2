@@ -2,6 +2,6 @@ import type { AmortizationPayment } from "./amortizationPayment";
 
 export interface Amortization {
   paymentValue: number;
-  totalInterest: 0;
+  totalInterest: number;
   amortizations: Array<AmortizationPayment>;
 }

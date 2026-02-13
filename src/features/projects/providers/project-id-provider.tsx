@@ -1,44 +1,32 @@
-import {
-  createContext,
-  PropsWithChildren,
-  useEffect,
-  useState,
-  useContext,
-} from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
+import { setProjectId } from '../lib/utils'
 
-const STORAGE_KEY = 'projectId'
-
-interface ProjectIdContextValue {
-  projectId: number | null
-  setProjectId: (id: number | null) => void
-}
+type ProjectIdContextValue = [number | null, (id: number | null) => void]
 
 const ProjectIdContext = createContext<ProjectIdContextValue | undefined>(
   undefined,
 )
 
-export const ProjectIdProvider = ({ children }: PropsWithChildren) => {
-  const [projectId, setProjectIdState] = useState<number | null>(null)
+type ProjectIdProviderProps = {
+  initialProjectId: number | null
+  children: ReactNode
+}
 
-  // Read from localStorage on mount
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) {
-      setProjectIdState(Number(stored))
-    }
-  }, [])
+export const ProjectIdProvider = ({
+  initialProjectId,
+  children,
+}: ProjectIdProviderProps) => {
+  const [projectId, setProjectIdState] = useState<number | null>(
+    initialProjectId,
+  )
 
-  const setProjectId = (id: number | null) => {
-    if (id === null) {
-      localStorage.removeItem(STORAGE_KEY)
-    } else {
-      localStorage.setItem(STORAGE_KEY, id.toString())
-    }
-    setProjectIdState(id)
+  const handleSetProjectId = (value: number | null) => {
+    setProjectIdState(value)
+    setProjectId(value)
   }
 
   return (
-    <ProjectIdContext.Provider value={{ projectId, setProjectId }}>
+    <ProjectIdContext.Provider value={[projectId, handleSetProjectId]}>
       {children}
     </ProjectIdContext.Provider>
   )

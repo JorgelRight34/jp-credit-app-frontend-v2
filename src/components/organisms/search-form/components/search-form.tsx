@@ -3,7 +3,7 @@ import { Activity, useState } from 'react'
 import { Form, FormInput, useForm } from '../../form'
 import { WIDTH_CLASS_MAP } from '../lib/constants'
 import type { PropsWithChildren } from 'react'
-import type { SchemaType } from '../../form'
+import type { SchemaType, UseFormBuilderReturn } from '../../form'
 import type { SearchFormOption } from '../models/searchFormOption'
 import type { Query } from '../models/query'
 import {
@@ -13,6 +13,7 @@ import {
   MenuIcon,
   SearchIcon,
 } from '@/components/atoms'
+import { FieldValues, useFormState } from 'react-hook-form'
 
 interface SearchFormProps<T extends Query> {
   options: Array<SearchFormOption<T>>
@@ -29,7 +30,6 @@ const SearchForm = <T extends Query>({
   initialValues,
   onSubmit,
 }: SearchFormProps<T>) => {
-  const [isDirty, setIsDirty] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [hasOpenedAdvanced, setHasOpenedAdvanced] = useState(false)
   const form = useForm({
@@ -37,7 +37,6 @@ const SearchForm = <T extends Query>({
     defaultValues: initialValues,
     resetValues: false,
     onSubmit,
-    onDirtyChange: setIsDirty,
   })
 
   return (
@@ -61,12 +60,7 @@ const SearchForm = <T extends Query>({
               ))}
             </div>
             <div className="flex shrink-0 items-center gap-1 pl-1">
-              <AccentBtn
-                disabled={!isDirty}
-                icon={SearchIcon}
-                className="shadow-sm"
-                onClick={form.form.handleSubmit}
-              />
+              <SubmitBtn form={form} />
               <LightBtn
                 icon={MenuIcon}
                 className="border shadow-sm"
@@ -97,11 +91,21 @@ const SearchForm = <T extends Query>({
   )
 }
 
-const SearchFormGroupContainer = ({
-  width,
-  children,
-}: { width: number } & PropsWithChildren) => {
-  return <div className={clsx('px-1', WIDTH_CLASS_MAP[width])}>{children}</div>
+const SubmitBtn = <T extends FieldValues>({
+  form,
+}: {
+  form: UseFormBuilderReturn<T>
+}) => {
+  const { isDirty } = useFormState({ control: form.form.control })
+
+  return (
+    <AccentBtn
+      disabled={!isDirty}
+      icon={SearchIcon}
+      className="shadow-sm"
+      onClick={form.form.handleSubmit}
+    />
+  )
 }
 
 const AdvancedSearchFormGroup = <T,>({
@@ -123,6 +127,13 @@ const AdvancedSearchFormGroup = <T,>({
       </div>
     </SearchFormGroupContainer>
   )
+}
+
+const SearchFormGroupContainer = ({
+  width,
+  children,
+}: { width: number } & PropsWithChildren) => {
+  return <div className={clsx('px-1', WIDTH_CLASS_MAP[width])}>{children}</div>
 }
 
 export default SearchForm

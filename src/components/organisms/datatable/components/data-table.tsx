@@ -14,13 +14,10 @@ export type DataTableProps<T, TQuery extends Query> = Partial<
   totalItems?: number | 'infinite'
   selectedId?: number | string
   defaultQuery?: TQuery
-  extraColumns?: Array<Column<T>>
-  startInsertingExtraColumnsAt?: number
   initialData?: PagedResponse<T>
   columns: Array<Column<T>>
   cacheKey: CacheKey
   title: string
-  displayEmptyMessage?: boolean
   initialState?: InitialTableState<T>
   loader: (options: TQuery) => Promise<PagedResponse<T>>
   onPageChange?: (page: number) => void
@@ -29,7 +26,6 @@ export type DataTableProps<T, TQuery extends Query> = Partial<
 }
 
 const DataTable = <T, TQuery extends Query = Query>({
-  displayEmptyMessage,
   title,
   query,
   placeholderData = keepPreviousData,

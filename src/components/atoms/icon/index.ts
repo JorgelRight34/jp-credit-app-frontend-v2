@@ -118,7 +118,7 @@ export { default as ErrorIcon } from "@mui/icons-material/ErrorOutlined"
 export { default as VisibilityOffIcon } from "@mui/icons-material/VisibilityOffOutlined"
 export { default as ArrowForwardIcon } from '@mui/icons-material/KeyboardArrowRightOutlined';
 export { default as GenderIcon } from "@mui/icons-material/WcOutlined"
-
+export { default as OpenInNewIcon } from '@mui/icons-material/OpenInNew'
 // Loans
 export { default as MailIcon } from "@mui/icons-material/MailOutlined";
 export { default as PlayCircleIcon } from "@mui/icons-material/PlayCircleOutlined";

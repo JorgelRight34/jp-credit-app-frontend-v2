@@ -6,6 +6,8 @@ import { CookieService } from '@/lib/services/cookieService'
 import { getAuthorizationFromClient, isJwtValid } from '@/lib/utils/auth-utils'
 import { getCurrentUser } from '@/features/auth/services/authService'
 import { getCurrentUserFromServer } from '@/features/auth/server/authServerService'
+import { PROJECT_ID_STORAGE_KEY, ProjectIdProvider } from '@/features/projects'
+import { getProjectId } from '@/features/projects/lib/utils'
 
 const getCurrentUserFn = createIsomorphicFn()
   .server(() => getCurrentUserFromServer())
@@ -14,6 +16,10 @@ const getCurrentUserFn = createIsomorphicFn()
 const getAuthorizationFn = createIsomorphicFn()
   .server(() => CookieService.getAuthorization())
   .client(() => getAuthorizationFromClient())
+
+const getProjectIdFn = createIsomorphicFn()
+  .server(() => Number(CookieService.get(PROJECT_ID_STORAGE_KEY)))
+  .client(() => getProjectId())
 
 export const Route = createFileRoute('/(main)')({
   component: RouteComponent,
@@ -33,15 +39,17 @@ function RouteComponent() {
   return (
     <div className="flex flex-col md:flex-row h-screen relative">
       <AuthProvider user={user}>
-        <div className="w-full md:w-2/14 hidden md:block h-full p-0 shadow-sm">
-          <Navbar />
-        </div>
-        <div className="flex flex-col flex-1 p-0 [scrollbar-gutter:stable] overflow-y-auto">
-          <Outlet />
-        </div>
-        <div className="flex-shrink-0">
-          <BottomNavbar />
-        </div>
+        <ProjectIdProvider initialProjectId={getProjectIdFn() ?? null}>
+          <div className="w-full md:w-2/14 hidden md:block h-full p-0 shadow-sm">
+            <Navbar />
+          </div>
+          <div className="flex flex-col flex-1 p-0 [scrollbar-gutter:stable] overflow-y-auto">
+            <Outlet />
+          </div>
+          <div className="flex-shrink-0">
+            <BottomNavbar />
+          </div>
+        </ProjectIdProvider>
       </AuthProvider>
     </div>
   )

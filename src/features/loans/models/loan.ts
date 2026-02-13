@@ -28,7 +28,7 @@ export interface Loan {
     accruedInterest: number;
     annualInterestRate: number;
     numberOfPayments: number;
-    paymentFrequency: number;
+    paymentFrequency: LoanPaymentFrequency;
     expirationDate: Date | string;
     latePaymentCredit: number; // Abono de mora (mora pagada)
     accruedCapital: number;
@@ -52,6 +52,8 @@ export interface Loan {
     createdAt: Date | string; // DateTime in C# is replaced by string (ISO format) in TypeScript
     updatedAt: Date | string; // Same as above
 }
+
+export type LoanPaymentFrequency = 1 | 12 | 4 | 2
 
 type LoanMember = {
     name: string;

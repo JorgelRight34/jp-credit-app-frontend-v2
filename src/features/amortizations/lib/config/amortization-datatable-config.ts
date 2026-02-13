@@ -1,15 +1,10 @@
 import { Column, DataTableConfig, getFooterTotalAsCurrency } from "@/components";
 import { AmortizationPayment } from "../../models/amortizationPayment";
-import { toCurrency } from "@/lib/utils";
-import { amortizationQueryKey } from "../constants";
+import { addDays, toCurrency, toFormattedDate, toTitleCase } from "@/lib/utils";
 import { getPagedAmortization } from "../../services/amortizationService";
 import { AmortizationCalculatorInput } from "../../models/amortizationCalculatorInput";
 
-const amortizationDatatableColumns: Array<Column<AmortizationPayment>> = [
-    {
-        accessorKey: "number",
-        header: "NO.",
-    },
+export const amortizationDatatableColumns: Array<Column<AmortizationPayment>> = [
     {
         header: "CUOTA",
         cell: ({ row }) => toCurrency(row.original.total),
@@ -30,9 +25,27 @@ const amortizationDatatableColumns: Array<Column<AmortizationPayment>> = [
     },
 ]
 
+export const createAmortizationPaymentNumberColumn = (startDate?: Date | string, paymentFrequencyPerYear?: number): Column<AmortizationPayment> => (
+    {
+        accessorKey: "number",
+        header: "No.",
+        cell: ({ row }) => {
+            if (!startDate || !paymentFrequencyPerYear)
+                return row.original.number;
+            return toTitleCase(
+                toFormattedDate(
+                    addDays(
+                        startDate,
+                        (365 / paymentFrequencyPerYear) * row.original.number,
+                    ),
+                ),
+            );
+        },
+    }
+)
+
 export const amortizationDatatableConfig: DataTableConfig<AmortizationPayment, AmortizationCalculatorInput> = ({
     title: "Amortizaciones",
     columns: amortizationDatatableColumns,
-    cacheKey: [amortizationQueryKey],
     loader: getPagedAmortization
 })

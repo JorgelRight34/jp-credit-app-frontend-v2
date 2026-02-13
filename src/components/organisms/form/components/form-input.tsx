@@ -25,6 +25,7 @@ const FormInput = <T extends FieldValues>({
   return (
     <Controller
       name={name as string}
+      defaultValue={''}
       render={({ field }) => {
         return <Component {...props} {...field} />
       }}

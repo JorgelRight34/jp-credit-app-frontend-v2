@@ -21,7 +21,10 @@ const ModalTrigger = forwardRef<ModalTriggerRef, ModalTriggerProps>(
 
     return (
       <>
-        <span className="w-full" onClick={() => setShowModal(true)}>
+        <span
+          className="cursor-pointer w-full"
+          onClick={() => setShowModal(true)}
+        >
           {trigger}
         </span>
         <Modal {...props} show={showModal} onHide={() => setShowModal(false)}>

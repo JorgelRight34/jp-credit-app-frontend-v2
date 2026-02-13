@@ -8,7 +8,6 @@ export type DataModuleFormProps<T = object, TData extends FieldValues = FieldVal
     reset?: boolean;
     shouldEdit?: boolean;
     toastMessage?: (data?: T) => string;
-    onDirtyChange?: (isDirty: boolean) => void;
     onIsValidChange?: (isValid: boolean) => void;
     onSuccess?: (data: T) => void;
 }

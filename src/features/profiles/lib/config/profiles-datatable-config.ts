@@ -1,4 +1,3 @@
-import { profilesQueryKey } from "../constants";
 import { getClients, getGuarantors, getLoanOfficers, getProfiles } from "../../services/profileClient";
 import type { ProfileRole } from "../../models/profileRole";
 import type { ProfileQuery } from "../../models/profileQuery";
@@ -59,18 +58,16 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
             enableSorting: true,
         },
     ],
-    cacheKey: [profilesQueryKey, role],
     loader: loadersMap[role]
 })
 
-export const createProfileSearchInputDataTableConfig = (onSelect: (profile: Profile) => void): DataTableConfig<Profile> => {
+export const createProfileSearchInputDataTableConfig = (onSelect: (profile: Profile) => void, role: ProfileRole = "profile"): DataTableConfig<Profile> => {
     return {
         title: "Buscar pérfil",
         columns: [{
             accessorKey: 'firstName',
             header: 'NOMBRES',
             enableSorting: true,
-            cell: ({ row }) => createLinkDataCell(row.original.firstName, { to: "/profiles/$id", params: { id: row.original.id.toString() } }),
         },
         {
             accessorKey: 'lastName',
@@ -90,7 +87,6 @@ export const createProfileSearchInputDataTableConfig = (onSelect: (profile: Prof
         },
         { id: "select", cell: ({ row }) => createSingleSelectCell(() => onSelect(row.original)) }
         ],
-        cacheKey: [profilesQueryKey],
-        loader: getProfiles
+        loader: loadersMap[role]
     }
 }

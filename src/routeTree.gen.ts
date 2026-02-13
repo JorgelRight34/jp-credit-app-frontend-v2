@@ -18,6 +18,8 @@ import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(m
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
 import { Route as mainmodulesCollateralsIndexRouteImport } from './routes/(main)/(modules)/collaterals/index'
 import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
+import { Route as mainmodulesProjectsSelectIndexRouteImport } from './routes/(main)/(modules)/projects/select/index'
+import { Route as mainmodulesProjectsCreateIndexRouteImport } from './routes/(main)/(modules)/projects/create/index'
 import { Route as mainmodulesProfilesCreateIndexRouteImport } from './routes/(main)/(modules)/profiles/create/index'
 import { Route as mainmodulesProfilesIdIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/index'
 import { Route as mainmodulesLoansCreateIndexRouteImport } from './routes/(main)/(modules)/loans/create/index'
@@ -78,6 +80,18 @@ const mainmodulesAccessControlIndexRoute =
   mainmodulesAccessControlIndexRouteImport.update({
     id: '/access-control/',
     path: '/access-control/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesProjectsSelectIndexRoute =
+  mainmodulesProjectsSelectIndexRouteImport.update({
+    id: '/projects/select/',
+    path: '/projects/select/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesProjectsCreateIndexRoute =
+  mainmodulesProjectsCreateIndexRouteImport.update({
+    id: '/projects/create/',
+    path: '/projects/create/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesProfilesCreateIndexRoute =
@@ -178,6 +192,8 @@ export interface FileRoutesByFullPath {
   '/loans/create/': typeof mainmodulesLoansCreateIndexRoute
   '/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
+  '/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
+  '/projects/select/': typeof mainmodulesProjectsSelectIndexRoute
   '/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -201,6 +217,8 @@ export interface FileRoutesByTo {
   '/loans/create': typeof mainmodulesLoansCreateIndexRoute
   '/profiles/$id': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create': typeof mainmodulesProfilesCreateIndexRoute
+  '/projects/create': typeof mainmodulesProjectsCreateIndexRoute
+  '/projects/select': typeof mainmodulesProjectsSelectIndexRoute
   '/access-control/roles/$id': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username': typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -227,6 +245,8 @@ export interface FileRoutesById {
   '/(main)/(modules)/loans/create/': typeof mainmodulesLoansCreateIndexRoute
   '/(main)/(modules)/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/(main)/(modules)/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
+  '/(main)/(modules)/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
+  '/(main)/(modules)/projects/select/': typeof mainmodulesProjectsSelectIndexRoute
   '/(main)/(modules)/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/(main)/(modules)/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/(main)/(modules)/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -252,6 +272,8 @@ export interface FileRouteTypes {
     | '/loans/create/'
     | '/profiles/$id/'
     | '/profiles/create/'
+    | '/projects/create/'
+    | '/projects/select/'
     | '/access-control/roles/$id/'
     | '/access-control/roles/create/'
     | '/access-control/users/$username/'
@@ -275,6 +297,8 @@ export interface FileRouteTypes {
     | '/loans/create'
     | '/profiles/$id'
     | '/profiles/create'
+    | '/projects/create'
+    | '/projects/select'
     | '/access-control/roles/$id'
     | '/access-control/roles/create'
     | '/access-control/users/$username'
@@ -300,6 +324,8 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/loans/create/'
     | '/(main)/(modules)/profiles/$id/'
     | '/(main)/(modules)/profiles/create/'
+    | '/(main)/(modules)/projects/create/'
+    | '/(main)/(modules)/projects/select/'
     | '/(main)/(modules)/access-control/roles/$id/'
     | '/(main)/(modules)/access-control/roles/create/'
     | '/(main)/(modules)/access-control/users/$username/'
@@ -378,6 +404,20 @@ declare module '@tanstack/react-router' {
       path: '/access-control'
       fullPath: '/access-control/'
       preLoaderRoute: typeof mainmodulesAccessControlIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/projects/select/': {
+      id: '/(main)/(modules)/projects/select/'
+      path: '/projects/select'
+      fullPath: '/projects/select/'
+      preLoaderRoute: typeof mainmodulesProjectsSelectIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/projects/create/': {
+      id: '/(main)/(modules)/projects/create/'
+      path: '/projects/create'
+      fullPath: '/projects/create/'
+      preLoaderRoute: typeof mainmodulesProjectsCreateIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/profiles/create/': {
@@ -493,6 +533,8 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesLoansCreateIndexRoute: typeof mainmodulesLoansCreateIndexRoute
   mainmodulesProfilesIdIndexRoute: typeof mainmodulesProfilesIdIndexRoute
   mainmodulesProfilesCreateIndexRoute: typeof mainmodulesProfilesCreateIndexRoute
+  mainmodulesProjectsCreateIndexRoute: typeof mainmodulesProjectsCreateIndexRoute
+  mainmodulesProjectsSelectIndexRoute: typeof mainmodulesProjectsSelectIndexRoute
   mainmodulesAccessControlRolesIdIndexRoute: typeof mainmodulesAccessControlRolesIdIndexRoute
   mainmodulesAccessControlRolesCreateIndexRoute: typeof mainmodulesAccessControlRolesCreateIndexRoute
   mainmodulesAccessControlUsersUsernameIndexRoute: typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -516,6 +558,8 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesLoansCreateIndexRoute: mainmodulesLoansCreateIndexRoute,
   mainmodulesProfilesIdIndexRoute: mainmodulesProfilesIdIndexRoute,
   mainmodulesProfilesCreateIndexRoute: mainmodulesProfilesCreateIndexRoute,
+  mainmodulesProjectsCreateIndexRoute: mainmodulesProjectsCreateIndexRoute,
+  mainmodulesProjectsSelectIndexRoute: mainmodulesProjectsSelectIndexRoute,
   mainmodulesAccessControlRolesIdIndexRoute:
     mainmodulesAccessControlRolesIdIndexRoute,
   mainmodulesAccessControlRolesCreateIndexRoute:

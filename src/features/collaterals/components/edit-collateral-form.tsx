@@ -26,47 +26,32 @@ const EditCollateralForm = ({
   collateral,
   ...props
 }: EditCollateralFormProps) => {
-  return (
-    <Tabs defaultActiveKey="data">
-      <Tab eventKey="data" title="Datos">
-        <EditCollateralDataForm collateral={collateral} {...props} />
-      </Tab>
-      <Tab eventKey="files" title="Archivos">
-        <EditCollateralFileAttachmentsForm collateral={collateral} />
-      </Tab>
-    </Tabs>
-  )
-}
-
-const EditCollateralDataForm = ({
-  collateral,
-  ...props
-}: EditCollateralFormProps) => {
-  const [isDirty, setIsDirty] = useState(false)
   const form = useCollateralForm({
-    onDirtyChange: setIsDirty,
     collateral,
     ...props,
   })
 
   return (
-    <FormContainer
-      footer={
-        <FormContainerButtons text="Actualizar" isDirty={isDirty} form={form} />
-      }
-    >
-      <CollateralDataForm
-        loanFormGroup={
-          <FormReadOnlyGroup
-            name="loanId"
-            label="Préstamo"
-            value={`Préstamo No.${collateral.loanId}`}
-            disabled
+    <Tabs defaultActiveKey="data">
+      <Tab eventKey="data" title="Datos">
+        <FormContainer form={form}>
+          <CollateralDataForm
+            loanFormGroup={
+              <FormReadOnlyGroup
+                name="loanId"
+                label="Préstamo"
+                value={`Préstamo No.${collateral.loanId}`}
+                disabled
+              />
+            }
+            form={form}
           />
-        }
-        form={form}
-      />
-    </FormContainer>
+        </FormContainer>
+      </Tab>
+      <Tab eventKey="files" title="Archivos">
+        <EditCollateralFileAttachmentsForm collateral={collateral} />
+      </Tab>
+    </Tabs>
   )
 }
 

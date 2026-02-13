@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useCollateralForm } from '../hooks/useCollateralForm'
 import { useCollateralFileAttachmentForm } from '../hooks/useCollateralFileAttachmentsForm'
 import type { DataModuleFormProps } from '@/components'
@@ -8,7 +7,6 @@ import {
   FileAttachmentsForm,
   FileAttachmentsPanel,
   FormContainer,
-  FormContainerButtons,
   FormGroup,
   Tab,
   Tabs,
@@ -22,18 +20,14 @@ interface CreateCollateralFormProps extends DataModuleFormProps<
 > {}
 
 const CreateCollateralForm = (props: CreateCollateralFormProps) => {
-  const [isDirty, setIsDirty] = useState(false)
   const fileAttachmentsForm = useCollateralFileAttachmentForm({})
   const form = useCollateralForm({
-    onDirtyChange: setIsDirty,
     onSuccess: fileAttachmentsForm.submit,
     ...props,
   })
 
   return (
-    <FormContainer
-      footer={<FormContainerButtons isDirty={isDirty} form={form} />}
-    >
+    <FormContainer form={form}>
       <Tabs defaultActiveKey="data">
         <Tab eventKey="data" title="Datos">
           <CollateralDataForm

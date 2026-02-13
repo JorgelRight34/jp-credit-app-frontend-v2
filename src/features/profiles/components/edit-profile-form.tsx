@@ -19,34 +19,22 @@ type EditProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues> & {
 }
 
 const EditProfileForm = ({ profile, ...props }: EditProfileFormProps) => {
-  return (
-    <Tabs defaultActiveKey="profile">
-      <Tab eventKey="profile" title="Pérfil">
-        <ProfileDataEditForm profile={profile} {...props} />
-      </Tab>
-      <Tab eventKey="files" title="Archivos">
-        <ProfileEditFileAttachmentsForm profile={profile} />
-      </Tab>
-    </Tabs>
-  )
-}
-
-const ProfileDataEditForm = ({ profile, ...props }: EditProfileFormProps) => {
-  const [isDirty, setIsDirty] = useState(false)
   const form = useProfileForm({
-    onDirtyChange: setIsDirty,
     profile,
     ...props,
   })
 
   return (
-    <FormContainer
-      footer={
-        <FormContainerButtons isDirty={isDirty} form={form} text="Actualizar" />
-      }
-    >
-      <ProfileDataForm form={form} />
-    </FormContainer>
+    <Tabs defaultActiveKey="profile">
+      <Tab eventKey="profile" title="Pérfil">
+        <FormContainer form={form}>
+          <ProfileDataForm form={form} />
+        </FormContainer>
+      </Tab>
+      <Tab eventKey="files" title="Archivos">
+        <ProfileEditFileAttachmentsForm profile={profile} />
+      </Tab>
+    </Tabs>
   )
 }
 
@@ -63,6 +51,7 @@ const ProfileEditFileAttachmentsForm = ({ profile }: EditProfileFormProps) => {
           text="Actualizar adjuntos"
         />
       }
+      onSubmit={fileAttachmentsForm.handleSubmit}
     >
       <FileAttachmentsForm
         ref={fileAttachmentsForm.formRef}

@@ -1,12 +1,14 @@
-import { Suspense, useRef, useState } from 'react'
+import { Suspense, useRef } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
-import UserRolesFormPanel, { UserRolesFormRef } from './user-roles-form-panel'
+import UserRolesFormPanel, {
+  UserRolesFormProps,
+  UserRolesFormRef,
+} from './user-roles-form-panel'
 import type { User } from '../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import {
   FormContainer,
-  FormContainerButtons,
   FormGroup,
   FormRow,
   PasswordInput,
@@ -16,11 +18,11 @@ import {
 import PermissionsForm, { PermissionsFormRef } from './permissions-form'
 import { updateUserClaims } from '../services/userClient'
 import UserDataFormPanel from './user-data-form-panel'
+import { useUserRolesForm } from '../hooks/useUserRolesForm'
 
 type CreateUserAccessFormProps = DataModuleFormProps<User, UserFormValues>
 
 const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
-  const [isDirty, setIsDirty] = useState(false)
   const permissionsFormRef = useRef<PermissionsFormRef>(null)
   const rolesFormRef = useRef<UserRolesFormRef>(null)
 
@@ -36,14 +38,11 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
         rolesFormRef.current?.submit(),
       ])
     },
-    onDirtyChange: setIsDirty,
     ...props,
   })
 
   return (
-    <FormContainer
-      footer={<FormContainerButtons form={form} isDirty={isDirty} />}
-    >
+    <FormContainer form={form}>
       <Tabs defaultActiveKey="data" navigate={false}>
         <Tab eventKey="data" title="Datos">
           <UserDataFormPanel form={form}>
@@ -70,10 +69,20 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
         </Tab>
         <Tab eventKey="roles" title="Roles">
           <Suspense fallback="...">
-            <UserRolesFormPanel />
+            <UserRolesForm ref={rolesFormRef} />
           </Suspense>
         </Tab>
       </Tabs>
+    </FormContainer>
+  )
+}
+
+const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
+  const form = useUserRolesForm(props)
+
+  return (
+    <FormContainer form={form}>
+      <UserRolesFormPanel form={form} ref={ref} />
     </FormContainer>
   )
 }

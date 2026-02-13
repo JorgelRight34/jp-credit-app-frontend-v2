@@ -35,7 +35,9 @@ export const useTabs = ({ defaultActiveKey, children, onSelect, getDefaultActive
     } else {
       startTransitionForPanelIndex(() => {
         setPanelIndex(index);
-        setRenderedTabs(prev => ({ ...prev, [index]: true }));
+        if (tabsArray[index].props.forceRender !== true) {
+          setRenderedTabs(prev => ({ ...prev, [index]: true }));
+        }
       })
     }
 

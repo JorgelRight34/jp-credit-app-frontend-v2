@@ -13,21 +13,15 @@ type FormProps<T extends FieldValues> = {
 }
 
 function InnerForm<T extends FieldValues>(
-  {
-    children,
-    className = 'h-full',
-    form: { form, validation, state },
-  }: FormProps<T>,
+  { children, className = 'h-full', form: { form } }: FormProps<T>,
   ref: React.Ref<FormRef<T>>,
 ) {
   useImperativeHandle(ref, () => ({
     control: form.control,
     applyInterceptors: form.applyInterceptors,
-    isDirty: () => state.isDirty,
     validate: form.validate,
     getValues: form.getValues,
     setValue: form.setValue,
-    watch: form.watch,
     submit: () => form.handleSubmit(),
     reset: () => form.reset(),
   }))
@@ -37,7 +31,6 @@ function InnerForm<T extends FieldValues>(
       <aside className="flex-1">
         <FormProvider {...form.methods}>{children}</FormProvider>
       </aside>
-      <FormErrors validation={validation} />
     </form>
   )
 }
@@ -45,32 +38,5 @@ function InnerForm<T extends FieldValues>(
 const Form = forwardRef(InnerForm) as <T extends FieldValues>(
   props: FormProps<T> & { ref?: React.Ref<FormRef<T>> },
 ) => ReactElement
-
-const FormErrors = <T extends FieldValues>({
-  validation: { formErrors, apiErrors },
-}: {
-  validation: UseFormBuilderReturn<T>['validation']
-}) => {
-  return (
-    <>
-      {apiErrors.length > 0 && (
-        <ul className="list-disc">
-          {apiErrors.map((err, index) => (
-            <li key={index}>{err}</li>
-          ))}
-        </ul>
-      )}
-      {
-        <ul className="list-disc">
-          {formErrors.map((err, index) => (
-            <li key={index}>
-              {err.src} - {err.message}
-            </li>
-          ))}
-        </ul>
-      }
-    </>
-  )
-}
 
 export default Form

@@ -5,7 +5,6 @@ import {
   rolesModuleBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import { rolesPermissionProvider } from '../lib/config/permissionProvider'
-import RolePermissionsPanel from '../components/role-permissions-panel'
 import UsersDataTable from '../components/users-datatable'
 import type { Role } from '../models/role'
 import type { IdentityPermissions } from '../models/identityPermissions'
@@ -18,9 +17,11 @@ import {
   PageRouterLayout,
   PermissionIcon,
   Tab,
+  TableBuilder,
   TabsRouter,
   getPageLayoutOptions,
 } from '@/components'
+import { claimsTableColumns } from '../lib/constants'
 
 type RolePageProps = {
   role: Role
@@ -77,10 +78,12 @@ const RolePage = ({ role, rolePermissions }: RolePageProps) => {
         </Tab>
         <Tab eventKey="permissions" title="Permisos">
           <Suspense fallback="...">
-            <RolePermissionsPanel
-              roleId={role.id}
-              rolePermissions={rolePermissions}
-            />
+            <section>
+              <TableBuilder
+                columns={claimsTableColumns}
+                data={rolePermissions.claims}
+              />
+            </section>
           </Suspense>
         </Tab>
         <Tab eventKey="participants" title="Participantes">

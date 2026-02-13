@@ -7,7 +7,8 @@ export const loanFormSchema = z
             z.number().positive("Debe ser positivo.")
         ),
         description: z.string(),
-        interestRate: z.union([
+        graceDays: z.number(),
+        annualInterestRate: z.union([
             z.string().transform((val) => Number(val)),
             z.number(),
         ]),
@@ -28,10 +29,10 @@ export const loanFormSchema = z
         ]),
         startDate: z.string().default(new Date().toISOString()),
         deliveryDate: z.string(),
-        loanOfficerId: z.number().optional(),
-        guarantorId: z.number().optional(),
+        loanOfficerProfileId: z.number().optional(),
+        guarantorProfileId: z.number().optional(),
         projectId: z.number(),
-        clientId: z.union([
+        clientProfileId: z.union([
             z
                 .object({
                     value: z.number(),
@@ -40,8 +41,6 @@ export const loanFormSchema = z
                 .transform((val) => val.value),
             z.number(),
         ]),
-        status: z.string(),
-        annualInterestRate: z.number().optional(),
     });
 
 export type LoanFormValues = z.infer<typeof loanFormSchema>;

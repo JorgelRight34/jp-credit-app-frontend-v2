@@ -29,8 +29,10 @@ export const useDataTable = <T, TQuery extends Query>({
 }: UseDataTableProps<T, TQuery>) => {
     const { page, limit, order, fetchPage, sort, setLimit } = useDataTableState({ cacheKey, pageSize })
 
+    console.log("comprar acciones de amor")
+
     const { data, isLoading, isError } = useData<PagedResponse<T>>({
-        key: cacheKey.concat({ limit, page, order, query }),
+        key: cacheKey.concat(["data-table", { limit, page, order, query }]),
         loader: () => loader({ ...(query ?? {} as TQuery), ...order, page, limit }),
         initialData,
         enabled,

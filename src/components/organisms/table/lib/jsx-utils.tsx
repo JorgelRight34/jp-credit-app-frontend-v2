@@ -13,6 +13,23 @@ export const createLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
   )
 }
 
+export const createOptionDataCell = (
+  label: ReactNode,
+  onClick: () => void,
+  isDestructive?: boolean,
+) => {
+  return (
+    <span
+      className={clsx('text-accent-secondary', {
+        '!text-red-500': isDestructive,
+      })}
+      onClick={onClick}
+    >
+      {label}
+    </span>
+  )
+}
+
 export const createImageDataCell = (props: TablePhotoCellProps) => {
   return <TablePhotoCell {...props} />
 }

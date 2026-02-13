@@ -5,3 +5,4 @@ export * from "./utils"
 export * from "./constants"
 export * from "./params-utils"
 export * from "./array-utils"
+export * from './dom-utils'

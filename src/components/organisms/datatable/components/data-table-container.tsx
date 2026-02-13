@@ -3,11 +3,12 @@ import DataTable from './data-table'
 import type { InitialTableState } from '../../table/hooks/useTableState'
 import type { DataTableConfig } from '../models/dataTableConfig'
 import type { Query, SearchFormConfig } from '../../search-form'
-import type { PagedResponse } from '@/models'
+import type { CacheKey, PagedResponse } from '@/models'
 
 export type DataTableContainerProps<TEntity extends object, T extends Query> = {
   searchConfig: SearchFormConfig<T>
   datatableConfig: DataTableConfig<TEntity>
+  cacheKey: CacheKey
   initialData?: PagedResponse<TEntity>
   initialQuery?: Partial<T>
   initialState?: InitialTableState<TEntity>
@@ -24,6 +25,7 @@ const DataTableContainer = <TEntity extends object, TQuery extends Query>({
   searchConfig,
   initialState,
   initialQuery,
+  cacheKey,
 }: DataTableContainerProps<TEntity, TQuery>) => {
   return (
     <SearchContainer
@@ -33,7 +35,7 @@ const DataTableContainer = <TEntity extends object, TQuery extends Query>({
         <DataTable<TEntity, TQuery>
           title={datatableConfig.title}
           columns={datatableConfig.columns}
-          cacheKey={datatableConfig.cacheKey}
+          cacheKey={cacheKey}
           initialData={initialData}
           initialState={initialState}
           query={query}

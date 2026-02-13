@@ -9,3 +9,8 @@ export const getProjects = async (params: Query): Promise<PagedResponse<Project>
     const { data } = await api.get(baseUrl, { params })
     return data;
 }
+
+export const getProject = async (id: Project["id"]) => {
+    const { data } = await api.get(baseUrl + "/" + id);
+    return data;
+}

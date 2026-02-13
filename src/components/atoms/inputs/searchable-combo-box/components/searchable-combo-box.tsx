@@ -18,7 +18,7 @@ interface SearchableComboBoxProps<T, TValue> extends Omit<InputProps, 'ref'> {
   onChange?: (val: TValue) => TValue
   accesorFn: (val: T | null) => TValue
   visibleValueFn: (val: T | null) => string | undefined
-  render: (setValue: (val: T) => void) => ReactNode
+  render: (setValue: (val: T | null) => void) => ReactNode
   loader: (val: TValue) => Promise<T> | T
 }
 
@@ -79,7 +79,7 @@ const DisplayInput = <T, TValue>({
   loader,
   ...props
 }: SearchableComboBoxProps<T, TValue>) => {
-  const [selected, setSelected] = useState<T>()
+  const [selected, setSelected] = useState<T | null>(null)
   const modalTriggerRef = useRef<ModalTriggerRef>(null)
 
   const { data: fetchedDefaultValue } = useData<T>({
@@ -89,7 +89,7 @@ const DisplayInput = <T, TValue>({
   })
 
   const handleSelect = useCallback(
-    (val: T) => {
+    (val: T | null) => {
       onChange?.(accesorFn(val))
       setSelected(val)
       modalTriggerRef.current?.hide()

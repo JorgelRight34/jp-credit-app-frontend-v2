@@ -4,17 +4,17 @@ import type { DataTableContainerOverrides } from '@/components'
 import type { User } from '../models/user'
 import type { UserQuery } from '../models/userQuery'
 import { DataTableContainer } from '@/components'
+import { usersQueryKey } from '../lib/constants'
 
 const UsersDataTable = (
   config: DataTableContainerOverrides<User, UserQuery>,
-) => {
-  return (
-    <DataTableContainer
-      searchConfig={userSearchConfig}
-      datatableConfig={usersDatatableConfig}
-      {...config}
-    />
-  )
-}
+) => (
+  <DataTableContainer
+    searchConfig={userSearchConfig}
+    datatableConfig={usersDatatableConfig}
+    cacheKey={[usersQueryKey]}
+    {...config}
+  />
+)
 
 export default UsersDataTable

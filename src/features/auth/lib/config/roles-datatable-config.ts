@@ -1,5 +1,4 @@
 import { getRoles } from "../../services/authService";
-import { rolesQueryKey } from "../constants";
 import UsersDataTable from "../../components/users-datatable";
 import type { Role } from "../../models/role";
 import type { DataTableConfig } from "@/components";
@@ -31,7 +30,6 @@ export const userRolesTableColumns: DataTableConfig<Role>["columns"] = [
 
 export const rolesDataTableConfig: DataTableConfig<Role> = {
     title: "Roles",
-    cacheKey: [rolesQueryKey, "all"],
     columns: rolesTableColumns,
     onExpand: (row) => UsersDataTable({ initialQuery: { role: row.original.normalizedName } }),
     loader: getRoles

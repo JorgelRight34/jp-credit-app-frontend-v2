@@ -156,8 +156,7 @@ export const getDateLabelSinceDate = (date: Date | string) => {
     return dayjs(date).fromNow()
 }
 
-
-export const addDays = (date: Date, days: number) => {
+export const addDays = (date: Date | string, days: number) => {
     return dayjs(date).add(days, 'day').toDate()
 }
 

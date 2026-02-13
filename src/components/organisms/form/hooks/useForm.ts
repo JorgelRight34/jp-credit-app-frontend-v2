@@ -1,21 +1,24 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AxiosError } from "axios";
-import { startTransition, useEffect, useMemo, useState } from "react";
 import { useForm as useRHFForm } from "react-hook-form";
 import type { SchemaType } from "../models/schemaType";
-import type { ApiError } from "../models/apiError";
 import type { UseFormBuilderReturn } from "../models/useFormBuilderReturn";
 import type { FormInterceptor } from "../models/formInterceptor";
-import type { FormError } from "../models/formError";
 import type { FieldValues } from "react-hook-form";
 import type { CacheKey } from "@/models";
 import { useDataClient } from "@/hooks/useDataClient";
 import { useDataMutation } from "@/hooks/useMutate";
 import { toastService } from "@/lib/services";
 
+export type DefaultFormValues<TData> = Partial<{
+    [K in keyof TData]:
+    | TData[K]
+    | ''
+    | TData[K][]
+}>
+
 export interface UseFormBuilderProps<TData, TReturn> {
     schema?: SchemaType<TData>;
-    defaultValues?: Partial<TData> | Partial<{ [K in keyof TData]: '' }>;
+    defaultValues?: DefaultFormValues<TData>;
     resetValues?: boolean;
     keysToInvalidate?: Array<CacheKey>;
     tagsToInvalidate?: Array<string>;
@@ -26,8 +29,6 @@ export interface UseFormBuilderProps<TData, TReturn> {
     onDelete?: () => void;
     onSubmit: ((data: TData) => Promise<TReturn>);
     onEdit?: ((data: TData) => Promise<void>);
-    onIsValidChange?: (val: boolean) => void;
-    onDirtyChange?: (val: boolean) => void;
 }
 
 export const useForm = <T extends object, TData extends FieldValues, TReturn = T>({
@@ -38,23 +39,17 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     interceptors,
     keysToInvalidate,
     toastMessage,
-    onIsValidChange,
-    onDirtyChange,
     onEdit,
-    onDelete,
     onSuccess,
     onSubmit,
 }: UseFormBuilderProps<TData, TReturn>): UseFormBuilderReturn<TData> => {
-    const [apiErrors, setApiErrors] = useState<Array<string>>([]);
-    const [memoizedOnDirtyChange] = useState(() => (isDirty: boolean) => onDirtyChange?.(isDirty))
-    const [memoizedOnIsValidChange] = useState(() => (isValid: boolean) => onIsValidChange?.(isValid))
     const dataClient = useDataClient();
 
-    const { mutateAsync, isPending, isError } = useDataMutation({
+    const { mutateAsync, isPending, isError, error } = useDataMutation({
         mutationFn: async (data: TData) => {
             if (shouldEdit && onEdit) {
                 const res = await onEdit(data);
-                reset(data)
+                methods.reset(data)
                 return res;
             }
             return await onSubmit(data)
@@ -68,18 +63,7 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
             invalidateKeys();
 
             if (resetValues) handleReset();
-        },
-        onError: (err) => {
-            handleError(err)
         }
-    })
-
-    const handleOnDeleteConfig = useDataMutation({
-        mutationFn: async () => {
-            return await Promise.resolve(onDelete?.());
-        },
-        onSuccess: () => invalidateKeys(),
-        onError: (err) => handleError(err)
     })
 
     const methods = useRHFForm({
@@ -87,45 +71,8 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
         defaultValues: defaultValues as Record<string, unknown>
     });
 
-    const {
-        control,
-        formState: { errors, isDirty, isValid },
-        handleSubmit,
-        reset,
-        setError,
-    } = methods;
-
-    const formErrors = useMemo<Array<FormError>>(() => {
-        return Object.keys(errors).map((key) => ({
-            src: key,
-            message: errors[key]?.message?.toString() || "",
-        }));
-    }, [errors]);
-
     const handleOnSubmit = async (data: FieldValues) => {
         await mutateAsync(applyInterceptors(data as TData));
-
-        clearApiErrors();
-    };
-
-    const handleError = (err: unknown) => {
-        if (!(err instanceof AxiosError)) return;
-
-        const apiErrs = err.response?.data as ApiError | undefined;
-        if (!apiErrs?.errors) return;
-
-        Object.keys(apiErrs.errors).forEach((key) =>
-            setError(key.toLowerCase(), {
-                type: "manual",
-                message: "Inválido",
-            })
-        );
-
-        setApiErrors(Object.values(apiErrs.errors).flat());
-    }
-
-    const clearApiErrors = () => {
-        if (apiErrors.length > 0) setApiErrors([]);
     };
 
     const applyInterceptors = (data: TData) => {
@@ -147,25 +94,16 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     }
 
     const handleReset = () => {
-        reset(defaultValues, { keepErrors: false, keepDirty: false });
+        methods.reset(defaultValues, { keepErrors: false, keepDirty: false });
     };
-
-    useEffect(() => {
-        startTransition(() => memoizedOnDirtyChange(isDirty));
-    }, [isDirty, memoizedOnDirtyChange])
-
-    useEffect(() => {
-        startTransition(() => memoizedOnIsValidChange(isValid))
-    }, [isValid, memoizedOnIsValidChange])
 
     return {
         form: {
-            control,
+            control: methods.control,
             methods,
             applyInterceptors,
             getValues: methods.getValues,
-            handleSubmit: handleSubmit(handleOnSubmit),
-            handleDelete: handleOnDeleteConfig.mutateAsync,
+            handleSubmit: methods.handleSubmit(handleOnSubmit),
             setValue: methods.setValue,
             validate: methods.trigger,
             reset: handleReset,
@@ -173,14 +111,9 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
             watch: methods.watch,
         },
         state: {
-            isPending: isPending || handleOnDeleteConfig.isPending,
-            isError: isError || handleOnDeleteConfig.isError,
-            isDirty,
-        },
-        validation: {
-            errors,
-            formErrors,
-            apiErrors,
+            error,
+            isPending: isPending,
+            isError: isError,
         },
     } as UseFormBuilderReturn<TData>;
 };

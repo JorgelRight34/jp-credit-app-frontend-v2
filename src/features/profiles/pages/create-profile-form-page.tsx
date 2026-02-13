@@ -6,7 +6,7 @@ import CreateProfileForm from '../components/create-profile-form'
 const CreateProfileFormPage = () => {
   return (
     <CreateFormPageLayout
-      title="pérfil"
+      title="Pérfil"
       breadcrumbs={[profilesBreadcrumb]}
       permissionProvider={profilesPermissionProvider}
     >

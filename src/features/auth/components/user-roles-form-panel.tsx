@@ -8,13 +8,15 @@ import type { User } from '../models/user'
 import { Form, FormInput, TransferList } from '@/components'
 import { useSuspenseData } from '@/hooks/useData'
 
-type UserRolesFormProps = DataModuleFormProps<null, UserRolesFormValues> & {
+export type UserRolesFormProps = DataModuleFormProps<null, UserRolesFormValues>
+export type UserRolesFormRef = FormRef<UserRolesFormValues>
+
+type UserRolesFormPanelProps = UserRolesFormProps & {
+  form: ReturnType<typeof useUserRolesForm>
   user?: User
 }
 
-export type UserRolesFormRef = FormRef<UserRolesFormValues>
-
-const UserRolesFormPanel = ({ ref, ...props }: UserRolesFormProps) => {
+const UserRolesFormPanel = ({ form, ref }: UserRolesFormPanelProps) => {
   const { data } = useSuspenseData(allRolesQueryOptions)
   const rolesListClaims = useMemo<Array<TransferItem>>(
     () =>
@@ -24,8 +26,6 @@ const UserRolesFormPanel = ({ ref, ...props }: UserRolesFormProps) => {
       })),
     [data],
   )
-  const form = useUserRolesForm(props)
-
   return (
     <Form ref={ref} form={form}>
       <FormInput

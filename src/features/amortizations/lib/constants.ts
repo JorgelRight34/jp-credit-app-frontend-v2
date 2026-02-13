@@ -1,1 +1,1 @@
-export const amortizationQueryKey = "amortization"
+export const amortizationQueryKey = "amortization";

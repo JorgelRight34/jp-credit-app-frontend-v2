@@ -18,8 +18,15 @@ export const useUserForm = ({ user, initialValues, ...props }: UseUserFormProps)
       lastName: user.lastName,
       email: user.email,
       isActive: user.isActive,
-      ...initialValues
-    } : initialValues,
+    } : {
+      username: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmation: "",
+      isActive: true
+    },
     onSubmit: createUser,
     onEdit: async (data) => {
       await editUser(data, user!.id)
