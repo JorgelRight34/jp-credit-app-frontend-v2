@@ -6,7 +6,7 @@ import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
-const getLoanFn = createIsomorphicFn()
+export const getLoanFn = createIsomorphicFn()
   .server((id) => getLoanFromServer(id))
   .client((id) => getLoan(id))
 

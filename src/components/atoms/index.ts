@@ -4,6 +4,8 @@
 export * from "./button"
 export { default as ToggleButtonGroup } from "./button/components/toggle-button-group";
 export { default as LightBtn } from "./button/components/light-btn";
+export * from "./icon/iconName";
+
 // -------------------------------------
 // Icon & Text
 // -------------------------------------

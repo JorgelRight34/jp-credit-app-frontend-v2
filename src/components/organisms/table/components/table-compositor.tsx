@@ -2,16 +2,12 @@ import Table from './table'
 import type { ReactNode } from 'react'
 
 type TableCompositorProps = React.HtmlHTMLAttributes<HTMLDivElement> & {
-  head?: ReactNode
-  body: ReactNode
-  footer?: ReactNode
+  children?: ReactNode
   navigation?: ReactNode
 }
 
 const TableCompositor = ({
-  body,
-  footer,
-  head,
+  children,
   navigation,
   className,
   ...props
@@ -22,11 +18,7 @@ const TableCompositor = ({
       {...props}
     >
       <div className="flex w-full flex-col !overflow-hidden rounded-xl">
-        <Table className={className}>
-          {head}
-          {body}
-          {footer}
-        </Table>
+        <Table className={className}>{children}</Table>
       </div>
       <div className="flex-shrink-0 border-t">{navigation}</div>
     </div>

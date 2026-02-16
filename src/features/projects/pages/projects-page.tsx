@@ -1,6 +1,7 @@
 import {
   AllIcon,
   BreadcrumbsByRoute,
+  createPageLayoutCreateOption,
   PageRouterLayout,
   Tab,
   TabsRouter,
@@ -18,6 +19,7 @@ const ProjectsPage = () => {
     <PageRouterLayout
       title="Proyectos"
       permissionProvider={projectsPermissionProvider}
+      options={[createPageLayoutCreateOption('/projects/create')]}
       routerConfig={{
         baseBreadcrumbs: [projectsBreadcrumb],
         defaultActive: 'all',

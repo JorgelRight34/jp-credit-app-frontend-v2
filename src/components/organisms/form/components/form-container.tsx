@@ -1,15 +1,14 @@
-import clsx from 'clsx'
 import { type PropsWithChildren, type ReactNode } from 'react'
-import FormErrorsPanel from './form-errors-panel'
-import { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
 import { FieldValues, useFormState } from 'react-hook-form'
+import FormErrorsPanel from './form-errors-panel'
 import FormContainerButtons from './form-container-buttons'
+import { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
+import FormContainerLayout from './form-container-layout'
 
 type FormContainerProps<T extends FieldValues> = PropsWithChildren & {
-  form?: UseFormBuilderReturn<T>
-  footer?: ReactNode
+  form: UseFormBuilderReturn<T>
   className?: string
-  onSubmit?: () => unknown
+  footer?: (isDirty: boolean) => ReactNode
 }
 
 const FormContainer = <T extends FieldValues>({
@@ -18,23 +17,27 @@ const FormContainer = <T extends FieldValues>({
   className,
   footer,
 }: FormContainerProps<T>) => {
-  const { isDirty } = useFormState({ control: form?.form.control })
+  const { isDirty } = useFormState({ control: form.form.control })
 
   return (
-    <section className={clsx('!h-full w-full flex flex-col', className)}>
-      <div className="flex flex-1 gap-6 flex-col">{children}</div>
-      <div className="flex-shrink-0">
-        {form && (
-          <FormErrorsPanel
-            control={form.form.control}
-            mutationError={form.state.error}
-          />
-        )}
-      </div>
-      <div className="pt-6 flex-shrink-0">
-        {footer ?? <FormContainerButtons form={form} isDirty={isDirty} />}
-      </div>
-    </section>
+    <FormContainerLayout
+      className={className}
+      errors={
+        <FormErrorsPanel
+          control={form.form.control}
+          mutationError={form.state.error}
+        />
+      }
+      footer={
+        footer ? (
+          footer(isDirty)
+        ) : (
+          <FormContainerButtons form={form} isDirty={isDirty} />
+        )
+      }
+    >
+      {children}
+    </FormContainerLayout>
   )
 }
 

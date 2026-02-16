@@ -2,9 +2,9 @@ import {
   BreadcrumbsByRoute,
   CalendarMonthIcon,
   CollateralIcon,
+  createPageLayoutSettingsOption,
   CreditCardIcon,
   DataTable,
-  LoanIcon,
   OverviewIcon,
   PageRouterLayout,
   Tab,
@@ -12,7 +12,7 @@ import {
 } from '@/components'
 import { Loan } from '../models/loan'
 import { loanPermissionProvider } from '../lib/config/permission-provider'
-import { loanBreadcrumb } from '../lib/config/breadcrumb'
+import { createLoanBreadcrumb, loanBreadcrumb } from '../lib/config/breadcrumb'
 import LoanOverview from '../components/loan-overview'
 import LoanAmortizationPreview from '../components/loan-amortization-preview'
 import { collateralsDataTableConfig } from '@/features/collaterals'
@@ -31,12 +31,14 @@ const LoanPage = ({ loan }: { loan: Loan }) => {
     <PageRouterLayout
       title={`Préstamo No. ${loan.id}`}
       permissionProvider={loanPermissionProvider}
+      options={[
+        createPageLayoutSettingsOption('/loans/$id/settings', {
+          id: loan.id.toString(),
+        }),
+      ]}
       routerConfig={{
         defaultActive: 'overview',
-        baseBreadcrumbs: [
-          loanBreadcrumb,
-          { title: `Préstamo No.#${loan.id}`, icon: LoanIcon },
-        ],
+        baseBreadcrumbs: [loanBreadcrumb, createLoanBreadcrumb(loan)],
         breadcrumbsByRoute,
       }}
     >

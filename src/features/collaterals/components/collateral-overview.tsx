@@ -8,6 +8,7 @@ import type { Collateral } from '../models/collateral'
 import {
   FormHtmlDisplayGroup,
   FormReadOnlyGroup,
+  FormReadonlyGroupLabelLink,
   FormRow,
   PhotoGallery,
 } from '@/components'
@@ -46,7 +47,14 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
             />
             <FormReadOnlyGroup
               name="loanId"
-              label="Préstamo"
+              label={
+                <FormReadonlyGroupLabelLink
+                  to="/loans/$id"
+                  params={{ id: collateral.loanId.toString() }}
+                >
+                  Préstamo
+                </FormReadonlyGroupLabelLink>
+              }
               value={`Préstamo No.${collateral.loanId}`}
             />
           </FormRow>

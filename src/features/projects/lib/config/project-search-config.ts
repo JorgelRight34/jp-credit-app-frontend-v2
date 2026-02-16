@@ -7,4 +7,5 @@ export const projectSearchConfig: SearchFormConfig<ProjectQuery> = {
     { name: 'name', width: 10, label: 'Nombre', type: (p) => Input(p) },
   ],
   advanced: [],
+  defaultValues: { id: "", name: "" }
 }

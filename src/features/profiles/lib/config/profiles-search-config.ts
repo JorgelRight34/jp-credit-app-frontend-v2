@@ -13,5 +13,6 @@ export const profileSearchConfig: SearchFormConfig<ProfileQuery> = {
         { name: "gender", label: "Género", width: 6, type: (p) => GenderSelect(p) },
         { name: "maritalStatus", label: "Estado civil", width: 6, type: (p) => GenderSelect(p) },
         { name: "address", label: "Direcciones", width: 6, type: (p) => Input(p) }
-    ]
+    ],
+    defaultValues: { names: "", lastName: "", DNI: "", id: "", gender: "", maritalStatus: "", address: "" }
 }

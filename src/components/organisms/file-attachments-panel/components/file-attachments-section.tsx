@@ -1,28 +1,25 @@
 import { useMemo } from 'react'
-import { TableOptionCell } from '../../table'
+import { Column } from '../../table'
 import { mapApiFileToTableFile, mapFileToTableFile } from '../../upload-form'
-import FileExplorer from './file-table'
+import FileTable from './file-table'
 import type { ReactNode } from 'react'
-import type { FileUploads } from '../../upload-form/hooks/useFileAttachments'
 import type { FileModel } from '@/models/fileModel'
 import { MediumTitle } from '@/components/atoms'
+import { TableFile } from '../models/tableFile'
 
 interface FileAttachmentsSectionProps {
   label: string
   existing: Array<FileModel>
   pending: Array<File>
   buttons?: ReactNode
-  optionLabel: string
-  onOptionClick: (index: number, key: keyof FileUploads) => void
+  extraColumns?: Array<Column<TableFile>>
 }
 
 const FileAttachmentsSection = ({
   label,
   buttons,
-  optionLabel,
   existing,
   pending,
-  onOptionClick,
 }: FileAttachmentsSectionProps) => {
   return (
     <div className="flex flex-col gap-6 p-2">
@@ -33,12 +30,7 @@ const FileAttachmentsSection = ({
           </MediumTitle>
           {buttons}
         </header>
-        <FileAttachmentsTable
-          existing={existing}
-          pending={pending}
-          optionLabel={optionLabel}
-          onOptionClick={onOptionClick}
-        />
+        <FileAttachmentsTable existing={existing} pending={pending} />
       </section>
     </div>
   )
@@ -47,11 +39,10 @@ const FileAttachmentsSection = ({
 const FileAttachmentsTable = ({
   existing,
   pending,
-  optionLabel,
-  onOptionClick,
+  extraColumns,
 }: Pick<
   FileAttachmentsSectionProps,
-  'existing' | 'pending' | 'optionLabel' | 'onOptionClick'
+  'existing' | 'pending' | 'extraColumns'
 >) => {
   const existingFiles = useMemo(
     () => existing.map(mapApiFileToTableFile),
@@ -64,25 +55,7 @@ const FileAttachmentsTable = ({
     [existingFiles, pendingFiles],
   )
 
-  return (
-    <FileExplorer
-      extraColumns={[
-        {
-          id: 'options',
-          header: 'OPCIONES',
-
-          cell: ({ row }) => (
-            <TableOptionCell
-              onClick={() => onOptionClick(row.index, row.original.key)}
-            >
-              {optionLabel}
-            </TableOptionCell>
-          ),
-        },
-      ]}
-      files={files}
-    />
-  )
+  return <FileTable extraColumns={extraColumns} files={files} />
 }
 
 export default FileAttachmentsSection

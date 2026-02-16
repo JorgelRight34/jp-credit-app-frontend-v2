@@ -2,7 +2,7 @@ import { Box, IconButton } from '@mui/material'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback } from 'react'
 import type { PropsWithChildren } from 'react'
-import { ArrowBackIcon, ArrowRightAltIcon, Icon } from '@/components/atoms'
+import { ArrowBackIcon, ArrowForwardIcon, Icon } from '@/components/atoms'
 
 type CarouselProps = PropsWithChildren<{
   height?: number | string
@@ -59,7 +59,7 @@ const Carousel = ({ children, height = 300 }: CarouselProps) => {
           color: 'white',
         }}
       >
-        <Icon icon={ArrowRightAltIcon} />
+        <Icon icon={ArrowForwardIcon} />
       </IconButton>
     </div>
   )

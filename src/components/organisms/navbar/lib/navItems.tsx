@@ -206,6 +206,13 @@ export const projectsNavItem: NavItem = {
   name: 'Proyectos',
   icon: () => <FolderOpenIcon />,
   route: '/projects',
+  children: [
+    {
+      name: 'Configuraciones',
+      icon: () => <SettingsIcon />,
+      route: '/projects/settings',
+    },
+  ],
 }
 
 export const loansNavItem: NavItem = {
@@ -349,10 +356,4 @@ export const financesNavItem: NavItem = {
       route: 'finance/expenses',
     },
   ],
-}
-
-export const settingsNavItem: NavItem = {
-  name: 'Configuraciones',
-  icon: () => <SettingsIcon />,
-  route: 'projects/settings',
 }

@@ -6,17 +6,17 @@ import {
 import { loanFormSchema, LoanFormValues } from '../lib/schemas/loanFormSchema'
 import { Loan } from '../models/loan'
 import { createLoan } from '../services/loanClient'
-import { useSuspenseCurrentProject } from '@/features/projects'
+import { Project } from '@/features/projects'
+
+interface UseLoanFormProps extends DataModuleFormProps<Loan, LoanFormValues> {
+  project: Project
+}
 
 export const useLoanForm = ({
+  project,
   initialValues,
   ...props
-}: DataModuleFormProps<
-  Loan,
-  LoanFormValues
->): UseFormBuilderReturn<LoanFormValues> => {
-  const project = useSuspenseCurrentProject()
-
+}: UseLoanFormProps): UseFormBuilderReturn<LoanFormValues> => {
   return useForm({
     schema: loanFormSchema,
     defaultValues: {
@@ -27,8 +27,8 @@ export const useLoanForm = ({
       startDate: '',
       deliveryDate: '',
       annualInterestRate: '',
-      projectId: project!.id,
-      graceDays: project?.graceDays,
+      projectId: project.id,
+      graceDays: project.graceDays,
     },
     onSubmit: createLoan,
     ...props,

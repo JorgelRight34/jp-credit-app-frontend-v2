@@ -1,3 +1,4 @@
+import { CreateProjectFormPage } from '@/features/projects'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/(main)/(modules)/projects/create/')({
@@ -5,5 +6,5 @@ export const Route = createFileRoute('/(main)/(modules)/projects/create/')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/(main)/(modules)/projects/create/"!</div>
+  return <CreateProjectFormPage />
 }

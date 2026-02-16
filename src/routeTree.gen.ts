@@ -13,12 +13,14 @@ import { Route as mainRouteRouteImport } from './routes/(main)/route'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as mainIndexRouteImport } from './routes/(main)/index'
 import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/route'
+import { Route as mainmodulesTransactionsIndexRouteImport } from './routes/(main)/(modules)/transactions/index'
 import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(modules)/projects/index'
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
 import { Route as mainmodulesCollateralsIndexRouteImport } from './routes/(main)/(modules)/collaterals/index'
 import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
-import { Route as mainmodulesProjectsSelectIndexRouteImport } from './routes/(main)/(modules)/projects/select/index'
+import { Route as mainmodulesTransactionsIdIndexRouteImport } from './routes/(main)/(modules)/transactions/$id/index'
+import { Route as mainmodulesProjectsSettingsIndexRouteImport } from './routes/(main)/(modules)/projects/settings/index'
 import { Route as mainmodulesProjectsCreateIndexRouteImport } from './routes/(main)/(modules)/projects/create/index'
 import { Route as mainmodulesProfilesCreateIndexRouteImport } from './routes/(main)/(modules)/profiles/create/index'
 import { Route as mainmodulesProfilesIdIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/index'
@@ -27,6 +29,8 @@ import { Route as mainmodulesLoansIdIndexRouteImport } from './routes/(main)/(mo
 import { Route as mainmodulesCollateralsCreateIndexRouteImport } from './routes/(main)/(modules)/collaterals/create/index'
 import { Route as mainmodulesCollateralsIdIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/index'
 import { Route as mainmodulesProfilesIdEditIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/edit/index'
+import { Route as mainmodulesLoansIdSettingsIndexRouteImport } from './routes/(main)/(modules)/loans/$id/settings/index'
+import { Route as mainmodulesCollateralsIdSettingsIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/settings/index'
 import { Route as mainmodulesCollateralsIdEditIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/edit/index'
 import { Route as mainmodulesAccessControlUsersCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/users/create/index'
 import { Route as mainmodulesAccessControlUsersUsernameIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/index'
@@ -53,6 +57,12 @@ const mainmodulesRouteRoute = mainmodulesRouteRouteImport.update({
   id: '/(modules)',
   getParentRoute: () => mainRouteRoute,
 } as any)
+const mainmodulesTransactionsIndexRoute =
+  mainmodulesTransactionsIndexRouteImport.update({
+    id: '/transactions/',
+    path: '/transactions/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesProjectsIndexRoute =
   mainmodulesProjectsIndexRouteImport.update({
     id: '/projects/',
@@ -82,10 +92,16 @@ const mainmodulesAccessControlIndexRoute =
     path: '/access-control/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesProjectsSelectIndexRoute =
-  mainmodulesProjectsSelectIndexRouteImport.update({
-    id: '/projects/select/',
-    path: '/projects/select/',
+const mainmodulesTransactionsIdIndexRoute =
+  mainmodulesTransactionsIdIndexRouteImport.update({
+    id: '/transactions/$id/',
+    path: '/transactions/$id/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesProjectsSettingsIndexRoute =
+  mainmodulesProjectsSettingsIndexRouteImport.update({
+    id: '/projects/settings/',
+    path: '/projects/settings/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesProjectsCreateIndexRoute =
@@ -133,6 +149,18 @@ const mainmodulesProfilesIdEditIndexRoute =
   mainmodulesProfilesIdEditIndexRouteImport.update({
     id: '/profiles/$id/edit/',
     path: '/profiles/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesLoansIdSettingsIndexRoute =
+  mainmodulesLoansIdSettingsIndexRouteImport.update({
+    id: '/loans/$id/settings/',
+    path: '/loans/$id/settings/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsIdSettingsIndexRoute =
+  mainmodulesCollateralsIdSettingsIndexRouteImport.update({
+    id: '/collaterals/$id/settings/',
+    path: '/collaterals/$id/settings/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesCollateralsIdEditIndexRoute =
@@ -186,6 +214,7 @@ export interface FileRoutesByFullPath {
   '/loans/': typeof mainmodulesLoansIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
   '/projects/': typeof mainmodulesProjectsIndexRoute
+  '/transactions/': typeof mainmodulesTransactionsIndexRoute
   '/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
   '/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
   '/loans/$id/': typeof mainmodulesLoansIdIndexRoute
@@ -193,12 +222,15 @@ export interface FileRoutesByFullPath {
   '/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
-  '/projects/select/': typeof mainmodulesProjectsSelectIndexRoute
+  '/projects/settings/': typeof mainmodulesProjectsSettingsIndexRoute
+  '/transactions/$id/': typeof mainmodulesTransactionsIdIndexRoute
   '/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/access-control/users/create/': typeof mainmodulesAccessControlUsersCreateIndexRoute
   '/collaterals/$id/edit/': typeof mainmodulesCollateralsIdEditIndexRoute
+  '/collaterals/$id/settings/': typeof mainmodulesCollateralsIdSettingsIndexRoute
+  '/loans/$id/settings/': typeof mainmodulesLoansIdSettingsIndexRoute
   '/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
   '/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -211,6 +243,7 @@ export interface FileRoutesByTo {
   '/loans': typeof mainmodulesLoansIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
   '/projects': typeof mainmodulesProjectsIndexRoute
+  '/transactions': typeof mainmodulesTransactionsIndexRoute
   '/collaterals/$id': typeof mainmodulesCollateralsIdIndexRoute
   '/collaterals/create': typeof mainmodulesCollateralsCreateIndexRoute
   '/loans/$id': typeof mainmodulesLoansIdIndexRoute
@@ -218,12 +251,15 @@ export interface FileRoutesByTo {
   '/profiles/$id': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create': typeof mainmodulesProfilesCreateIndexRoute
   '/projects/create': typeof mainmodulesProjectsCreateIndexRoute
-  '/projects/select': typeof mainmodulesProjectsSelectIndexRoute
+  '/projects/settings': typeof mainmodulesProjectsSettingsIndexRoute
+  '/transactions/$id': typeof mainmodulesTransactionsIdIndexRoute
   '/access-control/roles/$id': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/access-control/users/create': typeof mainmodulesAccessControlUsersCreateIndexRoute
   '/collaterals/$id/edit': typeof mainmodulesCollateralsIdEditIndexRoute
+  '/collaterals/$id/settings': typeof mainmodulesCollateralsIdSettingsIndexRoute
+  '/loans/$id/settings': typeof mainmodulesLoansIdSettingsIndexRoute
   '/profiles/$id/edit': typeof mainmodulesProfilesIdEditIndexRoute
   '/access-control/roles/$id/edit': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -239,6 +275,7 @@ export interface FileRoutesById {
   '/(main)/(modules)/loans/': typeof mainmodulesLoansIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
   '/(main)/(modules)/projects/': typeof mainmodulesProjectsIndexRoute
+  '/(main)/(modules)/transactions/': typeof mainmodulesTransactionsIndexRoute
   '/(main)/(modules)/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
   '/(main)/(modules)/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
   '/(main)/(modules)/loans/$id/': typeof mainmodulesLoansIdIndexRoute
@@ -246,12 +283,15 @@ export interface FileRoutesById {
   '/(main)/(modules)/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/(main)/(modules)/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/(main)/(modules)/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
-  '/(main)/(modules)/projects/select/': typeof mainmodulesProjectsSelectIndexRoute
+  '/(main)/(modules)/projects/settings/': typeof mainmodulesProjectsSettingsIndexRoute
+  '/(main)/(modules)/transactions/$id/': typeof mainmodulesTransactionsIdIndexRoute
   '/(main)/(modules)/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/(main)/(modules)/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/(main)/(modules)/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/(main)/(modules)/access-control/users/create/': typeof mainmodulesAccessControlUsersCreateIndexRoute
   '/(main)/(modules)/collaterals/$id/edit/': typeof mainmodulesCollateralsIdEditIndexRoute
+  '/(main)/(modules)/collaterals/$id/settings/': typeof mainmodulesCollateralsIdSettingsIndexRoute
+  '/(main)/(modules)/loans/$id/settings/': typeof mainmodulesLoansIdSettingsIndexRoute
   '/(main)/(modules)/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
   '/(main)/(modules)/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/(main)/(modules)/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -266,6 +306,7 @@ export interface FileRouteTypes {
     | '/loans/'
     | '/profiles/'
     | '/projects/'
+    | '/transactions/'
     | '/collaterals/$id/'
     | '/collaterals/create/'
     | '/loans/$id/'
@@ -273,12 +314,15 @@ export interface FileRouteTypes {
     | '/profiles/$id/'
     | '/profiles/create/'
     | '/projects/create/'
-    | '/projects/select/'
+    | '/projects/settings/'
+    | '/transactions/$id/'
     | '/access-control/roles/$id/'
     | '/access-control/roles/create/'
     | '/access-control/users/$username/'
     | '/access-control/users/create/'
     | '/collaterals/$id/edit/'
+    | '/collaterals/$id/settings/'
+    | '/loans/$id/settings/'
     | '/profiles/$id/edit/'
     | '/access-control/roles/$id/edit/'
     | '/access-control/users/$username/edit/'
@@ -291,6 +335,7 @@ export interface FileRouteTypes {
     | '/loans'
     | '/profiles'
     | '/projects'
+    | '/transactions'
     | '/collaterals/$id'
     | '/collaterals/create'
     | '/loans/$id'
@@ -298,12 +343,15 @@ export interface FileRouteTypes {
     | '/profiles/$id'
     | '/profiles/create'
     | '/projects/create'
-    | '/projects/select'
+    | '/projects/settings'
+    | '/transactions/$id'
     | '/access-control/roles/$id'
     | '/access-control/roles/create'
     | '/access-control/users/$username'
     | '/access-control/users/create'
     | '/collaterals/$id/edit'
+    | '/collaterals/$id/settings'
+    | '/loans/$id/settings'
     | '/profiles/$id/edit'
     | '/access-control/roles/$id/edit'
     | '/access-control/users/$username/edit'
@@ -318,6 +366,7 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/loans/'
     | '/(main)/(modules)/profiles/'
     | '/(main)/(modules)/projects/'
+    | '/(main)/(modules)/transactions/'
     | '/(main)/(modules)/collaterals/$id/'
     | '/(main)/(modules)/collaterals/create/'
     | '/(main)/(modules)/loans/$id/'
@@ -325,12 +374,15 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/profiles/$id/'
     | '/(main)/(modules)/profiles/create/'
     | '/(main)/(modules)/projects/create/'
-    | '/(main)/(modules)/projects/select/'
+    | '/(main)/(modules)/projects/settings/'
+    | '/(main)/(modules)/transactions/$id/'
     | '/(main)/(modules)/access-control/roles/$id/'
     | '/(main)/(modules)/access-control/roles/create/'
     | '/(main)/(modules)/access-control/users/$username/'
     | '/(main)/(modules)/access-control/users/create/'
     | '/(main)/(modules)/collaterals/$id/edit/'
+    | '/(main)/(modules)/collaterals/$id/settings/'
+    | '/(main)/(modules)/loans/$id/settings/'
     | '/(main)/(modules)/profiles/$id/edit/'
     | '/(main)/(modules)/access-control/roles/$id/edit/'
     | '/(main)/(modules)/access-control/users/$username/edit/'
@@ -371,6 +423,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesRouteRouteImport
       parentRoute: typeof mainRouteRoute
     }
+    '/(main)/(modules)/transactions/': {
+      id: '/(main)/(modules)/transactions/'
+      path: '/transactions'
+      fullPath: '/transactions/'
+      preLoaderRoute: typeof mainmodulesTransactionsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/projects/': {
       id: '/(main)/(modules)/projects/'
       path: '/projects'
@@ -406,11 +465,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesAccessControlIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/projects/select/': {
-      id: '/(main)/(modules)/projects/select/'
-      path: '/projects/select'
-      fullPath: '/projects/select/'
-      preLoaderRoute: typeof mainmodulesProjectsSelectIndexRouteImport
+    '/(main)/(modules)/transactions/$id/': {
+      id: '/(main)/(modules)/transactions/$id/'
+      path: '/transactions/$id'
+      fullPath: '/transactions/$id/'
+      preLoaderRoute: typeof mainmodulesTransactionsIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/projects/settings/': {
+      id: '/(main)/(modules)/projects/settings/'
+      path: '/projects/settings'
+      fullPath: '/projects/settings/'
+      preLoaderRoute: typeof mainmodulesProjectsSettingsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/projects/create/': {
@@ -467,6 +533,20 @@ declare module '@tanstack/react-router' {
       path: '/profiles/$id/edit'
       fullPath: '/profiles/$id/edit/'
       preLoaderRoute: typeof mainmodulesProfilesIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/$id/settings/': {
+      id: '/(main)/(modules)/loans/$id/settings/'
+      path: '/loans/$id/settings'
+      fullPath: '/loans/$id/settings/'
+      preLoaderRoute: typeof mainmodulesLoansIdSettingsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/$id/settings/': {
+      id: '/(main)/(modules)/collaterals/$id/settings/'
+      path: '/collaterals/$id/settings'
+      fullPath: '/collaterals/$id/settings/'
+      preLoaderRoute: typeof mainmodulesCollateralsIdSettingsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/collaterals/$id/edit/': {
@@ -527,6 +607,7 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesLoansIndexRoute: typeof mainmodulesLoansIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
   mainmodulesProjectsIndexRoute: typeof mainmodulesProjectsIndexRoute
+  mainmodulesTransactionsIndexRoute: typeof mainmodulesTransactionsIndexRoute
   mainmodulesCollateralsIdIndexRoute: typeof mainmodulesCollateralsIdIndexRoute
   mainmodulesCollateralsCreateIndexRoute: typeof mainmodulesCollateralsCreateIndexRoute
   mainmodulesLoansIdIndexRoute: typeof mainmodulesLoansIdIndexRoute
@@ -534,12 +615,15 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesProfilesIdIndexRoute: typeof mainmodulesProfilesIdIndexRoute
   mainmodulesProfilesCreateIndexRoute: typeof mainmodulesProfilesCreateIndexRoute
   mainmodulesProjectsCreateIndexRoute: typeof mainmodulesProjectsCreateIndexRoute
-  mainmodulesProjectsSelectIndexRoute: typeof mainmodulesProjectsSelectIndexRoute
+  mainmodulesProjectsSettingsIndexRoute: typeof mainmodulesProjectsSettingsIndexRoute
+  mainmodulesTransactionsIdIndexRoute: typeof mainmodulesTransactionsIdIndexRoute
   mainmodulesAccessControlRolesIdIndexRoute: typeof mainmodulesAccessControlRolesIdIndexRoute
   mainmodulesAccessControlRolesCreateIndexRoute: typeof mainmodulesAccessControlRolesCreateIndexRoute
   mainmodulesAccessControlUsersUsernameIndexRoute: typeof mainmodulesAccessControlUsersUsernameIndexRoute
   mainmodulesAccessControlUsersCreateIndexRoute: typeof mainmodulesAccessControlUsersCreateIndexRoute
   mainmodulesCollateralsIdEditIndexRoute: typeof mainmodulesCollateralsIdEditIndexRoute
+  mainmodulesCollateralsIdSettingsIndexRoute: typeof mainmodulesCollateralsIdSettingsIndexRoute
+  mainmodulesLoansIdSettingsIndexRoute: typeof mainmodulesLoansIdSettingsIndexRoute
   mainmodulesProfilesIdEditIndexRoute: typeof mainmodulesProfilesIdEditIndexRoute
   mainmodulesAccessControlRolesIdEditIndexRoute: typeof mainmodulesAccessControlRolesIdEditIndexRoute
   mainmodulesAccessControlUsersUsernameEditIndexRoute: typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -551,6 +635,7 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesLoansIndexRoute: mainmodulesLoansIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
   mainmodulesProjectsIndexRoute: mainmodulesProjectsIndexRoute,
+  mainmodulesTransactionsIndexRoute: mainmodulesTransactionsIndexRoute,
   mainmodulesCollateralsIdIndexRoute: mainmodulesCollateralsIdIndexRoute,
   mainmodulesCollateralsCreateIndexRoute:
     mainmodulesCollateralsCreateIndexRoute,
@@ -559,7 +644,8 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesProfilesIdIndexRoute: mainmodulesProfilesIdIndexRoute,
   mainmodulesProfilesCreateIndexRoute: mainmodulesProfilesCreateIndexRoute,
   mainmodulesProjectsCreateIndexRoute: mainmodulesProjectsCreateIndexRoute,
-  mainmodulesProjectsSelectIndexRoute: mainmodulesProjectsSelectIndexRoute,
+  mainmodulesProjectsSettingsIndexRoute: mainmodulesProjectsSettingsIndexRoute,
+  mainmodulesTransactionsIdIndexRoute: mainmodulesTransactionsIdIndexRoute,
   mainmodulesAccessControlRolesIdIndexRoute:
     mainmodulesAccessControlRolesIdIndexRoute,
   mainmodulesAccessControlRolesCreateIndexRoute:
@@ -570,6 +656,9 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
     mainmodulesAccessControlUsersCreateIndexRoute,
   mainmodulesCollateralsIdEditIndexRoute:
     mainmodulesCollateralsIdEditIndexRoute,
+  mainmodulesCollateralsIdSettingsIndexRoute:
+    mainmodulesCollateralsIdSettingsIndexRoute,
+  mainmodulesLoansIdSettingsIndexRoute: mainmodulesLoansIdSettingsIndexRoute,
   mainmodulesProfilesIdEditIndexRoute: mainmodulesProfilesIdEditIndexRoute,
   mainmodulesAccessControlRolesIdEditIndexRoute:
     mainmodulesAccessControlRolesIdEditIndexRoute,

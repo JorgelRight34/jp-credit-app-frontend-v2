@@ -18,6 +18,11 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
     title: "Pérfiles",
     columns: [
         {
+            accessorKey: 'id',
+            header: 'ID',
+            enableSorting: true,
+        },
+        {
             accessorKey: 'firstName',
             header: 'NOMBRES',
             enableSorting: true,
@@ -46,11 +51,6 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
             header: 'FECHA',
             enableSorting: true,
             cell: ({ row }) => createDateDataCell(row.original.createdAt),
-        },
-        {
-            accessorKey: 'id',
-            header: 'ID',
-            enableSorting: true,
         },
         {
             accessorKey: 'phoneNumber',

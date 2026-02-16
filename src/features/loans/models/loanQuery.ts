@@ -7,6 +7,7 @@ export type LoanQuery = Query & {
     profileId?: number;
     startDate?: string;
     minPrincipalBalance?: number;
+    maxPrincipalBalance?: number;
     endDate?: string;
     minPaymentValue?: number;
     maxPaymentValue?: number;

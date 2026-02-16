@@ -10,6 +10,6 @@ export const collateralSearchConfig: SearchFormConfig<CollateralQuery> = {
     advanced: [
         { name: "minValue", label: "Valor mínimo", width: 6, type: (p) => CurrencyInput(p) },
         { name: "maxValue", label: "Valor máximo", width: 6, type: (p) => CurrencyInput(p) }
-
-    ]
+    ],
+    defaultValues: { id: "", title: "", minValue: "", maxValue: "" }
 }

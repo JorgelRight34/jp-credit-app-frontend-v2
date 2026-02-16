@@ -22,6 +22,7 @@ export const userSearchConfig: SearchFormConfig<UserQuery> = {
                 cacheKey: [rolesQueryKey, "select-options"]
             })
         }],
+    defaultValues: { id: "", username: "", firstName: "", lastName: "", email: "", role: "" }
 }
 
 const getRolesSelectOptions = async (): Promise<SelectOptions> => {

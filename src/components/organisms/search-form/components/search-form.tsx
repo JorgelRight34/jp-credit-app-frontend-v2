@@ -3,7 +3,11 @@ import { Activity, useState } from 'react'
 import { Form, FormInput, useForm } from '../../form'
 import { WIDTH_CLASS_MAP } from '../lib/constants'
 import type { PropsWithChildren } from 'react'
-import type { SchemaType, UseFormBuilderReturn } from '../../form'
+import type {
+  DefaultFormValues,
+  SchemaType,
+  UseFormBuilderReturn,
+} from '../../form'
 import type { SearchFormOption } from '../models/searchFormOption'
 import type { Query } from '../models/query'
 import {
@@ -19,6 +23,7 @@ interface SearchFormProps<T extends Query> {
   options: Array<SearchFormOption<T>>
   advanced: Array<SearchFormOption<T>>
   schema?: SchemaType<T>
+  defaultValues?: DefaultFormValues<T>
   initialValues?: Partial<T>
   onSubmit: (q: T) => Promise<T>
 }
@@ -28,13 +33,15 @@ const SearchForm = <T extends Query>({
   advanced,
   schema,
   initialValues,
+  defaultValues,
   onSubmit,
 }: SearchFormProps<T>) => {
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [hasOpenedAdvanced, setHasOpenedAdvanced] = useState(false)
   const form = useForm({
     schema,
-    defaultValues: initialValues,
+    defaultValues,
+    initialValues,
     resetValues: false,
     onSubmit,
   })
@@ -63,7 +70,7 @@ const SearchForm = <T extends Query>({
               <SubmitBtn form={form} />
               <LightBtn
                 icon={MenuIcon}
-                className="border shadow-sm"
+                className={`border shadow-sm ${advanced.length > 0 ? '' : 'opacity-50 cursor-not-allowed'}`}
                 type="button"
                 onClick={() => {
                   if (advanced.length > 0) {

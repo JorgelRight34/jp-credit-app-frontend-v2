@@ -1,12 +1,8 @@
 export const LoanStatusMap = {
     active: "active",
-    agreement: "agreement",
-    judicial: "judicial",
-    legal: "legal",
+    inactive: "inactive",
     punished: "punished",
-    settled: "settled",
-    paidOff: "paidOff",
-    overdue: "overdue"
+    expired: "expired"
 } as const;
 
 export type LoanStatus = typeof LoanStatusMap[keyof typeof LoanStatusMap];

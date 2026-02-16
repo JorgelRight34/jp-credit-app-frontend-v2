@@ -13,7 +13,6 @@ import {
   profileNavItem,
   projectsNavItem,
   reportsNavItem,
-  settingsNavItem,
   transactionsNavItem,
 } from '../../lib/navItems'
 import NavbarLinksContainer from '../navbar-link/navbar-links-container'
@@ -36,7 +35,6 @@ const options = [
   reportsNavItem,
   projectsNavItem,
   armotizationsNavItem,
-  settingsNavItem,
 ]
 
 interface NavbarProps {
@@ -83,7 +81,6 @@ const Navbar = ({ onSelect }: NavbarProps) => {
         onExpand={handleOnSelect}
         activeOptions={{ includeSearch: true }}
       >
-        {/* imrpove this ui */}
         <div className="flex justify-between border-b border-t bg-active-transparent p-3 shadow-sm">
           <div className="border-left-accent">
             <Icon
@@ -92,7 +89,6 @@ const Navbar = ({ onSelect }: NavbarProps) => {
               onClick={() => setActiveNav(null)}
             />
           </div>
-
           <div className="flex items-center">
             <Icon
               className="text-sm text-link-active"

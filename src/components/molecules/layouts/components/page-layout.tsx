@@ -24,10 +24,10 @@ const PageLayout = ({
 }: PageLayoutProps) => {
   return (
     <div className="flex flex-1 w-full flex-col  px-6 pb-6 shadow-sm">
-      <div className="border-b mb-3 w-full bg-white p-2">{breadcrumb}</div>
-      <div className="pt-lg-0 px-lg-3 flex w-full flex-shrink-0 items-center justify-between pb-3 flex-shrink-0">
+      <div className="border-b w-full bg-white p-2">{breadcrumb}</div>
+      <div className="pt-lg-0 px-lg-3 flex w-full flex-shrink-0 items-center justify-between py-3 flex-shrink-0">
         {/* Title */}
-        <BigTitle className="border-left-accent mb-0 truncate text-3xl pl-2">
+        <BigTitle className="border-left-accent mb-0 truncate text-2xl pl-2">
           {title}
         </BigTitle>
         <PageLayoutOptionsContainer options={options} />

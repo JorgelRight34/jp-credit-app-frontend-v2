@@ -2,16 +2,18 @@ import { collateralsPermissionProvider } from '../lib/config/permissionsProvider
 import { collateralsBreadcrumb } from '../lib/config/breadcrumbs'
 import { collateralIconByTypeMap } from '../lib/jsx-utils'
 import CollateralOverview from '../components/collateral-overview'
-import CollateralEditFilesForm from '../components/collateral-edit-files-form'
 import type { BreadcrumbsByRoute } from '@/components'
 import type { Collateral } from '../models/collateral'
 import {
+  createPageLayoutEditOption,
+  createPageLayoutSettingsOptionLight,
+  FileTable,
+  mapApiFileToTableFile,
   OverviewIcon,
   PageRouterLayout,
   Tab,
   TabsRouter,
   UploadIcon,
-  getPageLayoutOptions,
 } from '@/components'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
@@ -24,10 +26,14 @@ const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
     <PageRouterLayout
       title={collateral.title}
       permissionProvider={collateralsPermissionProvider}
-      options={getPageLayoutOptions({
-        editPath: '/collaterals/$id/edit',
-        params: { id: collateral.id.toString() },
-      })}
+      options={[
+        createPageLayoutSettingsOptionLight('/collaterals/$id/settings', {
+          id: collateral.id.toString(),
+        }),
+        createPageLayoutEditOption('/collaterals/$id/edit', {
+          id: collateral.id.toString(),
+        }),
+      ]}
       routerConfig={{
         defaultActive: 'overview',
         baseBreadcrumbs: [
@@ -45,7 +51,9 @@ const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
           <CollateralOverview collateral={collateral} />
         </Tab>
         <Tab eventKey="files" title="Archivos">
-          <CollateralEditFilesForm collateral={collateral} />
+          <section>
+            <FileTable files={collateral.files.map(mapApiFileToTableFile)} />
+          </section>
         </Tab>
       </TabsRouter>
     </PageRouterLayout>

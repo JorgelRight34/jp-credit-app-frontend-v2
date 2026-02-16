@@ -9,12 +9,12 @@ import ProfileEditFilesForm from '../components/profile-edit-files-form'
 import type { BreadcrumbsByRoute } from '@/components'
 import type { Profile } from '../models/profile'
 import {
+  createPageLayoutEditOption,
   OverviewIcon,
   PageRouterLayout,
   Tab,
   TabsRouter,
   UploadIcon,
-  getPageLayoutOptions,
 } from '@/components'
 
 interface ProfilePageProps {
@@ -33,10 +33,11 @@ const ProfilePage = ({ profile }: ProfilePageProps) => {
     <PageRouterLayout
       title={title}
       permissionProvider={profilesPermissionProvider}
-      options={getPageLayoutOptions({
-        editPath: '/profiles/$id/edit',
-        params: { id: profile.id.toString() },
-      })}
+      options={[
+        createPageLayoutEditOption('/profiles/$id/edit', {
+          id: profile.id.toString(),
+        }),
+      ]}
       routerConfig={{
         defaultActive: 'overview',
         breadcrumbsByRoute,

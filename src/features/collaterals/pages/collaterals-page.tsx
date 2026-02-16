@@ -12,7 +12,7 @@ import {
   PageRouterLayout,
   Tab,
   TabsRouter,
-  getPageLayoutOptions,
+  createPageLayoutCreateOption,
 } from '@/components'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
@@ -28,7 +28,7 @@ const CollateralsPage = () => {
     <PageRouterLayout
       title="Garantías"
       permissionProvider={collateralsPermissionProvider}
-      options={getPageLayoutOptions({ createPath: '/collaterals/create' })}
+      options={[createPageLayoutCreateOption('/collaterals/create')]}
       routerConfig={{
         defaultActive: 'all',
         baseBreadcrumbs: [collateralsBreadcrumb],

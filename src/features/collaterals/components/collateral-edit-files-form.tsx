@@ -3,8 +3,8 @@ import { useCollateralFileAttachmentForm } from '../hooks/useCollateralFileAttac
 import type { Collateral } from '../models/collateral'
 import {
   FileAttachmentsForm,
-  FormContainer,
   FormContainerButtons,
+  FormLayout,
 } from '@/components'
 import { FileAttachmentsPanel } from '@/components/organisms/file-attachments-panel'
 
@@ -17,7 +17,7 @@ const CollateralEditFilesForm = ({ collateral }: CollateralEditFilesForm) => {
   const form = useCollateralFileAttachmentForm({ collateral })
 
   return (
-    <FormContainer
+    <FormLayout
       footer={
         <FormContainerButtons
           isDirty={isDirty}
@@ -31,7 +31,7 @@ const CollateralEditFilesForm = ({ collateral }: CollateralEditFilesForm) => {
         onDirtyChange={setIsDirty}
         render={FileAttachmentsPanel}
       />
-    </FormContainer>
+    </FormLayout>
   )
 }
 

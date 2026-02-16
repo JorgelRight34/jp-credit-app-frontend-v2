@@ -14,7 +14,7 @@ const LoginPanel = () => {
 
   return (
     <main className="flex items-center justify-center border h-screen">
-      <Container className="w-[95dvw] md:w-[75dvw] rounded-xl py-5 flex shadow-sm">
+      <Container className="w-[95dvw] md:w-[75dvw] flex-row rounded-xl py-5 flex shadow-sm">
         <aside className="md:p-5 border-end hidden w-6/12 flex-col items-center justify-center p-3 md:flex">
           <section
             className="border-accent flex rounded-xl flex-col w-full h-full items-center justify-center p-5 shadow-sm"

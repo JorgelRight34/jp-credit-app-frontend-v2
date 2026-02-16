@@ -1,10 +1,21 @@
 import { CreateLoanFormPage } from '@/features/loans'
+import { createProjectQueryKey } from '@/features/projects/lib/query-keys'
+import { getProjectId } from '@/features/projects/lib/utils'
+import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
+import { getProjectFn } from '../../projects/settings'
 
 export const Route = createFileRoute('/(main)/(modules)/loans/create/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  return <CreateLoanFormPage />
+  const projectId = getProjectId()
+
+  const { data: project } = useSuspenseData({
+    key: createProjectQueryKey(projectId),
+    loader: () => getProjectFn(projectId),
+  })
+
+  return <CreateLoanFormPage project={project} />
 }

@@ -8,12 +8,28 @@ type EntityLayoutOptionProps = {
 const EntityLayoutOption = ({ option }: EntityLayoutOptionProps) => {
   const Component = option.component
 
+  if (option.to) {
+    return (
+      <Link to={option.to}>
+        <Component
+          disabled={option.disabled}
+          title={option.tooltip}
+          onClick={option.onClick}
+        >
+          <Icon icon={option.icon}>{option.title}</Icon>
+        </Component>
+      </Link>
+    )
+  }
+
   return (
-    <Link to={option.to ?? '.'}>
-      <Component>
-        <Icon icon={option.icon}>{option.title}</Icon>
-      </Component>
-    </Link>
+    <Component
+      disabled={option.disabled}
+      title={option.tooltip}
+      onClick={option.onClick}
+    >
+      <Icon icon={option.icon}>{option.title}</Icon>
+    </Component>
   )
 }
 

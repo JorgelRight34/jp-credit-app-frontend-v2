@@ -46,7 +46,6 @@ export interface IconProps extends React.HtmlHTMLAttributes<HTMLSpanElement> {
  */
 const Icon = ({
   label,
-  icon,
   className = '',
   labelClassName = '',
   wrapperClassName = '',
@@ -60,6 +59,7 @@ const Icon = ({
   title,
   children,
   style,
+  icon,
   onClick,
   ...props
 }: IconProps) => {

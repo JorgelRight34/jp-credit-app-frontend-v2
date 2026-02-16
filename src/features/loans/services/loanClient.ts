@@ -3,6 +3,7 @@ import type { LoanQuery } from "../models/loanQuery"
 import type { PagedResponse } from "@/models"
 import api from "@/lib/services/api"
 import { LoanFormValues } from "../lib/schemas/loanFormSchema"
+import { LoanStatus } from "../models/loanStatus"
 
 const baseUrl = "loans"
 
@@ -19,4 +20,12 @@ export const getLoan = async (id: Loan["id"]) => {
 export const createLoan = async (body: LoanFormValues): Promise<Loan> => {
     const { data } = await api.post(baseUrl, body);
     return data;
+}
+
+export const deleteLoan = async (id: Loan["id"]) => {
+    await api.delete(baseUrl + "/" + id);
+}
+
+export const updateLoanStatus = async (id: Loan["id"], status: LoanStatus) => {
+    await api.put(baseUrl + "/" + id + "/status", { status });
 }

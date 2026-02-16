@@ -116,7 +116,7 @@ export { default as AttachMoneyIcon } from "@mui/icons-material/AttachMoneyOutli
 export { default as PaymentIcon } from "@mui/icons-material/PaymentOutlined"
 export { default as ErrorIcon } from "@mui/icons-material/ErrorOutlined"
 export { default as VisibilityOffIcon } from "@mui/icons-material/VisibilityOffOutlined"
-export { default as ArrowForwardIcon } from '@mui/icons-material/KeyboardArrowRightOutlined';
+export { default as ArrowForwardIcon } from '@mui/icons-material/ArrowForwardOutlined';
 export { default as GenderIcon } from "@mui/icons-material/WcOutlined"
 export { default as OpenInNewIcon } from '@mui/icons-material/OpenInNew'
 // Loans
@@ -156,5 +156,12 @@ export { default as InventoryIcon } from '@mui/icons-material/InventoryOutlined'
 export { default as LoanIcon } from "@mui/icons-material/MailOutline"
 export { default as RestoreIcon } from "@mui/icons-material/RestoreOutlined"
 export { default as TodayIcon } from "@mui/icons-material/TodayOutlined"
+export { default as VerifiedIcon } from "@mui/icons-material/VerifiedOutlined"
+export { default as PauseCircleIcon } from "@mui/icons-material/PauseCircleOutline"
+export { default as ArrowDropDownCircleIcon } from "@mui/icons-material/ArrowDropDownCircleOutlined";
+export { default as ArrowDropDownIcon } from "@mui/icons-material/ArrowDropDownOutlined";
+export { default as SellIcon } from "@mui/icons-material/SellOutlined"
+export { default as PriceCheckIcon } from "@mui/icons-material/PriceCheckOutlined"
+
 
 export { default as Icon } from "./icon";

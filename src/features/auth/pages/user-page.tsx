@@ -12,6 +12,7 @@ import type { IdentityPermissions } from '../models/identityPermissions'
 import type { BreadcrumbsByRoute } from '@/components'
 import { getFullName } from '@/lib/utils'
 import {
+  createPageLayoutEditOption,
   GroupsIcon,
   OverviewIcon,
   PageRouterLayout,
@@ -19,7 +20,6 @@ import {
   Tab,
   TableBuilder,
   TabsRouter,
-  getPageLayoutOptions,
 } from '@/components'
 
 type UserPageProps = {
@@ -38,10 +38,11 @@ const UserPage = ({ user, userPermissions }: UserPageProps) => {
     <PageRouterLayout
       title={`${getFullName(user)} - ${user.username}`}
       permissionProvider={accessControlPermissionProvider}
-      options={getPageLayoutOptions({
-        editPath: '/access-control/users/$username/edit',
-        params: { username: user.username },
-      })}
+      options={[
+        createPageLayoutEditOption('/access-control/users/$username/edit', {
+          username: user.username,
+        }),
+      ]}
       routerConfig={{
         defaultActive: 'overview',
         baseBreadcrumbs: [

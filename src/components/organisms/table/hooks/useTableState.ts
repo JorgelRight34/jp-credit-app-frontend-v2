@@ -70,7 +70,7 @@ export const useTableState = <T,>({
             startTransition(() => {
                 setPagination((prev) => {
                     const next = getUpdaterOrValue(updaterOrValue, prev)
-                    startTransition(() => onPageChange?.(next.pageIndex + 1));
+                    onPageChange?.(next.pageIndex + 1);
 
                     return next;
                 });
@@ -90,5 +90,5 @@ export const useTableState = <T,>({
         getSortedRowModel: getSortedRowModel(),
     });
 
-    return { table };
+    return table;
 };

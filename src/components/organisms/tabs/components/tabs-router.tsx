@@ -2,8 +2,8 @@ import {
   useSetActiveTabRoute,
   useUnreactiveActiveTabRoute,
 } from '../contexts/tabs-router-context'
-import Tabs from './tabs'
-import type { TabsProps } from './tabs'
+import Tabs from './tabs-bk'
+import type { TabsProps } from './tabs-bk'
 
 export type TabsRouterProps = Omit<TabsProps, 'defaultActiveKey'>
 

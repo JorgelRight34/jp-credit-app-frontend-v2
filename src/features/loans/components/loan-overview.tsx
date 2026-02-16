@@ -1,14 +1,16 @@
 import { FormHtmlDisplayGroup, FormReadOnlyGroup, FormRow } from '@/components'
 import { Loan } from '../models/loan'
 import { toCurrency, toFormattedDate, toPercentage } from '@/lib/utils'
-import { loanPaymentFrequencyStringMap } from '../lib/constants'
+import {
+  loanPaymentFrequencyStringMap,
+  loanStatusSpanishTranslations,
+} from '../lib/constants'
 import LoanProjectionCard from './loan-projection-card'
 import { FormReadonlyGroupLabelLink } from '@/components/organisms/form/components/form-readonly-group'
 
 const LoanOverview = ({ loan }: { loan: Loan }) => {
   return (
     <section>
-      {' '}
       <div className="flex">
         <div className="w-8/12">
           <section>
@@ -94,6 +96,11 @@ const LoanOverview = ({ loan }: { loan: Loan }) => {
                   )
                 }
                 value={loan.loanOfficer?.name}
+              />
+              <FormReadOnlyGroup
+                name="status"
+                label="Estado"
+                value={loanStatusSpanishTranslations[loan.status]}
               />
             </FormRow>
           </section>

@@ -1,9 +1,10 @@
-import { SearchContainer } from '../../search-form'
 import DataTable from './data-table'
 import type { InitialTableState } from '../../table/hooks/useTableState'
 import type { DataTableConfig } from '../models/dataTableConfig'
 import type { Query, SearchFormConfig } from '../../search-form'
 import type { CacheKey, PagedResponse } from '@/models'
+import { useSearchContainer } from '../../search-form/hooks/useSearchContainer'
+import SearchForm from '../../search-form/components/search-form'
 
 export type DataTableContainerProps<TEntity extends object, T extends Query> = {
   searchConfig: SearchFormConfig<T>
@@ -27,23 +28,35 @@ const DataTableContainer = <TEntity extends object, TQuery extends Query>({
   initialQuery,
   cacheKey,
 }: DataTableContainerProps<TEntity, TQuery>) => {
+  const [controlledQuery, onSearchSubmit] = useSearchContainer(
+    initialQuery as TQuery,
+  )
+
   return (
-    <SearchContainer
-      search={searchConfig}
-      initialValues={initialQuery}
-      render={(query) => (
+    <section className="flex flex-col w-full">
+      <div className="mb-3">
+        <SearchForm
+          onSubmit={onSearchSubmit}
+          options={searchConfig.options}
+          initialValues={initialQuery}
+          defaultValues={searchConfig.defaultValues}
+          advanced={searchConfig.advanced}
+          schema={searchConfig.schema}
+        />
+      </div>
+      <div>
         <DataTable<TEntity, TQuery>
           title={datatableConfig.title}
           columns={datatableConfig.columns}
           cacheKey={cacheKey}
           initialData={initialData}
           initialState={initialState}
-          query={query}
+          query={controlledQuery}
           loader={datatableConfig.loader}
           onExpand={datatableConfig.onExpand}
         />
-      )}
-    />
+      </div>
+    </section>
   )
 }
 

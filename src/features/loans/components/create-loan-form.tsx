@@ -21,11 +21,14 @@ import LoanProjectionCard from './loan-projection-card'
 import { Loan } from '../models/loan'
 import { LoanFormValues } from '../lib/schemas/loanFormSchema'
 import LoanAmortizationPreview from './loan-amortization-preview'
+import { Project } from '@/features/projects'
 
 interface CreateLoanFormProps extends DataModuleFormProps<
   Loan,
   LoanFormValues
-> {}
+> {
+  project: Project
+}
 
 const CreateLoanForm = (props: CreateLoanFormProps) => {
   const form = useLoanForm(props)

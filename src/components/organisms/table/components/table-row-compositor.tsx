@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { flexRender } from '@tanstack/react-table'
 import { AddCircleIcon, DoNotDisturbOnIcon, Icon } from '../../../atoms/icon'
 import TableRow from './table-row'
@@ -20,9 +19,7 @@ const TableRowCompositor = <TData,>({
   return (
     <TableRow
       key={row.id}
-      className={clsx('bg-accent-hover cursor-pointer', className, {
-        'bg-accent': row.getIsSelected(),
-      })}
+      className={`bg-accent-hover cursor-pointer ${row.getIsSelected() ? 'bg-accent' : ''} ${className}`}
     >
       {row.getVisibleCells().map((cell) => (
         <TableDataCell key={cell.id}>

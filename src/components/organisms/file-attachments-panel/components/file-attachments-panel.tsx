@@ -10,6 +10,7 @@ import {
   Paragraph,
   UploadIcon,
 } from '@/components/atoms'
+import { TableOptionCell } from '../../table'
 
 type FileAttachmentsPanelProps = UseFileAttachmentsReturn & {
   showLimitWarning?: boolean
@@ -34,10 +35,23 @@ const FileAttachmentsPanel = ({
         <Tab eventKey="uploaded" title="Subidos" icon={UploadIcon}>
           <FileFormExplorerTabPanel
             label="Subidos"
-            optionLabel="Borrar"
             existing={add.existingFiles}
             pending={add.pendingFiles}
-            onOptionClick={remove.removeFile}
+            extraColumns={[
+              {
+                id: 'options',
+                header: 'OPCIONES',
+                cell: ({ row }) => (
+                  <TableOptionCell
+                    onClick={() =>
+                      remove.removeFile(row.index, row.original.key)
+                    }
+                  >
+                    Borrar
+                  </TableOptionCell>
+                ),
+              },
+            ]}
             buttons={
               <FileInputWrapper
                 accept={accept}
@@ -53,10 +67,24 @@ const FileAttachmentsPanel = ({
         <Tab eventKey="removed" title="Eliminados" icon={DeleteIcon}>
           <FileFormExplorerTabPanel
             label="Eliminados"
-            optionLabel="Recuperar"
+            extraColumns={[
+              {
+                id: 'options',
+                header: 'OPCIONES',
+
+                cell: ({ row }) => (
+                  <TableOptionCell
+                    onClick={() =>
+                      remove.recoverFile(row.index, row.original.key)
+                    }
+                  >
+                    Recuperar
+                  </TableOptionCell>
+                ),
+              },
+            ]}
             existing={remove.deletedExistingFiles}
             pending={remove.removedPendingFiles}
-            onOptionClick={remove.recoverFile}
           />
         </Tab>
       </Tabs>

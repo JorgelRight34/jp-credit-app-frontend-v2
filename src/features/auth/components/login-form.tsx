@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useLoginForm } from '../hooks/useLoginForm'
 import type { LoginResult } from '../models/loginResult'
 import type { LoginSchemaType } from '../lib/schemas/loginSchema'
@@ -7,6 +6,7 @@ import {
   Form,
   FormContainer,
   FormGroup,
+  FormRow,
   FormSubmitBtn,
   Input,
   LoginIcon,
@@ -16,22 +16,24 @@ import {
 const LoginForm = (
   props: DataModuleFormProps<LoginResult, LoginSchemaType>,
 ) => {
-  const [isDirty, setIsDirty] = useState(false)
-  const form = useLoginForm({ onDirtyChange: setIsDirty, ...props })
+  const form = useLoginForm(props)
 
   return (
     <FormContainer
-      footer={
+      form={form}
+      footer={(isDirty) => (
         <FormSubmitBtn
-          form={form}
           isDirty={isDirty}
           text="Iniciar sesión"
           icon={LoginIcon}
+          onSubmit={() => form.form.handleSubmit()}
         />
-      }
+      )}
     >
       <Form form={form}>
-        <FormGroup label="Usuario" name="username" input={Input} />
+        <FormRow>
+          <FormGroup label="Usuario" name="username" input={Input} />
+        </FormRow>
         <FormGroup
           label="Contraseña"
           name="password"

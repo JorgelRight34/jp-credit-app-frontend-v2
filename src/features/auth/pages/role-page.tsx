@@ -10,6 +10,7 @@ import type { Role } from '../models/role'
 import type { IdentityPermissions } from '../models/identityPermissions'
 import type { BreadcrumbsByRoute } from '@/components'
 import {
+  createPageLayoutEditOption,
   FormReadOnlyGroup,
   FormRow,
   GroupIcon,
@@ -19,7 +20,6 @@ import {
   Tab,
   TableBuilder,
   TabsRouter,
-  getPageLayoutOptions,
 } from '@/components'
 import { claimsTableColumns } from '../lib/constants'
 
@@ -38,10 +38,11 @@ const RolePage = ({ role, rolePermissions }: RolePageProps) => {
   return (
     <PageRouterLayout
       title={`${role.id} - ${role.name}`}
-      options={getPageLayoutOptions({
-        editPath: '/access-control/roles/$id/edit',
-        params: { id: role.id.toString() },
-      })}
+      options={[
+        createPageLayoutEditOption('/access-control/roles/$id/edit', {
+          id: role.id.toString(),
+        }),
+      ]}
       routerConfig={{
         defaultActive: 'overview',
         baseBreadcrumbs: [

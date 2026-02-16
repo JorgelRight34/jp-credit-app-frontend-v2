@@ -8,4 +8,5 @@ export const rolesSearchConfig: SearchFormConfig<RoleQuery> = {
         { name: 'name', label: 'Nombre', width: 10, type: (props) => Input(props) },
     ],
     advanced: [],
+    defaultValues: { id: "", name: "" }
 }

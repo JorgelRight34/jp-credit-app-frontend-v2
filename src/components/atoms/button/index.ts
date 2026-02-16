@@ -7,3 +7,4 @@ export { default as SplitBtn } from "./components/split-btn";
 export { default as ToggleButtonGroup } from "./components/toggle-button-group"
 export { default as AccentPillBtn } from './components/accent-pill-btn'
 export { default as LightPillBtn } from './components/light-pill-btn'
+export { default as LightPillMenuBtn } from './components/light-pill-menu-btn'
