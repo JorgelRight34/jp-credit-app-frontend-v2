@@ -4,6 +4,7 @@ import type { Collateral } from "../models/collateral";
 import type { PagedResponse } from "@/models";
 import api from "@/lib/services/api";
 import { FileStorageService } from "@/lib/services";
+import { CollateralLiquidateFormValues } from "../lib/schemas/collateralLiquidateFormSchema";
 
 const baseUrl = "collaterals"
 
@@ -36,4 +37,8 @@ export const deleteCollateralFiles = async (ids: Array<number>) => {
 
 export const deleteCollateral = async (id: Collateral["id"]) => {
     await api.delete(baseUrl + "/" + id)
+}
+
+export const liquidateCollateral = async (id: Collateral["id"], body: CollateralLiquidateFormValues) => {
+    await api.post(baseUrl + "/" + id + "/liquidate", body);
 }

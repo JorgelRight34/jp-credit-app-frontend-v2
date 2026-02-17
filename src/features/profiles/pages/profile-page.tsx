@@ -5,11 +5,12 @@ import {
   profilesBreadcrumb,
 } from '../lib/config/breadcrumb'
 import ProfileOverview from '../components/profile-overview'
-import ProfileEditFilesForm from '../components/profile-edit-files-form'
 import type { BreadcrumbsByRoute } from '@/components'
 import type { Profile } from '../models/profile'
 import {
   createPageLayoutEditOption,
+  FileTable,
+  mapApiFileToTableFile,
   OverviewIcon,
   PageRouterLayout,
   Tab,
@@ -49,7 +50,7 @@ const ProfilePage = ({ profile }: ProfilePageProps) => {
           <ProfileOverview profile={profile} />
         </Tab>
         <Tab eventKey="files" title="Archivos">
-          <ProfileEditFilesForm profile={profile} />
+          <FileTable files={profile.files.map(mapApiFileToTableFile)} />
         </Tab>
         <Tab eventKey="loans" title="Préstamos">
           ...

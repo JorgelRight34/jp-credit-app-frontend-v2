@@ -39,7 +39,7 @@ const LoansPage = () => {
           <Tab eventKey="all" title="Todos">
             <LoanDataTable />
           </Tab>
-          <Tab eventKey="inactive" title="Activos">
+          <Tab eventKey="active" title="Activos">
             <LoanDataTable initialQuery={{ status: LoanStatusMap.active }} />
           </Tab>
           <Tab eventKey="inactive" title="Inactivos">

@@ -13,6 +13,7 @@ import {
 } from '@/components'
 import CollateralDataForm from './collateral-data-form'
 import { LoanSearchInput } from '@/features/loans'
+import { LoanStatusMap } from '@/features/loans/models/loanStatus'
 
 interface CreateCollateralFormProps extends DataModuleFormProps<
   Collateral,
@@ -35,7 +36,14 @@ const CreateCollateralForm = (props: CreateCollateralFormProps) => {
               <FormGroup
                 name="loanId"
                 label="Préstamo"
-                input={LoanSearchInput}
+                input={(p) =>
+                  LoanSearchInput({
+                    ...p,
+                    datatable: {
+                      initialQuery: { status: LoanStatusMap.active },
+                    },
+                  })
+                }
               />
             }
             form={form}

@@ -30,3 +30,5 @@ export * from "./breadcrumb"
 export * from "./messages"
 
 export { default as PhotoGallery } from "./photo-gallery/photo-gallery"
+
+export * from './stepper'
