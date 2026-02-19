@@ -38,7 +38,11 @@ export const collateralsDataTableColumns: DataTableConfig<Collateral>["columns"]
         accessorKey: "loanId",
         header: "PRÉSTAMO",
         enableSorting: true,
-        cell: ({ row }) => createLinkDataCell(getLoanLabel({ id: row.original.loanId }), {}),
+        cell: ({ row }) => createLinkDataCell(
+            getLoanLabel({ id: row.original.loanId }),
+            {
+                to: "/loans/$id", params: { id: row.original.loanId.toString() }
+            }),
     },
     {
         header: "FOTO",

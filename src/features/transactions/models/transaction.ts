@@ -9,8 +9,9 @@ export interface Transaction {
     penaltyFee: number;
     outstandingAmount: number;
     loanId: number;
-    payerId: number;
-    date: Date | string;
+    clientId: number;
+    actorId: string;
+    date: string;
     createdBy: User;
     type: TransactionType;
     value: number;

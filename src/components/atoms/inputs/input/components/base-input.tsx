@@ -51,6 +51,7 @@ const BaseInput = ({
           max,
           step,
         },
+        inputLabel: { shrink: true },
         ...props.slotProps,
       }}
       disabled={disabled}

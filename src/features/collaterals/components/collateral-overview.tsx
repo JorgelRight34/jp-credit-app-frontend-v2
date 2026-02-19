@@ -14,6 +14,7 @@ import {
   ViewMore,
 } from '@/components'
 import { getCollateralStatus } from '../lib/utils'
+import { getLoanLabel } from '@/features/loans'
 
 interface CollateralOverviewProps {
   collateral: Collateral
@@ -50,7 +51,7 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
                   Préstamo
                 </FormReadonlyGroupLabelLink>
               }
-              value={`Préstamo No.${collateral.loanId}`}
+              value={getLoanLabel({ id: collateral.loanId })}
             />
           </FormRow>
           <FormRow>

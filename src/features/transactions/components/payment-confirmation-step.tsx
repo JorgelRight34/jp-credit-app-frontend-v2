@@ -4,37 +4,40 @@ import {
   ArrowBackIcon,
   ArrowForwardIcon,
   CancelIcon,
+  FieldValues,
   FormHtmlDisplayGroup,
   FormLayout,
   FormReadOnlyGroup,
   FormRow,
   LightPillBtn,
   Paragraph,
+  UseFormBuilderReturn,
   useFormConfirmationFlowActiveStep,
   useFormConfirmationFlowData,
 } from '@/components'
 import { getLoanLabel } from '@/features/loans'
 import { toCurrency, toFormattedDate } from '@/lib/utils'
 import { CacheKey } from '@/models'
-import { Transaction } from '../models/transaction'
+import { PaymentResult } from '../models/paymentResult'
 
-interface TransactionConfirmationStepProps {
-  loader: (data: any) => Promise<Transaction>
-  cacheKeyBuilder: (data: any) => CacheKey
+interface PaymentConfirmationStepProps<T extends FieldValues> {
+  form: UseFormBuilderReturn<T>
+  previewLoader: (data: T) => Promise<PaymentResult>
+  cacheKeyBuilder: (data: T) => CacheKey
 }
 
-const TransactionConfirmationStep = ({
-  loader,
+const PaymentConfirmationStep = <T extends FieldValues>({
+  previewLoader,
   cacheKeyBuilder,
-}: TransactionConfirmationStepProps) => {
+}: PaymentConfirmationStepProps<T>) => {
   const [body] = useFormConfirmationFlowData()
   const { data, isLoading } = useData({
-    loader: () => loader(body),
-    key: cacheKeyBuilder(body),
+    loader: () => previewLoader(body as T),
+    key: cacheKeyBuilder(body as T),
     enabled: body !== null,
   })
 
-  if (isLoading || data === undefined) return null
+  if (isLoading || !data) return null
 
   return (
     <FormLayout footer={<Footer />}>
@@ -45,48 +48,48 @@ const TransactionConfirmationStep = ({
         <FormReadOnlyGroup
           name="loanId"
           label="Préstamo"
-          value={getLoanLabel(data)}
+          value={getLoanLabel(data.transaction)}
         />
         <FormReadOnlyGroup
           name="amount"
           label="Monto a pagar"
-          value={toCurrency(data.value)}
+          value={toCurrency(data.transaction.value)}
         />
       </FormRow>
       <FormRow>
         <FormReadOnlyGroup
           name="capital"
           label="Capital"
-          value={toCurrency(data.capitalValue)}
+          value={toCurrency(data.transaction.capitalValue)}
         />
         <FormReadOnlyGroup
           name="interest"
           label="Interés"
-          value={toCurrency(data.interestValue)}
+          value={toCurrency(data.transaction.interestValue)}
         />
       </FormRow>
       <FormRow>
         <FormReadOnlyGroup
           name="fee"
           label="Mora"
-          value={toCurrency(data.penaltyFee)}
+          value={toCurrency(data.transaction.penaltyFee)}
         />
         <FormReadOnlyGroup
           name="lateDays"
           label="Días de tardanza"
-          value={toCurrency(data.lateDays)}
+          value={toCurrency(data.transaction.lateDays)}
         />
       </FormRow>
       <FormRow>
         <FormReadOnlyGroup
           name="date"
           label="Fecha de pago"
-          value={toFormattedDate(data.date)}
+          value={toFormattedDate(data.transaction.date)}
         />
         <FormHtmlDisplayGroup
           name="description"
           label="Descripción"
-          value={data.description}
+          value={data.transaction.description}
           optional
         />
       </FormRow>
@@ -112,4 +115,4 @@ const Footer = () => {
   )
 }
 
-export default TransactionConfirmationStep
+export default PaymentConfirmationStep

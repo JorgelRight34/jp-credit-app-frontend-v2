@@ -8,7 +8,7 @@ import type {
     UseFormTrigger,
 } from "react-hook-form";
 
-export interface UseFormBuilderReturn<TData extends FieldValues> {
+export interface UseFormBuilderReturn<TData extends FieldValues = FieldValues> {
     form: {
         control: Control<TData>;
         methods: UseFormReturn<TData>;

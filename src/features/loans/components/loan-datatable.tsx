@@ -14,7 +14,7 @@ const LoanDataTable = (props: DataTableContainerOverrides<Loan, LoanQuery>) => {
     <DataTableContainer
       searchConfig={loanSearchConfig}
       datatableConfig={loanDataTableConfig}
-      cacheKey={[loansQueryKey, projectId]}
+      cacheKey={[loansQueryKey, 'projects', projectId]}
       {...props}
     />
   )

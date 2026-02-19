@@ -164,6 +164,8 @@ export { default as ArrowDropDownCircleIcon } from "@mui/icons-material/ArrowDro
 export { default as ArrowDropDownIcon } from "@mui/icons-material/ArrowDropDownOutlined";
 export { default as SellIcon } from "@mui/icons-material/SellOutlined"
 export { default as PriceCheckIcon } from "@mui/icons-material/PriceCheckOutlined"
+export { default as TransactionIcon } from '@mui/icons-material/CreditCardOutlined'
+export { default as DisbursementIcon } from '@mui/icons-material/PaidOutlined'
 
 
 export { default as Icon } from "./icon";

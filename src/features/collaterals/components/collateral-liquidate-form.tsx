@@ -11,16 +11,12 @@ import { useCollateralLiquidateForm } from '../hooks/useCollateralLiquidateForm'
 import { Collateral } from '../models/collateral'
 import { toCurrency } from '@/lib/utils'
 import { collateralsQueryKey } from '../lib/constants'
-import {
-  liquidateCollateral,
-  previewLiquidateCollateral,
-} from '../services/collateralClient'
-import { loansQueryKey } from '@/features/loans/lib/constants'
-import {
-  TransactionConfirmationStep,
-  TransactionReceiptStep,
-} from '@/features/transactions'
+import { previewLiquidateCollateral } from '../services/collateralClient'
 import { useRouter } from '@/hooks/useRouter'
+import {
+  PaymentConfirmationStep,
+  PaymentReceiptStep,
+} from '@/features/transactions'
 
 interface CollateralLiquidateFormProps {
   collateral: Collateral
@@ -44,8 +40,11 @@ const CollateralLiquidateForm = ({
   return (
     <FormConfirmationFlow
       confirmation={
-        <TransactionConfirmationStep
-          loader={(body) => previewLiquidateCollateral(collateral.id, body)}
+        <PaymentConfirmationStep
+          form={form}
+          previewLoader={(body) =>
+            previewLiquidateCollateral(collateral.id, body)
+          }
           cacheKeyBuilder={() => [
             collateralsQueryKey,
             'liquidate-form',
@@ -54,11 +53,7 @@ const CollateralLiquidateForm = ({
         />
       }
       receipt={
-        <TransactionReceiptStep
-          successText="El pago con garantía ha sido realizado"
-          loader={(body) => liquidateCollateral(collateral.id, body)}
-          keysToInvalidate={[[collateralsQueryKey], [loansQueryKey]]}
-        />
+        <PaymentReceiptStep successText="El pago con garantía ha sido realizado" />
       }
     >
       <FormConfirmationFlowContainer form={form}>

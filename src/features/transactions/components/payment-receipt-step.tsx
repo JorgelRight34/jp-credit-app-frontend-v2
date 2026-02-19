@@ -1,7 +1,4 @@
-import { useDataMutation } from '@/hooks/useMutate'
 import {
-  BigTitle,
-  CheckCircleIcon,
   DoneAllIcon,
   Icon,
   MediumTitle,
@@ -10,17 +7,13 @@ import {
   useFormConfirmationFlowData,
 } from '@/components'
 import { useDataClient } from '@/hooks/useDataClient'
-import { CacheKey } from '@/models'
 import { ReactNode, useEffect, useState } from 'react'
-import { Transaction } from '../models/transaction'
 
-interface TransactionReceiptStepProps {
-  keysToInvalidate: Array<CacheKey>
+interface PaymentReceiptStepProps {
   successText: ReactNode
-  loader: (data: any) => Promise<Transaction>
 }
 
-const TransactionReceiptStep = (props: TransactionReceiptStepProps) => {
+const PaymentReceiptStep = (props: PaymentReceiptStepProps) => {
   const [active] = useFormConfirmationFlowActiveStep()
   const [hasRendered, setHasRendered] = useState(false)
 
@@ -30,30 +23,12 @@ const TransactionReceiptStep = (props: TransactionReceiptStepProps) => {
 
   if (!hasRendered) return null
 
-  return <TransactionReceiptStepInner {...props} />
+  return <PaymentReceiptStepInner {...props} />
 }
 
-const TransactionReceiptStepInner = ({
-  loader,
-  successText,
-  keysToInvalidate,
-}: TransactionReceiptStepProps) => {
+const PaymentReceiptStepInner = ({ successText }: PaymentReceiptStepProps) => {
   const dataClient = useDataClient()
   const [body] = useFormConfirmationFlowData()
-  const { data, isPending, mutateAsync } = useDataMutation({
-    mutationFn: () => loader(body),
-    onSuccess: () => {
-      for (const key of keysToInvalidate) {
-        dataClient.invalidate({ key })
-      }
-    },
-  })
-
-  useEffect(() => {
-    mutateAsync()
-  }, [])
-
-  if (isPending) return null
 
   return (
     <div className="flex flex-col justify-center py-3">
@@ -78,4 +53,4 @@ const TransactionReceiptStepInner = ({
   )
 }
 
-export default TransactionReceiptStep
+export default PaymentReceiptStep

@@ -182,26 +182,29 @@ export const transactionsNavItem: NavItem = {
   children: [
     {
       ...allRouteBase,
-      route: 'transactions',
+      route: '/transactions',
     },
     {
       name: 'Ingresos',
       icon: () => <AttachMoneyIcon />,
-      route: 'transactions/incomes',
+      route: '/transactions',
+      search: { tab: 'payments' },
     },
     {
       name: 'Egresos',
       icon: () => <PaymentIcon />,
-      route: 'transactions/expenses',
+      route: '/transactions',
+      search: { tab: 'disbursements' },
     },
     {
       name: 'Atrasos',
       icon: () => <ErrorIcon />,
-      route: 'transactions/overdue-payments',
+      route: '/transactions',
+      search: { tab: 'overdue' },
     },
     {
       ...addRouteBase,
-      route: 'transactions/create',
+      route: '/transactions/create',
     },
   ],
 }

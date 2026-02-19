@@ -22,6 +22,7 @@ export { default as FormConfirmationFlow } from './components/form-confirmation-
 export { default as FormConfirmationFlowContainer } from './components/form-confirmation-flow-container'
 export * from "./components/form-readonly-group"
 export * from './providers/form-confirmation-provider'
+export type { FieldValues } from 'react-hook-form'
 
 export * from "./hooks/useForm"
 export * from "./models/apiError"

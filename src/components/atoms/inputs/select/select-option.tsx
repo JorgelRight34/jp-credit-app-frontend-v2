@@ -1,6 +1,8 @@
 import { MenuItem } from '@mui/material'
 
-export type SelectOptions = Array<Array<string | number | null>>
+export type SelectOptions<T = string | number | null> = Array<
+  [T, string | number | null]
+>
 
 const SelectOption = MenuItem
 

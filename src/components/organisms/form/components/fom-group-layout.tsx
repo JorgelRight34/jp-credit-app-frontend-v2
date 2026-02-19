@@ -31,8 +31,8 @@ export const FormGroupLabel = ({
   optional?: boolean
 }) => (
   <>
-    {label}{' '}
-    {optional && <span className="text-accent">&nbsp;*&nbsp;</span>}{' '}
+    {label}
+    {optional !== true && <span className="text-accent">&nbsp;*</span>}
   </>
 )
 

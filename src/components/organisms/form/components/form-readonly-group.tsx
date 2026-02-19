@@ -54,16 +54,13 @@ export const FormReadonlyGroupLabelLink = ({
   ...props
 }: Omit<LinkProps, 'children'> & PropsWithChildren) => {
   return (
-    <FormGroupLabel
-      label={
-        <Link {...props}>
-          <div className="flex items-center gap-3">
-            <span>{children}</span>
-            <Icon className="!text-sm" icon={OpenInNewIcon} />
-          </div>
-        </Link>
-      }
-    />
+    <Link {...props} className="!inline-block w-auto">
+      <div className="flex items-center">
+        <span>{children}</span>&nbsp;
+        <Icon className="!text-sm" icon={OpenInNewIcon} />
+        &nbsp;
+      </div>
+    </Link>
   )
 }
 

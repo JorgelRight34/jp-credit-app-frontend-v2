@@ -4,3 +4,4 @@ export { default as LoanPage } from './pages/loan-page'
 export { default as CreateLoanFormPage } from "./pages/create-loan-form-page"
 export { default as LoanSettingsPage } from './pages/loan-settings-page'
 export * from './lib/utils'
+export * from './models/loanStatus'

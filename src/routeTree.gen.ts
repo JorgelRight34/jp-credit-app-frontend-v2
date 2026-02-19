@@ -19,6 +19,7 @@ import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(m
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
 import { Route as mainmodulesCollateralsIndexRouteImport } from './routes/(main)/(modules)/collaterals/index'
 import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
+import { Route as mainmodulesTransactionsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/create/index'
 import { Route as mainmodulesTransactionsIdIndexRouteImport } from './routes/(main)/(modules)/transactions/$id/index'
 import { Route as mainmodulesProjectsSettingsIndexRouteImport } from './routes/(main)/(modules)/projects/settings/index'
 import { Route as mainmodulesProjectsCreateIndexRouteImport } from './routes/(main)/(modules)/projects/create/index'
@@ -90,6 +91,12 @@ const mainmodulesAccessControlIndexRoute =
   mainmodulesAccessControlIndexRouteImport.update({
     id: '/access-control/',
     path: '/access-control/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesTransactionsCreateIndexRoute =
+  mainmodulesTransactionsCreateIndexRouteImport.update({
+    id: '/transactions/create/',
+    path: '/transactions/create/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesTransactionsIdIndexRoute =
@@ -224,6 +231,7 @@ export interface FileRoutesByFullPath {
   '/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
   '/projects/settings/': typeof mainmodulesProjectsSettingsIndexRoute
   '/transactions/$id/': typeof mainmodulesTransactionsIdIndexRoute
+  '/transactions/create/': typeof mainmodulesTransactionsCreateIndexRoute
   '/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -253,6 +261,7 @@ export interface FileRoutesByTo {
   '/projects/create': typeof mainmodulesProjectsCreateIndexRoute
   '/projects/settings': typeof mainmodulesProjectsSettingsIndexRoute
   '/transactions/$id': typeof mainmodulesTransactionsIdIndexRoute
+  '/transactions/create': typeof mainmodulesTransactionsCreateIndexRoute
   '/access-control/roles/$id': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username': typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -285,6 +294,7 @@ export interface FileRoutesById {
   '/(main)/(modules)/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
   '/(main)/(modules)/projects/settings/': typeof mainmodulesProjectsSettingsIndexRoute
   '/(main)/(modules)/transactions/$id/': typeof mainmodulesTransactionsIdIndexRoute
+  '/(main)/(modules)/transactions/create/': typeof mainmodulesTransactionsCreateIndexRoute
   '/(main)/(modules)/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/(main)/(modules)/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/(main)/(modules)/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -316,6 +326,7 @@ export interface FileRouteTypes {
     | '/projects/create/'
     | '/projects/settings/'
     | '/transactions/$id/'
+    | '/transactions/create/'
     | '/access-control/roles/$id/'
     | '/access-control/roles/create/'
     | '/access-control/users/$username/'
@@ -345,6 +356,7 @@ export interface FileRouteTypes {
     | '/projects/create'
     | '/projects/settings'
     | '/transactions/$id'
+    | '/transactions/create'
     | '/access-control/roles/$id'
     | '/access-control/roles/create'
     | '/access-control/users/$username'
@@ -376,6 +388,7 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/projects/create/'
     | '/(main)/(modules)/projects/settings/'
     | '/(main)/(modules)/transactions/$id/'
+    | '/(main)/(modules)/transactions/create/'
     | '/(main)/(modules)/access-control/roles/$id/'
     | '/(main)/(modules)/access-control/roles/create/'
     | '/(main)/(modules)/access-control/users/$username/'
@@ -463,6 +476,13 @@ declare module '@tanstack/react-router' {
       path: '/access-control'
       fullPath: '/access-control/'
       preLoaderRoute: typeof mainmodulesAccessControlIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/transactions/create/': {
+      id: '/(main)/(modules)/transactions/create/'
+      path: '/transactions/create'
+      fullPath: '/transactions/create/'
+      preLoaderRoute: typeof mainmodulesTransactionsCreateIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/transactions/$id/': {
@@ -617,6 +637,7 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesProjectsCreateIndexRoute: typeof mainmodulesProjectsCreateIndexRoute
   mainmodulesProjectsSettingsIndexRoute: typeof mainmodulesProjectsSettingsIndexRoute
   mainmodulesTransactionsIdIndexRoute: typeof mainmodulesTransactionsIdIndexRoute
+  mainmodulesTransactionsCreateIndexRoute: typeof mainmodulesTransactionsCreateIndexRoute
   mainmodulesAccessControlRolesIdIndexRoute: typeof mainmodulesAccessControlRolesIdIndexRoute
   mainmodulesAccessControlRolesCreateIndexRoute: typeof mainmodulesAccessControlRolesCreateIndexRoute
   mainmodulesAccessControlUsersUsernameIndexRoute: typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -646,6 +667,8 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesProjectsCreateIndexRoute: mainmodulesProjectsCreateIndexRoute,
   mainmodulesProjectsSettingsIndexRoute: mainmodulesProjectsSettingsIndexRoute,
   mainmodulesTransactionsIdIndexRoute: mainmodulesTransactionsIdIndexRoute,
+  mainmodulesTransactionsCreateIndexRoute:
+    mainmodulesTransactionsCreateIndexRoute,
   mainmodulesAccessControlRolesIdIndexRoute:
     mainmodulesAccessControlRolesIdIndexRoute,
   mainmodulesAccessControlRolesCreateIndexRoute:

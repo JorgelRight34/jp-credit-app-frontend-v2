@@ -8,7 +8,7 @@ export interface Loan {
     overduePaymentsNumber?: number;
     interestBalance: number;
     lastTransactionDate?: Date | string;
-    totalFeePaid: number;
+    feePaid: number;
     outstandingAmount: number;
     client: LoanMember;
     totalFees: number;

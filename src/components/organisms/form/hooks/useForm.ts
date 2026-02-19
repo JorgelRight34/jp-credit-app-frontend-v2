@@ -113,13 +113,12 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
             validate: methods.trigger,
             reset: handleReset,
             resetValues: handleReset,
-            watch: methods.watch,
         },
         state: {
             error,
             isPending: isPending,
             isError: isError,
         },
-    } as UseFormBuilderReturn<TData>;
+    };
 };
 

@@ -31,8 +31,8 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
         defaultActive: 'liquidate',
         baseBreadcrumbs: [
           collateralsBreadcrumb,
-          settingsBreadcrumb,
           createCollateralBreadcrumb(collateral),
+          settingsBreadcrumb,
         ],
         breadcrumbsByRoute,
       }}
