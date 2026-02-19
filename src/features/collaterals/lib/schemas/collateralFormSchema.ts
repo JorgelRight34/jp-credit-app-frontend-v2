@@ -10,8 +10,8 @@ export const collateralFormSchema = z.object({
     description: z
         .string()
         .trim()
-        .min(5, "La descripción debe tener al menos 5 caracteres")
-        .max(500, "La descripción no puede exceder 500 caracteres"),
+        .max(500, "La descripción no puede exceder 500 caracteres")
+        .nullable(),
 
     value: z
         .union([z.string().transform((val) => +val), z.number()])
@@ -27,13 +27,11 @@ export const collateralFormSchema = z.object({
     type: z
         .string()
         .trim()
-        .min(1, "El tipo es obligatorio")
         .max(40, "El tipo no puede exceder 40 caracteres"),
 
     location: z
         .string()
         .trim()
-        .min(2, "La ubicación debe tener al menos 2 caracteres")
         .max(120, "La ubicación no puede exceder 120 caracteres")
         .optional(),
 

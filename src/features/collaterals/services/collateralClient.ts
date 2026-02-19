@@ -5,6 +5,9 @@ import type { PagedResponse } from "@/models";
 import api from "@/lib/services/api";
 import { FileStorageService } from "@/lib/services";
 import { CollateralLiquidateFormValues } from "../lib/schemas/collateralLiquidateFormSchema";
+import { Transaction } from "@/features/transactions";
+import { mockTransaction } from "@/features/transactions/lib/constants";
+import { CollateralSellFormValues } from "../lib/schemas/collateralSellFormSchema";
 
 const baseUrl = "collaterals"
 
@@ -40,5 +43,16 @@ export const deleteCollateral = async (id: Collateral["id"]) => {
 }
 
 export const liquidateCollateral = async (id: Collateral["id"], body: CollateralLiquidateFormValues) => {
-    await api.post(baseUrl + "/" + id + "/liquidate", body);
+    const { data } = await api.post(baseUrl + "/" + id + "/liquidation", { ...body, isPreview: true }); // JUST FOR TESTS OF NOW
+    return data;
+}
+
+export const previewLiquidateCollateral = async (id: Collateral["id"], body: CollateralLiquidateFormValues) => {
+    const { data } = await api.post<Transaction>(baseUrl + "/" + id + "/liquidation", { ...body, isPreview: true });
+    return data
+}
+
+export const sellCollateral = async (id: Collateral["id"], body: CollateralSellFormValues) => {
+    const { data } = await api.post<Transaction>(baseUrl + "/" + id + "/sell", { ...body, isPreview: true });
+    return data
 }

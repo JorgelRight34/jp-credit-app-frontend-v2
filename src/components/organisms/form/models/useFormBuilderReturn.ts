@@ -14,7 +14,8 @@ export interface UseFormBuilderReturn<TData extends FieldValues> {
         methods: UseFormReturn<TData>;
         applyInterceptors: (data: TData) => TData;
         getValues: UseFormGetValues<TData>;
-        handleSubmit: ReturnType<UseFormHandleSubmit<TData>>;
+        submit: ReturnType<UseFormHandleSubmit<TData>>;
+        handleSubmit: UseFormHandleSubmit<TData>
         setValue: UseFormSetValue<TData>;
         reset: () => void;
         resetValues: () => void;

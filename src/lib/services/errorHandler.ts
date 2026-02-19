@@ -1,4 +1,4 @@
-import { toastService } from "./toastService";
+import { toastService } from "@/components";
 import type { AxiosError } from "axios";
 
 const errorHandler = (error: AxiosError<{ message?: string }>) => {

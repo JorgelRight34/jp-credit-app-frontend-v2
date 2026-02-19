@@ -25,6 +25,7 @@ export const useProfileFileAttachmentsForm = ({ profile }: { profile?: Profile }
             await formRef.current?.submit();
         },
         handleSubmit: async () => formRef.current?.submit(),
+        handleReset: () => formRef.current?.reset(),
         formRef,
     };
 }

@@ -3,7 +3,7 @@ import { FieldValues, useFormState } from 'react-hook-form'
 import FormErrorsPanel from './form-errors-panel'
 import FormContainerButtons from './form-container-buttons'
 import { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
-import FormContainerLayout from './form-container-layout'
+import FormLayout from './form-container-layout'
 
 type FormContainerProps<T extends FieldValues> = PropsWithChildren & {
   form: UseFormBuilderReturn<T>
@@ -20,7 +20,7 @@ const FormContainer = <T extends FieldValues>({
   const { isDirty } = useFormState({ control: form.form.control })
 
   return (
-    <FormContainerLayout
+    <FormLayout
       className={className}
       errors={
         <FormErrorsPanel
@@ -37,7 +37,7 @@ const FormContainer = <T extends FieldValues>({
       }
     >
       {children}
-    </FormContainerLayout>
+    </FormLayout>
   )
 }
 

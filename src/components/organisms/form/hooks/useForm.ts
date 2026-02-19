@@ -7,12 +7,13 @@ import type { FieldValues } from "react-hook-form";
 import type { CacheKey } from "@/models";
 import { useDataClient } from "@/hooks/useDataClient";
 import { useDataMutation } from "@/hooks/useMutate";
-import { toastService } from "@/lib/services";
+import { toastService } from "@/components/molecules";
 
 export type DefaultFormValues<TData> = Partial<{
     [K in keyof TData]:
     | TData[K]
     | ''
+    | null
     | TData[K]
 }>
 
@@ -106,7 +107,8 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
             methods,
             applyInterceptors,
             getValues: methods.getValues,
-            handleSubmit: methods.handleSubmit(handleOnSubmit),
+            submit: methods.handleSubmit(handleOnSubmit),
+            handleSubmit: methods.handleSubmit,
             setValue: methods.setValue,
             validate: methods.trigger,
             reset: handleReset,

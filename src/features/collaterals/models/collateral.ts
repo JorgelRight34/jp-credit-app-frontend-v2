@@ -5,16 +5,19 @@ import type { FileModel } from "@/models/fileModel";
 export interface Collateral {
     id: number;
     title: string;
-    description: string;
+    description?: string;
     value: number;
     condition: CollateralCondition;
     createdAt: string;
-    ownerName?: string;
+    updatedAt: string;
     isActive?: boolean;
     loanId: number;
     type: CollateralType;
     location?: string;
     expirationDate?: string;
     liquidationDate?: string;
+    soldFor?: number;
+    loanClientName: string;
+    sellDate?: string;
     files: Array<FileModel>;
 }

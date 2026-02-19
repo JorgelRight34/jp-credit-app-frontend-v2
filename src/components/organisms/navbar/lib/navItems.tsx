@@ -142,31 +142,35 @@ export const collateralsNavItem: NavItem = {
   children: [
     {
       ...allRouteBase,
-      route: 'collaterals',
+      route: '/collaterals',
     },
     {
       name: 'Vehículos',
       icon: () => <DirectionsCarIcon />,
-      route: 'collaterals/vehicles',
+      route: '/collaterals',
+      search: { tab: 'vehicles' },
     },
     {
       name: 'Hipotecas',
       icon: () => <ApartmentIcon />,
-      route: 'collaterals/mobiliary',
+      route: '/collaterals',
+      search: { tab: 'mortgage' },
     },
     {
       name: 'Agrícola',
       icon: () => <GrassIcon />,
-      route: 'collaterals/farm',
+      route: '/collaterals',
+      search: { tab: 'agriculturalLoan' },
     },
     {
       name: 'Inventario',
       icon: () => <InventoryIcon />,
-      route: 'collaterals/collateralizations',
+      route: '/collaterals',
+      search: { tab: 'inventory' },
     },
     {
       ...addRouteBase,
-      route: 'collaterals/create',
+      route: '/collaterals/create',
     },
   ],
 }

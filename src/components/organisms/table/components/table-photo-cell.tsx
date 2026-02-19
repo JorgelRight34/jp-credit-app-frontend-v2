@@ -20,16 +20,20 @@ const TablePhotoCell = ({ fallback, getImage, icon }: TablePhotoCellProps) => {
 
   return (
     <>
-      <Icon
-        className="!text-base"
-        icon={icon ? icon : ImageIcon}
-        onClick={handleOnClick}
-      />
+      <Icon icon={icon ? icon : ImageIcon} onClick={handleOnClick} />
       <LightBox
         files={
           image
             ? [image]
-            : [{ url: fallback ?? '', publicId: '---', fileType: '---' }]
+            : [
+                {
+                  id: 0,
+                  url: fallback ?? '',
+                  publicId: '---',
+                  fileType: '---',
+                  isImage: true,
+                },
+              ]
         }
         show={showModal}
         onHide={() => setShowModal(false)}

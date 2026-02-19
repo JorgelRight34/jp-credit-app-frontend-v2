@@ -7,5 +7,6 @@ export type UseDeferredFileAttachmentsFormReturn<TRef> = {
     setRef: (value: TRef | undefined) => void;
     submit: (value: TRef | undefined) => Promise<unknown>;
     handleSubmit: () => Promise<unknown>;
+    handleReset: () => void;
     formRef: RefObject<FileAttachmentsFormRef | null>;
 }

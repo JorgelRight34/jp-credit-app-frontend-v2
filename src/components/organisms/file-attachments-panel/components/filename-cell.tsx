@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import DocumentIcon from '../icons/document-icon'
 import type { TableFile } from '../models/tableFile'
-import { LightBox } from '@/components/molecules'
-import { toastService } from '@/lib/services'
+import { LightBox, toastService } from '@/components/molecules'
 import { isImage } from '@/lib/utils'
 
 interface FilenameCellProps {

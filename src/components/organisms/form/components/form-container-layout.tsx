@@ -7,7 +7,7 @@ type FormLayoutProps = PropsWithChildren & {
   footer?: ReactNode
 }
 
-const FormContainerLayout = ({
+const FormLayout = ({
   children,
   className,
   errors,
@@ -22,4 +22,4 @@ const FormContainerLayout = ({
   )
 }
 
-export default FormContainerLayout
+export default FormLayout

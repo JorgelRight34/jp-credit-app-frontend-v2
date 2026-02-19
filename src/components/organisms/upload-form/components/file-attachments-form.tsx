@@ -40,7 +40,10 @@ const FileAttachmentsForm = forwardRef(
       validate: async () => await Promise.resolve(true),
       applyInterceptors: (data) => data,
       setValue: () => {},
-      getValues: () => [methods.upload, methods.remove],
+      handleSubmit: () => {
+        throw new Error('Not implemented')
+      },
+      getValues: () => [methods.add, methods.remove],
     }))
 
     return render({ isDirty, ...methods })

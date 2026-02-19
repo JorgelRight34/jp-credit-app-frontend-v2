@@ -6,6 +6,7 @@ import type { Loan } from '../models/loan'
 import type { DataTableContainerOverrides, InputProps } from '@/components'
 import { DataTableContainer, SearchableComboBox } from '@/components'
 import { useProjectId } from '@/features/projects'
+import { getLoanLabel } from '../lib/utils'
 
 interface LoanSearchInputProps extends InputProps {
   datatable?: DataTableContainerOverrides<Loan, LoanQuery>
@@ -21,7 +22,7 @@ const LoanSearchInput = ({ datatable, ...props }: LoanSearchInputProps) => {
       }}
       cacheKey={[loansQueryKey]}
       accesorFn={(l) => l?.id ?? 0}
-      visibleValueFn={(l) => (l ? `Préstamo No.${l.id}` : '---')}
+      visibleValueFn={(l) => (l ? getLoanLabel(l) : '---')}
       render={(setValue) => (
         <DataTableContainer
           searchConfig={loanSearchConfig}

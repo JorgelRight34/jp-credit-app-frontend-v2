@@ -41,6 +41,28 @@ export const loanFormSchema = z
                 .transform((val) => val.value),
             z.number(),
         ]),
+    })
+    .superRefine(({ guarantorProfileId, clientProfileId, loanOfficerProfileId }, ctx) => {
+        if (!guarantorProfileId) return;
+
+        if (guarantorProfileId === clientProfileId) {
+            ctx.addIssue({
+                code: "custom",
+                message: "El garante no puede ser el mismo cliente.",
+                path: ["guarantorProfileId"],
+            });
+        }
+
+        if (
+            loanOfficerProfileId &&
+            guarantorProfileId === loanOfficerProfileId
+        ) {
+            ctx.addIssue({
+                code: "custom",
+                message: "El garante no puede ser el oficial del préstamo.",
+                path: ["guarantorProfileId"],
+            });
+        }
     });
 
 export type LoanFormValues = z.infer<typeof loanFormSchema>;

@@ -6,8 +6,8 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 import { AxiosError } from 'axios'
-import { Bounce, ToastContainer } from 'react-toastify'
 import errorHandler from '@/lib/services/errorHandler'
+import { SnackbarContainer } from '@/components'
 
 const onError = (error: unknown) => {
   if (error instanceof AxiosError) {
@@ -48,19 +48,7 @@ export function Provider({
   return (
     <QueryClientProvider client={dataClient}>
       {children}
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
-      />
+      <SnackbarContainer />
     </QueryClientProvider>
   )
 }

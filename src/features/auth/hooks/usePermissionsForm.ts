@@ -1,12 +1,9 @@
-import { useMemo } from "react";
 import { permissionsFormSchema } from "../lib/schemas/permissionsFormSchema";
-import { getClaimPairsFromStringArray, mapIdentityClaimsToTransferItems } from "../lib/utils";
-import { allPossibleClaimsQueryOptions } from "../lib/query-keys";
+import { getClaimPairsFromStringArray } from "../lib/utils";
 import type { ClaimPair } from "../models/claimPair";
-import type { TransferItem, UseDataFormProps } from "@/components";
+import type { FormRef, UseDataFormProps } from "@/components";
 import type { PermissionsFormValues } from "../lib/schemas/permissionsFormSchema";
 import { useForm } from "@/components";
-import { useSuspenseData } from "@/hooks/useData";
 
 export type UpdatePermissionsHandler = (id: number, body: { add: Array<ClaimPair>; remove: Array<ClaimPair> }) => Promise<unknown>
 
@@ -17,10 +14,10 @@ export type UsePermissionsFormProps = UseDataFormProps<
   handler: UpdatePermissionsHandler
 }
 
-export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePermissionsFormProps) => {
-  const { data: identityClaims } = useSuspenseData(allPossibleClaimsQueryOptions)
+export type PermissionsFormRef = FormRef<PermissionsFormValues>;
 
-  const form = useForm<any, PermissionsFormValues>({
+export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePermissionsFormProps) => {
+  return useForm<any, PermissionsFormValues>({
     schema: permissionsFormSchema,
     onSubmit: async ({ id, claims }) => {
       await handler(id, {
@@ -30,7 +27,8 @@ export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePer
       return null;
     },
     onEdit: async ({ id, claims }) => {
-      const removedClaims = initialValues?.claims?.filter(c => !claims.includes(c));
+      const initialValuesClaims = initialValues?.claims as Array<string> | undefined;
+      const removedClaims = initialValuesClaims?.filter(c => !claims.includes(c));
       const claimsToAdd = claims.filter(c => !initialValues?.claims?.includes(c));
 
       await handler(id, {
@@ -44,9 +42,4 @@ export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePer
     ...config
   })
 
-  const claimListOptions = useMemo<Array<TransferItem>>(() => {
-    return mapIdentityClaimsToTransferItems(identityClaims.claims)
-  }, [identityClaims.claims])
-
-  return { form, claimListOptions }
 }

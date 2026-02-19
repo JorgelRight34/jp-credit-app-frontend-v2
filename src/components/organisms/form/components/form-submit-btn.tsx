@@ -1,30 +1,31 @@
 import type { IconName } from '@/components/atoms/icon/iconName'
-import { AccentBtn, CheckCircleIcon } from '@/components/atoms'
+import { AccentPillBtn, CheckCircleIcon } from '@/components/atoms'
 
 export interface FormSubmitBtnProps {
   text?: string
   isDirty?: boolean
   isValid?: boolean
-  toastMessage?: string;
+  toastMessage?: string
   icon?: IconName
   onSubmit?: () => unknown
 }
 
-const FormSubmitBtn =({
+const FormSubmitBtn = ({
   text = 'Confirmar',
   isDirty,
   isValid,
   icon = CheckCircleIcon,
   onSubmit,
 }: FormSubmitBtnProps) => {
-    return (<AccentBtn
+  return (
+    <AccentPillBtn
       type="submit"
       disabled={isValid !== undefined ? !isDirty || !isValid : !isDirty}
       icon={icon}
       onClick={onSubmit}
     >
       {text}
-    </AccentBtn>
+    </AccentPillBtn>
   )
 }
 

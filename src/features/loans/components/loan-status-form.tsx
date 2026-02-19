@@ -1,4 +1,5 @@
 import {
+  ClosedProcessPanel,
   DataModuleFormProps,
   Form,
   FormContainer,
@@ -22,6 +23,14 @@ interface LoanStatusFormProps extends DataModuleFormProps<
 }
 
 const LoanStatusForm = ({ loan, ...props }: LoanStatusFormProps) => {
+  return loan.isActive ? (
+    <ClosedProcessPanel />
+  ) : (
+    <LoanStatusFormInner loan={loan} {...props} />
+  )
+}
+
+const LoanStatusFormInner = ({ loan, ...props }: LoanStatusFormProps) => {
   const form = useLoanStatusForm({ loan, ...props })
 
   return (

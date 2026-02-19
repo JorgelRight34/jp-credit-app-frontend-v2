@@ -50,7 +50,9 @@ const ProfilePage = ({ profile }: ProfilePageProps) => {
           <ProfileOverview profile={profile} />
         </Tab>
         <Tab eventKey="files" title="Archivos">
-          <FileTable files={profile.files.map(mapApiFileToTableFile)} />
+          <section>
+            <FileTable files={profile.files.map(mapApiFileToTableFile)} />
+          </section>
         </Tab>
         <Tab eventKey="loans" title="Préstamos">
           ...

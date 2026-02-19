@@ -1,4 +1,4 @@
-import type { Control, FieldValues, UseFormGetValues, UseFormSetValue, UseFormTrigger } from "react-hook-form";
+import type { Control, FieldValues, UseFormGetValues, UseFormHandleSubmit, UseFormSetValue, UseFormTrigger } from "react-hook-form";
 
 export interface FormRef<T extends FieldValues = FieldValues> {
     control: Control<T>;
@@ -7,5 +7,6 @@ export interface FormRef<T extends FieldValues = FieldValues> {
     getValues: UseFormGetValues<T>;
     validate: UseFormTrigger<T>;
     submit: () => void;
+    handleSubmit: UseFormHandleSubmit<T>;
     reset: () => void;
 }

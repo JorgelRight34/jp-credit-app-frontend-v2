@@ -1,22 +1,43 @@
-import { Container, ContainerProps, Image } from '@/components/atoms'
+import { ContainerProps, Image } from '@/components/atoms'
 import { Carousel } from '@/components/molecules'
 import { FileModel } from '@/models/fileModel'
+import clsx from 'clsx'
 
 interface PhotoGalleryProps extends ContainerProps {
   photos: Array<FileModel>
+  itemHeight?: number
+  itemBackground?: string
 }
 
-const PhotoGallery = ({ photos, ...props }: PhotoGalleryProps) => {
+const PhotoGallery = ({
+  photos,
+  className,
+  itemHeight,
+  itemBackground,
+}: PhotoGalleryProps) => {
   return (
-    <Container className="bg-black" {...props}>
+    <div className={clsx('overflow-hidden border rounded-xl', className)}>
       <Carousel>
         {photos.map((photo) => (
-          <Carousel.Item key={photo.id}>
-            <Image objectFit="contain" loading="lazy" src={photo.url} />
+          <Carousel.Item
+            height={itemHeight}
+            background={itemBackground}
+            key={photo.id}
+          >
+            <img
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                display: 'block',
+              }}
+              loading="lazy"
+              src={photo.url}
+            />
           </Carousel.Item>
         ))}
       </Carousel>
-    </Container>
+    </div>
   )
 }
 

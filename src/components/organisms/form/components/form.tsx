@@ -22,7 +22,8 @@ function InnerForm<T extends FieldValues>(
     validate: form.validate,
     getValues: form.getValues,
     setValue: form.setValue,
-    submit: () => form.handleSubmit(),
+    submit: () => form.submit(),
+    handleSubmit: form.handleSubmit,
     reset: () => form.reset(),
   }))
 

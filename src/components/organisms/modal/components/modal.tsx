@@ -40,10 +40,10 @@ const Modal = ({
     >
       <div
         className="my-modal rounded-xl flex flex-col p-3"
-        style={{ height, width }}
+        style={{ height, width, maxHeight: '95dvh' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="border-bottom flex flex-shrink-0 items-center pb-3">
+        <div className="border-b flex flex-shrink-0 items-center pb-3">
           <Icon
             labelClassName="!text-2xl"
             wrapperClassName="mb-0 mr-auto"

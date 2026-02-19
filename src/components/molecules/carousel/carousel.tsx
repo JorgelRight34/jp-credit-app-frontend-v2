@@ -8,7 +8,7 @@ type CarouselProps = PropsWithChildren<{
   height?: number | string
 }>
 
-const Carousel = ({ children, height = 300 }: CarouselProps) => {
+const Carousel = ({ children }: CarouselProps) => {
   const [emblaRef, embla] = useEmblaCarousel({ loop: true })
 
   const scrollPrev = useCallback(() => embla?.scrollPrev(), [embla])
@@ -27,7 +27,7 @@ const Carousel = ({ children, height = 300 }: CarouselProps) => {
         <Box
           sx={{
             display: 'flex',
-            height,
+            height: 'auto',
           }}
         >
           {children}
@@ -65,14 +65,20 @@ const Carousel = ({ children, height = 300 }: CarouselProps) => {
   )
 }
 
-Carousel.Item = ({ children }: PropsWithChildren) => {
+Carousel.Item = ({
+  children,
+  height,
+  background,
+}: PropsWithChildren & { height?: number; background?: string }) => {
   return (
     <Box
+      height={height}
       sx={{
         flex: '0 0 100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        background,
         color: 'white',
       }}
     >

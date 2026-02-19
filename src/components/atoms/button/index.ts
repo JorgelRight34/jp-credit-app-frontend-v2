@@ -8,3 +8,4 @@ export { default as ToggleButtonGroup } from "./components/toggle-button-group"
 export { default as AccentPillBtn } from './components/accent-pill-btn'
 export { default as LightPillBtn } from './components/light-pill-btn'
 export { default as LightPillMenuBtn } from './components/light-pill-menu-btn'
+export { default as SecondaryPillBtn } from './components/secondary-pill-btn'

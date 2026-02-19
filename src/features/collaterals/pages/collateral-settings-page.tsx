@@ -1,8 +1,10 @@
 import {
   BreadcrumbsByRoute,
+  ClosedProcessPanel,
   PageRouterLayout,
   PriceCheckIcon,
   SellIcon,
+  settingsBreadcrumb,
   Tab,
   TabsRouter,
 } from '@/components'
@@ -13,6 +15,7 @@ import {
   createCollateralBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import CollateralLiquidateForm from '../components/collateral-liquidate-form'
+import CollateralSellForm from '../components/collateral-sell-form'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   liquidate: { title: 'Liquidar', icon: PriceCheckIcon },
@@ -28,6 +31,7 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
         defaultActive: 'liquidate',
         baseBreadcrumbs: [
           collateralsBreadcrumb,
+          settingsBreadcrumb,
           createCollateralBreadcrumb(collateral),
         ],
         breadcrumbsByRoute,
@@ -35,9 +39,19 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
     >
       <TabsRouter>
         <Tab eventKey="liquidate" title="Liquidar">
-          <CollateralLiquidateForm collateral={collateral} />
+          {collateral.liquidationDate ? (
+            <ClosedProcessPanel />
+          ) : (
+            <CollateralLiquidateForm collateral={collateral} />
+          )}
         </Tab>
-        <Tab eventKey="sell" title="Vender"></Tab>
+        <Tab eventKey="sell" title="Vender">
+          {collateral.sellDate ? (
+            <ClosedProcessPanel />
+          ) : (
+            <CollateralSellForm collateral={collateral} />
+          )}
+        </Tab>
       </TabsRouter>
     </PageRouterLayout>
   )

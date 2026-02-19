@@ -4,12 +4,13 @@ import UserRolesFormPanel from './user-roles-form-panel'
 import type { User } from '../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
-import { FormContainer, Tab, Tabs } from '@/components'
+import { Form, FormContainer, FormInput, Tab, Tabs } from '@/components'
 import UserDataFormPanel from './user-data-form-panel'
-import PermissionsForm from './permissions-form'
 import { claimPairToString } from '../lib/utils'
 import { updateUserClaims } from '../services/userClient'
 import { useUserRolesForm } from '../hooks/useUserRolesForm'
+import { usePermissionsForm } from '../hooks/usePermissionsForm'
+import PermissionsFormTransferList from './permissions-form-transfer-list'
 
 type EditUserFormProps = DataModuleFormProps<User, UserFormValues> & {
   user: User
@@ -29,23 +30,33 @@ const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
         </FormContainer>
       </Tab>
       <Tab eventKey="permissions" title="Permisos">
-        <Suspense fallback="...">
-          <PermissionsForm
-            handler={updateUserClaims}
-            initialValues={{
-              claims: user.claims.map(claimPairToString),
-              id: user.id,
-              roles: [],
-            }}
-          />
-        </Suspense>
+        <PermissionsForm user={user} />
       </Tab>
       <Tab eventKey="roles" title="Roles">
-        <Suspense fallback={null}>
-          <UserRolesForm user={user} />
-        </Suspense>
+        <UserRolesForm user={user} />
       </Tab>
     </Tabs>
+  )
+}
+
+const PermissionsForm = ({ user }: { user: User }) => {
+  const form = usePermissionsForm({
+    handler: updateUserClaims,
+    initialValues: {
+      claims: user.claims.map(claimPairToString),
+      id: user.id,
+      roles: [],
+    },
+  })
+
+  return (
+    <FormContainer form={form}>
+      <Form form={form}>
+        <Suspense fallback="...">
+          <FormInput name="claims" as={PermissionsFormTransferList} />
+        </Suspense>
+      </Form>
+    </FormContainer>
   )
 }
 
@@ -54,7 +65,9 @@ const UserRolesForm = ({ user }: EditUserFormProps) => {
 
   return (
     <FormContainer form={form}>
-      <UserRolesFormPanel form={form} user={user} />
+      <Suspense fallback={null}>
+        <UserRolesFormPanel form={form} user={user} />
+      </Suspense>
     </FormContainer>
   )
 }

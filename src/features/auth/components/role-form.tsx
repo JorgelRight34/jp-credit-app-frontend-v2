@@ -1,12 +1,15 @@
-import { Suspense, useRef } from 'react'
+import { Ref, Suspense, useRef } from 'react'
 import { useRoleForm } from '../hooks/useRoleForm'
 import { updateRoleClaims } from '../services/authService'
-import PermissionsForm from './permissions-form'
-import type { PermissionsFormRef } from './permissions-form'
 import type { DataModuleFormProps } from '@/components'
 import type { Role } from '../models/role'
 import type { RoleFormSchemaValues } from '../lib/schemas/roleFormSchema'
-import { Form, FormContainer, FormGroup, Input } from '@/components'
+import { Form, FormContainer, FormGroup, FormInput, Input } from '@/components'
+import {
+  PermissionsFormRef,
+  usePermissionsForm,
+} from '../hooks/usePermissionsForm'
+import PermissionsFormTransferList from './permissions-form-transfer-list'
 
 interface RoleFormProps extends DataModuleFormProps<
   Role,
@@ -31,9 +34,21 @@ const RoleForm = (props: RoleFormProps) => {
         <FormGroup name="name" label="Nombre" input={Input} />
       </Form>
       <Suspense fallback="...">
-        <PermissionsForm ref={permissionFormRef} handler={updateRoleClaims} />
+        <PermissionsForm ref={permissionFormRef} />
       </Suspense>
     </FormContainer>
+  )
+}
+
+const PermissionsForm = ({ ref }: { ref: Ref<PermissionsFormRef> }) => {
+  const form = usePermissionsForm({ handler: updateRoleClaims })
+
+  return (
+    <Form ref={ref} form={form}>
+      <Suspense fallback="...">
+        <FormInput name="claims" as={PermissionsFormTransferList} />
+      </Suspense>
+    </Form>
   )
 }
 

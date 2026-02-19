@@ -26,7 +26,7 @@ const LoginForm = (
           isDirty={isDirty}
           text="Iniciar sesión"
           icon={LoginIcon}
-          onSubmit={() => form.form.handleSubmit()}
+          onSubmit={() => form.form.submit()}
         />
       )}
     >

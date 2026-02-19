@@ -1,4 +1,4 @@
-import { Suspense, useRef } from 'react'
+import { Ref, Suspense, useRef } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
 import UserRolesFormPanel, {
   UserRolesFormProps,
@@ -8,17 +8,23 @@ import type { User } from '../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import {
+  Form,
   FormContainer,
   FormGroup,
+  FormInput,
   FormRow,
   PasswordInput,
   Tab,
   Tabs,
 } from '@/components'
-import PermissionsForm, { PermissionsFormRef } from './permissions-form'
 import { updateUserClaims } from '../services/userClient'
 import UserDataFormPanel from './user-data-form-panel'
 import { useUserRolesForm } from '../hooks/useUserRolesForm'
+import {
+  PermissionsFormRef,
+  usePermissionsForm,
+} from '../hooks/usePermissionsForm'
+import PermissionsFormTransferList from './permissions-form-transfer-list'
 
 type CreateUserAccessFormProps = DataModuleFormProps<User, UserFormValues>
 
@@ -63,17 +69,25 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
           </UserDataFormPanel>
         </Tab>
         <Tab eventKey="permissions" title="Permisos">
-          <Suspense fallback="...">
-            <PermissionsForm handler={updateUserClaims} />
-          </Suspense>
+          <PermissionsForm ref={permissionsFormRef} />
         </Tab>
         <Tab eventKey="roles" title="Roles">
-          <Suspense fallback="...">
-            <UserRolesForm ref={rolesFormRef} />
-          </Suspense>
+          <UserRolesForm ref={rolesFormRef} />
         </Tab>
       </Tabs>
     </FormContainer>
+  )
+}
+
+const PermissionsForm = ({ ref }: { ref: Ref<PermissionsFormRef> }) => {
+  const form = usePermissionsForm({ handler: updateUserClaims })
+
+  return (
+    <Form ref={ref} form={form}>
+      <Suspense fallback="...">
+        <FormInput name="claims" as={PermissionsFormTransferList} />
+      </Suspense>
+    </Form>
   )
 }
 
@@ -81,9 +95,9 @@ const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
   const form = useUserRolesForm(props)
 
   return (
-    <FormContainer form={form}>
+    <Suspense fallback="...">
       <UserRolesFormPanel form={form} ref={ref} />
-    </FormContainer>
+    </Suspense>
   )
 }
 

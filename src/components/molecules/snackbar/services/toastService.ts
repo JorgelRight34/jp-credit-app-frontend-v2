@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { toast } from "react-toastify";
+import SnackbarSuccess from "../components/snackbar-success";
+import SnackbarError from "../components/snackbar-error";
 
 type Message = string | ReactNode;
 
@@ -13,8 +15,14 @@ class Toast {
      *
      * @param message - The success message to display to the user
      */
-    success(message: Message) {
-        toast.success(message);
+    success(title: Message) {
+        toast(SnackbarSuccess, {
+            data: { title },
+            // remove the padding on the toast wrapper
+            // make it 400px width
+            // add a thin purple border because I like purple
+            className: 'p-0 w-[400px] border',
+        });
     }
 
     /**
@@ -22,8 +30,11 @@ class Toast {
      *
      * @param message - The error message to display to the user
      */
-    error(message: Message) {
-        toast.error(message);
+    error(title: Message) {
+        toast.error(SnackbarError, {
+            data: { title },
+            className: 'p-0 w-[400px] border',
+        });
     }
 
     /**

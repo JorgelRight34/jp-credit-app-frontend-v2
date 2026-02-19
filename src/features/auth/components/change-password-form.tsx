@@ -7,7 +7,6 @@ import {
   FormContainer,
   FormGroup,
   FormRow,
-  FormSubmitBtn,
   PasswordInput,
 } from '@/components'
 
@@ -16,15 +15,11 @@ export type ChangePasswordFormProps = DataModuleFormProps<
   ChangePasswordSchemaType
 >
 
-const ChangePasswordForm = ({ initialValues }: ChangePasswordFormProps) => {
-  const [isDirty, setIsDirty] = useState(false)
-  const form = useChangePasswordForm({
-    initialValues,
-    onDirtyChange: setIsDirty,
-  })
+const ChangePasswordForm = (props: ChangePasswordFormProps) => {
+  const form = useChangePasswordForm(props)
 
   return (
-    <FormContainer footer={<FormSubmitBtn isDirty={isDirty} form={form} />}>
+    <FormContainer form={form}>
       <Form form={form}>
         <FormRow>
           <FormGroup

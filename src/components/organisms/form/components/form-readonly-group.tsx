@@ -10,10 +10,10 @@ import {
   OpenInNewIcon,
 } from '@/components/atoms'
 import { copyToClipboard } from '@/lib/utils'
-import { toastService } from '@/lib/services'
+import { toastService } from '@/components/molecules'
 
 export interface FormReadOnlyProps extends FormGroupLayoutProps {
-  value?: string | number
+  value?: string | number | null
   optional?: boolean
   disabled?: boolean
 }

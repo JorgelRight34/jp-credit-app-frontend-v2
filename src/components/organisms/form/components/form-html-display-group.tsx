@@ -26,7 +26,7 @@ const FormHtmlDisplayGroup = ({
       {...props}
     >
       <Box
-        className="border py-2 p-3 w-full h-1oo overflow-y-auto"
+        className="border py-2 p-3 w-full h-1oo min-h-[2.5rem] overflow-y-auto"
         sx={SX_CONFIG}
       >
         <SafeHtml html={value?.toString() ?? ''} />

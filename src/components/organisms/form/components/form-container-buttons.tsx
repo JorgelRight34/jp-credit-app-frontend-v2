@@ -2,12 +2,12 @@ import { useCallback } from 'react'
 import type { FieldValues } from 'react-hook-form'
 import FormSubmitBtn from './form-submit-btn'
 import type { FormSubmitBtnProps } from './form-submit-btn'
-import { SecondaryBtn } from '@/components/atoms'
+import { RestartAllIcon, SecondaryPillBtn } from '@/components/atoms'
 import { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
 
 type FormContainerButtonsProps<T extends FieldValues> =
   Partial<FormSubmitBtnProps> & {
-    form?: UseFormBuilderReturn<T>;
+    form?: UseFormBuilderReturn<T>
     onReset?: () => void
   }
 
@@ -29,17 +29,19 @@ const FormContainerButtons = <T extends FieldValues>({
   }, [form, onReset])
 
   const submitHandler = useCallback(
-    async () =>
-      await (form ? form.form.handleSubmit : onSubmit)?.()
-    ,
+    async () => await (form ? form.form.submit : onSubmit)?.(),
     [form],
   )
 
   return (
     <div className="flex items-center gap-3">
-      <SecondaryBtn disabled={!isDirty} onClick={handleReset}>
+      <SecondaryPillBtn
+        icon={RestartAllIcon}
+        disabled={!isDirty}
+        onClick={handleReset}
+      >
         Resetear
-      </SecondaryBtn>
+      </SecondaryPillBtn>
       <FormSubmitBtn
         isDirty={isDirty}
         isValid={isValid}

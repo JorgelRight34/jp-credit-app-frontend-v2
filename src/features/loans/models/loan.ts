@@ -14,6 +14,7 @@ export interface Loan {
     totalFees: number;
     guarantor?: LoanMember;
     loanOfficer?: LoanMember;
+    isActive: boolean;
 
     clientProfileId: number;
     guarantorProfileId?: number;

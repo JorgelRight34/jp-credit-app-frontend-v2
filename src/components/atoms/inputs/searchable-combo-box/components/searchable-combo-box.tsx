@@ -102,6 +102,7 @@ const DisplayInput = <T, TValue>({
       <ModalTrigger
         {...modalProps}
         width="auto"
+        height="95dvh"
         ref={modalTriggerRef}
         trigger={
           <Input

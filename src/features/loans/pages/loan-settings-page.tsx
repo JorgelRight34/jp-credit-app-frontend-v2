@@ -1,12 +1,10 @@
 import {
-  BreadcrumbSpec,
   ConfirmationModal,
   ConfirmationModalRef,
   createPageLayoutDeleteOption,
-  EditFormPageLayout,
   PageLayout,
   PageLayoutBreadcrumb,
-  SettingsIcon,
+  settingsBreadcrumb,
 } from '@/components'
 import { Loan } from '../models/loan'
 import { loanPermissionProvider } from '../lib/config/permission-provider'
@@ -14,14 +12,10 @@ import { createLoanBreadcrumb, loanBreadcrumb } from '../lib/config/breadcrumb'
 import LoanStatusForm from '../components/loan-status-form'
 import { deleteLoan } from '../services/loanClient'
 import { useRef } from 'react'
+import { getLoanLabel } from '../lib/utils'
 
 interface LoanSettingsPageProps {
   loan: Loan
-}
-
-const settingsBreadcrumb: BreadcrumbSpec = {
-  title: 'Ajustes',
-  icon: SettingsIcon,
 }
 
 const LoanSettingsPage = ({ loan }: LoanSettingsPageProps) => {
@@ -29,7 +23,7 @@ const LoanSettingsPage = ({ loan }: LoanSettingsPageProps) => {
 
   return (
     <PageLayout
-      title={`Préstamo No. ${loan.id} / Ajustes`}
+      title={`${getLoanLabel(loan)} / Ajustes`}
       permissionProvider={loanPermissionProvider}
       isAuthorizedFn={(p) => p.canEdit}
       options={[

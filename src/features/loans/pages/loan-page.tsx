@@ -17,6 +17,7 @@ import LoanOverview from '../components/loan-overview'
 import LoanAmortizationPreview from '../components/loan-amortization-preview'
 import { collateralsDataTableConfig } from '@/features/collaterals'
 import { loansQueryKey } from '../lib/constants'
+import { getLoanLabel } from '../lib/utils'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   overview: { title: 'Overview', icon: OverviewIcon },
@@ -29,7 +30,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = {
 const LoanPage = ({ loan }: { loan: Loan }) => {
   return (
     <PageRouterLayout
-      title={`Préstamo No. ${loan.id}`}
+      title={getLoanLabel(loan)}
       permissionProvider={loanPermissionProvider}
       options={[
         createPageLayoutSettingsOption('/loans/$id/settings', {

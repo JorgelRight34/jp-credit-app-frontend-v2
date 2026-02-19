@@ -14,7 +14,8 @@ export const normalizeDate = (d: Date) => {
 };
 
 /** Format to French locale (or "---" if invalid) */
-export const toFormattedDate = (date: string | Date): string => {
+export const toFormattedDate = (date?: string | Date): string | null => {
+    if (!date) return null;
     if (!(date instanceof Date)) date = new Date(date);
     if (isNaN(date.getTime())) return "---";
 

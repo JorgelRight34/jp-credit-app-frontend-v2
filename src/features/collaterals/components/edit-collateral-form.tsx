@@ -9,6 +9,7 @@ import {
   FileAttachmentsPanel,
   FormContainer,
   FormContainerButtons,
+  FormLayout,
   FormReadOnlyGroup,
   Tab,
   Tabs,
@@ -62,10 +63,11 @@ const EditCollateralFileAttachmentsForm = ({
   const fileAttachmentsForm = useCollateralFileAttachmentForm({ collateral })
 
   return (
-    <FormContainer
+    <FormLayout
       footer={
         <FormContainerButtons
           isDirty={isDirty}
+          onReset={fileAttachmentsForm.handleReset}
           onSubmit={fileAttachmentsForm.handleSubmit}
         />
       }
@@ -76,7 +78,7 @@ const EditCollateralFileAttachmentsForm = ({
         onDirtyChange={setIsDirty}
         render={FileAttachmentsPanel}
       />
-    </FormContainer>
+    </FormLayout>
   )
 }
 

@@ -11,14 +11,7 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
     <section>
       <div className="flex mb-6">
         <div className="flex items-center justify-center w-5/12 pr-6">
-          <PhotoGallery
-            className="w-full shadow-sm"
-            photos={
-              profile.files.length > 0
-                ? profile.files.filter((c) => c.isImage)
-                : [getDefaultProfilePicModel(profile)]
-            }
-          />
+          <ProfilePhotoGallery profile={profile} />
         </div>
         <aside className="w-7/12">
           <FormRow>
@@ -72,6 +65,19 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
       </div>
       <FormReadOnlyGroup label="Dirección" name="address" optional />
     </section>
+  )
+}
+
+const ProfilePhotoGallery = ({ profile }: ProfileOverviewProps) => {
+  const images = profile.files.filter((c) => c.isImage)
+
+  return (
+    <PhotoGallery
+      itemBackground="black"
+      className="w-full shadow-sm max-h-[400px]"
+      itemHeight={350}
+      photos={images.length > 0 ? images : [getDefaultProfilePicModel(profile)]}
+    />
   )
 }
 

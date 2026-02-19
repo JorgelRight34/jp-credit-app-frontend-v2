@@ -67,7 +67,7 @@ export const createLoanSearchInputDataTableConfig = (onRowClick: (loan: Loan) =>
     return ({
         title: "Préstamos",
         columns: [
-            { id: "id", header: "ID", enableSorting: true },
+            { id: "id", header: "ID", accessorKey: "id", enableSorting: true },
             {
                 header: "CLIENTE",
                 accessorFn: (row) => row.client?.name,

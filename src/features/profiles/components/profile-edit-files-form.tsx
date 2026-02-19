@@ -14,21 +14,21 @@ interface ProfileEditFilesFormProps {
 
 const ProfileEditFilesForm = ({ profile }: ProfileEditFilesFormProps) => {
   const [isDirty, setIsDirty] = useState(false)
-  const form = useProfileFileAttachmentsForm({ profile })
+  const fileAttachmentsForm = useProfileFileAttachmentsForm({ profile })
 
   return (
     <FormLayout
       footer={
         <FormContainerButtons
           isDirty={isDirty}
-          onReset={() => form.formRef.current?.reset()}
-          onSubmit={() => form.formRef.current?.submit()}
+          onReset={fileAttachmentsForm.handleReset}
+          onSubmit={fileAttachmentsForm.handleSubmit}
         />
       }
     >
       <FileAttachmentsForm
-        ref={form.formRef}
-        form={form.form}
+        ref={fileAttachmentsForm.formRef}
+        form={fileAttachmentsForm.form}
         onDirtyChange={setIsDirty}
         render={FileAttachmentsPanel}
       />

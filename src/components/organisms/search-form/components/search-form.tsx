@@ -110,7 +110,7 @@ const SubmitBtn = <T extends FieldValues>({
       disabled={!isDirty}
       icon={SearchIcon}
       className="shadow-sm"
-      onClick={form.form.handleSubmit}
+      onClick={form.form.submit}
     />
   )
 }

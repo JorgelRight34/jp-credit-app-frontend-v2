@@ -21,6 +21,8 @@ export const useCollateralFileAttachmentForm = ({ collateral }: { collateral?: C
             collateralRef.current = value;
             await formRef.current?.submit();
         },
+        handleSubmit: async () => formRef.current?.submit(),
+        handleReset: () => formRef.current?.reset(),
         formRef
     }
 }
