@@ -6,9 +6,8 @@ import {
   useState,
 } from 'react'
 import clsx from 'clsx'
-import Modal from './modal'
+import Modal, { ModalProps } from './modal'
 import type { ReactNode } from 'react'
-import type { ModalProps } from '../models/modalProps'
 import type { CacheKey } from '@/models'
 import { useDataClient } from '@/hooks/useDataClient'
 import { AccentBtn, Input, SecondaryBtn, Subtitle } from '@/components/atoms'

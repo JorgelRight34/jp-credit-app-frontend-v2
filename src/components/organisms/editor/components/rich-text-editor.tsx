@@ -11,7 +11,7 @@ const RichTextEditorInput = ({
 }: InputProps & React.PropsWithChildren) => {
   return (
     <div
-      className={clsx('w-full h-100 shadow-sm rounded-xl', className)}
+      className={clsx('w-full flex-1 shadow-sm rounded-xl', className)}
       data-color-mode="light"
     >
       <Editor

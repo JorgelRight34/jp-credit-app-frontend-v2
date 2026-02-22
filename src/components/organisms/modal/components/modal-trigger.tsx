@@ -1,7 +1,6 @@
 import { forwardRef, useImperativeHandle, useState } from 'react'
-import Modal from './modal'
+import Modal, { ModalProps } from './modal'
 import type { ReactNode } from 'react'
-import type { ModalProps } from '../models/modalProps'
 
 interface ModalTriggerProps extends Omit<ModalProps, 'show' | 'onHide'> {
   trigger: ReactNode

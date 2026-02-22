@@ -1,4 +1,4 @@
-import { startTransition, useMemo } from 'react'
+import { startTransition, useMemo, useState } from 'react'
 import '../_navbar.css'
 import type { NavItem } from '../../models/navItem'
 import { Input, SearchIcon } from '@/components/atoms'
@@ -6,14 +6,11 @@ import { Input, SearchIcon } from '@/components/atoms'
 interface NavbarSearchProps {
   options: Array<NavItem>
   className?: string
-  onSearch?: (results: Array<NavItem>) => void
+  onChange?: (results: Array<NavItem>) => void
 }
 
-const NavbarSearch = ({
-  options,
-  className = '',
-  onSearch,
-}: NavbarSearchProps) => {
+const NavbarSearch = ({ options, className, onChange }: NavbarSearchProps) => {
+  const [query, setQuery] = useState('')
   const searchableOptions = useMemo(
     () =>
       options
@@ -25,13 +22,14 @@ const NavbarSearch = ({
   const setFilteredOptions = (query: string) => {
     query = query.trim()
 
-    if (query == '') {
-      onSearch?.(options)
+    if (query === '') {
+      onChange?.([])
+      return
     }
 
     const normalizedQuery = query.toLowerCase()
 
-    onSearch?.(
+    onChange?.(
       searchableOptions.filter(
         (option) =>
           option.nameLower.includes(normalizedQuery) ||
@@ -42,11 +40,13 @@ const NavbarSearch = ({
 
   return (
     <Input
-      icon={{ icon: SearchIcon, iconDirection: 'left' }}
+      icon={{ icon: SearchIcon, iconDirection: 'right' }}
       className={className}
       placeholder="Buscar..."
+      value={query}
       onChange={(v: string) =>
         startTransition(() => {
+          setQuery(v)
           setFilteredOptions(v)
         })
       }

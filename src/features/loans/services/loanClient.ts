@@ -1,4 +1,4 @@
-import type { Loan } from "../models/loan"
+import type { Loan, LoanMember } from "../models/loan"
 import type { LoanQuery } from "../models/loanQuery"
 import type { PagedResponse } from "@/models"
 import api from "@/lib/services/api"
@@ -12,7 +12,7 @@ export const getLoans = async (params: LoanQuery): Promise<PagedResponse<Loan>> 
     return data;
 }
 
-export const getLoan = async (id: Loan["id"]) => {
+export const getLoan = async (id: Loan["id"]): Promise<Loan> => {
     const { data } = await api.get(baseUrl + "/" + id);
     return data;
 }
@@ -28,4 +28,9 @@ export const deleteLoan = async (id: Loan["id"]) => {
 
 export const updateLoanStatus = async (id: Loan["id"], status: LoanStatus) => {
     await api.put(baseUrl + "/" + id + "/status", { status });
+}
+
+export const getLoanActors = async (loanId: Loan["id"]): Promise<{ client: LoanMember, guarantor?: LoanMember, loanOfficer?: LoanMember }> => {
+    const { data } = await api.get(baseUrl + "/" + loanId + "/actors");
+    return data;
 }

@@ -82,7 +82,7 @@ const SearchForm = <T extends Query>({
             </div>
           </div>
           <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
-            <div className="rounded-xl mt-3 flex w-full flex-wrap  space-y-3 shadow-sm border bg-white p-3">
+            <div className="rounded-xl mt-3 flex w-full flex-wrap space-y-3 shadow-sm border bg-white p-3">
               {hasOpenedAdvanced &&
                 advanced.map((option) => (
                   <AdvancedSearchFormGroup

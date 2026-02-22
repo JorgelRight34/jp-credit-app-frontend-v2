@@ -18,7 +18,7 @@ export { default as EmailInput } from './email-input/email-input'
 export { default as FileInputWrapper } from './file-input-wrapper/file-input-wrapper'
 
 
-export * from './searchable-combo-box'
+export * from './picker-input'
 export { default as GenderSelect } from "./select/gender-select"
 export { default as CivilStatusSelect } from "./select/civil-status-select"
 

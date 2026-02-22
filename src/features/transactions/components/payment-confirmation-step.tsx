@@ -3,7 +3,9 @@ import {
   AccentPillBtn,
   ArrowBackIcon,
   ArrowForwardIcon,
-  CancelIcon,
+  DetailRow,
+  DetailRowGroup,
+  Fieldset,
   FieldValues,
   FormHtmlDisplayGroup,
   FormLayout,
@@ -19,6 +21,7 @@ import { getLoanLabel } from '@/features/loans'
 import { toCurrency, toFormattedDate } from '@/lib/utils'
 import { CacheKey } from '@/models'
 import { PaymentResult } from '../models/paymentResult'
+import { loanStatusSpanishTranslations } from '@/features/loans/lib/constants'
 
 interface PaymentConfirmationStepProps<T extends FieldValues> {
   form: UseFormBuilderReturn<T>
@@ -44,56 +47,140 @@ const PaymentConfirmationStep = <T extends FieldValues>({
       <Paragraph>
         Verifique su pago. Para aceptar, presione <b>Continuar</b>
       </Paragraph>
+      <div className="flex">
+        <div className="w-7/12">
+          <PaymentDetails transaction={data.transaction} />
+        </div>
+        <div className="flex w-5/12 px-6">
+          <PaymentLoanChangesCard paymentResult={data} />
+        </div>
+      </div>
+    </FormLayout>
+  )
+}
+
+const PaymentDetails = ({
+  transaction,
+}: {
+  transaction: PaymentResult['transaction']
+}) => {
+  return (
+    <>
       <FormRow>
         <FormReadOnlyGroup
           name="loanId"
           label="Préstamo"
-          value={getLoanLabel(data.transaction)}
+          value={getLoanLabel({ id: transaction.loanId })}
         />
         <FormReadOnlyGroup
           name="amount"
           label="Monto a pagar"
-          value={toCurrency(data.transaction.value)}
+          value={toCurrency(transaction.value)}
         />
       </FormRow>
       <FormRow>
         <FormReadOnlyGroup
           name="capital"
           label="Capital"
-          value={toCurrency(data.transaction.capitalValue)}
+          value={toCurrency(transaction.capitalValue)}
         />
         <FormReadOnlyGroup
           name="interest"
           label="Interés"
-          value={toCurrency(data.transaction.interestValue)}
+          value={toCurrency(transaction.interestValue)}
         />
       </FormRow>
       <FormRow>
         <FormReadOnlyGroup
           name="fee"
           label="Mora"
-          value={toCurrency(data.transaction.penaltyFee)}
+          value={toCurrency(transaction.penaltyFee)}
         />
         <FormReadOnlyGroup
           name="lateDays"
           label="Días de tardanza"
-          value={toCurrency(data.transaction.lateDays)}
+          value={toCurrency(transaction.lateDays)}
         />
       </FormRow>
       <FormRow>
         <FormReadOnlyGroup
           name="date"
           label="Fecha de pago"
-          value={toFormattedDate(data.transaction.date)}
+          value={toFormattedDate(transaction.date)}
         />
-        <FormHtmlDisplayGroup
-          name="description"
-          label="Descripción"
-          value={data.transaction.description}
-          optional
+        <FormReadOnlyGroup
+          name="outstandingAmount"
+          label="Balance pendiente pagado"
+          value={toCurrency(transaction.outstandingAmount)}
         />
       </FormRow>
-    </FormLayout>
+      <FormHtmlDisplayGroup
+        name="description"
+        label="Descripción"
+        value={transaction.description}
+        optional
+      />
+    </>
+  )
+}
+
+const PaymentLoanChangesCard = ({
+  paymentResult: { transaction, loanBefore, loanAfter },
+}: {
+  paymentResult: PaymentResult
+}) => {
+  const loanLabel = getLoanLabel({ id: transaction.loanId }).toUpperCase()
+  return (
+    <div className="flex w-full flex-col gap-6 px-3">
+      <Fieldset className="p-3" legend={`${loanLabel} / ANTES`}>
+        <DetailRowGroup>
+          <DetailRow
+            title="Balance capital"
+            subtitle={toCurrency(loanBefore.accruedCapital)}
+          />
+          <DetailRow
+            title="Balance interés"
+            subtitle={toCurrency(loanBefore.accruedInterest)}
+          />
+          <DetailRow
+            title="Mora pendiente"
+            subtitle={toCurrency(loanBefore.totalFees)}
+          />
+          <DetailRow
+            title="Monto atrasado"
+            subtitle={toCurrency(loanBefore.outstandingAmount)}
+          />
+          <DetailRow
+            title="Estado"
+            subtitle={loanStatusSpanishTranslations[loanBefore.status]}
+          />
+        </DetailRowGroup>
+      </Fieldset>
+      <Fieldset className="p-4" legend={`${loanLabel} / DESPUES`}>
+        <DetailRowGroup>
+          <DetailRow
+            title="Balance capital"
+            subtitle={toCurrency(loanAfter.accruedCapital)}
+          />
+          <DetailRow
+            title="Balance interés"
+            subtitle={toCurrency(loanAfter.accruedInterest)}
+          />
+          <DetailRow
+            title="Mora pendiente"
+            subtitle={toCurrency(loanAfter.totalFees)}
+          />
+          <DetailRow
+            title="Monto atrasado"
+            subtitle={toCurrency(loanAfter.outstandingAmount)}
+          />
+          <DetailRow
+            title="Estado"
+            subtitle={loanStatusSpanishTranslations[loanAfter.status]}
+          />
+        </DetailRowGroup>
+      </Fieldset>
+    </div>
   )
 }
 
@@ -101,16 +188,21 @@ const Footer = () => {
   const [_, setActive] = useFormConfirmationFlowActiveStep()
 
   return (
-    <div className="flex justify-between">
-      <div className="flex items-center w-4/12 gap-3">
+    <div className="flex border-t pt-3 justify-between">
+      <span>
         <LightPillBtn icon={ArrowBackIcon} onClick={() => setActive(0)}>
           Atrás
         </LightPillBtn>
-        <LightPillBtn icon={CancelIcon}>Cancelar</LightPillBtn>
-        <AccentPillBtn icon={ArrowForwardIcon} onClick={() => setActive(2)}>
+      </span>
+      <span>
+        <AccentPillBtn
+          icon={ArrowForwardIcon}
+          iconDirection="right"
+          onClick={() => setActive(2)}
+        >
           Continuar
         </AccentPillBtn>
-      </div>
+      </span>
     </div>
   )
 }

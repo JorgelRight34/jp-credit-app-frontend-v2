@@ -75,7 +75,6 @@ export * from "./image/image"
 // -------------------------------------
 // Inputs - Select (Lazy & Normal)
 // -------------------------------------
-export { default as LazySelectInput } from "./inputs/select/lazy-select";
 export { default as SelectInput } from "./inputs/select/select";
 export * from "./inputs/select/select"
 export { default as SelectOption } from "./inputs/select/select-option";
@@ -88,11 +87,14 @@ export { default as Link } from "./navigation/link";
 export { default as NavLink } from "./navigation/nav-link";
 export { default as PhoneLink } from "./navigation/phone-link";
 export { default as DateLabel } from "./date-label/date-label"
-export { default as Container } from "./container/container"
-export * from "./container/container"
+export * from './container'
+export * from "./container/components/container"
 export * from "./navigation/link"
 
 export * from "./icon"
 
 export { default as Skeleton } from "./skeleton/skeleton"
 export { default as ParagraphSkeleton } from "./skeleton/skeleton"
+export { default as Fieldset } from './fielset/fieldset'
+
+export * from './details'

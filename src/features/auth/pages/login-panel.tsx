@@ -21,7 +21,7 @@ const LoginPanel = () => {
             style={{ borderWidth: '1px' }}
           >
             <header className="flex flex-col items-center justify-center gap-5 p-5">
-              <BigTitle className="text-accent text-3xl mb-5 text-center">
+              <BigTitle className="text-accent text-4xl mb-5 text-center">
                 Sistema de Crédito Empresarial
               </BigTitle>
               {/* Version info at bottom */}

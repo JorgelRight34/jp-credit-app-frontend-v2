@@ -20,6 +20,7 @@ export { default as FormLayout } from './components/form-container-layout'
 export { default as FormErrorsPanel } from './components/form-errors-panel'
 export { default as FormConfirmationFlow } from './components/form-confirmation-flow'
 export { default as FormConfirmationFlowContainer } from './components/form-confirmation-flow-container'
+export { default as FormLazySelectGroup } from './components/form-lazy-select-group'
 export * from "./components/form-readonly-group"
 export * from './providers/form-confirmation-provider'
 export type { FieldValues } from 'react-hook-form'

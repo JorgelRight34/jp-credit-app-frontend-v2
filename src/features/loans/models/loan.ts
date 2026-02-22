@@ -15,11 +15,12 @@ export interface Loan {
     guarantor?: LoanMember;
     loanOfficer?: LoanMember;
     isActive: boolean;
+    daysOfGrace: number;
 
     clientProfileId: number;
     guarantorProfileId?: number;
     loanOfficerProfileId?: number;
-    penaltyRate?: number;
+    penaltyRate: number;
 
     // Loan details
     approvedAmount: number; // Monto aprobado
@@ -32,7 +33,6 @@ export interface Loan {
     paymentFrequency: LoanPaymentFrequency;
     expirationDate: Date | string;
     latePaymentCredit: number; // Abono de mora (mora pagada)
-    accruedCapital: number;
     isOverdue: boolean;
     lastPaymentDate?: string;
     effectivePaymentDate: string;
@@ -56,7 +56,8 @@ export interface Loan {
 
 export type LoanPaymentFrequency = 1 | 12 | 4 | 2
 
-type LoanMember = {
-    name: string;
+export type LoanMember = {
+    firstName: string;
+    lastName: string;
     profileId: number;
 }

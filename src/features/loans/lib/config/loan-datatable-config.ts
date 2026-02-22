@@ -8,9 +8,13 @@ export const loansDataTableColumns: DataTableConfig<Loan>["columns"] = [
     { accessorKey: "id", header: "ID" },
     {
         header: "CLIENTE",
-        accessorFn: (row) => row.client?.name,
+        accessorFn: (row) => row.client?.lastName,
         enableSorting: true,
-        cell: ({ row }) => createLinkDataCell(row.original.client?.name, { to: "/loans/$id", params: { id: row.original.id.toString() } }),
+        cell: ({ row }) => createLinkDataCell(
+            `${row.original.client.lastName}, ${row.original.client.firstName}`,
+            {
+                to: "/loans/$id", params: { id: row.original.id.toString() }
+            }),
     },
     {
         accessorKey: "disbursedAmount",
@@ -70,9 +74,9 @@ export const createLoanSearchInputDataTableConfig = (onRowClick: (loan: Loan) =>
             { id: "id", header: "ID", accessorKey: "id", enableSorting: true },
             {
                 header: "CLIENTE",
-                accessorFn: (row) => row.client?.name,
+                accessorFn: (row) => row.client?.firstName,
                 enableSorting: true,
-                cell: ({ row }) => createLinkDataCell(row.original.client?.name, { to: "/profiles/$id", params: { id: row.original.clientId.toString() } }),
+                cell: ({ row }) => createLinkDataCell(`${row.original.client.lastName}, ${row.original.client.firstName}`, {}),
             },
             {
                 accessorKey: "disbursedAmount",

@@ -6,13 +6,20 @@ import { useData } from '@/hooks/useData'
 
 export type LazySelectInputProps = Omit<SelectInputProps, 'options'> & {
   cacheKey: CacheKey
+  enabled?: boolean
   loader: () => Promise<SelectOptions>
 }
 
-const LazySelect = ({ cacheKey, loader, ...props }: LazySelectInputProps) => {
+const LazySelect = ({
+  cacheKey,
+  enabled,
+  loader,
+  ...props
+}: LazySelectInputProps) => {
   const { data } = useData({
     key: cacheKey,
     loader,
+    enabled,
   })
 
   return <SelectInput {...props} options={data ?? []} />

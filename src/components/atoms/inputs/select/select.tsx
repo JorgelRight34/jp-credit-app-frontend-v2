@@ -4,7 +4,7 @@ import { getIconInputSlot } from '../input/lib/react-utils'
 import { SX_CONFIG } from '../../constants'
 import type { SelectOptions } from './select-option'
 import type { InputProps } from '../input/components/input'
-import type { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { toTitleCase } from '@/lib/utils/utils'
 
 export type SelectInputProps = Omit<
@@ -22,10 +22,11 @@ const SelectInput = ({
   options,
   children,
   label,
-  allowNoOption = true,
-  value = '',
   icon,
   readOnly,
+  allowNoOption = true,
+  value = '',
+  onChange,
   ...props
 }: SelectInputProps) => {
   return (
@@ -39,7 +40,7 @@ const SelectInput = ({
         label={label}
         labelId={label?.toString()}
         value={value}
-        onChange={(e) => props.onChange?.(e.target.value as string)}
+        onChange={(e) => onChange?.(e.target.value as string)}
         sx={{ width: 'auto', minWidth: 'fit-content', ...SX_CONFIG }}
         IconComponent={readOnly ? () => null : undefined}
         readOnly={readOnly}

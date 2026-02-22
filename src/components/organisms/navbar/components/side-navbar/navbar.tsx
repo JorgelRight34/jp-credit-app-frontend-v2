@@ -1,6 +1,5 @@
 import '../_navbar.css'
-import { useState } from 'react'
-import clsx from 'clsx'
+import { Activity, useMemo, useState } from 'react'
 import {
   accessControlNavItem,
   accountStatusNavItem,
@@ -42,14 +41,6 @@ interface NavbarProps {
 }
 
 const Navbar = ({ onSelect }: NavbarProps) => {
-  const [activeNav, setActiveNav] = useState<NavItem | null>(null)
-  const [searchResults, setSearchResults] = useState<Array<NavItem>>([])
-
-  const handleOnSelect = (option: NavItem) => {
-    setActiveNav(option)
-    onSelect?.(option)
-  }
-
   return (
     <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-white border-r shadow-sm">
       <div className="border-bottom flex-shrink-0">
@@ -59,52 +50,73 @@ const Navbar = ({ onSelect }: NavbarProps) => {
           className="mb-0"
         />
       </div>
-      <div className="flex-shrink-0 p-3">
-        <NavbarSearch
-          className="bg-active-transparent"
-          options={options}
-          onSearch={(results: Array<NavItem>) => {
-            if (results.length > 0) {
-              setSearchResults(results)
-            }
-          }}
-        />
-      </div>
-      <NavbarLinksContainer
-        className={clsx({ hidden: activeNav?.children?.length })}
-        options={searchResults.length > 0 ? searchResults : options}
-        onExpand={handleOnSelect}
-      />
-      <NavbarLinksContainer
-        className={clsx({ hidden: !activeNav?.children?.length })}
-        options={activeNav?.children || []}
-        onExpand={handleOnSelect}
-        activeOptions={{ includeSearch: true }}
-      >
-        <div className="flex justify-between border-b border-t bg-active-transparent p-3 shadow-sm">
-          <div className="border-left-accent">
-            <Icon
-              className="text-accent-secondary cursor-pointer"
-              icon={ArrowBackIcon}
-              onClick={() => setActiveNav(null)}
-            />
-          </div>
-          <div className="flex items-center">
-            <Icon
-              className="text-sm text-link-active"
-              orientation="right"
-              icon={activeNav?.icon}
-            >
-              /&nbsp;
-              {activeNav?.name}
-            </Icon>
-          </div>
-        </div>
-      </NavbarLinksContainer>
+      <NavbarBody onSelect={onSelect} />
       <div className="w-full flex-shrink-0 p-3">
         <NavbarFooter className="bg-active-transparent shadow-sm" />
       </div>
     </div>
+  )
+}
+
+const NavbarBody = ({ onSelect }: NavbarProps) => {
+  const [activeNav, setActiveNav] = useState<NavItem | null>(null)
+  const [searchResults, setSearchResults] = useState<Array<NavItem>>([])
+  const hasActiveNavChildren = useMemo(
+    () =>
+      searchResults.length === 0 &&
+      activeNav?.children &&
+      activeNav.children.length > 0,
+    [activeNav, searchResults],
+  )
+
+  const handleOnSelect = (option: NavItem) => {
+    setActiveNav(option)
+    onSelect?.(option)
+  }
+
+  return (
+    <>
+      <div className="flex-shrink-0 p-3">
+        <NavbarSearch
+          className="bg-active-transparent"
+          options={options}
+          onChange={setSearchResults}
+        />
+      </div>
+      <Activity mode={!hasActiveNavChildren ? 'visible' : 'hidden'}>
+        <NavbarLinksContainer
+          options={searchResults.length > 0 ? searchResults : options}
+          onExpand={handleOnSelect}
+        />
+      </Activity>
+      <Activity mode={hasActiveNavChildren ? 'visible' : 'hidden'}>
+        <NavbarLinksContainer
+          options={activeNav?.children ?? []}
+          onExpand={handleOnSelect}
+          activeOptions={{ includeSearch: true }}
+        >
+          <div className="flex justify-between border-b border-t bg-active-transparent p-3 shadow-sm">
+            <div className="border-left-accent">
+              <Icon
+                className="text-accent-secondary cursor-pointer"
+                icon={ArrowBackIcon}
+                onClick={() => setActiveNav(null)}
+              />
+            </div>
+            <div className="flex items-center">
+              <Icon
+                className="text-sm text-link-active"
+                orientation="right"
+                icon={activeNav?.icon}
+              >
+                /&nbsp;
+                {activeNav?.name}
+              </Icon>
+            </div>
+          </div>
+        </NavbarLinksContainer>
+      </Activity>
+    </>
   )
 }
 

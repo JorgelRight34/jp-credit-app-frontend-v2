@@ -12,12 +12,12 @@ export const getTransactions = async (params: Query): Promise<PagedResponse<Tran
     return data;
 }
 
-export const createPayment = async (body: TransactionFormValues): Promise<Transaction> => {
-    const { data } = await api.post(baseUrl, body);
+export const createPayment = async ({ loanId, ...request }: TransactionFormValues): Promise<Transaction> => {
+    const { data } = await api.post(baseUrl, { request, loanId, isPreview: true });
     return data;
 }
 
-export const getPaymentPreview = async (body: TransactionFormValues): Promise<PaymentResult> => {
-    const { data } = await api.post(baseUrl, { ...body, isPreview: true });
+export const getPaymentPreview = async ({ loanId, ...request }: TransactionFormValues): Promise<PaymentResult> => {
+    const { data } = await api.post(baseUrl, { request, loanId, isPreview: true });
     return data;
 }

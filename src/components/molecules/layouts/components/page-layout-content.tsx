@@ -5,7 +5,6 @@ import type {
   IsAuthorizedFn,
   PermissionsProvider,
 } from '@/components/organisms'
-import { getProjectId } from '@/lib/utils'
 import { ProtectedComponent } from '@/components/organisms'
 
 interface PageLayoutContentProps {
@@ -17,7 +16,6 @@ interface PageLayoutContentProps {
 
 const PageLayoutContent = ({
   permissionProvider,
-  validateProject,
   children,
   isAuthorizedFn = (p) => p.canView,
 }: PageLayoutContentProps) => {
@@ -29,9 +27,7 @@ const PageLayoutContent = ({
           isAuthorizedFn={isAuthorizedFn}
           fallback={<Unauthorized />}
         >
-          {validateProject && !getProjectId()
-            ? '<ChooseProjectPrompt />'
-            : children}
+          {children}
         </ProtectedComponent>
       </Suspense>
     </div>

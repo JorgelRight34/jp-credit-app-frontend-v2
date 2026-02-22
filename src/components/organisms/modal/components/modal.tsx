@@ -1,9 +1,20 @@
 import './modal.css'
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { createPortal } from 'react-dom'
-import type { ModalProps } from '../models/modalProps'
-import { CloseIcon, Icon } from '@/components/atoms'
+import { CloseIcon, Icon, IconName } from '@/components/atoms'
+
+export interface ModalProps extends React.PropsWithChildren {
+  className?: string
+  title?: ReactNode
+  show: boolean
+  showCloseBtn?: boolean
+  width?: string
+  height?: string
+  modalOverlay?: string
+  icon?: IconName
+  onHide: () => void
+}
 
 const modalRoot =
   typeof window !== 'undefined' ? document.getElementById('modal-root') : null
@@ -12,10 +23,11 @@ const Modal = ({
   children,
   title,
   show,
-  showCloseBtn = true,
   width,
   height,
   className,
+  modalOverlay = 'bg-black/50',
+  showCloseBtn = true,
   icon,
   onHide,
 }: ModalProps & React.PropsWithChildren) => {
@@ -30,9 +42,9 @@ const Modal = ({
 
   if (!hasMountedOnce && !show) return null
 
-  const modal = (
+  return createPortal(
     <div
-      className={clsx('modal-overlay', {
+      className={clsx('modal-overlay', modalOverlay, {
         'pointer-events-auto opacity-100': show,
         'pointer-events-none opacity-0': !show,
       })}
@@ -62,17 +74,16 @@ const Modal = ({
         </div>
         <div
           className={clsx(
-            'flex-1 overflow-y-auto !w-fit overflow-x-auto p-3',
+            'flex-1 overflow-y-auto overflow-x-auto p-3',
             className,
           )}
         >
           {children}
         </div>
       </div>
-    </div>
+    </div>,
+    modalRoot!,
   )
-
-  return createPortal(modal, modalRoot!)
 }
 
 export default Modal

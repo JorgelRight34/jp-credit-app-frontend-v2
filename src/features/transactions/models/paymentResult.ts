@@ -11,6 +11,7 @@ interface LoanSnapshot {
     accruedCapital: number;
     totalFees: number;
     feePaid: number;
+    outstandingAmount: number;
     accruedInterest: number;
     status: LoanStatus
 }

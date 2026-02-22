@@ -10,7 +10,6 @@ import {
   loanPaymentFrequencyStringMap,
   loanStatusSpanishTranslations,
 } from '../lib/constants'
-import LoanProjectionCard from './loan-projection-card'
 import { FormReadonlyGroupLabelLink } from '@/components/organisms/form/components/form-readonly-group'
 
 const LoanOverview = ({ loan }: { loan: Loan }) => {

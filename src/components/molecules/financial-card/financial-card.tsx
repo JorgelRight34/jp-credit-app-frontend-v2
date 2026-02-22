@@ -1,12 +1,13 @@
 import clsx from 'clsx'
 import type { IconName } from '@/components/atoms/icon/iconName'
-import { Container, Icon } from '@/components/atoms'
+import { DetailRow, DetailRowGroup, Fieldset } from '@/components/atoms'
+import { ReactNode } from 'react'
 
 interface FinancialCardProps {
-  title?: string
-  heading: string | number
-  subheading: string
-  headers: Array<Array<string | number>>
+  title: string
+  heading: ReactNode
+  subheading?: string
+  headers: Array<Array<ReactNode>>
   className?: string
   headingClassName?: string
   icon?: IconName
@@ -18,16 +19,15 @@ const FinancialCard = ({
   headers,
   subheading,
   headingClassName,
-  icon,
   className,
 }: FinancialCardProps) => {
   return (
-    <Container className={className}>
-      {/* Top title */}
-      <header className="flex-shrink-0 border-b p-3">
-        <Icon icon={icon} label={title} labelClassName="text-xl" />
-      </header>
-      <section className="flex flex-1 flex-col p-3">
+    <Fieldset
+      className={className}
+      legend={title}
+      legendClassName="text-center"
+    >
+      <section className="flex flex-1 h-full flex-col p-3 px-6">
         <div
           className={clsx(
             `flex flex-col justify-center mb-4`,
@@ -39,16 +39,13 @@ const FinancialCard = ({
             {heading}
           </span>
         </div>
-        <div className="flex flex-1 min-h-0 flex-col flex-wrap gap-4 items-between !justify-between">
+        <DetailRowGroup>
           {headers.map((header, key) => (
-            <header key={key} className="border-b flex justify-between">
-              <span>{header[0]}</span>
-              <b className="truncate">{header[1]}</b>
-            </header>
+            <DetailRow key={key} title={header[0]} subtitle={header[1]} />
           ))}
-        </div>
+        </DetailRowGroup>
       </section>
-    </Container>
+    </Fieldset>
   )
 }
 

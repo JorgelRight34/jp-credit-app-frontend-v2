@@ -4,6 +4,7 @@ import { Project } from "@/features/projects"
 import { Transaction } from "../models/transaction"
 import { createPayment } from "../services/transactionClient"
 import { transactionsQueryKey } from "../lib/constants"
+import { getTodayAsInputDate } from "@/lib/utils"
 
 interface UseTransactionFormProps extends UseDataFormProps<Transaction, TransactionFormValues> {
     project: Project
@@ -17,7 +18,7 @@ export const useTransactionForm = ({ project }: UseTransactionFormProps) => {
             type: "",
             loanId: null,
             payerId: null,
-            date: '',
+            date: getTodayAsInputDate(),
             penaltyRate: project.defaultPenaltyRate,
             description: '',
             daysOfGrace: project.graceDays

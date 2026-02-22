@@ -3,35 +3,37 @@ import { loanSearchConfig } from '../lib/config/loan-search-config'
 import { createLoanSearchInputDataTableConfig } from '../lib/config/loan-datatable-config'
 import type { LoanQuery } from '../models/loanQuery'
 import type { Loan } from '../models/loan'
-import type { DataTableContainerOverrides, InputProps } from '@/components'
-import { DataTableContainer, SearchableComboBox } from '@/components'
+import { DataPickerInputProps, Icon, PickerInputPanel } from '@/components'
+import { DataTableContainer, LoanIcon, PickerInput } from '@/components'
 import { useProjectId } from '@/features/projects'
 import { getLoanLabel } from '../lib/utils'
+import { getLoan } from '../services/loanClient'
 
-interface LoanSearchInputProps extends InputProps {
-  datatable?: DataTableContainerOverrides<Loan, LoanQuery>
-}
-
-const LoanSearchInput = ({ datatable, ...props }: LoanSearchInputProps) => {
+const LoanSearchInput = ({
+  datatable,
+  ...props
+}: DataPickerInputProps<Loan, LoanQuery>) => {
   const [projectId] = useProjectId()
 
   return (
-    <SearchableComboBox<{ id: number }, number>
+    <PickerInput<Loan, number>
       modalProps={{
-        title: 'Préstamos',
+        title: <Icon icon={LoanIcon}>Préstamos</Icon>,
       }}
       cacheKey={[loansQueryKey]}
-      accesorFn={(l) => l?.id ?? 0}
-      visibleValueFn={(l) => (l ? getLoanLabel(l) : '---')}
+      accesorFn={(l) => l?.id}
+      visibleValueFn={(loan) => (loan ? getLoanLabel(loan) : '---')}
       render={(setValue) => (
-        <DataTableContainer
-          searchConfig={loanSearchConfig}
-          datatableConfig={createLoanSearchInputDataTableConfig(setValue)}
-          cacheKey={[loansQueryKey, projectId]}
-          {...datatable}
-        />
+        <PickerInputPanel reset={() => setValue(null)}>
+          <DataTableContainer
+            searchConfig={loanSearchConfig}
+            datatableConfig={createLoanSearchInputDataTableConfig(setValue)}
+            cacheKey={[loansQueryKey, projectId]}
+            {...datatable}
+          />
+        </PickerInputPanel>
       )}
-      loader={(id) => ({ id })}
+      loader={getLoan}
       {...props}
     />
   )

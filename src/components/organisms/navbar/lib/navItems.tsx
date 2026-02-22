@@ -183,6 +183,7 @@ export const transactionsNavItem: NavItem = {
     {
       ...allRouteBase,
       route: '/transactions',
+      search: { tab: 'all' },
     },
     {
       name: 'Ingresos',

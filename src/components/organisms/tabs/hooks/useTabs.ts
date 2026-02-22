@@ -30,6 +30,10 @@ export const useTabs = ({ defaultActiveKey, children, onSelect, getDefaultActive
   const handleOnSelect = (index: number) => {
     setActiveIndex(index)
 
+    startTransition(() => {
+      onSelect?.(tabsArray[index].props.eventKey ?? null, index);
+    })
+
     if (renderedTabs[index] === true) {
       setPanelIndex(index)
     } else {
@@ -40,10 +44,6 @@ export const useTabs = ({ defaultActiveKey, children, onSelect, getDefaultActive
         }
       })
     }
-
-    startTransition(() => {
-      onSelect?.(tabsArray[index].props.eventKey ?? null, index);
-    })
   }
 
   return { activeIndex, renderedTabs, tabsArray, isPending, panelIndex, handleOnSelect };

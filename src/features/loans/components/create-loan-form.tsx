@@ -108,7 +108,7 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                   ]}
                   render={(values) => (
                     <LoanProjectionCard
-                      className="w-full h-full shadow-sm"
+                      className="w-full shadow-sm"
                       amount={values[0]}
                       nPer={values[1]}
                       annualInterestRate={values[2]}

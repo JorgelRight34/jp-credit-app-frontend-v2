@@ -5,7 +5,7 @@ import type { FormInputProps } from './form-input'
 import FormGroupLayout, { FormGroupLabel } from './fom-group-layout'
 import { FormGroupProps } from './form-group'
 
-type FormWatchGroupProps<T extends FieldValues> = FormGroupProps<T> &
+export type FormWatchGroupProps<T extends FieldValues> = FormGroupProps<T> &
   Omit<FormWatchInputProps<T>, 'as'> & {
     label: string
     input: FormInputProps<T>['as']

@@ -1,4 +1,4 @@
-import { FinancialCard, InfoIcon } from '@/components'
+import { FinancialCard } from '@/components'
 import { getPmt, getTotalInterest, toCurrency } from '@/lib/utils'
 import { useMemo } from 'react'
 
@@ -34,9 +34,8 @@ const LoanProjectionCard = ({
   return (
     <FinancialCard
       className={className}
-      headingClassName="py-4 text"
-      icon={InfoIcon}
-      title="Prevista del préstamo"
+      headingClassName="py-4"
+      title="PREVISTA DEL PRESTAMO"
       subheading="Cuota"
       heading={toCurrency(details.pmt)}
       headers={[

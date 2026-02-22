@@ -26,6 +26,10 @@ export const toFormattedDate = (date?: string | Date): string | null => {
     }
 };
 
+export const getTodayAsInputDate = () => {
+    return new Date().toISOString().split('T')[0]
+}
+
 /** Full Spanish date string: "Lunes, 3 de Enero de 2024" */
 export const getFullDateString = (date?: string | Date): string => {
     if (!date) return "";
@@ -160,6 +164,8 @@ export const getDateLabelSinceDate = (date: Date | string) => {
 export const addDays = (date: Date | string, days: number) => {
     return dayjs(date).add(days, 'day').toDate()
 }
+
+export const toDate = (value: Date | string) => (value instanceof Date ? value : new Date(value))
 
 export const TimeSpan = {
     fromMinutes: (minutes: number) => 60 * minutes,

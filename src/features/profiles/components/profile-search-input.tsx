@@ -1,11 +1,10 @@
 import {
+  DataPickerInputProps,
   DataTableContainer,
-  DataTableContainerOverrides,
   Icon,
-  InputProps,
   PersonIcon,
-  SearchableComboBox,
-  SearchableComboBoxPanel,
+  PickerInput,
+  PickerInputPanel,
 } from '@/components'
 import { Profile } from '../models/profile'
 import { getFullName } from '@/lib/utils'
@@ -15,16 +14,12 @@ import { profileSearchConfig } from '../lib/config/profiles-search-config'
 import { createProfileSearchInputDataTableConfig } from '../lib/config/profiles-datatable-config'
 import { profilesQueryKey } from '../lib/constants'
 
-interface ProfileSearchInputProps extends InputProps {
-  datatable?: DataTableContainerOverrides<Profile, ProfileQuery>
-}
-
 const ProfileSearchInput = ({
   datatable,
   ...props
-}: ProfileSearchInputProps) => {
+}: DataPickerInputProps<Profile, ProfileQuery>) => {
   return (
-    <SearchableComboBox<Profile, number>
+    <PickerInput<Profile, number>
       modalProps={{
         title: <Icon icon={PersonIcon}>Pérfiles</Icon>,
       }}
@@ -32,13 +27,13 @@ const ProfileSearchInput = ({
       accesorFn={(p) => p?.id ?? 0}
       visibleValueFn={(p) => (p ? getFullName(p) : '')}
       render={(setValue) => (
-        <SearchableComboBoxPanel reset={() => setValue(null)}>
+        <PickerInputPanel reset={() => setValue(null)}>
           <DataTableContainer
             searchConfig={profileSearchConfig}
             cacheKey={[profilesQueryKey]}
             datatableConfig={createProfileSearchInputDataTableConfig(setValue)}
           />
-        </SearchableComboBoxPanel>
+        </PickerInputPanel>
       )}
       loader={getProfile}
       {...props}
