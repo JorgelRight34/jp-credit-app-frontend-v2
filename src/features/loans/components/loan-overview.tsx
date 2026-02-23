@@ -11,6 +11,7 @@ import {
   loanStatusSpanishTranslations,
 } from '../lib/constants'
 import { FormReadonlyGroupLabelLink } from '@/components/organisms/form/components/form-readonly-group'
+import { getProfileInvertedName } from '@/features/profiles'
 
 const LoanOverview = ({ loan }: { loan: Loan }) => {
   return (
@@ -63,7 +64,7 @@ const LoanOverview = ({ loan }: { loan: Loan }) => {
                 Cliente
               </FormReadonlyGroupLabelLink>
             }
-            value={loan.client.name}
+            value={getProfileInvertedName(loan.client)}
           />
           <FormReadOnlyGroup
             name="guarantor"
@@ -79,7 +80,9 @@ const LoanOverview = ({ loan }: { loan: Loan }) => {
                 'Garante'
               )
             }
-            value={loan.guarantor?.name}
+            value={
+              loan.guarantor ? getProfileInvertedName(loan.guarantor) : null
+            }
           />
         </FormRow>
         <FormRow>
@@ -123,7 +126,9 @@ const LoanOverview = ({ loan }: { loan: Loan }) => {
                 'Oficial'
               )
             }
-            value={loan.loanOfficer?.name}
+            value={
+              loan.loanOfficer ? getProfileInvertedName(loan.loanOfficer) : null
+            }
           />
           <FormReadOnlyGroup
             name="status"

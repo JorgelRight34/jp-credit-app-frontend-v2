@@ -11,5 +11,5 @@ export const transactionSearchConfig: SearchFormConfig<TransactionQuery> = {
     advanced: [
         { name: "loanId", label: "Préstamo", width: 6, type: p => LoanSearchInput(p) }
     ],
-    defaultValues: { id: null, startDate: null, endDate: null, loanId: null }
+    defaultValues: { id: '', startDate: '', endDate: '', loanId: '' }
 }

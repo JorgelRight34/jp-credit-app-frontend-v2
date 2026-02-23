@@ -48,7 +48,7 @@ const PaymentConfirmationStep = <T extends FieldValues>({
         Verifique su pago. Para aceptar, presione <b>Continuar</b>
       </Paragraph>
       <div className="flex">
-        <div className="w-7/12">
+        <div className="flex flex-col w-7/12">
           <PaymentDetails transaction={data.transaction} />
         </div>
         <div className="flex w-5/12 px-6">
@@ -99,7 +99,7 @@ const PaymentDetails = ({
         <FormReadOnlyGroup
           name="lateDays"
           label="Días de tardanza"
-          value={toCurrency(transaction.lateDays)}
+          value={transaction.lateDays}
         />
       </FormRow>
       <FormRow>
@@ -125,14 +125,26 @@ const PaymentDetails = ({
 }
 
 const PaymentLoanChangesCard = ({
-  paymentResult: { transaction, loanBefore, loanAfter },
+  paymentResult: { transaction, loanBefore, loanAfter, ...paymentResult },
 }: {
   paymentResult: PaymentResult
 }) => {
   const loanLabel = getLoanLabel({ id: transaction.loanId }).toUpperCase()
   return (
     <div className="flex w-full flex-col gap-6 px-3">
-      <Fieldset className="p-3" legend={`${loanLabel} / ANTES`}>
+      <Fieldset className="p-4" legend={`${loanLabel} / DETALLES`}>
+        <DetailRowGroup>
+          <DetailRow
+            title="Cuota"
+            subtitle={toCurrency(paymentResult.loanPaymentValue)}
+          />
+          <DetailRow
+            title="Fecha debida"
+            subtitle={toFormattedDate(paymentResult.effectivePaymentDate)}
+          />
+        </DetailRowGroup>
+      </Fieldset>
+      <Fieldset className="p-4" legend={`${loanLabel} / ANTES`}>
         <DetailRowGroup>
           <DetailRow
             title="Balance capital"

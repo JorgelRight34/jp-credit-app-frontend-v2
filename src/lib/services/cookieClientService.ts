@@ -26,4 +26,11 @@ export class CookieClientService {
             sameSite,
         })
     }
+
+    static delete(key: string, path = '/') {
+        document.cookie = serialize(key, '', {
+            expires: new Date(0),
+            path,
+        })
+    }
 }

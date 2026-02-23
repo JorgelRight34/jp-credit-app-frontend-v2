@@ -10,7 +10,10 @@ interface PaymentPreviewCardProps {
 }
 
 const PaymentPreviewCard = ({ loan, amount = 0 }: PaymentPreviewCardProps) => {
-  const { lateDays, fee, interest } = usePaymentPreviewCard(amount, loan)
+  const { lateDays, fee, interest, nextPaymentDate } = usePaymentPreviewCard(
+    amount,
+    loan,
+  )
 
   return (
     <FinancialCard
@@ -25,6 +28,7 @@ const PaymentPreviewCard = ({ loan, amount = 0 }: PaymentPreviewCardProps) => {
           'Últ. Pago',
           loan?.lastPaymentDate ? toFormattedDate(loan.lastPaymentDate) : ND,
         ],
+        ['Fecha esperada', toFormattedDate(nextPaymentDate)],
         ['Días de atraso', lateDays],
         ['Mora', toCurrency(fee)],
         ['Interés', toCurrency(interest)],

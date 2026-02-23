@@ -34,5 +34,5 @@ export const usePaymentPreviewCard = (amount: number, loan: Loan | null) => {
         )
     }, [loan, amount])
 
-    return { lateDays, fee, interest }
+    return { lateDays, fee, interest, nextPaymentDate }
 }

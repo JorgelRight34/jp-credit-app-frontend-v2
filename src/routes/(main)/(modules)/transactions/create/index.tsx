@@ -3,7 +3,7 @@ import { CreateTransactionPage } from '@/features/transactions'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getProjectFn } from '../../projects/settings'
-import { getProjectId } from '@/features/projects/lib/utils'
+import { getProjectId } from '@/features/projects/server/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/transactions/create/')({
   component: RouteComponent,

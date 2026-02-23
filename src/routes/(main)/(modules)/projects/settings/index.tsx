@@ -1,7 +1,7 @@
 import { EditProjectFormPage } from '@/features/projects'
 import { createProjectQueryKey } from '@/features/projects/lib/query-keys'
-import { getProjectId } from '@/features/projects/lib/utils'
 import { getProjectFromServer } from '@/features/projects/server/projectServerClient'
+import { getProjectId } from '@/features/projects/server/utils'
 import { getProject } from '@/features/projects/services/projectClient'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'

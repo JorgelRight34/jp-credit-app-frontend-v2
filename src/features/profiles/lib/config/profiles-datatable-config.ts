@@ -45,12 +45,16 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
             enableSorting: true,
             cell: ({ row }) => createDateDataCell(row.original.dateOfBirth),
         },
-        { accessorKey: 'gender', header: 'GENERO', enableSorting: true },
         {
             accessorKey: 'createdAt',
             header: 'FECHA',
             enableSorting: true,
             cell: ({ row }) => createDateDataCell(row.original.createdAt),
+        },
+        {
+            accessorKey: 'landline',
+            header: 'TELEFONO',
+            enableSorting: true,
         },
         {
             accessorKey: 'phoneNumber',

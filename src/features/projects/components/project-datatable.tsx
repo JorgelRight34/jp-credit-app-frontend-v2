@@ -29,7 +29,13 @@ const ProjectDataTable = (
 
             return createOptionDataCell(
               isSelected ? 'Deseleccionar' : 'Seleccionar',
-              () => setProjectId(row.original.id),
+              () => {
+                if (!isSelected) {
+                  setProjectId(row.original.id)
+                } else {
+                  setProjectId(null)
+                }
+              },
               isSelected,
             )
           },

@@ -13,7 +13,7 @@ export type BaseInputProps = BaseTextFieldProps & {
   value?: any
   defaultValue?: any
   min?: number
-  max?: number
+  max?: number | string
   step?: number
   inputComponent?: ElementType<InputBaseComponentProps>
   onIconClick?: () => void

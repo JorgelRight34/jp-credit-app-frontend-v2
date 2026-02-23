@@ -17,7 +17,7 @@ const LightBox = ({ files, show, onHide }: LightBoxInterface) => {
   if (!show) return null
 
   return (
-    <div className="modal-overlay" onClick={handleOnHide}>
+    <div className="modal-overlay bg-black/75" onClick={handleOnHide}>
       <Icon
         icon={CloseIcon}
         onClick={handleOnHide}

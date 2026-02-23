@@ -4,7 +4,9 @@ import { Transaction } from "./transaction";
 export interface PaymentResult {
     transaction: Transaction;
     loanBefore: LoanSnapshot;
-    loanAfter: LoanSnapshot
+    loanAfter: LoanSnapshot;
+    effectivePaymentDate: string;
+    loanPaymentValue: number;
 }
 
 interface LoanSnapshot {

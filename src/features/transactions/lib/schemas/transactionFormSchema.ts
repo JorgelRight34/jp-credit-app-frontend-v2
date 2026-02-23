@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const transactionFormSchema = z.object({
-    value: z.string().transform((val) => Number(val)),
+    amount: z.string().transform((val) => Number(val)),
     type: z.string(),
     loanId: z.number(),
     payerId: z.number(),

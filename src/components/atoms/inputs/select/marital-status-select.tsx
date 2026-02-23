@@ -1,7 +1,7 @@
 import SelectInput from './select'
 import type { SelectInputProps } from './select'
 
-const CivilStatusSelect = (props: SelectInputProps) => {
+const MaritalStatusSelect = (props: SelectInputProps) => {
   return (
     <SelectInput
       {...props}
@@ -15,4 +15,4 @@ const CivilStatusSelect = (props: SelectInputProps) => {
   )
 }
 
-export default CivilStatusSelect
+export default MaritalStatusSelect

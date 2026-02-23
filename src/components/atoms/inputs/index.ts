@@ -20,7 +20,7 @@ export { default as FileInputWrapper } from './file-input-wrapper/file-input-wra
 
 export * from './picker-input'
 export { default as GenderSelect } from "./select/gender-select"
-export { default as CivilStatusSelect } from "./select/civil-status-select"
+export { default as MaritalStatusSelect } from "./select/marital-status-select"
 
 // Models and Utils
 export * from './input/models/baseTextFieldProps';

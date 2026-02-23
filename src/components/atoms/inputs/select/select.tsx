@@ -5,7 +5,6 @@ import { SX_CONFIG } from '../../constants'
 import type { SelectOptions } from './select-option'
 import type { InputProps } from '../input/components/input'
 import { type ReactNode } from 'react'
-import { toTitleCase } from '@/lib/utils/utils'
 
 export type SelectInputProps = Omit<
   InputProps,
@@ -50,7 +49,7 @@ const SelectInput = ({
         {options &&
           options.map((option, key) => (
             <MenuItem key={key} value={option[0] ?? ''}>
-              {toTitleCase(option[1])}
+              {option[1]}
             </MenuItem>
           ))}
         {children}

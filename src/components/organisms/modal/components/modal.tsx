@@ -78,7 +78,7 @@ const Modal = ({
             className,
           )}
         >
-          {children}
+          {children} {/* DELAY THIS */}
         </div>
       </div>
     </div>,

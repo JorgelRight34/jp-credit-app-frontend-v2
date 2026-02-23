@@ -1,4 +1,10 @@
-import { FieldValues, Path, useWatch } from 'react-hook-form'
+import {
+  FieldValues,
+  Path,
+  useFormContext,
+  UseFormSetValue,
+  useWatch,
+} from 'react-hook-form'
 import { LazySelect, SelectOptions } from '@/components/atoms'
 import { CacheKey } from '@/models'
 import FormGroupLayout, { FormGroupLabel } from './fom-group-layout'
@@ -16,7 +22,10 @@ interface FormLazySelectGroupProps<T extends FieldValues> extends Omit<
   allowNoOption?: boolean
   enabledFn: (values: WatchValues) => boolean
   buildCacheKey: (values: WatchValues) => CacheKey
-  loader: (values: WatchValues) => Promise<SelectOptions>
+  loader: (
+    values: WatchValues,
+    setValue: UseFormSetValue<T>,
+  ) => Promise<SelectOptions>
 }
 
 const FormLazySelectGroup = <T extends FieldValues>({
@@ -30,8 +39,10 @@ const FormLazySelectGroup = <T extends FieldValues>({
   loader,
   ...props
 }: FormLazySelectGroupProps<T>) => {
+  const { control, setValue } = useFormContext<T>()
   const watch = useWatch({
     name: watchedValues,
+    control,
   })
   const enabled = useMemo(() => enabledFn(watch), [watch])
 
@@ -46,7 +57,7 @@ const FormLazySelectGroup = <T extends FieldValues>({
         as={(inputProps) => (
           <LazySelect
             cacheKey={buildCacheKey(watch)}
-            loader={() => loader(watch)}
+            loader={() => loader(watch, setValue)}
             enabled={enabled}
             disabled={!enabled}
             allowNoOption={allowNoOption}

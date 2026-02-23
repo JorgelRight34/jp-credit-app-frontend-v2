@@ -10,12 +10,12 @@ interface UseTransactionFormProps extends UseDataFormProps<Transaction, Transact
     project: Project
 }
 
-export const useTransactionForm = ({ project }: UseTransactionFormProps) => {
+export const useTransactionForm = ({ project, initialValues }: UseTransactionFormProps) => {
     return useForm({
         schema: transactionFormSchema,
         defaultValues: {
-            value: "",
-            type: "",
+            amount: "",
+            type: initialValues?.type ?? "",
             loanId: null,
             payerId: null,
             date: getTodayAsInputDate(),
@@ -24,6 +24,6 @@ export const useTransactionForm = ({ project }: UseTransactionFormProps) => {
             daysOfGrace: project.graceDays
         },
         onSubmit: createPayment,
-        keysToInvalidate: [[transactionsQueryKey]]
+        keysToInvalidate: [[transactionsQueryKey]],
     })
 }

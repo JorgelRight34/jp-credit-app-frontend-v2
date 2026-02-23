@@ -67,6 +67,7 @@ const CollateralLiquidateForm = ({
             />
           </FormRow>
           <FormGroup
+            className="flex-1"
             name="description"
             label="Descripción"
             input={RichTextEditor}

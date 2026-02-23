@@ -18,17 +18,15 @@ import {
 import { Transaction } from '../models/transaction'
 import { TransactionFormValues } from '../lib/schemas/transactionFormSchema'
 import { Project } from '@/features/projects'
-import {
-  getLoanActorsSelectOptions,
-  Loan,
-  LoanSearchInput,
-} from '@/features/loans'
+import { Loan, LoanSearchInput } from '@/features/loans'
 import TransactionConfirmationStep from './payment-confirmation-step'
 import TransactionReceiptStep from './payment-receipt-step'
 import { getPaymentPreview } from '../services/transactionClient'
 import PaymentPreviewCard from './payment-preview-card'
 import { useRef } from 'react'
 import { transactionsQueryKey } from '../lib/constants'
+import { getTransactionLoanActorsSelectOptions } from '../lib/utils'
+import { getTodayAsInputDate } from '@/lib/utils'
 
 interface CreateTransactionFormProps extends DataModuleFormProps<
   Transaction,
@@ -58,8 +56,13 @@ const CreateTransactionForm = (props: CreateTransactionFormProps) => {
           <div className="flex-1 h-full flex">
             <div className="flex flex-col w-8/12">
               <FormRow>
-                <FormGroup name="value" label="Monto" input={CurrencyInput} />
-                <FormGroup name="date" label="Fecha" input={DateInput} />
+                <FormGroup name="amount" label="Monto" input={CurrencyInput} />
+                <FormGroup
+                  name="date"
+                  label="Fecha"
+                  max={getTodayAsInputDate()}
+                  input={DateInput}
+                />
               </FormRow>
               <FormRow>
                 <FormGroup
@@ -75,9 +78,7 @@ const CreateTransactionForm = (props: CreateTransactionFormProps) => {
                   name="payerId"
                   label="Actor"
                   watchedValues={['loanId']}
-                  loader={([loanId]) =>
-                    getLoanActorsSelectOptions(loanId as number)
-                  }
+                  loader={getTransactionLoanActorsSelectOptions}
                   buildCacheKey={([loanId]) => [
                     transactionsQueryKey,
                     'form',
@@ -100,7 +101,7 @@ const CreateTransactionForm = (props: CreateTransactionFormProps) => {
                 render={(loan) => (
                   <FormWatch
                     form={form}
-                    names={['value']}
+                    names={['amount']}
                     render={([amount]) => (
                       <PaymentPreviewCard loan={loan} amount={amount} />
                     )}

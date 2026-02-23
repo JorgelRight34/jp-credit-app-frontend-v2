@@ -7,7 +7,7 @@ import { getAuthorizationFromClient, isJwtValid } from '@/lib/utils/auth-utils'
 import { getCurrentUser } from '@/features/auth/services/authService'
 import { getCurrentUserFromServer } from '@/features/auth/server/authServerService'
 import { PROJECT_ID_STORAGE_KEY, ProjectIdProvider } from '@/features/projects'
-import { getProjectId } from '@/features/projects/lib/utils'
+import { getProjectId } from '@/features/projects/server/utils'
 
 const getCurrentUserFn = createIsomorphicFn()
   .server(() => getCurrentUserFromServer())
