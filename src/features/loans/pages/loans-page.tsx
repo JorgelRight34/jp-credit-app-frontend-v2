@@ -2,7 +2,7 @@ import {
   AllIcon,
   BreadcrumbsByRoute,
   CheckCircleIcon,
-  createPageLayoutCreateOption,
+  buildPageLayoutCreateOption,
   PageRouterLayout,
   RestoreIcon,
   Tab,
@@ -16,10 +16,10 @@ import { LoanStatusMap } from '../models/loanStatus'
 import { ProjectSelectionGuard } from '@/features/projects'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: { title: 'Todos', icon: AllIcon },
-  inactive: { title: 'Inactivos', icon: RestoreIcon },
-  active: { title: 'Activos', icon: TodayIcon },
-  paidOff: { title: 'Saldados', icon: CheckCircleIcon },
+  all: [{ title: 'Todos', icon: AllIcon }],
+  inactive: [{ title: 'Inactivos', icon: RestoreIcon }],
+  active: [{ title: 'Activos', icon: TodayIcon }],
+  paidOff: [{ title: 'Saldados', icon: CheckCircleIcon }],
 }
 
 const LoansPage = () => {
@@ -32,7 +32,7 @@ const LoansPage = () => {
         baseBreadcrumbs: [loanBreadcrumb],
         breadcrumbsByRoute,
       }}
-      options={[createPageLayoutCreateOption('/loans/create')]}
+      options={[buildPageLayoutCreateOption('/loans/create')]}
     >
       <ProjectSelectionGuard>
         <TabsRouter>

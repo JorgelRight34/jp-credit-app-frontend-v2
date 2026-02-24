@@ -1,31 +1,72 @@
-import { CreateFormPageLayout, Tab, Tabs } from '@/components'
+import {
+  BreadcrumbsByRoute,
+  createBreadcrumb,
+  DisbursementIcon,
+  PageRouterLayout,
+  PaymentIcon,
+  Tab,
+  TabsRouter,
+} from '@/components'
 import { transactionPermissionProvider } from '../lib/config/permission-provider'
 import { transactionBreadcrumb } from '../lib/config/breadcrumb'
-import CreateTransactionForm from '../components/create-transaction-form'
+import CreatePaymentForm from '../components/create-payment-form'
 import { Project } from '@/features/projects'
+import CreateDisbursementForm from '../components/create-disbursement-form'
 
-const CreateTransactionPage = ({ project }: { project: Project }) => {
+interface CreateTransactionPageProps {
+  project: Project
+  loanId?: number
+  amount?: number
+}
+
+const breadcrumbsByRoute: BreadcrumbsByRoute = {
+  pay: [
+    {
+      icon: PaymentIcon,
+      title: 'Pagos',
+      pathname: '/transactions',
+      search: { tab: 'payments' },
+    },
+    createBreadcrumb,
+  ],
+  disburse: [
+    {
+      icon: DisbursementIcon,
+      title: 'Desembolsos',
+      pathname: '/transactions',
+      search: { tab: 'disbursements' },
+    },
+    createBreadcrumb,
+  ],
+}
+
+const CreateTransactionPage = ({
+  project,
+  loanId,
+  amount,
+}: CreateTransactionPageProps) => {
   return (
-    <CreateFormPageLayout
+    <PageRouterLayout
       title="Transacciones"
-      breadcrumbs={[transactionBreadcrumb]}
+      routerConfig={{
+        defaultActive: 'pay',
+        baseBreadcrumbs: [transactionBreadcrumb],
+        breadcrumbsByRoute,
+      }}
       permissionProvider={transactionPermissionProvider}
     >
-      <Tabs>
-        <Tab eventKey="payments" title="Pagos">
-          <CreateTransactionForm
+      <TabsRouter>
+        <Tab eventKey="pay" title="Pagos">
+          <CreatePaymentForm
             project={project}
-            initialValues={{ type: 'pc' }}
+            initialValues={{ loanId, amount }}
           />
         </Tab>
-        <Tab eventKey="disbursements" title="Desembolsos">
-          <CreateTransactionForm
-            project={project}
-            initialValues={{ type: 'ds' }}
-          />
+        <Tab eventKey="disburse" title="Desembolsos">
+          <CreateDisbursementForm initialValues={{ loanId, amount }} />
         </Tab>
-      </Tabs>
-    </CreateFormPageLayout>
+      </TabsRouter>
+    </PageRouterLayout>
   )
 }
 

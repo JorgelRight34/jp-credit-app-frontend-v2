@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import type { TableBuilderProps } from './table-builder'
 import type { Table } from '@tanstack/react-table'
 import type { PageSize } from '../models/pageSize'
-import { defaultPageSize } from '@/lib/utils/constants'
+import { defaultPageSize } from '@/lib/constants/constants'
 import { PageSizeSelector, Pagination } from '@/components/molecules'
 import { Subtitle } from '@/components/atoms'
 

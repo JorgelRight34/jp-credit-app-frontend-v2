@@ -1,8 +1,7 @@
 import type { FieldValues } from "react-hook-form";
-import { DefaultFormValues } from "../hooks/useForm";
 
 export interface UseDataFormProps<T, TData extends FieldValues> {
-    initialValues?: DefaultFormValues<TData>;
+    initialValues?: Partial<TData>;
     shouldEdit?: boolean;
     toastMessage?: () => string;
     onDirtyChange?: (isDirty: boolean) => void;

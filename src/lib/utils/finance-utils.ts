@@ -18,8 +18,7 @@ export const getTotalInterest = (pmt: number, nPer: number, amount: number) => {
     return total;
 };
 
-export const toCurrency = (money: number | undefined): string | number => {
-    if (money === undefined) return NaN;
+export const toCurrency = (money: number): string | number => {
     const formattedAmount = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",

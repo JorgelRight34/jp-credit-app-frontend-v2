@@ -1,3 +1,4 @@
+import { ProfileSummary } from "@/features/profiles";
 import type { LoanStatus } from "./loanStatus";
 
 export interface Loan {
@@ -10,10 +11,10 @@ export interface Loan {
     lastTransactionDate?: Date | string;
     feePaid: number;
     outstandingAmount: number;
-    client: LoanMember;
+    client: ProfileSummary;
     totalFees: number;
-    guarantor?: LoanMember;
-    loanOfficer?: LoanMember;
+    guarantor?: ProfileSummary;
+    loanOfficer?: ProfileSummary;
     isActive: boolean;
     daysOfGrace: number;
 
@@ -55,9 +56,3 @@ export interface Loan {
 }
 
 export type LoanPaymentFrequency = 1 | 12 | 4 | 2
-
-export type LoanMember = {
-    firstName: string;
-    lastName: string;
-    profileId: number;
-}

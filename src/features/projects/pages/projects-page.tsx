@@ -1,7 +1,7 @@
 import {
   AllIcon,
   BreadcrumbsByRoute,
-  createPageLayoutCreateOption,
+  buildPageLayoutCreateOption,
   PageRouterLayout,
   Tab,
   TabsRouter,
@@ -11,7 +11,7 @@ import { projectsPermissionProvider } from '../lib/config/permissionProvider'
 import ProjectDataTable from '../components/project-datatable'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: { title: 'Todos', icon: AllIcon },
+  all: [{ title: 'Todos', icon: AllIcon }],
 }
 
 const ProjectsPage = () => {
@@ -19,7 +19,7 @@ const ProjectsPage = () => {
     <PageRouterLayout
       title="Proyectos"
       permissionProvider={projectsPermissionProvider}
-      options={[createPageLayoutCreateOption('/projects/create')]}
+      options={[buildPageLayoutCreateOption('/projects/create')]}
       routerConfig={{
         baseBreadcrumbs: [projectsBreadcrumb],
         defaultActive: 'all',

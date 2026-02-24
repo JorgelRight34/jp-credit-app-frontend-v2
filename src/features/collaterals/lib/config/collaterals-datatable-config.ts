@@ -5,7 +5,7 @@ import type { Collateral } from "../../models/collateral";
 import { createDateDataCell, createImageDataCell, createLinkDataCell } from "@/components";
 import { toCurrency } from "@/lib/utils";
 import { FileModelMetadata } from "@/models/fileModel";
-import { getLoanLabel } from "@/features/loans";
+import { buildLoanLabel } from "@/features/loans";
 
 export const collateralsDataTableColumns: DataTableConfig<Collateral>["columns"] = [
     { accessorKey: "id", header: "ID", enableSorting: true },
@@ -39,7 +39,7 @@ export const collateralsDataTableColumns: DataTableConfig<Collateral>["columns"]
         header: "PRÉSTAMO",
         enableSorting: true,
         cell: ({ row }) => createLinkDataCell(
-            getLoanLabel({ id: row.original.loanId }),
+            buildLoanLabel({ id: row.original.loanId }),
             {
                 to: "/loans/$id", params: { id: row.original.loanId.toString() }
             }),

@@ -28,7 +28,6 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
     const open = Boolean(anchorEl)
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-      console.log(event.currentTarget)
       setAnchorEl(event.currentTarget)
     }
 

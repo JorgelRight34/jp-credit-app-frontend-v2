@@ -1,5 +1,5 @@
 // components
-export { default as Tabs } from "./components/tabs-bk";
+export { default as Tabs } from "./components/tabs";
 export { default as Tab } from "./components/tab";
 export { default as TabsRouter } from './components/tabs-router'
 export { default as TabsRouterBreadcrumb } from "./components/tabs-router-breadcrumb"
@@ -13,6 +13,8 @@ export * from "./hooks/useTabs";
 // lib
 export * from "./lib/variations";
 
-export * from "./components/tabs-bk"
+export * from "./components/tabs"
 export * from "./components/tabs-router-breadcrumb"
 export * from "./contexts/tabs-router-context";
+
+export { default as TabList } from './components/tab-list'

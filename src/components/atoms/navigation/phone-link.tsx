@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import parsePhoneNumberFromString from 'libphonenumber-js'
 import type { CountryCode } from 'libphonenumber-js'
-import { ND, TEST } from '@/lib/utils/constants'
+import { ND, TEST } from '@/lib/constants/constants'
 
 interface PhoneLink {
   phoneNumber?: string

@@ -7,7 +7,7 @@ export const loanBreadcrumb: BreadcrumbSpec = {
   pathname: '/loans',
 }
 
-export const createLoanBreadcrumb = (loan: Loan): BreadcrumbSpec => ({
+export const buildLoanBreadcrumb = (loan: Loan): BreadcrumbSpec => ({
   title: `Préstamo No.#${loan.id}`,
   icon: LoanIcon,
   pathname: '/loans/$id',

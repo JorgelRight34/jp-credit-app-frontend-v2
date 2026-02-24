@@ -6,7 +6,7 @@ import type { BreadcrumbsByRoute } from '@/components'
 import {
   AddIcon,
   AdminPanelSettingsIcon,
-  createPageLayoutCreateOption,
+  buildPageLayoutCreateOption,
   LightPillBtn,
   PageRouterLayout,
   PersonIcon,
@@ -15,16 +15,20 @@ import {
 } from '@/components'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  users: {
-    icon: () => <PersonIcon />,
-    title: 'Usuarios',
-    pathname: '.',
-  },
-  roles: {
-    icon: () => <AdminPanelSettingsIcon />,
-    title: 'Roles',
-    pathname: '.',
-  },
+  users: [
+    {
+      icon: () => <PersonIcon />,
+      title: 'Usuarios',
+      pathname: '.',
+    },
+  ],
+  roles: [
+    {
+      icon: () => <AdminPanelSettingsIcon />,
+      title: 'Roles',
+      pathname: '.',
+    },
+  ],
 }
 
 const AccessControlPage = () => {
@@ -38,7 +42,7 @@ const AccessControlPage = () => {
           to: '/access-control/roles/create',
           component: LightPillBtn,
         },
-        createPageLayoutCreateOption('/access-control/users/create'),
+        buildPageLayoutCreateOption('/access-control/users/create'),
       ]}
       permissionProvider={accessControlPermissionProvider}
       routerConfig={{

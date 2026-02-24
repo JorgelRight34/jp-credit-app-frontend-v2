@@ -3,7 +3,7 @@ import {
     PROJECT_KEY,
     TEST,
     imageExtensions,
-} from "./constants";
+} from "../constants/constants";
 import type { Column } from "@/components";
 
 export const getProjectId = () => {

@@ -1,13 +1,13 @@
 import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
 import {
   collateralsBreadcrumb,
-  createCollateralBreadcrumb,
+  buildCollateralBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import type { Collateral } from '../models/collateral'
 import {
   ConfirmationModal,
   ConfirmationModalRef,
-  createPageLayoutDeleteOption,
+  buildPageLayoutDeleteOption,
   EditFormPageLayout,
 } from '@/components'
 import EditCollateralForm from '../components/edit-collateral-form'
@@ -28,11 +28,11 @@ const EditCollateralFormPage = ({
       title={collateral.title}
       breadcrumbs={[
         collateralsBreadcrumb,
-        createCollateralBreadcrumb(collateral),
+        buildCollateralBreadcrumb(collateral),
       ]}
       permissionProvider={collateralsPermissionProvider}
       options={[
-        createPageLayoutDeleteOption({
+        buildPageLayoutDeleteOption({
           onClick: () => modalRef.current?.show(),
           disabled: collateral.isActive === false,
           tooltip:
@@ -43,8 +43,8 @@ const EditCollateralFormPage = ({
       <EditCollateralForm collateral={collateral} />
       <ConfirmationModal
         title="Borrar garantía"
-        ref={modalRef}
         confirmationMessage="Deseo borrar esta garantía"
+        ref={modalRef}
         onConfirm={() => deleteCollateral(collateral.id)}
       />
     </EditFormPageLayout>

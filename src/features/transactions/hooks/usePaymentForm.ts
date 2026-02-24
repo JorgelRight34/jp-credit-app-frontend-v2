@@ -1,21 +1,20 @@
 import { UseDataFormProps, useForm } from "@/components"
-import { transactionFormSchema, TransactionFormValues } from "../lib/schemas/transactionFormSchema"
+import { paymentFormSchema, PaymentFormValues } from "../lib/schemas/paymentFormSchema"
 import { Project } from "@/features/projects"
 import { Transaction } from "../models/transaction"
 import { createPayment } from "../services/transactionClient"
 import { transactionsQueryKey } from "../lib/constants"
 import { getTodayAsInputDate } from "@/lib/utils"
 
-interface UseTransactionFormProps extends UseDataFormProps<Transaction, TransactionFormValues> {
+interface UsePaymentFormProps extends UseDataFormProps<Transaction, PaymentFormValues> {
     project: Project
 }
 
-export const useTransactionForm = ({ project, initialValues }: UseTransactionFormProps) => {
+export const usePaymentForm = ({ project, ...config }: UsePaymentFormProps) => {
     return useForm({
-        schema: transactionFormSchema,
+        schema: paymentFormSchema,
         defaultValues: {
             amount: "",
-            type: initialValues?.type ?? "",
             loanId: null,
             payerId: null,
             date: getTodayAsInputDate(),
@@ -25,5 +24,6 @@ export const useTransactionForm = ({ project, initialValues }: UseTransactionFor
         },
         onSubmit: createPayment,
         keysToInvalidate: [[transactionsQueryKey]],
+        ...config,
     })
 }

@@ -12,14 +12,14 @@ import { Collateral } from '../models/collateral'
 import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
 import {
   collateralsBreadcrumb,
-  createCollateralBreadcrumb,
+  buildCollateralBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import CollateralLiquidateForm from '../components/collateral-liquidate-form'
 import CollateralSellForm from '../components/collateral-sell-form'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  liquidate: { title: 'Liquidar', icon: PriceCheckIcon },
-  sell: { title: 'Vender', icon: SellIcon },
+  liquidate: [{ title: 'Liquidar', icon: PriceCheckIcon }],
+  sell: [{ title: 'Vender', icon: SellIcon }],
 }
 
 const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
@@ -31,7 +31,7 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
         defaultActive: 'liquidate',
         baseBreadcrumbs: [
           collateralsBreadcrumb,
-          createCollateralBreadcrumb(collateral),
+          buildCollateralBreadcrumb(collateral),
           settingsBreadcrumb,
         ],
         breadcrumbsByRoute,

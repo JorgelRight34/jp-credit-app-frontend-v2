@@ -12,7 +12,7 @@ import type {
     SortingState,
     TableOptions
 } from "@tanstack/react-table";
-import { defaultPageSize } from "@/lib/utils/constants";
+import { defaultPageSize } from "@/lib/constants/constants";
 
 export type InitialTableState<TData> = TableOptions<TData>["initialState"]
 

@@ -1,8 +1,7 @@
 import z from "zod";
 
-export const transactionFormSchema = z.object({
+export const paymentFormSchema = z.object({
     amount: z.string().transform((val) => Number(val)),
-    type: z.string(),
     loanId: z.number(),
     payerId: z.number(),
     date: z.string(),
@@ -11,4 +10,4 @@ export const transactionFormSchema = z.object({
     daysOfGrace: z.number().optional(),
 })
 
-export type TransactionFormValues = z.infer<typeof transactionFormSchema>;
+export type PaymentFormValues = z.infer<typeof paymentFormSchema>;

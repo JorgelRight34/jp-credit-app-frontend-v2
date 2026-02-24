@@ -4,27 +4,31 @@ import type { TabProps as RTabProps } from 'react-tabs'
 import type { ReactNode } from 'react'
 import type { IconName } from '@/components/atoms/icon/iconName'
 import { Icon } from '@/components/atoms'
+import { VariationKey, variations } from '../lib/variations'
 
 export type TabProps = Omit<RTabProps, 'title'> & {
   eventKey?: string
   title?: ReactNode
   isActive?: boolean
   forceRender?: boolean
+  variation?: VariationKey
   icon?: IconName
 }
 
 const Tab = ({
+  variation = 'default',
   title,
   eventKey,
-  icon,
   className,
   isActive,
+  icon,
   ...props
 }: TabProps) => {
   return (
     <RTab
       {...props}
       className={clsx(
+        variations[variation].tab,
         'w-fit cursor-pointer focus-visible:outline-none',
         className,
         {

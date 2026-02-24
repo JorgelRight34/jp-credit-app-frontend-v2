@@ -9,7 +9,7 @@ export const collateralsBreadcrumb: BreadcrumbSpec = {
   pathname: '/collaterals',
 }
 
-export const createCollateralBreadcrumb = (
+export const buildCollateralBreadcrumb = (
   collateral: Collateral,
 ): BreadcrumbSpec => ({
   title: collateral.title,

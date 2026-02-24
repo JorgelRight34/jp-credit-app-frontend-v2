@@ -1,18 +1,20 @@
 import {
   ConfirmationModal,
   ConfirmationModalRef,
-  createPageLayoutDeleteOption,
+  buildPageLayoutDeleteOption,
   PageLayout,
   PageLayoutBreadcrumb,
   settingsBreadcrumb,
+  TabList,
+  Tab,
 } from '@/components'
 import { Loan } from '../models/loan'
 import { loanPermissionProvider } from '../lib/config/permission-provider'
-import { createLoanBreadcrumb, loanBreadcrumb } from '../lib/config/breadcrumb'
+import { buildLoanBreadcrumb, loanBreadcrumb } from '../lib/config/breadcrumb'
 import LoanStatusForm from '../components/loan-status-form'
 import { deleteLoan } from '../services/loanClient'
 import { useRef } from 'react'
-import { getLoanLabel } from '../lib/utils'
+import { buildLoanLabel } from '../lib/utils'
 
 interface LoanSettingsPageProps {
   loan: Loan
@@ -23,11 +25,11 @@ const LoanSettingsPage = ({ loan }: LoanSettingsPageProps) => {
 
   return (
     <PageLayout
-      title={`${getLoanLabel(loan)} / Ajustes`}
+      title={`${buildLoanLabel(loan)} / Ajustes`}
       permissionProvider={loanPermissionProvider}
       isAuthorizedFn={(p) => p.canEdit}
       options={[
-        createPageLayoutDeleteOption({
+        buildPageLayoutDeleteOption({
           onClick: () => modalRef.current?.show(),
           disabled: loan.hasPayments,
           tooltip: 'Un préstamo con transacciones no puede ser borrado.',
@@ -37,12 +39,15 @@ const LoanSettingsPage = ({ loan }: LoanSettingsPageProps) => {
         <PageLayoutBreadcrumb
           breadcrumbs={[
             loanBreadcrumb,
-            createLoanBreadcrumb(loan),
+            buildLoanBreadcrumb(loan),
             settingsBreadcrumb,
           ]}
         />
       }
     >
+      <TabList>
+        <Tab title="Estado" isActive />
+      </TabList>
       <LoanStatusForm loan={loan} />
       <ConfirmationModal
         title="Borrar préstamo"

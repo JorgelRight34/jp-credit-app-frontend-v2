@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import CurrentUserPicCard from './current-user-pic-card'
 import { Icon, LogoutIcon, NavLink } from '@/components/atoms'
 import { useAuth } from '@/contexts/auth-context'
-import { primaryColor } from '@/lib/utils/constants'
+import { primaryColor } from '@/lib/constants/constants'
 import { getFirstAndLastName } from '@/lib/utils/utils'
 
 interface NavbarFooterProps {

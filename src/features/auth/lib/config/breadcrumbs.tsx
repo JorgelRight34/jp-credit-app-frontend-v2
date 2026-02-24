@@ -28,14 +28,14 @@ export const usersModuleBreadcrumb: BreadcrumbSpec = {
   search: { tab: 'users' },
 }
 
-export const createUserBreadcrumb = (user: User): BreadcrumbSpec => ({
+export const buildUserBreadcrumb = (user: User): BreadcrumbSpec => ({
   icon: PersonIcon,
   title: user.username,
   pathname: '/access-control/users/$username',
   params: { username: user.username },
 })
 
-export const createRoleBreadcrumb = (role: Role): BreadcrumbSpec => ({
+export const buildRoleBreadcrumb = (role: Role): BreadcrumbSpec => ({
   title: role.name,
   icon: BadgeIcon,
   pathname: '/access-control/roles/$id',

@@ -12,15 +12,15 @@ import {
   PageRouterLayout,
   Tab,
   TabsRouter,
-  createPageLayoutCreateOption,
+  buildPageLayoutCreateOption,
 } from '@/components'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: { title: 'Todos', icon: () => <AllIcon /> },
-  inventory: { title: 'Inventario', icon: () => <InventoryIcon /> },
-  vehicles: { title: 'Vehículos', icon: () => <DirectionsCarIcon /> },
-  mortgage: { title: 'Hipotecas', icon: () => <ApartmentIcon /> },
-  agriculturalLoan: { title: 'Agrícola', icon: () => <GrassIcon /> },
+  all: [{ title: 'Todos', icon: () => <AllIcon /> }],
+  inventory: [{ title: 'Inventario', icon: () => <InventoryIcon /> }],
+  vehicles: [{ title: 'Vehículos', icon: () => <DirectionsCarIcon /> }],
+  mortgage: [{ title: 'Hipotecas', icon: () => <ApartmentIcon /> }],
+  agriculturalLoan: [{ title: 'Agrícola', icon: () => <GrassIcon /> }],
 }
 
 const CollateralsPage = () => {
@@ -28,7 +28,7 @@ const CollateralsPage = () => {
     <PageRouterLayout
       title="Garantías"
       permissionProvider={collateralsPermissionProvider}
-      options={[createPageLayoutCreateOption('/collaterals/create')]}
+      options={[buildPageLayoutCreateOption('/collaterals/create')]}
       routerConfig={{
         defaultActive: 'all',
         baseBreadcrumbs: [collateralsBreadcrumb],

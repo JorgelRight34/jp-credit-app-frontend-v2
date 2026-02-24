@@ -9,6 +9,7 @@ import {
   FileAttachmentsForm,
   FormContainer,
   FormContainerButtons,
+  FormLayout,
   Tab,
   Tabs,
 } from '@/components'
@@ -43,7 +44,7 @@ const ProfileEditFileAttachmentsForm = ({ profile }: EditProfileFormProps) => {
   const fileAttachmentsForm = useProfileFileAttachmentsForm({ profile })
 
   return (
-    <FormContainer
+    <FormLayout
       footer={
         <FormContainerButtons
           isDirty={isDirty}
@@ -51,7 +52,6 @@ const ProfileEditFileAttachmentsForm = ({ profile }: EditProfileFormProps) => {
           text="Actualizar adjuntos"
         />
       }
-      onSubmit={fileAttachmentsForm.handleSubmit}
     >
       <FileAttachmentsForm
         ref={fileAttachmentsForm.formRef}
@@ -59,7 +59,7 @@ const ProfileEditFileAttachmentsForm = ({ profile }: EditProfileFormProps) => {
         onDirtyChange={setIsDirty}
         render={FileAttachmentsPanel}
       />
-    </FormContainer>
+    </FormLayout>
   )
 }
 

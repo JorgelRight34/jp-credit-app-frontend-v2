@@ -4,3 +4,6 @@ export { default as PaymentReceiptStep } from './components/payment-receipt-step
 export { default as TransactionsPage } from './pages/transactions-page'
 export { default as CreateTransactionPage } from './pages/create-transaction-page'
 export * from './models/paymentResult'
+export { default as TransactionPage } from './pages/transaction-page'
+export { default as ClosedPeriodsPage } from './pages/closed-periods-page'
+export { default as CreateClosedPeriodPage } from './pages/create-closed-period-page'

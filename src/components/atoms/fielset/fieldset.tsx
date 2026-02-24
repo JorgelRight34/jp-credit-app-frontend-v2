@@ -12,7 +12,7 @@ const Fieldset = ({
 }) => {
   return (
     <fieldset
-      className={clsx('border rounded-xl bg-white pb-2 p-3', className)}
+      className={clsx('border w-full rounded-xl bg-white p-3 px-4', className)}
     >
       <legend className={legendClassName}>{legend}</legend>
       {children}

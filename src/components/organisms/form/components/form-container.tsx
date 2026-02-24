@@ -8,6 +8,8 @@ import FormLayout from './form-container-layout'
 type FormContainerProps<T extends FieldValues> = PropsWithChildren & {
   form: UseFormBuilderReturn<T>
   className?: string
+  initializeAsDirty?: boolean
+  onSubmit?: () => void
   footer?: (isDirty: boolean) => ReactNode
 }
 
@@ -15,6 +17,8 @@ const FormContainer = <T extends FieldValues>({
   form,
   children,
   className,
+  initializeAsDirty,
+  onSubmit = form.form.submit,
   footer,
 }: FormContainerProps<T>) => {
   const { isDirty } = useFormState({ control: form.form.control })
@@ -32,7 +36,11 @@ const FormContainer = <T extends FieldValues>({
         footer ? (
           footer(isDirty)
         ) : (
-          <FormContainerButtons form={form} isDirty={isDirty} />
+          <FormContainerButtons
+            form={form}
+            onSubmit={onSubmit}
+            isDirty={isDirty || initializeAsDirty}
+          />
         )
       }
     >

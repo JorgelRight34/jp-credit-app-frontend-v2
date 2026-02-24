@@ -30,6 +30,7 @@ import {
   PlayCircleIcon,
   PublicIcon,
   QueryStatsIcon,
+  ScheduleIcon,
   SettingsIcon,
   StickyNote2Icon,
   TrendingUpIcon,
@@ -204,8 +205,21 @@ export const transactionsNavItem: NavItem = {
       search: { tab: 'overdue' },
     },
     {
+      name: 'Periodos contables',
+      icon: () => <ScheduleIcon />,
+      route: '/transactions/periods',
+    },
+    {
       ...addRouteBase,
+      name: 'Pagar',
       route: '/transactions/create',
+      search: { tab: 'pay' },
+    },
+    {
+      ...addRouteBase,
+      name: 'Desembolsar',
+      route: '/transactions/create',
+      search: { tab: 'disburse' },
     },
   ],
 }

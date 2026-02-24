@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ACCESS_TOKEN, IS_DEV_MODE } from "../utils/constants";
+import { ACCESS_TOKEN, IS_DEV_MODE } from "../constants/constants";
 import { isJwtValid } from "../utils/auth-utils";
 import type { InternalAxiosRequestConfig } from "axios";
 

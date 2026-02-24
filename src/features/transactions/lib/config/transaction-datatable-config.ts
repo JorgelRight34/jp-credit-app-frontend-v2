@@ -1,33 +1,32 @@
 import { createDateDataCell, createLinkDataCell, DataTableConfig } from "@/components";
 import { Transaction } from "../../models/transaction";
 import { sortDateRows, toCurrency } from "@/lib/utils";
-import { getTransactionLabel } from "../utils";
-import { getLoanLabel } from "@/features/loans";
+import { buildTransactionLabel } from "../utils";
+import { buildLoanLabel } from "@/features/loans";
 import { getTransactions } from "../../services/transactionClient";
+import { buildProfileFullName } from "@/features/profiles";
 
 export const transactionDataTableConfig: DataTableConfig<Transaction> = {
     title: "Transacciones",
     columns: [
         {
-            id: "date",
-            accessorKey: "date",
-            header: "FECHA",
-            enableSorting: true,
-            sortingFn: sortDateRows,
-            cell: ({ row }) => createDateDataCell(row.original.date),
-        },
-        {
-            header: "ACTOR",
-            accessorFn: (row) => row.clientName,
-            enableSorting: true,
-            cell: ({ row }) => createLinkDataCell(row.original.clientName, { to: "/profiles/$id", params: { id: row.original.actorId?.toString() } }),
-        },
-        {
             id: "id",
             accessorKey: "id",
             header: "DOCUMENTO",
             enableSorting: true,
-            cell: ({ row }) => getTransactionLabel(row.original),
+            cell: ({ row }) => createLinkDataCell(buildTransactionLabel(row.original), {
+                to: "/transactions/$id",
+                params: { id: row.original.id.toString() }
+            }),
+        },
+        {
+            header: "CLIENTE",
+            accessorFn: (row) => row.client.firstName,
+            enableSorting: true,
+            cell: ({ row }) => createLinkDataCell(buildProfileFullName(row.original.client), {
+                to: "/profiles/$id",
+                params: { id: row.original.actorId?.toString() }
+            }),
         },
         {
             id: "value",
@@ -58,8 +57,16 @@ export const transactionDataTableConfig: DataTableConfig<Transaction> = {
             id: "loanId",
             accessorKey: "loanId",
             header: "PRESTAMO",
-            cell: ({ row }) => createLinkDataCell(getLoanLabel({ id: row.original.loanId }), { to: "/loans/$id", params: { id: row.original.loanId.toString() } }),
-        }
+            cell: ({ row }) => createLinkDataCell(buildLoanLabel({ id: row.original.loanId }), { to: "/loans/$id", params: { id: row.original.loanId.toString() } }),
+        },
+        {
+            id: "date",
+            accessorKey: "date",
+            header: "FECHA",
+            enableSorting: true,
+            sortingFn: sortDateRows,
+            cell: ({ row }) => createDateDataCell(row.original.date),
+        },
     ],
     loader: getTransactions
 }

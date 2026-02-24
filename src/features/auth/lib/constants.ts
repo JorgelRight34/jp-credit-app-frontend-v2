@@ -1,4 +1,4 @@
-import { PERMISSIONS_ENDPOINT_SUFFIX } from "../../../lib/utils/constants";
+import { PERMISSIONS_ENDPOINT_SUFFIX } from "../../../lib/constants/constants";
 import type { ClaimPair } from "../models/claimPair";
 import type { Column } from "@/components";
 

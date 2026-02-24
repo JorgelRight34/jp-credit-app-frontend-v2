@@ -1,13 +1,9 @@
-import { startTransition, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import type { CacheKey } from '@/models'
 import type { InputProps } from '@/components/atoms'
-import type { ModalTriggerRef } from '@/components/organisms'
-import { Input } from '@/components/atoms'
-import { useData } from '@/hooks/useData'
-import { ModalTrigger } from '@/components/organisms'
+import PickerInputDisplay from './picker-input-display'
 
-interface PickerInputProps<T, TValue> extends Omit<InputProps, 'ref'> {
+export interface PickerInputProps<T, TValue> extends Omit<InputProps, 'ref'> {
   placeholder?: string
   label?: ReactNode
   className?: string
@@ -30,66 +26,8 @@ const PickerInput = <T, TValue>({
   return (
     <>
       <input type="hidden" value={value ?? ''} className="hidden" readOnly />
-      <DisplayInput value={value} {...props} />
+      <PickerInputDisplay value={value} {...props} />
     </>
-  )
-}
-
-const DisplayInput = <T, TValue>({
-  cacheKey,
-  isDisabled,
-  value: controlledValue,
-  modalProps,
-  onSelect,
-  accesorFn,
-  onChange,
-  visibleValueFn,
-  render,
-  loader,
-  ...props
-}: PickerInputProps<T, TValue>) => {
-  const [selected, setSelected] = useState<T | null>(null)
-  const modalTriggerRef = useRef<ModalTriggerRef>(null)
-
-  const { data: fetchedDefaultValue } = useData<T>({
-    key: cacheKey,
-    loader: () => loader(controlledValue),
-    enabled: Boolean(controlledValue && selected === null),
-  })
-
-  const displayInputValue = useMemo(() => {
-    if (!controlledValue) return ''
-
-    return visibleValueFn(selected ?? fetchedDefaultValue ?? null) ?? ''
-  }, [controlledValue, selected, fetchedDefaultValue])
-
-  const handleSelect = (val: T | null) => {
-    startTransition(() => {
-      onChange?.(accesorFn(val))
-      setSelected(val)
-      onSelect?.(val)
-      modalTriggerRef.current?.hide()
-    })
-  }
-
-  return (
-    <ModalTrigger
-      {...modalProps}
-      modalOverlay="bg-black/25"
-      width="75dvw"
-      height="95dvh"
-      ref={modalTriggerRef}
-      trigger={
-        <Input
-          value={displayInputValue}
-          disabled={isDisabled}
-          readOnly={true}
-          {...props}
-        />
-      }
-    >
-      {render(handleSelect)}
-    </ModalTrigger>
   )
 }
 

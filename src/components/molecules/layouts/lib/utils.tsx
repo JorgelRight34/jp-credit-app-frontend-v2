@@ -11,7 +11,7 @@ import {
 import { MenuOption } from '../../menu/menu'
 import LightPillMenuBtn from '@/components/atoms/button/components/light-pill-menu-btn'
 
-export const createPageLayoutCreateOption = (
+export const buildPageLayoutCreateOption = (
   createPath: Route,
 ): LayoutOption => ({
   title: 'Añadir',
@@ -20,7 +20,7 @@ export const createPageLayoutCreateOption = (
   component: AccentPillBtn,
 })
 
-export const createPageLayoutEditOption = (
+export const buildPageLayoutEditOption = (
   editPath: Route,
   params?: RouteParams,
 ): LayoutOption => ({
@@ -31,14 +31,14 @@ export const createPageLayoutEditOption = (
   component: AccentPillBtn,
 })
 
-export const createPageLayoutMenuOption = (
+export const buildPageLayoutMenuOption = (
   options: Array<MenuOption>,
 ): LayoutOption => ({
   title: 'Opciones',
   component: (props) => LightPillMenuBtn({ ...props, options }),
 })
 
-export const createPageLayoutDeleteOption = ({
+export const buildPageLayoutDeleteOption = ({
   disabled,
   tooltip,
   ...options
@@ -51,7 +51,7 @@ export const createPageLayoutDeleteOption = ({
   ...options,
 })
 
-export const createPageLayoutSettingsOption = (
+export const buildPageLayoutSettingsOption = (
   to: Route,
   params?: RouteParams,
 ) => {
@@ -64,7 +64,7 @@ export const createPageLayoutSettingsOption = (
   }
 }
 
-export const createPageLayoutSettingsOptionLight = (
+export const buildPageLayoutSettingsOptionLight = (
   to: Route,
   params?: RouteParams,
 ) => {

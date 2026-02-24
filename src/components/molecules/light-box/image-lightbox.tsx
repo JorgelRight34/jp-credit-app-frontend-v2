@@ -2,7 +2,7 @@ import { useState } from 'react'
 import LightBox from './lightbox'
 import type { FileModel } from '@/models/fileModel'
 import { Image } from '@/components/atoms'
-import { ND } from '@/lib/utils/constants'
+import { ND } from '@/lib/constants/constants'
 
 interface ImageWithLightBoxProps {
   src: string

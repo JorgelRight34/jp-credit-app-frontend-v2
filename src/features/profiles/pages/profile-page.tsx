@@ -1,17 +1,17 @@
-import { getProfileFullName } from '../lib/utils'
+import { buildProfileFullName } from '../lib/utils'
 import { profilesPermissionProvider } from '../lib/config/permissionProvider'
 import {
-  createProfileBreadcrumb,
+  buildProfileBreadcrumb,
   profilesBreadcrumb,
 } from '../lib/config/breadcrumb'
 import ProfileOverview from '../components/profile-overview'
 import type { BreadcrumbsByRoute } from '@/components'
 import type { Profile } from '../models/profile'
 import {
-  createPageLayoutEditOption,
+  buildPageLayoutEditOption,
   FileTable,
   mapApiFileToTableFile,
-  OverviewIcon,
+  overviewBreadcrumb,
   PageRouterLayout,
   Tab,
   TabsRouter,
@@ -23,30 +23,30 @@ interface ProfilePageProps {
 }
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: { title: 'Overview', icon: OverviewIcon },
-  files: { title: 'Archivos', icon: UploadIcon },
+  overview: [overviewBreadcrumb],
+  files: [{ title: 'Archivos', icon: UploadIcon }],
 }
 
 const ProfilePage = ({ profile }: ProfilePageProps) => {
-  const title = getProfileFullName(profile)
+  const title = buildProfileFullName(profile)
 
   return (
     <PageRouterLayout
       title={title}
       permissionProvider={profilesPermissionProvider}
       options={[
-        createPageLayoutEditOption('/profiles/$id/edit', {
+        buildPageLayoutEditOption('/profiles/$id/edit', {
           id: profile.id.toString(),
         }),
       ]}
       routerConfig={{
         defaultActive: 'overview',
         breadcrumbsByRoute,
-        baseBreadcrumbs: [profilesBreadcrumb, createProfileBreadcrumb(profile)],
+        baseBreadcrumbs: [profilesBreadcrumb, buildProfileBreadcrumb(profile)],
       }}
     >
       <TabsRouter>
-        <Tab eventKey="overview" title="Overview">
+        <Tab eventKey="overview" title="Resumen">
           <ProfileOverview profile={profile} />
         </Tab>
         <Tab eventKey="files" title="Archivos">

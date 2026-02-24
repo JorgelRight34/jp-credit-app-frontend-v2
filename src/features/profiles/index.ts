@@ -7,3 +7,4 @@ export { default as LoanOfficerSearchInput } from "./components/loan-officer-sea
 export * from './models/profileRole'
 export * from './models/profile'
 export * from './lib/utils'
+export * from './models/profileSummary'

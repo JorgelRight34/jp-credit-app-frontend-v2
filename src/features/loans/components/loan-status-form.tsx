@@ -6,8 +6,6 @@ import {
   FormInput,
   InputProps,
   Paragraph,
-  Tab,
-  Tabs,
 } from '@/components'
 import { useLoanStatusForm } from '../hooks/useLoanStatusForm'
 import { Loan } from '../models/loan'
@@ -34,15 +32,11 @@ const LoanStatusFormInner = ({ loan, ...props }: LoanStatusFormProps) => {
   const form = useLoanStatusForm({ loan, ...props })
 
   return (
-    <Tabs>
-      <Tab eventKey="status" title="Estado">
-        <FormContainer form={form}>
-          <Form form={form}>
-            <FormInput name="status" as={LoanStatusCardsInput} />
-          </Form>
-        </FormContainer>
-      </Tab>
-    </Tabs>
+    <FormContainer form={form}>
+      <Form form={form}>
+        <FormInput name="status" as={LoanStatusCardsInput} />
+      </Form>
+    </FormContainer>
   )
 }
 

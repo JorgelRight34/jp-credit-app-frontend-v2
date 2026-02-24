@@ -1,1 +1,3 @@
-export const createLoanQueryKey = (id: number) => ["loans", id]
+import { CacheKey } from "@/models";
+
+export const createLoanQueryKey = (id: number): CacheKey => ["loans", id]

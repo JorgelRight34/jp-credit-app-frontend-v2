@@ -1,7 +1,7 @@
 import EditUserAccessForm from '../components/edit-user-form'
 import {
   accessControlBreadcrumb,
-  createUserBreadcrumb,
+  buildUserBreadcrumb,
   usersModuleBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
@@ -18,7 +18,7 @@ const EditUserFormPage = ({ user }: EditUserFormPageProps) => {
       title={user.username}
       permissionProvider={accessControlPermissionProvider}
       breadcrumbs={[accessControlBreadcrumb, usersModuleBreadcrumb].concat(
-        createUserBreadcrumb(user),
+        buildUserBreadcrumb(user),
       )}
     >
       <EditUserAccessForm user={user} />

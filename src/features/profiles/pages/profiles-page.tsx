@@ -4,7 +4,7 @@ import ProfilesDataTable from '../components/profiles-datatable'
 import type { BreadcrumbsByRoute } from '@/components'
 import {
   AllIcon,
-  createPageLayoutCreateOption,
+  buildPageLayoutCreateOption,
   GroupIcon,
   PageRouterLayout,
   Tab,
@@ -12,13 +12,15 @@ import {
 } from '@/components'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: { title: 'Todos', icon: () => <AllIcon /> },
-  clients: { title: 'Clientes', icon: () => <GroupIcon /> },
-  guarantors: { title: 'Garantes', icon: () => <GroupIcon /> },
-  'loan-officers': {
-    title: 'Agentes',
-    icon: () => <GroupIcon />,
-  },
+  all: [{ title: 'Todos', icon: () => <AllIcon /> }],
+  clients: [{ title: 'Clientes', icon: () => <GroupIcon /> }],
+  guarantors: [{ title: 'Garantes', icon: () => <GroupIcon /> }],
+  'loan-officers': [
+    {
+      title: 'Agentes',
+      icon: () => <GroupIcon />,
+    },
+  ],
 }
 
 const ProfilesPage = () => {
@@ -26,7 +28,7 @@ const ProfilesPage = () => {
     <PageRouterLayout
       title="Pérfiles"
       permissionProvider={profilesPermissionProvider}
-      options={[createPageLayoutCreateOption('/profiles/create')]}
+      options={[buildPageLayoutCreateOption('/profiles/create')]}
       routerConfig={{
         baseBreadcrumbs: [profilesBreadcrumb],
         defaultActive: 'all',

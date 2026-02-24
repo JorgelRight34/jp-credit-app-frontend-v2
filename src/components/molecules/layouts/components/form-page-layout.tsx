@@ -16,6 +16,19 @@ export type FormPageLayoutProps = React.PropsWithChildren &
     breadcrumbs: Array<BreadcrumbSpec>
   }
 
+export const editBreadcrumb: BreadcrumbSpec = {
+  title: 'Editar',
+  icon: EditIcon,
+  pathname: '.',
+  disabled: true,
+}
+
+export const createBreadcrumb: BreadcrumbSpec = {
+  title: 'Crear',
+  icon: AddIcon,
+  pathname: '.',
+}
+
 export const CreateFormPageLayout = ({
   permissionProvider,
   title,
@@ -29,11 +42,7 @@ export const CreateFormPageLayout = ({
       isAuthorizedFn={(p) => p.canCreate}
       breadcrumb={
         <PageLayoutBreadcrumb
-          breadcrumbs={breadcrumbs.concat({
-            title: 'Crear',
-            icon: AddIcon,
-            pathname: '.',
-          })}
+          breadcrumbs={breadcrumbs.concat(createBreadcrumb)}
         />
       }
       options={[]}
@@ -61,12 +70,7 @@ export const EditFormPageLayout = ({
       isAuthorizedFn={(p) => p.canEdit}
       breadcrumb={
         <PageLayoutBreadcrumb
-          breadcrumbs={breadcrumbs.concat({
-            title: 'Editar',
-            icon: EditIcon,
-            pathname: '.',
-            disabled: true,
-          })}
+          breadcrumbs={breadcrumbs.concat(editBreadcrumb)}
         />
       }
     >

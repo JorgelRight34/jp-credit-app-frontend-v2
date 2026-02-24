@@ -1,7 +1,7 @@
 import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import {
   accessControlBreadcrumb,
-  createUserBreadcrumb,
+  buildUserBreadcrumb,
   usersModuleBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import UserOverview from '../components/user-overview'
@@ -12,15 +12,15 @@ import type { IdentityPermissions } from '../models/identityPermissions'
 import type { BreadcrumbsByRoute } from '@/components'
 import { getFullName } from '@/lib/utils'
 import {
-  createPageLayoutEditOption,
+  buildPageLayoutEditOption,
   GroupsIcon,
-  OverviewIcon,
   PageRouterLayout,
   PermissionIcon,
   Tab,
   TableBuilder,
   TabsRouter,
 } from '@/components'
+import { overviewBreadcrumb } from '@/lib/constants'
 
 type UserPageProps = {
   user: User
@@ -28,9 +28,9 @@ type UserPageProps = {
 }
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: { title: 'Overview', icon: OverviewIcon },
-  permissions: { title: 'Permisos', icon: PermissionIcon },
-  roles: { title: 'Roles', icon: GroupsIcon },
+  overview: [overviewBreadcrumb],
+  permissions: [{ title: 'Permisos', icon: PermissionIcon }],
+  roles: [{ title: 'Roles', icon: GroupsIcon }],
 }
 
 const UserPage = ({ user, userPermissions }: UserPageProps) => {
@@ -39,7 +39,7 @@ const UserPage = ({ user, userPermissions }: UserPageProps) => {
       title={`${getFullName(user)} - ${user.username}`}
       permissionProvider={accessControlPermissionProvider}
       options={[
-        createPageLayoutEditOption('/access-control/users/$username/edit', {
+        buildPageLayoutEditOption('/access-control/users/$username/edit', {
           username: user.username,
         }),
       ]}
@@ -48,12 +48,12 @@ const UserPage = ({ user, userPermissions }: UserPageProps) => {
         baseBreadcrumbs: [
           accessControlBreadcrumb,
           usersModuleBreadcrumb,
-        ].concat(createUserBreadcrumb(user)),
+        ].concat(buildUserBreadcrumb(user)),
         breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="overview" title="Overview">
+        <Tab eventKey="overview" title="Resumen">
           <UserOverview user={user} />
         </Tab>
         <Tab eventKey="permissions" title="Permisos">

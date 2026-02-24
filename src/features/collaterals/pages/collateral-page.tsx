@@ -1,15 +1,17 @@
 import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
-import { collateralsBreadcrumb } from '../lib/config/breadcrumbs'
-import { collateralIconByTypeMap } from '../lib/jsx-utils'
+import {
+  buildCollateralBreadcrumb,
+  collateralsBreadcrumb,
+} from '../lib/config/breadcrumbs'
 import CollateralOverview from '../components/collateral-overview'
 import type { BreadcrumbsByRoute } from '@/components'
 import type { Collateral } from '../models/collateral'
 import {
-  createPageLayoutEditOption,
-  createPageLayoutSettingsOptionLight,
+  buildPageLayoutEditOption,
+  buildPageLayoutSettingsOptionLight,
   FileTable,
   mapApiFileToTableFile,
-  OverviewIcon,
+  overviewBreadcrumb,
   PageRouterLayout,
   Tab,
   TabsRouter,
@@ -17,8 +19,8 @@ import {
 } from '@/components'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: { title: 'Overview', icon: OverviewIcon },
-  files: { title: 'Archivos', icon: UploadIcon },
+  overview: [overviewBreadcrumb],
+  files: [{ title: 'Archivos', icon: UploadIcon }],
 }
 
 const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
@@ -27,10 +29,10 @@ const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
       title={collateral.title}
       permissionProvider={collateralsPermissionProvider}
       options={[
-        createPageLayoutSettingsOptionLight('/collaterals/$id/settings', {
+        buildPageLayoutSettingsOptionLight('/collaterals/$id/settings', {
           id: collateral.id.toString(),
         }),
-        createPageLayoutEditOption('/collaterals/$id/edit', {
+        buildPageLayoutEditOption('/collaterals/$id/edit', {
           id: collateral.id.toString(),
         }),
       ]}
@@ -38,16 +40,13 @@ const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
         defaultActive: 'overview',
         baseBreadcrumbs: [
           collateralsBreadcrumb,
-          {
-            title: collateral.title,
-            icon: collateralIconByTypeMap[collateral.type],
-          },
+          buildCollateralBreadcrumb(collateral),
         ],
         breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="overview" title="Overview">
+        <Tab eventKey="overview" title="Resumen">
           <CollateralOverview collateral={collateral} />
         </Tab>
         <Tab eventKey="files" title="Archivos">

@@ -9,7 +9,7 @@ const EditProjectFormPage = ({ project }: { project: Project }) => {
     <EditFormPageLayout
       breadcrumbs={[projectsBreadcrumb]}
       permissionProvider={projectsPermissionProvider}
-      title={`Proyecto No.${project.id} | ${project.name}`}
+      title={`Proyecto No. ${project.id} | ${project.name}`}
     >
       <ProjectForm project={project} />
     </EditFormPageLayout>

@@ -1,7 +1,7 @@
 import {
   AllIcon,
   BreadcrumbsByRoute,
-  createPageLayoutCreateOption,
+  buildPageLayoutCreateOption,
   DisbursementIcon,
   PageRouterLayout,
   PaymentIcon,
@@ -14,17 +14,17 @@ import { transactionBreadcrumb } from '../lib/config/breadcrumb'
 import TransactionDataTable from '../components/transaction-datatable'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: { title: 'Todos', icon: AllIcon },
-  payments: { title: 'Pagos', icon: PaymentIcon },
-  disbursements: { title: 'Desembolsos', icon: DisbursementIcon },
-  overdue: { title: 'Atrasados', icon: ScheduleIcon },
+  all: [{ title: 'Todos', icon: AllIcon }],
+  payments: [{ title: 'Pagos', icon: PaymentIcon }],
+  disbursements: [{ title: 'Desembolsos', icon: DisbursementIcon }],
+  overdue: [{ title: 'Atrasados', icon: ScheduleIcon }],
 }
 
 const TransactionsPage = () => {
   return (
     <PageRouterLayout
       title="Transacciones"
-      options={[createPageLayoutCreateOption('/transactions/create')]}
+      options={[buildPageLayoutCreateOption('/transactions/create')]}
       routerConfig={{
         defaultActive: 'all',
         baseBreadcrumbs: [transactionBreadcrumb],

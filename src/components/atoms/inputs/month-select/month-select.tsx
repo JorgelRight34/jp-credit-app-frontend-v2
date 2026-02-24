@@ -1,6 +1,6 @@
 import SelectInput from '../select/select'
 import type { SelectInputProps } from '../select/select'
-import { months } from '@/lib/utils/constants'
+import { months } from '@/lib/constants/constants'
 
 type MonthSelectProps = SelectInputProps
 

@@ -14,6 +14,8 @@ export const IS_DEV_MODE = !(process.env.VITE_MODE === "PROD")
 
 export const ND = "N/D"
 
+export const DASHES = "---"
+
 export const SMALL_SCREEN_BREAKPOINT = 500;
 
 export const PERMISSIONS_ENDPOINT_SUFFIX = "permissions"

@@ -17,7 +17,7 @@ export type DefaultFormValues<TData> = Partial<{
     | TData[K]
 }>
 
-export interface UseFormBuilderProps<TData, TReturn> {
+export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
     schema?: SchemaType<TData>;
     defaultValues?: DefaultFormValues<TData>;
     resetValues?: boolean;

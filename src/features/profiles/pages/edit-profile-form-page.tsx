@@ -1,6 +1,6 @@
 import { profilesPermissionProvider } from '../lib/config/permissionProvider'
 import {
-  createProfileBreadcrumb,
+  buildProfileBreadcrumb,
   profilesBreadcrumb,
 } from '../lib/config/breadcrumb'
 import type { Profile } from '../models/profile'
@@ -12,7 +12,7 @@ const EditProfileFormPage = ({ profile }: { profile: Profile }) => {
   return (
     <EditFormPageLayout
       title={getFullName(profile)}
-      breadcrumbs={[profilesBreadcrumb, createProfileBreadcrumb(profile)]}
+      breadcrumbs={[profilesBreadcrumb, buildProfileBreadcrumb(profile)]}
       permissionProvider={profilesPermissionProvider}
     >
       <EditProfileForm profile={profile} />

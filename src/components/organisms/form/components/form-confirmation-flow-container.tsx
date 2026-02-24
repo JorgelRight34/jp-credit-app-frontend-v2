@@ -18,18 +18,25 @@ interface FormConfirmationFlowContainerProps<
   T extends FieldValues,
 > extends PropsWithChildren {
   form: UseFormBuilderReturn<T>
+  initializeAsDirty?: boolean
   isDirty?: boolean
 }
 
 const FormConfirmationFlowContainer = <T extends FieldValues>({
   children,
+  initializeAsDirty,
   form,
 }: FormConfirmationFlowContainerProps<T>) => {
   const { isDirty } = useFormState({ control: form.form.control })
 
   return (
     <FormLayout
-      footer={<FormConfirmationButtons isDirty={isDirty} form={form} />}
+      footer={
+        <FormConfirmationButtons
+          isDirty={isDirty || initializeAsDirty === true}
+          form={form}
+        />
+      }
       errors={
         <FormErrorsPanel
           control={form.form.control}

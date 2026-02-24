@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState } from 'react'
-import { PROJECT_KEY } from '../lib/utils/constants'
+import { PROJECT_KEY } from '../lib/constants/constants'
 import { useAuth } from './auth-context'
 import { Project, projectsClient, projectsQueryKey } from 'bk/projects'
 import { useData } from '@/hooks/useData'

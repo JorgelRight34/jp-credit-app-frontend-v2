@@ -17,7 +17,7 @@ import {
   useFormConfirmationFlowActiveStep,
   useFormConfirmationFlowData,
 } from '@/components'
-import { getLoanLabel } from '@/features/loans'
+import { buildLoanLabel } from '@/features/loans'
 import { toCurrency, toFormattedDate } from '@/lib/utils'
 import { CacheKey } from '@/models'
 import { PaymentResult } from '../models/paymentResult'
@@ -70,7 +70,7 @@ const PaymentDetails = ({
         <FormReadOnlyGroup
           name="loanId"
           label="Préstamo"
-          value={getLoanLabel({ id: transaction.loanId })}
+          value={buildLoanLabel({ id: transaction.loanId })}
         />
         <FormReadOnlyGroup
           name="amount"
@@ -129,7 +129,7 @@ const PaymentLoanChangesCard = ({
 }: {
   paymentResult: PaymentResult
 }) => {
-  const loanLabel = getLoanLabel({ id: transaction.loanId }).toUpperCase()
+  const loanLabel = buildLoanLabel({ id: transaction.loanId }).toUpperCase()
   return (
     <div className="flex w-full flex-col gap-6 px-3">
       <Fieldset className="p-4" legend={`${loanLabel} / DETALLES`}>

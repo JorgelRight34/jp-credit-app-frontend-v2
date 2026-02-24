@@ -14,7 +14,7 @@ export const normalizeDate = (d: Date) => {
 };
 
 /** Format to French locale (or "---" if invalid) */
-export const toFormattedDate = (date?: string | Date): string | null => {
+export const toFormattedDate = (date: string | Date): string | null => {
     if (!date) return null;
     if (!(date instanceof Date)) date = new Date(date);
     if (isNaN(date.getTime())) return "---";
@@ -28,6 +28,11 @@ export const toFormattedDate = (date?: string | Date): string | null => {
 
 export const getTodayAsInputDate = () => {
     return new Date().toISOString().split('T')[0]
+}
+
+export const toInputDate = (date: string | Date) => {
+    if (!(date instanceof Date)) date = new Date(date);
+    return date.toISOString().split('T')[0]
 }
 
 /** Full Spanish date string: "Lunes, 3 de Enero de 2024" */

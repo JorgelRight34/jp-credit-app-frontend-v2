@@ -2,7 +2,7 @@ import { EditFormPageLayout } from '@/components'
 import RoleForm from '../components/role-form'
 import {
   accessControlBreadcrumb,
-  createRoleBreadcrumb,
+  buildRoleBreadcrumb,
   rolesModuleBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import { rolesPermissionProvider } from '../lib/config/permissionProvider'
@@ -16,7 +16,7 @@ const EditRoleFormPage = ({ role }: { role: Role }) => {
       breadcrumbs={[
         accessControlBreadcrumb,
         rolesModuleBreadcrumb,
-        createRoleBreadcrumb(role),
+        buildRoleBreadcrumb(role),
       ]}
     >
       <RoleForm role={role} />

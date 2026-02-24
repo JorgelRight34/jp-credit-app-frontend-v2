@@ -23,8 +23,7 @@ export { default as FormConfirmationFlowContainer } from './components/form-conf
 export { default as FormLazySelectGroup } from './components/form-lazy-select-group'
 export * from "./components/form-readonly-group"
 export * from './providers/form-confirmation-provider'
-export type { FieldValues } from 'react-hook-form';
-export { UseFormSetValue } from 'react-hook-form'
+export type { FieldValues, UseFormSetValue } from 'react-hook-form';
 
 export * from "./hooks/useForm"
 export * from "./models/apiError"

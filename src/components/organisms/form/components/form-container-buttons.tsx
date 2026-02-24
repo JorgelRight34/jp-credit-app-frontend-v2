@@ -28,11 +28,6 @@ const FormContainerButtons = <T extends FieldValues>({
     onReset?.()
   }, [form, onReset])
 
-  const submitHandler = useCallback(
-    async () => await (form ? form.form.submit : onSubmit)?.(),
-    [form],
-  )
-
   return (
     <div className="flex items-center gap-3">
       <SecondaryPillBtn
@@ -47,7 +42,7 @@ const FormContainerButtons = <T extends FieldValues>({
         isValid={isValid}
         icon={icon}
         text={text}
-        onSubmit={submitHandler}
+        onSubmit={onSubmit}
       />
     </div>
   )

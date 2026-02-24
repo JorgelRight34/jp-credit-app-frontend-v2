@@ -23,7 +23,7 @@ const FormHtmlDisplayGroup = ({
           <Icon icon={ContentCopyIcon} />
         </div>
       }
-      className="flex flex-1"
+      className="flex flex-1 min-h-[8rem]"
       {...props}
     >
       <Box

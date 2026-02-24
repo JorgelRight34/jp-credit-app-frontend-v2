@@ -1,5 +1,5 @@
 import { getFullDateString, toFormattedDate } from '@/lib/utils'
-import { nullFieldLabel } from '@/lib/utils/constants'
+import { nullFieldLabel } from '@/lib/constants/constants'
 
 interface DataLabelProps {
   date?: string | Date

@@ -18,21 +18,21 @@ const PaymentPreviewCard = ({ loan, amount = 0 }: PaymentPreviewCardProps) => {
   return (
     <FinancialCard
       title="CALCULOS"
+      subheading="Monto"
       className="shadow-sm"
-      headingClassName="py-4"
       headers={[
-        ['Cuota', toCurrency(loan?.paymentValue ?? 0)],
-        ['Penalidad', toPercentage(loan?.penaltyRate ?? 0)],
+        ['Cuota', loan ? toCurrency(loan?.paymentValue ?? 0) : ND],
+        ['Penalidad', loan ? toPercentage(loan?.penaltyRate ?? 0) : ND],
         ['Días de gracia', loan?.daysOfGrace ?? ND],
         [
           'Últ. Pago',
           loan?.lastPaymentDate ? toFormattedDate(loan.lastPaymentDate) : ND,
         ],
-        ['Fecha esperada', toFormattedDate(nextPaymentDate)],
-        ['Días de atraso', lateDays],
-        ['Mora', toCurrency(fee)],
-        ['Interés', toCurrency(interest)],
-        ['Capital', toCurrency(Math.max(0, amount - interest))],
+        ['Fecha pago', nextPaymentDate ? toFormattedDate(nextPaymentDate) : ND],
+        ['Días de atraso', loan ? lateDays : ND],
+        ['Mora', loan ? toCurrency(fee) : ND],
+        ['Interés', loan ? toCurrency(interest) : ND],
+        ['Capital', loan ? toCurrency(Math.max(0, amount - interest)) : ND],
       ]}
       heading={toCurrency(amount)}
     />

@@ -56,7 +56,7 @@ const CollateralLiquidateForm = ({
         <PaymentReceiptStep successText="El pago con garantía ha sido realizado" />
       }
     >
-      <FormConfirmationFlowContainer form={form}>
+      <FormConfirmationFlowContainer form={form} initializeAsDirty>
         <Form form={form}>
           <FormRow>
             <FormReadOnlyGroup

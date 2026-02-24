@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import {
   accessControlBreadcrumb,
-  createRoleBreadcrumb,
+  buildRoleBreadcrumb,
   rolesModuleBreadcrumb,
 } from '../lib/config/breadcrumbs'
 import { rolesPermissionProvider } from '../lib/config/permissionProvider'
@@ -10,11 +10,10 @@ import type { Role } from '../models/role'
 import type { IdentityPermissions } from '../models/identityPermissions'
 import type { BreadcrumbsByRoute } from '@/components'
 import {
-  createPageLayoutEditOption,
+  buildPageLayoutEditOption,
   FormReadOnlyGroup,
   FormRow,
   GroupIcon,
-  OverviewIcon,
   PageRouterLayout,
   PermissionIcon,
   Tab,
@@ -22,6 +21,7 @@ import {
   TabsRouter,
 } from '@/components'
 import { claimsTableColumns } from '../lib/constants'
+import { overviewBreadcrumb } from '@/lib/constants'
 
 type RolePageProps = {
   role: Role
@@ -29,9 +29,9 @@ type RolePageProps = {
 }
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: { title: 'Overview', icon: OverviewIcon },
-  permissions: { title: 'Permisos', icon: PermissionIcon },
-  participants: { title: 'Participantes', icon: GroupIcon },
+  overview: [overviewBreadcrumb],
+  permissions: [{ title: 'Permisos', icon: PermissionIcon }],
+  participants: [{ title: 'Participantes', icon: GroupIcon }],
 }
 
 const RolePage = ({ role, rolePermissions }: RolePageProps) => {
@@ -39,7 +39,7 @@ const RolePage = ({ role, rolePermissions }: RolePageProps) => {
     <PageRouterLayout
       title={`${role.id} - ${role.name}`}
       options={[
-        createPageLayoutEditOption('/access-control/roles/$id/edit', {
+        buildPageLayoutEditOption('/access-control/roles/$id/edit', {
           id: role.id.toString(),
         }),
       ]}
@@ -48,14 +48,14 @@ const RolePage = ({ role, rolePermissions }: RolePageProps) => {
         baseBreadcrumbs: [
           accessControlBreadcrumb,
           rolesModuleBreadcrumb,
-          createRoleBreadcrumb(role),
+          buildRoleBreadcrumb(role),
         ],
         breadcrumbsByRoute,
       }}
       permissionProvider={rolesPermissionProvider}
     >
       <TabsRouter>
-        <Tab eventKey="overview" title="Overview">
+        <Tab eventKey="overview" title="Resumen">
           <FormRow>
             <FormReadOnlyGroup name="name" label="Nombre" value={role.name} />
           </FormRow>

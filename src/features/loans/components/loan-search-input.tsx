@@ -6,7 +6,7 @@ import type { Loan } from '../models/loan'
 import { DataPickerInputProps, Icon, PickerInputPanel } from '@/components'
 import { DataTableContainer, LoanIcon, PickerInput } from '@/components'
 import { useProjectId } from '@/features/projects'
-import { getLoanLabel } from '../lib/utils'
+import { buildLoanLabel } from '../lib/utils'
 import { getLoan } from '../services/loanClient'
 
 const LoanSearchInput = ({
@@ -22,13 +22,14 @@ const LoanSearchInput = ({
       }}
       cacheKey={[loansQueryKey]}
       accesorFn={(l) => l?.id}
-      visibleValueFn={(loan) => (loan ? getLoanLabel(loan) : '---')}
+      visibleValueFn={(loan) => (loan ? buildLoanLabel(loan) : '---')}
       render={(setValue) => (
         <PickerInputPanel reset={() => setValue(null)}>
           <DataTableContainer
             searchConfig={loanSearchConfig}
             datatableConfig={createLoanSearchInputDataTableConfig(setValue)}
-            cacheKey={[loansQueryKey, projectId]}
+            initialQuery={{ projectId: projectId! }}
+            cacheKey={[loansQueryKey, projectId!]}
             {...datatable}
           />
         </PickerInputPanel>

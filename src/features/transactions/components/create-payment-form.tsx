@@ -1,4 +1,4 @@
-import { useTransactionForm } from '../hooks/useTransactionForm'
+import { usePaymentForm } from '../hooks/usePaymentForm'
 import {
   createPickerInputWithOnSelect,
   CurrencyInput,
@@ -16,7 +16,7 @@ import {
   RichTextEditor,
 } from '@/components'
 import { Transaction } from '../models/transaction'
-import { TransactionFormValues } from '../lib/schemas/transactionFormSchema'
+import { PaymentFormValues } from '../lib/schemas/paymentFormSchema'
 import { Project } from '@/features/projects'
 import { Loan, LoanSearchInput } from '@/features/loans'
 import TransactionConfirmationStep from './payment-confirmation-step'
@@ -25,18 +25,18 @@ import { getPaymentPreview } from '../services/transactionClient'
 import PaymentPreviewCard from './payment-preview-card'
 import { useRef } from 'react'
 import { transactionsQueryKey } from '../lib/constants'
-import { getTransactionLoanActorsSelectOptions } from '../lib/utils'
+import { getPaymentLoanActorsSelectOptions } from '../lib/utils'
 import { getTodayAsInputDate } from '@/lib/utils'
 
-interface CreateTransactionFormProps extends DataModuleFormProps<
+interface CreatePaymentProps extends DataModuleFormProps<
   Transaction,
-  TransactionFormValues
+  PaymentFormValues
 > {
   project: Project
 }
 
-const CreateTransactionForm = (props: CreateTransactionFormProps) => {
-  const form = useTransactionForm(props)
+const CreatePayment = (props: CreatePaymentProps) => {
+  const form = usePaymentForm(props)
   const loanPickerInputDataControllerRef =
     useRef<PickerInputDataControllerRef<Loan>>(null)
 
@@ -56,29 +56,22 @@ const CreateTransactionForm = (props: CreateTransactionFormProps) => {
           <div className="flex-1 h-full flex">
             <div className="flex flex-col w-8/12">
               <FormRow>
-                <FormGroup name="amount" label="Monto" input={CurrencyInput} />
-                <FormGroup
-                  name="date"
-                  label="Fecha"
-                  max={getTodayAsInputDate()}
-                  input={DateInput}
-                />
-              </FormRow>
-              <FormRow>
                 <FormGroup
                   name="loanId"
                   label="Préstamo"
                   input={createPickerInputWithOnSelect(
                     LoanSearchInput,
-                    (value) =>
-                      loanPickerInputDataControllerRef.current?.setValue(value),
+                    (loan) => {
+                      loanPickerInputDataControllerRef.current?.setValue(loan)
+                      if (loan) form.form.setValue('amount', loan.paymentValue)
+                    },
                   )}
                 />
                 <FormLazySelectGroup
                   name="payerId"
                   label="Actor"
                   watchedValues={['loanId']}
-                  loader={getTransactionLoanActorsSelectOptions}
+                  loader={getPaymentLoanActorsSelectOptions}
                   buildCacheKey={([loanId]) => [
                     transactionsQueryKey,
                     'form',
@@ -87,6 +80,15 @@ const CreateTransactionForm = (props: CreateTransactionFormProps) => {
                   ]}
                   enabledFn={([loanId]) => !!loanId}
                   allowNoOption={false}
+                />
+              </FormRow>
+              <FormRow>
+                <FormGroup name="amount" label="Monto" input={CurrencyInput} />
+                <FormGroup
+                  name="date"
+                  label="Fecha"
+                  max={getTodayAsInputDate()}
+                  input={DateInput}
                 />
               </FormRow>
               <FormGroup
@@ -116,4 +118,4 @@ const CreateTransactionForm = (props: CreateTransactionFormProps) => {
   )
 }
 
-export default CreateTransactionForm
+export default CreatePayment

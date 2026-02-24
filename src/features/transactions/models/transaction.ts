@@ -1,5 +1,5 @@
-import { User } from "@/features/auth";
 import { TransactionType } from "./transactionType";
+import { ProfileSummary } from "@/features/profiles";
 
 export interface Transaction {
     id: number;
@@ -8,15 +8,16 @@ export interface Transaction {
     interestValue: number;
     penaltyFee: number;
     outstandingAmount: number;
+    actor?: ProfileSummary;
     loanId: number;
     clientId: number;
+    feePaid: number;
     actorId: string;
     date: string;
-    createdBy: User;
+    createdByUsername: string;
     type: TransactionType;
     value: number;
     lateDays: number;
     isClosed: boolean;
-    clientName: string;
-    total: number;
+    client: ProfileSummary;
 }

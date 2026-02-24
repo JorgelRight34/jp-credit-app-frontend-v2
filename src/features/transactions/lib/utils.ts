@@ -1,12 +1,10 @@
 import { getLoanActorsSelectOptions } from "@/features/loans";
 import { Transaction } from "../models/transaction";
 import { SelectOptions, UseFormSetValue } from "@/components";
-import { TransactionFormValues } from "./schemas/transactionFormSchema";
+import { PaymentFormValues } from "./schemas/paymentFormSchema";
 
-export const getTransactionLabel = (transaction: Transaction) => `${transaction.type.toUpperCase()}-${transaction.id}`
-
-export const getTransactionLoanActorsSelectOptions = async (
-    [loanId]: Array<string | number>, setValue: UseFormSetValue<TransactionFormValues>
+export const getPaymentLoanActorsSelectOptions = async (
+    [loanId]: Array<string | number>, setValue: UseFormSetValue<PaymentFormValues>
 ): Promise<SelectOptions> => {
     const options = await getLoanActorsSelectOptions(
         loanId as number,
@@ -15,3 +13,5 @@ export const getTransactionLoanActorsSelectOptions = async (
 
     return options
 }
+
+export const buildTransactionLabel = (transaction: Transaction) => `${transaction.type.toUpperCase()} - ${transaction.id}`
