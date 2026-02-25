@@ -21,7 +21,21 @@ type EditProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues> & {
 
 const EditProfileForm = ({ profile, ...props }: EditProfileFormProps) => {
   const form = useProfileForm({
-    profile,
+    initialValues: {
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      email: profile.email,
+      gender: profile.gender,
+      dateOfBirth: profile.dateOfBirth,
+      maritalStatus: profile.maritalStatus,
+      dni: profile.dni,
+      address: profile.address,
+      landline: profile.landline,
+      officePhone: profile.officePhone,
+      phoneNumber: profile.phoneNumber,
+    },
+    profileId: profile.id,
+    shouldEdit: true,
     ...props,
   })
 

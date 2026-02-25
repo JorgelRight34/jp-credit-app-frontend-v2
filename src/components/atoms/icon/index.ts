@@ -169,6 +169,7 @@ export { default as DisbursementIcon } from '@mui/icons-material/PaidOutlined'
 export { default as AdjustmentNoteIcon } from '@mui/icons-material/StickyNote2Outlined'
 export { default as CreditIcon } from '@mui/icons-material/TrendingUpOutlined'
 export { default as DebitIcon } from '@mui/icons-material/TrendingDownOutlined'
+export { default as FollowUpIcon } from '@mui/icons-material/AssignmentOutlined'
 
 
 export { default as Icon } from "./icon";

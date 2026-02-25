@@ -44,6 +44,7 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
         rolesFormRef.current?.submit(),
       ])
     },
+    toastMessage: () => 'Guardado',
     ...props,
   })
 

@@ -1,6 +1,6 @@
 import { Fieldset, FormReadOnlyGroup, FormRow } from '@/components'
 import { AdjustmentNote } from '../models/adjustmentNote'
-import { buildLoanLabel } from '@/features/loans'
+import { buildLoanLabelById } from '@/features/loans'
 import { buildProfileFullName } from '@/features/profiles'
 import { toCurrency, toFormattedDate } from '@/lib/utils'
 
@@ -17,7 +17,7 @@ const AdjustmentNoteOverview = ({
             <FormReadOnlyGroup
               name="loanId"
               label="Préstamo"
-              value={buildLoanLabel({ id: adjustmentNote.id })}
+              value={buildLoanLabelById(adjustmentNote.loanId)}
             />
             <FormReadOnlyGroup
               name="clientName"

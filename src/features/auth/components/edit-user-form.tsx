@@ -18,7 +18,16 @@ type EditUserFormProps = DataModuleFormProps<User, UserFormValues> & {
 
 const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
   const form = useUserForm({
-    user,
+    initialValues: {
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      isActive: user.isActive,
+    },
+    shouldEdit: true,
+    userId: user.id,
+    toastMessage: () => 'Guardado',
     ...props,
   })
 

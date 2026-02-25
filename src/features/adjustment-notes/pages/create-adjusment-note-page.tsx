@@ -26,6 +26,7 @@ const CreateAdjustmentNotePage = () => {
         breadcrumbsByRoute,
       }}
       permissionProvider={adjustmentNotesPermissionProvider}
+      isAuthorizedFn={(p) => p.canCreate}
     >
       <TabsRouter>
         <Tab eventKey="nc" title="Crédito">

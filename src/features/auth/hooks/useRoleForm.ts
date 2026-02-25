@@ -7,18 +7,16 @@ import type { UseDataFormProps } from "@/components";
 import { useForm } from "@/components";
 
 type UseRoleFormProps = UseDataFormProps<Role, RoleFormSchemaValues> & {
-    role?: Role;
+    roleId?: number;
 };
 
-export const useRoleForm = ({ initialValues, role, shouldEdit, ...config }: UseRoleFormProps) => {
+export const useRoleForm = ({ initialValues, roleId, shouldEdit, ...config }: UseRoleFormProps) => {
     return useForm({
         schema: roleFormSchema,
-        defaultValues: { name: role?.name ?? "" },
+        defaultValues: initialValues ?? { name: "" },
         onSubmit: createRole,
-        onEdit: (data) => updateRole(role!.id, data),
-        shouldEdit: !!role,
+        onEdit: (data) => updateRole(roleId!, data),
         keysToInvalidate: [[rolesQueryKey]],
-        toastMessage: (data) => shouldEdit ? `Se ha modificado el rol ${role?.name}` : `Se ha creado el rol (${data!.id}) [${data!.name}]`,
         ...config
     })
 }

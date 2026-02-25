@@ -7,10 +7,10 @@ import type { Profile } from "../models/profile"
 import { useForm } from "@/components"
 
 interface UseProfileFormProps extends UseDataFormProps<Profile, ProfileFormValues> {
-    profile?: Profile
+    profileId?: number;
 }
 
-export const useProfileForm = ({ profile, initialValues, ...config }: UseProfileFormProps):
+export const useProfileForm = ({ profileId, initialValues, ...config }: UseProfileFormProps):
     UseFormBuilderReturn<ProfileFormValues> => {
     return useForm({
         schema: profileFormSchema,
@@ -27,23 +27,9 @@ export const useProfileForm = ({ profile, initialValues, ...config }: UseProfile
             officePhone: "",
             phoneNumber: "",
         },
-        initialValues: profile ? {
-            firstName: profile.firstName,
-            lastName: profile.lastName,
-            email: profile.email,
-            gender: profile.gender,
-            dateOfBirth: profile.dateOfBirth,
-            maritalStatus: profile.maritalStatus,
-            dni: profile.dni.replace('-', '').replace("-", ""),  // REMOVE THIS WHEN API SEEDS AGAIN WITH RIGHT FORMAT
-            address: profile.address,
-            landline: profile.landline,
-            officePhone: profile.officePhone,
-            phoneNumber: profile.phoneNumber,
-        } : undefined,
         onSubmit: createProfile,
-        onEdit: (body) => updateProfile(profile!.id, body),
+        onEdit: (body) => updateProfile(profileId!, body),
         keysToInvalidate: [[profilesQueryKey]],
-        shouldEdit: !!profile,
         ...config
     })
 }

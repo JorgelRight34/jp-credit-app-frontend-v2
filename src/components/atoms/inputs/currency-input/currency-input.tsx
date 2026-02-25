@@ -12,6 +12,7 @@ const CurrencyInput = ({
   onBlur,
   ...props
 }: CurrencyInputProps) => {
+  console.log(value)
   return (
     <NumericFormat
       customInput={BaseInput}

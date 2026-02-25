@@ -54,6 +54,7 @@ const CreateTransactionPage = ({
         breadcrumbsByRoute,
       }}
       permissionProvider={transactionPermissionProvider}
+      isAuthorizedFn={(p) => p.canCreate}
     >
       <TabsRouter>
         <Tab eventKey="pay" title="Pagos">

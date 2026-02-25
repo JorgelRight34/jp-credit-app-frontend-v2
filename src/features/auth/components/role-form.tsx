@@ -18,14 +18,20 @@ interface RoleFormProps extends DataModuleFormProps<
   role?: Role
 }
 
-const RoleForm = (props: RoleFormProps) => {
+const RoleForm = ({ role, ...props }: RoleFormProps) => {
   const permissionFormRef = useRef<PermissionsFormRef>(null)
   const form = useRoleForm({
-    ...props,
+    initialValues: role,
+    shouldEdit: !!role,
     onSuccess: (data) => {
       permissionFormRef.current?.setValue('id', data.id)
       permissionFormRef.current?.submit()
     },
+    toastMessage: (data) =>
+      role
+        ? `Se ha modificado el rol ${role?.name}`
+        : `Se ha creado el rol (${data?.id}) [${data!.name}]`,
+    ...props,
   })
 
   return (

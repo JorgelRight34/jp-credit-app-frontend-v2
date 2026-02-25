@@ -28,7 +28,18 @@ const EditCollateralForm = ({
   ...props
 }: EditCollateralFormProps) => {
   const form = useCollateralForm({
-    collateral,
+    initialValues: {
+      title: collateral.title,
+      description: collateral.description,
+      value: collateral.value,
+      condition: collateral.condition,
+      type: collateral.type,
+      location: collateral.location,
+      expirationDate: collateral.expirationDate,
+      loanId: collateral.loanId,
+    },
+    collateralId: collateral.id,
+    shouldEdit: true,
     ...props,
   })
 

@@ -7,7 +7,7 @@ import {
   ViewMore,
 } from '@/components'
 import { Transaction } from '../models/transaction'
-import { buildLoanLabel } from '@/features/loans'
+import { buildLoanLabelById } from '@/features/loans'
 import { toCurrency, toFormattedDate } from '@/lib/utils'
 import { buildProfileFullName } from '@/features/profiles'
 
@@ -27,7 +27,7 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
                   Préstamo
                 </FormReadonlyGroupLabelLink>
               }
-              value={buildLoanLabel({ id: transaction.loanId })}
+              value={buildLoanLabelById(transaction.loanId)}
             />
             <FormReadOnlyGroup
               name="client"

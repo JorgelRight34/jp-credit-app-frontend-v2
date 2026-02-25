@@ -25,7 +25,6 @@ export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
     tagsToInvalidate?: Array<string>;
     shouldEdit?: boolean;
     interceptors?: Array<FormInterceptor<TData>>;
-    initialValues?: Partial<TData>;
     toastMessage?: (data: TReturn | undefined) => string;
     onSuccess?: (data: TReturn) => void;
     onDelete?: () => void;
@@ -40,7 +39,6 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     resetValues = shouldEdit ? false : true,
     interceptors,
     keysToInvalidate,
-    initialValues,
     toastMessage,
     onEdit,
     onSuccess,
@@ -72,7 +70,6 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     const methods = useRHFForm({
         resolver: schema ? zodResolver(schema) : undefined,
         defaultValues: defaultValues as Record<string, unknown>,
-        values: initialValues
     });
 
     const handleOnSubmit = async (data: FieldValues) => {

@@ -307,15 +307,15 @@ export const armotizationsNavItem: NavItem = {
 export const followUpsNavItem: NavItem = {
   name: 'Seguimientos',
   icon: () => <AssignmentIcon />,
-  route: 'follow-ups',
+  route: '/follow-ups',
   children: [
     {
       ...allRouteBase,
-      route: 'follow-ups',
+      route: '/follow-ups',
     },
     {
       ...addRouteBase,
-      route: 'follow-ups/create',
+      route: '/follow-ups/create',
     },
   ],
 }

@@ -13,15 +13,31 @@ import { ProfileQuery } from '../models/profileQuery'
 import { profileSearchConfig } from '../lib/config/profiles-search-config'
 import { createProfileSearchInputDataTableConfig } from '../lib/config/profiles-datatable-config'
 import { profilesQueryKey } from '../lib/constants'
+import { ProfileRole } from '../models/profileRole'
+
+interface ProfileSearchInputProps extends DataPickerInputProps<
+  Profile,
+  ProfileQuery
+> {
+  title?: string
+  role?: ProfileRole
+}
+
+export type ProfileRoleSearchInputProps = DataPickerInputProps<
+  Profile,
+  ProfileQuery
+>
 
 const ProfileSearchInput = ({
+  title = 'Pérfiles',
+  role = 'profile',
   datatable,
   ...props
-}: DataPickerInputProps<Profile, ProfileQuery>) => {
+}: ProfileSearchInputProps) => {
   return (
     <PickerInput<Profile, number>
       modalProps={{
-        title: <Icon icon={PersonIcon}>Pérfiles</Icon>,
+        title: <Icon icon={PersonIcon}>{title}</Icon>,
       }}
       cacheKey={[profilesQueryKey]}
       accesorFn={(p) => p?.id ?? 0}
@@ -30,8 +46,11 @@ const ProfileSearchInput = ({
         <PickerInputPanel reset={() => setValue(null)}>
           <DataTableContainer
             searchConfig={profileSearchConfig}
-            cacheKey={[profilesQueryKey]}
-            datatableConfig={createProfileSearchInputDataTableConfig(setValue)}
+            cacheKey={[profilesQueryKey, role]}
+            datatableConfig={createProfileSearchInputDataTableConfig(
+              setValue,
+              role,
+            )}
           />
         </PickerInputPanel>
       )}

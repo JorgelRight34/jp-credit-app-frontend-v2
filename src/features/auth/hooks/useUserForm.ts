@@ -6,19 +6,13 @@ import type { UseDataFormProps, UseFormBuilderReturn } from "@/components";
 import { useForm } from "@/components";
 
 export type UseUserFormProps = UseDataFormProps<User, UserFormValues> & {
-  user?: User;
+  userId?: number;
 };
 
-export const useUserForm = ({ user, initialValues, ...props }: UseUserFormProps): UseFormBuilderReturn<UserFormValues> => {
+export const useUserForm = ({ userId, initialValues, ...props }: UseUserFormProps): UseFormBuilderReturn<UserFormValues> => {
   return useForm({
     schema: userFormSchema,
-    defaultValues: user ? {
-      username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      isActive: user.isActive,
-    } : {
+    defaultValues: initialValues ?? {
       username: "",
       firstName: "",
       lastName: "",
@@ -29,9 +23,8 @@ export const useUserForm = ({ user, initialValues, ...props }: UseUserFormProps)
     },
     onSubmit: createUser,
     onEdit: async (data) => {
-      await editUser(data, user!.id)
+      await editUser(data, userId!)
     },
-    toastMessage: () => "Ha sido agregado exitosamente",
     ...props
   });
 }

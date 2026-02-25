@@ -7,22 +7,13 @@ import type { UseDataFormProps } from "@/components";
 import { useForm } from "@/components";
 
 export interface UseCollateralFormProps extends UseDataFormProps<Collateral, CollateralFormValues> {
-    collateral?: Collateral
+    collateralId?: number;
 }
 
-export const useCollateralForm = ({ collateral, initialValues, ...config }: UseCollateralFormProps) => {
+export const useCollateralForm = ({ collateralId, initialValues, ...config }: UseCollateralFormProps) => {
     return useForm({
         schema: collateralFormSchema,
-        defaultValues: collateral ? {
-            title: collateral.title,
-            description: collateral.description,
-            value: collateral.value,
-            condition: collateral.condition,
-            type: collateral.type,
-            location: collateral.location,
-            expirationDate: collateral.expirationDate,
-            loanId: collateral.loanId
-        } : {
+        defaultValues: initialValues ?? {
             title: "",
             value: '',
             condition: "",
@@ -32,9 +23,8 @@ export const useCollateralForm = ({ collateral, initialValues, ...config }: UseC
             expirationDate: null,
         },
         onSubmit: createCollateral,
-        onEdit: (body) => updateCollateral(collateral!.id, body),
-        toastMessage: (data) => collateral ? "Editado" : `Creado garantía #${data?.id}`,
-        shouldEdit: !!collateral,
+        onEdit: (body) => updateCollateral(collateralId!, body),
+        toastMessage: () => "Guardado",
         keysToInvalidate: [[collateralsQueryKey]],
         ...config
     })

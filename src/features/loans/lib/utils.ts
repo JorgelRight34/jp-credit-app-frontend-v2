@@ -4,6 +4,7 @@ import { SelectOptions } from "@/components"
 import { getLoanActors } from "../services/loanClient"
 
 export const buildLoanLabel = (loan: { id: number }) => `Préstamo No. ${loan.id}`
+export const buildLoanLabelById = (id: number) => `Préstamo No. ${id}`
 
 const MS_PER_DAY = 24 * 60 * 60 * 1000
 
