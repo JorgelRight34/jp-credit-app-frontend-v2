@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import {
     getCoreRowModel, getExpandedRowModel, getPaginationRowModel,
     getSortedRowModel, useReactTable
 } from "@tanstack/react-table";
-import { startTransition, useState } from "react";
+import { useState } from "react";
 import { getUpdaterOrValue } from "../lib/utils";
 import type { PageSize } from "../models/pageSize";
 import type { Column } from "../models/column";
@@ -67,21 +66,19 @@ export const useTableState = <T,>({
             }
         },
         onPaginationChange: (updaterOrValue) => {
-            startTransition(() => {
-                setPagination((prev) => {
-                    const next = getUpdaterOrValue(updaterOrValue, prev)
-                    onPageChange?.(next.pageIndex + 1);
+            setPagination((prev) => {
+                const next = getUpdaterOrValue(updaterOrValue, prev)
+                onPageChange?.(next.pageIndex + 1);
 
-                    return next;
-                });
-            })
+                return next;
+            });
         },
         getExpandedRowModel: getExpandedRowModel(),
         getRowCanExpand: () => allowExpand ?? false,
         onSortingChange: (updaterOrValue) => {
             setSorting((prev) => {
                 const next = getUpdaterOrValue(updaterOrValue, prev)
-                startTransition(() => onSortingChange?.(next));
+                onSortingChange?.(next);
 
                 return next;
             });

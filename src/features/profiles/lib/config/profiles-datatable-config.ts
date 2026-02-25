@@ -4,7 +4,7 @@ import type { ProfileQuery } from "../../models/profileQuery";
 import type { Profile } from "../../models/profile";
 import type { DataTableConfig } from "@/components";
 import type { PagedResponse } from "@/models";
-import { createDateDataCell, createLinkDataCell, createSingleSelectCell } from "@/components";
+import { buildDateDataCell, buildLinkDataCell, buildSingleSelectCell } from "@/components";
 import { toAllTitleCase } from "@/lib/utils";
 
 const loadersMap: Record<ProfileRole, (q: ProfileQuery) => Promise<PagedResponse<Profile>>> = {
@@ -26,7 +26,7 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
             accessorKey: 'firstName',
             header: 'NOMBRES',
             enableSorting: true,
-            cell: ({ row }) => createLinkDataCell(row.original.firstName, { to: "/profiles/$id", params: { id: row.original.id.toString() } }),
+            cell: ({ row }) => buildLinkDataCell(row.original.firstName, { to: "/profiles/$id", params: { id: row.original.id.toString() } }),
         },
         {
             accessorKey: 'lastName',
@@ -43,13 +43,13 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
             accessorKey: 'dateOfBirth',
             header: 'FECH. NACIMIENTO',
             enableSorting: true,
-            cell: ({ row }) => createDateDataCell(row.original.dateOfBirth),
+            cell: ({ row }) => buildDateDataCell(row.original.dateOfBirth),
         },
         {
             accessorKey: 'createdAt',
             header: 'FECHA',
             enableSorting: true,
-            cell: ({ row }) => createDateDataCell(row.original.createdAt),
+            cell: ({ row }) => buildDateDataCell(row.original.createdAt),
         },
         {
             accessorKey: 'landline',
@@ -89,7 +89,7 @@ export const createProfileSearchInputDataTableConfig = (onSelect: (profile: Prof
             header: 'ID',
             enableSorting: true,
         },
-        { id: "select", cell: ({ row }) => createSingleSelectCell(() => onSelect(row.original)) }
+        { id: "select", cell: ({ row }) => buildSingleSelectCell(() => onSelect(row.original)) }
         ],
         loader: loadersMap[role]
     }

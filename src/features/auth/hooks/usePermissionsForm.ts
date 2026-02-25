@@ -1,5 +1,5 @@
 import { permissionsFormSchema } from "../lib/schemas/permissionsFormSchema";
-import { getClaimPairsFromStringArray } from "../lib/utils";
+import { getPermissionClaimPairsFromStringArray } from "../lib/utils";
 import type { ClaimPair } from "../models/claimPair";
 import type { FormRef, UseDataFormProps } from "@/components";
 import type { PermissionsFormValues } from "../lib/schemas/permissionsFormSchema";
@@ -21,7 +21,7 @@ export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePer
     schema: permissionsFormSchema,
     onSubmit: async ({ id, claims }) => {
       await handler(id, {
-        add: getClaimPairsFromStringArray(claims),
+        add: getPermissionClaimPairsFromStringArray(claims),
         remove: []
       });
       return null;
@@ -32,8 +32,8 @@ export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePer
       const claimsToAdd = claims.filter(c => !initialValues?.claims?.includes(c));
 
       await handler(id, {
-        add: getClaimPairsFromStringArray(claimsToAdd),
-        remove: removedClaims ? getClaimPairsFromStringArray(removedClaims) : []
+        add: getPermissionClaimPairsFromStringArray(claimsToAdd),
+        remove: removedClaims ? getPermissionClaimPairsFromStringArray(removedClaims) : []
       })
 
       return;

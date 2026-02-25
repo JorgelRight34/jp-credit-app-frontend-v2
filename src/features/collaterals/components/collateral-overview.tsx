@@ -1,4 +1,4 @@
-import { toCurrency, toFormattedDate } from '@/lib/utils'
+import { DASHES, toCurrency, toFormattedDate } from '@/lib/utils'
 import {
   collateralConditionTranslations,
   collateralTypeTranslations,
@@ -111,13 +111,21 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
               <FormReadOnlyGroup
                 name="sellDate"
                 label="Fecha de venta"
-                value={toFormattedDate(collateral.sellDate)}
+                value={
+                  collateral.sellDate
+                    ? toFormattedDate(collateral.sellDate)
+                    : DASHES
+                }
               />
               <FormReadOnlyGroup
                 name="liquidationDate"
                 label="Fecha de liquidación"
                 optional
-                value={toFormattedDate(collateral.liquidationDate)}
+                value={
+                  collateral.liquidationDate
+                    ? toFormattedDate(collateral.liquidationDate)
+                    : DASHES
+                }
               />
             </FormRow>
             <FormRow>

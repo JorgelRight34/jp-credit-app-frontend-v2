@@ -1,7 +1,10 @@
 import { useRef } from 'react'
 import { ArrowDropDownCircleIcon } from '../../icon'
 import { LightBtnProps } from './light-btn'
-import Menu, { MenuOption, MenuRef } from '@/components/molecules/menu/menu'
+import Menu, {
+  MenuOption,
+  MenuRef,
+} from '@/components/molecules/menu/components/menu'
 import LightPillBtn from './light-pill-btn'
 
 interface LightPillMenuBtnProps extends LightBtnProps {

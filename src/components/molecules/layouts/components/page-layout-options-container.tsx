@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import Menu from '../../menu/menu'
+import Menu from '../../menu/components/menu'
 import PageLayoutOption from './page-layout-option'
-import type { MenuRef } from '../../menu/menu'
+import type { MenuRef } from '../../menu/components/menu'
 import type { LayoutOption } from '../models/pageLayoutOption'
 import { ArrowDownwardIcon, LightBtn } from '@/components/atoms'
 

@@ -14,6 +14,7 @@ export { default as Subtitle } from "./text/subtitle";
 export { default as FormLabel } from "./form-label/form-label";
 export { default as Paragraph } from "./text/paragraph"
 export * from './collapse'
+export { default as Tooltip } from './tooltip/tooltip'
 
 // -------------------------------------
 // Inputs - Global Constants

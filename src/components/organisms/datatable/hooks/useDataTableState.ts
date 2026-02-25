@@ -22,12 +22,19 @@ export const useDataTableState = ({ cacheKey, pageSize }: UseDatatableStateProps
     };
 
     const handleLimitChange = (receivedLimit: number) => {
-        setLimit(receivedLimit);
+        startTransition(() => setLimit(receivedLimit));
         PaginationLimitManager.setLimit(identifier, receivedLimit);
     }
 
     const onSortingChange = ([state]: SortingState) => {
-        setOrder({ orderBy: state.id, orderDesc: state.desc })
+        startTransition(() => {
+            if (state) {
+                setOrder({ orderBy: state.id, orderDesc: state.desc })
+            } else {
+                setOrder(null)
+            }
+        })
+
     };
 
     return { page, order, limit, fetchPage, sort: onSortingChange, setLimit: handleLimitChange }

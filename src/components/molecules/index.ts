@@ -17,9 +17,8 @@ export { default as ErrorDocument } from './pages/error-document'
 
 // Menu
 // -------------------------------------
-export { default as Menu } from "./menu/menu";
 export { default as Drawer } from "./drawer/drawer"
-export * from "./menu/menu-item";
+export * from "./menu"
 
 // -------------------------------------
 // Pagination

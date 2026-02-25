@@ -1,6 +1,8 @@
 import {
   BreadcrumbsByRoute,
+  buildConfirmationModalTrigger,
   buildPageLayoutMenuOption,
+  CheckCircleIcon,
   PageRouterLayout,
   Tab,
   TabsRouter,
@@ -14,9 +16,11 @@ import {
 } from '../lib/config/breadcrumb'
 import { overviewBreadcrumb } from '@/lib/constants'
 import TransactionOverview from '../components/transaction-overview'
+import { deleteTransaction } from '../services/transactionClient'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   overview: [overviewBreadcrumb],
+  receipt: [{ title: 'Comprobante', icon: CheckCircleIcon }],
 }
 
 const TransactionPage = ({ transaction }: { transaction: Transaction }) => {
@@ -31,16 +35,31 @@ const TransactionPage = ({ transaction }: { transaction: Transaction }) => {
         ],
         breadcrumbsByRoute,
       }}
-      options={[buildPageLayoutMenuOption([{ label: 'Eliminar' }])]}
+      options={[
+        buildPageLayoutMenuOption([
+          {
+            label: 'Eliminar',
+            disabled: transaction.isClosed,
+            tooltip: 'No puede editar una transaccion cerrada',
+            as: buildConfirmationModalTrigger({
+              onConfirm: () =>
+                deleteTransaction(transaction.id, transaction.type),
+              title: 'Eliminar transacción',
+              description:
+                'Esta acción eliminará permanentemente la transacción seleccionada.',
+              confirmationMessage:
+                '¿Está seguro de que desea eliminar esta transacción?',
+            }),
+          },
+        ]),
+      ]}
       permissionProvider={transactionPermissionProvider}
     >
       <TabsRouter>
         <Tab eventKey="overview" title="Resumen">
           <TransactionOverview transaction={transaction} />
         </Tab>
-        <Tab eventKey="receipt" title="Comprobante">
-          ...
-        </Tab>
+        <Tab eventKey="receipt" title="Comprobante"></Tab>
       </TabsRouter>
     </PageRouterLayout>
   )

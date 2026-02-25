@@ -53,6 +53,7 @@ const DataTableContainer = <TEntity extends object, TQuery extends Query>({
           initialState={initialState}
           query={controlledQuery}
           loader={datatableConfig.loader}
+          allowExpand={datatableConfig.allowExpand}
           onExpand={datatableConfig.onExpand}
         />
       </div>

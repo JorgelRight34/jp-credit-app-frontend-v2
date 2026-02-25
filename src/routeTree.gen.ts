@@ -18,6 +18,7 @@ import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(m
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
 import { Route as mainmodulesCollateralsIndexRouteImport } from './routes/(main)/(modules)/collaterals/index'
+import { Route as mainmodulesAdjustmentNotesIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/index'
 import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
 import { Route as mainmodulesTransactionsPeriodsIndexRouteImport } from './routes/(main)/(modules)/transactions/periods/index'
 import { Route as mainmodulesTransactionsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/create/index'
@@ -30,6 +31,8 @@ import { Route as mainmodulesLoansCreateIndexRouteImport } from './routes/(main)
 import { Route as mainmodulesLoansIdIndexRouteImport } from './routes/(main)/(modules)/loans/$id/index'
 import { Route as mainmodulesCollateralsCreateIndexRouteImport } from './routes/(main)/(modules)/collaterals/create/index'
 import { Route as mainmodulesCollateralsIdIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/index'
+import { Route as mainmodulesAdjustmentNotesCreateIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/create/index'
+import { Route as mainmodulesAdjustmentNotesIdIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/$id/index'
 import { Route as mainmodulesTransactionsPeriodsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/periods/create/index'
 import { Route as mainmodulesProfilesIdEditIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/edit/index'
 import { Route as mainmodulesLoansIdSettingsIndexRouteImport } from './routes/(main)/(modules)/loans/$id/settings/index'
@@ -87,6 +90,12 @@ const mainmodulesCollateralsIndexRoute =
   mainmodulesCollateralsIndexRouteImport.update({
     id: '/collaterals/',
     path: '/collaterals/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesAdjustmentNotesIndexRoute =
+  mainmodulesAdjustmentNotesIndexRouteImport.update({
+    id: '/adjustment-notes/',
+    path: '/adjustment-notes/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesAccessControlIndexRoute =
@@ -160,6 +169,18 @@ const mainmodulesCollateralsIdIndexRoute =
     path: '/collaterals/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesAdjustmentNotesCreateIndexRoute =
+  mainmodulesAdjustmentNotesCreateIndexRouteImport.update({
+    id: '/adjustment-notes/create/',
+    path: '/adjustment-notes/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesAdjustmentNotesIdIndexRoute =
+  mainmodulesAdjustmentNotesIdIndexRouteImport.update({
+    id: '/adjustment-notes/$id/',
+    path: '/adjustment-notes/$id/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesTransactionsPeriodsCreateIndexRoute =
   mainmodulesTransactionsPeriodsCreateIndexRouteImport.update({
     id: '/transactions/periods/create/',
@@ -231,11 +252,14 @@ export interface FileRoutesByFullPath {
   '/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
   '/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
   '/collaterals/': typeof mainmodulesCollateralsIndexRoute
   '/loans/': typeof mainmodulesLoansIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
   '/projects/': typeof mainmodulesProjectsIndexRoute
   '/transactions/': typeof mainmodulesTransactionsIndexRoute
+  '/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
+  '/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
   '/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
   '/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
   '/loans/$id/': typeof mainmodulesLoansIdIndexRoute
@@ -263,11 +287,14 @@ export interface FileRoutesByTo {
   '/': typeof mainIndexRoute
   '/login': typeof LoginIndexRoute
   '/access-control': typeof mainmodulesAccessControlIndexRoute
+  '/adjustment-notes': typeof mainmodulesAdjustmentNotesIndexRoute
   '/collaterals': typeof mainmodulesCollateralsIndexRoute
   '/loans': typeof mainmodulesLoansIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
   '/projects': typeof mainmodulesProjectsIndexRoute
   '/transactions': typeof mainmodulesTransactionsIndexRoute
+  '/adjustment-notes/$id': typeof mainmodulesAdjustmentNotesIdIndexRoute
+  '/adjustment-notes/create': typeof mainmodulesAdjustmentNotesCreateIndexRoute
   '/collaterals/$id': typeof mainmodulesCollateralsIdIndexRoute
   '/collaterals/create': typeof mainmodulesCollateralsCreateIndexRoute
   '/loans/$id': typeof mainmodulesLoansIdIndexRoute
@@ -298,11 +325,14 @@ export interface FileRoutesById {
   '/(main)/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
   '/(main)/(modules)/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/(main)/(modules)/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
   '/(main)/(modules)/collaterals/': typeof mainmodulesCollateralsIndexRoute
   '/(main)/(modules)/loans/': typeof mainmodulesLoansIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
   '/(main)/(modules)/projects/': typeof mainmodulesProjectsIndexRoute
   '/(main)/(modules)/transactions/': typeof mainmodulesTransactionsIndexRoute
+  '/(main)/(modules)/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
+  '/(main)/(modules)/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
   '/(main)/(modules)/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
   '/(main)/(modules)/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
   '/(main)/(modules)/loans/$id/': typeof mainmodulesLoansIdIndexRoute
@@ -332,11 +362,14 @@ export interface FileRouteTypes {
     | '/'
     | '/login/'
     | '/access-control/'
+    | '/adjustment-notes/'
     | '/collaterals/'
     | '/loans/'
     | '/profiles/'
     | '/projects/'
     | '/transactions/'
+    | '/adjustment-notes/$id/'
+    | '/adjustment-notes/create/'
     | '/collaterals/$id/'
     | '/collaterals/create/'
     | '/loans/$id/'
@@ -364,11 +397,14 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/access-control'
+    | '/adjustment-notes'
     | '/collaterals'
     | '/loans'
     | '/profiles'
     | '/projects'
     | '/transactions'
+    | '/adjustment-notes/$id'
+    | '/adjustment-notes/create'
     | '/collaterals/$id'
     | '/collaterals/create'
     | '/loans/$id'
@@ -398,11 +434,14 @@ export interface FileRouteTypes {
     | '/(main)/'
     | '/login/'
     | '/(main)/(modules)/access-control/'
+    | '/(main)/(modules)/adjustment-notes/'
     | '/(main)/(modules)/collaterals/'
     | '/(main)/(modules)/loans/'
     | '/(main)/(modules)/profiles/'
     | '/(main)/(modules)/projects/'
     | '/(main)/(modules)/transactions/'
+    | '/(main)/(modules)/adjustment-notes/$id/'
+    | '/(main)/(modules)/adjustment-notes/create/'
     | '/(main)/(modules)/collaterals/$id/'
     | '/(main)/(modules)/collaterals/create/'
     | '/(main)/(modules)/loans/$id/'
@@ -497,6 +536,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesCollateralsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/adjustment-notes/': {
+      id: '/(main)/(modules)/adjustment-notes/'
+      path: '/adjustment-notes'
+      fullPath: '/adjustment-notes/'
+      preLoaderRoute: typeof mainmodulesAdjustmentNotesIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/access-control/': {
       id: '/(main)/(modules)/access-control/'
       path: '/access-control'
@@ -581,6 +627,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesCollateralsIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/adjustment-notes/create/': {
+      id: '/(main)/(modules)/adjustment-notes/create/'
+      path: '/adjustment-notes/create'
+      fullPath: '/adjustment-notes/create/'
+      preLoaderRoute: typeof mainmodulesAdjustmentNotesCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/adjustment-notes/$id/': {
+      id: '/(main)/(modules)/adjustment-notes/$id/'
+      path: '/adjustment-notes/$id'
+      fullPath: '/adjustment-notes/$id/'
+      preLoaderRoute: typeof mainmodulesAdjustmentNotesIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/transactions/periods/create/': {
       id: '/(main)/(modules)/transactions/periods/create/'
       path: '/transactions/periods/create'
@@ -663,11 +723,14 @@ declare module '@tanstack/react-router' {
 
 interface mainmodulesRouteRouteChildren {
   mainmodulesAccessControlIndexRoute: typeof mainmodulesAccessControlIndexRoute
+  mainmodulesAdjustmentNotesIndexRoute: typeof mainmodulesAdjustmentNotesIndexRoute
   mainmodulesCollateralsIndexRoute: typeof mainmodulesCollateralsIndexRoute
   mainmodulesLoansIndexRoute: typeof mainmodulesLoansIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
   mainmodulesProjectsIndexRoute: typeof mainmodulesProjectsIndexRoute
   mainmodulesTransactionsIndexRoute: typeof mainmodulesTransactionsIndexRoute
+  mainmodulesAdjustmentNotesIdIndexRoute: typeof mainmodulesAdjustmentNotesIdIndexRoute
+  mainmodulesAdjustmentNotesCreateIndexRoute: typeof mainmodulesAdjustmentNotesCreateIndexRoute
   mainmodulesCollateralsIdIndexRoute: typeof mainmodulesCollateralsIdIndexRoute
   mainmodulesCollateralsCreateIndexRoute: typeof mainmodulesCollateralsCreateIndexRoute
   mainmodulesLoansIdIndexRoute: typeof mainmodulesLoansIdIndexRoute
@@ -694,11 +757,16 @@ interface mainmodulesRouteRouteChildren {
 
 const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesAccessControlIndexRoute: mainmodulesAccessControlIndexRoute,
+  mainmodulesAdjustmentNotesIndexRoute: mainmodulesAdjustmentNotesIndexRoute,
   mainmodulesCollateralsIndexRoute: mainmodulesCollateralsIndexRoute,
   mainmodulesLoansIndexRoute: mainmodulesLoansIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
   mainmodulesProjectsIndexRoute: mainmodulesProjectsIndexRoute,
   mainmodulesTransactionsIndexRoute: mainmodulesTransactionsIndexRoute,
+  mainmodulesAdjustmentNotesIdIndexRoute:
+    mainmodulesAdjustmentNotesIdIndexRoute,
+  mainmodulesAdjustmentNotesCreateIndexRoute:
+    mainmodulesAdjustmentNotesCreateIndexRoute,
   mainmodulesCollateralsIdIndexRoute: mainmodulesCollateralsIdIndexRoute,
   mainmodulesCollateralsCreateIndexRoute:
     mainmodulesCollateralsCreateIndexRoute,

@@ -1,4 +1,4 @@
-import { createDateDataCell, createLinkDataCell, DataTableConfig } from "@/components";
+import { buildDateDataCell, buildLinkDataCell, DataTableConfig } from "@/components";
 import { ClosedPeriod } from "../../models/accountingPeriod";
 import { getClosedPeriods } from "../../services/transactionClient";
 
@@ -9,18 +9,18 @@ export const closedPeriodsDataTableConfig: DataTableConfig<ClosedPeriod> = {
         {
             accessorKey: "startDate",
             header: "INICIO",
-            cell: ({ row }) => createDateDataCell(row.original.startDate),
+            cell: ({ row }) => buildDateDataCell(row.original.startDate),
             enableSorting: true
         },
         {
             accessorKey: "endDate",
             header: "FIN",
-            cell: ({ row }) => createDateDataCell(row.original.endDate),
+            cell: ({ row }) => buildDateDataCell(row.original.endDate),
             enableSorting: true
         },
         {
             header: "OPCIONES",
-            cell: () => createLinkDataCell("Ver detalles", { to: "/transactions" })
+            cell: () => buildLinkDataCell("Ver detalles", { to: "/transactions" })
         }
     ],
     loader: getClosedPeriods

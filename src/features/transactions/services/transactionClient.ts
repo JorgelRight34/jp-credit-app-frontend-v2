@@ -50,3 +50,19 @@ export const createDisbursement = async ({ loanId, ...request }: DisbursementFor
     const { data } = await api.post(baseUrl + "/disbursement", { request, loanId });
     return data;
 }
+
+export const deleteTransaction = async (id: Transaction["id"], type: Transaction["type"]) => {
+    const endpoint = baseUrl
+
+    if (type === "pc") {
+        baseUrl + "/payments/"
+    }
+    else if (type === "ds") {
+        baseUrl + "/disbursements/"
+    }
+    else {
+        throw new Error("Type is invalid")
+    }
+
+    await api.delete(endpoint + id);
+}

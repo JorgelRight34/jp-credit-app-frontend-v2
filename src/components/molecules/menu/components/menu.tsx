@@ -1,14 +1,17 @@
 import { Menu as MuiMenu } from '@mui/material'
 import { forwardRef, useId, useImperativeHandle, useState } from 'react'
-import { MenuItem } from './menu-item'
+import MenuItem from './menu-item'
 import type { MenuProps } from '@mui/material'
 import type { IconName } from '@/components/atoms/icon/iconName'
-import Icon from '@/components/atoms/icon/icon'
+import Icon, { IconProps } from '@/components/atoms/icon/icon'
+import { Tooltip } from '@/components/atoms'
 
 export interface MenuOption {
   label: string
-  icon?: IconName
   disabled?: boolean
+  tooltip?: string
+  as?: IconProps['as']
+  icon?: IconName
   onClick?: () => void
 }
 
@@ -49,9 +52,11 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
         onClose={handleMenuClose}
       >
         {options.map((option, index) => (
-          <MenuItem key={index} onClick={option.onClick}>
-            <Icon icon={option.icon} label={option.label} />
-          </MenuItem>
+          <Tooltip key={index} title={option.tooltip}>
+            <MenuItem onClick={option.onClick} disabled={option.disabled}>
+              <Icon icon={option.icon} label={option.label} as={option.as} />
+            </MenuItem>
+          </Tooltip>
         ))}
       </MuiMenu>
     )

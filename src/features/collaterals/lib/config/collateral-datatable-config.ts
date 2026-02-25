@@ -2,15 +2,15 @@ import { collateralMainPicFallback, collateralTypeTranslations } from "../consta
 import { getCollaterals } from "../../services/collateralClient";
 import type { DataTableConfig } from "@/components";
 import type { Collateral } from "../../models/collateral";
-import { createDateDataCell, createImageDataCell, createLinkDataCell } from "@/components";
+import { buildDateDataCell, buildExpandableDescriptionCell, buildImageDataCell, buildLinkDataCell } from "@/components";
 import { toCurrency } from "@/lib/utils";
 import { FileModelMetadata } from "@/models/fileModel";
 import { buildLoanLabel } from "@/features/loans";
 
-export const collateralsDataTableColumns: DataTableConfig<Collateral>["columns"] = [
+export const CollateralDataTableColumns: DataTableConfig<Collateral>["columns"] = [
     { accessorKey: "id", header: "ID", enableSorting: true },
     {
-        accessorKey: "title", header: "TÍTULO", enableSorting: true, cell: ({ row }) => createLinkDataCell(
+        accessorKey: "title", header: "TÍTULO", enableSorting: true, cell: ({ row }) => buildLinkDataCell(
             row.original.title,
             { to: "/collaterals/$id", params: { id: row.original.id.toString() } }
         )
@@ -20,7 +20,7 @@ export const collateralsDataTableColumns: DataTableConfig<Collateral>["columns"]
         accessorKey: "createdAt",
         header: "FECHA",
         enableSorting: true,
-        cell: ({ row }) => createDateDataCell(row.original.createdAt),
+        cell: ({ row }) => buildDateDataCell(row.original.createdAt),
     },
     {
         accessorKey: "value",
@@ -38,7 +38,7 @@ export const collateralsDataTableColumns: DataTableConfig<Collateral>["columns"]
         accessorKey: "loanId",
         header: "PRÉSTAMO",
         enableSorting: true,
-        cell: ({ row }) => createLinkDataCell(
+        cell: ({ row }) => buildLinkDataCell(
             buildLoanLabel({ id: row.original.loanId }),
             {
                 to: "/loans/$id", params: { id: row.original.loanId.toString() }
@@ -46,15 +46,17 @@ export const collateralsDataTableColumns: DataTableConfig<Collateral>["columns"]
     },
     {
         header: "FOTO",
-        cell: ({ row }) => createImageDataCell({
+        cell: ({ row }) => buildImageDataCell({
             getImage: () => row.original.files.find(el => el.metadata === FileModelMetadata.mainpic),
             fallback: collateralMainPicFallback
         })
     },
 ]
 
-export const collateralsDataTableConfig: DataTableConfig<Collateral> = {
+export const CollateralDataTableConfig: DataTableConfig<Collateral> = {
     title: "Garantías",
-    columns: collateralsDataTableColumns,
+    columns: CollateralDataTableColumns,
+    allowExpand: true,
+    onExpand: (row) => buildExpandableDescriptionCell(row.original.description ?? "Sin descripción"),
     loader: getCollaterals
 }

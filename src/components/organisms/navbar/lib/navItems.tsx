@@ -3,6 +3,7 @@ import {
   AccountBalanceIcon,
   AccountBalanceWalletIcon,
   AddIcon,
+  AdjustmentNoteIcon,
   AdminPanelSettingsIcon,
   ApartmentIcon,
   ArrowCircleDownIcon,
@@ -271,26 +272,28 @@ export const loansNavItem: NavItem = {
 
 export const notesNavItem: NavItem = {
   name: 'Notas',
-  icon: () => <StickyNote2Icon />,
-  route: 'adjustment-notes',
+  icon: () => <AdjustmentNoteIcon />,
+  route: '/adjustment-notes',
   children: [
     {
       ...allRouteBase,
-      route: 'adjustment-notes',
+      route: '/adjustment-notes',
     },
     {
       name: 'Crédito',
       icon: () => <ArrowCircleUpIcon />,
-      route: 'adjustment-notes/credit',
+      route: '/adjustment-notes',
+      search: { tab: 'nc' },
     },
     {
       name: 'Débito',
       icon: () => <ArrowCircleDownIcon />,
-      route: 'adjustment-notes/debit',
+      route: '/adjustment-notes',
+      search: { tab: 'nd' },
     },
     {
       ...addRouteBase,
-      route: 'adjustment-notes/create',
+      route: '/adjustment-notes/create',
     },
   ],
 }

@@ -96,7 +96,6 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
           </FormRow>
         </Fieldset>
       </FormRow>
-
       <ViewMore className="mb-6">
         <Fieldset legend="Autores">
           <FormRow>
@@ -127,7 +126,6 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
           </FormRow>
         </Fieldset>
       </ViewMore>
-
       <FormHtmlDisplayGroup
         name="description"
         label="Descripción"

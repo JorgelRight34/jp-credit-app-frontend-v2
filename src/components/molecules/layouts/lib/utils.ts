@@ -8,8 +8,9 @@ import {
   LightPillBtn,
   SettingsIcon,
 } from '@/components/atoms'
-import { MenuOption } from '../../menu/menu'
+import { MenuOption } from '../../menu/components/menu'
 import LightPillMenuBtn from '@/components/atoms/button/components/light-pill-menu-btn'
+import { buildConfirmationModalTrigger, BuildConfirmationModalTriggerProps } from '../../menu'
 
 export const buildPageLayoutCreateOption = (
   createPath: Route,
@@ -50,6 +51,23 @@ export const buildPageLayoutDeleteOption = ({
   component: AccentPillBtn,
   ...options,
 })
+
+export const buildPageLayoutConfirmationModalOption = ({
+  disabled,
+  tooltip,
+  ...options
+}: Partial<LayoutOption>, confModalProps: BuildConfirmationModalTriggerProps): LayoutOption => {
+  confModalProps.wrapper = AccentPillBtn;
+
+  return {
+    title: 'Eliminar',
+    icon: DeleteIcon,
+    disabled,
+    tooltip: disabled ? tooltip : undefined,
+    component: buildConfirmationModalTrigger(confModalProps),
+    ...options,
+  }
+}
 
 export const buildPageLayoutSettingsOption = (
   to: Route,

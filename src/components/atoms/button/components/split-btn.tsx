@@ -2,7 +2,10 @@ import { useRef } from 'react'
 import { ArrowCircleDownIcon, Icon } from '../../icon'
 import type { ButtonProps } from './button'
 import type { ElementType } from 'react'
-import type { MenuOption, MenuRef } from '@/components/molecules/menu/menu'
+import type {
+  MenuOption,
+  MenuRef,
+} from '@/components/molecules/menu/components/menu'
 import { Menu } from '@/components/molecules'
 
 export type SplitBtnProps = ButtonProps & {

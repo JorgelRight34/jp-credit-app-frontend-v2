@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 import clsx from 'clsx'
 import type { ElementType, ReactNode } from 'react'
 import type { IconName } from './iconName'
-import { LoadingSpinner } from '@/components/molecules'
 
 /**
  * Props for the Icon component
@@ -21,12 +20,6 @@ export interface IconProps extends React.HtmlHTMLAttributes<HTMLSpanElement> {
   label?: string | ReactNode
   /** Optional CSS class name for the wrapper element */
   wrapperClassName?: string
-  /** Whether to show a loading spinner alongside the label */
-  showLoadingSpinner?: boolean
-  /** Content to display instead of the label when not showing loading spinner */
-  loadingSpinnerReplace?: string | ReactNode
-  /** Optional badge content to display over the icon */
-  badge?: string | number | ReactNode
   /** Optional data-title attribute for tooltips or accessibility */
   dataTitle?: string
   /** Position of the icon relative to the label */
@@ -52,9 +45,6 @@ const Icon = ({
   iconClassName,
   dataTitle,
   orientation = 'left',
-  showLoadingSpinner = false,
-  loadingSpinnerReplace,
-  badge,
   as,
   title,
   children,
@@ -92,31 +82,21 @@ const Icon = ({
       <span className="relative flex items-center justify-center">
         {/* Render icon on the left side */}
         {orientation === 'left' && renderIcon()}
-
         {/* Render label with optional loading spinner */}
-        {((label ?? children) || loadingSpinnerReplace) && (
+        {(label ?? children) && (
           <span
             className={clsx(
               `font-normal ${
-                orientation === 'left' ? 'ms-2' : 'mr-2'
-              } text-truncate min-w-0 flex-shrink-1`,
+                orientation === 'left' ? 'ml-2' : 'mr-2'
+              } truncate min-w-0 flex-shrink-1`,
               labelClassName,
               className,
             )}
             {...props}
           >
-            {label ?? children} {showLoadingSpinner && <LoadingSpinner />}{' '}
-            {!showLoadingSpinner && loadingSpinnerReplace}
+            {label ?? children}
           </span>
         )}
-
-        {/* Render badge at top-right corner of icon */}
-        {badge !== undefined && (
-          <span className="badge rounded-pill bg-dark-green absolute -right-1 translate-x-1/2 -translate-y-1/2">
-            {badge}
-          </span>
-        )}
-
         {/* Render icon on the right side */}
         {orientation === 'right' && renderIcon()}
       </span>

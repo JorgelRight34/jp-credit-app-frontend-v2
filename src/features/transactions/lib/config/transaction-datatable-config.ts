@@ -1,4 +1,4 @@
-import { createDateDataCell, createLinkDataCell, DataTableConfig } from "@/components";
+import { buildDateDataCell, buildExpandableDescriptionCell, buildLinkDataCell, DataTableConfig } from "@/components";
 import { Transaction } from "../../models/transaction";
 import { sortDateRows, toCurrency } from "@/lib/utils";
 import { buildTransactionLabel } from "../utils";
@@ -14,7 +14,7 @@ export const transactionDataTableConfig: DataTableConfig<Transaction> = {
             accessorKey: "id",
             header: "DOCUMENTO",
             enableSorting: true,
-            cell: ({ row }) => createLinkDataCell(buildTransactionLabel(row.original), {
+            cell: ({ row }) => buildLinkDataCell(buildTransactionLabel(row.original), {
                 to: "/transactions/$id",
                 params: { id: row.original.id.toString() }
             }),
@@ -23,7 +23,7 @@ export const transactionDataTableConfig: DataTableConfig<Transaction> = {
             header: "CLIENTE",
             accessorFn: (row) => row.client.firstName,
             enableSorting: true,
-            cell: ({ row }) => createLinkDataCell(buildProfileFullName(row.original.client), {
+            cell: ({ row }) => buildLinkDataCell(buildProfileFullName(row.original.client), {
                 to: "/profiles/$id",
                 params: { id: row.original.actorId?.toString() }
             }),
@@ -57,7 +57,7 @@ export const transactionDataTableConfig: DataTableConfig<Transaction> = {
             id: "loanId",
             accessorKey: "loanId",
             header: "PRESTAMO",
-            cell: ({ row }) => createLinkDataCell(buildLoanLabel({ id: row.original.loanId }), { to: "/loans/$id", params: { id: row.original.loanId.toString() } }),
+            cell: ({ row }) => buildLinkDataCell(buildLoanLabel({ id: row.original.loanId }), { to: "/loans/$id", params: { id: row.original.loanId.toString() } }),
         },
         {
             id: "date",
@@ -65,8 +65,10 @@ export const transactionDataTableConfig: DataTableConfig<Transaction> = {
             header: "FECHA",
             enableSorting: true,
             sortingFn: sortDateRows,
-            cell: ({ row }) => createDateDataCell(row.original.date),
+            cell: ({ row }) => buildDateDataCell(row.original.date),
         },
     ],
+    allowExpand: true,
+    onExpand: (row) => buildExpandableDescriptionCell(row.original.description ?? "Sin descripción"),
     loader: getTransactions
 }

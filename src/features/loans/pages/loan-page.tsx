@@ -15,7 +15,7 @@ import { loanPermissionProvider } from '../lib/config/permission-provider'
 import { buildLoanBreadcrumb, loanBreadcrumb } from '../lib/config/breadcrumb'
 import LoanOverview from '../components/loan-overview'
 import LoanAmortizationPreview from '../components/loan-amortization-preview'
-import { collateralsDataTableConfig } from '@/features/collaterals'
+import { CollateralDataTableConfig } from '@/features/collaterals'
 import { loansQueryKey } from '../lib/constants'
 import { buildLoanLabel } from '../lib/utils'
 import { useRouter } from '@/hooks/useRouter'
@@ -55,7 +55,7 @@ const LoanPage = ({ loan }: { loan: Loan }) => {
             query={{ loanId: loan.id }}
             initialState={{ columnVisibility: { loanId: false } }}
             cacheKey={[loansQueryKey, 'collaterals', loan.id]}
-            {...collateralsDataTableConfig}
+            {...CollateralDataTableConfig}
           />
         </Tab>
       </TabsRouter>

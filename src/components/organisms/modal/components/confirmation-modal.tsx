@@ -1,5 +1,6 @@
 import {
   forwardRef,
+  startTransition,
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -55,23 +56,28 @@ const ConfirmationModal = forwardRef<
     const dataClient = useDataClient()
 
     const { mutateAsync, isPending } = useDataMutation({
-      mutationFn: onConfirm,
+      mutationFn: async () => {
+        if (!isInputValid) return
+        await onConfirm()
+      },
       onSuccess: () => {
         if (cacheKey) dataClient.invalidate({ key: [cacheKey] })
         hide()
       },
     })
 
-    const isInputValid = useMemo(() => {
-      return (
-        input.trim().toLowerCase() === confirmationMessage.trim().toLowerCase()
-      )
-    }, [input, confirmationMessage])
+    const isInputValid = useMemo(
+      () =>
+        input.trim().toLowerCase() === confirmationMessage.trim().toLowerCase(),
+      [input, confirmationMessage],
+    )
 
     const hide = useCallback(() => {
       setIsOpen(false)
-      setInput('')
-      onHide?.()
+      startTransition(() => {
+        setInput('')
+        onHide?.()
+      })
     }, [onHide])
 
     const show = useCallback(() => {
@@ -79,11 +85,6 @@ const ConfirmationModal = forwardRef<
     }, [])
 
     useImperativeHandle(ref, () => ({ show, hide }), [show, hide])
-
-    const handleConfirm = useCallback(async () => {
-      if (!isInputValid) return
-      await mutateAsync()
-    }, [isInputValid, mutateAsync])
 
     return (
       <Modal {...props} title={title} show={isOpen} onHide={hide}>
@@ -146,7 +147,7 @@ const ConfirmationModal = forwardRef<
             <AccentBtn
               className="w-full"
               disabled={!isInputValid || isPending}
-              onClick={handleConfirm}
+              onClick={() => mutateAsync()}
             >
               {confirmText}
             </AccentBtn>

@@ -1,0 +1,33 @@
+import { buildDateDataCell, buildExpandableDescriptionCell, buildLinkDataCell, DataTableConfig } from "@/components";
+import { AdjustmentNote } from "../../models/adjustmentNote";
+import { buildAdjustmentNoteLabel } from "../utils";
+import { toCurrency } from "@/lib/utils";
+import { buildLoanLabel } from "@/features/loans";
+import { getAdjustmentNotes } from "../../services/adjustmentNoteClient";
+import { buildProfileFullName } from "@/features/profiles";
+
+export const adjustmentNoteDatatableConfig: DataTableConfig<AdjustmentNote> = {
+    title: "Notas de Ajuste",
+    columns: [
+        {
+            accessorKey: "id", header: "ID", cell: ({ row }) => buildLinkDataCell(buildAdjustmentNoteLabel(row.original), {
+                to: "/adjustment-notes/$id",
+                params: { id: row.original.id.toString() }
+            }), enableSorting: true
+        },
+        {
+            accessorFn: row => row.client.firstName,
+            header: "CLIENTE",
+            cell: ({ row }) => buildLinkDataCell(buildProfileFullName(row.original.client), {
+                to: "/profiles/$id",
+                params: { id: row.original.client.profileId }
+            })
+        },
+        { accessorKey: "amount", header: "MONTO", cell: ({ row }) => toCurrency(row.original.amount), enableSorting: true },
+        { accessorKey: "loanId", header: "PRESTAMO", cell: ({ row }) => buildLinkDataCell(buildLoanLabel({ id: row.original.loanId }), {}), enableSorting: true },
+        { accessorKey: "date", header: "FECHA", cell: ({ row }) => buildDateDataCell(row.original.date) }
+    ],
+    allowExpand: true,
+    onExpand: (row) => buildExpandableDescriptionCell(row.original.description ?? "Sin descripción"),
+    loader: getAdjustmentNotes
+}

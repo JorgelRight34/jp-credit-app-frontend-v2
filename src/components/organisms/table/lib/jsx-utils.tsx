@@ -4,8 +4,9 @@ import type { TablePhotoCellProps } from '../components/table-photo-cell'
 import type { ReactNode } from 'react'
 import type { LinkProps } from '@/components/atoms'
 import { DateLabel, Link } from '@/components/atoms'
+import SafeHtml from '@/components/molecules/safe-html/safe-html'
 
-export const createLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
+export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
   return (
     <Link className="text-accent-secondary" {...linkProps}>
       {label}
@@ -13,7 +14,7 @@ export const createLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
   )
 }
 
-export const createOptionDataCell = (
+export const buildOptionDataCell = (
   label: ReactNode,
   onClick: () => void,
   isDestructive?: boolean,
@@ -30,15 +31,19 @@ export const createOptionDataCell = (
   )
 }
 
-export const createImageDataCell = (props: TablePhotoCellProps) => {
+export const buildImageDataCell = (props: TablePhotoCellProps) => {
   return <TablePhotoCell {...props} />
 }
 
-export const createDateDataCell = (date?: string) => {
+export const buildDateDataCell = (date?: string) => {
   return <DateLabel date={date} />
 }
 
-export const createSingleSelectCell = (onClick: () => void) => {
+export const buildExpandableDescriptionCell = (description: string) => {
+  return <SafeHtml html={description} />
+}
+
+export const buildSingleSelectCell = (onClick: () => void) => {
   return (
     <span className="text-accent" onClick={onClick}>
       Seleccionar
@@ -46,7 +51,7 @@ export const createSingleSelectCell = (onClick: () => void) => {
   )
 }
 
-export const createIsActiveDataCell = (isActive: boolean) => {
+export const buildIsActiveDataCell = (isActive: boolean) => {
   return (
     <span className="inline-flex items-center gap-2">
       <span

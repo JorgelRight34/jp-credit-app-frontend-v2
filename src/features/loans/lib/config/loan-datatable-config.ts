@@ -1,7 +1,7 @@
 import { getLoans } from "../../services/loanClient";
 import type { Loan } from "../../models/loan";
 import type { DataTableConfig } from "@/components";
-import { createDateDataCell, createLinkDataCell, createSingleSelectCell } from "@/components";
+import { buildDateDataCell, buildExpandableDescriptionCell, buildLinkDataCell, buildSingleSelectCell } from "@/components";
 import { sortDateRows, toCurrency } from "@/lib/utils";
 
 export const loansDataTableColumns: DataTableConfig<Loan>["columns"] = [
@@ -10,7 +10,7 @@ export const loansDataTableColumns: DataTableConfig<Loan>["columns"] = [
         header: "CLIENTE",
         accessorFn: (row) => row.client?.lastName,
         enableSorting: true,
-        cell: ({ row }) => createLinkDataCell(
+        cell: ({ row }) => buildLinkDataCell(
             `${row.original.client.lastName}, ${row.original.client.firstName}`,
             {
                 to: "/loans/$id", params: { id: row.original.id.toString() }
@@ -51,13 +51,13 @@ export const loansDataTableColumns: DataTableConfig<Loan>["columns"] = [
         header: "ÚLT. PAGO",
         enableSorting: true,
         sortingFn: sortDateRows,
-        cell: ({ row }) => createDateDataCell(row.original.lastPaymentDate),
+        cell: ({ row }) => buildDateDataCell(row.original.lastPaymentDate),
     },
     {
         accessorKey: "createdAt",
         header: "FECHA",
         enableSorting: true,
-        cell: ({ row }) => createDateDataCell(row.original.startDate),
+        cell: ({ row }) => buildDateDataCell(row.original.startDate),
     },
 ]
 
@@ -76,7 +76,7 @@ export const createLoanSearchInputDataTableConfig = (onRowClick: (loan: Loan) =>
                 header: "CLIENTE",
                 accessorFn: (row) => row.client?.firstName,
                 enableSorting: true,
-                cell: ({ row }) => createLinkDataCell(`${row.original.client.lastName}, ${row.original.client.firstName}`, {}),
+                cell: ({ row }) => buildLinkDataCell(`${row.original.client.lastName}, ${row.original.client.firstName}`, {}),
             },
             {
                 accessorKey: "disbursedAmount",
@@ -90,8 +90,10 @@ export const createLoanSearchInputDataTableConfig = (onRowClick: (loan: Loan) =>
                 enableSorting: true,
                 cell: ({ row }) => toCurrency(row.original.paymentValue),
             },
-            { id: "select", cell: ({ row }) => createSingleSelectCell(() => onRowClick(row.original)) }
+            { id: "select", header: "OPCIONES", cell: ({ row }) => buildSingleSelectCell(() => onRowClick(row.original)) }
         ],
+        allowExpand: true,
+        onExpand: (row) => buildExpandableDescriptionCell(row.original.description ?? "Sin descripción"),
         loader: getLoans
     })
 }

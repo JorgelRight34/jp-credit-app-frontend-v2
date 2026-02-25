@@ -1,5 +1,5 @@
 import {
-  createOptionDataCell,
+  buildOptionDataCell,
   DataTableContainer,
   DataTableContainerOverrides,
 } from '@/components'
@@ -27,7 +27,7 @@ const ProjectDataTable = (
           cell: ({ row }) => {
             const isSelected = row.original.id === projectId
 
-            return createOptionDataCell(
+            return buildOptionDataCell(
               isSelected ? 'Deseleccionar' : 'Seleccionar',
               () => {
                 if (!isSelected) {

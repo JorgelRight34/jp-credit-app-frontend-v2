@@ -166,6 +166,9 @@ export { default as SellIcon } from "@mui/icons-material/SellOutlined"
 export { default as PriceCheckIcon } from "@mui/icons-material/PriceCheckOutlined"
 export { default as TransactionIcon } from '@mui/icons-material/CreditCardOutlined'
 export { default as DisbursementIcon } from '@mui/icons-material/PaidOutlined'
+export { default as AdjustmentNoteIcon } from '@mui/icons-material/StickyNote2Outlined'
+export { default as CreditIcon } from '@mui/icons-material/TrendingUpOutlined'
+export { default as DebitIcon } from '@mui/icons-material/TrendingDownOutlined'
 
 
 export { default as Icon } from "./icon";

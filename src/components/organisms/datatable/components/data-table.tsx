@@ -19,6 +19,7 @@ export type DataTableProps<T, TQuery extends Query> = Partial<
   cacheKey: CacheKey
   title: string
   initialState?: InitialTableState<T>
+  allowExpand?: boolean
   loader: (options: TQuery) => Promise<PagedResponse<T>>
   onPageChange?: (page: number) => void
   onExpand?: (row: Row<T>) => ReactNode
@@ -31,6 +32,8 @@ const DataTable = <T, TQuery extends Query = Query>({
   placeholderData = keepPreviousData,
   initialState,
   columns,
+  allowExpand,
+  selectedId,
   onRowClick,
   onExpand,
   ...props
@@ -45,6 +48,7 @@ const DataTable = <T, TQuery extends Query = Query>({
     <div className="overflow-x-auto">
       <TableBuilder
         {...props}
+        allowExpand={allowExpand}
         initialState={initialState}
         onRowClick={onRowClick}
         data={data?.items ?? []}
