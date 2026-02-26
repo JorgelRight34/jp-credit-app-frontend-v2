@@ -30,11 +30,14 @@ export const calculateAmortization = ({
     paymentFrequency,
     numberOfPayments,
 }: AmortizationCalculatorInput): Amortization => {
-    console.log("rerendering")
+    console.log("deja que te hable")
     if (!isFiniteNumber(principalBalance) || principalBalance <= 0) {
         return { amortizations: [], paymentValue: 0, totalInterest: 0 }
     }
     if (!isFiniteNumber(numberOfPayments) || numberOfPayments <= 0) {
+        return { amortizations: [], paymentValue: 0, totalInterest: 0 }
+    }
+    if (!isFiniteNumber(annualInterestRate) || annualInterestRate <= 0) {
         return { amortizations: [], paymentValue: 0, totalInterest: 0 }
     }
 

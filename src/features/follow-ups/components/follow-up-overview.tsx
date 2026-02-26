@@ -5,7 +5,7 @@ import { toFormattedDate } from '@/lib/utils'
 
 const FollowUpOverview = ({ followUp }: { followUp: FollowUp }) => {
   return (
-    <section>
+    <section className="h-full flex flex-col">
       <FormRow>
         <FormReadOnlyGroup name="title" label="Título" value={followUp.title} />
       </FormRow>

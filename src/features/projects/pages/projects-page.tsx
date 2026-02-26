@@ -9,12 +9,13 @@ import {
 import { projectsBreadcrumb } from '../lib/config/breadcrumbs'
 import { projectsPermissionProvider } from '../lib/config/permissionProvider'
 import ProjectDataTable from '../components/project-datatable'
+import { Project } from '../models/project'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: [{ title: 'Todos', icon: AllIcon }],
 }
 
-const ProjectsPage = () => {
+const ProjectsPage = ({ projectId }: { projectId?: Project['id'] }) => {
   return (
     <PageRouterLayout
       title="Proyectos"
@@ -28,7 +29,7 @@ const ProjectsPage = () => {
     >
       <TabsRouter>
         <Tab eventKey="all" title="Todos">
-          <ProjectDataTable />
+          <ProjectDataTable initialQuery={{ projectId }} />
         </Tab>
       </TabsRouter>
     </PageRouterLayout>

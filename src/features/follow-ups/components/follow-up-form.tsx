@@ -23,8 +23,9 @@ interface FollowUpFormProps extends DataModuleFormProps<
 
 const FollowUpForm = ({ followUp, ...props }: FollowUpFormProps) => {
   const form = useFollowUpForm({
-    //initialValues: followUp,
+    initialValues: followUp,
     shouldEdit: !!followUp,
+    followUpId: followUp?.id,
     toastMessage: () => 'Guardado',
     ...props,
   })

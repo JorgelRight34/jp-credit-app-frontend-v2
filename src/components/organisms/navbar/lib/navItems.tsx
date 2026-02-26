@@ -1,7 +1,7 @@
 import type { NavItem } from '../models/navItem'
 import {
-  AccountBalanceIcon,
   AccountBalanceWalletIcon,
+  AccountStatementsIcon,
   AddIcon,
   AdjustmentNoteIcon,
   AdminPanelSettingsIcon,
@@ -33,7 +33,6 @@ import {
   QueryStatsIcon,
   ScheduleIcon,
   SettingsIcon,
-  StickyNote2Icon,
   TrendingUpIcon,
 } from '@/components/atoms'
 
@@ -51,23 +50,26 @@ const allRouteBase: NavItem = {
 
 export const accountStatusNavItem: NavItem = {
   name: 'Estados de Cuenta',
-  icon: () => <AccountBalanceIcon />,
+  icon: () => <AccountStatementsIcon />,
   route: '/account-statements',
   children: [
     {
       name: 'General',
       icon: () => <GroupIcon />,
-      route: 'account-statements/all',
+      route: '/account-statements',
+      search: { tab: 'all' },
     },
     {
       name: 'Cliente',
       icon: () => <GroupsIcon />,
-      route: 'account-statements/client',
+      route: '/account-statements',
+      search: { tab: 'clients' },
     },
     {
       name: 'Garante',
       icon: () => <GroupsIcon />,
-      route: 'account-statements/guarantor',
+      route: '/account-statements',
+      search: { tab: 'guarantors' },
     },
   ],
 }
@@ -299,9 +301,9 @@ export const notesNavItem: NavItem = {
 }
 
 export const armotizationsNavItem: NavItem = {
-  name: 'Armotizaciones',
+  name: 'Amortizaciones',
   icon: () => <ListAltIcon />,
-  route: 'armotizations',
+  route: '/amortizations',
 }
 
 export const followUpsNavItem: NavItem = {

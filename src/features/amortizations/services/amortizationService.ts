@@ -13,7 +13,9 @@ export const getAmortization = async (params: AmortizationCalculatorInput): Prom
 }
 
 export const getPagedAmortization = async (params: AmortizationCalculatorInput): Promise<PagedResponse<AmortizationPayment>> => {
+    console.log("executing")
     if (!validateAmortizationInput(params)) {
+        console.log("bohemia")
         return { items: [], page: 1, pageSize: 0, totalItems: 0, totalPages: 0 }
     }
 

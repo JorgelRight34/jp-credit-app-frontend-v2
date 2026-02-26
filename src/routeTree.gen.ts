@@ -18,8 +18,11 @@ import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(m
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
 import { Route as mainmodulesFollowUpsIndexRouteImport } from './routes/(main)/(modules)/follow-ups/index'
+import { Route as mainmodulesFinanceIndexRouteImport } from './routes/(main)/(modules)/finance/index'
 import { Route as mainmodulesCollateralsIndexRouteImport } from './routes/(main)/(modules)/collaterals/index'
+import { Route as mainmodulesAmortizationsIndexRouteImport } from './routes/(main)/(modules)/amortizations/index'
 import { Route as mainmodulesAdjustmentNotesIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/index'
+import { Route as mainmodulesAccountStatementsIndexRouteImport } from './routes/(main)/(modules)/account-statements/index'
 import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
 import { Route as mainmodulesTransactionsPeriodsIndexRouteImport } from './routes/(main)/(modules)/transactions/periods/index'
 import { Route as mainmodulesTransactionsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/create/index'
@@ -96,16 +99,33 @@ const mainmodulesFollowUpsIndexRoute =
     path: '/follow-ups/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesFinanceIndexRoute = mainmodulesFinanceIndexRouteImport.update({
+  id: '/finance/',
+  path: '/finance/',
+  getParentRoute: () => mainmodulesRouteRoute,
+} as any)
 const mainmodulesCollateralsIndexRoute =
   mainmodulesCollateralsIndexRouteImport.update({
     id: '/collaterals/',
     path: '/collaterals/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesAmortizationsIndexRoute =
+  mainmodulesAmortizationsIndexRouteImport.update({
+    id: '/amortizations/',
+    path: '/amortizations/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesAdjustmentNotesIndexRoute =
   mainmodulesAdjustmentNotesIndexRouteImport.update({
     id: '/adjustment-notes/',
     path: '/adjustment-notes/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesAccountStatementsIndexRoute =
+  mainmodulesAccountStatementsIndexRouteImport.update({
+    id: '/account-statements/',
+    path: '/account-statements/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesAccessControlIndexRoute =
@@ -280,8 +300,11 @@ export interface FileRoutesByFullPath {
   '/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
   '/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/account-statements/': typeof mainmodulesAccountStatementsIndexRoute
   '/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
+  '/amortizations/': typeof mainmodulesAmortizationsIndexRoute
   '/collaterals/': typeof mainmodulesCollateralsIndexRoute
+  '/finance/': typeof mainmodulesFinanceIndexRoute
   '/follow-ups/': typeof mainmodulesFollowUpsIndexRoute
   '/loans/': typeof mainmodulesLoansIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
@@ -319,8 +342,11 @@ export interface FileRoutesByTo {
   '/': typeof mainIndexRoute
   '/login': typeof LoginIndexRoute
   '/access-control': typeof mainmodulesAccessControlIndexRoute
+  '/account-statements': typeof mainmodulesAccountStatementsIndexRoute
   '/adjustment-notes': typeof mainmodulesAdjustmentNotesIndexRoute
+  '/amortizations': typeof mainmodulesAmortizationsIndexRoute
   '/collaterals': typeof mainmodulesCollateralsIndexRoute
+  '/finance': typeof mainmodulesFinanceIndexRoute
   '/follow-ups': typeof mainmodulesFollowUpsIndexRoute
   '/loans': typeof mainmodulesLoansIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
@@ -361,8 +387,11 @@ export interface FileRoutesById {
   '/(main)/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
   '/(main)/(modules)/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/(main)/(modules)/account-statements/': typeof mainmodulesAccountStatementsIndexRoute
   '/(main)/(modules)/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
+  '/(main)/(modules)/amortizations/': typeof mainmodulesAmortizationsIndexRoute
   '/(main)/(modules)/collaterals/': typeof mainmodulesCollateralsIndexRoute
+  '/(main)/(modules)/finance/': typeof mainmodulesFinanceIndexRoute
   '/(main)/(modules)/follow-ups/': typeof mainmodulesFollowUpsIndexRoute
   '/(main)/(modules)/loans/': typeof mainmodulesLoansIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
@@ -402,8 +431,11 @@ export interface FileRouteTypes {
     | '/'
     | '/login/'
     | '/access-control/'
+    | '/account-statements/'
     | '/adjustment-notes/'
+    | '/amortizations/'
     | '/collaterals/'
+    | '/finance/'
     | '/follow-ups/'
     | '/loans/'
     | '/profiles/'
@@ -441,8 +473,11 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/access-control'
+    | '/account-statements'
     | '/adjustment-notes'
+    | '/amortizations'
     | '/collaterals'
+    | '/finance'
     | '/follow-ups'
     | '/loans'
     | '/profiles'
@@ -482,8 +517,11 @@ export interface FileRouteTypes {
     | '/(main)/'
     | '/login/'
     | '/(main)/(modules)/access-control/'
+    | '/(main)/(modules)/account-statements/'
     | '/(main)/(modules)/adjustment-notes/'
+    | '/(main)/(modules)/amortizations/'
     | '/(main)/(modules)/collaterals/'
+    | '/(main)/(modules)/finance/'
     | '/(main)/(modules)/follow-ups/'
     | '/(main)/(modules)/loans/'
     | '/(main)/(modules)/profiles/'
@@ -588,6 +626,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesFollowUpsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/finance/': {
+      id: '/(main)/(modules)/finance/'
+      path: '/finance'
+      fullPath: '/finance/'
+      preLoaderRoute: typeof mainmodulesFinanceIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/collaterals/': {
       id: '/(main)/(modules)/collaterals/'
       path: '/collaterals'
@@ -595,11 +640,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesCollateralsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/amortizations/': {
+      id: '/(main)/(modules)/amortizations/'
+      path: '/amortizations'
+      fullPath: '/amortizations/'
+      preLoaderRoute: typeof mainmodulesAmortizationsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/adjustment-notes/': {
       id: '/(main)/(modules)/adjustment-notes/'
       path: '/adjustment-notes'
       fullPath: '/adjustment-notes/'
       preLoaderRoute: typeof mainmodulesAdjustmentNotesIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/account-statements/': {
+      id: '/(main)/(modules)/account-statements/'
+      path: '/account-statements'
+      fullPath: '/account-statements/'
+      preLoaderRoute: typeof mainmodulesAccountStatementsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/access-control/': {
@@ -803,8 +862,11 @@ declare module '@tanstack/react-router' {
 
 interface mainmodulesRouteRouteChildren {
   mainmodulesAccessControlIndexRoute: typeof mainmodulesAccessControlIndexRoute
+  mainmodulesAccountStatementsIndexRoute: typeof mainmodulesAccountStatementsIndexRoute
   mainmodulesAdjustmentNotesIndexRoute: typeof mainmodulesAdjustmentNotesIndexRoute
+  mainmodulesAmortizationsIndexRoute: typeof mainmodulesAmortizationsIndexRoute
   mainmodulesCollateralsIndexRoute: typeof mainmodulesCollateralsIndexRoute
+  mainmodulesFinanceIndexRoute: typeof mainmodulesFinanceIndexRoute
   mainmodulesFollowUpsIndexRoute: typeof mainmodulesFollowUpsIndexRoute
   mainmodulesLoansIndexRoute: typeof mainmodulesLoansIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
@@ -841,8 +903,12 @@ interface mainmodulesRouteRouteChildren {
 
 const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesAccessControlIndexRoute: mainmodulesAccessControlIndexRoute,
+  mainmodulesAccountStatementsIndexRoute:
+    mainmodulesAccountStatementsIndexRoute,
   mainmodulesAdjustmentNotesIndexRoute: mainmodulesAdjustmentNotesIndexRoute,
+  mainmodulesAmortizationsIndexRoute: mainmodulesAmortizationsIndexRoute,
   mainmodulesCollateralsIndexRoute: mainmodulesCollateralsIndexRoute,
+  mainmodulesFinanceIndexRoute: mainmodulesFinanceIndexRoute,
   mainmodulesFollowUpsIndexRoute: mainmodulesFollowUpsIndexRoute,
   mainmodulesLoansIndexRoute: mainmodulesLoansIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,

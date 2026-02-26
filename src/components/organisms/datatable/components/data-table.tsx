@@ -17,7 +17,6 @@ export type DataTableProps<T, TQuery extends Query> = Partial<
   initialData?: PagedResponse<T>
   columns: Array<Column<T>>
   cacheKey: CacheKey
-  title: string
   initialState?: InitialTableState<T>
   allowExpand?: boolean
   loader: (options: TQuery) => Promise<PagedResponse<T>>
@@ -27,7 +26,6 @@ export type DataTableProps<T, TQuery extends Query> = Partial<
 }
 
 const DataTable = <T, TQuery extends Query = Query>({
-  title,
   query,
   placeholderData = keepPreviousData,
   initialState,

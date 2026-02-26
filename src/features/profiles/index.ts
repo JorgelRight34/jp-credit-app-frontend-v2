@@ -5,6 +5,7 @@ export { default as ProfilePage } from './pages/profile-page'
 export { default as ProfileSearchInput } from './components/profile-search-input'
 export { default as LoanOfficerSearchInput } from "./components/loan-officer-search-input"
 export { default as ClientSearchInput } from './components/client-search-input'
+export { default as GuarantorSearchInput } from './components/guarantor-search-input'
 export * from './models/profileRole'
 export * from './models/profile'
 export * from './lib/utils'

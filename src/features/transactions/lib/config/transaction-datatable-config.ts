@@ -7,7 +7,6 @@ import { getTransactions } from "../../services/transactionClient";
 import { buildProfileFullName } from "@/features/profiles";
 
 export const transactionDataTableConfig: DataTableConfig<Transaction> = {
-    title: "Transacciones",
     columns: [
         {
             id: "id",

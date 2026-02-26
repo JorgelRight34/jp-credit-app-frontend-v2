@@ -1,0 +1,52 @@
+import { buildDateDataCell, buildLinkDataCell, DataTableConfig, getFooterTotalAsCurrency } from "@/components";
+import { buildTransactionLabel, getTransactions, Transaction } from "@/features/transactions";
+import { toCurrency } from "@/lib/utils";
+
+export const clientAccountStatementDataTableConfig: DataTableConfig<Transaction> = {
+    columns: [
+        {
+            accessorKey: "date",
+            header: "FECHA",
+            enableSorting: true,
+            cell: ({ row }) => buildDateDataCell(row.original.date),
+        },
+        {
+            accessorKey: "id",
+            header: "DOCUMENTO",
+            enableSorting: true,
+            cell: ({ row }) => buildLinkDataCell(buildTransactionLabel(row.original), {
+                to: "/transactions/$id",
+                params: { id: row.original.id.toString() }
+            }),
+        },
+        {
+            accessorKey: "capitalValue",
+            header: "CAPITAL",
+            enableSorting: true,
+            cell: ({ row }) => toCurrency(row.original.capitalValue),
+            footer: (info) => getFooterTotalAsCurrency(info, "capitalValue"),
+        },
+        {
+            accessorKey: "interestValue",
+            header: "INTERES",
+            enableSorting: true,
+            cell: ({ row }) => toCurrency(row.original.interestValue),
+            footer: (info) => getFooterTotalAsCurrency(info, "interestValue"),
+        },
+        {
+            accessorKey: "penaltyFee",
+            header: "Mora",
+            enableSorting: true,
+            cell: ({ row }) => toCurrency(row.original.penaltyFee),
+            footer: (info) => getFooterTotalAsCurrency(info, "penaltyFee"),
+        },
+        {
+            accessorKey: "total",
+            header: "Total Pagado",
+            enableSorting: true,
+            cell: ({ row }) => toCurrency(row.original.value),
+            footer: (info) => getFooterTotalAsCurrency(info, "value"),
+        },
+    ],
+    loader: getTransactions
+}

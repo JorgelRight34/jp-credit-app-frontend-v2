@@ -6,16 +6,15 @@ import {
   FormContainer,
   FormGroup,
   FormRow,
-  FormSelectGroup,
   FormWatch,
   NumericInput,
+  PaymentFrequencySelect,
   PercentageInput,
   RichTextEditor,
   Tab,
   Tabs,
 } from '@/components'
 import { useLoanForm } from '../hooks/useLoanForm'
-import { loanPaymentFrequencySelectOptions } from '../lib/constants'
 import { LoanOfficerSearchInput, ProfileSearchInput } from '@/features/profiles'
 import LoanProjectionCard from './loan-projection-card'
 import { Loan } from '../models/loan'
@@ -65,10 +64,10 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                   />
                 </FormRow>
                 <FormRow>
-                  <FormSelectGroup
+                  <FormGroup
                     name="paymentFrequency"
                     label="Frecuencia de pago"
-                    options={loanPaymentFrequencySelectOptions}
+                    input={PaymentFrequencySelect}
                   />
                   <FormGroup
                     name="numberOfPayments"

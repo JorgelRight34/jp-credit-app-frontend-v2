@@ -6,7 +6,7 @@ const ClientSearchInput = ({
   datatable,
   ...props
 }: ProfileRoleSearchInputProps) => {
-  return <ProfileSearchInput title="Oficiales" role="client" {...props} />
+  return <ProfileSearchInput title="Clientes" role="client" {...props} />
 }
 
 export default ClientSearchInput

@@ -41,7 +41,6 @@ const TableBuilder = <TData,>({
       navigation={
         <TableNavigation
           table={table}
-          pageSize={pageSize}
           totalItems={totalItems}
           infinitePagination={infinitePagination}
           onLimitChange={onLimitChange}

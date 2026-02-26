@@ -10,7 +10,6 @@ export const useAdjustmentNoteForm = ({ initialValues, ...props }: UseAdjustment
     return useForm({
         schema: adjustmentNoteFormSchema,
         defaultValues: { type: initialValues?.type ?? "pc", description: null, amount: '', loanId: null },
-        initialValues,
         onSubmit: createAdjustmentNote,
         keysToInvalidate: [[adjustmentNoteQueryKey]],
         ...props

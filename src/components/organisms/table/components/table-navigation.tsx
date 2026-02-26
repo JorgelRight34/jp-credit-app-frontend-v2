@@ -3,14 +3,12 @@ import clsx from 'clsx'
 import type { TableBuilderProps } from './table-builder'
 import type { Table } from '@tanstack/react-table'
 import type { PageSize } from '../models/pageSize'
-import { defaultPageSize } from '@/lib/constants/constants'
 import { PageSizeSelector, Pagination } from '@/components/molecules'
 import { Subtitle } from '@/components/atoms'
 
 interface TableNavigationProps<TData> {
   table: Table<TData>
   totalItems?: number
-  pageSize?: PageSize
   infinitePagination?: TableBuilderProps<TData>['infinitePagination']
   className?: string
   onLimitChange?: (limit: PageSize) => void
@@ -20,10 +18,11 @@ const TableNavigation = <TData,>({
   table,
   totalItems = 0,
   className,
-  pageSize = defaultPageSize,
   onLimitChange,
 }: TableNavigationProps<TData>) => {
-  const page = table.getState().pagination.pageIndex + 1
+  const pagination = table.getState().pagination
+  const pageSize = pagination.pageSize
+  const page = pagination.pageIndex + 1
   const currentRows = table.getRowModel().rows.length
 
   const totalPages = useMemo(
@@ -61,7 +60,7 @@ const TableNavigation = <TData,>({
           <div className="hidden flex-shrink-0 md:block">
             <PageSizeSelector
               onChange={(val) => handlePageSizeChange(+val)}
-              value={pageSize < 10 ? 10 : pageSize}
+              value={pageSize}
             />
           </div>
           <div className="mt-3 flex flex-shrink-0 items-center md:!mt-0">

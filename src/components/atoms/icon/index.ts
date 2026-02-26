@@ -150,10 +150,6 @@ export { default as DeleteIcon } from "@mui/icons-material/DeleteOutline"
 export { default as AdminPanelSettingsIcon } from "@mui/icons-material/AdminPanelSettingsOutlined"
 export { default as AccessTimeIcon } from "@mui/icons-material/AccessTimeOutlined";
 export { default as DashboardIcon } from "@mui/icons-material/DashboardOutlined";
-export { default as OverviewIcon } from "@mui/icons-material/DashboardOutlined"
-export { default as PermissionIcon } from "@mui/icons-material/VerifiedUserOutlined";
-export { default as CollateralIcon } from "@mui/icons-material/DirectionsCarOutlined";
-export { default as AllIcon } from "@mui/icons-material/PublicOutlined"
 export { default as InventoryIcon } from '@mui/icons-material/InventoryOutlined';
 export { default as LoanIcon } from "@mui/icons-material/MailOutline"
 export { default as RestoreIcon } from "@mui/icons-material/RestoreOutlined"
@@ -164,12 +160,20 @@ export { default as ArrowDropDownCircleIcon } from "@mui/icons-material/ArrowDro
 export { default as ArrowDropDownIcon } from "@mui/icons-material/ArrowDropDownOutlined";
 export { default as SellIcon } from "@mui/icons-material/SellOutlined"
 export { default as PriceCheckIcon } from "@mui/icons-material/PriceCheckOutlined"
+
+export { default as AllIcon } from "@mui/icons-material/PublicOutlined"
+export { default as PermissionIcon } from "@mui/icons-material/VerifiedUserOutlined";
+export { default as CollateralIcon } from "@mui/icons-material/DirectionsCarOutlined";
+export { default as OverviewIcon } from "@mui/icons-material/DashboardOutlined"
 export { default as TransactionIcon } from '@mui/icons-material/CreditCardOutlined'
 export { default as DisbursementIcon } from '@mui/icons-material/PaidOutlined'
 export { default as AdjustmentNoteIcon } from '@mui/icons-material/StickyNote2Outlined'
 export { default as CreditIcon } from '@mui/icons-material/TrendingUpOutlined'
 export { default as DebitIcon } from '@mui/icons-material/TrendingDownOutlined'
 export { default as FollowUpIcon } from '@mui/icons-material/AssignmentOutlined'
+export { default as AccountStatementsIcon } from '@mui/icons-material/AccountBalanceOutlined'
+export { default as ClientIcon } from '@mui/icons-material/PersonOutline'
+export { default as GuarantorIcon } from '@mui/icons-material/PersonOutline'
 
 
 export { default as Icon } from "./icon";

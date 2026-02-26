@@ -24,7 +24,6 @@ interface SearchFormProps<T extends Query> {
   advanced: Array<SearchFormOption<T>>
   schema?: SchemaType<T>
   defaultValues?: DefaultFormValues<T>
-  initialValues?: Partial<T>
   onSubmit: (q: T) => Promise<T>
 }
 
@@ -32,7 +31,6 @@ const SearchForm = <T extends Query>({
   options,
   advanced,
   schema,
-  initialValues,
   defaultValues,
   onSubmit,
 }: SearchFormProps<T>) => {
@@ -41,7 +39,6 @@ const SearchForm = <T extends Query>({
   const form = useForm({
     schema,
     defaultValues,
-    initialValues,
     resetValues: false,
     onSubmit,
   })

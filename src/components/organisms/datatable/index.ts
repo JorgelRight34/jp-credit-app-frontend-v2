@@ -23,3 +23,6 @@ export * from "./models/dataTableConfig"
 
 export { default as DataTableContainer } from './components/data-table-container'
 export * from "./components/data-table-container"
+
+export { default as TableAndFormContainer } from './components/table-and-form-container'
+export * from './components/table-and-form-container'

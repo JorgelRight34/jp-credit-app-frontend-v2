@@ -1,4 +1,9 @@
-import { Fieldset, FormReadOnlyGroup, FormRow } from '@/components'
+import {
+  Fieldset,
+  FormHtmlDisplayGroup,
+  FormReadOnlyGroup,
+  FormRow,
+} from '@/components'
 import { AdjustmentNote } from '../models/adjustmentNote'
 import { buildLoanLabelById } from '@/features/loans'
 import { buildProfileFullName } from '@/features/profiles'
@@ -10,7 +15,7 @@ const AdjustmentNoteOverview = ({
   adjustmentNote: AdjustmentNote
 }) => {
   return (
-    <section>
+    <section className="flex flex-col h-full">
       <FormRow>
         <Fieldset legend="Contrato">
           <FormRow>
@@ -43,6 +48,11 @@ const AdjustmentNoteOverview = ({
           </FormRow>
         </Fieldset>
       </FormRow>
+      <FormHtmlDisplayGroup
+        name="description"
+        label="Descripción"
+        value={adjustmentNote.description ?? 'Sin descripción'}
+      />
     </section>
   )
 }

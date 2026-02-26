@@ -1,8 +1,6 @@
-import { Column, DataTableConfig, getFooterTotalAsCurrency } from "@/components";
+import { Column, getFooterTotalAsCurrency } from "@/components";
 import { AmortizationPayment } from "../../models/amortizationPayment";
 import { addDays, toCurrency, toFormattedDate, toTitleCase } from "@/lib/utils";
-import { getPagedAmortization } from "../../services/amortizationService";
-import { AmortizationCalculatorInput } from "../../models/amortizationCalculatorInput";
 
 export const amortizationDatatableColumns: Array<Column<AmortizationPayment>> = [
     {
@@ -43,9 +41,3 @@ export const createAmortizationPaymentNumberColumn = (startDate?: Date | string,
         },
     }
 )
-
-export const amortizationDatatableConfig: DataTableConfig<AmortizationPayment, AmortizationCalculatorInput> = ({
-    title: "Amortizaciones",
-    columns: amortizationDatatableColumns,
-    loader: getPagedAmortization
-})

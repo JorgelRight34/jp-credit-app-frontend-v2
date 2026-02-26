@@ -7,7 +7,12 @@ import { buildLoanLabelById } from "@/features/loans";
 export const followUpDataTableConfig: DataTableConfig<FollowUp> = {
     title: "Seguimientos",
     columns: [
-        { id: "id", accessorKey: "id", header: "ID", enableSorting: true },
+        {
+            id: "id",
+            accessorKey: "id",
+            header: "ID",
+            enableSorting: true,
+        },
         {
             id: "title",
             accessorKey: "title",

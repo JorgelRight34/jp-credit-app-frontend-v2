@@ -22,7 +22,7 @@ export const createFollowUp = async (body: FollowUpFormValues): Promise<FollowUp
 }
 
 export const updateFollowUp = async (id: FollowUp["id"], body: FollowUpFormValues) => {
-    await api.put(baseUrl + "/" + id, body);
+    await api.patch(baseUrl + "/" + id, body);
 }
 
 export const deleteFollowUp = async (id: FollowUp["id"]) => {

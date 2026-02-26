@@ -16,6 +16,7 @@ export { default as Checkbox } from "./checkbox/checkbox"
 export { default as NumericInput } from './numeric-input/numeric-input'
 export { default as EmailInput } from './email-input/email-input'
 export { default as FileInputWrapper } from './file-input-wrapper/file-input-wrapper'
+export { default as PaymentFrequencySelect } from './select/payment-frequency-select'
 
 
 export * from './picker-input'

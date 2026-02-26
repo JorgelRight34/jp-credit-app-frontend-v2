@@ -38,7 +38,6 @@ const DataTableContainer = <TEntity extends object, TQuery extends Query>({
         <SearchForm
           onSubmit={onSearchSubmit}
           options={searchConfig.options}
-          initialValues={initialQuery}
           defaultValues={searchConfig.defaultValues}
           advanced={searchConfig.advanced}
           schema={searchConfig.schema}
