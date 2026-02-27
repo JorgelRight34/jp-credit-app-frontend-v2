@@ -1,12 +1,12 @@
 import { FieldValues, useFormState } from 'react-hook-form'
-import { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
 import { useMemo } from 'react'
 import { FormError } from '../models/formError'
 import { ApiError } from '../models/apiError'
 import { AxiosError } from 'axios'
+import { UseFormReturn } from '../hooks/useFormMethods'
 
 interface FormErrorsPanelProps<T extends FieldValues> {
-  control: UseFormBuilderReturn<T>['form']['control']
+  control: UseFormReturn<T>['control']
   mutationError: any
 }
 

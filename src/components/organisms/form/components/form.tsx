@@ -1,24 +1,22 @@
 import React, { forwardRef, useImperativeHandle } from 'react'
 import { FormProvider } from 'react-hook-form'
 import clsx from 'clsx'
-import type { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
 import type { FormRef } from '../models/fomRef'
 import type { FieldValues } from 'react-hook-form'
 import type { ReactElement } from 'react'
 
 type FormProps<T extends FieldValues> = {
   children: React.ReactNode
-  form: UseFormBuilderReturn<T>
+  form: UseFormReturn<T>
   className?: string
 }
 
 function InnerForm<T extends FieldValues>(
-  { children, className = 'h-full', form: { form } }: FormProps<T>,
+  { children, className = 'h-full', form }: FormProps<T>,
   ref: React.Ref<FormRef<T>>,
 ) {
   useImperativeHandle(ref, () => ({
     control: form.control,
-    applyInterceptors: form.applyInterceptors,
     validate: form.validate,
     getValues: form.getValues,
     setValue: form.setValue,

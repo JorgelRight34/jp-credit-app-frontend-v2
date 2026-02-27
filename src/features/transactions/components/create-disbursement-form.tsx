@@ -43,8 +43,8 @@ const CreateDisbursementForm = (props: CreateDisbursementFormProps) => {
             input={createPickerInputWithOnSelect(LoanSearchInput, (loan) => {
               loanPickerInputDataControllerRef.current?.setValue(loan)
               if (loan) {
-                form.form.setValue('amount', loan?.approvedAmount)
-                form.form.setValue('date', toInputDate(loan.startDate))
+                form.setValue('amount', loan?.approvedAmount)
+                form.setValue('date', toInputDate(loan.startDate))
               }
             })}
           />

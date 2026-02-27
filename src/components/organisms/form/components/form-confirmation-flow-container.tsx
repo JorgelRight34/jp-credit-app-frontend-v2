@@ -5,7 +5,7 @@ import {
   FormLayout,
   RestartAllIcon,
   SecondaryPillBtn,
-  UseFormBuilderReturn,
+  UseFormReturn,
 } from '@/components'
 import { PropsWithChildren } from 'react'
 import { FieldValues, useFormState } from 'react-hook-form'
@@ -17,7 +17,7 @@ import {
 interface FormConfirmationFlowContainerProps<
   T extends FieldValues,
 > extends PropsWithChildren {
-  form: UseFormBuilderReturn<T>
+  form: UseFormReturn<T>
   initializeAsDirty?: boolean
   isDirty?: boolean
 }
@@ -27,7 +27,7 @@ const FormConfirmationFlowContainer = <T extends FieldValues>({
   initializeAsDirty,
   form,
 }: FormConfirmationFlowContainerProps<T>) => {
-  const { isDirty } = useFormState({ control: form.form.control })
+  const { isDirty, errors } = useFormState({ control: form.control })
 
   return (
     <FormLayout
@@ -37,12 +37,7 @@ const FormConfirmationFlowContainer = <T extends FieldValues>({
           form={form}
         />
       }
-      errors={
-        <FormErrorsPanel
-          control={form.form.control}
-          mutationError={form.state.error}
-        />
-      }
+      errors={<FormErrorsPanel control={form.control} mutationError={errors} />}
     >
       {children}
     </FormLayout>
@@ -57,7 +52,7 @@ const FormConfirmationButtons = <T extends FieldValues>({
   const [__, setData] = useFormConfirmationFlowData()
 
   const handleOnSubmit = () => {
-    form.form.handleSubmit((data) => {
+    form.handleSubmit((data) => {
       setData(data)
       setActive(1)
     })()
@@ -68,7 +63,7 @@ const FormConfirmationButtons = <T extends FieldValues>({
       <SecondaryPillBtn
         icon={RestartAllIcon}
         disabled={!isDirty}
-        onClick={form.form.reset}
+        onClick={form.reset}
       >
         Resetear
       </SecondaryPillBtn>

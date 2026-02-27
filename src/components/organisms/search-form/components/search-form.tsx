@@ -1,23 +1,23 @@
 import clsx from 'clsx'
 import { Activity, useState } from 'react'
-import { Form, FormInput, useForm } from '../../form'
+import { Form, FormInput } from '../../form'
 import { WIDTH_CLASS_MAP } from '../lib/constants'
 import type { PropsWithChildren } from 'react'
-import type {
-  DefaultFormValues,
-  SchemaType,
-  UseFormBuilderReturn,
-} from '../../form'
+import type { DefaultFormValues, SchemaType, UseFormReturn } from '../../form'
 import type { SearchFormOption } from '../models/searchFormOption'
 import type { Query } from '../models/query'
 import {
   AccentBtn,
   FormLabel,
   LightBtn,
+  LightPillBtn,
   MenuIcon,
+  RestoreIcon,
   SearchIcon,
 } from '@/components/atoms'
 import { FieldValues, useFormState } from 'react-hook-form'
+import { useSearchFormSubmit } from '../providers/search-form-provider'
+import { useFormMethods } from '../../form/hooks/useFormMethods'
 
 interface SearchFormProps<T extends Query> {
   options: Array<SearchFormOption<T>>
@@ -25,7 +25,6 @@ interface SearchFormProps<T extends Query> {
   schema?: SchemaType<T>
   defaultValues?: DefaultFormValues<T>
   initialValues?: Partial<T>
-  onSubmit: (q: T) => Promise<T>
 }
 
 const SearchForm = <T extends Query>({
@@ -34,18 +33,17 @@ const SearchForm = <T extends Query>({
   schema,
   defaultValues,
   initialValues,
-  onSubmit,
 }: SearchFormProps<T>) => {
+  const onSubmit = useSearchFormSubmit()
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [hasOpenedAdvanced, setHasOpenedAdvanced] = useState(false)
-  const form = useForm({
+  const form = useFormMethods({
     schema,
     defaultValues: {
       ...defaultValues,
       ...initialValues,
     } as DefaultFormValues<T>,
-    resetValues: false,
-    onSubmit,
+    handleOnSubmit: onSubmit,
   })
 
   return (
@@ -84,14 +82,25 @@ const SearchForm = <T extends Query>({
             </div>
           </div>
           <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
-            <div className="rounded-xl mt-3 flex w-full flex-wrap space-y-3 shadow-sm border bg-white p-3">
-              {hasOpenedAdvanced &&
-                advanced.map((option) => (
-                  <AdvancedSearchFormGroup
-                    option={option}
-                    key={option.name as string}
-                  />
-                ))}
+            <div className="rounded-xl flex-col flex mt-3 flex w-full flex-wrap space-y-3 shadow-sm border bg-white p-3">
+              <div className="flex-1">
+                {hasOpenedAdvanced &&
+                  advanced.map((option) => (
+                    <AdvancedSearchFormGroup
+                      option={option}
+                      key={option.name as string}
+                    />
+                  ))}
+              </div>
+              <div className="flex justify-end flex-shrink-0 border-t pt-3">
+                <LightPillBtn
+                  className="!w-auto"
+                  icon={RestoreIcon}
+                  onClick={() => form.reset()}
+                >
+                  Resetear
+                </LightPillBtn>
+              </div>
             </div>
           </Activity>
         </div>
@@ -103,16 +112,16 @@ const SearchForm = <T extends Query>({
 const SubmitBtn = <T extends FieldValues>({
   form,
 }: {
-  form: UseFormBuilderReturn<T>
+  form: UseFormReturn<T>
 }) => {
-  const { isDirty } = useFormState({ control: form.form.control })
+  const { isDirty } = useFormState({ control: form.control })
 
   return (
     <AccentBtn
       disabled={!isDirty}
       icon={SearchIcon}
       className="shadow-sm"
-      onClick={form.form.submit}
+      onClick={form.submit}
     />
   )
 }

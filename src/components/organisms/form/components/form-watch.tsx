@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 import { FieldValues, Path, useWatch } from 'react-hook-form'
-import { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
+import { UseFormReturn } from '../hooks/useFormMethods'
 
 export interface FormSubscriptionWrapperProps<T extends FieldValues> {
   names: ReadonlyArray<Path<T>>
-  form: UseFormBuilderReturn<T>
+  form: UseFormReturn<T>
   render: (values: any[]) => ReactNode
 }
 
@@ -15,7 +15,7 @@ const FormWatch = <T extends FieldValues>({
 }: FormSubscriptionWrapperProps<T>) => {
   const watchedValues = useWatch({
     name: names,
-    control: form.form.control,
+    control: form.control,
   })
 
   return render(watchedValues)

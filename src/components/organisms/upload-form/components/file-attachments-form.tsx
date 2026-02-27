@@ -37,8 +37,7 @@ const FileAttachmentsForm = forwardRef(
       reset,
       onChange: config.onChange,
       submit: () => config.onSubmit(),
-      validate: async () => await Promise.resolve(true),
-      applyInterceptors: (data) => data,
+      validate: async () => true,
       setValue: () => {},
       handleSubmit: () => {
         throw new Error('Not implemented')

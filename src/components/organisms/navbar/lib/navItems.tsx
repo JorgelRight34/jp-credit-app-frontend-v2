@@ -367,10 +367,6 @@ export const financesNavItem: NavItem = {
   route: '/finance',
   children: [
     {
-      ...allRouteBase,
-      route: '/finance',
-    },
-    {
       name: 'Proyecciones',
       icon: () => <TrendingUpIcon />,
       route: '/finance',

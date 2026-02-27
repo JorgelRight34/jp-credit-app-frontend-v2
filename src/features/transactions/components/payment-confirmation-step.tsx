@@ -13,7 +13,7 @@ import {
   FormRow,
   LightPillBtn,
   Paragraph,
-  UseFormBuilderReturn,
+  UseFormReturn,
   useFormConfirmationFlowActiveStep,
   useFormConfirmationFlowData,
 } from '@/components'
@@ -24,7 +24,7 @@ import { PaymentResult } from '../models/paymentResult'
 import { loanStatusSpanishTranslations } from '@/features/loans/lib/constants'
 
 interface PaymentConfirmationStepProps<T extends FieldValues> {
-  form: UseFormBuilderReturn<T>
+  form: UseFormReturn<T>
   previewLoader: (data: T) => Promise<PaymentResult>
   cacheKeyBuilder: (data: T) => CacheKey
 }

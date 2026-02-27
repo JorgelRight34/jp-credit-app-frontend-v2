@@ -60,7 +60,7 @@ const CreateClosedPeriodForm = ({
         title="Confirmar cierre del período"
         confirmationMessage="Esta acción cerrará el período actual y no podrá deshacerse. ¿Desea continuar?"
         ref={modalRef}
-        onConfirm={form.form.submit}
+        onConfirm={form.submit}
       />
     </FormContainer>
   )

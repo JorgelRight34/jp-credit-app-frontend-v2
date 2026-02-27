@@ -63,7 +63,7 @@ const CreatePayment = (props: CreatePaymentProps) => {
                     LoanSearchInput,
                     (loan) => {
                       loanPickerInputDataControllerRef.current?.setValue(loan)
-                      if (loan) form.form.setValue('amount', loan.paymentValue)
+                      if (loan) form.setValue('amount', loan.paymentValue)
                     },
                   )}
                 />

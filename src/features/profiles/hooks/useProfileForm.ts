@@ -1,7 +1,7 @@
 import { profileFormSchema } from "../lib/schemas/profileFormSchema"
 import { createProfile, updateProfile } from "../services/profileClient";
 import { profilesQueryKey } from "../lib/constants";
-import type { UseDataFormProps, UseFormBuilderReturn } from "@/components";
+import type { UseDataFormProps } from "@/components";
 import type { ProfileFormValues } from "../lib/schemas/profileFormSchema";
 import type { Profile } from "../models/profile"
 import { useForm } from "@/components"
@@ -10,8 +10,7 @@ interface UseProfileFormProps extends UseDataFormProps<Profile, ProfileFormValue
     profileId?: number;
 }
 
-export const useProfileForm = ({ profileId, initialValues, ...config }: UseProfileFormProps):
-    UseFormBuilderReturn<ProfileFormValues> => {
+export const useProfileForm = ({ profileId, initialValues, ...config }: UseProfileFormProps) => {
     return useForm({
         schema: profileFormSchema,
         defaultValues: {

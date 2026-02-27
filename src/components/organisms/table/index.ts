@@ -53,5 +53,4 @@ export * from "./lib/utils";
 export * from "./models/sortingState"
 export * from "./lib/jsx-utils"
 
-export { default as TableAndFormContainer } from './components/table-and-form-container'
 export { default as TableWithDataLoaderBuilder } from './components/table-with-data-loader-builder'

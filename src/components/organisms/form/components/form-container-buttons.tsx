@@ -3,11 +3,11 @@ import type { FieldValues } from 'react-hook-form'
 import FormSubmitBtn from './form-submit-btn'
 import type { FormSubmitBtnProps } from './form-submit-btn'
 import { RestartAllIcon, SecondaryPillBtn } from '@/components/atoms'
-import { UseFormBuilderReturn } from '../models/useFormBuilderReturn'
+import { UseFormReturn } from '../hooks/useFormMethods'
 
 type FormContainerButtonsProps<T extends FieldValues> =
   Partial<FormSubmitBtnProps> & {
-    form?: UseFormBuilderReturn<T>
+    form?: UseFormReturn<T>
     onReset?: () => void
   }
 
@@ -22,7 +22,7 @@ const FormContainerButtons = <T extends FieldValues>({
 }: FormContainerButtonsProps<T>) => {
   const handleReset = useCallback(() => {
     if (form) {
-      form.form.reset()
+      form.reset()
       return
     }
     onReset?.()

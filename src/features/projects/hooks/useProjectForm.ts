@@ -1,4 +1,4 @@
-import { UseDataFormProps, useForm, UseFormBuilderReturn } from "@/components"
+import { UseDataFormProps, useForm } from "@/components"
 import { projectFormSchema, ProjectFormValues } from "../lib/schemas/projectFormSchema"
 import { createProject, editProject } from "../services/projectClient"
 import { Project } from "../models/project"
@@ -8,7 +8,7 @@ interface UseProjectFormProps extends UseDataFormProps<Project, ProjectFormValue
     project?: Project
 }
 
-export const useProjectForm = ({ project, ...config }: UseProjectFormProps): UseFormBuilderReturn<ProjectFormValues> => {
+export const useProjectForm = ({ project, ...config }: UseProjectFormProps) => {
     return useForm({
         schema: projectFormSchema,
         defaultValues: project ? {

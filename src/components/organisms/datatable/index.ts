@@ -24,6 +24,5 @@ export * from "./models/dataTableConfig"
 export { default as DataTableContainer } from './components/data-table-container'
 export * from "./components/data-table-container"
 
-export * from '../table/components/table-and-form-container'
 
 export { default as DataTableBuilder } from './components/data-table-builder'

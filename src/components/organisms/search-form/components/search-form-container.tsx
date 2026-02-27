@@ -1,12 +1,13 @@
 import type { Query, SearchFormConfig } from '../../search-form'
-import { useSearchContainer } from '../../search-form/hooks/useSearchContainer'
 import SearchForm from '../../search-form/components/search-form'
-import { ReactNode } from 'react'
+import { PropsWithChildren } from 'react'
+import { SearchFormProvider } from '../providers/search-form-provider'
 
-export interface SearchFormContainerProps<T extends Query> {
+export interface SearchFormContainerProps<
+  T extends Query,
+> extends PropsWithChildren {
   searchConfig: SearchFormConfig<T>
   initialQuery?: Partial<T>
-  render: (query: T) => ReactNode
 }
 
 export type SearchFormContainerOverrides<TQuery extends Query> = Partial<
@@ -16,26 +17,23 @@ export type SearchFormContainerOverrides<TQuery extends Query> = Partial<
 const SearchFormContainer = <TQuery extends Query>({
   searchConfig,
   initialQuery,
-  render,
+  children,
 }: SearchFormContainerProps<TQuery>) => {
-  const [controlledQuery, onSearchSubmit] = useSearchContainer(
-    (initialQuery ?? {}) as TQuery,
-  )
-
   return (
-    <section className="flex flex-col w-full">
-      <div className="mb-3">
-        <SearchForm
-          onSubmit={onSearchSubmit}
-          options={searchConfig.options}
-          initialValues={initialQuery}
-          defaultValues={searchConfig.defaultValues}
-          advanced={searchConfig.advanced}
-          schema={searchConfig.schema}
-        />
-      </div>
-      <div>{render(controlledQuery)}</div>
-    </section>
+    <SearchFormProvider initialQuery={initialQuery}>
+      <section className="flex flex-col w-full">
+        <div className="mb-3">
+          <SearchForm
+            options={searchConfig.options}
+            initialValues={initialQuery}
+            defaultValues={searchConfig.defaultValues}
+            advanced={searchConfig.advanced}
+            schema={searchConfig.schema}
+          />
+        </div>
+        <div>{children}</div>
+      </section>
+    </SearchFormProvider>
   )
 }
 

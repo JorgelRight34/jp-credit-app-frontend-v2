@@ -1,8 +1,4 @@
-import {
-  DataModuleFormProps,
-  useForm,
-  UseFormBuilderReturn,
-} from '@/components'
+import { DataModuleFormProps, useForm } from '@/components'
 import { loanFormSchema, LoanFormValues } from '../lib/schemas/loanFormSchema'
 import { Loan } from '../models/loan'
 import { createLoan } from '../services/loanClient'
@@ -16,7 +12,7 @@ export const useLoanForm = ({
   project,
   initialValues,
   ...props
-}: UseLoanFormProps): UseFormBuilderReturn<LoanFormValues> => {
+}: UseLoanFormProps) => {
   return useForm({
     schema: loanFormSchema,
     defaultValues: {

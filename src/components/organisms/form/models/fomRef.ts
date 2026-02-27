@@ -2,7 +2,6 @@ import type { Control, FieldValues, UseFormGetValues, UseFormHandleSubmit, UseFo
 
 export interface FormRef<T extends FieldValues = FieldValues> {
     control: Control<T>;
-    applyInterceptors: (data: T) => T
     setValue: UseFormSetValue<T>;
     getValues: UseFormGetValues<T>;
     validate: UseFormTrigger<T>;

@@ -1,4 +1,4 @@
-import { UseDataFormProps, useForm, UseFormBuilderReturn } from '@/components'
+import { UseDataFormProps, useForm } from '@/components'
 import {
   loanSettingsFormSchema,
   LoanSettingsFormValues,
@@ -18,7 +18,7 @@ interface UseLoanStatusFormProps extends UseDataFormProps<
 export const useLoanStatusForm = ({
   loan,
   ...props
-}: UseLoanStatusFormProps): UseFormBuilderReturn<LoanSettingsFormValues> => {
+}: UseLoanStatusFormProps) => {
   return useForm({
     schema: loanSettingsFormSchema,
     defaultValues: { status: loan.status.toString() },
