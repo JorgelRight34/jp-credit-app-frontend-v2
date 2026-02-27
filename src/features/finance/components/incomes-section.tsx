@@ -7,7 +7,6 @@ import {
   TrendingUpIcon,
 } from '@/components'
 import { financeSearchConfig } from '../lib/config/finance-search-config'
-import { incomeTableColumns } from '../lib/config/finance-datatable-config'
 import { getIncomesPerInterval } from '../services/financeService'
 import { FinanceQuery } from '../models/financeQuery'
 import { buildFinanceTableOnExpand } from '../jsx-utils'
@@ -16,6 +15,7 @@ import {
   getTodayWithDaysFromNow,
   toInputDate,
 } from '@/lib/utils'
+import { buildFinancialBreakdownColumns } from '../lib/config/finance-datatable-config'
 
 const getIncomes = async (query: FinanceQuery) => {
   const data = await getIncomesPerInterval(query)
@@ -27,8 +27,8 @@ const IncomesSection = () => {
     <SearchFormContainer
       searchConfig={financeSearchConfig}
       initialQuery={{
-        startDate: getTodayAsInputDate(),
-        endDate: toInputDate(getTodayWithDaysFromNow(-30)),
+        startDate: toInputDate(getTodayWithDaysFromNow(-30)),
+        endDate: getTodayAsInputDate(),
         interval: 30,
         scale: '',
       }}
@@ -39,7 +39,11 @@ const IncomesSection = () => {
             render={(query) => (
               <TableWithDataLoaderBuilder
                 cacheKey={[{ query }]}
-                columns={incomeTableColumns}
+                columns={buildFinancialBreakdownColumns(
+                  query.startDate,
+                  query.endDate,
+                  query.interval,
+                )}
                 loader={() => getIncomes(query)}
                 onExpand={buildFinanceTableOnExpand(['pc', 'pg'])}
               />

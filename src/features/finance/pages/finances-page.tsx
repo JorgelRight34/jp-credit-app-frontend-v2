@@ -9,6 +9,7 @@ import {
 import { financePermissionProvider } from '../lib/config/permission-provider'
 import IncomesSection from '../components/incomes-section'
 import ExpensesSection from '../components/expenses-section'
+import ProjectionsSection from '../components/projections-section'
 
 const breadcrumbsByRoute = {
   projections: [{ title: 'Proyecciones', icon: FInanceIcon }],
@@ -29,7 +30,7 @@ const FinancesPage = () => {
     >
       <TabsRouter>
         <Tab eventKey="projections" title="Proyecciones">
-          ...
+          <ProjectionsSection />
         </Tab>
         <Tab eventKey="incomes" title="Ingresos">
           <IncomesSection />

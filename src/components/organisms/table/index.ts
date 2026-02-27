@@ -28,7 +28,7 @@ export { default as TableDataCell } from "./components/table-data-cell";
 export { default as TableFooter } from "./components/table-footer";
 export { default as TableFooterCompositor } from "./components/table-footer-compositor";
 export { default as TableNavigation } from "./components/table-navigation";
-export { default as TableGroup } from './components/table-group';
+export { default as GroupedTable } from './components/table-group';
 export { default as TableOptionCell } from './components/table-option-cell';
 export { default as TablePhotoCell } from "./components/table-photo-cell"
 export { default as TableBuilder } from "./components/table-builder"
@@ -54,3 +54,4 @@ export * from "./models/sortingState"
 export * from "./lib/jsx-utils"
 
 export { default as TableWithDataLoaderBuilder } from './components/table-with-data-loader-builder'
+

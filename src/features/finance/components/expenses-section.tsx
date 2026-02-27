@@ -1,7 +1,12 @@
-import { SearchFormContainer, TableWithDataLoaderBuilder } from '@/components'
-import FinanceSectionLayout from '../layouts/finance-section-layout'
+import {
+  SearchFormContainer,
+  SearchFormValueConsumer,
+  Tab,
+  TableWithDataLoaderBuilder,
+  Tabs,
+  TrendingUpIcon,
+} from '@/components'
 import { financeSearchConfig } from '../lib/config/finance-search-config'
-import { incomeTableColumns } from '../lib/config/finance-datatable-config'
 import { getExpensesPerInterval } from '../services/financeService'
 import { FinanceQuery } from '../models/financeQuery'
 import { buildFinanceTableOnExpand } from '../jsx-utils'
@@ -10,6 +15,7 @@ import {
   getTodayWithDaysFromNow,
   toInputDate,
 } from '@/lib/utils'
+import { buildFinancialBreakdownColumns } from '../lib/config/finance-datatable-config'
 
 const getExpenses = async (query: FinanceQuery) => {
   const data = await getExpensesPerInterval(query)
@@ -18,25 +24,35 @@ const getExpenses = async (query: FinanceQuery) => {
 
 const ExpensesSection = () => {
   return (
-    <FinanceSectionLayout>
-      <SearchFormContainer
-        searchConfig={financeSearchConfig}
-        initialQuery={{
-          startDate: getTodayAsInputDate(),
-          endDate: toInputDate(getTodayWithDaysFromNow(-30)),
-          interval: 30,
-          scale: '',
-        }}
-        render={(query) => (
-          <TableWithDataLoaderBuilder
-            cacheKey={[{ query }]}
-            columns={incomeTableColumns}
-            loader={() => getExpenses(query)}
-            onExpand={buildFinanceTableOnExpand(['ds', 'vg'])}
+    <SearchFormContainer
+      searchConfig={financeSearchConfig}
+      initialQuery={{
+        startDate: toInputDate(getTodayWithDaysFromNow(-30)),
+        endDate: getTodayAsInputDate(),
+        interval: 30,
+        scale: '',
+      }}
+    >
+      <Tabs variation="minimal" defaultActiveKey="table">
+        <Tab eventKey="table" title="Tabla">
+          <SearchFormValueConsumer<FinanceQuery>
+            render={(query) => (
+              <TableWithDataLoaderBuilder
+                cacheKey={[{ query }]}
+                columns={buildFinancialBreakdownColumns(
+                  query.startDate,
+                  query.endDate,
+                  query.interval,
+                )}
+                loader={() => getExpenses(query)}
+                onExpand={buildFinanceTableOnExpand(['pc', 'pg'])}
+              />
+            )}
           />
-        )}
-      />
-    </FinanceSectionLayout>
+        </Tab>
+        <Tab eventKey="chart" title="Grafica" icon={TrendingUpIcon}></Tab>
+      </Tabs>
+    </SearchFormContainer>
   )
 }
 

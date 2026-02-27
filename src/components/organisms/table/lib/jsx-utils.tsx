@@ -6,6 +6,8 @@ import type { LinkProps } from '@/components/atoms'
 import { DateLabel, Link } from '@/components/atoms'
 import SafeHtml from '@/components/molecules/safe-html/safe-html'
 import { HeaderContext } from '@tanstack/react-table'
+import { DASHES, getDateGroupingLabel } from '@/lib/utils'
+import { TimeUnit } from '@/models'
 
 export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
   return (
@@ -14,6 +16,28 @@ export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
     </Link>
   )
 }
+
+export const buildDateGroupingFooter =
+  <T,>(
+    dateAccesor: (row: T) => string | Date | undefined,
+    minDate?: Date | string,
+    maxDate?: Date | string,
+    timeUnit?: TimeUnit,
+  ) =>
+  (info: HeaderContext<T, unknown>) => {
+    if (!minDate || !maxDate) return DASHES
+
+    const firstRow = info.table.getRowModel().rows[0]?.original
+    if (!firstRow) return DASHES
+
+    const date = dateAccesor(firstRow)
+    if (!date) return DASHES
+
+    return getDateGroupingLabel(date, timeUnit ?? 1, {
+      minDate: new Date(minDate),
+      maxDate: new Date(maxDate),
+    })
+  }
 
 export const buildTotalRowsFooter =
   <T,>(suffix: string) =>

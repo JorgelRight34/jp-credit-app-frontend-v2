@@ -1,9 +1,8 @@
-import clsx from 'clsx'
 import { Activity, useState } from 'react'
 import { Form, FormInput } from '../../form'
 import { WIDTH_CLASS_MAP } from '../lib/constants'
 import type { PropsWithChildren } from 'react'
-import type { DefaultFormValues, SchemaType, UseFormReturn } from '../../form'
+import type { DefaultFormValues, SchemaType } from '../../form'
 import type { SearchFormOption } from '../models/searchFormOption'
 import type { Query } from '../models/query'
 import {
@@ -17,7 +16,7 @@ import {
 } from '@/components/atoms'
 import { FieldValues, useFormState } from 'react-hook-form'
 import { useSearchFormSubmit } from '../providers/search-form-provider'
-import { useFormMethods } from '../../form/hooks/useFormMethods'
+import { useFormMethods, UseFormReturn } from '../../form/hooks/useFormMethods'
 
 interface SearchFormProps<T extends Query> {
   options: Array<SearchFormOption<T>>
@@ -70,7 +69,7 @@ const SearchForm = <T extends Query>({
               <SubmitBtn form={form} />
               <LightBtn
                 icon={MenuIcon}
-                className={`border shadow-sm ${advanced.length > 0 ? '' : 'opacity-50 cursor-not-allowed'}`}
+                className={`border shadow-sm${advanced.length > 0 ? '' : ' opacity-50 cursor-not-allowed'}`}
                 type="button"
                 onClick={() => {
                   if (advanced.length > 0) {
@@ -82,8 +81,8 @@ const SearchForm = <T extends Query>({
             </div>
           </div>
           <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
-            <div className="rounded-xl flex-col flex mt-3 flex w-full flex-wrap space-y-3 shadow-sm border bg-white p-3">
-              <div className="flex-1">
+            <div className="rounded-xl flex-col flex mt-3 flex w-full flex-wrap space-y-3 shadow-sm border bg-white">
+              <div className="flex-1 p-3">
                 {hasOpenedAdvanced &&
                   advanced.map((option) => (
                     <AdvancedSearchFormGroup
@@ -92,7 +91,7 @@ const SearchForm = <T extends Query>({
                     />
                   ))}
               </div>
-              <div className="flex justify-end flex-shrink-0 border-t pt-3">
+              <div className="flex justify-end flex-shrink-0 border-t p-3">
                 <LightPillBtn
                   className="!w-auto"
                   icon={RestoreIcon}
@@ -151,7 +150,7 @@ const SearchFormGroupContainer = ({
   width,
   children,
 }: { width: number } & PropsWithChildren) => {
-  return <div className={clsx('px-1', WIDTH_CLASS_MAP[width])}>{children}</div>
+  return <div className={`px-1 ${WIDTH_CLASS_MAP[width]}`}>{children}</div>
 }
 
 export default SearchForm

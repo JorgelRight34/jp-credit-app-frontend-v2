@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime"
 import type { Row } from "@/components";
 import "dayjs/locale/es"
+import { TimeUnit } from "@/models";
 
 dayjs.extend(relativeTime)
 dayjs.locale("es")
@@ -25,6 +26,27 @@ export const toFormattedDate = (date: string | Date): string | null => {
         return date.toString();
     }
 };
+
+export const getDateGroupingLabel = (input: Date | string, timeUnit: TimeUnit, config?: { minDate: Date, maxDate: Date }): string => {
+    const date = new Date(input);
+
+    if (timeUnit === TimeUnit.year) {
+        return date.getFullYear().toString();
+    }
+
+    const yearA = config?.minDate.getFullYear();
+    const yearB = config?.maxDate.getFullYear();
+
+    if (timeUnit === TimeUnit.month) {
+        return `${getLocaleMonth(date)}${yearA == yearB ? "" : " " + date.getFullYear()}`
+    }
+
+    if (yearA === yearB && yearA !== undefined) {
+        return `${getLocaleMonth(date)} ${date.getDate()}`
+    }
+    return dateToIsoString(date);
+
+}
 
 export const getTodayAsInputDate = () => {
     return new Date().toISOString().split('T')[0]

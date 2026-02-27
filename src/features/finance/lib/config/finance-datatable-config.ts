@@ -1,31 +1,94 @@
-import { buildDateDataCell, Column, getFooterTotalAsCurrency } from "@/components";
+import { buildDateDataCell, buildDateGroupingFooter, buildLinkDataCell, buildTotalRowsFooter, Column, getFooterTotalAsCurrency } from "@/components";
 import { toCurrency } from "@/lib/utils";
 import { FinancialBreakdown } from "../../models/financialBreakdown";
+import { Projection } from "../../models/projection";
+import { buildLoanLabelById, Loan, loanPaymentFrequencyStringMap } from "@/features/loans";
+import { buildProfileFullName } from "@/features/profiles";
+import { TimeUnit } from "@/models";
+import { LoanProjection } from "../../models/projectionResult";
 
-export const incomeTableColumns: Array<Column<FinancialBreakdown>> = [
-    {
-        accessorKey: "date",
-        header: "FECHA",
-        cell: ({ row }) => buildDateDataCell(row.original.date),
-        enableSorting: true,
-        footer: "TOTAL"
-    },
-    {
-        accessorKey: "capital",
-        header: "CAPITAL",
-        cell: ({ row }) => toCurrency(row.original.capital),
-        footer: (info) => getFooterTotalAsCurrency(info, "capital")
-    },
-    {
-        accessorKey: "interest",
-        header: "INTERES",
-        cell: ({ row }) => toCurrency(row.original.interest),
-        footer: (info) => getFooterTotalAsCurrency(info, "interest"),
-    },
-    {
-        accessorKey: "interest",
-        header: "MORA",
-        cell: ({ row }) => toCurrency(row.original.fee),
-        footer: (info) => getFooterTotalAsCurrency(info, "fee"),
-    },
-]
+export const buildFinancialBreakdownColumns = (startDate?: string,
+    endDate?: string,
+    timeDiff?: TimeUnit): Array<Column<FinancialBreakdown>> => [
+        {
+            accessorKey: "date",
+            header: "Fecha",
+            enableSorting: true,
+            cell: ({ row }) => buildDateDataCell(row.original.date),
+            footer: buildDateGroupingFooter(r => r.date, startDate, endDate, timeDiff)
+        },
+        {
+            accessorKey: "capital",
+            header: "CAPITAL",
+            cell: ({ row }) => toCurrency(row.original.capital),
+            footer: (info) => getFooterTotalAsCurrency(info, "capital")
+        },
+        {
+            accessorKey: "interest",
+            header: "INTERES",
+            cell: ({ row }) => toCurrency(row.original.interest),
+            footer: (info) => getFooterTotalAsCurrency(info, "interest"),
+        },
+        {
+            accessorKey: "interest",
+            header: "MORA",
+            cell: ({ row }) => toCurrency(row.original.fee),
+            footer: (info) => getFooterTotalAsCurrency(info, "fee"),
+        },
+    ]
+
+
+export const buildProjectionTableColumns = (
+    loansMap: Record<Loan["id"], LoanProjection> = {},
+    startDate?: string | Date,
+    endDate?: string | Date,
+    timeDiff?: TimeUnit
+): Array<Column<Projection>> => {
+    return [
+        {
+            accessorKey: "date",
+            header: "Fecha",
+            enableSorting: true,
+            cell: ({ row }) => buildDateDataCell(row.original.date),
+            footer: buildDateGroupingFooter(r => r.date, startDate, endDate, timeDiff)
+        },
+        {
+            accessorFn: (row) => row.loanId,
+            header: "PRESTAMO",
+            enableSorting: true,
+            footer: buildTotalRowsFooter('Préstamos'),
+            cell: ({ row }) => buildLinkDataCell(buildLoanLabelById(row.original.loanId), {
+                to: "/loans/$id",
+                params: {
+                    id: row.original.loanId.toString()
+                }
+            }),
+        },
+        {
+            accessorFn: (row) => loansMap[row.loanId].paymentFrequency,
+            header: "FREC. PAGO",
+            cell: ({ row }) =>
+                loanPaymentFrequencyStringMap[loansMap[row.original.loanId].paymentFrequency],
+        },
+        {
+            accessorFn: (row) => loansMap[row.loanId].clientOverview?.firstName,
+            header: "CLIENTE",
+            cell: ({ row }) => buildLinkDataCell(buildProfileFullName(loansMap[row.original.loanId].clientOverview), {
+                to: "/profiles/$id",
+                params: { id: loansMap[row.original.loanId].clientOverview.profileId.toString() }
+            })
+        },
+        {
+            accessorKey: "capital",
+            header: "CAPITAL",
+            cell: ({ row }) => toCurrency(row.original.capital),
+            footer: (info) => getFooterTotalAsCurrency(info, "capital")
+        },
+        {
+            accessorKey: "interest",
+            header: "INTERES",
+            cell: ({ row }) => toCurrency(row.original.interest),
+            footer: (info) => getFooterTotalAsCurrency(info, "interest"),
+        },
+    ]
+}
