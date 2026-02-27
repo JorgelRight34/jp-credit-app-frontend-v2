@@ -3,6 +3,7 @@ import { AddCircleIcon, DoNotDisturbOnIcon, Icon } from '../../../atoms/icon'
 import TableRow from './table-row'
 import TableDataCell from './table-data-cell'
 import type { Row } from '../models/row'
+import { startTransition } from 'react'
 
 export interface TableRowCompositorProps<TData> {
   row: Row<TData>
@@ -32,7 +33,7 @@ const TableRowCompositor = <TData,>({
             icon={row.getIsExpanded() ? DoNotDisturbOnIcon : AddCircleIcon}
             onClick={(event) => {
               event.stopPropagation()
-              row.toggleExpanded()
+              startTransition(() => row.toggleExpanded())
             }}
           />
         </TableDataCell>

@@ -247,27 +247,30 @@ export const loansNavItem: NavItem = {
   children: [
     {
       ...allRouteBase,
-      route: 'loans',
+      route: '/loans',
+      search: { tab: 'all' },
     },
     {
       name: 'Activos',
       icon: () => <PlayCircleIcon />,
-      route: 'loans/active',
+      route: '/loans',
+      search: { tab: 'active' },
+    },
+    {
+      name: 'Inactivos',
+      icon: () => <CheckCircleIcon />,
+      route: '/loans',
+      search: { tab: 'inactive' },
     },
     {
       name: 'Saldados',
-      icon: () => <CheckCircleIcon />,
-      route: 'loans/paid-off',
-    },
-    {
-      name: 'Atrasados',
       icon: () => <ErrorIcon />,
-      route: 'loans/overdue',
+      route: '/loans',
+      search: { tab: 'paidOff' },
     },
     {
-      name: 'Añadir',
-      icon: () => <AddIcon />,
-      route: 'loans/create',
+      ...addRouteBase,
+      route: '/loans/create',
     },
   ],
 }
@@ -361,26 +364,29 @@ export const reportsNavItem: NavItem = {
 export const financesNavItem: NavItem = {
   name: 'Finanzas',
   icon: () => <QueryStatsIcon />,
-  route: 'finance',
+  route: '/finance',
   children: [
     {
       ...allRouteBase,
-      route: 'finance',
+      route: '/finance',
     },
     {
       name: 'Proyecciones',
       icon: () => <TrendingUpIcon />,
-      route: 'finance/projections',
+      route: '/finance',
+      search: { tab: 'projections' },
     },
     {
       name: 'Ingresos',
       icon: () => <AttachMoneyIcon />,
-      route: 'finance/incomes',
+      route: '/finance',
+      search: { tab: 'incomes' },
     },
     {
       name: 'Egresos',
       icon: () => <AccountBalanceWalletIcon />,
-      route: 'finance/expenses',
+      route: '/finance',
+      search: { tab: 'expenses' },
     },
   ],
 }

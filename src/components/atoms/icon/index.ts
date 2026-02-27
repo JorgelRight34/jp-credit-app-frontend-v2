@@ -174,6 +174,7 @@ export { default as FollowUpIcon } from '@mui/icons-material/AssignmentOutlined'
 export { default as AccountStatementsIcon } from '@mui/icons-material/AccountBalanceOutlined'
 export { default as ClientIcon } from '@mui/icons-material/PersonOutline'
 export { default as GuarantorIcon } from '@mui/icons-material/PersonOutline'
+export { default as FInanceIcon } from '@mui/icons-material/QueryStatsOutlined'
 
 
 export { default as Icon } from "./icon";

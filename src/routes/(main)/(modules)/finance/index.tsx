@@ -1,3 +1,4 @@
+import { FinancesPage } from '@/features/finance'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/(main)/(modules)/finance/')({
@@ -5,5 +6,5 @@ export const Route = createFileRoute('/(main)/(modules)/finance/')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/(main)/(modules)/finance/"!</div>
+  return <FinancesPage />
 }

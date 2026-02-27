@@ -1,5 +1,5 @@
 import { collateralSearchConfig } from '../lib/config/collaterals-search-config'
-import { CollateralDataTableConfig } from '../lib/config/collateral-datatable-config'
+import { collateralDataTableConfig } from '../lib/config/collateral-datatable-config'
 import type { DataTableContainerOverrides } from '@/components'
 import type { Collateral } from '../models/collateral'
 import type { CollateralQuery } from '../models/collateralQuery'
@@ -15,7 +15,7 @@ const CollateralDataTable = (
   return (
     <DataTableContainer
       searchConfig={collateralSearchConfig}
-      datatableConfig={CollateralDataTableConfig}
+      datatableConfig={collateralDataTableConfig}
       cacheKey={[collateralsQueryKey, projectId]}
       {...props}
     />

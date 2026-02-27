@@ -45,7 +45,6 @@ const DataTableContainer = <TEntity extends object, TQuery extends Query>({
       </div>
       <div>
         <DataTable<TEntity, TQuery>
-          title={datatableConfig.title}
           columns={datatableConfig.columns}
           cacheKey={cacheKey}
           initialData={initialData}

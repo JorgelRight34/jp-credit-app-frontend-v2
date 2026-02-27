@@ -24,6 +24,7 @@ interface SearchFormProps<T extends Query> {
   advanced: Array<SearchFormOption<T>>
   schema?: SchemaType<T>
   defaultValues?: DefaultFormValues<T>
+  initialValues?: Partial<T>
   onSubmit: (q: T) => Promise<T>
 }
 
@@ -32,13 +33,17 @@ const SearchForm = <T extends Query>({
   advanced,
   schema,
   defaultValues,
+  initialValues,
   onSubmit,
 }: SearchFormProps<T>) => {
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [hasOpenedAdvanced, setHasOpenedAdvanced] = useState(false)
   const form = useForm({
     schema,
-    defaultValues,
+    defaultValues: {
+      ...defaultValues,
+      ...initialValues,
+    } as DefaultFormValues<T>,
     resetValues: false,
     onSubmit,
   })
@@ -52,7 +57,7 @@ const SearchForm = <T extends Query>({
               {options.map((option) => (
                 <SearchFormGroupContainer
                   width={option.width}
-                  key={option.name.toString()}
+                  key={option.name as string}
                 >
                   <FormInput
                     label={option.label}
@@ -84,7 +89,7 @@ const SearchForm = <T extends Query>({
                 advanced.map((option) => (
                   <AdvancedSearchFormGroup
                     option={option}
-                    key={option.name.toString()}
+                    key={option.name as string}
                   />
                 ))}
             </div>

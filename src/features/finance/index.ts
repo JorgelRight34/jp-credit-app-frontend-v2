@@ -1,0 +1,1 @@
+export { default as FinancesPage } from './pages/finances-page'

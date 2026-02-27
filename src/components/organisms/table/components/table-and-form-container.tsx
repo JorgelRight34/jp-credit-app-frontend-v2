@@ -1,8 +1,8 @@
-import type { InitialTableState } from '../../table/hooks/useTableState'
+import type { InitialTableState } from '../hooks/useTableState'
 import type { Query, SearchFormConfig } from '../../search-form'
 import { useSearchContainer } from '../../search-form/hooks/useSearchContainer'
 import SearchForm from '../../search-form/components/search-form'
-import { Column, Table } from '../../table'
+import { Column, Table } from '..'
 
 export type TableAndFormContainerProps<
   TEntity extends object,

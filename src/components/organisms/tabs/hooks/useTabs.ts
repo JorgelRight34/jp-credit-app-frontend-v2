@@ -1,5 +1,5 @@
-import { Children, isValidElement, startTransition, useMemo, useState, useTransition } from "react";
-import type { ReactNode } from "react";
+import { Children, startTransition, useState, useTransition } from "react";
+import type { ReactElement, ReactNode } from "react";
 import type { TabProps } from "../components/tab";
 
 export interface UseTabsProps {
@@ -10,14 +10,7 @@ export interface UseTabsProps {
 }
 
 export const useTabs = ({ defaultActiveKey, children, onSelect, getDefaultActiveKey }: UseTabsProps) => {
-  const tabsArray = useMemo(
-    () => {
-      return Children.toArray(children).filter(
-        isValidElement<TabProps>,
-      )
-    },
-    [children],
-  );
+  const tabsArray = Children.toArray(children) as ReactElement<TabProps, string>[];
 
   const [activeIndex, setActiveIndex] = useState(() => {
     const key = getDefaultActiveKey?.() ?? defaultActiveKey;
@@ -37,12 +30,10 @@ export const useTabs = ({ defaultActiveKey, children, onSelect, getDefaultActive
     if (renderedTabs[index] === true) {
       setPanelIndex(index)
     } else {
-      startTransitionForPanelIndex(() => {
-        setPanelIndex(index);
-        if (tabsArray[index].props.forceRender !== true) {
-          setRenderedTabs(prev => ({ ...prev, [index]: true }));
-        }
-      })
+      setPanelIndex(index);
+      if (tabsArray[index].props.forceRender !== true) {
+        startTransitionForPanelIndex(() => setRenderedTabs(prev => ({ ...prev, [index]: true })))
+      }
     }
   }
 

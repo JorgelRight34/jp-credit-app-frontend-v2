@@ -9,7 +9,8 @@ const URLS = {
 };
 
 export const baseURL = IS_DEV_MODE ? URLS.DEV : URLS.PROD;
-const api = axios.create({ baseURL });
+
+const api = axios.create({ baseURL, paramsSerializer: { indexes: null } });
 
 api.interceptors.request.use(
   (

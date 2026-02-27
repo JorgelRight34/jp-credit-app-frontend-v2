@@ -9,3 +9,8 @@ export { default as ClosedPeriodsPage } from './pages/closed-periods-page'
 export { default as CreateClosedPeriodPage } from './pages/create-closed-period-page'
 export * from './lib/utils'
 export * from './services/transactionClient'
+export * from './lib/config/permission-provider'
+export * from './models/transactionType'
+
+export * from './lib/config/transaction-datatable-config'
+export * from './lib/query-keys'

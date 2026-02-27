@@ -1,1 +1,1 @@
-export type TransactionType = "pc" | "ds"
+export type TransactionType = "pc" | "ds" | "pg" | "vg"

@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 import type { LinkProps } from '@/components/atoms'
 import { DateLabel, Link } from '@/components/atoms'
 import SafeHtml from '@/components/molecules/safe-html/safe-html'
+import { HeaderContext } from '@tanstack/react-table'
 
 export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
   return (
@@ -13,6 +14,11 @@ export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
     </Link>
   )
 }
+
+export const buildTotalRowsFooter =
+  <T,>(suffix: string) =>
+  (info: HeaderContext<T, unknown>) =>
+    `${info.table.options.data.length} ${suffix}`
 
 export const buildOptionDataCell = (
   label: ReactNode,

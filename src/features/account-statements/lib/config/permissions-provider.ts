@@ -1,7 +1,3 @@
-import { PermissionsProvider } from "@/components";
-import { getModulePermissions } from "@/features/auth";
+import { transactionPermissionProvider } from "@/features/transactions";
 
-export const accountStatementsPermissionProvider: PermissionsProvider = {
-    cacheKey: ["transactions"],
-    loader: () => getModulePermissions("transactions/permissions")
-}
+export const accountStatementsPermissionProvider = transactionPermissionProvider

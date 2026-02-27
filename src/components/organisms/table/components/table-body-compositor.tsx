@@ -38,15 +38,13 @@ const TableBodyCompositor = <T,>({
       {table.getRowModel().rows.map((row) => (
         <React.Fragment key={row.id}>
           <TableRowCompositor row={row} {...props} />
-          {onExpand && row.getIsExpanded() && (
+          {row.getIsExpanded() && (
             <TableRow className="border-y !bg-white">
               <TableDataCell
-                colSpan={
-                  row.getVisibleCells().length + (row.getCanExpand() ? 1 : 0)
-                }
+                colSpan={row.getVisibleCells().length + 1}
                 className="p-0 align-top"
               >
-                <div className="block w-full">{onExpand(row)}</div>
+                <div className="block w-full">{onExpand?.(row)}</div>
               </TableDataCell>
             </TableRow>
           )}
