@@ -7,6 +7,7 @@
 // -------------------------------------
 export * from "./datatable";
 export * from "./protected"
+export * from './chart'
 
 // -------------------------------------
 // Entity Section (uses its own index.ts)
