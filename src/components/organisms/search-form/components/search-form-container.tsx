@@ -25,8 +25,7 @@ const SearchFormContainer = <TQuery extends Query>({
         <div className="mb-3">
           <SearchForm
             options={searchConfig.options}
-            initialValues={initialQuery}
-            defaultValues={searchConfig.defaultValues}
+            defaultValues={initialQuery}
             advanced={searchConfig.advanced}
             schema={searchConfig.schema}
           />

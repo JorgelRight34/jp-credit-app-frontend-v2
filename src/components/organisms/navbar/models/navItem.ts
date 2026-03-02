@@ -1,5 +1,5 @@
 import type { Route, Search } from "@/components";
-import type { IconName } from "@/components/atoms/icon/iconName";
+import type { IconName } from "@/components/atoms/icon/models/iconName";
 
 export interface NavItem {
     name: string,

@@ -2,7 +2,7 @@ import { Tab as RTab } from 'react-tabs'
 import clsx from 'clsx'
 import type { TabProps as RTabProps } from 'react-tabs'
 import type { ReactNode } from 'react'
-import type { IconName } from '@/components/atoms/icon/iconName'
+import type { IconName } from '@/components/atoms/icon/models/iconName'
 import { Icon } from '@/components/atoms'
 import { VariationKey, variations } from '../lib/variations'
 

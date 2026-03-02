@@ -7,6 +7,7 @@ import {
   EditIcon,
   LightPillBtn,
   SettingsIcon,
+  TableChartIcon,
 } from '@/components/atoms'
 import { MenuOption } from '../../menu/components/menu'
 import LightPillMenuBtn from '@/components/atoms/button/components/light-pill-menu-btn'
@@ -91,6 +92,14 @@ export const buildPageLayoutSettingsOptionLight = (
     to,
     params,
     icon: SettingsIcon,
+    component: LightPillBtn,
+  }
+}
+
+export const buildPageLayoutExportToExcel = () => {
+  return {
+    title: 'Excel',
+    icon: TableChartIcon,
     component: LightPillBtn,
   }
 }

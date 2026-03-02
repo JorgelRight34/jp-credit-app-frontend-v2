@@ -1,6 +1,7 @@
 import { Loan } from "@/features/loans";
+import { Transaction } from "@/features/transactions";
 
-export interface FinancialBreakdown<T = unknown> {
+export interface FinancialBreakdown<T = Transaction> {
     date: string;
     interest: number;
     capital: number;

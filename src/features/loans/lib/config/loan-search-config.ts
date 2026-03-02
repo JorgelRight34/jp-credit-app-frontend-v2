@@ -14,5 +14,4 @@ export const loanSearchConfig: SearchFormConfig<LoanQuery> = {
         { name: "startDate", label: "Fecha mínima", width: 6, type: (p) => DateInput(p) },
         { name: "endDate", label: "Fecha máxima", width: 6, type: (p) => DateInput(p) },
     ],
-    defaultValues: { id: "", clientName: "", status: "", minPaymentValue: "", maxPaymentValue: "", startDate: "", endDate: "" }
 }

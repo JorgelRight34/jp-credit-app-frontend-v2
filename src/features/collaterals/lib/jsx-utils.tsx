@@ -1,5 +1,5 @@
 import type { CollateralType } from '../models/collateralType'
-import type { IconName } from '@/components/atoms/icon/iconName'
+import type { IconName } from '@/components/atoms/icon/models/iconName'
 import { ApartmentIcon, DirectionsCarIcon, GrassIcon } from '@/components'
 
 export const collateralIconByTypeMap: Record<CollateralType, IconName> = {

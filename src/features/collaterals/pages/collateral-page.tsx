@@ -1,4 +1,3 @@
-import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
 import {
   buildCollateralBreadcrumb,
   collateralsBreadcrumb,
@@ -27,7 +26,6 @@ const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
   return (
     <PageRouterLayout
       title={collateral.title}
-      permissionProvider={collateralsPermissionProvider}
       options={[
         buildPageLayoutSettingsOptionLight('/collaterals/$id/settings', {
           id: collateral.id.toString(),

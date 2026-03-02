@@ -1,5 +1,4 @@
 import { buildProfileFullName } from '../lib/utils'
-import { profilesPermissionProvider } from '../lib/config/permissionProvider'
 import {
   buildProfileBreadcrumb,
   profilesBreadcrumb,
@@ -33,7 +32,6 @@ const ProfilePage = ({ profile }: ProfilePageProps) => {
   return (
     <PageRouterLayout
       title={title}
-      permissionProvider={profilesPermissionProvider}
       options={[
         buildPageLayoutEditOption('/profiles/$id/edit', {
           id: profile.id.toString(),
@@ -53,18 +51,6 @@ const ProfilePage = ({ profile }: ProfilePageProps) => {
           <section>
             <FileTable files={profile.files.map(mapApiFileToTableFile)} />
           </section>
-        </Tab>
-        <Tab eventKey="loans" title="Préstamos">
-          ...
-        </Tab>
-        <Tab eventKey="transactions" title="Transacciones">
-          ...
-        </Tab>
-        <Tab eventKey="collaterals" title="Garantías">
-          ...
-        </Tab>
-        <Tab eventKey="follow-ups" title="Seguimientos">
-          ...
         </Tab>
       </TabsRouter>
     </PageRouterLayout>

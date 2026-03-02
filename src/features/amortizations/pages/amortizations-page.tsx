@@ -6,7 +6,6 @@ import {
   Tab,
   TabsRouter,
 } from '@/components'
-import { amortizationPermissionsProvider } from '../lib/config/permissions-provider'
 import AmortizationDataTable from '../components/amortization-datatable'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
@@ -18,7 +17,6 @@ const AmortizationsPage = () => {
   return (
     <PageRouterLayout
       title="Amortizaciones"
-      permissionProvider={amortizationPermissionsProvider}
       routerConfig={{
         defaultActive: 'calculator',
         baseBreadcrumbs: [{ title: 'Amortizaciones', icon: CalculateIcon }],

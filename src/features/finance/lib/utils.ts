@@ -2,11 +2,13 @@ import { TimeUnit } from "@/models";
 import { Period } from "../models/period";
 import dayjs, { Dayjs } from "dayjs";
 
+type EndComputer = (cursor: Dayjs) => Dayjs
+
 export function splitIntoPeriods(
     start: Date | string,
     end: Date | string,
-    timeUnit: TimeUnit,            // e.g. TimeUnit.day | TimeUnit.month | TimeUnit.year
-    daysPerPeriod: number          // for day-based buckets (e.g. 7, 30, 365)
+    timeUnit: TimeUnit,
+    daysPerPeriod: number
 ): Array<Period> {
     const dateStart = dayjs(start);
     const dateEnd = dayjs(end);
@@ -14,41 +16,30 @@ export function splitIntoPeriods(
 
     // cursor always moves to previous period's end + 1 day (inclusive)
     let cursor = dateStart;
+    const computeNaturalEnd = getEndComputer(timeUnit, daysPerPeriod)
 
     while (cursor.isBefore(dateEnd) || cursor.isSame(dateEnd, "day")) {
-        let periodStart = cursor;
-        let naturalEnd: Dayjs;
-
-        switch (timeUnit) {
-            case TimeUnit.year:
-                // first chunk starts at actual start; subsequent chunks start at Jan 1
-                if (periods.length > 0) periodStart = cursor.startOf("year");
-                naturalEnd = periodStart.endOf("year");
-                break;
-
-            case TimeUnit.month:
-                // first chunk starts at actual start; subsequent chunks start at day 1
-                if (periods.length > 0) periodStart = cursor.startOf("month");
-                naturalEnd = periodStart.endOf("month");
-                break;
-
-            default:
-                // day-based bucket (7 days, 30 days, etc.)
-                naturalEnd = periodStart.add(daysPerPeriod - 1, "day");
-                break;
-        }
-
-        const truncated = naturalEnd.isAfter(dateEnd);
-        const periodEnd = truncated ? dateEnd : naturalEnd;
+        const naturalEnd = computeNaturalEnd(cursor)
+        const periodEnd = naturalEnd.isAfter(dateEnd) ? dateEnd : naturalEnd
 
         periods.push({
-            start: periodStart.toDate(),
+            start: cursor.toDate(),
             end: periodEnd.toDate(),
-        });
+        })
 
-        // move cursor to the next day after the end of this period
-        cursor = periodEnd.add(1, "day");
+        cursor = periodEnd.add(1, 'day')
     }
 
     return periods;
+}
+
+const getEndComputer = (timeUnit: TimeUnit, daysPerPeriod: number): EndComputer => {
+    switch (timeUnit) {
+        case TimeUnit.year:
+            return (cursor) => cursor.endOf('year')
+        case TimeUnit.month:
+            return (cursor) => cursor.endOf('month')
+        default:
+            return (cursor) => cursor.add(daysPerPeriod - 1, 'day')
+    }
 }

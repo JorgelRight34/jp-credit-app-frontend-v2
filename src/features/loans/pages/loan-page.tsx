@@ -11,7 +11,6 @@ import {
   TabsRouter,
 } from '@/components'
 import { Loan } from '../models/loan'
-import { loanPermissionProvider } from '../lib/config/permission-provider'
 import { buildLoanBreadcrumb, loanBreadcrumb } from '../lib/config/breadcrumb'
 import LoanOverview from '../components/loan-overview'
 import LoanAmortizationPreview from '../components/loan-amortization-preview'
@@ -72,7 +71,6 @@ const LoanPageRouterLayout = ({
   return (
     <PageRouterLayout
       title={buildLoanLabel(loan)}
-      permissionProvider={loanPermissionProvider}
       options={[
         buildPageLayoutMenuOption([
           {

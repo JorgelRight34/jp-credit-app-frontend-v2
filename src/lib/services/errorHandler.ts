@@ -16,11 +16,12 @@ const errorHandler = (error: AxiosError<{ message?: string }>) => {
       toastService.error("Oops!, error interno.");
       break;
     case "ERR_BAD_REQUEST":
-      console.log("Error.response.status", error.response?.status)
-      console.log("Response", error.response)
       switch (error.response?.status) {
         case 400:
           toastService.error("Mala solicitud.");
+          break;
+        case 403:
+          toastService.error("No tiene permisos para ver este contenido");
           break;
         case 404:
           toastService.error("No encontrado")

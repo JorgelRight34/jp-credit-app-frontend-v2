@@ -1,4 +1,3 @@
-import { profilesPermissionProvider } from '../lib/config/permissionProvider'
 import { profilesBreadcrumb } from '../lib/config/breadcrumb'
 import ProfilesDataTable from '../components/profiles-datatable'
 import type { BreadcrumbsByRoute } from '@/components'
@@ -27,7 +26,6 @@ const ProfilesPage = () => {
   return (
     <PageRouterLayout
       title="Pérfiles"
-      permissionProvider={profilesPermissionProvider}
       options={[buildPageLayoutCreateOption('/profiles/create')]}
       routerConfig={{
         baseBreadcrumbs: [profilesBreadcrumb],

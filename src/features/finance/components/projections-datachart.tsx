@@ -1,0 +1,31 @@
+import {
+  getTodayAsInputDate,
+  getTodayWithDaysFromNow,
+  toInputDate,
+} from '@/lib/utils'
+import FinancialBreakdownDataChart from './financial-breakdown-datachart'
+import { getProjectedIncomes } from '../services/financeService'
+
+const ProjectionsDataChart = () => {
+  return (
+    <FinancialBreakdownDataChart
+      initialQuery={{
+        startDate: getTodayAsInputDate(),
+        endDate: toInputDate(getTodayWithDaysFromNow(30 * 12 * 6)),
+        interval: 30,
+        chart: 'bar',
+      }}
+      buildDataOptions={(query) => ({
+        key: [
+          'projections-summary',
+          query.startDate,
+          query.endDate,
+          query.interval,
+        ],
+        loader: () => getProjectedIncomes(query),
+      })}
+    />
+  )
+}
+
+export default ProjectionsDataChart

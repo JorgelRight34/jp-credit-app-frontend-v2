@@ -3,6 +3,7 @@ import {
   ClosedProcessPanel,
   PageRouterLayout,
   PriceCheckIcon,
+  ProtectedComponent,
   SellIcon,
   settingsBreadcrumb,
   Tab,
@@ -26,7 +27,6 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
   return (
     <PageRouterLayout
       title={`${collateral.title}`}
-      permissionProvider={collateralsPermissionProvider}
       routerConfig={{
         defaultActive: 'liquidate',
         baseBreadcrumbs: [
@@ -37,22 +37,27 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
         breadcrumbsByRoute,
       }}
     >
-      <TabsRouter>
-        <Tab eventKey="liquidate" title="Liquidar">
-          {collateral.liquidationDate ? (
-            <ClosedProcessPanel />
-          ) : (
-            <CollateralLiquidateForm collateral={collateral} />
-          )}
-        </Tab>
-        <Tab eventKey="sell" title="Vender">
-          {collateral.sellDate ? (
-            <ClosedProcessPanel />
-          ) : (
-            <CollateralSellForm collateral={collateral} />
-          )}
-        </Tab>
-      </TabsRouter>
+      <ProtectedComponent
+        provider={collateralsPermissionProvider}
+        isAuthorizedFn={(p) => p.canEdit}
+      >
+        <TabsRouter>
+          <Tab eventKey="liquidate" title="Liquidar">
+            {collateral.liquidationDate ? (
+              <ClosedProcessPanel />
+            ) : (
+              <CollateralLiquidateForm collateral={collateral} />
+            )}
+          </Tab>
+          <Tab eventKey="sell" title="Vender">
+            {collateral.sellDate ? (
+              <ClosedProcessPanel />
+            ) : (
+              <CollateralSellForm collateral={collateral} />
+            )}
+          </Tab>
+        </TabsRouter>
+      </ProtectedComponent>
     </PageRouterLayout>
   )
 }

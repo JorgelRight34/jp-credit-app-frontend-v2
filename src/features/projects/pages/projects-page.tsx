@@ -7,7 +7,6 @@ import {
   TabsRouter,
 } from '@/components'
 import { projectsBreadcrumb } from '../lib/config/breadcrumbs'
-import { projectsPermissionProvider } from '../lib/config/permissionProvider'
 import ProjectDataTable from '../components/project-datatable'
 import { Project } from '../models/project'
 
@@ -19,7 +18,6 @@ const ProjectsPage = ({ projectId }: { projectId?: Project['id'] }) => {
   return (
     <PageRouterLayout
       title="Proyectos"
-      permissionProvider={projectsPermissionProvider}
       options={[buildPageLayoutCreateOption('/projects/create')]}
       routerConfig={{
         baseBreadcrumbs: [projectsBreadcrumb],

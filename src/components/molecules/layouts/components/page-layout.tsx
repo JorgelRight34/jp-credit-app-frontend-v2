@@ -2,17 +2,13 @@ import PageLayoutContent from './page-layout-content'
 import PageLayoutOptionsContainer from './page-layout-options-container'
 import type { ReactNode } from 'react'
 import type { LayoutOption } from '../models/pageLayoutOption'
-import type { IsAuthorizedFn, PermissionsProvider } from '@/components'
 import { BigTitle } from '@/components'
 
 export interface PageLayoutProps {
   children: ReactNode
   title: string
-  permissionProvider: PermissionsProvider
   options?: Array<LayoutOption>
-  validateProject?: boolean
   breadcrumb?: ReactNode
-  isAuthorizedFn?: IsAuthorizedFn
 }
 
 const PageLayout = ({

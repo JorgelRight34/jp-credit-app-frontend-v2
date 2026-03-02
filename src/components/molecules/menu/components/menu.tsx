@@ -2,8 +2,8 @@ import { Menu as MuiMenu } from '@mui/material'
 import { forwardRef, useId, useImperativeHandle, useState } from 'react'
 import MenuItem from './menu-item'
 import type { MenuProps } from '@mui/material'
-import type { IconName } from '@/components/atoms/icon/iconName'
-import Icon, { IconProps } from '@/components/atoms/icon/icon'
+import type { IconName } from '@/components/atoms/icon/models/iconName'
+import Icon, { IconProps } from '@/components/atoms/icon/components/icon'
 import { Tooltip } from '@/components/atoms'
 
 export interface MenuOption {

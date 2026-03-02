@@ -1,11 +1,15 @@
 import type { BreadcrumbSpec } from '../../breadcrumb'
 import type { PageLayoutProps } from './page-layout'
 import type { CacheKey } from '@/models'
-import type { PermissionsProvider } from '@/components/organisms'
-import type { ConfirmationModalProps } from '@/components/organisms/modal/components/confirmation-modal'
+import {
+  ConfirmationModalProps,
+  ProtectedComponent,
+  type PermissionsProvider,
+} from '@/components/organisms'
 import PageLayout from './page-layout'
 import { AddIcon, EditIcon } from '@/components/atoms'
 import PageLayoutBreadcrumb from './page-layout-breadcrumb'
+import Unauthorized from '../../pages/unathorized'
 
 export type FormPageLayoutProps = React.PropsWithChildren &
   PageLayoutProps &
@@ -38,8 +42,6 @@ export const CreateFormPageLayout = ({
   return (
     <PageLayout
       title={title}
-      permissionProvider={permissionProvider}
-      isAuthorizedFn={(p) => p.canCreate}
       breadcrumb={
         <PageLayoutBreadcrumb
           breadcrumbs={breadcrumbs.concat(createBreadcrumb)}
@@ -47,7 +49,13 @@ export const CreateFormPageLayout = ({
       }
       options={[]}
     >
-      {children}
+      <ProtectedComponent
+        provider={permissionProvider}
+        isAuthorizedFn={(p) => p.canCreate}
+        fallback={<Unauthorized />}
+      >
+        {children}
+      </ProtectedComponent>
     </PageLayout>
   )
 }
@@ -66,15 +74,19 @@ export const EditFormPageLayout = ({
     <PageLayout
       {...props}
       title={title}
-      permissionProvider={permissionProvider}
-      isAuthorizedFn={(p) => p.canEdit}
       breadcrumb={
         <PageLayoutBreadcrumb
           breadcrumbs={breadcrumbs.concat(editBreadcrumb)}
         />
       }
     >
-      {children}
+      <ProtectedComponent
+        provider={permissionProvider}
+        isAuthorizedFn={(p) => p.canEdit}
+        fallback={<Unauthorized />}
+      >
+        {children}
+      </ProtectedComponent>
     </PageLayout>
   )
 }

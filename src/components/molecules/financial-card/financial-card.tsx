@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { IconName } from '@/components/atoms/icon/iconName'
+import type { IconName } from '@/components/atoms/icon/models/iconName'
 import { DetailRow, DetailRowGroup, Fieldset } from '@/components/atoms'
 import { ReactNode } from 'react'
 
@@ -30,11 +30,11 @@ const FinancialCard = ({
       <section className="flex flex-1 h-full flex-col p-3 px-6">
         <div
           className={clsx(
-            `flex flex-col justify-center mb-4`,
+            `flex flex-col justify-center py-2`,
             headingClassName,
           )}
         >
-          <h6 className="truncate text-center">{subheading}</h6>
+          {subheading && <h6 className="truncate text-center">{subheading}</h6>}
           <span className="truncate text-center text-accent text-4xl">
             {heading}
           </span>

@@ -34,7 +34,7 @@ const GroupedTable = <T,>({
   onLimitChange,
   ...config
 }: GroupedTableProps<T>) => {
-  const table = useTableState({ data: groups.flat(), columns, ...config }) // AVOID FLAT
+  const table = useTableState({ columns, ...config }) // AVOID FLAT
 
   return (
     <TableCompositor

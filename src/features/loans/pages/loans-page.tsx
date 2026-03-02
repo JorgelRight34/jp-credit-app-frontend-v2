@@ -10,7 +10,6 @@ import {
   TodayIcon,
 } from '@/components'
 import LoanDataTable from '../components/loan-datatable'
-import { loanPermissionProvider } from '../lib/config/permission-provider'
 import { loanBreadcrumb } from '../lib/config/breadcrumb'
 import { LoanStatusMap } from '../models/loanStatus'
 import { ProjectSelectionGuard } from '@/features/projects'
@@ -26,7 +25,6 @@ const LoansPage = () => {
   return (
     <PageRouterLayout
       title="Préstamos"
-      permissionProvider={loanPermissionProvider}
       routerConfig={{
         defaultActive: 'all',
         baseBreadcrumbs: [loanBreadcrumb],

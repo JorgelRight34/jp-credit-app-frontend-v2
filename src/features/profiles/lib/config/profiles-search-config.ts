@@ -14,5 +14,4 @@ export const profileSearchConfig: SearchFormConfig<ProfileQuery> = {
         { name: "maritalStatus", label: "Estado civil", width: 6, type: (p) => MaritalStatusSelect(p) },
         { name: "address", label: "Direcciones", width: 6, type: (p) => Input(p) }
     ],
-    defaultValues: { names: "", lastName: "", DNI: "", id: "", gender: "", maritalStatus: "", address: "" }
 }

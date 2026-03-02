@@ -36,5 +36,4 @@ export const amortizationSearchConfig: SearchFormConfig<AmortizationCalculatorIn
             type: p => NumericInput(p)
         }
     ],
-    defaultValues: {}
 }

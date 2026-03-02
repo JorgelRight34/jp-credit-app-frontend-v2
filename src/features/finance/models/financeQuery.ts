@@ -5,6 +5,8 @@ export interface FinanceQuery extends Query {
     interval?: 365 | 30 | 1;
     startDate?: string;
     endDate?: string;
-    scale?: string; // FOR NOW
-    type?: TransactionType
+    chart?: "pie" | "linear" | "bar"
+    type?: TransactionType;
+    vsStartDate?: string;
+    vsEndDate?: string;
 }

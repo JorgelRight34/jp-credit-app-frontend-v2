@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import Icon, { IconProps } from '../../icon/icon'
+import Icon, { IconProps } from '../../icon/components/icon'
 import type { ElementType, ReactNode } from 'react'
-import type { IconName } from '../../icon/iconName'
+import type { IconName } from '../../icon/models/iconName'
 
 export interface ButtonProps extends React.HtmlHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode

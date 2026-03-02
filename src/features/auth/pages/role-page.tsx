@@ -4,7 +4,6 @@ import {
   buildRoleBreadcrumb,
   rolesModuleBreadcrumb,
 } from '../lib/config/breadcrumbs'
-import { rolesPermissionProvider } from '../lib/config/permissionProvider'
 import UsersDataTable from '../components/users-datatable'
 import type { Role } from '../models/role'
 import type { IdentityPermissions } from '../models/identityPermissions'
@@ -52,7 +51,6 @@ const RolePage = ({ role, rolePermissions }: RolePageProps) => {
         ],
         breadcrumbsByRoute,
       }}
-      permissionProvider={rolesPermissionProvider}
     >
       <TabsRouter>
         <Tab eventKey="overview" title="Resumen">

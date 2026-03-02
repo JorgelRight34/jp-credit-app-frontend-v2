@@ -39,12 +39,23 @@ export const getProjectionsPerInterval = async (params: FinanceQuery): Promise<P
     return data;
 }
 
-export const getProjectedIncomes = async (params: FinanceQuery): Promise<FinancialBreakdown> => {
-    const { data } = await api.get(`${baseUrl}/payment-projection/summary`, {
+export const getProjectedIncomes = async (params: FinanceQuery): Promise<Array<FinancialBreakdown>> => {
+    const { data } = await api.get(`${baseUrl}/payment-projection/summaries`, {
         params: {
             start: params.startDate,
             end: params.endDate,
+            timeDiff: params.interval
         }
     })
     return data;
+}
+
+export const getIncomes = async (query: FinanceQuery) => {
+    const data = await getIncomesPerInterval(query)
+    return data.items
+}
+
+export const getExpenses = async (query: FinanceQuery) => {
+    const data = await getExpensesPerInterval(query)
+    return data.items
 }

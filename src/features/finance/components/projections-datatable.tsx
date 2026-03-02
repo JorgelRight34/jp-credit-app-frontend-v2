@@ -2,39 +2,31 @@ import {
   GroupedTable,
   SearchFormContainer,
   SearchFormValueConsumer,
-  Tab,
-  Tabs,
-  TrendingUpIcon,
 } from '@/components'
-import { financeSearchConfig } from '../lib/config/finance-search-config'
-import { FinanceQuery } from '../models/financeQuery'
+import { financeTableSearchConfig } from '../lib/config/finance-search-config'
 import {
   getTodayAsInputDate,
   getTodayWithDaysFromNow,
   toInputDate,
 } from '@/lib/utils'
+import { FinanceQuery } from '../models/financeQuery'
 import { useGroupedProjections } from '../hooks/useGroupedProjections'
 import { buildProjectionTableColumns } from '../lib/config/finance-datatable-config'
 
-const ProjectionsSection = () => {
+const ProjectionsDataTable = () => {
   return (
     <SearchFormContainer
-      searchConfig={financeSearchConfig}
+      searchConfig={financeTableSearchConfig}
       initialQuery={{
+        options: 1,
         startDate: getTodayAsInputDate(),
-        endDate: toInputDate(getTodayWithDaysFromNow(30)),
+        endDate: toInputDate(getTodayWithDaysFromNow(30 * 12 * 6)),
         interval: 30,
-        scale: '',
       }}
     >
-      <Tabs variation="minimal" defaultActiveKey="table">
-        <Tab eventKey="table" title="Tabla">
-          <SearchFormValueConsumer<FinanceQuery>
-            render={(query) => <ProjectionsGroupedTable query={query} />}
-          />
-        </Tab>
-        <Tab eventKey="chart" title="Grafica" icon={TrendingUpIcon}></Tab>
-      </Tabs>
+      <SearchFormValueConsumer<FinanceQuery>
+        render={(query) => <ProjectionsGroupedTable query={query} />}
+      />
     </SearchFormContainer>
   )
 }
@@ -48,6 +40,7 @@ const ProjectionsGroupedTable = ({ query }: { query: FinanceQuery }) => {
   return (
     <GroupedTable
       groupPageSize={10}
+      data={projections?.items}
       columns={buildProjectionTableColumns(
         projections?.loansMap,
         period?.start,
@@ -60,4 +53,4 @@ const ProjectionsGroupedTable = ({ query }: { query: FinanceQuery }) => {
   )
 }
 
-export default ProjectionsSection
+export default ProjectionsDataTable

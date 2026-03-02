@@ -11,7 +11,6 @@ import {
   buildFollowUpBreadcrumb,
   followUpBreadcrumb,
 } from '../lib/config/breadcrumb'
-import { followUpPermissionProvider } from '../lib/config/permission-provider'
 import FollowUpOverview from '../components/follow-up-overview'
 
 const FollowUpPage = ({ followUp }: { followUp: FollowUp }) => {
@@ -32,7 +31,6 @@ const FollowUpPage = ({ followUp }: { followUp: FollowUp }) => {
           ]}
         />
       }
-      permissionProvider={followUpPermissionProvider}
     >
       <TabList>
         <Tab title="Resumen" isActive />

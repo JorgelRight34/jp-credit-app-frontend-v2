@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import type { DefaultFormValues, SchemaType } from "../../form";
+import type { FieldValues, SchemaType, UseFormSetValue } from "../../form";
+import { Path } from "react-hook-form";
 
 export type SearchFormOption<T> = {
     name: keyof T;
@@ -9,9 +10,10 @@ export type SearchFormOption<T> = {
     type: (props: any) => ReactNode;
 }
 
-export interface SearchFormConfig<T> {
+export interface SearchFormConfig<T extends FieldValues> {
     options: Array<SearchFormOption<T>>;
     advanced: Array<SearchFormOption<T>>;
-    defaultValues: DefaultFormValues<T>;
     schema?: SchemaType<T>;
+    watchedValues?: Array<Path<T>>;
+    onWatchedValuesChange?: (form: T, setForm: UseFormSetValue<T>) => void;
 }

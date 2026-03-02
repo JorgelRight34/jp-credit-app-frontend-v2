@@ -7,7 +7,6 @@ import {
   TabList,
 } from '@/components'
 import { followUpBreadcrumb } from '../lib/config/breadcrumb'
-import { followUpPermissionProvider } from '../lib/config/permission-provider'
 import FollowUpDataTable from '../components/follow-up-datatable'
 
 const FollowUpsPage = () => {
@@ -20,7 +19,6 @@ const FollowUpsPage = () => {
           breadcrumbs={[followUpBreadcrumb, { title: 'Todos', icon: AllIcon }]}
         />
       }
-      permissionProvider={followUpPermissionProvider}
     >
       <TabList>
         <Tab title="Todos" isActive />

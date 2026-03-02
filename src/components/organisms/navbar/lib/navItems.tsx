@@ -364,25 +364,22 @@ export const reportsNavItem: NavItem = {
 export const financesNavItem: NavItem = {
   name: 'Finanzas',
   icon: () => <QueryStatsIcon />,
-  route: '/finance',
+  route: '/finance/projections',
   children: [
     {
       name: 'Proyecciones',
       icon: () => <TrendingUpIcon />,
-      route: '/finance',
-      search: { tab: 'projections' },
+      route: '/finance/projections',
     },
     {
       name: 'Ingresos',
       icon: () => <AttachMoneyIcon />,
-      route: '/finance',
-      search: { tab: 'incomes' },
+      route: '/finance/incomes',
     },
     {
       name: 'Egresos',
       icon: () => <AccountBalanceWalletIcon />,
-      route: '/finance',
-      search: { tab: 'expenses' },
+      route: '/finance/expenses',
     },
   ],
 }

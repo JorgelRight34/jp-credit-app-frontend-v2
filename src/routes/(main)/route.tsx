@@ -39,7 +39,7 @@ function RouteComponent() {
   return (
     <div className="flex flex-col md:flex-row h-screen relative">
       <AuthProvider user={user}>
-        <ProjectIdProvider initialProjectId={getProjectIdFn() ?? null}>
+        <ProjectIdProvider initialProjectId={getProjectIdFn()}>
           <div className="w-full md:w-2/14 hidden md:block h-full p-0 shadow-sm">
             <Navbar />
           </div>

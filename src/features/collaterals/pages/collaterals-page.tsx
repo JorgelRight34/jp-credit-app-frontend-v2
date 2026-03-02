@@ -1,4 +1,3 @@
-import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
 import { collateralsBreadcrumb } from '../lib/config/breadcrumbs'
 import CollateralDataTable from '../components/collaterals-datatable'
 import { CollateralTypeMap } from '../models/collateralType'
@@ -27,7 +26,6 @@ const CollateralsPage = () => {
   return (
     <PageRouterLayout
       title="Garantías"
-      permissionProvider={collateralsPermissionProvider}
       options={[buildPageLayoutCreateOption('/collaterals/create')]}
       routerConfig={{
         defaultActive: 'all',

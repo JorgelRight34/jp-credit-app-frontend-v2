@@ -4,12 +4,12 @@
 export * from "./button"
 export { default as ToggleButtonGroup } from "./button/components/toggle-button-group";
 export { default as LightBtn } from "./button/components/light-btn";
-export * from "./icon/iconName";
+export * from "./icon/models/iconName";
 
 // -------------------------------------
 // Icon & Text
 // -------------------------------------
-export { default as Icon } from "./icon/icon";
+export { default as Icon } from "./icon/components/icon";
 export { default as Subtitle } from "./text/subtitle";
 export { default as FormLabel } from "./form-label/form-label";
 export { default as Paragraph } from "./text/paragraph"

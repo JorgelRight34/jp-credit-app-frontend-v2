@@ -1,5 +1,5 @@
 import { Activity, useState } from 'react'
-import { Form, FormInput } from '../../form'
+import { Form, FormInput, useHasFormEverBeenDirty } from '../../form'
 import { WIDTH_CLASS_MAP } from '../lib/constants'
 import type { PropsWithChildren } from 'react'
 import type { DefaultFormValues, SchemaType } from '../../form'
@@ -14,7 +14,7 @@ import {
   RestoreIcon,
   SearchIcon,
 } from '@/components/atoms'
-import { FieldValues, useFormState } from 'react-hook-form'
+import { FieldValues } from 'react-hook-form'
 import { useSearchFormSubmit } from '../providers/search-form-provider'
 import { useFormMethods, UseFormReturn } from '../../form/hooks/useFormMethods'
 
@@ -23,7 +23,6 @@ interface SearchFormProps<T extends Query> {
   advanced: Array<SearchFormOption<T>>
   schema?: SchemaType<T>
   defaultValues?: DefaultFormValues<T>
-  initialValues?: Partial<T>
 }
 
 const SearchForm = <T extends Query>({
@@ -31,17 +30,13 @@ const SearchForm = <T extends Query>({
   advanced,
   schema,
   defaultValues,
-  initialValues,
 }: SearchFormProps<T>) => {
   const onSubmit = useSearchFormSubmit()
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [hasOpenedAdvanced, setHasOpenedAdvanced] = useState(false)
   const form = useFormMethods({
     schema,
-    defaultValues: {
-      ...defaultValues,
-      ...initialValues,
-    } as DefaultFormValues<T>,
+    defaultValues,
     handleOnSubmit: onSubmit,
   })
 
@@ -81,8 +76,8 @@ const SearchForm = <T extends Query>({
             </div>
           </div>
           <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
-            <div className="rounded-xl flex-col flex mt-3 flex w-full flex-wrap space-y-3 shadow-sm border bg-white">
-              <div className="flex-1 p-3">
+            <div className="rounded-xl flex-col flex mt-3 flex w-full shadow-sm border bg-white">
+              <div className="flex-1 flex flex-wrap space-y-3 p-3">
                 {hasOpenedAdvanced &&
                   advanced.map((option) => (
                     <AdvancedSearchFormGroup
@@ -113,11 +108,11 @@ const SubmitBtn = <T extends FieldValues>({
 }: {
   form: UseFormReturn<T>
 }) => {
-  const { isDirty } = useFormState({ control: form.control })
+  const hasEverBeenDirty = useHasFormEverBeenDirty(form.control)
 
   return (
     <AccentBtn
-      disabled={!isDirty}
+      disabled={!hasEverBeenDirty}
       icon={SearchIcon}
       className="shadow-sm"
       onClick={form.submit}

@@ -14,5 +14,4 @@ export const followUpSearchConfig: SearchFormConfig<FollowUpQuery> = {
         { name: "startDate", label: "Fecha inicio", width: 6, type: p => DateInput(p) },
         { name: "endDate", label: "Fecha fin", width: 6, type: p => DateInput(p) }
     ],
-    defaultValues: { id: '', title: '', loanId: '', clientId: '', startDate: '', endDate: '' }
 }

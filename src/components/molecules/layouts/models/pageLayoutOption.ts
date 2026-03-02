@@ -1,5 +1,5 @@
 import type { ElementType } from "react";
-import type { IconName } from "@/components/atoms/icon/iconName";
+import type { IconName } from "@/components/atoms/icon/models/iconName";
 import type { Route, RouteParams } from "@/components/atoms";
 
 export interface LayoutOption {

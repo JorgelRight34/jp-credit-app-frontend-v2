@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import type { Editor } from '@tiptap/react'
-import type { IconName } from '@/components/atoms/icon/iconName'
+import type { IconName } from '@/components/atoms/icon/models/iconName'
 import {
   CodeIcon,
   FormatBoldIcon,

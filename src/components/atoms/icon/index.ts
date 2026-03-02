@@ -174,7 +174,9 @@ export { default as FollowUpIcon } from '@mui/icons-material/AssignmentOutlined'
 export { default as AccountStatementsIcon } from '@mui/icons-material/AccountBalanceOutlined'
 export { default as ClientIcon } from '@mui/icons-material/PersonOutline'
 export { default as GuarantorIcon } from '@mui/icons-material/PersonOutline'
-export { default as FInanceIcon } from '@mui/icons-material/QueryStatsOutlined'
+export { default as FinanceIcon } from '@mui/icons-material/QueryStatsOutlined'
+export { default as TableRowsIcon } from '@mui/icons-material/TableRowsOutlined'
+export { default as BarChartIcon } from '@mui/icons-material/BarChartOutlined'
+export { default as TableChartIcon } from '@mui/icons-material/TableChart';
 
-
-export { default as Icon } from "./icon";
+export { default as Icon } from "./components/icon";

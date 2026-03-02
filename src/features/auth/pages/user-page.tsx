@@ -1,4 +1,3 @@
-import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import {
   accessControlBreadcrumb,
   buildUserBreadcrumb,
@@ -37,7 +36,6 @@ const UserPage = ({ user, userPermissions }: UserPageProps) => {
   return (
     <PageRouterLayout
       title={`${getFullName(user)} - ${user.username}`}
-      permissionProvider={accessControlPermissionProvider}
       options={[
         buildPageLayoutEditOption('/access-control/users/$username/edit', {
           username: user.username,

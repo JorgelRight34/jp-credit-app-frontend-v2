@@ -10,7 +10,6 @@ import {
   Tab,
   TabsRouter,
 } from '@/components'
-import { accountStatementsPermissionProvider } from '../lib/config/permissions-provider'
 import {
   accountStatementSearchConfig,
   clientAccountStatementSearchConfig,
@@ -40,7 +39,6 @@ const AccountStatementsPage = () => {
         baseBreadcrumbs: [breadcrumb],
         breadcrumbsByRoute,
       }}
-      permissionProvider={accountStatementsPermissionProvider}
     >
       <TabsRouter>
         <Tab eventKey="all" title="Todos">

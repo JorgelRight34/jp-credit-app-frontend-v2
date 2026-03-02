@@ -1,8 +1,11 @@
 import { DataTableBuilder, type Row } from '@/components'
-import { FinancialBreakdown } from './models/financialBreakdown'
-import { transactionDataTableConfig, TransactionType } from '../transactions'
-import { transactionsQueryKey } from '../transactions/lib/constants'
 import { dateToIsoString } from '@/lib/utils'
+import { FinancialBreakdown } from '../models/financialBreakdown'
+import {
+  transactionDataTableConfig,
+  TransactionType,
+} from '@/features/transactions'
+import { transactionsQueryKey } from '@/features/transactions/lib/constants'
 
 export function buildFinanceTableOnExpand<T>(types: Array<TransactionType>) {
   return (row: Row<FinancialBreakdown<T>>) => (

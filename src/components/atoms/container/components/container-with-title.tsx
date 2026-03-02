@@ -1,5 +1,5 @@
 import { Icon } from '../../icon'
-import { IconName } from '../../icon/iconName'
+import { IconName } from '../../icon/models/iconName'
 import Container, { ContainerProps } from './container'
 
 interface ContainerWithTitleProps extends ContainerProps {

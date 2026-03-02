@@ -11,5 +11,4 @@ export const adjusmentNoteSearchConfig: SearchFormConfig<AdjustmentNoteQuery> = 
     advanced: [
         { name: "loanId", label: "Préstamo", width: 6, type: p => LoanSearchInput(p) }
     ],
-    defaultValues: { id: '', startDate: '', endDate: '', loanId: '' }
 }

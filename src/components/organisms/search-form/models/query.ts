@@ -1,4 +1,6 @@
-export type Query = {
+import { FieldValues } from "react-hook-form";
+
+export interface Query extends FieldValues {
   id?: number;
   startDate?: string;
   endDate?: string;
@@ -13,4 +15,5 @@ export type Query = {
   profileAs?: any;
   limit?: number;
   all?: boolean;
+  options?: number;
 }

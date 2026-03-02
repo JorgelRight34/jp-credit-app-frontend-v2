@@ -1,4 +1,4 @@
-import type { IconName } from '@/components/atoms/icon/iconName'
+import type { IconName } from '@/components/atoms/icon/models/iconName'
 import { AccentPillBtn, CheckCircleIcon } from '@/components/atoms'
 
 export interface FormSubmitBtnProps {

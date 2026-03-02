@@ -1,6 +1,6 @@
 import { startTransition, useState } from 'react'
 import type { FileModel } from '@/models/fileModel'
-import type { IconName } from '@/components/atoms/icon/iconName'
+import type { IconName } from '@/components/atoms/icon/models/iconName'
 import { Icon, ImageIcon, LightBox } from '@/components'
 
 export interface TablePhotoCellProps {

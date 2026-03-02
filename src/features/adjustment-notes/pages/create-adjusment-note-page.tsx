@@ -4,6 +4,7 @@ import {
   CreditIcon,
   DebitIcon,
   PageRouterLayout,
+  ProtectedComponent,
   Tab,
   TabsRouter,
 } from '@/components'
@@ -25,17 +26,20 @@ const CreateAdjustmentNotePage = () => {
         baseBreadcrumbs: [adjustmentNotesBreadcrumb],
         breadcrumbsByRoute,
       }}
-      permissionProvider={adjustmentNotesPermissionProvider}
-      isAuthorizedFn={(p) => p.canCreate}
     >
-      <TabsRouter>
-        <Tab eventKey="nc" title="Crédito">
-          <AdjustmentNoteForm initialValues={{ type: 'nc' }} />
-        </Tab>
-        <Tab eventKey="nd" title="Débito">
-          <AdjustmentNoteForm initialValues={{ type: 'nd' }} />
-        </Tab>
-      </TabsRouter>
+      <ProtectedComponent
+        provider={adjustmentNotesPermissionProvider}
+        isAuthorizedFn={(p) => p.canCreate}
+      >
+        <TabsRouter>
+          <Tab eventKey="nc" title="Crédito">
+            <AdjustmentNoteForm initialValues={{ type: 'nc' }} />
+          </Tab>
+          <Tab eventKey="nd" title="Débito">
+            <AdjustmentNoteForm initialValues={{ type: 'nd' }} />
+          </Tab>
+        </TabsRouter>
+      </ProtectedComponent>
     </PageRouterLayout>
   )
 }

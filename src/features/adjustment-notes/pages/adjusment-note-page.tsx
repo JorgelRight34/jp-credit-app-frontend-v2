@@ -8,7 +8,6 @@ import {
 } from '@/components'
 import { AdjustmentNote } from '../models/adjustmentNote'
 import { buildAdjustmentNoteLabel } from '../lib/utils'
-import { adjustmentNotesPermissionProvider } from '../lib/config/permission-provider'
 import {
   adjustmentNotesBreadcrumb,
   buildAdjustmentNoteBreadcrumb,
@@ -24,7 +23,6 @@ const AdjustmentNotePage = ({
   return (
     <PageLayout
       title={buildAdjustmentNoteLabel(adjustmentNote)}
-      permissionProvider={adjustmentNotesPermissionProvider}
       options={[
         buildPageLayoutConfirmationModalOption(
           {

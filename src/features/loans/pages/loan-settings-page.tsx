@@ -5,6 +5,7 @@ import {
   TabList,
   Tab,
   buildPageLayoutConfirmationModalOption,
+  ProtectedComponent,
 } from '@/components'
 import { Loan } from '../models/loan'
 import { loanPermissionProvider } from '../lib/config/permission-provider'
@@ -21,8 +22,6 @@ const LoanSettingsPage = ({ loan }: LoanSettingsPageProps) => {
   return (
     <PageLayout
       title={`${buildLoanLabel(loan)} / Ajustes`}
-      permissionProvider={loanPermissionProvider}
-      isAuthorizedFn={(p) => p.canEdit}
       options={[
         buildPageLayoutConfirmationModalOption(
           {
@@ -46,10 +45,15 @@ const LoanSettingsPage = ({ loan }: LoanSettingsPageProps) => {
         />
       }
     >
-      <TabList>
-        <Tab title="Estado" isActive />
-      </TabList>
-      <LoanStatusForm loan={loan} />
+      <ProtectedComponent
+        provider={loanPermissionProvider}
+        isAuthorizedFn={(p) => p.canEdit}
+      >
+        <TabList>
+          <Tab title="Estado" isActive />
+        </TabList>
+        <LoanStatusForm loan={loan} />
+      </ProtectedComponent>
     </PageLayout>
   )
 }

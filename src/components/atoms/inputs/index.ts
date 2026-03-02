@@ -31,3 +31,5 @@ export * from "./select/select-option"
 export * from "./transfer-list/transfer-list"
 export * from "./transfer-list/transfer-list-box"
 export { default as DaysIntervalSelect } from './select/days-interval-select'
+
+export * from './select/lib/utils'

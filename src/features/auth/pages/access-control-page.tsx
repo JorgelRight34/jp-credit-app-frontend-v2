@@ -1,7 +1,6 @@
 import RolesDataTable from '../components/roles-datatable'
 import UsersDataTable from '../components/users-datatable'
 import { accessControlBreadcrumb } from '../lib/config/breadcrumbs'
-import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import type { BreadcrumbsByRoute } from '@/components'
 import {
   AddIcon,
@@ -15,20 +14,8 @@ import {
 } from '@/components'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  users: [
-    {
-      icon: () => <PersonIcon />,
-      title: 'Usuarios',
-      pathname: '.',
-    },
-  ],
-  roles: [
-    {
-      icon: () => <AdminPanelSettingsIcon />,
-      title: 'Roles',
-      pathname: '.',
-    },
-  ],
+  users: [{ icon: PersonIcon, title: 'Usuarios' }],
+  roles: [{ icon: AdminPanelSettingsIcon, title: 'Roles' }],
 }
 
 const AccessControlPage = () => {
@@ -44,7 +31,6 @@ const AccessControlPage = () => {
         },
         buildPageLayoutCreateOption('/access-control/users/create'),
       ]}
-      permissionProvider={accessControlPermissionProvider}
       routerConfig={{
         defaultActive: 'users',
         breadcrumbsByRoute,

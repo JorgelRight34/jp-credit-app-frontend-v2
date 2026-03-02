@@ -13,8 +13,7 @@ export interface UseDataProps<T> extends UseApiQueryOptions<T> {
     loader?: () => Promise<T> | T;
 }
 
-export const useData = <T,>({ key, loader, log = false, ...options }: UseDataProps<T>) => {
-    if (log) console.log(key)
+export const useData = <T,>({ key, loader, ...options }: UseDataProps<T>) => {
     return useQuery({
         queryKey: key,
         queryFn: (loader ?? (() => { return undefined as T })),
@@ -22,8 +21,7 @@ export const useData = <T,>({ key, loader, log = false, ...options }: UseDataPro
     });
 }
 
-export const useSuspenseData = <T,>({ key, loader, log = false, ...options }: UseDataProps<T>) => {
-    if (log) console.log(key)
+export const useSuspenseData = <T,>({ key, loader, ...options }: UseDataProps<T>) => {
     return useSuspenseQuery({
         queryKey: key,
         queryFn: (loader ?? (() => { return undefined as T })),

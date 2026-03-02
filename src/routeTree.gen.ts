@@ -18,7 +18,6 @@ import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(m
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
 import { Route as mainmodulesFollowUpsIndexRouteImport } from './routes/(main)/(modules)/follow-ups/index'
-import { Route as mainmodulesFinanceIndexRouteImport } from './routes/(main)/(modules)/finance/index'
 import { Route as mainmodulesCollateralsIndexRouteImport } from './routes/(main)/(modules)/collaterals/index'
 import { Route as mainmodulesAmortizationsIndexRouteImport } from './routes/(main)/(modules)/amortizations/index'
 import { Route as mainmodulesAdjustmentNotesIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/index'
@@ -35,6 +34,9 @@ import { Route as mainmodulesLoansCreateIndexRouteImport } from './routes/(main)
 import { Route as mainmodulesLoansIdIndexRouteImport } from './routes/(main)/(modules)/loans/$id/index'
 import { Route as mainmodulesFollowUpsCreateIndexRouteImport } from './routes/(main)/(modules)/follow-ups/create/index'
 import { Route as mainmodulesFollowUpsIdIndexRouteImport } from './routes/(main)/(modules)/follow-ups/$id/index'
+import { Route as mainmodulesFinanceProjectionsIndexRouteImport } from './routes/(main)/(modules)/finance/projections/index'
+import { Route as mainmodulesFinanceIncomesIndexRouteImport } from './routes/(main)/(modules)/finance/incomes/index'
+import { Route as mainmodulesFinanceExpensesIndexRouteImport } from './routes/(main)/(modules)/finance/expenses/index'
 import { Route as mainmodulesCollateralsCreateIndexRouteImport } from './routes/(main)/(modules)/collaterals/create/index'
 import { Route as mainmodulesCollateralsIdIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/index'
 import { Route as mainmodulesAdjustmentNotesCreateIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/create/index'
@@ -99,11 +101,6 @@ const mainmodulesFollowUpsIndexRoute =
     path: '/follow-ups/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesFinanceIndexRoute = mainmodulesFinanceIndexRouteImport.update({
-  id: '/finance/',
-  path: '/finance/',
-  getParentRoute: () => mainmodulesRouteRoute,
-} as any)
 const mainmodulesCollateralsIndexRoute =
   mainmodulesCollateralsIndexRouteImport.update({
     id: '/collaterals/',
@@ -197,6 +194,24 @@ const mainmodulesFollowUpsIdIndexRoute =
   mainmodulesFollowUpsIdIndexRouteImport.update({
     id: '/follow-ups/$id/',
     path: '/follow-ups/$id/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesFinanceProjectionsIndexRoute =
+  mainmodulesFinanceProjectionsIndexRouteImport.update({
+    id: '/finance/projections/',
+    path: '/finance/projections/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesFinanceIncomesIndexRoute =
+  mainmodulesFinanceIncomesIndexRouteImport.update({
+    id: '/finance/incomes/',
+    path: '/finance/incomes/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesFinanceExpensesIndexRoute =
+  mainmodulesFinanceExpensesIndexRouteImport.update({
+    id: '/finance/expenses/',
+    path: '/finance/expenses/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesCollateralsCreateIndexRoute =
@@ -304,7 +319,6 @@ export interface FileRoutesByFullPath {
   '/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
   '/amortizations/': typeof mainmodulesAmortizationsIndexRoute
   '/collaterals/': typeof mainmodulesCollateralsIndexRoute
-  '/finance/': typeof mainmodulesFinanceIndexRoute
   '/follow-ups/': typeof mainmodulesFollowUpsIndexRoute
   '/loans/': typeof mainmodulesLoansIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
@@ -314,6 +328,9 @@ export interface FileRoutesByFullPath {
   '/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
   '/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
   '/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
+  '/finance/expenses/': typeof mainmodulesFinanceExpensesIndexRoute
+  '/finance/incomes/': typeof mainmodulesFinanceIncomesIndexRoute
+  '/finance/projections/': typeof mainmodulesFinanceProjectionsIndexRoute
   '/follow-ups/$id/': typeof mainmodulesFollowUpsIdIndexRoute
   '/follow-ups/create/': typeof mainmodulesFollowUpsCreateIndexRoute
   '/loans/$id/': typeof mainmodulesLoansIdIndexRoute
@@ -346,7 +363,6 @@ export interface FileRoutesByTo {
   '/adjustment-notes': typeof mainmodulesAdjustmentNotesIndexRoute
   '/amortizations': typeof mainmodulesAmortizationsIndexRoute
   '/collaterals': typeof mainmodulesCollateralsIndexRoute
-  '/finance': typeof mainmodulesFinanceIndexRoute
   '/follow-ups': typeof mainmodulesFollowUpsIndexRoute
   '/loans': typeof mainmodulesLoansIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
@@ -356,6 +372,9 @@ export interface FileRoutesByTo {
   '/adjustment-notes/create': typeof mainmodulesAdjustmentNotesCreateIndexRoute
   '/collaterals/$id': typeof mainmodulesCollateralsIdIndexRoute
   '/collaterals/create': typeof mainmodulesCollateralsCreateIndexRoute
+  '/finance/expenses': typeof mainmodulesFinanceExpensesIndexRoute
+  '/finance/incomes': typeof mainmodulesFinanceIncomesIndexRoute
+  '/finance/projections': typeof mainmodulesFinanceProjectionsIndexRoute
   '/follow-ups/$id': typeof mainmodulesFollowUpsIdIndexRoute
   '/follow-ups/create': typeof mainmodulesFollowUpsCreateIndexRoute
   '/loans/$id': typeof mainmodulesLoansIdIndexRoute
@@ -391,7 +410,6 @@ export interface FileRoutesById {
   '/(main)/(modules)/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
   '/(main)/(modules)/amortizations/': typeof mainmodulesAmortizationsIndexRoute
   '/(main)/(modules)/collaterals/': typeof mainmodulesCollateralsIndexRoute
-  '/(main)/(modules)/finance/': typeof mainmodulesFinanceIndexRoute
   '/(main)/(modules)/follow-ups/': typeof mainmodulesFollowUpsIndexRoute
   '/(main)/(modules)/loans/': typeof mainmodulesLoansIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
@@ -401,6 +419,9 @@ export interface FileRoutesById {
   '/(main)/(modules)/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
   '/(main)/(modules)/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
   '/(main)/(modules)/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
+  '/(main)/(modules)/finance/expenses/': typeof mainmodulesFinanceExpensesIndexRoute
+  '/(main)/(modules)/finance/incomes/': typeof mainmodulesFinanceIncomesIndexRoute
+  '/(main)/(modules)/finance/projections/': typeof mainmodulesFinanceProjectionsIndexRoute
   '/(main)/(modules)/follow-ups/$id/': typeof mainmodulesFollowUpsIdIndexRoute
   '/(main)/(modules)/follow-ups/create/': typeof mainmodulesFollowUpsCreateIndexRoute
   '/(main)/(modules)/loans/$id/': typeof mainmodulesLoansIdIndexRoute
@@ -435,7 +456,6 @@ export interface FileRouteTypes {
     | '/adjustment-notes/'
     | '/amortizations/'
     | '/collaterals/'
-    | '/finance/'
     | '/follow-ups/'
     | '/loans/'
     | '/profiles/'
@@ -445,6 +465,9 @@ export interface FileRouteTypes {
     | '/adjustment-notes/create/'
     | '/collaterals/$id/'
     | '/collaterals/create/'
+    | '/finance/expenses/'
+    | '/finance/incomes/'
+    | '/finance/projections/'
     | '/follow-ups/$id/'
     | '/follow-ups/create/'
     | '/loans/$id/'
@@ -477,7 +500,6 @@ export interface FileRouteTypes {
     | '/adjustment-notes'
     | '/amortizations'
     | '/collaterals'
-    | '/finance'
     | '/follow-ups'
     | '/loans'
     | '/profiles'
@@ -487,6 +509,9 @@ export interface FileRouteTypes {
     | '/adjustment-notes/create'
     | '/collaterals/$id'
     | '/collaterals/create'
+    | '/finance/expenses'
+    | '/finance/incomes'
+    | '/finance/projections'
     | '/follow-ups/$id'
     | '/follow-ups/create'
     | '/loans/$id'
@@ -521,7 +546,6 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/adjustment-notes/'
     | '/(main)/(modules)/amortizations/'
     | '/(main)/(modules)/collaterals/'
-    | '/(main)/(modules)/finance/'
     | '/(main)/(modules)/follow-ups/'
     | '/(main)/(modules)/loans/'
     | '/(main)/(modules)/profiles/'
@@ -531,6 +555,9 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/adjustment-notes/create/'
     | '/(main)/(modules)/collaterals/$id/'
     | '/(main)/(modules)/collaterals/create/'
+    | '/(main)/(modules)/finance/expenses/'
+    | '/(main)/(modules)/finance/incomes/'
+    | '/(main)/(modules)/finance/projections/'
     | '/(main)/(modules)/follow-ups/$id/'
     | '/(main)/(modules)/follow-ups/create/'
     | '/(main)/(modules)/loans/$id/'
@@ -624,13 +651,6 @@ declare module '@tanstack/react-router' {
       path: '/follow-ups'
       fullPath: '/follow-ups/'
       preLoaderRoute: typeof mainmodulesFollowUpsIndexRouteImport
-      parentRoute: typeof mainmodulesRouteRoute
-    }
-    '/(main)/(modules)/finance/': {
-      id: '/(main)/(modules)/finance/'
-      path: '/finance'
-      fullPath: '/finance/'
-      preLoaderRoute: typeof mainmodulesFinanceIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/collaterals/': {
@@ -743,6 +763,27 @@ declare module '@tanstack/react-router' {
       path: '/follow-ups/$id'
       fullPath: '/follow-ups/$id/'
       preLoaderRoute: typeof mainmodulesFollowUpsIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/finance/projections/': {
+      id: '/(main)/(modules)/finance/projections/'
+      path: '/finance/projections'
+      fullPath: '/finance/projections/'
+      preLoaderRoute: typeof mainmodulesFinanceProjectionsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/finance/incomes/': {
+      id: '/(main)/(modules)/finance/incomes/'
+      path: '/finance/incomes'
+      fullPath: '/finance/incomes/'
+      preLoaderRoute: typeof mainmodulesFinanceIncomesIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/finance/expenses/': {
+      id: '/(main)/(modules)/finance/expenses/'
+      path: '/finance/expenses'
+      fullPath: '/finance/expenses/'
+      preLoaderRoute: typeof mainmodulesFinanceExpensesIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/collaterals/create/': {
@@ -866,7 +907,6 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesAdjustmentNotesIndexRoute: typeof mainmodulesAdjustmentNotesIndexRoute
   mainmodulesAmortizationsIndexRoute: typeof mainmodulesAmortizationsIndexRoute
   mainmodulesCollateralsIndexRoute: typeof mainmodulesCollateralsIndexRoute
-  mainmodulesFinanceIndexRoute: typeof mainmodulesFinanceIndexRoute
   mainmodulesFollowUpsIndexRoute: typeof mainmodulesFollowUpsIndexRoute
   mainmodulesLoansIndexRoute: typeof mainmodulesLoansIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
@@ -876,6 +916,9 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesAdjustmentNotesCreateIndexRoute: typeof mainmodulesAdjustmentNotesCreateIndexRoute
   mainmodulesCollateralsIdIndexRoute: typeof mainmodulesCollateralsIdIndexRoute
   mainmodulesCollateralsCreateIndexRoute: typeof mainmodulesCollateralsCreateIndexRoute
+  mainmodulesFinanceExpensesIndexRoute: typeof mainmodulesFinanceExpensesIndexRoute
+  mainmodulesFinanceIncomesIndexRoute: typeof mainmodulesFinanceIncomesIndexRoute
+  mainmodulesFinanceProjectionsIndexRoute: typeof mainmodulesFinanceProjectionsIndexRoute
   mainmodulesFollowUpsIdIndexRoute: typeof mainmodulesFollowUpsIdIndexRoute
   mainmodulesFollowUpsCreateIndexRoute: typeof mainmodulesFollowUpsCreateIndexRoute
   mainmodulesLoansIdIndexRoute: typeof mainmodulesLoansIdIndexRoute
@@ -908,7 +951,6 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesAdjustmentNotesIndexRoute: mainmodulesAdjustmentNotesIndexRoute,
   mainmodulesAmortizationsIndexRoute: mainmodulesAmortizationsIndexRoute,
   mainmodulesCollateralsIndexRoute: mainmodulesCollateralsIndexRoute,
-  mainmodulesFinanceIndexRoute: mainmodulesFinanceIndexRoute,
   mainmodulesFollowUpsIndexRoute: mainmodulesFollowUpsIndexRoute,
   mainmodulesLoansIndexRoute: mainmodulesLoansIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
@@ -921,6 +963,10 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesCollateralsIdIndexRoute: mainmodulesCollateralsIdIndexRoute,
   mainmodulesCollateralsCreateIndexRoute:
     mainmodulesCollateralsCreateIndexRoute,
+  mainmodulesFinanceExpensesIndexRoute: mainmodulesFinanceExpensesIndexRoute,
+  mainmodulesFinanceIncomesIndexRoute: mainmodulesFinanceIncomesIndexRoute,
+  mainmodulesFinanceProjectionsIndexRoute:
+    mainmodulesFinanceProjectionsIndexRoute,
   mainmodulesFollowUpsIdIndexRoute: mainmodulesFollowUpsIdIndexRoute,
   mainmodulesFollowUpsCreateIndexRoute: mainmodulesFollowUpsCreateIndexRoute,
   mainmodulesLoansIdIndexRoute: mainmodulesLoansIdIndexRoute,

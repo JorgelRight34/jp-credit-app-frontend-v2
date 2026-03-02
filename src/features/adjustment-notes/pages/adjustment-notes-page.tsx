@@ -8,7 +8,6 @@ import {
   Tab,
   TabsRouter,
 } from '@/components'
-import { adjustmentNotesPermissionProvider } from '../lib/config/permission-provider'
 import { adjustmentNotesBreadcrumb } from '../lib/config/breadcrumbs'
 import AdjustmentNoteDataTable from '../components/adjusment-note-datatable'
 
@@ -22,7 +21,6 @@ const AdjustmentNotesPage = () => {
   return (
     <PageRouterLayout
       title="Notas de ajuste"
-      permissionProvider={adjustmentNotesPermissionProvider}
       options={[buildPageLayoutCreateOption('/adjustment-notes/create')]}
       routerConfig={{
         defaultActive: 'nc',

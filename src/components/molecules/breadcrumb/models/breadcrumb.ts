@@ -1,4 +1,4 @@
-import type { IconName } from "@/components/atoms/icon/iconName";
+import type { IconName } from "@/components/atoms/icon/models/iconName";
 import type { Route, RouteParams, Search } from "@/components/atoms";
 
 export interface BreadcrumbSpec {

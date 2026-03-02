@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import clsx from 'clsx'
 import type { ElementType, ReactNode } from 'react'
-import type { IconName } from './iconName'
+import type { IconName } from '../models/iconName'
 
 /**
  * Props for the Icon component

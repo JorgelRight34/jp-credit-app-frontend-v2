@@ -1,6 +1,6 @@
 import { IconButton, InputAdornment } from '@mui/material'
-import type { IconName } from '@/components/atoms/icon/iconName'
-import Icon from '@/components/atoms/icon/icon'
+import type { IconName } from '@/components/atoms/icon/models/iconName'
+import Icon from '@/components/atoms/icon/components/icon'
 
 export type IconInputSlotProps = {
   iconDirection?: string
