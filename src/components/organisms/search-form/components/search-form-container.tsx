@@ -28,6 +28,7 @@ const SearchFormContainer = <TQuery extends Query>({
             defaultValues={initialQuery}
             advanced={searchConfig.advanced}
             schema={searchConfig.schema}
+            onExport={searchConfig.onExport}
           />
         </div>
         <div>{children}</div>

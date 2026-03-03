@@ -1,12 +1,13 @@
 import { generateUsername } from "./utils";
-import type { UseFormSetValue } from "react-hook-form";
 import type { UserFormValues } from "./schemas/userFormSchema";
+import { WatchedValuesChangeHandler } from "@/components";
 
-export const updateUsernameOnForm = (
-    { lastName, firstName }: UserFormValues,
-    setValue: UseFormSetValue<UserFormValues>
-) => {
+export const updateUsernameOnForm: WatchedValuesChangeHandler<UserFormValues> = (context) => {
+    if (context.formState.isDirty === false) return;
+
+    const { lastName, firstName } = context.getValues();
+
     if (lastName && firstName) {
-        setValue("username", generateUsername(firstName.trim(), lastName.trim()));
+        context.setValue("username", generateUsername(firstName.trim(), lastName.trim()));
     }
 };

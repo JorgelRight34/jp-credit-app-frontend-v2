@@ -1,4 +1,4 @@
-import { Controller } from 'react-hook-form'
+import { Controller, useFormState } from 'react-hook-form'
 import type { FieldValues } from 'react-hook-form'
 import type { ReactNode } from 'react'
 import type { InputProps } from '@/components/atoms'
@@ -20,13 +20,21 @@ const FormInput = <T extends FieldValues>({
   name,
   ...props
 }: FormInputProps<T>) => {
+  const { errors } = useFormState()
+
   const Component = as
 
   return (
     <Controller
       name={name as string}
       render={({ field }) => {
-        return <Component {...props} {...field} />
+        return (
+          <Component
+            error={!!errors[name as keyof typeof errors]}
+            {...props}
+            {...field}
+          />
+        )
       }}
     />
   )

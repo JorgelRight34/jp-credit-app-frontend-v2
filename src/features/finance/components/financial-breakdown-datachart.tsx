@@ -7,7 +7,7 @@ import { FinancialBreakdown } from '../models/financialBreakdown'
 import { CacheKey } from '@/models'
 
 interface FinancialBreakdownDataChartProps {
-  initialQuery?: Partial<FinanceQuery>
+  initialQuery?: FinanceQuery
   buildDataOptions: (query: FinanceQuery) => {
     key: CacheKey
     loader: () => Promise<Array<FinancialBreakdown>>

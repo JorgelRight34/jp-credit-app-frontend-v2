@@ -1,30 +1,26 @@
-import { useFormContext, useWatch } from 'react-hook-form'
-import { useEffect } from 'react'
 import FormInput from './form-input'
-import type { FieldValues, Path, UseFormSetValue } from 'react-hook-form'
+import type { FieldValues } from 'react-hook-form'
 import type { FormInputProps } from './form-input'
+import FormWatchContainer, {
+  FormWatchContainerProps,
+} from './form-watch-container'
 
-export type FormWatchInputProps<T extends FieldValues> = FormInputProps<T> & {
-  watchedValues: ReadonlyArray<Path<T>>
-  onWacthedValuesChange: (form: T, setForm: UseFormSetValue<T>) => void
-}
+export type FormWatchInputProps<T extends FieldValues> = FormInputProps<T> &
+  FormWatchContainerProps<T>
 
 const FormWatchInput = <T extends FieldValues>({
   watchedValues,
-  onWacthedValuesChange,
+  onWatchedValuesChange,
   ...props
 }: FormWatchInputProps<T>) => {
-  const { control, formState, getValues, setValue } = useFormContext<T>()
-  const watch = useWatch({
-    name: watchedValues,
-    control,
-  })
-
-  useEffect(() => {
-    if (formState.isDirty) onWacthedValuesChange(getValues(), setValue)
-  }, [watch])
-
-  return <FormInput {...props} />
+  return (
+    <FormWatchContainer
+      watchedValues={watchedValues}
+      onWatchedValuesChange={onWatchedValuesChange}
+    >
+      <FormInput {...props} />
+    </FormWatchContainer>
+  )
 }
 
 export default FormWatchInput

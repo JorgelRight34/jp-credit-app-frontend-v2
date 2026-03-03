@@ -19,7 +19,7 @@ const UserDataFormPanel = ({
       <FormRow>
         <FormWatchGroup
           watchedValues={['firstName', 'lastName']}
-          onWacthedValuesChange={updateUsernameOnForm}
+          onWatchedValuesChange={updateUsernameOnForm}
           label="Usuario"
           name="username"
           input={Input}

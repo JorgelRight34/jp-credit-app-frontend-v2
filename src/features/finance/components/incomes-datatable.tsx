@@ -23,7 +23,7 @@ const IncomesDataTable = () => {
     <SearchFormContainer
       searchConfig={financeTableSearchConfig}
       initialQuery={{
-        options: 1,
+        option: 1,
         startDate: toInputDate(getTodayWithDaysFromNow(-30)),
         endDate: getTodayAsInputDate(),
         interval: 30,

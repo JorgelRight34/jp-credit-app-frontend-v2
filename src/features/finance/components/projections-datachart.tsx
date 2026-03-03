@@ -10,6 +10,7 @@ const ProjectionsDataChart = () => {
   return (
     <FinancialBreakdownDataChart
       initialQuery={{
+        option: 1,
         startDate: getTodayAsInputDate(),
         endDate: toInputDate(getTodayWithDaysFromNow(30 * 12 * 6)),
         interval: 30,

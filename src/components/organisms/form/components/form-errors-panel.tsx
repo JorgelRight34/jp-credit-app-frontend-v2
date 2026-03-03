@@ -7,7 +7,7 @@ import { UseFormReturn } from '../hooks/useFormMethods'
 
 interface FormErrorsPanelProps<T extends FieldValues> {
   control: UseFormReturn<T>['control']
-  mutationError: any
+  mutationError?: any
 }
 
 const FormErrorsPanel = <T extends FieldValues>({

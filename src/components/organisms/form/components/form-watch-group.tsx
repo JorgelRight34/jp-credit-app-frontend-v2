@@ -16,7 +16,7 @@ const FormWatchGroup = <T extends FieldValues>({
   label,
   watchedValues,
   optional,
-  onWacthedValuesChange,
+  onWatchedValuesChange,
   input,
   ...props
 }: FormWatchGroupProps<T>) => {
@@ -28,7 +28,7 @@ const FormWatchGroup = <T extends FieldValues>({
     >
       <FormWatchInput
         watchedValues={watchedValues}
-        onWacthedValuesChange={onWacthedValuesChange}
+        onWatchedValuesChange={onWatchedValuesChange}
         className="w-full"
         name={name}
         as={input}

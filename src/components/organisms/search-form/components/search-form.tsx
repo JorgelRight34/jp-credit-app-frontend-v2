@@ -7,22 +7,28 @@ import type { SearchFormOption } from '../models/searchFormOption'
 import type { Query } from '../models/query'
 import {
   AccentBtn,
+  DownloadIcon,
   FormLabel,
+  Icon,
   LightBtn,
   LightPillBtn,
   MenuIcon,
   RestoreIcon,
   SearchIcon,
+  SettingsIcon,
 } from '@/components/atoms'
 import { FieldValues } from 'react-hook-form'
 import { useSearchFormSubmit } from '../providers/search-form-provider'
 import { useFormMethods, UseFormReturn } from '../../form/hooks/useFormMethods'
+import { ModalTrigger } from '../../modal'
+import { ExportForm, ExportHandler } from '@/components/molecules'
 
 interface SearchFormProps<T extends Query> {
   options: Array<SearchFormOption<T>>
   advanced: Array<SearchFormOption<T>>
   schema?: SchemaType<T>
   defaultValues?: DefaultFormValues<T>
+  onExport?: ExportHandler<T>
 }
 
 const SearchForm = <T extends Query>({
@@ -30,6 +36,7 @@ const SearchForm = <T extends Query>({
   advanced,
   schema,
   defaultValues,
+  onExport,
 }: SearchFormProps<T>) => {
   const onSubmit = useSearchFormSubmit()
   const [showAdvanced, setShowAdvanced] = useState(false)
@@ -64,13 +71,11 @@ const SearchForm = <T extends Query>({
               <SubmitBtn form={form} />
               <LightBtn
                 icon={MenuIcon}
-                className={`border shadow-sm${advanced.length > 0 ? '' : ' opacity-50 cursor-not-allowed'}`}
+                className="border shadow-sm"
                 type="button"
                 onClick={() => {
-                  if (advanced.length > 0) {
-                    setShowAdvanced((prev) => !prev)
-                    if (!hasOpenedAdvanced) setHasOpenedAdvanced(true)
-                  }
+                  setShowAdvanced((prev) => !prev)
+                  if (!hasOpenedAdvanced) setHasOpenedAdvanced(true)
                 }}
               />
             </div>
@@ -85,8 +90,14 @@ const SearchForm = <T extends Query>({
                       key={option.name as string}
                     />
                   ))}
+                {advanced.length === 0 && 'No hay opciones'}
               </div>
-              <div className="flex justify-end flex-shrink-0 border-t p-3">
+              <div className="flex justify-end flex-shrink-0 border-t gap-3 p-3">
+                {onExport && (
+                  <span>
+                    <SearchFormExportBtn form={form} onExport={onExport} />
+                  </span>
+                )}
                 <LightPillBtn
                   className="!w-auto"
                   icon={RestoreIcon}
@@ -138,6 +149,26 @@ const AdvancedSearchFormGroup = <T,>({
         />
       </div>
     </SearchFormGroupContainer>
+  )
+}
+
+const SearchFormExportBtn = <T extends Query>({
+  form,
+  onExport,
+}: Pick<SearchFormProps<T>, 'onExport'> & {
+  form: ReturnType<typeof useFormMethods>
+}) => {
+  return (
+    <ModalTrigger
+      title={<Icon icon={SettingsIcon}>Configurar exporte</Icon>}
+      trigger={
+        <LightPillBtn className="!w-auto" icon={DownloadIcon}>
+          Exportar
+        </LightPillBtn>
+      }
+    >
+      <ExportForm onSubmit={(body) => onExport!(body, form.getValues())} />
+    </ModalTrigger>
   )
 }
 

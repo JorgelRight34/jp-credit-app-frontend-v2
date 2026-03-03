@@ -11,7 +11,7 @@ const IncomesDataChart = () => {
   return (
     <FinancialBreakdownDataChart
       initialQuery={{
-        options: '',
+        option: 1,
         startDate: getTodayAsInputDate(),
         endDate: toInputDate(getTodayWithDaysFromNow(-30)),
         interval: 30,

@@ -12,8 +12,11 @@ export interface Query extends FieldValues {
   profileId?: number;
   loanId?: number;
   createdBy?: number;
-  profileAs?: any;
   limit?: number;
   all?: boolean;
-  options?: number;
+  option?: number;
+  exportAs?: string;
+  exportPageFrom?: string;
+  exportPageTill?: string;
+  exportPageLimit?: number;
 }
