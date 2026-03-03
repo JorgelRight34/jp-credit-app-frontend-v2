@@ -42,8 +42,12 @@ const ExportForm = (props: ExportFormProps) => {
           />
         </FormRow>
         <FormRow>
-          <FormGroup label="Pag desde" name="pageStart" input={NumericInput} />
-          <FormGroup label="Pag hasta" name="pageEnd" input={NumericInput} />
+          <FormGroup
+            label="Pag desde"
+            name="initialPage"
+            input={NumericInput}
+          />
+          <FormGroup label="Pag hasta" name="endPage" input={NumericInput} />
         </FormRow>
         <FormRow>
           <FormGroup label="Por pagina" name="limit" input={NumericInput} />

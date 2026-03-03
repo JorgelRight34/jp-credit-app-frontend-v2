@@ -3,7 +3,6 @@ import {
   SearchFormContainer,
   SearchFormValueConsumer,
 } from '@/components'
-import { financeTableSearchConfig } from '../lib/config/finance-search-config'
 import {
   getTodayAsInputDate,
   getTodayWithDaysFromNow,
@@ -12,6 +11,7 @@ import {
 import { FinanceQuery } from '../models/financeQuery'
 import { useGroupedProjections } from '../hooks/useGroupedProjections'
 import { buildProjectionTableColumns } from '../lib/config/finance-datatable-config'
+import { financeTableSearchConfig } from '../lib/config/finance-search-config'
 
 const ProjectionsDataTable = () => {
   return (

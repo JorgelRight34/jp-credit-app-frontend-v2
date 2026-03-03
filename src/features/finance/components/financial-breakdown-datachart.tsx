@@ -1,5 +1,8 @@
-import { SearchFormContainer, SearchFormValueConsumer } from '@/components'
-import { financeChartSearchConfig } from '../lib/config/finance-search-config'
+import {
+  SearchFormConfig,
+  SearchFormContainer,
+  SearchFormValueConsumer,
+} from '@/components'
 import { FinanceQuery } from '../models/financeQuery'
 import { useData } from '@/hooks/useData'
 import FinancialBreakdownChart from './financial-breakdown-chart'
@@ -8,6 +11,7 @@ import { CacheKey } from '@/models'
 
 interface FinancialBreakdownDataChartProps {
   initialQuery?: FinanceQuery
+  searchConfig: SearchFormConfig<FinanceQuery>
   buildDataOptions: (query: FinanceQuery) => {
     key: CacheKey
     loader: () => Promise<Array<FinancialBreakdown>>
@@ -16,11 +20,12 @@ interface FinancialBreakdownDataChartProps {
 
 const FinancialBreakdownDataChart = ({
   initialQuery,
+  searchConfig,
   buildDataOptions,
 }: FinancialBreakdownDataChartProps) => {
   return (
     <SearchFormContainer
-      searchConfig={financeChartSearchConfig}
+      searchConfig={searchConfig}
       initialQuery={initialQuery}
     >
       <SearchFormValueConsumer<FinanceQuery>
@@ -38,7 +43,9 @@ const FinancialBreakdownDataChart = ({
 const FinancialBreakdownChartContainer = ({
   query,
   buildDataOptions,
-}: FinancialBreakdownDataChartProps & { query: FinanceQuery }) => {
+}: Pick<FinancialBreakdownDataChartProps, 'buildDataOptions'> & {
+  query: FinanceQuery
+}) => {
   const { data } = useData(buildDataOptions(query))
 
   if (!data || !query.chart) return null

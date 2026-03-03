@@ -3,6 +3,7 @@ export const downloadFile = (file: Blob, filename?: string) => {
 
     const a = document.createElement("a");
     a.style.display = 'none';
+    a.target = "_blank";
     a.href = url;
     document.body.appendChild(a);
     a.click();

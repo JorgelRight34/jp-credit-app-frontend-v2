@@ -6,10 +6,12 @@ import {
 import FinancialBreakdownDataChart from './financial-breakdown-datachart'
 import { getExpenses } from '../services/financeService'
 import { transactionsQueryKey } from '@/features/transactions/lib/constants'
+import { expenseChartSearchConfig } from '../lib/config/expense-config'
 
 const ExpensesDataChart = () => {
   return (
     <FinancialBreakdownDataChart
+      searchConfig={expenseChartSearchConfig}
       initialQuery={{
         option: 1,
         startDate: getTodayAsInputDate(),

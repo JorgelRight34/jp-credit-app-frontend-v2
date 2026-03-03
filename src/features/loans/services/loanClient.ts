@@ -1,9 +1,11 @@
-import type { Loan, LoanMember } from "../models/loan"
+import type { Loan } from "../models/loan"
 import type { LoanQuery } from "../models/loanQuery"
 import type { PagedResponse } from "@/models"
 import api from "@/lib/services/api"
 import { LoanFormValues } from "../lib/schemas/loanFormSchema"
 import { LoanStatus } from "../models/loanStatus"
+import { ExportHandler } from "@/components"
+import { ProfileSummary } from "@/features/profiles"
 
 const baseUrl = "loans"
 
@@ -30,7 +32,16 @@ export const updateLoanStatus = async (id: Loan["id"], status: LoanStatus) => {
     await api.put(baseUrl + "/" + id + "/status", { status });
 }
 
-export const getLoanActors = async (loanId: Loan["id"]): Promise<{ client: LoanMember, guarantor?: LoanMember, loanOfficer?: LoanMember }> => {
+export const getLoanActors = async (loanId: Loan["id"]): Promise<{
+    client: ProfileSummary,
+    guarantor?: ProfileSummary,
+    loanOfficer?: ProfileSummary
+}> => {
     const { data } = await api.get(baseUrl + "/" + loanId + "/actors");
+    return data;
+}
+
+export const exportLoans: ExportHandler<LoanQuery> = async (options, params) => {
+    const { data } = await api.get(baseUrl, { params: { ...params, ...options } })
     return data;
 }

@@ -1,6 +1,7 @@
 import type { LoanQuery } from "../../models/loanQuery";
 import { DateInput, Input, NumericInput, Select, type SearchFormConfig } from "@/components";
 import { loanStatusSelectOptions } from "../constants";
+import { exportLoans } from "../../services/loanClient";
 
 export const loanSearchConfig: SearchFormConfig<LoanQuery> = {
     options: [
@@ -14,4 +15,5 @@ export const loanSearchConfig: SearchFormConfig<LoanQuery> = {
         { name: "startDate", label: "Fecha mínima", width: 6, type: (p) => DateInput(p) },
         { name: "endDate", label: "Fecha máxima", width: 6, type: (p) => DateInput(p) },
     ],
+    onExport: exportLoans
 }

@@ -1,6 +1,7 @@
 import type { SearchFormConfig } from "@/components";
 import type { CollateralQuery } from "../../models/collateralQuery";
 import { CurrencyInput, Input } from "@/components";
+import { exportCollaterals } from "../../services/collateralClient";
 
 export const collateralSearchConfig: SearchFormConfig<CollateralQuery> = {
     options: [
@@ -11,4 +12,5 @@ export const collateralSearchConfig: SearchFormConfig<CollateralQuery> = {
         { name: "minValue", label: "Valor mínimo", width: 6, type: (p) => CurrencyInput(p) },
         { name: "maxValue", label: "Valor máximo", width: 6, type: (p) => CurrencyInput(p) }
     ],
+    onExport: exportCollaterals
 }

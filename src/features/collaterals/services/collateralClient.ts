@@ -7,6 +7,7 @@ import { FileStorageService } from "@/lib/services";
 import { CollateralLiquidateFormValues } from "../lib/schemas/collateralLiquidateFormSchema";
 import { PaymentResult } from "@/features/transactions";
 import { CollateralSellFormValues } from "../lib/schemas/collateralSellFormSchema";
+import { ExportHandler } from "@/components";
 
 const baseUrl = "collaterals"
 
@@ -54,4 +55,9 @@ export const previewLiquidateCollateral = async (id: Collateral["id"], body: Col
 export const sellCollateral = async (id: Collateral["id"], body: CollateralSellFormValues) => {
     const { data } = await api.post<PaymentResult>(baseUrl + "/" + id + "/sell", { ...body, isPreview: true });
     return data
+}
+
+export const exportCollaterals: ExportHandler<CollateralQuery> = async (options, params) => {
+    const { data } = await api.get(baseUrl, { params: { ...params, ...options } })
+    return data;
 }

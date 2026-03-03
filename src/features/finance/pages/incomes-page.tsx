@@ -1,9 +1,4 @@
-import {
-  buildPageLayoutExportToExcel,
-  PageRouterLayout,
-  Tab,
-  TabsRouter,
-} from '@/components'
+import { PageRouterLayout, Tab, TabsRouter } from '@/components'
 import {
   financeBreadcrumb,
   financeSectionBreadcrumbsByRoute,
@@ -15,7 +10,6 @@ const IncomesPage = () => {
   return (
     <PageRouterLayout
       title="Ingresos"
-      options={[buildPageLayoutExportToExcel()]}
       routerConfig={{
         defaultActive: 'table',
         baseBreadcrumbs: [financeBreadcrumb],

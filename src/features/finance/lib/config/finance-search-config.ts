@@ -1,6 +1,6 @@
 import {
-    buildFormWatchSelectWithOptions,
-    buildSelectWithOptions,
+    withFormWatchSelectOptions,
+    withSelectOptions,
     ChartType,
     DateInput,
     DaysIntervalSelect,
@@ -10,7 +10,7 @@ import {
 } from "@/components";
 import { FinanceQuery } from "../../models/financeQuery";
 import { getTodayAsInputDate, getTodayWithDaysFromNow, toInputDate } from "@/lib/utils";
-import { exportIncomes } from "../../services/financeService";
+import { exportProjections } from "../../services/financeService";
 
 const onFinanceOptionChange: WatchedValuesChangeHandler<FinanceQuery> = (context) => {
     if (!context.formState.isDirty) return;
@@ -35,11 +35,23 @@ const onFinanceOptionChange: WatchedValuesChangeHandler<FinanceQuery> = (context
     }
 }
 
-const baseOptions: SearchFormConfig<FinanceQuery>["options"] = [
+export const financeBaseAdvancedOptions: SearchFormConfig<FinanceQuery>["advanced"] = [
+    {
+        name: "chart", width: 12, label: "Gráfica", type: withSelectOptions([
+            ["linear", "Linear"],
+            ["pie", "Pie"],
+            ["bar", "Barras"],
+        ] as SelectOptions<ChartType>)
+    },
+    { name: "vsStartDate", width: 6, label: "VS Fecha inicio", type: p => DateInput(p) },
+    { name: "vsEndDate", width: 6, label: "VS Fecha final", type: p => DateInput(p) }
+]
+
+export const financeBaseOptions: SearchFormConfig<FinanceQuery>["options"] = [
     { name: "startDate", width: 4, label: "Inicio", type: p => DateInput(p) },
     { name: "endDate", width: 4, label: "Fin", type: p => DateInput(p) },
     {
-        name: "option", width: 3, label: "Opciones", type: buildFormWatchSelectWithOptions<FinanceQuery>([
+        name: "option", width: 3, label: "Opciones", type: withFormWatchSelectOptions<FinanceQuery>([
             [1, "Ultimo mes"],
             [3, "Ultimos 3 meses"],
             [6, "Ultimos 6 meses"],
@@ -50,23 +62,14 @@ const baseOptions: SearchFormConfig<FinanceQuery>["options"] = [
     { name: "interval", width: 4, label: "Intervalo", type: p => DaysIntervalSelect(p) }
 ]
 
-export const financeTableSearchConfig: SearchFormConfig<FinanceQuery> = {
-    options: baseOptions,
-    advanced: [],
-    onExport: exportIncomes
+export const financeChartSearchConfig: SearchFormConfig<FinanceQuery> = {
+    options: financeBaseOptions,
+    advanced: financeBaseAdvancedOptions,
+    onExport: exportProjections
 }
 
-export const financeChartSearchConfig: SearchFormConfig<FinanceQuery> = {
-    options: baseOptions,
-    advanced: [
-        {
-            name: "chart", width: 12, label: "Gráfica", type: buildSelectWithOptions([
-                ["linear", "Linear"],
-                ["pie", "Pie"],
-                ["bar", "Barras"],
-            ] as SelectOptions<ChartType>)
-        },
-        { name: "vsStartDate", width: 6, label: "VS Fecha inicio", type: p => DateInput(p) },
-        { name: "vsEndDate", width: 6, label: "VS Fecha final", type: p => DateInput(p) }
-    ],
+export const financeTableSearchConfig: SearchFormConfig<FinanceQuery> = {
+    options: financeBaseOptions,
+    advanced: [],
+    onExport: exportProjections
 }

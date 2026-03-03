@@ -3,7 +3,6 @@ import {
   SearchFormValueConsumer,
   TableBuilder,
 } from '@/components'
-import { financeTableSearchConfig } from '../lib/config/finance-search-config'
 import {
   getTodayAsInputDate,
   getTodayWithDaysFromNow,
@@ -17,11 +16,12 @@ import { useData } from '@/hooks/useData'
 import FinancialSummaryCards, {
   FinancialSummaryCardsLayout,
 } from './financial-summary-cards'
+import { incomeTableSearchConfig } from '../lib/config/income-config'
 
 const IncomesDataTable = () => {
   return (
     <SearchFormContainer
-      searchConfig={financeTableSearchConfig}
+      searchConfig={incomeTableSearchConfig}
       initialQuery={{
         option: 1,
         startDate: toInputDate(getTodayWithDaysFromNow(-30)),

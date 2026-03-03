@@ -30,7 +30,7 @@ const SelectInput = ({
 }: SelectInputProps) => {
   return (
     <FormControl className={clsx('flex-shrink-0', props.className)} fullWidth>
-      <InputLabel size="small" id={label?.toString()}>
+      <InputLabel size="small" id={label?.toString()} shrink>
         {label}
       </InputLabel>
       <Select

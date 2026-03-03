@@ -12,10 +12,11 @@ interface UseExportFormProps extends UseDataFormProps<Blob, ExportFormValues> {
     ) => Promise<Blob>
 }
 
-export const useExportForm = ({ onSubmit }: UseExportFormProps) => {
+export const useExportForm = ({ onSubmit, ...config }: UseExportFormProps) => {
     return useForm({
         schema: exportFormSchema,
-        defaultValues: { format: "pdf", pageStart: 1, pageEnd: 2, limit: 20 },
+        defaultValues: { format: "pdf", initialPage: 1, endPage: 2, limit: 20 },
         onSubmit,
+        ...config
     })
 }

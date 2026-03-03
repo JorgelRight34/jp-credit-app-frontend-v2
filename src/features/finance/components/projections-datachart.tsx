@@ -5,10 +5,12 @@ import {
 } from '@/lib/utils'
 import FinancialBreakdownDataChart from './financial-breakdown-datachart'
 import { getProjectedIncomes } from '../services/financeService'
+import { financeChartSearchConfig } from '../lib/config/finance-search-config'
 
 const ProjectionsDataChart = () => {
   return (
     <FinancialBreakdownDataChart
+      searchConfig={financeChartSearchConfig}
       initialQuery={{
         option: 1,
         startDate: getTodayAsInputDate(),

@@ -4,7 +4,6 @@ import { FinanceReport } from "../models/financeReport";
 import { Transaction } from "@/features/transactions";
 import { FinancialBreakdown } from "../models/financialBreakdown";
 import { ProjectionResult } from "../models/projectionResult";
-import { ExportFormat } from "@/models";
 import { ExportHandler } from "@/components";
 
 const baseUrl = "finance";
@@ -76,10 +75,25 @@ export const exportIncomes: ExportHandler<FinanceQuery> = async (body, params): 
     return data;
 }
 
-export const exportExpenses = async (format: ExportFormat, params: FinanceQuery): Promise<Blob> => {
-    const { data } = await api.get(`${baseUrl}/incomes/expenses`, {
+export const exportExpenses: ExportHandler<FinanceQuery> = async (body, params): Promise<Blob> => {
+    const { data } = await api.get(`${baseUrl}/expenses/export`, {
         params: {
-            format,
+            ...body,
+            start: params.startDate,
+            end: params.endDate,
+            timeDiff: params.interval,
+            ...params
+        },
+        responseType: "blob"
+    })
+    return data;
+}
+
+
+export const exportProjections: ExportHandler<FinanceQuery> = async (body, params): Promise<Blob> => {
+    const { data } = await api.get(`${baseUrl}/payment-projection/export`, {
+        params: {
+            ...body,
             start: params.startDate,
             end: params.endDate,
             timeDiff: params.interval,

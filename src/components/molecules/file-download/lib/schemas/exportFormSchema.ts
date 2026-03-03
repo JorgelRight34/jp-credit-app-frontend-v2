@@ -1,17 +1,19 @@
 import z from "zod";
 
-export const exportFormSchema = z.object({
-    format: z.string(),
-    pageStart: z.union([z.string(), z.number()]).transform(val => +val),
-    pageEnd: z.union([z.string(), z.number()]).transform(val => +val),
-    limit: z.union([z.string(), z.number()]).transform(val => +val),
-})
-    .refine(
-        (data) => +data.pageStart > +data.pageEnd,
-        {
-            message: "La página final debe ser mayor a la inicial",
-            path: ["pageStart"], // attach error to specific field
+export const exportFormSchema = z
+    .object({
+        format: z.string(),
+        initialPage: z.coerce.number().int().min(1),
+        endPage: z.coerce.number().int().min(1),
+        limit: z.coerce.number().int().min(1),
+    })
+    .superRefine(({ initialPage, endPage }, ctx) => {
+        if (endPage <= initialPage) {
+            ctx.addIssue({
+                code: "custom",
+                message: "La página hast debe ser mayor a la inicial",
+                path: ["endPage"],
+            });
         }
-    );
-
+    });
 export type ExportFormValues = z.infer<typeof exportFormSchema>
