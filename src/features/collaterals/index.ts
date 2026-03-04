@@ -4,3 +4,4 @@ export { default as EditCollateralFormPage } from './pages/edit-collateral-form-
 export { default as CollateralPage } from './pages/collateral-page'
 export { default as CollateralSettingsPage } from './pages/collateral-settings-page'
 export * from "./lib/config/collateral-datatable-config"
+export * from './models/collateral'

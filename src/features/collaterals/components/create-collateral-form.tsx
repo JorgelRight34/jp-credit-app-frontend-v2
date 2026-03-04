@@ -24,6 +24,15 @@ const CreateCollateralForm = (props: CreateCollateralFormProps) => {
   const fileAttachmentsForm = useCollateralFileAttachmentForm()
   const form = useCollateralForm({
     onSuccess: fileAttachmentsForm.submit,
+    initialValues: {
+      title: '',
+      value: '',
+      condition: '',
+      type: '',
+      location: '',
+      description: null,
+      expirationDate: null,
+    },
     ...props,
   })
 

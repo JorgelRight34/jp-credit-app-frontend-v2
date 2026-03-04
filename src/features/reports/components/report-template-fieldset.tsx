@@ -8,9 +8,9 @@ import {
 import { useData } from '@/hooks/useData'
 import { reporstQueryKey } from '../lib/query-keys'
 import { Report } from '../models/report'
-import { getReportTemplateDefinition } from '../services/reportsClient'
 import { reportTemplateKeysLabels } from '../lib/constants'
 import { DASHES } from '@/lib/utils'
+import { reportTemplatesDefinition } from '../lib/report-templates-map'
 
 interface ReportTemplateDefinitionFieldsetProps {
   templateKey?: Report['key']
@@ -19,11 +19,7 @@ interface ReportTemplateDefinitionFieldsetProps {
 const ReportTemplateDefinitionFieldset = ({
   templateKey,
 }: ReportTemplateDefinitionFieldsetProps) => {
-  const { data } = useData({
-    key: [reporstQueryKey, 'templates', templateKey],
-    loader: () => getReportTemplateDefinition(templateKey!),
-    enabled: !!templateKey,
-  })
+  const data = templateKey ? reportTemplatesDefinition[templateKey] : null
 
   return (
     <Fieldset
@@ -36,13 +32,13 @@ const ReportTemplateDefinitionFieldset = ({
       </BigTitle>
       <aside className="flex-1 h-96 !overflow-y-auto">
         {data &&
-          Object.keys(data.fields).map((field) => {
-            const template = data.fields[field as keyof typeof data.fields]
+          Object.keys(data).map((field) => {
+            const template = data[field as keyof typeof data]
 
             return (
-              <Accordion key={template.propertyPath} id={template.propertyPath}>
+              <Accordion key={field} id={field}>
                 <AccordionSummary>
-                  {template.propertyPath} | {template.fieldType}
+                  {field} | {template.fieldType}
                 </AccordionSummary>
                 <AccordionDetails>{template.description}</AccordionDetails>
               </Accordion>

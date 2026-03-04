@@ -45,6 +45,15 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
       ])
     },
     toastMessage: () => 'Guardado',
+    initialValues: {
+      username: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmation: '',
+      isActive: true,
+    },
     ...props,
   })
 

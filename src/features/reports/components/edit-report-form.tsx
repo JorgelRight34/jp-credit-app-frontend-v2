@@ -3,15 +3,8 @@ import {
   FileAttachmentsForm,
   FileAttachmentsPanel,
   Form,
-  FormCheckboxGroup,
   FormContainer,
-  FormGroup,
-  FormRow,
-  FormSelectGroup,
   FormWatch,
-  Input,
-  RichTextEditor,
-  SelectOptions,
   Tab,
   Tabs,
 } from '@/components'
@@ -20,19 +13,26 @@ import { Report } from '../models/report'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
+import ReportFormPanel from './report-form-panel'
 
-interface ReportFormProps extends DataModuleFormProps<
+interface EditReportFormProps extends DataModuleFormProps<
   Report,
   ReportFormValues
 > {
-  report?: Report
+  report: Report
 }
 
-const ReportForm = ({ report, ...props }: ReportFormProps) => {
-  const fileAttachmentsForm = useReportFileAttachmentForm()
+const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
+  const fileAttachmentsForm = useReportFileAttachmentForm({ report })
   const form = useReportForm({
     ...props,
-    shouldEdit: !!report,
+    initialValues: {
+      title: report.title,
+      description: report.description,
+      bookmark: report.bookmark,
+      key: report.key,
+    },
+    resetValues: false,
     onSuccess: fileAttachmentsForm.submit,
   })
 
@@ -43,26 +43,7 @@ const ReportForm = ({ report, ...props }: ReportFormProps) => {
           <div className="flex h-full">
             <div className="w-8/12">
               <Form form={form}>
-                <FormRow>
-                  <FormGroup name="title" label="Título" input={Input} />
-                </FormRow>
-                <FormRow>
-                  <FormSelectGroup
-                    name="key"
-                    label="Categoría"
-                    options={
-                      [['loan', 'Préstamos']] as SelectOptions<Report['key']>
-                    }
-                  />
-
-                  <FormCheckboxGroup name="bookmark" label="Marcar" />
-                </FormRow>
-                <FormGroup
-                  name="description"
-                  label="Descripción"
-                  input={RichTextEditor}
-                  optional
-                />
+                <ReportFormPanel />
               </Form>
             </div>
             <div className="flex h-full flex-col w-4/12 pl-6">
@@ -88,4 +69,4 @@ const ReportForm = ({ report, ...props }: ReportFormProps) => {
   )
 }
 
-export default ReportForm
+export default EditReportForm

@@ -12,15 +12,7 @@ export type UseUserFormProps = UseDataFormProps<User, UserFormValues> & {
 export const useUserForm = ({ userId, initialValues, ...props }: UseUserFormProps) => {
   return useForm({
     schema: userFormSchema,
-    defaultValues: initialValues ?? {
-      username: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmation: "",
-      isActive: true
-    },
+    defaultValues: initialValues,
     onSubmit: createUser,
     onEdit: async (data) => {
       await editUser(data, userId!)

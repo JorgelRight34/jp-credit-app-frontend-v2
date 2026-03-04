@@ -13,19 +13,7 @@ interface UseProfileFormProps extends UseDataFormProps<Profile, ProfileFormValue
 export const useProfileForm = ({ profileId, initialValues, ...config }: UseProfileFormProps) => {
     return useForm({
         schema: profileFormSchema,
-        defaultValues: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            gender: "",
-            dateOfBirth: "",
-            maritalStatus: "",
-            dni: "",
-            address: "",
-            landline: "",
-            officePhone: "",
-            phoneNumber: "",
-        },
+        defaultValues: initialValues,
         onSubmit: createProfile,
         onEdit: (body) => updateProfile(profileId!, body),
         keysToInvalidate: [[profilesQueryKey]],

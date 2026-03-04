@@ -5,8 +5,8 @@ export interface Report {
     documentId: number;
     title: string;
     description?: string;
-    key: "loan";
+    key: "loan" | "collateral";
     bookmark: boolean;
     createdAt: string;
-    files?: Array<FileModel>;
+    documents?: Array<FileModel>;
 }

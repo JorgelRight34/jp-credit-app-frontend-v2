@@ -13,6 +13,19 @@ const CreateProfileForm = (props: CreateProfileFormProps) => {
   const fileAttachmentsForm = useProfileFileAttachmentsForm({})
   const form = useProfileForm({
     onSuccess: fileAttachmentsForm.submit,
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      gender: '',
+      dateOfBirth: '',
+      maritalStatus: '',
+      dni: '',
+      address: '',
+      landline: '',
+      officePhone: '',
+      phoneNumber: '',
+    },
     ...props,
   })
 

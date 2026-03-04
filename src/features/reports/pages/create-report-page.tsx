@@ -1,7 +1,7 @@
 import { CreateFormPageLayout } from '@/components'
 import { reportPermissionProvider } from '../lib/permission-provider'
 import { reportsBreadcrumb } from './reports-page'
-import ReportForm from '../components/report-form'
+import CreateReportForm from '../components/create-report-form'
 
 const CreateReportPage = () => {
   return (
@@ -10,7 +10,7 @@ const CreateReportPage = () => {
       breadcrumbs={[reportsBreadcrumb]}
       permissionProvider={reportPermissionProvider}
     >
-      <ReportForm />
+      <CreateReportForm />
     </CreateFormPageLayout>
   )
 }

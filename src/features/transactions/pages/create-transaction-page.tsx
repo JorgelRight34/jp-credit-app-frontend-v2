@@ -4,6 +4,7 @@ import {
   DisbursementIcon,
   PageRouterLayout,
   PaymentIcon,
+  ProtectedComponent,
   Tab,
   TabsRouter,
 } from '@/components'
@@ -53,20 +54,23 @@ const CreateTransactionPage = ({
         baseBreadcrumbs: [transactionBreadcrumb],
         breadcrumbsByRoute,
       }}
-      permissionProvider={transactionPermissionProvider}
-      isAuthorizedFn={(p) => p.canCreate}
     >
-      <TabsRouter>
-        <Tab eventKey="pay" title="Pagos">
-          <CreatePaymentForm
-            project={project}
-            initialValues={{ loanId, amount }}
-          />
-        </Tab>
-        <Tab eventKey="disburse" title="Desembolsos">
-          <CreateDisbursementForm initialValues={{ loanId, amount }} />
-        </Tab>
-      </TabsRouter>
+      <ProtectedComponent
+        provider={transactionPermissionProvider}
+        isAuthorizedFn={(p) => p.canCreate}
+      >
+        <TabsRouter>
+          <Tab eventKey="pay" title="Pagos">
+            <CreatePaymentForm
+              project={project}
+              initialValues={{ loanId, amount }}
+            />
+          </Tab>
+          <Tab eventKey="disburse" title="Desembolsos">
+            <CreateDisbursementForm initialValues={{ loanId, amount }} />
+          </Tab>
+        </TabsRouter>
+      </ProtectedComponent>
     </PageRouterLayout>
   )
 }

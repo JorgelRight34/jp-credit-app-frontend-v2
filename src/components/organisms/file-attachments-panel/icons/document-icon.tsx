@@ -36,7 +36,7 @@ const DocumentIcon = ({
   className,
   color = '#555',
 }: DocumentIconProps) => {
-  const IconRenderer = icons[type as keyof typeof icons]
+  const IconRenderer = icons[type as keyof typeof icons] ?? icons.docx
 
   return <IconRenderer className={className} size={size} color={color} />
 }

@@ -7,7 +7,7 @@ export const useReportFileAttachmentForm = ({ report }: { report?: Report } = {}
     const reportRef = useRef(report);
     const formRef = useRef<FileAttachmentsFormRef>(null);
 
-    const memoizedReportFiles = useMemo(() => report?.files, [report])
+    const memoizedReportFiles = useMemo(() => report?.documents, [report])
 
     return {
         form: {
