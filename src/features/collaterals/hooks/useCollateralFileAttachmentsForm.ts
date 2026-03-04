@@ -3,8 +3,8 @@ import { deleteCollateralFiles, uploadCollateralFiles } from "../services/collat
 import type { Collateral } from "../models/collateral";
 import type { FileAttachmentsFormRef, UseDeferredFileAttachmentsFormReturn } from "@/components";
 
-export const useCollateralFileAttachmentForm = ({ collateral }: { collateral?: Collateral }): UseDeferredFileAttachmentsFormReturn<Collateral> => {
-    const collateralRef = useRef<Collateral | undefined>(collateral);
+export const useCollateralFileAttachmentForm = ({ collateral }: { collateral?: Collateral } = {}): UseDeferredFileAttachmentsFormReturn<Collateral> => {
+    const collateralRef = useRef(collateral);
     const formRef = useRef<FileAttachmentsFormRef>(null);
 
     const memoizedCollateralFiles = useMemo(() => collateral?.files, [collateral])

@@ -1,7 +1,6 @@
 // COMPONENTS
 export { default as FileExplorer } from "../file-attachments-panel/components/file-table";
 // export { default as FileForm } from "./components/file-form";
-export { default as FileFormTrigger } from "./components/file-form-trigger";
 export { default as FileAttachmentsForm } from "./components/file-attachments-form";
 
 // HOOKS

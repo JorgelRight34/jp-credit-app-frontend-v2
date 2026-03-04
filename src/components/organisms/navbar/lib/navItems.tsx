@@ -20,7 +20,6 @@ import {
   GrassIcon,
   GroupIcon,
   GroupsIcon,
-  HomeStorageIcon,
   InventoryIcon,
   ListAltIcon,
   LockIcon,
@@ -31,16 +30,14 @@ import {
   PlayCircleIcon,
   PublicIcon,
   QueryStatsIcon,
+  ReportIcon,
   ScheduleIcon,
   SettingsIcon,
   TrendingUpIcon,
 } from '@/components/atoms'
 
-const addRouteBase: NavItem = {
-  name: 'Añadir',
-  icon: () => <AddIcon />,
-  route: '.',
-}
+const addRouteName = 'Añadir'
+const addRouteIcon = () => <AddIcon />
 
 const allRouteBase: NavItem = {
   name: 'Todos',
@@ -92,12 +89,12 @@ export const accessControlNavItem: NavItem = {
       search: { tab: 'roles' },
     },
     {
-      ...addRouteBase,
+      icon: addRouteIcon,
       name: 'Añadir acceso',
       route: '/access-control/users/create',
     },
     {
-      ...addRouteBase,
+      icon: addRouteIcon,
       name: 'Añadir grupo',
       route: '/access-control/roles/create',
     },
@@ -133,7 +130,8 @@ export const profileNavItem: NavItem = {
       search: { tab: 'loan-officers' },
     },
     {
-      ...addRouteBase,
+      name: addRouteName,
+      icon: addRouteIcon,
       route: '/profiles/create',
     },
   ],
@@ -173,7 +171,8 @@ export const collateralsNavItem: NavItem = {
       search: { tab: 'inventory' },
     },
     {
-      ...addRouteBase,
+      name: addRouteName,
+      icon: addRouteIcon,
       route: '/collaterals/create',
     },
   ],
@@ -213,13 +212,13 @@ export const transactionsNavItem: NavItem = {
       route: '/transactions/periods',
     },
     {
-      ...addRouteBase,
+      icon: addRouteIcon,
       name: 'Pagar',
       route: '/transactions/create',
       search: { tab: 'pay' },
     },
     {
-      ...addRouteBase,
+      icon: addRouteIcon,
       name: 'Desembolsar',
       route: '/transactions/create',
       search: { tab: 'disburse' },
@@ -269,7 +268,8 @@ export const loansNavItem: NavItem = {
       search: { tab: 'paidOff' },
     },
     {
-      ...addRouteBase,
+      name: addRouteName,
+      icon: addRouteIcon,
       route: '/loans/create',
     },
   ],
@@ -297,7 +297,8 @@ export const notesNavItem: NavItem = {
       search: { tab: 'nd' },
     },
     {
-      ...addRouteBase,
+      name: addRouteName,
+      icon: addRouteIcon,
       route: '/adjustment-notes/create',
     },
   ],
@@ -319,7 +320,8 @@ export const followUpsNavItem: NavItem = {
       route: '/follow-ups',
     },
     {
-      ...addRouteBase,
+      name: addRouteName,
+      icon: addRouteIcon,
       route: '/follow-ups/create',
     },
   ],
@@ -327,36 +329,41 @@ export const followUpsNavItem: NavItem = {
 
 export const reportsNavItem: NavItem = {
   name: 'Reportes',
-  icon: () => <HomeStorageIcon />,
-  route: 'reports',
+  icon: () => <ReportIcon />,
+  route: '/reports',
   children: [
     {
       ...allRouteBase,
-      route: 'reports',
+      route: '/reports',
     },
     {
       name: 'Garantías',
       icon: collateralsNavItem.icon,
-      route: 'reports/collaterals',
+      route: '/reports',
+      search: { tab: 'collaterals' },
     },
     {
       name: 'Préstamos',
       icon: loansNavItem.icon,
-      route: 'reports/loans',
+      route: '/reports',
+      search: { tab: 'loans' },
     },
     {
       name: 'Pérfiles',
       icon: profileNavItem.icon,
-      route: 'reports/profiles',
+      route: '/reports',
+      search: { tab: 'profiles' },
     },
     {
       name: 'Transacciones',
       icon: transactionsNavItem.icon,
-      route: 'reports/transactions',
+      route: '/reports',
+      search: { tab: 'transactions' },
     },
     {
-      ...addRouteBase,
-      route: 'reports/create',
+      name: addRouteName,
+      icon: addRouteIcon,
+      route: '/reports/create',
     },
   ],
 }

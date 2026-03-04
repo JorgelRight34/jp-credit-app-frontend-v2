@@ -178,5 +178,7 @@ export { default as FinanceIcon } from '@mui/icons-material/QueryStatsOutlined'
 export { default as TableRowsIcon } from '@mui/icons-material/TableRowsOutlined'
 export { default as BarChartIcon } from '@mui/icons-material/BarChartOutlined'
 export { default as TableChartIcon } from '@mui/icons-material/TableChart';
+export { default as ReportIcon } from '@mui/icons-material/StorageOutlined'
+export { default as ExpandMoreIcon } from '@mui/icons-material/ExpandMoreOutlined'
 
 export { default as Icon } from "./components/icon";

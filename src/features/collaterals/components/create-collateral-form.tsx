@@ -21,7 +21,7 @@ interface CreateCollateralFormProps extends DataModuleFormProps<
 > {}
 
 const CreateCollateralForm = (props: CreateCollateralFormProps) => {
-  const fileAttachmentsForm = useCollateralFileAttachmentForm({})
+  const fileAttachmentsForm = useCollateralFileAttachmentForm()
   const form = useCollateralForm({
     onSuccess: fileAttachmentsForm.submit,
     ...props,
