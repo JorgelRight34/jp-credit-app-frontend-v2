@@ -1,6 +1,6 @@
 import {
   DataModuleFormProps,
-  FileAttachmentsForm,
+  FileAttachmentsFormContainer,
   FileAttachmentsPanel,
   Form,
   FormContainer,
@@ -23,7 +23,6 @@ interface EditReportFormProps extends DataModuleFormProps<
 }
 
 const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
-  const fileAttachmentsForm = useReportFileAttachmentForm({ report })
   const form = useReportForm({
     ...props,
     initialValues: {
@@ -33,40 +32,49 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
       key: report.key,
     },
     resetValues: false,
-    onSuccess: fileAttachmentsForm.submit,
   })
 
   return (
-    <FormContainer form={form}>
-      <Tabs>
-        <Tab eventKey="form" title="Datos">
-          <div className="flex h-full">
-            <div className="w-8/12">
+    <Tabs>
+      <Tab eventKey="form" title="Datos">
+        <div className="flex h-full">
+          <div className="w-8/12">
+            <FormContainer form={form}>
               <Form form={form}>
                 <ReportFormPanel />
               </Form>
-            </div>
-            <div className="flex h-full flex-col w-4/12 pl-6">
-              <FormWatch
-                form={form}
-                names={['key']}
-                render={([key]) => (
-                  <ReportTemplateDefinitionFieldset templateKey={key} />
-                )}
-              />
-            </div>
+            </FormContainer>
           </div>
-        </Tab>
-        <Tab eventKey="files" title="Archivos">
-          <FileAttachmentsForm
-            ref={fileAttachmentsForm.formRef}
-            form={fileAttachmentsForm.form}
-            render={FileAttachmentsPanel}
-          />
-        </Tab>
-      </Tabs>
-    </FormContainer>
+          <div className="flex h-full flex-col w-4/12 pl-6">
+            <FormWatch
+              form={form}
+              names={['key']}
+              render={([key]) => (
+                <ReportTemplateDefinitionFieldset templateKey={key} />
+              )}
+            />
+          </div>
+        </div>
+      </Tab>
+      <Tab eventKey="files" title="Archivos">
+        <EditReportFormFiles report={report} />
+      </Tab>
+    </Tabs>
   )
 }
 
+const EditReportFormFiles = ({
+  report,
+}: Pick<EditReportFormProps, 'report'>) => {
+  const fileAttachmentsForm = useReportFileAttachmentForm({
+    report,
+  })
+
+  return (
+    <FileAttachmentsFormContainer
+      form={fileAttachmentsForm}
+      render={FileAttachmentsPanel}
+    />
+  )
+}
 export default EditReportForm

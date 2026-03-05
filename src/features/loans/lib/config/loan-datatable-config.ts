@@ -1,6 +1,6 @@
 import { getLoans } from "../../services/loanClient";
 import type { Loan } from "../../models/loan";
-import type { DataTableConfig } from "@/components";
+import type { BuildSearchInputDataTableConfigHandler, DataTableConfig } from "@/components";
 import { buildDateDataCell, buildExpandableDescriptionCell, buildLinkDataCell, buildSingleSelectCell } from "@/components";
 import { sortDateRows, toCurrency } from "@/lib/utils";
 
@@ -62,14 +62,12 @@ export const loansDataTableColumns: DataTableConfig<Loan>["columns"] = [
 ]
 
 export const loanDataTableConfig: DataTableConfig<Loan> = {
-    title: "Préstamos",
     columns: loansDataTableColumns,
     loader: getLoans
 }
 
-export const createLoanSearchInputDataTableConfig = (onRowClick: (loan: Loan) => void): DataTableConfig<Loan> => {
+export const buildLoanSearchInputDataTableConfig: BuildSearchInputDataTableConfigHandler<Loan> = (setValue) => {
     return ({
-        title: "Préstamos",
         columns: [
             { id: "id", header: "ID", accessorKey: "id", enableSorting: true },
             {
@@ -90,7 +88,7 @@ export const createLoanSearchInputDataTableConfig = (onRowClick: (loan: Loan) =>
                 enableSorting: true,
                 cell: ({ row }) => toCurrency(row.original.paymentValue),
             },
-            { id: "select", header: "OPCIONES", cell: ({ row }) => buildSingleSelectCell(() => onRowClick(row.original)) }
+            { id: "select", header: "OPCIONES", cell: ({ row }) => buildSingleSelectCell(() => setValue(row.original)) }
         ],
         allowExpand: true,
         onExpand: (row) => buildExpandableDescriptionCell(row.original.description ?? "Sin descripción"),

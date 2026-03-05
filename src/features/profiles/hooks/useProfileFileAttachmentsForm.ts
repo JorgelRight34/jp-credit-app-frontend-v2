@@ -2,6 +2,7 @@ import { useMemo, useRef } from "react"
 import { deleteProfilePhoto, uploadProfilePhoto } from "../services/profileClient"
 import type { FileAttachmentsFormRef, UseDeferredFileAttachmentsFormReturn } from "@/components";
 import type { Profile } from "../models/profile"
+import { profilesQueryKey } from "../lib/constants";
 
 export const useProfileFileAttachmentsForm = ({ profile }: { profile?: Profile }): UseDeferredFileAttachmentsFormReturn<Profile> => {
     const profileRef = useRef<Profile | undefined>(profile);
@@ -18,6 +19,7 @@ export const useProfileFileAttachmentsForm = ({ profile }: { profile?: Profile }
             filesMaxLength: 1,
             accept: "image/*",
             initialFiles: memoizedProfileFiles,
+            keysToInvalidate: [[profilesQueryKey]],
         },
         setRef: (value) => profileRef.current = value,
         submit: async (value) => {

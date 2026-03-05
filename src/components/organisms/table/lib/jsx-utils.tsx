@@ -3,7 +3,12 @@ import TablePhotoCell from '../components/table-photo-cell'
 import type { TablePhotoCellProps } from '../components/table-photo-cell'
 import type { ReactNode } from 'react'
 import type { LinkProps } from '@/components/atoms'
-import { DateLabel, Link } from '@/components/atoms'
+import {
+  BookmarkIcon,
+  DateLabel,
+  Link,
+  TurnedInNotIcon,
+} from '@/components/atoms'
 import SafeHtml from '@/components/molecules/safe-html/safe-html'
 import { HeaderContext } from '@tanstack/react-table'
 import { DASHES, getDateGroupingLabel } from '@/lib/utils'
@@ -14,6 +19,16 @@ export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
     <Link className="text-accent-secondary" {...linkProps}>
       {label}
     </Link>
+  )
+}
+
+export const buildBookmarkedDataCell = (
+  bookmarked: boolean,
+  linkProps: LinkProps = {},
+) => {
+  return buildLinkDataCell(
+    bookmarked ? <BookmarkIcon /> : <TurnedInNotIcon />,
+    linkProps,
   )
 }
 
@@ -58,6 +73,23 @@ export const buildOptionDataCell = (
     >
       {label}
     </span>
+  )
+}
+
+export const buildOptionLinkDataCell = (
+  label: ReactNode,
+  linkProps: LinkProps,
+  isDestructive?: boolean,
+) => {
+  return buildLinkDataCell(
+    <span
+      className={clsx('text-accent-secondary', {
+        '!text-red-500': isDestructive,
+      })}
+    >
+      {label}
+    </span>,
+    linkProps,
   )
 }
 

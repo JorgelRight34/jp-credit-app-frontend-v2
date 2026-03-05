@@ -24,4 +24,5 @@ export * from "./models/fileAccept";
 
 // SERVICES
 export * from "./services/fileUploadClient";
-export * from "./models/useDeferredFileAttachmentsFormReturn";  
+export * from "./models/useDeferredFileAttachmentsFormReturn";
+export { default as FileAttachmentsFormContainer } from './components/file-attachments-form-container'

@@ -4,11 +4,14 @@ import type { FileAccept } from "../models/fileAccept";
 import type { FileModel } from "@/models/fileModel";
 import type { FileFormFieldValues } from "../lib/form";
 import { useDataMutation } from "@/hooks/useMutate";
+import { CacheKey } from "@/models";
+import { useDataClient } from "@/hooks/useDataClient";
 
 export type UseFileAttachmentsFormProps = {
     initialFiles?: Array<FileModel>;
     filesMaxLength?: number;
     accept: FileAccept;
+    keysToInvalidate: Array<CacheKey>;
     onUpload: (files: Array<File>) => Promise<unknown>;
     onDelete?: (files: Array<FileModel>) => Promise<void>;
     onCreate?: (fileData: Array<FileFormFieldValues>) => Promise<void>;
@@ -17,6 +20,7 @@ export type UseFileAttachmentsFormProps = {
 export const useFileAttachmentsForm = ({
     initialFiles,
     filesMaxLength,
+    keysToInvalidate,
     onUpload,
     onDelete,
 }: UseFileAttachmentsFormProps) => {
@@ -35,8 +39,14 @@ export const useFileAttachmentsForm = ({
         setFileUploads((prev) => ({ ...prev, deletedExisting: [] }));
     };
 
+    const dataClient = useDataClient();
     const { mutateAsync, isPending } = useDataMutation({
         mutationFn: handleSubmit,
+        onSuccess: () => {
+            for (const key of keysToInvalidate) {
+                dataClient.invalidate({ key })
+            }
+        }
     });
 
     const processUploads = async () => {

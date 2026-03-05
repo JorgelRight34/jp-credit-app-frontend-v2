@@ -180,5 +180,8 @@ export { default as BarChartIcon } from '@mui/icons-material/BarChartOutlined'
 export { default as TableChartIcon } from '@mui/icons-material/TableChart';
 export { default as ReportIcon } from '@mui/icons-material/StorageOutlined'
 export { default as ExpandMoreIcon } from '@mui/icons-material/ExpandMoreOutlined'
+export { default as BookmarkIcon } from '@mui/icons-material/Bookmark';
+export { default as TurnedInNotIcon } from '@mui/icons-material/TurnedInNot';
+export { default as PrintIcon } from '@mui/icons-material/PrintOutlined'
 
 export { default as Icon } from "./components/icon";

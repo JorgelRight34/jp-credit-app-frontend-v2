@@ -1,7 +1,7 @@
-export const CollateralTypeMap = {
-    CarLoan: "carLoan",
-    Mortgage: "mortgage",
-    AgriculturalLoan: "agriculturalLoan",
+export const collateralTypeMap = {
+    carLoan: "carLoan",
+    mortgage: "mortgage",
+    agriculturalLoan: "agriculturalLoan",
 } as const
 
-export type CollateralType = typeof CollateralTypeMap[keyof typeof CollateralTypeMap]
+export type CollateralType = typeof collateralTypeMap[keyof typeof collateralTypeMap]

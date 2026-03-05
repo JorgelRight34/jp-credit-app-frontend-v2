@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useProfileForm } from '../hooks/useProfileForm'
 import { useProfileFileAttachmentsForm } from '../hooks/useProfileFileAttachmentsForm'
 import ProfileDataForm from './profile-data-form'
@@ -6,10 +5,8 @@ import type { DataModuleFormProps } from '@/components'
 import type { Profile } from '../models/profile'
 import type { ProfileFormValues } from '../lib/schemas/profileFormSchema'
 import {
-  FileAttachmentsForm,
+  FileAttachmentsFormContainer,
   FormContainer,
-  FormContainerButtons,
-  FormLayout,
   Tab,
   Tabs,
 } from '@/components'
@@ -54,26 +51,13 @@ const EditProfileForm = ({ profile, ...props }: EditProfileFormProps) => {
 }
 
 const ProfileEditFileAttachmentsForm = ({ profile }: EditProfileFormProps) => {
-  const [isDirty, setIsDirty] = useState(false)
   const fileAttachmentsForm = useProfileFileAttachmentsForm({ profile })
 
   return (
-    <FormLayout
-      footer={
-        <FormContainerButtons
-          isDirty={isDirty}
-          onSubmit={fileAttachmentsForm.handleSubmit}
-          text="Actualizar adjuntos"
-        />
-      }
-    >
-      <FileAttachmentsForm
-        ref={fileAttachmentsForm.formRef}
-        form={fileAttachmentsForm.form}
-        onDirtyChange={setIsDirty}
-        render={FileAttachmentsPanel}
-      />
-    </FormLayout>
+    <FileAttachmentsFormContainer
+      form={fileAttachmentsForm}
+      render={FileAttachmentsPanel}
+    />
   )
 }
 

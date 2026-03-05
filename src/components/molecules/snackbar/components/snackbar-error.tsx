@@ -4,7 +4,9 @@ import { SnackbarProps } from './snackbar'
 const SnackbarError = ({ data }: SnackbarProps) => {
   return (
     <div className="flex">
-      <Icon icon={ErrorIcon}>{data.title}</Icon>
+      <Icon icon={ErrorIcon} iconClassName="text-red-400">
+        {data.title}
+      </Icon>
     </div>
   )
 }

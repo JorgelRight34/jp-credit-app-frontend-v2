@@ -1,4 +1,7 @@
-export interface ReportTemplateDefinition {
+export type ReportTemplateDefinition<T> = {
     description: string;
-    fieldType: string;
-}
+    fieldType: "number" | "currency" | "date" | "text";
+    name: string;
+    nullable?: boolean;
+    mapper: (t: T) => string | number | undefined;
+}[]

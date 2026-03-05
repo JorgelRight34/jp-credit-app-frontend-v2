@@ -1,6 +1,6 @@
 import { collateralsBreadcrumb } from '../lib/config/breadcrumbs'
 import CollateralDataTable from '../components/collaterals-datatable'
-import { CollateralTypeMap } from '../models/collateralType'
+import { collateralTypeMap } from '../models/collateralType'
 import type { BreadcrumbsByRoute } from '@/components'
 import {
   AllIcon,
@@ -39,19 +39,19 @@ const CollateralsPage = () => {
         </Tab>
         <Tab eventKey="vehicles" title="Vehículos">
           <CollateralDataTable
-            initialQuery={{ type: CollateralTypeMap.CarLoan }}
+            initialQuery={{ type: collateralTypeMap.CarLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </Tab>
         <Tab eventKey="mortgage" title="Hipotecas">
           <CollateralDataTable
-            initialQuery={{ type: CollateralTypeMap.AgriculturalLoan }}
+            initialQuery={{ type: collateralTypeMap.AgriculturalLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </Tab>
         <Tab eventKey="agriculturalLoan" title="Agrícola">
           <CollateralDataTable
-            initialQuery={{ type: CollateralTypeMap.AgriculturalLoan }}
+            initialQuery={{ type: collateralTypeMap.AgriculturalLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </Tab>

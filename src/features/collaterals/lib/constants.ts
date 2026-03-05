@@ -1,4 +1,4 @@
-import { CollateralTypeMap } from "../models/collateralType";
+import { collateralTypeMap } from "../models/collateralType";
 import { CollateralConditionMap } from "../models/collateralCondition";
 import type { CollateralType } from "../models/collateralType";
 import type { CollateralCondition } from "../models/collateralCondition";
@@ -45,9 +45,9 @@ export const collateralTypeTranslations: Record<
     CollateralType,
     string
 > = {
-    [CollateralTypeMap.CarLoan]: "Préstamo de vehículo",
-    [CollateralTypeMap.Mortgage]: "Hipoteca",
-    [CollateralTypeMap.AgriculturalLoan]: "Préstamo agrícola",
+    [collateralTypeMap.carLoan]: "Préstamo de vehículo",
+    [collateralTypeMap.mortgage]: "Hipoteca",
+    [collateralTypeMap.agriculturalLoan]: "Préstamo agrícola",
 };
 
 export const COLLATERAL_DISABLED_MESSAGES_CONSTANTS = {

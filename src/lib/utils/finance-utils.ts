@@ -27,6 +27,10 @@ export const toCurrency = (money: number): string | number => {
     return formattedAmount;
 };
 
+export const formatNumberWithCommas = (value: number): string => {
+    return new Intl.NumberFormat().format(value);
+}
+
 export const toPercentage = (number: number): string => {
     return `${(number * 100).toFixed(2)}%`
 }

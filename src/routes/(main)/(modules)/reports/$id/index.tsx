@@ -1,4 +1,4 @@
-import { EditReportPage } from '@/features/reports'
+import { GenerateReportPage } from '@/features/reports'
 import { buildReportQueryKey } from '@/features/reports/lib/query-keys'
 import { getReportFromServer } from '@/features/reports/server/reportServerClient'
 import { getReport } from '@/features/reports/services/reportsClient'
@@ -6,7 +6,7 @@ import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
-const getReportFn = createIsomorphicFn()
+export const getReportFn = createIsomorphicFn()
   .server((id) => getReportFromServer(id))
   .client((id) => getReport(id))
 
@@ -21,5 +21,5 @@ function RouteComponent() {
     loader: () => getReportFn(id),
   })
 
-  return <EditReportPage report={data} />
+  return <GenerateReportPage report={data} />
 }

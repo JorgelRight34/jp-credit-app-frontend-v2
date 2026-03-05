@@ -6,7 +6,11 @@ const TabList = ({
   className = variations[variation].list,
   children,
 }: TabListProps & { variation?: VariationKey }) => {
-  return <RTabList className={className}>{children}</RTabList>
+  return (
+    <RTabList className={className + ' ' + variations[variation].list}>
+      {children}
+    </RTabList>
+  )
 }
 
 export default TabList

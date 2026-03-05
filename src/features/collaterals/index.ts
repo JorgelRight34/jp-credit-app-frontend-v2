@@ -5,3 +5,6 @@ export { default as CollateralPage } from './pages/collateral-page'
 export { default as CollateralSettingsPage } from './pages/collateral-settings-page'
 export * from "./lib/config/collateral-datatable-config"
 export * from './models/collateral'
+export * from './models/collateralType'
+export * from './services/collateralClient'
+export { default as CollateralSearchInput } from './components/collateral-search-input'

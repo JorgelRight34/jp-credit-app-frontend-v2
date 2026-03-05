@@ -20,6 +20,7 @@ const FileAttachmentsSection = ({
   buttons,
   existing,
   pending,
+  extraColumns,
 }: FileAttachmentsSectionProps) => {
   return (
     <div className="flex flex-col gap-6 p-2">
@@ -30,7 +31,11 @@ const FileAttachmentsSection = ({
           </MediumTitle>
           {buttons}
         </header>
-        <FileAttachmentsTable existing={existing} pending={pending} />
+        <FileAttachmentsTable
+          existing={existing}
+          pending={pending}
+          extraColumns={extraColumns}
+        />
       </section>
     </div>
   )

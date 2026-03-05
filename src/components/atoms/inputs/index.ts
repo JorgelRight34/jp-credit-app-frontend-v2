@@ -34,3 +34,5 @@ export { default as DaysIntervalSelect } from './select/days-interval-select'
 
 export * from './select/lib/utils'
 export { default as NumberInput } from './numeric-input/number-input'
+
+export * from './models/inputElement'

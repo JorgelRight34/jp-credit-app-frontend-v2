@@ -11,6 +11,7 @@ const SnackbarContainer = () => {
       pauseOnFocusLoss
       draggable
       pauseOnHover
+      icon={false}
     />
   )
 }

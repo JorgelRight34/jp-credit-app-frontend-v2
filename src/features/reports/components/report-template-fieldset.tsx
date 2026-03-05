@@ -5,12 +5,10 @@ import {
   BigTitle,
   Fieldset,
 } from '@/components'
-import { useData } from '@/hooks/useData'
-import { reporstQueryKey } from '../lib/query-keys'
 import { Report } from '../models/report'
 import { reportTemplateKeysLabels } from '../lib/constants'
 import { DASHES } from '@/lib/utils'
-import { reportTemplatesDefinition } from '../lib/report-templates-map'
+import { reportTemplatesDefinition } from '../lib/templates/report-templates-map'
 
 interface ReportTemplateDefinitionFieldsetProps {
   templateKey?: Report['key']
@@ -31,19 +29,14 @@ const ReportTemplateDefinitionFieldset = ({
         {templateKey ? reportTemplateKeysLabels[templateKey] : DASHES}
       </BigTitle>
       <aside className="flex-1 h-96 !overflow-y-auto">
-        {data &&
-          Object.keys(data).map((field) => {
-            const template = data[field as keyof typeof data]
-
-            return (
-              <Accordion key={field} id={field}>
-                <AccordionSummary>
-                  {field} | {template.fieldType}
-                </AccordionSummary>
-                <AccordionDetails>{template.description}</AccordionDetails>
-              </Accordion>
-            )
-          })}
+        {data?.map((field) => (
+          <Accordion key={field.name} id={field.name}>
+            <AccordionSummary>
+              {field.name} | {field.fieldType}
+            </AccordionSummary>
+            <AccordionDetails>{field.description}</AccordionDetails>
+          </Accordion>
+        ))}
       </aside>
     </Fieldset>
   )

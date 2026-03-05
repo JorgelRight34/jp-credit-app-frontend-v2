@@ -45,6 +45,7 @@ import { Route as mainmodulesCollateralsIdIndexRouteImport } from './routes/(mai
 import { Route as mainmodulesAdjustmentNotesCreateIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/create/index'
 import { Route as mainmodulesAdjustmentNotesIdIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/$id/index'
 import { Route as mainmodulesTransactionsPeriodsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/periods/create/index'
+import { Route as mainmodulesReportsIdEditIndexRouteImport } from './routes/(main)/(modules)/reports/$id/edit/index'
 import { Route as mainmodulesProfilesIdEditIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/edit/index'
 import { Route as mainmodulesLoansIdSettingsIndexRouteImport } from './routes/(main)/(modules)/loans/$id/settings/index'
 import { Route as mainmodulesFollowUpsIdEditIndexRouteImport } from './routes/(main)/(modules)/follow-ups/$id/edit/index'
@@ -264,6 +265,12 @@ const mainmodulesTransactionsPeriodsCreateIndexRoute =
     path: '/transactions/periods/create/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesReportsIdEditIndexRoute =
+  mainmodulesReportsIdEditIndexRouteImport.update({
+    id: '/reports/$id/edit/',
+    path: '/reports/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesProfilesIdEditIndexRoute =
   mainmodulesProfilesIdEditIndexRouteImport.update({
     id: '/profiles/$id/edit/',
@@ -374,6 +381,7 @@ export interface FileRoutesByFullPath {
   '/follow-ups/$id/edit/': typeof mainmodulesFollowUpsIdEditIndexRoute
   '/loans/$id/settings/': typeof mainmodulesLoansIdSettingsIndexRoute
   '/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
+  '/reports/$id/edit/': typeof mainmodulesReportsIdEditIndexRoute
   '/transactions/periods/create/': typeof mainmodulesTransactionsPeriodsCreateIndexRoute
   '/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -421,6 +429,7 @@ export interface FileRoutesByTo {
   '/follow-ups/$id/edit': typeof mainmodulesFollowUpsIdEditIndexRoute
   '/loans/$id/settings': typeof mainmodulesLoansIdSettingsIndexRoute
   '/profiles/$id/edit': typeof mainmodulesProfilesIdEditIndexRoute
+  '/reports/$id/edit': typeof mainmodulesReportsIdEditIndexRoute
   '/transactions/periods/create': typeof mainmodulesTransactionsPeriodsCreateIndexRoute
   '/access-control/roles/$id/edit': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -471,6 +480,7 @@ export interface FileRoutesById {
   '/(main)/(modules)/follow-ups/$id/edit/': typeof mainmodulesFollowUpsIdEditIndexRoute
   '/(main)/(modules)/loans/$id/settings/': typeof mainmodulesLoansIdSettingsIndexRoute
   '/(main)/(modules)/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
+  '/(main)/(modules)/reports/$id/edit/': typeof mainmodulesReportsIdEditIndexRoute
   '/(main)/(modules)/transactions/periods/create/': typeof mainmodulesTransactionsPeriodsCreateIndexRoute
   '/(main)/(modules)/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/(main)/(modules)/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -520,6 +530,7 @@ export interface FileRouteTypes {
     | '/follow-ups/$id/edit/'
     | '/loans/$id/settings/'
     | '/profiles/$id/edit/'
+    | '/reports/$id/edit/'
     | '/transactions/periods/create/'
     | '/access-control/roles/$id/edit/'
     | '/access-control/users/$username/edit/'
@@ -567,6 +578,7 @@ export interface FileRouteTypes {
     | '/follow-ups/$id/edit'
     | '/loans/$id/settings'
     | '/profiles/$id/edit'
+    | '/reports/$id/edit'
     | '/transactions/periods/create'
     | '/access-control/roles/$id/edit'
     | '/access-control/users/$username/edit'
@@ -616,6 +628,7 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/follow-ups/$id/edit/'
     | '/(main)/(modules)/loans/$id/settings/'
     | '/(main)/(modules)/profiles/$id/edit/'
+    | '/(main)/(modules)/reports/$id/edit/'
     | '/(main)/(modules)/transactions/periods/create/'
     | '/(main)/(modules)/access-control/roles/$id/edit/'
     | '/(main)/(modules)/access-control/users/$username/edit/'
@@ -880,6 +893,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesTransactionsPeriodsCreateIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/reports/$id/edit/': {
+      id: '/(main)/(modules)/reports/$id/edit/'
+      path: '/reports/$id/edit'
+      fullPath: '/reports/$id/edit/'
+      preLoaderRoute: typeof mainmodulesReportsIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/profiles/$id/edit/': {
       id: '/(main)/(modules)/profiles/$id/edit/'
       path: '/profiles/$id/edit'
@@ -1001,6 +1021,7 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesFollowUpsIdEditIndexRoute: typeof mainmodulesFollowUpsIdEditIndexRoute
   mainmodulesLoansIdSettingsIndexRoute: typeof mainmodulesLoansIdSettingsIndexRoute
   mainmodulesProfilesIdEditIndexRoute: typeof mainmodulesProfilesIdEditIndexRoute
+  mainmodulesReportsIdEditIndexRoute: typeof mainmodulesReportsIdEditIndexRoute
   mainmodulesTransactionsPeriodsCreateIndexRoute: typeof mainmodulesTransactionsPeriodsCreateIndexRoute
   mainmodulesAccessControlRolesIdEditIndexRoute: typeof mainmodulesAccessControlRolesIdEditIndexRoute
   mainmodulesAccessControlUsersUsernameEditIndexRoute: typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -1060,6 +1081,7 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesFollowUpsIdEditIndexRoute: mainmodulesFollowUpsIdEditIndexRoute,
   mainmodulesLoansIdSettingsIndexRoute: mainmodulesLoansIdSettingsIndexRoute,
   mainmodulesProfilesIdEditIndexRoute: mainmodulesProfilesIdEditIndexRoute,
+  mainmodulesReportsIdEditIndexRoute: mainmodulesReportsIdEditIndexRoute,
   mainmodulesTransactionsPeriodsCreateIndexRoute:
     mainmodulesTransactionsPeriodsCreateIndexRoute,
   mainmodulesAccessControlRolesIdEditIndexRoute:

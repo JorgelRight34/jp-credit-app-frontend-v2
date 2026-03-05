@@ -1,15 +1,12 @@
-import { useState } from 'react'
 import { useCollateralForm } from '../hooks/useCollateralForm'
 import { useCollateralFileAttachmentForm } from '../hooks/useCollateralFileAttachmentsForm'
 import type { DataModuleFormProps } from '@/components'
 import type { Collateral } from '../models/collateral'
 import type { CollateralFormValues } from '../lib/schemas/collateralFormSchema'
 import {
-  FileAttachmentsForm,
+  FileAttachmentsFormContainer,
   FileAttachmentsPanel,
   FormContainer,
-  FormContainerButtons,
-  FormLayout,
   FormReadOnlyGroup,
   Tab,
   Tabs,
@@ -70,26 +67,13 @@ const EditCollateralForm = ({
 const EditCollateralFileAttachmentsForm = ({
   collateral,
 }: EditCollateralFormProps) => {
-  const [isDirty, setIsDirty] = useState(false)
   const fileAttachmentsForm = useCollateralFileAttachmentForm({ collateral })
 
   return (
-    <FormLayout
-      footer={
-        <FormContainerButtons
-          isDirty={isDirty}
-          onReset={fileAttachmentsForm.handleReset}
-          onSubmit={fileAttachmentsForm.handleSubmit}
-        />
-      }
-    >
-      <FileAttachmentsForm
-        ref={fileAttachmentsForm.formRef}
-        form={fileAttachmentsForm.form}
-        onDirtyChange={setIsDirty}
-        render={FileAttachmentsPanel}
-      />
-    </FormLayout>
+    <FileAttachmentsFormContainer
+      form={fileAttachmentsForm}
+      render={FileAttachmentsPanel}
+    />
   )
 }
 

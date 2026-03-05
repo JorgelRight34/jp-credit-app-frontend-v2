@@ -8,5 +8,5 @@ export interface Report {
     key: "loan" | "collateral";
     bookmark: boolean;
     createdAt: string;
-    documents?: Array<FileModel>;
+    documents: Array<FileModel>;
 }
