@@ -1,16 +1,19 @@
 import { UseDataFormProps, useForm } from "@/components"
 import { Report } from "../models/report"
 import { reportFormSchema, ReportFormValues } from "../lib/schemas/reportFormSchema"
-import { createReport } from "../services/reportsClient"
+import { createReport, updateReport } from "../services/reportsClient"
 import { reporstQueryKey } from "../lib/query-keys"
 
-interface UseReportFormProps extends UseDataFormProps<Report, ReportFormValues> { }
+interface UseReportFormProps extends UseDataFormProps<Report, ReportFormValues> {
+    reportId?: Report["id"]
+}
 
-export const useReportForm = ({ initialValues, ...config }: UseReportFormProps) => {
+export const useReportForm = ({ initialValues, reportId, ...config }: UseReportFormProps) => {
     return useForm({
         schema: reportFormSchema,
-        defaultValues: initialValues ?? { title: "", description: "", key: "", bookmark: true },
+        defaultValues: initialValues,
         onSubmit: createReport,
+        onEdit: (body) => updateReport(reportId!, body),
         keysToInvalidate: [[reporstQueryKey]],
         ...config
     })

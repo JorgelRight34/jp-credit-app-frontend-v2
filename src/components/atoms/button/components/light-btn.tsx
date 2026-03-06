@@ -16,7 +16,7 @@ export type LightBtnProps = ButtonProps
 const LightBtn = ({ className, ...props }: LightBtnProps) => {
   return (
     <Button
-      className={clsx('btn-light border !bg-white', className)}
+      className={clsx('btn-light border !bg-surface', className)}
       {...props}
     />
   )

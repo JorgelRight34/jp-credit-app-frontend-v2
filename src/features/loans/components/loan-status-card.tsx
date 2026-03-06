@@ -18,7 +18,7 @@ const LoanStatusCard = ({
 }: LoanStatusCardProps) => {
   return (
     <div
-      className={clsx('bg-white rounded-xl', className, {
+      className={clsx('bg-surface rounded-xl', className, {
         border: !isSelected,
         'border-accent-secondary': isSelected,
       })}

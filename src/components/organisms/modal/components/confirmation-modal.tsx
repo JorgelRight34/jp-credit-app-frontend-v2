@@ -112,7 +112,7 @@ const ConfirmationModal = forwardRef<
 
           {description && (
             <div>
-              <p className="mb-5 text-gray-500">{description}</p>
+              <p className="mb-5 text-muted">{description}</p>
             </div>
           )}
 

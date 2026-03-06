@@ -7,7 +7,7 @@ const Container = ({ className, children, ...props }: ContainerProps) => {
   return (
     <div
       className={clsx(
-        'flex flex-col rounded-xl border bg-white p-3',
+        'flex flex-col rounded-xl border bg-surface p-3',
         className,
       )}
       {...props}

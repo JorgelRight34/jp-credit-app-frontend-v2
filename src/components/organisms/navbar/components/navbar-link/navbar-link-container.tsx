@@ -36,7 +36,7 @@ const NavbarLinkContainer = ({
           {
             'nav-link-active bg-active-transparent text-white shadow-sm':
               isActive,
-            'text-gray-500': !isActive,
+            'text-muted': !isActive,
           },
         )}
       >

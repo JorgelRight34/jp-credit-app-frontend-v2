@@ -5,7 +5,7 @@ import type { Profile } from "../../models/profile";
 import type { DataTableConfig } from "@/components";
 import type { PagedResponse } from "@/models";
 import { buildDateDataCell, buildLinkDataCell, buildSingleSelectCell } from "@/components";
-import { toAllTitleCase } from "@/lib/utils";
+import { DASHES, toAllTitleCase } from "@/lib/utils";
 
 const loadersMap: Record<ProfileRole, (q: ProfileQuery) => Promise<PagedResponse<Profile>>> = {
     "profile": getProfiles,
@@ -15,7 +15,6 @@ const loadersMap: Record<ProfileRole, (q: ProfileQuery) => Promise<PagedResponse
 }
 
 export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfig<Profile> => ({
-    title: "Pérfiles",
     columns: [
         {
             accessorKey: 'id',
@@ -59,6 +58,7 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
         {
             accessorKey: 'phoneNumber',
             header: 'CELULAR',
+            cell: ({ row }) => row.original.phoneNumber ?? DASHES,
             enableSorting: true,
         },
     ],
@@ -67,7 +67,6 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
 
 export const createProfileSearchInputDataTableConfig = (onSelect: (profile: Profile) => void, role: ProfileRole = "profile"): DataTableConfig<Profile> => {
     return {
-        title: "Buscar pérfil",
         columns: [{
             accessorKey: 'firstName',
             header: 'NOMBRES',

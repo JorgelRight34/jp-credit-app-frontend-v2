@@ -12,7 +12,6 @@
 
 .my-modal {
   position: absolute;
-  background-color: #fff;
   color: var(--text-color) !important;
   max-height: 99dvw !important;
   z-index: 999;

@@ -22,6 +22,10 @@ export const createReport = async (body: ReportFormValues): Promise<Report> => {
     return data;
 }
 
+export const updateReport = async (id: Report["id"], body: ReportFormValues) => {
+    await api.patch(`${baseUrl}/${id}`, body)
+}
+
 export const uploadReportFiles = async (id: Report["id"], files: Array<File>) => {
     return FileStorageService.upload(files, { reportId: id })
 }

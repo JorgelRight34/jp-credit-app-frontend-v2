@@ -51,7 +51,7 @@ const Modal = ({
       onClick={onHide}
     >
       <div
-        className="my-modal rounded-xl flex flex-col p-3"
+        className="my-modal bg-surface rounded-xl flex flex-col p-3"
         style={{ height, width, maxHeight: '95dvh' }}
         onClick={(e) => e.stopPropagation()}
       >

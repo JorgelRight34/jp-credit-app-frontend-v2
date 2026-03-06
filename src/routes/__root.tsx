@@ -51,11 +51,28 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html className="light" lang="es">
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            (function() {
+              try {
+                var t = localStorage.getItem('theme');
+                if (!t) {
+                  var m = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  t = m ? 'dark' : 'light';
+                }
+                document.documentElement.classList.remove('light','dark');
+                document.documentElement.classList.add(t);
+              } catch (e) {}
+            })();
+            `,
+          }}
+        />
       </head>
-      <body className="antialiased bg-stone-50">
+      <body className="antialiased">
         <Provider dataClient={context.dataClient}>
           <LoadingBar />
           <LoadingScreen />

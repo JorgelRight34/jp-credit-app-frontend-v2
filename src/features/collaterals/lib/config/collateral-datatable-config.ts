@@ -60,7 +60,10 @@ export const collateralDataTableConfig: DataTableConfig<Collateral> = {
 export const buildCollateralSearchInputDataTableConfig: BuildSearchInputDataTableConfigHandler<Collateral> = (setValue) => ({
     columns: [{ accessorKey: "id", header: "ID", enableSorting: true },
     {
-        accessorKey: "title", header: "TÍTULO", enableSorting: true
+        accessorKey: "title", header: "TÍTULO", enableSorting: true, cell: ({ row }) => buildLinkDataCell(
+            row.original.title,
+            { to: "/collaterals/$id", params: { id: row.original.id.toString() } }
+        )
     },
     { id: "loanClientName", accessorKey: "loanClientName", header: "CLIENTE", enableSorting: true },
     {

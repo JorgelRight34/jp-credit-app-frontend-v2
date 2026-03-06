@@ -29,7 +29,7 @@ const Tab = ({
       {...props}
       className={clsx(
         variations[variation].tab,
-        'w-fit cursor-pointer focus-visible:outline-none',
+        'w-fit cursor-pointer focus-visible:outline-none text-secondary',
         className,
         {
           'border-b border-secondary-color text-accent-secondary': isActive,

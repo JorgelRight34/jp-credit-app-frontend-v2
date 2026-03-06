@@ -36,7 +36,7 @@ const Unauthorized = () => {
         </div>
 
         {/* Main Heading */}
-        <BigTitle className="mb-6 text-3xl font-bold text-gray-900">
+        <BigTitle className="mb-6 text-3xl font-bold text-primary">
           Acceso Denegado
         </BigTitle>
 
@@ -56,7 +56,7 @@ const Unauthorized = () => {
           </AccentBtn>
           <SecondaryBtn
             onClick={() => (window.location.href = '/')}
-            className="w-full rounded-lg !bg-white"
+            className="w-full rounded-lg !bg-surface"
             icon={HomeIcon}
           >
             <span className="text-lg">Inicio</span>

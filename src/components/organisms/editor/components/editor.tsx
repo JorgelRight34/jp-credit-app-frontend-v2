@@ -50,7 +50,7 @@ const Editor = ({
 
   return (
     <div
-      className={clsx('flex h-full flex-col bg-white rounded-xl', className)}
+      className={clsx('flex h-full flex-col bg-surface rounded-xl', className)}
     >
       <EditorToolBar
         className="flex-shrink-0 rounded-t-xl border"

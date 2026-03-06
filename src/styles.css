@@ -1,29 +1,89 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --primary-color: #d09d0c;
   --secondary-color: #9c6334;
-  --background-color: #faf9f6;
   --active-color: #583906;
-  --text-color: #333333;
   --white-2: white;
-   --border-gray-500: #6b7280; 
-   --bs-border-color: #dee2e6;
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --text-disabled: #9ca3af;
+  --border-gray-500: #6b7280;
+  --bs-border-color: #dee2e6; 
+  --text-color: #333333; 
+  --surface: #ffff; 
+  --background: #fefefe;
+}
+
+.light {
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --text-disabled: #9ca3af;
+  --border-gray-500: #6b7280;
+  --bs-border-color: #dee2e6; 
+  --text-color: #333333; 
+  --surface: #ffff; 
+  --background: #fefefe;
+}
+
+.dark {
+  --text-primary: #f9fafb;     /* main text (almost white) */
+  --text-secondary: #e5e7eb;   /* regular text */
+  --text-muted: #9ca3af;       /* subtle text */
+  --text-disabled: #6b7280;    /* disabled / low contrast */
+  --border-gray-500: #6b7280;   /* you can keep this if you use it as a "neutral 500" */
+  --bs-border-color: #2b3340;   /* subtle border on dark surfaces */
+  --text-color: #e5e7eb;        /* readable light text */
+  --surface: #111827;           /* cards/panels */
+  --background: #0b1220;        /* page background, slightly darker than surface */
 }
 
 #root {
   height: 100dvh;
   font-family: Arial;
-  color: var(--text-color);
+  color: var(--text-color) !important;
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-background {
+  background-color: var(--background) !important;
+}
+
+.text-primary {
+  color: var(--text-primary) !important;
+}
+
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-disabled {
+  color: var(--text-disabled) !important;
 }
 
 .reset-dropdown-toggle {
   all: unset !important;
 }
 
-.border, .border-b, .border-t, .border-l, .border-r, .border-x, .border-y {
+.border,
+.border-b,
+.border-t,
+.border-l,
+.border-r,
+.border-x,
+.border-y {
   border-color: var(--bs-border-color) !important;
 }
+
 
 .border-primary-color {
   border-color: var(--primary-color) !important;
@@ -33,12 +93,8 @@
   border-color: var(--primary-color) !important;
 }
 
-.bg-color {
-  background-color: #fefefe !important;
-}
-
-.bg-white-2 {
-background-color: var(---white-2) !important;
+.bg-surface-2 {
+  background-color: var(---white-2) !important;
 }
 
 .border-accent-secondary {
@@ -54,7 +110,7 @@ background-color: var(---white-2) !important;
 }
 
 .btn-accent-secondary {
-  background-color: var(--background-color) !important;
+  background-color: var(--surface) !important;
   border: 1px solid var(--secondary-color) !important;
   color: var(--secondary-color) !important;
 }
@@ -62,7 +118,7 @@ background-color: var(---white-2) !important;
 .btn-filled {
   color: var(--primary-color) !important;
   position: relative;
-  background-color: var(--background-color);
+  background-color: var(--surface);
   border: 1px solid var(--primary-color) !important;
 }
 
@@ -92,12 +148,8 @@ background-color: var(---white-2) !important;
   color: #fff;
 }
 
-.bg-background {
-  background-color: var(--background-color);
-}
-
 .btn-light {
-  background-color: #f5f5f5 !important;
+  background-color: (--surface) !important;
   color: var(--secondary-color) !important;
 }
 
@@ -209,32 +261,30 @@ input:focus {
   background-color: rgba(88, 57, 6, 0.025) !important;
 }
 
-
 .transparent-accent-bg::before {
   position: absolute;
   inset: 0;
-  content: "";
+  content: '';
   background-color: var(--primary-color);
   opacity: 0.7;
   border-radius: 0.5rem;
   z-index: -1;
 }
 
-
 .transparent-accent-bg {
   position: relative;
 }
 
 .text-accent {
-  color: var(--secondary-color);
-} 
+  color: var(--secondary-color) !important;
+}
 
 .text-accent-important {
   color: var(--secondary-color) !important;
-} 
+}
 
 .text-accent-secondary {
-  color: var(--secondary-color);
+  color: var(--secondary-color) !important;
 }
 
 .tab-title:hover {

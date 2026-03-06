@@ -39,7 +39,7 @@ const TableBodyCompositor = <T,>({
         <React.Fragment key={row.id}>
           <TableRowCompositor row={row} {...props} />
           {row.getIsExpanded() && (
-            <TableRow className="border-y !bg-white">
+            <TableRow className="border-y !bg-surface">
               <TableDataCell
                 colSpan={row.getVisibleCells().length + 1}
                 className="p-0 align-top"

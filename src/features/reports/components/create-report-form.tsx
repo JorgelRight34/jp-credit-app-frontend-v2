@@ -24,6 +24,7 @@ const CreateReportForm = (props: CreateReportFormProps) => {
   const fileAttachmentsForm = useReportFileAttachmentForm()
   const form = useReportForm({
     ...props,
+    initialValues: { title: '', description: '', key: '', bookmark: true },
     resetValues: true,
     onSuccess: fileAttachmentsForm.submit,
   })

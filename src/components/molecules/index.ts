@@ -33,3 +33,5 @@ export { default as PhotoGallery } from "./photo-gallery/photo-gallery"
 export * from './stepper'
 export * from './snackbar'
 export * from './file-download'
+
+export * from './theme'

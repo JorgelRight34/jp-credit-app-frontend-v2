@@ -21,7 +21,7 @@ const ModalTrigger = forwardRef<ModalTriggerRef, ModalTriggerProps>(
     return (
       <>
         <span
-          className="cursor-pointer w-full"
+          className="cursor-pointer inline"
           onClick={() => setShowModal(true)}
         >
           {trigger}

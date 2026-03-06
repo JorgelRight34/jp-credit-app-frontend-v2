@@ -5,7 +5,7 @@ import Tab from './tab'
 import type { UseTabsProps } from '../hooks/useTabs'
 import type { ReactNode } from 'react'
 import 'react-tabs/style/react-tabs.css'
-import type { VariationKey } from '../lib/variations'
+import { variations, type VariationKey } from '../lib/variations'
 import TabList from './tab-list'
 
 export interface TabsProps extends UseTabsProps {
@@ -23,7 +23,7 @@ const Tabs = ({
   tabListClassName,
   tabClassName,
   tabPanelClassName,
-  variation,
+  variation = 'default',
   children,
   ...props
 }: TabsProps) => {
@@ -34,7 +34,7 @@ const Tabs = ({
     })
 
   return (
-    <div className={clsx('h-full', className)}>
+    <div className={clsx('h-full bg-surface', className)}>
       <RTabs
         selectedIndex={activeIndex}
         onSelect={(tab) => {
@@ -43,22 +43,25 @@ const Tabs = ({
         selectedTabClassName="text-accent"
         className="react-tabs flex h-full flex-col"
       >
-        <TabList variation={variation} className={tabListClassName}>
-          {tabsArray.map((tab, index) => (
-            <Tab
-              variation={variation}
-              className={tabClassName}
-              {...tab.props}
-              isActive={index === activeIndex}
-              key={index}
-            >
-              {tab.props.title}
-            </Tab>
-          ))}
-        </TabList>
+        <div className={variations[variation].container}>
+          <TabList variation={variation} className={tabListClassName}>
+            {tabsArray.map((tab, index) => (
+              <Tab
+                variation={variation}
+                className={tabClassName}
+                {...tab.props}
+                isActive={index === activeIndex}
+                key={index}
+              >
+                {tab.props.title}
+              </Tab>
+            ))}
+          </TabList>
+        </div>
+
         {tabsArray.map((tab, index) => (
           <TabPanel
-            className="react-tabs__tab-panel h-full"
+            className={`react-tabs__tab-panel h-full bg-background pt-3 ${variations[variation].container}`}
             key={index}
             forceRender={renderedTabs[index]}
           >

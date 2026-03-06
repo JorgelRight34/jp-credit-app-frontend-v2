@@ -16,6 +16,7 @@ export interface MenuOption {
 }
 
 export interface MenuRef {
+  isOpen: boolean
   close: () => void
   open: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
@@ -39,6 +40,7 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
     }
 
     useImperativeHandle(ref, () => ({
+      isOpen: open,
       close: handleMenuClose,
       open: handleMenuOpen,
     }))

@@ -8,7 +8,7 @@ interface PageLayoutContentProps {
 
 const PageLayoutContent = ({ children }: PageLayoutContentProps) => {
   return (
-    <div className="px-lg-3 flex flex-1 flex-col p-0">
+    <div className="p-3 flex flex-1 flex-col p-0">
       <Suspense fallback={null}>{children}</Suspense>
     </div>
   )

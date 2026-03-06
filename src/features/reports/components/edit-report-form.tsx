@@ -31,7 +31,7 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
       bookmark: report.bookmark,
       key: report.key,
     },
-    resetValues: false,
+    shouldEdit: true,
   })
 
   return (

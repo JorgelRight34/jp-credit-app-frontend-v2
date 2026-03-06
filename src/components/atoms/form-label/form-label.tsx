@@ -1,5 +1,7 @@
-import { FormLabel as MFormLabel } from "@mui/material";
+import { FormLabelProps, FormLabel as MFormLabel } from '@mui/material'
 
-const FormLabel = MFormLabel;
+const FormLabel = (props: FormLabelProps) => (
+  <MFormLabel {...props} className="text-secondary" />
+)
 
-export default FormLabel;
+export default FormLabel

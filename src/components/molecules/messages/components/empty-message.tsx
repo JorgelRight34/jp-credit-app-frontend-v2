@@ -22,7 +22,7 @@ const EmptyMessage = ({
   return (
     <div className={className}>
       <div className="flex justify-center">
-        <Icon icon={EmptyIcon} className="mx-auto mb-5 text-gray-700" />
+        <Icon icon={EmptyIcon} className="mx-auto mb-5 text-secondary" />
       </div>
       <div className="mb-5">
         <BigTitle className="mb-3 text-center text-2xl font-semibold text-gray-800">

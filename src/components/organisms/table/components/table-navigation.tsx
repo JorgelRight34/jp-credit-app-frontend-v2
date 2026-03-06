@@ -36,7 +36,7 @@ const TableNavigation = <TData,>({
   }
 
   return (
-    <div className={clsx('w-full rounded-b-xl bg-white', className)}>
+    <div className={clsx('w-full rounded-b-xl bg-surface', className)}>
       <div className="flex w-full flex-col justify-center p-3 py-2 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-2">
           <Subtitle>

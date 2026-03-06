@@ -1,3 +1,5 @@
 export * from './lib/utils'
 export { default as Menu } from './components/menu'
+export * from './components/menu'
 export { default as MenuItem } from './components/menu-item'
+export * from './components/menu-trigger'

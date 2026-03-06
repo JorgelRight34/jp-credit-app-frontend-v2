@@ -9,7 +9,7 @@ const DetailRowProps = ({ title, subtitle }: DetailRowProps) => {
   return (
     <header className="border-b flex justify-between">
       <span>{title}</span>
-      <span className="text-gray-900 truncate">{subtitle}</span>
+      <span className="text-primary truncate">{subtitle}</span>
     </header>
   )
 }

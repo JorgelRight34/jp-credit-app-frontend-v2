@@ -20,6 +20,14 @@ export const SX_CONFIG = {
             boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
         },
 
+        "& .MuiInputBase-input": {
+            color: "var(--text-primary)", // input text
+        },
+
+        "& .MuiInputLabel-root": {
+            color: "var(--text-muted)", // label color
+        },
+
         /* Chrome, Safari, Edge
         '& input[type="date"]::-webkit-calendar-picker-indicator': {
             display: 'none',

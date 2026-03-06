@@ -33,7 +33,7 @@ const NavbarLink = ({
           isActive={isActive}
         >
           <span
-            className={clsx('flex items-center p-2', {
+            className={clsx('flex bg-surface items-center p-2', {
               'text-active font-medium': isActive,
             })}
           >

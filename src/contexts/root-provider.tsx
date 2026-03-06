@@ -7,7 +7,7 @@ import {
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 import { AxiosError } from 'axios'
 import errorHandler from '@/lib/services/errorHandler'
-import { SnackbarContainer } from '@/components'
+import { SnackbarContainer, ThemeProvider } from '@/components'
 
 const onError = (error: unknown) => {
   if (error instanceof AxiosError) {
@@ -47,8 +47,10 @@ export function Provider({
 }) {
   return (
     <QueryClientProvider client={dataClient}>
-      {children}
-      <SnackbarContainer />
+      <ThemeProvider>
+        <SnackbarContainer />
+        {children}
+      </ThemeProvider>
     </QueryClientProvider>
   )
 }
