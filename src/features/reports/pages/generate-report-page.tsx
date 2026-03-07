@@ -1,56 +1,34 @@
 import {
-  BreadcrumbsByRoute,
-  BreadcrumbSpec,
-  buildPageLayoutEditOption,
-  DownloadIcon,
-  FileTable,
-  mapApiFileToTableFile,
-  PageRouterLayout,
+  PageLayout,
+  PageLayoutBreadcrumb,
   PrintIcon,
-  ReportIcon,
   Tab,
-  TabsRouter,
+  TabList,
+  TabsPanelContainer,
 } from '@/components'
-import { Report } from '../models/report'
 import { reportsBreadcrumb } from './reports-page'
-import GenerateReportForm from '../components/generate-report-form'
+import ReportGenerationForm from '../components/report-generation-form'
 
-export const buildReportBreadcrumb = (report: Report): BreadcrumbSpec => ({
-  icon: ReportIcon,
-  title: report.title,
-})
-
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  generate: [{ icon: PrintIcon, title: 'Generar' }],
-  files: [{ icon: DownloadIcon, title: 'Archivos' }],
-}
-
-const GenerateReportPage = ({ report }: { report: Report }) => {
+const GenerateReportPage = () => {
   return (
-    <PageRouterLayout
+    <PageLayout
       title="Generar reporte"
-      options={[
-        buildPageLayoutEditOption('/reports/$id/edit', {
-          id: report.id.toString(),
-        }),
-      ]}
-      routerConfig={{
-        defaultActive: 'generate',
-        baseBreadcrumbs: [reportsBreadcrumb, buildReportBreadcrumb(report)],
-        breadcrumbsByRoute,
-      }}
+      breadcrumb={
+        <PageLayoutBreadcrumb
+          breadcrumbs={[
+            reportsBreadcrumb,
+            { icon: PrintIcon, title: 'Generar' },
+          ]}
+        />
+      }
     >
-      <TabsRouter>
-        <Tab eventKey="generate" title="Generar">
-          <GenerateReportForm report={report} />
-        </Tab>
-        <Tab eventKey="files" title="Archivos">
-          <section>
-            <FileTable files={report.documents.map(mapApiFileToTableFile)} />
-          </section>
-        </Tab>
-      </TabsRouter>
-    </PageRouterLayout>
+      <TabList>
+        <Tab title="Formulario" isActive />
+      </TabList>
+      <TabsPanelContainer>
+        <ReportGenerationForm />
+      </TabsPanelContainer>
+    </PageLayout>
   )
 }
 

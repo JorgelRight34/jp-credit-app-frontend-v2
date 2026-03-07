@@ -1,0 +1,29 @@
+import { InputAdornment } from '@mui/material'
+import type { IconName } from '@/components/atoms/icon/models/iconName'
+import Icon from '@/components/atoms/icon/components/icon'
+
+export type IconInputSlotProps = {
+  iconDirection?: string
+  icon?: IconName
+  onClick?: () => void
+}
+
+export const getIconInputSlot = ({
+  icon,
+  iconDirection = 'right',
+  onClick,
+}: IconInputSlotProps = {}) => {
+  const isDirectionRight = iconDirection === 'right' && icon
+
+  return {
+    [isDirectionRight ? 'startAdornment' : 'endAdornment']: icon ? (
+      <InputAdornment
+        className="text-muted"
+        position={isDirectionRight ? 'start' : 'end'}
+        onClick={onClick}
+      >
+        <Icon icon={icon} />
+      </InputAdornment>
+    ) : null,
+  }
+}

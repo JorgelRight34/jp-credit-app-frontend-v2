@@ -4,6 +4,7 @@ import {
   FileAttachmentsPanel,
   Form,
   FormContainer,
+  FormMasterDetailLayout,
   FormWatch,
   Tab,
   Tabs,
@@ -33,13 +34,13 @@ const CreateReportForm = (props: CreateReportFormProps) => {
     <FormContainer form={form}>
       <Tabs>
         <Tab eventKey="form" title="Datos">
-          <div className="flex h-full">
-            <div className="w-8/12">
+          <FormMasterDetailLayout>
+            <FormMasterDetailLayout.Master>
               <Form form={form}>
                 <ReportFormPanel />
               </Form>
-            </div>
-            <div className="flex h-full flex-col w-4/12 pl-6">
+            </FormMasterDetailLayout.Master>
+            <FormMasterDetailLayout.Detail>
               <FormWatch
                 form={form}
                 names={['key']}
@@ -47,8 +48,8 @@ const CreateReportForm = (props: CreateReportFormProps) => {
                   <ReportTemplateDefinitionFieldset templateKey={key} />
                 )}
               />
-            </div>
-          </div>
+            </FormMasterDetailLayout.Detail>
+          </FormMasterDetailLayout>
         </Tab>
         <Tab eventKey="files" title="Archivos">
           <FileAttachmentsForm

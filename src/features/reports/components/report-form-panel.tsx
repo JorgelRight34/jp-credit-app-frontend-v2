@@ -5,9 +5,8 @@ import {
   FormSelectGroup,
   Input,
   RichTextEditor,
-  SelectOptions,
 } from '@/components'
-import { Report } from '../models/report'
+import { reportKeySelectOptions } from '../lib/constants'
 
 const ReportFormPanel = () => {
   return (
@@ -19,7 +18,7 @@ const ReportFormPanel = () => {
         <FormSelectGroup
           name="key"
           label="Categoría"
-          options={[['loan', 'Préstamos']] as SelectOptions<Report['key']>}
+          options={reportKeySelectOptions}
         />
         <FormCheckboxGroup name="bookmark" label="Marcar" />
       </FormRow>

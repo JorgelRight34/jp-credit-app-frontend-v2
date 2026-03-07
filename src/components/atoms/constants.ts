@@ -28,6 +28,10 @@ export const SX_CONFIG = {
             color: "var(--text-muted)", // label color
         },
 
+        "& .MuiSelect-icon": {
+            color: "var(--text-muted)", // customize here
+        },
+
         /* Chrome, Safari, Edge
         '& input[type="date"]::-webkit-calendar-picker-indicator': {
             display: 'none',

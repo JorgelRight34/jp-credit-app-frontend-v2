@@ -26,6 +26,7 @@ const FormContainer = <T extends FieldValues>({
   return (
     <FormLayout
       className={className}
+      onSubmit={onSubmit}
       errors={<FormErrorsPanel control={form.control} mutationError={errors} />}
       footer={
         footer ? (
@@ -33,7 +34,6 @@ const FormContainer = <T extends FieldValues>({
         ) : (
           <FormContainerButtons
             form={form}
-            onSubmit={onSubmit}
             isDirty={isDirty || initializeAsDirty}
           />
         )

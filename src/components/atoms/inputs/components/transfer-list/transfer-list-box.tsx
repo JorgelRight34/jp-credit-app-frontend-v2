@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import Paragraph from '../../text/paragraph'
-import FormLabel from '../../form-label/form-label'
+import Paragraph from '../../../text/paragraph'
+import FormLabel from '../../../form-label/form-label'
 import Checkbox from '../checkbox/checkbox'
 
 export type TransferItem = {
@@ -44,7 +44,7 @@ const TransferListBox = ({
         <Paragraph className={subtitleClassName}>{subtitle}</Paragraph>
       </div>
       <div className="flex flex-1 border-x border-b rounded-b-xl overflow-hidden">
-        <div className="bg-white w-full !max-h-[20rem] overflow-y-auto">
+        <div className="bg-surface w-full !max-h-[20rem] overflow-y-auto">
           {items.map((item) => {
             const isDisabled = !!disabled || !!item.disabled
 

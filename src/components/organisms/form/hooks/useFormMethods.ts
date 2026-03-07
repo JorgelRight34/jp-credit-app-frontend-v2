@@ -14,17 +14,20 @@ export type DefaultFormValues<TData> = Partial<{
 export interface UseFormMethodsProps<TData extends FieldValues, TReturn> {
     schema?: SchemaType<TData>;
     defaultValues?: DefaultFormValues<TData>;
+    shouldUseNativeValidation?: boolean;
     handleOnSubmit: (data: TData) => TReturn;
 }
 
 export const useFormMethods = <T extends object, TData extends FieldValues, TReturn = T>({
     schema,
     defaultValues,
+    shouldUseNativeValidation,
     handleOnSubmit,
 }: UseFormMethodsProps<TData, TReturn>) => {
     const methods = useRHFForm({
         resolver: schema ? zodResolver(schema) : undefined,
         defaultValues: defaultValues as Record<string, unknown>,
+        shouldUseNativeValidation,
     });
 
     const handleReset = () => {

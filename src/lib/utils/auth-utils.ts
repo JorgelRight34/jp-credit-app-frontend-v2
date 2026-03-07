@@ -22,4 +22,11 @@ export const getProfilePicWithInitials = (
     return profile ? getPicWithInitials(getFirstAndLastName(profile), background, color) : defaultProfilePic;
 };
 
+export const getNameInitials = (names: { firstName: string; lastName: string }) => {
+    const first = names.firstName?.trim()?.[0] ?? '';
+    const last = names.lastName?.trim()?.[0] ?? '';
+
+    return (first + last).toUpperCase();
+};
+
 export const getAuthorizationFromClient = () => localStorage.getItem(ACCESS_TOKEN)

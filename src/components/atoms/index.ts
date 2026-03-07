@@ -19,22 +19,22 @@ export { default as Tooltip } from './tooltip/tooltip'
 // -------------------------------------
 // Inputs - Global Constants
 // -------------------------------------
-export * from "./inputs/constants";
+export * from "./inputs/lib/constants";
 
 // -------------------------------------
 // Inputs - Citizen ID
 // -------------------------------------
-export { default as CitizenIdInput } from "./inputs/citizen-id-input/citizen-id-input";
+export { default as CitizenIdInput } from "./inputs/components/checkbox/citizen-id-input/citizen-id-input";
 
 // -------------------------------------
 // Inputs - Currency
 // -------------------------------------
-export { default as CurrencyInput } from "./inputs/currency-input/currency-input";
+export { default as CurrencyInput } from "./inputs/components/currency-input/currency-input";
 
 // -------------------------------------
 // Inputs - Date
 // -------------------------------------
-export { default as DateInput } from "./inputs/date-input/date-input";
+export { default as DateInput } from "./inputs/components/date-input/date-input";
 
 // -------------------------------------
 // Inputs - Base Input + TextField
@@ -42,44 +42,44 @@ export { default as DateInput } from "./inputs/date-input/date-input";
 export * from "./inputs"
 export { default as MediumTitle } from "./text/medium-title"
 export { default as BigTitle } from "./text/big-title"
-export * from "./inputs/input/components/input"
-export * from "./inputs/input/models/baseTextFieldProps";
-export * from "./inputs/input/lib/react-utils";
+export * from "./inputs/components/input/components/input"
+export * from "./inputs/components/input/models/baseTextFieldProps";
+export * from "./inputs/components/input/lib/react-utils";
 
 // -------------------------------------
 // Inputs - Masked
 // -------------------------------------
-export { default as MaskedInput } from "./inputs/masked-input/masked-input";
+export { default as MaskedInput } from "./inputs/components/masked-input/masked-input";
 
 // -------------------------------------
 // Inputs - Month Select
 // -------------------------------------
-export { default as MonthSelect } from "./inputs/month-select/month-select";
+export { default as MonthSelect } from "./inputs/components/month-select/month-select";
 
 // -------------------------------------
 // Inputs - Password
 // -------------------------------------
-export { default as PasswordInput } from "./inputs/password-input/password-input";
+export { default as PasswordInput } from "./inputs/components/password-input/password-input";
 
 // -------------------------------------
 // Inputs - Percentage
 // -------------------------------------
-export { default as PercentageInput } from "./inputs/percentage-input/percentage-input";
+export { default as PercentageInput } from "./inputs/components/percentage-input/percentage-input";
 
 // -------------------------------------
 // Inputs - Phone
 // -------------------------------------
-export { default as PhoneInput } from "./inputs/phone-input/phone-input";
+export { default as PhoneInput } from "./inputs/components/phone-input/phone-input";
 export { default as Image } from "./image/image"
 export * from "./image/image"
 
 // -------------------------------------
 // Inputs - Select (Lazy & Normal)
 // -------------------------------------
-export { default as SelectInput } from "./inputs/select/select";
-export * from "./inputs/select/select"
-export { default as SelectOption } from "./inputs/select/select-option";
-export { default as YearSelect } from "./inputs/select/year-select";
+export { default as SelectInput } from "./inputs/components/select/select";
+export * from "./inputs/components/select/select"
+export { default as SelectOption } from "./inputs/components/select/select-option";
+export { default as YearSelect } from "./inputs/components/select/year-select";
 
 // -------------------------------------
 // Navigation

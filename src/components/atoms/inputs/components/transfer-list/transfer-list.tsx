@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { LightBtn } from '../../button'
+import { LightBtn } from '../../../button'
 import TransferListBox from './transfer-list-box'
 import { useTransferList } from './useTransferList'
 import type { UseTransferListProps } from './useTransferList'

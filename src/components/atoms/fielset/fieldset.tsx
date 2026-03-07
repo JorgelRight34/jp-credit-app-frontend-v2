@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { HTMLAttributes } from 'react'
 
 const Fieldset = ({
@@ -12,12 +11,9 @@ const Fieldset = ({
 }) => {
   return (
     <fieldset
-      className={clsx(
-        'border w-full rounded-xl bg-surface p-3 px-4',
-        className,
-      )}
+      className={`border w-full rounded-xl bg-surface p-3 px-4 ${className}`}
     >
-      <legend className={legendClassName}>{legend}</legend>
+      <legend className={`${legendClassName} text-primary`}>{legend}</legend>
       {children}
     </fieldset>
   )

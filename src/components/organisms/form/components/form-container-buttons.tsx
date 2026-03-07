@@ -1,5 +1,4 @@
-import { useCallback } from 'react'
-import type { FieldValues } from 'react-hook-form'
+import { type FieldValues } from 'react-hook-form'
 import FormSubmitBtn from './form-submit-btn'
 import type { FormSubmitBtnProps } from './form-submit-btn'
 import { RestartAllIcon, SecondaryPillBtn } from '@/components/atoms'
@@ -12,37 +11,27 @@ type FormContainerButtonsProps<T extends FieldValues> =
   }
 
 const FormContainerButtons = <T extends FieldValues>({
-  isDirty,
-  isValid,
   form,
   text,
-  onSubmit,
-  onReset,
+  isDirty,
+  isValid,
+  onReset = form?.reset,
   icon,
 }: FormContainerButtonsProps<T>) => {
-  const handleReset = useCallback(() => {
-    if (form) {
-      form.reset()
-      return
-    }
-    onReset?.()
-  }, [form, onReset])
-
   return (
     <div className="flex items-center gap-3">
       <SecondaryPillBtn
         icon={RestartAllIcon}
         disabled={!isDirty}
-        onClick={handleReset}
+        onClick={onReset}
       >
         Resetear
       </SecondaryPillBtn>
       <FormSubmitBtn
-        isDirty={isDirty}
-        isValid={isValid}
         icon={icon}
         text={text}
-        onSubmit={onSubmit}
+        isDirty={isDirty}
+        isValid={isValid}
       />
     </div>
   )

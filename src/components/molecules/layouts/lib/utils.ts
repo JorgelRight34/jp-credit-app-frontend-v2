@@ -2,6 +2,7 @@ import type { Route, RouteParams } from '@/components/atoms'
 import type { LayoutOption } from '../models/pageLayoutOption'
 import {
   AccentPillBtn,
+  AccentPillLinkBtn,
   AddIcon,
   DeleteIcon,
   EditIcon,
@@ -19,8 +20,9 @@ export const buildPageLayoutCreateOption = (
   title: 'Añadir',
   to: createPath,
   icon: AddIcon,
-  component: AccentPillBtn,
+  component: AccentPillLinkBtn,
 })
+
 
 export const buildPageLayoutEditOption = (
   editPath: Route,

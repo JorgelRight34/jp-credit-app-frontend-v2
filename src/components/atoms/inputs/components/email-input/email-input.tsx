@@ -1,4 +1,4 @@
-import { EmailIcon } from '../../icon'
+import { EmailIcon } from '../../../icon'
 import Input from '../input/components/input'
 import type { InputProps } from '../input/components/input'
 

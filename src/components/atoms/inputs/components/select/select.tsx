@@ -1,10 +1,11 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import { FormControl, InputLabel, Select } from '@mui/material'
 import clsx from 'clsx'
 import { getIconInputSlot } from '../input/lib/react-utils'
-import { SX_CONFIG } from '../../constants'
+import { SX_CONFIG } from '../../../constants'
 import type { SelectOptions } from './select-option'
 import type { InputProps } from '../input/components/input'
 import { type ReactNode } from 'react'
+import { MenuItem } from '@/components/molecules'
 
 export type SelectInputProps = Omit<
   InputProps,
@@ -43,6 +44,13 @@ const SelectInput = ({
         label={label}
         labelId={label?.toString()}
         value={value}
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              backgroundColor: 'var(--surface)',
+            },
+          },
+        }}
         onChange={(e) => onChange?.(e.target.value as string)}
         sx={{ width: 'auto', minWidth: 'fit-content', ...SX_CONFIG }}
         IconComponent={readOnly ? () => null : undefined}

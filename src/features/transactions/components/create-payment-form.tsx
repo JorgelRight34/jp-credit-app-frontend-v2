@@ -9,6 +9,7 @@ import {
   FormConfirmationFlowContainer,
   FormGroup,
   FormLazySelectGroup,
+  FormMasterDetailLayout,
   FormRow,
   FormWatch,
   PickerInputDataController,
@@ -53,8 +54,8 @@ const CreatePayment = (props: CreatePaymentProps) => {
     >
       <FormConfirmationFlowContainer form={form}>
         <Form form={form}>
-          <div className="flex-1 h-full flex">
-            <div className="flex flex-col w-8/12">
+          <FormMasterDetailLayout>
+            <FormMasterDetailLayout.Master>
               <FormRow>
                 <FormGroup
                   name="loanId"
@@ -96,8 +97,8 @@ const CreatePayment = (props: CreatePaymentProps) => {
                 label="Descripción"
                 input={RichTextEditor}
               />
-            </div>
-            <div className="w-4/12 pl-6">
+            </FormMasterDetailLayout.Master>
+            <FormMasterDetailLayout.Detail>
               <PickerInputDataController
                 ref={loanPickerInputDataControllerRef}
                 render={(loan) => (
@@ -110,8 +111,8 @@ const CreatePayment = (props: CreatePaymentProps) => {
                   />
                 )}
               />
-            </div>
-          </div>
+            </FormMasterDetailLayout.Detail>
+          </FormMasterDetailLayout>
         </Form>
       </FormConfirmationFlowContainer>
     </FormConfirmationFlow>

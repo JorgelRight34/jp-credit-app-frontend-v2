@@ -1,36 +1,23 @@
 import type { LayoutOption } from '../models/pageLayoutOption'
-import { Icon, Link } from '@/components/atoms'
+import { Icon } from '@/components/atoms'
 
-type EntityLayoutOptionProps = {
+type PageLayoutOptionProps = {
   option: LayoutOption
 }
 
-const EntityLayoutOption = ({ option }: EntityLayoutOptionProps) => {
+const PageLayoutOption = ({ option }: PageLayoutOptionProps) => {
   const Component = option.component
-
-  if (option.to) {
-    return (
-      <Link to={option.to}>
-        <Component
-          disabled={option.disabled}
-          title={option.tooltip}
-          onClick={option.onClick}
-        >
-          <Icon icon={option.icon}>{option.title}</Icon>
-        </Component>
-      </Link>
-    )
-  }
 
   return (
     <Component
       disabled={option.disabled}
       title={option.tooltip}
       onClick={option.onClick}
+      to={option.to}
     >
       <Icon icon={option.icon}>{option.title}</Icon>
     </Component>
   )
 }
 
-export default EntityLayoutOption
+export default PageLayoutOption

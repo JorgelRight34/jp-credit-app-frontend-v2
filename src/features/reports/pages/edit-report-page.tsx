@@ -3,7 +3,7 @@ import { reportPermissionProvider } from '../lib/permission-provider'
 import { reportsBreadcrumb } from './reports-page'
 import EditReportForm from '../components/edit-report-form'
 import { Report } from '../models/report'
-import { buildReportBreadcrumb } from './generate-report-page'
+import { buildReportBreadcrumb } from './report-page'
 
 const EditReportPage = ({ report }: { report: Report }) => {
   return (

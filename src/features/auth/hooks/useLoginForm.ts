@@ -1,18 +1,21 @@
-import { loginSchema } from "../lib/schemas/loginSchema";
 import { login } from "../services/authService";
 import type { LoginResult } from "../models/loginResult";
-import type { LoginSchemaType } from "../lib/schemas/loginSchema";
 import type { UseDataFormProps } from "@/components";
 import { useForm } from "@/components";
 import { ACCESS_TOKEN } from "@/lib/utils";
 
-export const useLoginForm = ({ onSuccess, ...props }: UseDataFormProps<LoginResult, LoginSchemaType>) => {
+export interface LoginFormValues {
+    username: string;
+    password: string;
+}
+
+export const useLoginForm = ({ onSuccess, ...props }: UseDataFormProps<LoginResult, LoginFormValues>) => {
     return useForm({
         ...props,
         onSubmit: login,
         defaultValues: { username: "", password: "" },
-        schema: loginSchema,
         resetValues: false,
+        shouldUseNativeValidation: true,
         toastMessage: () => `Bienvenido!`,
         onSuccess: (data) => {
             localStorage.setItem(ACCESS_TOKEN, data.token)

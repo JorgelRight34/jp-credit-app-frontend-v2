@@ -47,7 +47,7 @@
 }
 
 .bg-surface {
-  background-color: var(--surface);
+  background-color: var(--surface) !important;
 }
 
 .bg-background {
@@ -316,4 +316,12 @@ input:focus {
 
 .mb-auto {
   margin-bottom: auto;
+}
+
+* {
+  scrollbar-track-color: transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
 }

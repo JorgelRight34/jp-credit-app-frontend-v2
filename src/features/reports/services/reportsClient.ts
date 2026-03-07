@@ -9,6 +9,7 @@ import { loanTemplateDefinition } from "../lib/templates/loan-template-definitio
 import { templateMapper } from "../lib/templates/report-templates-map";
 import { getCollateral } from "@/features/collaterals";
 import { collateralTemplateDefinition } from "../lib/templates/collateral-template-definition";
+import { ReportGenerationFormValues } from "../lib/schemas/reportGenerationFormSchema";
 
 const baseUrl = "reports"
 
@@ -39,23 +40,28 @@ export const getReport = async (id: Report["id"]): Promise<Report> => {
     return data;
 }
 
-export const generateReport = async (objId: number | string, id: Report["id"], key: Report["key"]): Promise<Blob> => {
+export const generateReport = async ({ id, key, file }: ReportGenerationFormValues): Promise<Blob> => {
     let context = null;
 
     switch (key) {
         case "loan":
-            const loan = await getLoan(objId as number)
+            const loan = await getLoan(id as number)
             context = templateMapper(loan, loanTemplateDefinition)
             break;
         case "collateral":
-            const colateral = await getCollateral(objId as number);
+            const colateral = await getCollateral(id as number);
             context = templateMapper(colateral, collateralTemplateDefinition)
             break;
     }
 
-    const { data } = await api.post(`${baseUrl}/generate`, {
-        context, id
-    }, { responseType: "blob" });
+    const formData = new FormData();
+    formData.append("context", JSON.stringify(context));
+
+    for (const f in file) {
+        formData.append("file", f)
+    }
+
+    const { data } = await api.post(`${baseUrl}/generate`, formData, { responseType: "blob" });
 
     return data;
 }

@@ -7,7 +7,6 @@ export interface FormSubmitBtnProps {
   isValid?: boolean
   toastMessage?: string
   icon?: IconName
-  onSubmit?: () => unknown
 }
 
 const FormSubmitBtn = ({
@@ -15,14 +14,12 @@ const FormSubmitBtn = ({
   isDirty,
   isValid,
   icon = CheckCircleIcon,
-  onSubmit,
 }: FormSubmitBtnProps) => {
   return (
     <AccentPillBtn
       type="submit"
       disabled={isValid !== undefined ? !isDirty || !isValid : !isDirty}
       icon={icon}
-      onClick={onSubmit}
     >
       {text}
     </AccentPillBtn>

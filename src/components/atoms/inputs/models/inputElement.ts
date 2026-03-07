@@ -1,4 +1,4 @@
 import { ReactNode } from "react";
-import { InputProps } from "../input/components/input";
+import { InputProps } from "../components/input/components/input";
 
 export type InputElement = (props: InputProps) => ReactNode

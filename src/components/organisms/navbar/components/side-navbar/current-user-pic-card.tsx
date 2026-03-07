@@ -1,40 +1,17 @@
-import clsx from 'clsx'
-import { Image } from '@/components/atoms'
 import { useAuth } from '@/contexts/auth-context'
-import { getProfilePicWithInitials } from '@/lib/utils/auth-utils'
+import { getNameInitials } from '@/lib/utils/auth-utils'
+import { HTMLAttributes } from 'react'
 
-interface CurrentUserPicCardProps {
-  className?: string
-  showBorder?: boolean
-  height?: string
-  color?: string
-  width?: string
-  background?: string
-}
-
-const CurrentUserPicCard = ({
-  className,
-  background = 'random',
-  color = '',
-  showBorder = true,
-}: CurrentUserPicCardProps) => {
+const CurrentUserPicCard = ({ className }: HTMLAttributes<HTMLDivElement>) => {
   const { user } = useAuth()
-  const src = getProfilePicWithInitials(user, background, color)
 
   return (
-    <div
-      className={clsx('relative', className, {
-        'profile-pic-card-wrapper': showBorder && src,
-        '!invisible': !src,
-      })}
-    >
-      <Image
-        src={src}
-        className={clsx('rounded-full profile-pic-card', {
-          '!hidden': !src,
-        })}
-        alt={src}
-      />
+    <div className={`relative profile-pic-card-wrapper ${className}`}>
+      <div className="rounded-full bg-white flex justify-center items-center profile-pic-card">
+        <span className="text-sm text-accent-secondary">
+          {user && getNameInitials(user)}
+        </span>
+      </div>
     </div>
   )
 }

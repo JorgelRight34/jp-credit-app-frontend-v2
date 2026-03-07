@@ -44,7 +44,11 @@ const Navbar = ({ onSelect }: NavbarProps) => {
   return (
     <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-surface border-r shadow-sm">
       <div className="border-b flex-shrink-0">
-        <NavbarHeader src="/logo.svg?url" alt="logo" className="mb-0" />
+        <NavbarHeader
+          src="/horizontal-logo-light.svg?url"
+          alt="logo"
+          className="mb-0"
+        />
       </div>
       <NavbarBody onSelect={onSelect} />
       <div className="w-full flex-shrink-0 p-3">

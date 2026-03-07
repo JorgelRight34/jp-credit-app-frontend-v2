@@ -9,10 +9,9 @@ import {
   SettingsIcon,
 } from '@/components/atoms'
 import { useAuth } from '@/contexts/auth-context'
-import { primaryColor } from '@/lib/constants/constants'
-import { getFirstAndLastName } from '@/lib/utils/utils'
 import { MenuItem, useTheme } from '@/components/molecules'
 import { ModalTrigger } from '@/components/organisms/modal'
+import { getFirstAndLastName } from '@/lib/utils'
 
 interface NavbarFooterProps {
   className?: string
@@ -23,12 +22,8 @@ const NavbarFooter = ({ className }: NavbarFooterProps) => {
 
   return (
     <div className={clsx(`flex w-full flex-col rounded border p-2`, className)}>
-      <div className={'nav-link !flex w-full items-center text-muted'}>
-        <CurrentUserPicCard
-          className="mr-2"
-          color={primaryColor}
-          background="#fff"
-        />
+      <div className="!flex w-full items-center text-muted">
+        <CurrentUserPicCard className="mr-2"/>
         <span className="mr-auto flex flex-col">
           <span>{user && getFirstAndLastName(user)}</span>
         </span>

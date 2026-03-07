@@ -5,6 +5,7 @@ export { default as TabsRouter } from './components/tabs-router'
 export { default as TabsRouterBreadcrumb } from "./components/tabs-router-breadcrumb"
 export { default as TabsRouterProvider } from "./contexts/tabs-router-context"
 export { default as ProtectedTab } from "./components/protected-tab"
+export { default as TabsPanelContainer } from './components/tabs-panel-container'
 export * from './components/tabs-router'
 
 // hooks

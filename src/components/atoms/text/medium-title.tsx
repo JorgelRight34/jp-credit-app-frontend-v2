@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from 'clsx'
 
 const MediumTitle = ({
   children,
@@ -6,10 +6,10 @@ const MediumTitle = ({
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement>) => {
   return (
-    <h3 className={clsx("mb-0", className)} {...props}>
+    <h3 className={clsx('text-secondary mb-0', className)} {...props}>
       {children}
     </h3>
-  );
-};
+  )
+}
 
-export default MediumTitle;
+export default MediumTitle

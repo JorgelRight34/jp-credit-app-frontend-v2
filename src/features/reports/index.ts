@@ -1,4 +1,5 @@
 export { default as ReportsPage } from './pages/reports-page'
 export { default as CreateReportPage } from './pages/create-report-page'
 export { default as EditReportPage } from './pages/edit-report-page'
+export { default as ReportPage } from './pages/report-page'
 export { default as GenerateReportPage } from './pages/generate-report-page'

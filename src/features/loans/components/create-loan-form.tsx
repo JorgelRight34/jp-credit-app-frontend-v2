@@ -5,6 +5,7 @@ import {
   Form,
   FormContainer,
   FormGroup,
+  FormMasterDetailLayout,
   FormRow,
   FormWatch,
   NumericInput,
@@ -37,8 +38,8 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
       <Tabs>
         <Tab eventKey="data" title="Datos">
           <Form form={form}>
-            <div className="flex">
-              <div className="w-8/12">
+            <FormMasterDetailLayout>
+              <FormMasterDetailLayout.Master>
                 <FormRow>
                   <FormGroup
                     name="approvedAmount"
@@ -95,8 +96,8 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                     input={LoanOfficerSearchInput}
                   />
                 </FormRow>
-              </div>
-              <div className="w-4/12 pl-6">
+              </FormMasterDetailLayout.Master>
+              <FormMasterDetailLayout.Detail>
                 <FormWatch
                   form={form}
                   names={[
@@ -115,8 +116,8 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                     />
                   )}
                 />
-              </div>
-            </div>
+              </FormMasterDetailLayout.Detail>
+            </FormMasterDetailLayout>
             <FormGroup
               name="description"
               label="Descripción"

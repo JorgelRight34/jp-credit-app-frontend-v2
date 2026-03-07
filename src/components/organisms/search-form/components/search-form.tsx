@@ -62,6 +62,7 @@ const SearchForm = <T extends Query>({
                     label={option.label}
                     className="w-full min-w-0"
                     name={option.name as string}
+                    id={option.name as string}
                     as={option.type}
                   />
                 </SearchFormGroupContainer>

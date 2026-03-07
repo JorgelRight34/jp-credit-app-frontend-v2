@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import { SecondaryBtn } from '../../../button'
+import { SecondaryBtn } from '../../../../button'
 
 interface PickerInputPanelProps extends PropsWithChildren {
   reset: () => void

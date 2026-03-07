@@ -5,6 +5,7 @@ type FormLayoutProps = PropsWithChildren & {
   className?: string
   errors?: ReactNode
   footer?: ReactNode
+  onSubmit: () => void
 }
 
 const FormLayout = ({
@@ -12,13 +13,17 @@ const FormLayout = ({
   className,
   errors,
   footer,
+  onSubmit,
 }: FormLayoutProps) => {
   return (
-    <section className={clsx('!h-full w-full flex flex-col', className)}>
+    <form
+      className={clsx('!h-full w-full px-3 flex flex-col', className)}
+      onSubmit={onSubmit}
+    >
       <div className="flex flex-1 gap-6 flex-col">{children}</div>
       {errors && <div className="flex-shrink-0">{errors}</div>}
       {footer && <div className="pt-6 flex-shrink-0">{footer}</div>}
-    </section>
+    </form>
   )
 }
 

@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   BigTitle,
   Fieldset,
+  Paragraph,
 } from '@/components'
 import { Report } from '../models/report'
 import { reportTemplateKeysLabels } from '../lib/constants'
@@ -34,7 +35,9 @@ const ReportTemplateDefinitionFieldset = ({
             <AccordionSummary>
               {field.name} | {field.fieldType}
             </AccordionSummary>
-            <AccordionDetails>{field.description}</AccordionDetails>
+            <AccordionDetails>
+              <Paragraph>{field.description}</Paragraph>
+            </AccordionDetails>
           </Accordion>
         ))}
       </aside>

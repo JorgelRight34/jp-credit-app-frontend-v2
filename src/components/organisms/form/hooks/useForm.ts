@@ -21,6 +21,7 @@ export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
     keysToInvalidate?: Array<CacheKey>;
     tagsToInvalidate?: Array<string>;
     shouldEdit?: boolean;
+    shouldUseNativeValidation?: boolean;
     toastMessage?: (data: TReturn | undefined) => string;
     onSuccess?: (data: TReturn) => void;
     onDelete?: () => void;
@@ -34,6 +35,7 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     defaultValues,
     resetValues = shouldEdit ? false : true,
     keysToInvalidate,
+    shouldUseNativeValidation,
     toastMessage,
     onEdit,
     onSuccess,
@@ -67,9 +69,10 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     })
 
     const methods = useFormMethods({
-        schema, defaultValues, handleOnSubmit: async (data) => {
-            return await mutateAsync(data);
-        }
+        schema,
+        defaultValues,
+        shouldUseNativeValidation,
+        handleOnSubmit: (data) => mutateAsync(data)
     })
 
     return methods;

@@ -7,7 +7,7 @@ const Paragraph = ({
   ...props
 }: HTMLAttributes<HTMLParagraphElement>) => {
   return (
-    <p className={clsx('text-secondary font-normal', className)} {...props}>
+    <p className={clsx('text-muted font-normal', className)} {...props}>
       {children}
     </p>
   )

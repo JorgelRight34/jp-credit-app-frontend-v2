@@ -1,6 +1,6 @@
-import { BadgeIcon } from '../../icon'
-import MaskInput from '../masked-input/masked-input'
-import type { MaskInputProps } from '../masked-input/masked-input'
+import { BadgeIcon } from '../../../../icon'
+import MaskInput from '../../masked-input/masked-input'
+import type { MaskInputProps } from '../../masked-input/masked-input'
 
 const CitizenIdInput = (props: MaskInputProps) => (
   <MaskInput

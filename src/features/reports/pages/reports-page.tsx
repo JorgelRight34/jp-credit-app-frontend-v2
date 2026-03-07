@@ -3,11 +3,13 @@ import {
   BreadcrumbsByRoute,
   BreadcrumbSpec,
   buildPageLayoutCreateOption,
-  LoanIcon,
+  LightPillLinkBtn,
   PageRouterLayout,
+  PrintIcon,
   ReportIcon,
   Tab,
   TabsRouter,
+  UploadIcon,
 } from '@/components'
 import ReportDataTable from '../components/report-datatable'
 
@@ -19,14 +21,22 @@ export const reportsBreadcrumb: BreadcrumbSpec = {
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: [{ icon: AllIcon, title: 'Todos' }],
-  loans: [{ icon: LoanIcon, title: 'Préstamos' }],
+  uploads: [{ icon: UploadIcon, title: 'Archivos' }],
 }
 
 const ReportsPage = () => {
   return (
     <PageRouterLayout
       title="Reportes"
-      options={[buildPageLayoutCreateOption('/reports/create')]}
+      options={[
+        {
+          title: 'Generar',
+          to: '/reports/generate',
+          icon: PrintIcon,
+          component: LightPillLinkBtn,
+        },
+        buildPageLayoutCreateOption('/reports/create'),
+      ]}
       routerConfig={{
         defaultActive: 'all',
         baseBreadcrumbs: [reportsBreadcrumb],
@@ -37,8 +47,8 @@ const ReportsPage = () => {
         <Tab eventKey="all" title="Todos">
           <ReportDataTable />
         </Tab>
-        <Tab eventKey="loans" title="Préstamos">
-          <ReportDataTable initialQuery={{ key: 'loans' }} />
+        <Tab eventKey="uploads" title="Archivos">
+          ...
         </Tab>
       </TabsRouter>
     </PageRouterLayout>

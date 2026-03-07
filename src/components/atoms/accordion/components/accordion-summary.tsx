@@ -5,7 +5,10 @@ import { ExpandMoreIcon } from '../../icon'
 
 const AccordionSummary = ({ children }: PropsWithChildren) => {
   return (
-    <MAccordionSummary expandIcon={<ExpandMoreIcon />}>
+    <MAccordionSummary
+      className="bg-surface"
+      expandIcon={<ExpandMoreIcon className="text-secondary" />}
+    >
       <MediumTitle>{children}</MediumTitle>
     </MAccordionSummary>
   )

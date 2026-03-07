@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { LoadingIndicator } from './loading-indicator'
 import { useIsLoading } from '@/hooks/useIsLoading'
 
@@ -7,7 +6,7 @@ const LoadingScreen = () => {
 
   if (isMutating) {
     return (
-      <div className={clsx(`modal-overlay`)} style={{ zIndex: 1000 }}>
+      <div className="bg-black/50" style={{ zIndex: 1000 }}>
         <LoadingIndicator show={true} />
       </div>
     )

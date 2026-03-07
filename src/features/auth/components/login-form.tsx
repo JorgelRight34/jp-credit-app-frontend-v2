@@ -1,6 +1,5 @@
-import { useLoginForm } from '../hooks/useLoginForm'
+import { LoginFormValues, useLoginForm } from '../hooks/useLoginForm'
 import type { LoginResult } from '../models/loginResult'
-import type { LoginSchemaType } from '../lib/schemas/loginSchema'
 import type { DataModuleFormProps } from '@/components'
 import {
   Form,
@@ -14,7 +13,7 @@ import {
 } from '@/components'
 
 const LoginForm = (
-  props: DataModuleFormProps<LoginResult, LoginSchemaType>,
+  props: DataModuleFormProps<LoginResult, LoginFormValues>,
 ) => {
   const form = useLoginForm(props)
 
@@ -26,7 +25,6 @@ const LoginForm = (
           isDirty={isDirty}
           text="Iniciar sesión"
           icon={LoginIcon}
-          onSubmit={form.submit}
         />
       )}
     >

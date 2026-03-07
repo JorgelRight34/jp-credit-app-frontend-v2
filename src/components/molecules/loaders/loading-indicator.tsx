@@ -4,7 +4,7 @@ export const LoadingIndicator = ({ show }: { show: boolean }) => {
   return (
     <div
       className={clsx(
-        `modal-overlay flex h-full w-full items-center justify-center`,
+        `modal-overlay bg-black/50 flex h-full w-full items-center justify-center`,
         { '!hidden': !show },
       )}
       style={{ zIndex: 1000 }}

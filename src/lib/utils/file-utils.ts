@@ -1,3 +1,4 @@
+
 export const downloadFile = (file: Blob, filename?: string) => {
     const url = URL.createObjectURL(file);
 
@@ -10,4 +11,11 @@ export const downloadFile = (file: Blob, filename?: string) => {
 
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+}
+
+export const fileFromUrl = async (url: string) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    return new File([blob], 'file', { type: blob.type })
 }

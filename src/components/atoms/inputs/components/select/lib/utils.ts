@@ -1,5 +1,5 @@
 import { buildFormWatchContainer, FieldValues, FormWatchContainerProps } from "@/components/organisms";
-import { Select } from "../..";
+import { Select } from "../../..";
 import { SelectInputProps } from "../select";
 import { SelectOptions } from "../select-option";
 

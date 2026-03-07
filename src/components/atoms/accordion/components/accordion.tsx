@@ -1,5 +1,7 @@
-import { Accordion as MAccordion } from '@mui/material'
+import { AccordionProps, Accordion as MAccordion } from '@mui/material'
 
-const Accordion = MAccordion
+const Accordion = (props: AccordionProps) => {
+  return <MAccordion {...props} className="bg-surface" />
+}
 
 export default Accordion

@@ -1,4 +1,4 @@
-import { GenerateReportPage } from '@/features/reports'
+import { ReportPage } from '@/features/reports'
 import { buildReportQueryKey } from '@/features/reports/lib/query-keys'
 import { getReportFromServer } from '@/features/reports/server/reportServerClient'
 import { getReport } from '@/features/reports/services/reportsClient'
@@ -21,5 +21,5 @@ function RouteComponent() {
     loader: () => getReportFn(id),
   })
 
-  return <GenerateReportPage report={data} />
+  return <ReportPage report={data} />
 }

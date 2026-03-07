@@ -34,6 +34,7 @@ const FormGroup = <T extends FieldValues>({
         className={inputClassName}
         type={type}
         name={name}
+        id={name}
         as={input}
       />
     </FormGroupLayout>
