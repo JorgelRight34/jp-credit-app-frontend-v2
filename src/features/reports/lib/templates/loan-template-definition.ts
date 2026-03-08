@@ -1,9 +1,11 @@
-import { Loan } from "@/features/loans";
 import { ReportTemplateDefinition } from "../../models/reportTemplateDefinition";
 import { formatNumberWithCommas, toPercentage } from "@/lib/utils";
+import { LoanReportModel } from "../../models/loanReportModel";
+import { getLoan } from "@/features/loans";
+import api from "@/lib/services/api";
 
 export const loanTemplateDefinition:
-    ReportTemplateDefinition<Loan>
+    ReportTemplateDefinition<LoanReportModel>
     = [
         {
             name: "id",
@@ -150,3 +152,8 @@ export const loanTemplateDefinition:
             mapper: (l) => l.numberOfPayments,
         },
     ];
+
+export const getLoanReportModel = async (id: number): Promise<LoanReportModel> => {
+    const { data } = await api.get("loans/" + id, { params: { includes: ["client"] } });
+    return data;
+}

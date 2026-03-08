@@ -28,12 +28,14 @@ import {
   PersonAddIcon,
   PersonIcon,
   PlayCircleIcon,
+  PrintIcon,
   PublicIcon,
   QueryStatsIcon,
   ReportIcon,
   ScheduleIcon,
   SettingsIcon,
   TrendingUpIcon,
+  UploadIcon,
 } from '@/components/atoms'
 
 const addRouteName = 'Añadir'
@@ -337,28 +339,15 @@ export const reportsNavItem: NavItem = {
       route: '/reports',
     },
     {
-      name: 'Garantías',
-      icon: collateralsNavItem.icon,
+      name: 'Archivos',
+      icon: () => <UploadIcon />,
       route: '/reports',
-      search: { tab: 'collaterals' },
+      search: { tab: 'uploads' },
     },
     {
-      name: 'Préstamos',
-      icon: loansNavItem.icon,
-      route: '/reports',
-      search: { tab: 'loans' },
-    },
-    {
-      name: 'Pérfiles',
-      icon: profileNavItem.icon,
-      route: '/reports',
-      search: { tab: 'profiles' },
-    },
-    {
-      name: 'Transacciones',
-      icon: transactionsNavItem.icon,
-      route: '/reports',
-      search: { tab: 'transactions' },
+      name: 'Generar',
+      icon: () => <PrintIcon />,
+      route: '/reports/generate',
     },
     {
       name: addRouteName,

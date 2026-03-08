@@ -22,7 +22,7 @@ const FormGroupHorizontal = <T extends FieldValues>({
   ...props
 }: FormGroupHorizontalProps<T>) => {
   return (
-    <section className="flex items-center">
+    <section className="flex items-end">
       <div className={clsx('flex flex-1 items-center gap-4', className)}>
         <FormLabel htmlFor={name as string}>
           {label}

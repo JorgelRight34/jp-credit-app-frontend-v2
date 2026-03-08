@@ -16,10 +16,10 @@ export const getIconInputSlot = ({
   const isDirectionRight = iconDirection === 'right' && icon
 
   return {
-    [isDirectionRight ? 'startAdornment' : 'endAdornment']: icon ? (
+    [isDirectionRight ? 'endAdornment' : 'startAdornment']: icon ? (
       <InputAdornment
         className="text-muted"
-        position={isDirectionRight ? 'start' : 'end'}
+        position={isDirectionRight ? 'end' : 'start'}
         onClick={onClick}
       >
         <Icon icon={icon} />

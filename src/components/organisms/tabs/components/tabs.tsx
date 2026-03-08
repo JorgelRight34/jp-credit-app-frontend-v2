@@ -37,7 +37,7 @@ const Tabs = ({
     })
 
   return (
-    <div className={clsx('h-full bg-surface', className)}>
+    <div className={clsx('h-full', className)}>
       <RTabs
         selectedIndex={activeIndex}
         onSelect={(tab) => {

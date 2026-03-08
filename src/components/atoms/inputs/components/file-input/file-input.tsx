@@ -1,6 +1,6 @@
 import { UploadIcon } from '@/components/atoms/icon'
 import Input, { InputProps } from '../input/components/input'
-import { useRef, useState } from 'react'
+import { useMemo, useRef } from 'react'
 import { FileAccept } from '@/components/organisms'
 
 export interface FileInputProps extends Omit<InputProps, 'type'> {
@@ -13,17 +13,16 @@ const FileInput = ({
   multiple,
   accept,
   name,
+  value,
   className,
   ...props
 }: FileInputProps) => {
   const ref = useRef<HTMLInputElement | null>(null)
-  const [displayValue, setDisplayValue] = useState('')
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.currentTarget.files ?? [])
-    setDisplayValue(files.map((f) => f.name).join(', '))
-    onChange?.(files)
-  }
+  const displayValue = useMemo(() => {
+    return value?.length > 0
+      ? value.map((f: File) => f.name).join(', ')
+      : 'Seleccione un archivo'
+  }, [value])
 
   return (
     <label className={className}>
@@ -35,7 +34,7 @@ const FileInput = ({
         accept={accept}
         hidden
         multiple={multiple}
-        onChange={handleChange}
+        onChange={(e) => onChange?.(Array.from(e.currentTarget.files ?? []))}
       />
       <Input
         {...props}

@@ -319,7 +319,7 @@ input:focus {
 }
 
 * {
-  scrollbar-track-color: transparent;
+  scrollbar-color: var(--bs-border-color) transparent;
 }
 
 *::-webkit-scrollbar-track {

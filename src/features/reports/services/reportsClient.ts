@@ -55,13 +55,19 @@ export const generateReport = async ({ id, key, file }: ReportGenerationFormValu
     }
 
     const formData = new FormData();
-    formData.append("context", JSON.stringify(context));
+    formData.append("Context", JSON.stringify(context));
 
-    for (const f in file) {
-        formData.append("file", f)
+    console.log(file)
+
+    for (const f of file) {
+        formData.append("File", f)
     }
 
-    const { data } = await api.post(`${baseUrl}/generate`, formData, { responseType: "blob" });
+    console.log(formData)
+
+    const { data } = await api.post(`${baseUrl}/generate`, formData, {
+        responseType: "blob"
+    });
 
     return data;
 }

@@ -18,12 +18,14 @@ import {
 } from '../lib/constants'
 import { Report } from '../models/report'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
+import { downloadFile } from '@/lib/utils'
 
 const ReportGenerationForm = (
   props: DataModuleFormProps<Blob, ReportGenerationFormValues>,
 ) => {
   const form = useReportGenerationForm({
     ...props,
+    onSuccess: downloadFile,
     initialValues: { key: 'loan' },
   })
 
@@ -33,7 +35,12 @@ const ReportGenerationForm = (
         <FormMasterDetailLayout.Master>
           <Form form={form}>
             <FormRow>
-              <FormFileGroup name="file" label="Archivos" />
+              <FormFileGroup
+                name="file"
+                accept=".pdf,.docx"
+                label="Archivos"
+                multiple
+              />
             </FormRow>
             <FormRow>
               <FormSelectGroup
