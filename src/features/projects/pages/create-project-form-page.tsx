@@ -1,7 +1,7 @@
 import { CreateFormPageLayout, Tab, Tabs } from '@/components'
 import { projectsPermissionProvider } from '../lib/config/permissionProvider'
-import { projectsBreadcrumb } from '../lib/config/breadcrumbs'
 import ProjectForm from '../components/project-form'
+import { projectsBreadcrumb } from './projects-page'
 
 const CreateProjectFormPage = () => {
   return (

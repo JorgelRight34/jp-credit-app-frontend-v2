@@ -1,10 +1,8 @@
 import CreateUserAccessForm from '../components/create-user-form'
-import {
-  accessControlBreadcrumb,
-  usersModuleBreadcrumb,
-} from '../lib/config/breadcrumbs'
 import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import { CreateFormPageLayout } from '@/components'
+import { accessControlBreadcrumb } from './access-control-page'
+import { usersModuleBreadcrumb } from './user-page'
 
 const CreateUserFormPage = () => {
   return (

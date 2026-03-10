@@ -1,6 +1,8 @@
 import {
+  AdjustmentNoteIcon,
   AllIcon,
   BreadcrumbsByRoute,
+  BreadcrumbSpec,
   buildPageLayoutCreateOption,
   CreditIcon,
   DebitIcon,
@@ -8,8 +10,13 @@ import {
   Tab,
   TabsRouter,
 } from '@/components'
-import { adjustmentNotesBreadcrumb } from '../lib/config/breadcrumbs'
 import AdjustmentNoteDataTable from '../components/adjusment-note-datatable'
+
+export const adjustmentNotesBreadcrumb: BreadcrumbSpec = {
+  title: 'Notas de ajuste',
+  pathname: '/adjustment-notes',
+  icon: AdjustmentNoteIcon,
+}
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: [{ title: 'Todos', icon: AllIcon }],

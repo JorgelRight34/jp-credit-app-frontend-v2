@@ -1,7 +1,30 @@
 import { ReactNode } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
-import { Form, FormGroup, FormRow, FormWatchGroup, Input } from '@/components'
-import { updateUsernameOnForm } from '../lib/form-utils'
+import {
+  Form,
+  FormGroup,
+  FormRow,
+  FormWatchGroup,
+  Input,
+  WatchedValuesChangeHandler,
+} from '@/components'
+import { UserFormValues } from '../lib/schemas/userFormSchema'
+import { generateUsername } from '../lib/utils'
+
+export const updateUsernameOnForm: WatchedValuesChangeHandler<
+  UserFormValues
+> = (context) => {
+  if (context.formState.isDirty === false) return
+
+  const { lastName, firstName } = context.getValues()
+
+  if (lastName && firstName) {
+    context.setValue(
+      'username',
+      generateUsername(firstName.trim(), lastName.trim()),
+    )
+  }
+}
 
 const UserDataFormPanel = ({
   form,

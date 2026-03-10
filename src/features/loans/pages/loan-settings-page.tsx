@@ -9,16 +9,13 @@ import {
 } from '@/components'
 import { Loan } from '../models/loan'
 import { loanPermissionProvider } from '../lib/config/permission-provider'
-import { buildLoanBreadcrumb, loanBreadcrumb } from '../lib/config/breadcrumb'
 import LoanStatusForm from '../components/loan-status-form'
 import { deleteLoan } from '../services/loanClient'
 import { buildLoanLabel } from '../lib/utils'
+import { loanModuleBreadcrumb } from './loans-page'
+import { buildLoanBreadcrumb } from './loan-page'
 
-interface LoanSettingsPageProps {
-  loan: Loan
-}
-
-const LoanSettingsPage = ({ loan }: LoanSettingsPageProps) => {
+const LoanSettingsPage = ({ loan }: { loan: Loan }) => {
   return (
     <PageLayout
       title={`${buildLoanLabel(loan)} / Ajustes`}
@@ -38,7 +35,7 @@ const LoanSettingsPage = ({ loan }: LoanSettingsPageProps) => {
       breadcrumb={
         <PageLayoutBreadcrumb
           breadcrumbs={[
-            loanBreadcrumb,
+            loanModuleBreadcrumb,
             buildLoanBreadcrumb(loan),
             settingsBreadcrumb,
           ]}

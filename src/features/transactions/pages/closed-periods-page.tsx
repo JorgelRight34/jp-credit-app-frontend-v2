@@ -4,20 +4,16 @@ import {
   buildPageLayoutCreateOption,
   PageLayout,
   PageLayoutBreadcrumb,
-  ScheduleIcon,
   Tab,
   TabList,
 } from '@/components'
-import { transactionPermissionProvider } from '../lib/config/permission-provider'
 import ClosedPeriodDataTable from '../components/closed-period-datatable'
-import { transactionBreadcrumb } from '../lib/config/breadcrumb'
+import { transactionBreadcrumb } from './transactions-page'
+import { closedPeriodsBreadcrumb } from './create-closed-period-page'
 
 const periodsBreadcrumb: Array<BreadcrumbSpec> = [
   transactionBreadcrumb,
-  {
-    title: 'Periodos contables',
-    icon: ScheduleIcon,
-  },
+  closedPeriodsBreadcrumb,
   { title: 'Todos', icon: AllIcon },
 ]
 
@@ -27,7 +23,6 @@ const ClosedPeriodsPage = () => {
       title="Transacciones / Periodos Contables"
       breadcrumb={<PageLayoutBreadcrumb breadcrumbs={periodsBreadcrumb} />}
       options={[buildPageLayoutCreateOption('/transactions/periods/create')]}
-      permissionProvider={transactionPermissionProvider}
     >
       <TabList>
         <Tab title="Todos" isActive />

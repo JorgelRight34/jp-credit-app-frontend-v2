@@ -9,9 +9,10 @@ import {
   PageRouterLayout,
   Tab,
   TabsRouter,
+  BreadcrumbSpec,
+  LoanIcon,
 } from '@/components'
 import { Loan } from '../models/loan'
-import { buildLoanBreadcrumb, loanBreadcrumb } from '../lib/config/breadcrumb'
 import LoanOverview from '../components/loan-overview'
 import LoanAmortizationPreview from '../components/loan-amortization-preview'
 import { collateralDataTableConfig } from '@/features/collaterals'
@@ -20,6 +21,14 @@ import { buildLoanLabel } from '../lib/utils'
 import { useRouter } from '@/hooks/useRouter'
 import { PropsWithChildren } from 'react'
 import { overviewBreadcrumb } from '@/lib/constants'
+import { loanModuleBreadcrumb } from './loans-page'
+
+export const buildLoanBreadcrumb = (loan: Loan): BreadcrumbSpec => ({
+  title: `Préstamo No.#${loan.id}`,
+  icon: LoanIcon,
+  pathname: '/loans/$id',
+  params: { id: loan.id.toString() },
+})
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   overview: [overviewBreadcrumb],
@@ -96,7 +105,7 @@ const LoanPageRouterLayout = ({
       ]}
       routerConfig={{
         defaultActive: 'overview',
-        baseBreadcrumbs: [loanBreadcrumb, buildLoanBreadcrumb(loan)],
+        baseBreadcrumbs: [loanModuleBreadcrumb, buildLoanBreadcrumb(loan)],
         breadcrumbsByRoute,
       }}
     >

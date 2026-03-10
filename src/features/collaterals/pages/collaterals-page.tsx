@@ -1,4 +1,3 @@
-import { collateralsBreadcrumb } from '../lib/config/breadcrumbs'
 import CollateralDataTable from '../components/collaterals-datatable'
 import { collateralTypeMap } from '../models/collateralType'
 import type { BreadcrumbsByRoute } from '@/components'
@@ -13,6 +12,7 @@ import {
   TabsRouter,
   buildPageLayoutCreateOption,
 } from '@/components'
+import { collateralsBreadcrumb } from './collateral-page'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: [{ title: 'Todos', icon: () => <AllIcon /> }],
@@ -39,19 +39,19 @@ const CollateralsPage = () => {
         </Tab>
         <Tab eventKey="vehicles" title="Vehículos">
           <CollateralDataTable
-            initialQuery={{ type: collateralTypeMap.CarLoan }}
+            initialQuery={{ type: collateralTypeMap.carLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </Tab>
         <Tab eventKey="mortgage" title="Hipotecas">
           <CollateralDataTable
-            initialQuery={{ type: collateralTypeMap.AgriculturalLoan }}
+            initialQuery={{ type: collateralTypeMap.agriculturalLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </Tab>
         <Tab eventKey="agriculturalLoan" title="Agrícola">
           <CollateralDataTable
-            initialQuery={{ type: collateralTypeMap.AgriculturalLoan }}
+            initialQuery={{ type: collateralTypeMap.agriculturalLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </Tab>

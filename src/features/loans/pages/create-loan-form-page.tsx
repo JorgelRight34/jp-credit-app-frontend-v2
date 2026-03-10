@@ -1,15 +1,15 @@
 import { CreateFormPageLayout } from '@/components'
 import { loanPermissionProvider } from '../lib/config/permission-provider'
-import { loanBreadcrumb } from '../lib/config/breadcrumb'
 import CreateLoanForm from '../components/create-loan-form'
 import { Project } from '@/features/projects'
+import { loanModuleBreadcrumb } from './loans-page'
 
 const CreateLoanFormPage = ({ project }: { project: Project }) => {
   return (
     <CreateFormPageLayout
       title="Préstamos"
       permissionProvider={loanPermissionProvider}
-      breadcrumbs={[loanBreadcrumb]}
+      breadcrumbs={[loanModuleBreadcrumb]}
     >
       <CreateLoanForm project={project} />
     </CreateFormPageLayout>

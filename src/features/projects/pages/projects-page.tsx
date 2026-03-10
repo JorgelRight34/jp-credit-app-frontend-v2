@@ -1,14 +1,21 @@
 import {
   AllIcon,
   BreadcrumbsByRoute,
+  BreadcrumbSpec,
   buildPageLayoutCreateOption,
+  FolderOpenIcon,
   PageRouterLayout,
   Tab,
   TabsRouter,
 } from '@/components'
-import { projectsBreadcrumb } from '../lib/config/breadcrumbs'
 import ProjectDataTable from '../components/project-datatable'
 import { Project } from '../models/project'
+
+export const projectsBreadcrumb: BreadcrumbSpec = {
+  title: 'Proyectos',
+  icon: FolderOpenIcon,
+  pathname: '/projects',
+}
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: [{ title: 'Todos', icon: AllIcon }],

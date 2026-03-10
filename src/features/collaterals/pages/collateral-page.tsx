@@ -1,13 +1,10 @@
-import {
-  buildCollateralBreadcrumb,
-  collateralsBreadcrumb,
-} from '../lib/config/breadcrumbs'
 import CollateralOverview from '../components/collateral-overview'
-import type { BreadcrumbsByRoute } from '@/components'
+import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import type { Collateral } from '../models/collateral'
 import {
   buildPageLayoutEditOption,
   buildPageLayoutSettingsOptionLight,
+  CollateralIcon,
   FileTable,
   mapApiFileToTableFile,
   overviewBreadcrumb,
@@ -16,6 +13,22 @@ import {
   TabsRouter,
   UploadIcon,
 } from '@/components'
+import { collateralIconByTypeMap } from '../lib/jsx-utils'
+
+export const buildCollateralBreadcrumb = (
+  collateral: Collateral,
+): BreadcrumbSpec => ({
+  title: collateral.title,
+  icon: collateralIconByTypeMap[collateral.type],
+  pathname: '/collaterals/$id',
+  params: { id: collateral.id.toString() },
+})
+
+export const collateralsBreadcrumb: BreadcrumbSpec = {
+  title: 'Garantías',
+  icon: CollateralIcon,
+  pathname: '/collaterals',
+}
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   overview: [overviewBreadcrumb],

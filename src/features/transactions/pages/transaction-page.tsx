@@ -1,22 +1,29 @@
 import {
   BreadcrumbsByRoute,
+  BreadcrumbSpec,
   buildConfirmationModalTrigger,
   buildPageLayoutMenuOption,
   CheckCircleIcon,
   PageRouterLayout,
   Tab,
   TabsRouter,
+  TransactionIcon,
 } from '@/components'
 import { Transaction } from '../models/transaction'
 import { buildTransactionLabel } from '../lib/utils'
-import { transactionPermissionProvider } from '../lib/config/permission-provider'
-import {
-  buildTransactionBreadcrumb,
-  transactionBreadcrumb,
-} from '../lib/config/breadcrumb'
 import { overviewBreadcrumb } from '@/lib/constants'
 import TransactionOverview from '../components/transaction-overview'
 import { deleteTransaction } from '../services/transactionClient'
+import { transactionBreadcrumb } from './transactions-page'
+
+export const buildTransactionBreadcrumb = (
+  transaction: Transaction,
+): BreadcrumbSpec => ({
+  title: buildTransactionLabel(transaction),
+  icon: TransactionIcon,
+  pathname: '/transactions/$id',
+  params: { id: transaction.id.toString() },
+})
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   overview: [overviewBreadcrumb],
@@ -53,7 +60,6 @@ const TransactionPage = ({ transaction }: { transaction: Transaction }) => {
           },
         ]),
       ]}
-      permissionProvider={transactionPermissionProvider}
     >
       <TabsRouter>
         <Tab eventKey="overview" title="Resumen">

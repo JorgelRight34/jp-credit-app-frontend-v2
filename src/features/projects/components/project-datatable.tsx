@@ -21,7 +21,6 @@ const ProjectDataTable = (
       searchConfig={projectSearchConfig}
       cacheKey={[projectsQueryKey]}
       datatableConfig={{
-        title: 'Proyectos',
         columns: projectsDataTableConfigColumns.concat({
           header: 'OPCIONES',
           cell: ({ row }) => {

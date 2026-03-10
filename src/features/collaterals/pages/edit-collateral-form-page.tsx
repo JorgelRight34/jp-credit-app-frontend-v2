@@ -1,8 +1,4 @@
 import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
-import {
-  collateralsBreadcrumb,
-  buildCollateralBreadcrumb,
-} from '../lib/config/breadcrumbs'
 import type { Collateral } from '../models/collateral'
 import {
   EditFormPageLayout,
@@ -10,14 +6,12 @@ import {
 } from '@/components'
 import EditCollateralForm from '../components/edit-collateral-form'
 import { deleteCollateral } from '../services/collateralClient'
+import {
+  buildCollateralBreadcrumb,
+  collateralsBreadcrumb,
+} from './collateral-page'
 
-interface EditCollateralFormPageProps {
-  collateral: Collateral
-}
-
-const EditCollateralFormPage = ({
-  collateral,
-}: EditCollateralFormPageProps) => {
+const EditCollateralFormPage = ({ collateral }: { collateral: Collateral }) => {
   return (
     <EditFormPageLayout
       title={collateral.title}

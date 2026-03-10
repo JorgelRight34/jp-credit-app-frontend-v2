@@ -1,11 +1,9 @@
 import RoleForm from '../components/role-form'
-import {
-  accessControlBreadcrumb,
-  rolesModuleBreadcrumb,
-} from '../lib/config/breadcrumbs'
 import { rolesPermissionProvider } from '../lib/config/permissionProvider'
 import type { Role } from '../models/role'
 import { CreateFormPageLayout, Tab, Tabs } from '@/components'
+import { accessControlBreadcrumb } from './access-control-page'
+import { rolesModuleBreadcrumb } from './role-page'
 
 const CreateRoleFormPage = ({ role }: { role?: Role }) => {
   return (

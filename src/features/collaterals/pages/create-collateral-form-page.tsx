@@ -1,7 +1,7 @@
 import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
-import { collateralsBreadcrumb } from '../lib/config/breadcrumbs'
 import { CreateFormPageLayout } from '@/components'
 import CreateCollateralForm from '../components/create-collateral-form'
+import { collateralsBreadcrumb } from './collateral-page'
 
 const CreateCollateralFormPage = () => {
   return (

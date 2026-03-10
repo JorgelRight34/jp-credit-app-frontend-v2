@@ -1,4 +1,5 @@
 import {
+  AdjustmentNoteIcon,
   buildPageLayoutConfirmationModalOption,
   overviewBreadcrumb,
   PageLayout,
@@ -8,21 +9,19 @@ import {
 } from '@/components'
 import { AdjustmentNote } from '../models/adjustmentNote'
 import { buildAdjustmentNoteLabel } from '../lib/utils'
-import {
-  adjustmentNotesBreadcrumb,
-  buildAdjustmentNoteBreadcrumb,
-} from '../lib/config/breadcrumbs'
 import AdjustmentNoteOverview from '../components/adjustment-note-overview'
 import { deleteAdjustmentNote } from '../services/adjustmentNoteClient'
+import { adjustmentNotesBreadcrumb } from './adjustment-notes-page'
 
 const AdjustmentNotePage = ({
   adjustmentNote,
 }: {
   adjustmentNote: AdjustmentNote
 }) => {
+  const title = buildAdjustmentNoteLabel(adjustmentNote)
   return (
     <PageLayout
-      title={buildAdjustmentNoteLabel(adjustmentNote)}
+      title={title}
       options={[
         buildPageLayoutConfirmationModalOption(
           {
@@ -44,7 +43,12 @@ const AdjustmentNotePage = ({
         <PageLayoutBreadcrumb
           breadcrumbs={[
             adjustmentNotesBreadcrumb,
-            buildAdjustmentNoteBreadcrumb(adjustmentNote),
+            {
+              title,
+              pathname: '/adjustment-notes/$id',
+              params: { id: adjustmentNote.id.toString() },
+              icon: AdjustmentNoteIcon,
+            },
             overviewBreadcrumb,
           ]}
         />

@@ -5,7 +5,6 @@ import { buildProfileFullName } from "@/features/profiles";
 import { buildLoanLabelById } from "@/features/loans";
 
 export const followUpDataTableConfig: DataTableConfig<FollowUp> = {
-    title: "Seguimientos",
     columns: [
         {
             id: "id",

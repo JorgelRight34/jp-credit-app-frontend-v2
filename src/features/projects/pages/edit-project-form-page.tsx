@@ -1,8 +1,8 @@
 import { EditFormPageLayout, PageLayoutContent } from '@/components'
 import { Project } from '../models/project'
 import ProjectForm from '../components/project-form'
-import { projectsBreadcrumb } from '../lib/config/breadcrumbs'
 import { projectsPermissionProvider } from '../lib/config/permissionProvider'
+import { projectsBreadcrumb } from './projects-page'
 
 const EditProjectFormPage = ({ project }: { project: Project }) => {
   return (

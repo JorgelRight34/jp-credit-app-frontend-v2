@@ -1,6 +1,7 @@
 import {
   AllIcon,
   BreadcrumbsByRoute,
+  BreadcrumbSpec,
   buildPageLayoutCreateOption,
   DisbursementIcon,
   PageRouterLayout,
@@ -8,15 +9,30 @@ import {
   ScheduleIcon,
   Tab,
   TabsRouter,
+  TransactionIcon,
 } from '@/components'
-import { transactionPermissionProvider } from '../lib/config/permission-provider'
-import { transactionBreadcrumb } from '../lib/config/breadcrumb'
 import TransactionDataTable from '../components/transaction-datatable'
+
+export const transactionBreadcrumb: BreadcrumbSpec = {
+  icon: TransactionIcon,
+  title: 'Transacciones',
+  pathname: '/transactions',
+}
+
+export const paymentsBreadcrumb: BreadcrumbSpec = {
+  title: 'Pagos',
+  icon: PaymentIcon,
+}
+
+export const disbursementsBreadcrumb: BreadcrumbSpec = {
+  title: 'Desembolsos',
+  icon: DisbursementIcon,
+}
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: [{ title: 'Todos', icon: AllIcon }],
-  payments: [{ title: 'Pagos', icon: PaymentIcon }],
-  disbursements: [{ title: 'Desembolsos', icon: DisbursementIcon }],
+  payments: [paymentsBreadcrumb],
+  disbursements: [disbursementsBreadcrumb],
   overdue: [{ title: 'Atrasados', icon: ScheduleIcon }],
 }
 
@@ -30,7 +46,6 @@ const TransactionsPage = () => {
         baseBreadcrumbs: [transactionBreadcrumb],
         breadcrumbsByRoute,
       }}
-      permissionProvider={transactionPermissionProvider}
     >
       <TabsRouter>
         <Tab eventKey="all" title="Todos">

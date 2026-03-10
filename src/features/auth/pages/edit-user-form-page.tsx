@@ -1,25 +1,20 @@
 import EditUserAccessForm from '../components/edit-user-form'
-import {
-  accessControlBreadcrumb,
-  buildUserBreadcrumb,
-  usersModuleBreadcrumb,
-} from '../lib/config/breadcrumbs'
 import { accessControlPermissionProvider } from '../lib/config/permissionProvider'
 import type { User } from '../models/user'
 import { EditFormPageLayout } from '@/components'
+import { accessControlBreadcrumb } from './access-control-page'
+import { buildUserBreadcrumb, usersModuleBreadcrumb } from './user-page'
 
-interface EditUserFormPageProps {
-  user: User
-}
-
-const EditUserFormPage = ({ user }: EditUserFormPageProps) => {
+const EditUserFormPage = ({ user }: { user: User }) => {
   return (
     <EditFormPageLayout
       title={user.username}
       permissionProvider={accessControlPermissionProvider}
-      breadcrumbs={[accessControlBreadcrumb, usersModuleBreadcrumb].concat(
+      breadcrumbs={[
+        accessControlBreadcrumb,
+        usersModuleBreadcrumb,
         buildUserBreadcrumb(user),
-      )}
+      ]}
     >
       <EditUserAccessForm user={user} />
     </EditFormPageLayout>

@@ -1,10 +1,6 @@
 import { buildProfileFullName } from '../lib/utils'
-import {
-  buildProfileBreadcrumb,
-  profilesBreadcrumb,
-} from '../lib/config/breadcrumb'
 import ProfileOverview from '../components/profile-overview'
-import type { BreadcrumbsByRoute } from '@/components'
+import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import type { Profile } from '../models/profile'
 import {
   buildPageLayoutEditOption,
@@ -12,21 +8,26 @@ import {
   mapApiFileToTableFile,
   overviewBreadcrumb,
   PageRouterLayout,
+  PersonIcon,
   Tab,
   TabsRouter,
   UploadIcon,
 } from '@/components'
+import { profilesBreadcrumb } from './profiles-page'
 
-interface ProfilePageProps {
-  profile: Profile
-}
+export const buildProfileBreadcrumb = (profile: Profile): BreadcrumbSpec => ({
+  title: buildProfileFullName(profile),
+  icon: PersonIcon,
+  pathname: '/profiles/$id',
+  params: { id: profile.id.toString() },
+})
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   overview: [overviewBreadcrumb],
   files: [{ title: 'Archivos', icon: UploadIcon }],
 }
 
-const ProfilePage = ({ profile }: ProfilePageProps) => {
+const ProfilePage = ({ profile }: { profile: Profile }) => {
   const title = buildProfileFullName(profile)
 
   return (

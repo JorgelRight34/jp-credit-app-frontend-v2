@@ -1,14 +1,20 @@
-import { profilesBreadcrumb } from '../lib/config/breadcrumb'
 import ProfilesDataTable from '../components/profiles-datatable'
-import type { BreadcrumbsByRoute } from '@/components'
+import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import {
   AllIcon,
   buildPageLayoutCreateOption,
   GroupIcon,
+  GroupsIcon,
   PageRouterLayout,
   Tab,
   TabsRouter,
 } from '@/components'
+
+export const profilesBreadcrumb: BreadcrumbSpec = {
+  title: 'Pérfiles',
+  icon: GroupsIcon,
+  pathname: '/profiles',
+}
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: [{ title: 'Todos', icon: () => <AllIcon /> }],

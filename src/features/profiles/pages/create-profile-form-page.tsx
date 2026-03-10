@@ -1,7 +1,7 @@
 import { profilesPermissionProvider } from '../lib/config/permissionProvider'
-import { profilesBreadcrumb } from '../lib/config/breadcrumb'
 import { CreateFormPageLayout } from '@/components'
 import CreateProfileForm from '../components/create-profile-form'
+import { profilesBreadcrumb } from './profiles-page'
 
 const CreateProfileFormPage = () => {
   return (

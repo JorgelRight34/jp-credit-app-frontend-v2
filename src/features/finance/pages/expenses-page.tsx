@@ -1,10 +1,10 @@
 import { PageRouterLayout, Tab, TabsRouter } from '@/components'
+import ExpensesDataTable from '../components/expenses-datatable'
+import ExpensesDataChart from '../components/expenses-datachart'
 import {
   financeBreadcrumb,
   financeSectionBreadcrumbsByRoute,
-} from '../lib/config/breadcrumb'
-import ExpensesDataTable from '../components/expenses-datatable'
-import ExpensesDataChart from '../components/expenses-datachart'
+} from './projections-page'
 
 const ExpensesPage = () => {
   return (

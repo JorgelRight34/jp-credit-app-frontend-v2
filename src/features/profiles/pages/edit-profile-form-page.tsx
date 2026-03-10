@@ -1,12 +1,10 @@
 import { profilesPermissionProvider } from '../lib/config/permissionProvider'
-import {
-  buildProfileBreadcrumb,
-  profilesBreadcrumb,
-} from '../lib/config/breadcrumb'
 import type { Profile } from '../models/profile'
 import { EditFormPageLayout } from '@/components'
 import { getFullName } from '@/lib/utils'
 import EditProfileForm from '../components/edit-profile-form'
+import { profilesBreadcrumb } from './profiles-page'
+import { buildProfileBreadcrumb } from './profile-page'
 
 const EditProfileFormPage = ({ profile }: { profile: Profile }) => {
   return (

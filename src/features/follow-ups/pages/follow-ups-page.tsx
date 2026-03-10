@@ -6,8 +6,8 @@ import {
   Tab,
   TabList,
 } from '@/components'
-import { followUpBreadcrumb } from '../lib/config/breadcrumb'
 import FollowUpDataTable from '../components/follow-up-datatable'
+import { followUpBreadcrumb } from './follow-up-page'
 
 const FollowUpsPage = () => {
   return (

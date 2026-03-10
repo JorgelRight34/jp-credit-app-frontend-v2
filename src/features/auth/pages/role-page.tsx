@@ -1,14 +1,11 @@
 import { Suspense } from 'react'
-import {
-  accessControlBreadcrumb,
-  buildRoleBreadcrumb,
-  rolesModuleBreadcrumb,
-} from '../lib/config/breadcrumbs'
 import UsersDataTable from '../components/users-datatable'
 import type { Role } from '../models/role'
 import type { IdentityPermissions } from '../models/identityPermissions'
-import type { BreadcrumbsByRoute } from '@/components'
+import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import {
+  AdminPanelSettingsIcon,
+  BadgeIcon,
   buildPageLayoutEditOption,
   FormReadOnlyGroup,
   FormRow,
@@ -21,10 +18,20 @@ import {
 } from '@/components'
 import { claimsTableColumns } from '../lib/constants'
 import { overviewBreadcrumb } from '@/lib/constants'
+import { accessControlBreadcrumb } from './access-control-page'
 
-type RolePageProps = {
-  role: Role
-  rolePermissions: IdentityPermissions
+export const buildRoleBreadcrumb = (role: Role): BreadcrumbSpec => ({
+  title: role.name,
+  icon: BadgeIcon,
+  pathname: '/access-control/roles/$id',
+  params: { id: role.id.toString() },
+})
+
+export const rolesModuleBreadcrumb: BreadcrumbSpec = {
+  icon: AdminPanelSettingsIcon,
+  title: 'Roles',
+  pathname: '/access-control',
+  search: { tab: 'roles' },
 }
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
@@ -33,7 +40,13 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = {
   participants: [{ title: 'Participantes', icon: GroupIcon }],
 }
 
-const RolePage = ({ role, rolePermissions }: RolePageProps) => {
+const RolePage = ({
+  role,
+  rolePermissions,
+}: {
+  role: Role
+  rolePermissions: IdentityPermissions
+}) => {
   return (
     <PageRouterLayout
       title={`${role.id} - ${role.name}`}

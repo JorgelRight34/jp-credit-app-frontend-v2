@@ -8,11 +8,18 @@ import {
   Tab,
   TabsRouter,
   TodayIcon,
+  MailIcon,
+  BreadcrumbSpec,
 } from '@/components'
 import LoanDataTable from '../components/loan-datatable'
-import { loanBreadcrumb } from '../lib/config/breadcrumb'
 import { LoanStatusMap } from '../models/loanStatus'
 import { ProjectSelectionGuard } from '@/features/projects'
+
+export const loanModuleBreadcrumb: BreadcrumbSpec = {
+  title: 'Préstamos',
+  icon: MailIcon,
+  pathname: '/loans',
+}
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   all: [{ title: 'Todos', icon: AllIcon }],
@@ -27,7 +34,7 @@ const LoansPage = () => {
       title="Préstamos"
       routerConfig={{
         defaultActive: 'all',
-        baseBreadcrumbs: [loanBreadcrumb],
+        baseBreadcrumbs: [loanModuleBreadcrumb],
         breadcrumbsByRoute,
       }}
       options={[buildPageLayoutCreateOption('/loans/create')]}

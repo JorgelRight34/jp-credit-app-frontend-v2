@@ -1,17 +1,23 @@
 import RolesDataTable from '../components/roles-datatable'
 import UsersDataTable from '../components/users-datatable'
-import { accessControlBreadcrumb } from '../lib/config/breadcrumbs'
-import type { BreadcrumbsByRoute } from '@/components'
+import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import {
   AddIcon,
   AdminPanelSettingsIcon,
   buildPageLayoutCreateOption,
   LightPillBtn,
+  LockIcon,
   PageRouterLayout,
   PersonIcon,
   Tab,
   TabsRouter,
 } from '@/components'
+
+export const accessControlBreadcrumb: BreadcrumbSpec = {
+  icon: LockIcon,
+  title: 'Accesos',
+  pathname: '/access-control',
+}
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   users: [{ icon: PersonIcon, title: 'Usuarios' }],

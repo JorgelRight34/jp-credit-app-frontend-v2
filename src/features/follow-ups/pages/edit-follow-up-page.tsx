@@ -6,12 +6,9 @@ import {
 } from '@/components'
 import { FollowUp } from '../models/followUp'
 import { followUpPermissionProvider } from '../lib/config/permission-provider'
-import {
-  buildFollowUpBreadcrumb,
-  followUpBreadcrumb,
-} from '../lib/config/breadcrumb'
 import FollowUpForm from '../components/follow-up-form'
 import { deleteFollowUp } from '../services/followUpClient'
+import { buildFollowUpBreadcrumb, followUpBreadcrumb } from './follow-up-page'
 
 const EditFollowUpPage = ({ followUp }: { followUp: FollowUp }) => {
   return (

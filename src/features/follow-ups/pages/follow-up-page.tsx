@@ -1,4 +1,6 @@
 import {
+  AssignmentIcon,
+  BreadcrumbSpec,
   buildPageLayoutEditOption,
   overviewBreadcrumb,
   PageLayout,
@@ -7,11 +9,22 @@ import {
   TabList,
 } from '@/components'
 import { FollowUp } from '../models/followUp'
-import {
-  buildFollowUpBreadcrumb,
-  followUpBreadcrumb,
-} from '../lib/config/breadcrumb'
 import FollowUpOverview from '../components/follow-up-overview'
+
+export const buildFollowUpBreadcrumb = (
+  followUp: FollowUp,
+): BreadcrumbSpec => ({
+  icon: () => <AssignmentIcon />,
+  title: `Seguimiento No. ${followUp.id}`,
+  pathname: '/follow-ups/$id',
+  params: { id: followUp.id.toString() },
+})
+
+export const followUpBreadcrumb: BreadcrumbSpec = {
+  icon: AssignmentIcon,
+  title: 'Seguimientos',
+  pathname: '/follow-ups',
+}
 
 const FollowUpPage = ({ followUp }: { followUp: FollowUp }) => {
   return (
