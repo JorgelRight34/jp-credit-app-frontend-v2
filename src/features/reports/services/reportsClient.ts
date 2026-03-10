@@ -4,12 +4,12 @@ import { PagedResponse } from "@/models";
 import { ReportQuery } from "../models/reportQuery";
 import { ReportFormValues } from "../lib/schemas/reportFormSchema";
 import { FileStorageService } from "@/lib/services";
-import { getLoan } from "@/features/loans";
 import { loanTemplateDefinition } from "../lib/templates/loan-template-definition";
 import { templateMapper } from "../lib/templates/report-templates-map";
 import { getCollateral } from "@/features/collaterals";
 import { collateralTemplateDefinition } from "../lib/templates/collateral-template-definition";
 import { ReportGenerationFormValues } from "../lib/schemas/reportGenerationFormSchema";
+import { LoanReportModel } from "../models/loanReportModel";
 
 const baseUrl = "reports"
 
@@ -40,12 +40,17 @@ export const getReport = async (id: Report["id"]): Promise<Report> => {
     return data;
 }
 
+export const getLoanReportModel = async (id: number): Promise<LoanReportModel> => {
+    const { data } = await api.get(`${baseUrl}/loans/${id}/report-data`);
+    return data;
+}
+
 export const generateReport = async ({ id, key, file }: ReportGenerationFormValues): Promise<Blob> => {
     let context = null;
 
     switch (key) {
         case "loan":
-            const loan = await getLoan(id as number)
+            const loan = await getLoanReportModel(id as number)
             context = templateMapper(loan, loanTemplateDefinition)
             break;
         case "collateral":
@@ -57,13 +62,9 @@ export const generateReport = async ({ id, key, file }: ReportGenerationFormValu
     const formData = new FormData();
     formData.append("Context", JSON.stringify(context));
 
-    console.log(file)
-
     for (const f of file) {
         formData.append("File", f)
     }
-
-    console.log(formData)
 
     const { data } = await api.post(`${baseUrl}/generate`, formData, {
         responseType: "blob"

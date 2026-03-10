@@ -1,4 +1,4 @@
-import TableCompositor from './table-compositor'
+import TableContainer from './table-container'
 import TableHeadCompositor from './table-header-compositor'
 import TableBodyCompositor from './table-body-compositor'
 import TableFooterCompositor from './table-footer-compositor'
@@ -7,6 +7,7 @@ import type { ReactNode } from 'react'
 import type { TableStateWrapperProps } from './table-state-wrapper'
 import type { Row } from '../models/row'
 import { useTableState } from '../hooks/useTableState'
+import Table from './table'
 
 export interface TableBuilderProps<TData> extends Omit<
   TableStateWrapperProps<TData>,
@@ -36,8 +37,7 @@ const TableBuilder = <TData,>({
   const table = useTableState({ data, pageSize, ...config })
 
   return (
-    <TableCompositor
-      className={className}
+    <TableContainer
       navigation={
         <TableNavigation
           table={table}
@@ -47,15 +47,17 @@ const TableBuilder = <TData,>({
         />
       }
     >
-      <TableHeadCompositor table={table} />
-      <TableBodyCompositor<TData>
-        table={table}
-        isLoading={isLoading}
-        onRowClick={(r) => onRowClick?.(r.original)}
-        onExpand={onExpand}
-      />
-      <TableFooterCompositor table={table} />
-    </TableCompositor>
+      <Table className={className}>
+        <TableHeadCompositor table={table} />
+        <TableBodyCompositor<TData>
+          table={table}
+          isLoading={isLoading}
+          onRowClick={(r) => onRowClick?.(r.original)}
+          onExpand={onExpand}
+        />
+        <TableFooterCompositor table={table} />
+      </Table>
+    </TableContainer>
   )
 }
 

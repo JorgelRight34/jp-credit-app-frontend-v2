@@ -18,6 +18,8 @@ import SavedReportGenerationForm from '../components/saved-report-generation-for
 export const buildReportBreadcrumb = (report: Report): BreadcrumbSpec => ({
   icon: ReportIcon,
   title: report.title,
+  pathname: '/reports/$id',
+  params: { id: report.id.toString() },
 })
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {

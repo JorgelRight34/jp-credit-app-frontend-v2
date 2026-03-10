@@ -5,7 +5,6 @@ import {
     DateInput,
     DaysIntervalSelect,
     SearchFormConfig,
-    SelectOptions,
     WatchedValuesChangeHandler
 } from "@/components";
 import { FinanceQuery } from "../../models/financeQuery";
@@ -37,11 +36,11 @@ const onFinanceOptionChange: WatchedValuesChangeHandler<FinanceQuery> = (context
 
 export const financeBaseAdvancedOptions: SearchFormConfig<FinanceQuery>["advanced"] = [
     {
-        name: "chart", width: 12, label: "Gráfica", type: withSelectOptions([
+        name: "chart", width: 12, label: "Gráfica", type: withSelectOptions<ChartType>([
             ["linear", "Linear"],
             ["pie", "Pie"],
             ["bar", "Barras"],
-        ] as SelectOptions<ChartType>)
+        ])
     },
     { name: "vsStartDate", width: 6, label: "VS Fecha inicio", type: p => DateInput(p) },
     { name: "vsEndDate", width: 6, label: "VS Fecha final", type: p => DateInput(p) }

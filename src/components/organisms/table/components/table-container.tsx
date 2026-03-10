@@ -1,28 +1,26 @@
-import Table from './table'
 import type { ReactNode } from 'react'
 
-type TableCompositorProps = React.HtmlHTMLAttributes<HTMLDivElement> & {
+type TableContainerProps = React.HtmlHTMLAttributes<HTMLDivElement> & {
   children?: ReactNode
   navigation?: ReactNode
 }
 
-const TableCompositor = ({
+const TableContainer = ({
   children,
   navigation,
-  className,
   ...props
-}: TableCompositorProps) => {
+}: TableContainerProps) => {
   return (
     <div
       className="flex h-full flex-col rounded-xl border shadow-sm"
       {...props}
     >
       <div className="flex w-full flex-col !overflow-hidden rounded-xl">
-        <Table className={className}>{children}</Table>
+        {children}
       </div>
       <div className="flex-shrink-0 border-t">{navigation}</div>
     </div>
   )
 }
 
-export default TableCompositor
+export default TableContainer

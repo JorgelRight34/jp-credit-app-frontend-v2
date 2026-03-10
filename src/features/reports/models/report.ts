@@ -6,7 +6,6 @@ export interface Report {
     title: string;
     description?: string;
     key: "loan" | "collateral";
-    bookmark: boolean;
     createdAt: string;
     documents: Array<FileModel>;
 }

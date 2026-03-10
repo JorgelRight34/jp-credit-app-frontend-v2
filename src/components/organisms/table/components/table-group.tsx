@@ -11,7 +11,7 @@ import {
   useTableState,
 } from '..'
 import { TableBuilderProps } from './table-builder'
-import TableCompositor from './table-compositor'
+import TableCompositor from './table-container'
 import TableStateWrapper from './table-state-wrapper'
 
 type TableGroupTableProps<T> = {

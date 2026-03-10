@@ -9,15 +9,11 @@ interface UseReportGenerationFormValuesProps extends UseDataFormProps<Blob, Repo
 }
 
 export const useReportGenerationForm = ({ report, initialValues, ...config }: UseReportGenerationFormValuesProps) => {
-    return useForm<Blob, ReportGenerationFormValues>({
+    return useForm<Blob, ReportGenerationFormValues, Blob>({
         onSubmit: generateReport,
         onEdit: async (body) => {
-            if (body.file.length === 0) {
-                const files = await Promise.all(report!.documents.map(d => fileFromUrl(d.url)))
-                body.file = files;
-            }
-
-            generateReport(body)
+            const files = await Promise.all(report!.documents.map(d => fileFromUrl(d.url)))
+            return await generateReport({ id: body.id, key: report!.key, file: files, url: [] })
         },
         shouldEdit: !!report,
         shouldUseNativeValidation: true,

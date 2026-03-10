@@ -1,4 +1,4 @@
-import { Table } from '../../table'
+import { TableBuilder } from '../../table'
 import FilenameCell from './filename-cell'
 import type { TableFile } from '../models/tableFile'
 import type { Column } from '../../table/models/column'
@@ -48,7 +48,7 @@ const columns: Array<Column<TableFile>> = [
 ]
 
 const FileTable = ({ files = [], extraColumns = [] }: FileTableProps) => {
-  return <Table columns={columns.concat(extraColumns)} data={files} />
+  return <TableBuilder columns={columns.concat(extraColumns)} data={files} />
 }
 
 export default FileTable

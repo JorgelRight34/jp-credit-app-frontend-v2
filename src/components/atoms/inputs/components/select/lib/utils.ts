@@ -3,7 +3,7 @@ import { Select } from "../../..";
 import { SelectInputProps } from "../select";
 import { SelectOptions } from "../select-option";
 
-export const withSelectOptions = (options: SelectOptions) => {
+export const withSelectOptions = <T extends string | number | null>(options: SelectOptions<T>) => {
     return (props: SelectInputProps) => Select({ ...props, options })
 }
 

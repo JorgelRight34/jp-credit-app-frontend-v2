@@ -8,6 +8,7 @@ import {
   FormRow,
   FormSelectGroup,
   FormWatch,
+  Input,
 } from '@/components'
 import { useReportGenerationForm } from '../hooks/useReportGenerationForm'
 import { ReportGenerationFormValues } from '../lib/schemas/reportGenerationFormSchema'
@@ -26,7 +27,7 @@ const ReportGenerationForm = (
   const form = useReportGenerationForm({
     ...props,
     onSuccess: downloadFile,
-    initialValues: { key: 'loan' },
+    initialValues: { key: 'loan', url: [], file: [] },
   })
 
   return (
@@ -41,6 +42,9 @@ const ReportGenerationForm = (
                 label="Archivos"
                 multiple
               />
+            </FormRow>
+            <FormRow>
+              <FormGroup name="url" label="Enlace" input={Input} />
             </FormRow>
             <FormRow>
               <FormSelectGroup

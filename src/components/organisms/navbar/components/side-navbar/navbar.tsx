@@ -17,7 +17,6 @@ import {
 import NavbarLinksContainer from '../navbar-link/navbar-links-container'
 import NavbarHeader from './navbar-header'
 import NavbarFooter from './navbar-footer'
-import NavbarSearch from './navbar-search'
 import type { NavItem } from '../../models/navItem'
 import { ArrowBackIcon, Icon } from '@/components/atoms'
 
@@ -51,7 +50,7 @@ const Navbar = ({ onSelect }: NavbarProps) => {
         />
       </div>
       <NavbarBody onSelect={onSelect} />
-      <div className="w-full flex-shrink-0 p-3">
+      <div className="w-full flex-shrink-0 p-3 border-t">
         <NavbarFooter className="bg-active-transparent shadow-sm" />
       </div>
     </div>
@@ -60,13 +59,9 @@ const Navbar = ({ onSelect }: NavbarProps) => {
 
 const NavbarBody = ({ onSelect }: NavbarProps) => {
   const [activeNav, setActiveNav] = useState<NavItem | null>(null)
-  const [searchResults, setSearchResults] = useState<Array<NavItem>>([])
   const hasActiveNavChildren = useMemo(
-    () =>
-      searchResults.length === 0 &&
-      activeNav?.children &&
-      activeNav.children.length > 0,
-    [activeNav, searchResults],
+    () => activeNav?.children && activeNav.children.length > 0,
+    [activeNav],
   )
 
   const handleOnSelect = (option: NavItem) => {
@@ -76,24 +71,14 @@ const NavbarBody = ({ onSelect }: NavbarProps) => {
 
   return (
     <>
-      <div className="flex-shrink-0 p-3">
-        <NavbarSearch
-          className="bg-active-transparent"
-          options={options}
-          onChange={setSearchResults}
-        />
-      </div>
       <Activity mode={!hasActiveNavChildren ? 'visible' : 'hidden'}>
-        <NavbarLinksContainer
-          options={searchResults.length > 0 ? searchResults : options}
-          onExpand={handleOnSelect}
-        />
+        <NavbarLinksContainer options={options} onExpand={handleOnSelect} />
       </Activity>
       <Activity mode={hasActiveNavChildren ? 'visible' : 'hidden'}>
         <NavbarLinksContainer
           options={activeNav?.children ?? []}
           onExpand={handleOnSelect}
-          activeOptions={{ includeSearch: true }}
+          activeOptions={{ includeSearch: true, exact: true }}
         >
           <div className="flex justify-between border-b border-t bg-active-transparent p-3 shadow-sm">
             <div className="border-left-accent">

@@ -23,7 +23,7 @@ const NavbarFooter = ({ className }: NavbarFooterProps) => {
   return (
     <div className={clsx(`flex w-full flex-col rounded border p-2`, className)}>
       <div className="!flex w-full items-center text-muted">
-        <CurrentUserPicCard className="mr-2"/>
+        <CurrentUserPicCard className="mr-2" />
         <span className="mr-auto flex flex-col">
           <span>{user && getFirstAndLastName(user)}</span>
         </span>
@@ -48,7 +48,7 @@ const MenuTrigger = () => {
         </span>
         <span>
           <MenuItem onClick={logout}>
-            <Icon icon={LogoutIcon}>Cerrar sesion</Icon>
+            <Icon icon={LogoutIcon}>Cerrar sesión</Icon>
           </MenuItem>
         </span>
       </span>
@@ -62,9 +62,9 @@ const ThemeTogglerMenuItem = () => {
   return (
     <MenuItem onClick={toggle}>
       {theme === 'light' ? (
-        <Icon icon={LightModeIcon}>Modo claro</Icon>
-      ) : (
         <Icon icon={DarkModeIcon}>Modo obscuro</Icon>
+      ) : (
+        <Icon icon={LightModeIcon}>Modo claro</Icon>
       )}
     </MenuItem>
   )

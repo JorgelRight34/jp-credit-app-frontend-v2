@@ -101,4 +101,4 @@ export { default as SectionHeading } from './text/section-heading'
 
 export * from './details'
 export * from './accordion'
-
+export * from './list'

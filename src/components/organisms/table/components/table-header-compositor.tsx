@@ -16,17 +16,13 @@ const TableHeadCompositor = <T,>({ table, className }: TableHeadProps<T>) => {
       {table.getHeaderGroups().map((headerGroup) => (
         <TableRow key={headerGroup.id} className="cursor-pointer border-b">
           {headerGroup.headers.map((header) => (
-            <TableHeadCell
-              className="px-4 py-2 whitespace-normal"
-              key={header.id}
-            >
+            <TableHeadCell key={header.id}>
               <div
-                {...{
-                  className:
-                    'flex items-center' +
-                    (header.column.getCanSort() ? ' cursor-pointer hover' : ''),
-                  onClick: header.column.getToggleSortingHandler(),
-                }}
+                className={
+                  'flex items-center' +
+                  (header.column.getCanSort() ? ' cursor-pointer hover' : '')
+                }
+                onClick={header.column.getToggleSortingHandler()}
               >
                 {flexRender(
                   header.column.columnDef.header,

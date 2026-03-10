@@ -1,8 +1,13 @@
-import { Column, getFooterTotalAsCurrency } from "@/components";
+import { buildLinkDataCell, Column, getFooterTotalAsCurrency } from "@/components";
 import { AmortizationPayment } from "../../models/amortizationPayment";
 import { addDays, toCurrency, toFormattedDate, toTitleCase } from "@/lib/utils";
 
 export const amortizationDatatableColumns: Array<Column<AmortizationPayment>> = [
+    {
+        header: "NO",
+        cell: ({ row }) => buildLinkDataCell(`Cuota No. ${row.index + 1}`, {}),
+        footer: () => "TOTAL:"
+    },
     {
         header: "CUOTA",
         cell: ({ row }) => toCurrency(row.original.total),
@@ -16,10 +21,12 @@ export const amortizationDatatableColumns: Array<Column<AmortizationPayment>> = 
     {
         header: "CAPITAL",
         cell: ({ row }) => toCurrency(row.original.capitalValue),
+        footer: (context) => getFooterTotalAsCurrency(context, "capitalValue")
     },
     {
         header: "BALANCE",
         cell: ({ row }) => toCurrency(row.original.principalBalance),
+        footer: (context) => getFooterTotalAsCurrency(context, "principalBalance")
     },
 ]
 

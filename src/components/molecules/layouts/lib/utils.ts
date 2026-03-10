@@ -7,6 +7,7 @@ import {
   DeleteIcon,
   EditIcon,
   LightPillBtn,
+  LightPillLinkBtn,
   SettingsIcon,
   TableChartIcon,
 } from '@/components/atoms'
@@ -32,7 +33,7 @@ export const buildPageLayoutEditOption = (
   to: editPath,
   params,
   icon: EditIcon,
-  component: AccentPillBtn,
+  component: AccentPillLinkBtn,
 })
 
 export const buildPageLayoutMenuOption = (
@@ -81,7 +82,7 @@ export const buildPageLayoutSettingsOption = (
     to,
     params,
     icon: SettingsIcon,
-    component: AccentPillBtn,
+    component: AccentPillLinkBtn,
   }
 }
 
@@ -94,7 +95,7 @@ export const buildPageLayoutSettingsOptionLight = (
     to,
     params,
     icon: SettingsIcon,
-    component: LightPillBtn,
+    component: LightPillLinkBtn,
   }
 }
 

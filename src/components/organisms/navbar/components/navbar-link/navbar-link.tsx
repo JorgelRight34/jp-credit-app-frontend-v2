@@ -18,7 +18,6 @@ export interface NavbarLinkProps extends Partial<LinkProps> {
 const NavbarLink = ({
   option,
   className,
-  activeOptions,
   onClick,
   onExpand,
   ...linkProps

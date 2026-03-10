@@ -1,5 +1,4 @@
 import {
-  FormCheckboxGroup,
   FormGroup,
   FormRow,
   FormSelectGroup,
@@ -20,7 +19,6 @@ const ReportFormPanel = () => {
           label="Categoría"
           options={reportKeySelectOptions}
         />
-        <FormCheckboxGroup name="bookmark" label="Marcar" />
       </FormRow>
       <FormGroup
         name="description"

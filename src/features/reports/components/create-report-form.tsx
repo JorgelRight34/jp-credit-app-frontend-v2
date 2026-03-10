@@ -15,6 +15,7 @@ import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
 import ReportFormPanel from './report-form-panel'
+import FormattersDefinitionPanel from './formatters-definition-panel'
 
 interface CreateReportFormProps extends DataModuleFormProps<
   Report,
@@ -25,7 +26,7 @@ const CreateReportForm = (props: CreateReportFormProps) => {
   const fileAttachmentsForm = useReportFileAttachmentForm()
   const form = useReportForm({
     ...props,
-    initialValues: { title: '', description: '', key: '', bookmark: true },
+    initialValues: { title: '', description: '', key: '' },
     resetValues: true,
     onSuccess: fileAttachmentsForm.submit,
   })
@@ -57,6 +58,9 @@ const CreateReportForm = (props: CreateReportFormProps) => {
             form={fileAttachmentsForm.form}
             render={FileAttachmentsPanel}
           />
+        </Tab>
+        <Tab eventKey="formatters" title="Formatos">
+          <FormattersDefinitionPanel />
         </Tab>
       </Tabs>
     </FormContainer>

@@ -6,7 +6,6 @@ import {
   FormMasterDetailLayout,
   FormReadOnlyGroup,
   FormRow,
-  FormWatch,
 } from '@/components'
 import { Report } from '../models/report'
 import {
@@ -54,13 +53,7 @@ const SavedReportGenerationForm = ({ report }: { report: Report }) => {
             />
           </FormMasterDetailLayout.Master>
           <FormMasterDetailLayout.Detail>
-            <FormWatch
-              form={form}
-              names={['key']}
-              render={([key]) => (
-                <ReportTemplateDefinitionFieldset templateKey={key} />
-              )}
-            />
+            <ReportTemplateDefinitionFieldset templateKey={report.key} />
           </FormMasterDetailLayout.Detail>
         </FormMasterDetailLayout>
       </Form>

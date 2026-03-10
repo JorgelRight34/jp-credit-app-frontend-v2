@@ -2,7 +2,7 @@ import {
   SearchFormContainer,
   SearchFormContainerOverrides,
   SearchFormValueConsumer,
-  Table,
+  TableBuilder,
 } from '@/components'
 import { AmortizationCalculatorInput } from '../models/amortizationCalculatorInput'
 import { amortizationSearchConfig } from '../lib/config/amortization-search-config'
@@ -16,7 +16,7 @@ const AmortizationDataTable = (
     <SearchFormContainer searchConfig={amortizationSearchConfig} {...props}>
       <SearchFormValueConsumer<AmortizationCalculatorInput>
         render={(input) => (
-          <Table
+          <TableBuilder
             columns={amortizationDatatableColumns}
             data={
               calculateAmortization({

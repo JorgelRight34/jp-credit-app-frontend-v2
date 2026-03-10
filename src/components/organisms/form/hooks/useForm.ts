@@ -26,7 +26,7 @@ export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
     onSuccess?: (data: TReturn) => void;
     onDelete?: () => void;
     onSubmit: ((data: TData) => Promise<TReturn>);
-    onEdit?: ((data: TData) => Promise<void>);
+    onEdit?: ((data: TData) => Promise<void | TReturn>);
 }
 
 export const useForm = <T extends object, TData extends FieldValues, TReturn = T>({

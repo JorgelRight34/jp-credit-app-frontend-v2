@@ -11,7 +11,6 @@ export type IconInputSlotProps = {
 export const getIconInputSlot = ({
   icon,
   iconDirection = 'right',
-  onClick,
 }: IconInputSlotProps = {}) => {
   const isDirectionRight = iconDirection === 'right' && icon
 
@@ -20,7 +19,6 @@ export const getIconInputSlot = ({
       <InputAdornment
         className="text-muted"
         position={isDirectionRight ? 'end' : 'start'}
-        onClick={onClick}
       >
         <Icon icon={icon} />
       </InputAdornment>

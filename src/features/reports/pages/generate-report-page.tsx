@@ -3,11 +3,11 @@ import {
   PageLayoutBreadcrumb,
   PrintIcon,
   Tab,
-  TabList,
-  TabsPanelContainer,
+  Tabs,
 } from '@/components'
 import { reportsBreadcrumb } from './reports-page'
 import ReportGenerationForm from '../components/report-generation-form'
+import FormattersDefinitionPanel from '../components/formatters-definition-panel'
 
 const GenerateReportPage = () => {
   return (
@@ -22,12 +22,14 @@ const GenerateReportPage = () => {
         />
       }
     >
-      <TabList>
-        <Tab title="Formulario" isActive />
-      </TabList>
-      <TabsPanelContainer>
-        <ReportGenerationForm />
-      </TabsPanelContainer>
+      <Tabs defaultActiveKey="form">
+        <Tab eventKey="form" title="Formulario">
+          <ReportGenerationForm />
+        </Tab>
+        <Tab eventKey="formatters" title="Formatos">
+          <FormattersDefinitionPanel />
+        </Tab>
+      </Tabs>
     </PageLayout>
   )
 }
