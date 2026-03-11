@@ -5,7 +5,7 @@ type TableRowProps = HTMLAttributes<HTMLTableRowElement>
 
 const TableRow = ({ children, className, ...props }: TableRowProps) => {
   return (
-    <tr className={clsx('bg-surface even:bg-stone-50', className)} {...props}>
+    <tr className={clsx('text-secondary bg-surface', className)} {...props}>
       {children}
     </tr>
   )

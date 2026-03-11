@@ -168,9 +168,7 @@ const ToolbarButton = ({
       title={title}
       type="button"
       className={clsx(
-        'rounded p-2 transition-colors',
-        'hover:bg-gray-200',
-        'disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent',
+        'rounded p-2 transition-colors text-primary hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent',
         isActive && 'bg-blue-100 text-blue-700 hover:bg-blue-200',
       )}
     >

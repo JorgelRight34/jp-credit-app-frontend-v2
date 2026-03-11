@@ -2,6 +2,7 @@ import { useId } from 'react'
 import clsx from 'clsx'
 import type { InputProps } from '../input/components/input'
 import type { ReactNode } from 'react'
+import FormLabel from '@/components/atoms/form-label/form-label'
 
 interface FileInputWrapperProps extends InputProps {
   reachedLimit?: boolean
@@ -29,14 +30,14 @@ const FileInputWrapper = ({
         disabled={reachedLimit}
         onChange={onChange}
       />
-      <label
+      <FormLabel
         htmlFor={id}
-        className={clsx('cursor-pointer', {
-          'pointer-events-none cursor-not-allowed opacity-50': reachedLimit,
+        className={clsx('cursor-pointer !w-auto', {
+          'pointer-events-none cursor-not-allowed  opacity-50': reachedLimit,
         })}
       >
         {children}
-      </label>
+      </FormLabel>
     </>
   )
 }

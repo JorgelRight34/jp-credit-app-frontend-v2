@@ -3,7 +3,6 @@
 :root {
   --primary-color: #d09d0c;
   --secondary-color: #9c6334;
-  --active-color: #583906;
   --white-2: white;
   --text-primary: #111827;
   --text-secondary: #374151;
@@ -14,9 +13,14 @@
   --text-color: #333333; 
   --surface: #ffff; 
   --background: #fefefe;
+    --surface-subtle: #fafaf9;
 }
 
 .light {
+  --surface-subtle: #fafaf9;
+  --active-color: #583906;
+  --primary-color: #d09d0c;
+  --secondary-color: #9c6334;
   --text-primary: #111827;
   --text-secondary: #374151;
   --text-muted: #6b7280;
@@ -29,15 +33,19 @@
 }
 
 .dark {
+  --surface-subtle: #292524;
+  --active-color: #a87c09;  /* darkened version of #d09d0c */
+  --secondary-color: #d09d0c;
+  --primary-color: #9c6334;
   --text-primary: #f9fafb;     /* main text (almost white) */
   --text-secondary: #e5e7eb;   /* regular text */
   --text-muted: #9ca3af;       /* subtle text */
   --text-disabled: #6b7280;    /* disabled / low contrast */
-  --border-gray-500: #6b7280;   /* you can keep this if you use it as a "neutral 500" */
-  --bs-border-color: #2b3340;   /* subtle border on dark surfaces */
+   --border-gray-500: #4a4a4a;   /* ← lifted */
   --text-color: #e5e7eb;        /* readable light text */
-  --surface: #111827;           /* cards/panels */
-  --background: #0b1220;        /* page background, slightly darker than surface */
+--surface: #262626;        /* slightly lifted */
+--background: #1e1e1e;
+   --bs-border-color: #3d3d3d;   /* ← lifted */
 }
 
 #root {
@@ -47,7 +55,7 @@
 }
 
 .bg-surface {
-  background-color: var(--surface) !important;
+  background-color: var(--surface);
 }
 
 .bg-background {
@@ -174,6 +182,10 @@
   color: #fff;
 }
 
+.bg-surface-subtle {
+  background-color: var(--surface-subtle);
+}
+
 .cursor-not-allowed {
   cursor: not-allowed !important;
 }
@@ -257,8 +269,16 @@ input:focus {
   color: var(--active-color) !important;
 }
 
+tbody tr:nth-child(even) {
+  background-color: var(--surface-subtle);
+}
+
 .bg-active-transparent {
-  background-color: rgba(88, 57, 6, 0.025) !important;
+  background-color: color-mix(in srbg, var(--active-color) 50%, transparent) !important;
+}
+
+.bg-muted {
+  background-color: var(--text-muted);
 }
 
 .transparent-accent-bg::before {

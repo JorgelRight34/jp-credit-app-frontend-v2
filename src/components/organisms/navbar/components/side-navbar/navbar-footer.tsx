@@ -21,7 +21,12 @@ const NavbarFooter = ({ className }: NavbarFooterProps) => {
   const { user } = useAuth()
 
   return (
-    <div className={clsx(`flex w-full flex-col rounded border p-2`, className)}>
+    <div
+      className={clsx(
+        `flex w-full flex-col rounded border bg-active-transparent p-2`,
+        className,
+      )}
+    >
       <div className="!flex w-full items-center text-muted">
         <CurrentUserPicCard className="mr-2" />
         <span className="mr-auto flex flex-col">

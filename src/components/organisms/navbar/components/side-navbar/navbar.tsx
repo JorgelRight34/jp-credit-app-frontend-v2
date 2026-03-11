@@ -15,10 +15,10 @@ import {
   transactionsNavItem,
 } from '../../lib/navItems'
 import NavbarLinksContainer from '../navbar-link/navbar-links-container'
-import NavbarHeader from './navbar-header'
 import NavbarFooter from './navbar-footer'
 import type { NavItem } from '../../models/navItem'
-import { ArrowBackIcon, Icon } from '@/components/atoms'
+import { ArrowBackIcon, Icon, Image, Link } from '@/components/atoms'
+import { useTheme } from '@/components/molecules'
 
 const options = [
   profileNavItem,
@@ -43,17 +43,34 @@ const Navbar = ({ onSelect }: NavbarProps) => {
   return (
     <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-surface border-r shadow-sm">
       <div className="border-b flex-shrink-0">
-        <NavbarHeader
-          src="/horizontal-logo-light.svg?url"
-          alt="logo"
-          className="mb-0"
-        />
+        <NavbarHeader />
       </div>
       <NavbarBody onSelect={onSelect} />
       <div className="w-full flex-shrink-0 p-3 border-t">
         <NavbarFooter className="bg-active-transparent shadow-sm" />
       </div>
     </div>
+  )
+}
+
+const NavbarHeader = () => {
+  const { theme } = useTheme()
+
+  return (
+    <Link to="/">
+      <div className="flex items-center gap-6 p-3">
+        <Image
+          className="brand h-12 object-fit"
+          src={
+            theme === 'light'
+              ? '/horizontal-logo-light.svg?url'
+              : '/horizontal-logo-dark.svg?url'
+          }
+          alt="logo"
+          style={{ objectFit: 'contain' }}
+        />
+      </div>
+    </Link>
   )
 }
 
@@ -90,7 +107,8 @@ const NavbarBody = ({ onSelect }: NavbarProps) => {
             </div>
             <div className="flex items-center">
               <Icon
-                className="text-sm text-link-active"
+                className="text-sm text-accent-secondary"
+                iconClassName="text-accent-secondary"
                 orientation="right"
                 icon={activeNav?.icon}
               >

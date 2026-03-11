@@ -1,13 +1,22 @@
 export const SX_CONFIG = {
     borderRadius: "0.5rem", // Tailwind's rounded-xl = 1rem
+    "& .MuiInputLabel-root": {        // ← moved up, outside MuiOutlinedInput-root
+        color: "var(--text-muted)",
+    },
     "& .MuiOutlinedInput-root": {
         borderRadius: "0.5rem",
+        backgroundColor: "var(--surface)",
         '&.Mui-focused': {
             outline: 'none',
         },
 
         '& fieldset': {
             borderColor: '#e5e7eb',
+        },
+
+
+        '&:hover fieldset': {
+            borderColor: 'var(--text-muted)',  // keep same as default, or set whatever color you want
         },
 
         '&.Mui-focused fieldset': {

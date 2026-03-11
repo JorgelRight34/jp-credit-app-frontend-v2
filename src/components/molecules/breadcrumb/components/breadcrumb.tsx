@@ -7,6 +7,12 @@ type BreadcrumbProps = React.HTMLAttributes<HTMLDivElement> & {
   maxItems?: number
 }
 
+const SX = {
+  '& .MuiBreadcrumbs-separator': {
+    color: 'var(--text-muted)',
+  },
+}
+
 const Breadcrumb = ({
   breadcrumbs,
   maxItems = 4,
@@ -18,6 +24,7 @@ const Breadcrumb = ({
         className="opacity-70"
         aria-label="breadcrumb"
         maxItems={maxItems}
+        sx={SX}
         {...props}
       >
         {breadcrumbs?.map((bread, index) => {

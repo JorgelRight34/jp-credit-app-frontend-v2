@@ -15,7 +15,7 @@ const SafeHtml = ({ html, className }: SafeHtmlProps) => {
 
   return (
     <div
-      className={className}
+      className={`text-secondary ${className}`}
       dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
     />
   )

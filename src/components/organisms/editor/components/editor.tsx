@@ -59,7 +59,7 @@ const Editor = ({
 
       <EditorContent
         editor={editor}
-        className="flex-1 border [&_ProseMirror]:overflow-y-auto"
+        className="text-secondary flex-1 border [&_ProseMirror]:overflow-y-auto"
       />
       <div className="flex-shrink-0">{children}</div>
     </div>

@@ -8,7 +8,11 @@ const BottomNavbarDrawer = () => {
 
   return (
     <>
-      <Icon icon={MenuIcon} onClick={toggleOpenDrawer} />
+      <Icon
+        iconClassName="text-secondary"
+        icon={MenuIcon}
+        onClick={toggleOpenDrawer}
+      />
       <Drawer open={openDrawer} onClose={close}>
         <div role="presentation" className="h-full" style={{ width: '60dvw' }}>
           <Navbar onSelect={close} />

@@ -17,12 +17,9 @@ const FileAttachmentsFormContainer = <T,>({
 
   return (
     <FormLayout
+      onSubmit={form.handleSubmit}
       footer={
-        <FormContainerButtons
-          isDirty={isDirty}
-          onReset={form.handleReset}
-          onSubmit={form.handleSubmit}
-        />
+        <FormContainerButtons isDirty={isDirty} onReset={form.handleReset} />
       }
     >
       <FileAttachmentsForm

@@ -25,6 +25,19 @@ type MenuRefProps = Omit<MenuProps, 'open'> & {
   options?: Array<MenuOption>
 }
 
+const SX = {
+  '& .MuiPaper-root': {
+    backgroundColor: 'var(--surface)',
+    color: 'var(--text-primary)',
+    borderColor: 'var(--bs-border-color)',
+    border: '1px solid var(--bs-border-color)',
+  },
+  '& .MuiMenuItem-root:hover': {
+    backgroundColor:
+      'color-mix(in srgb, var(--primary-color) 10%, transparent)',
+  },
+}
+
 const Menu = forwardRef<MenuRef, MenuRefProps>(
   ({ options = [], ...props }, ref) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -51,6 +64,7 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
         anchorEl={anchorEl}
         open={open}
         id={id}
+        sx={SX}
         onClose={handleMenuClose}
       >
         {options.map((option, index) => (
