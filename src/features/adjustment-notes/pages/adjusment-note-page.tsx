@@ -5,7 +5,9 @@ import {
   PageLayout,
   PageLayoutBreadcrumb,
   Tab,
-  TabList,
+  TabPanel,
+  Tabs,
+  TabsList,
 } from '@/components'
 import { AdjustmentNote } from '../models/adjustmentNote'
 import { buildAdjustmentNoteLabel } from '../lib/utils'
@@ -54,10 +56,14 @@ const AdjustmentNotePage = ({
         />
       }
     >
-      <TabList>
-        <Tab title="Resumen" isActive />
-      </TabList>
-      <AdjustmentNoteOverview adjustmentNote={adjustmentNote} />
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Resumen</Tab>
+        </TabsList>
+        <TabPanel index={0}>
+          <AdjustmentNoteOverview adjustmentNote={adjustmentNote} />
+        </TabPanel>
+      </Tabs>
     </PageLayout>
   )
 }

@@ -15,7 +15,9 @@ import {
   FormRow,
   PasswordInput,
   Tab,
+  TabPanel,
   Tabs,
+  TabsList,
 } from '@/components'
 import { updateUserClaims } from '../services/userClient'
 import UserDataFormPanel from './user-data-form-panel'
@@ -33,6 +35,15 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
   const rolesFormRef = useRef<UserRolesFormRef>(null)
 
   const form = useUserForm({
+    initialValues: {
+      username: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmation: '',
+      isActive: true,
+    },
     onSuccess: async ({ id, username }) => {
       permissionsFormRef.current?.setValue('id', id)
 
@@ -45,22 +56,18 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
       ])
     },
     toastMessage: () => 'Guardado',
-    initialValues: {
-      username: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmation: '',
-      isActive: true,
-    },
     ...props,
   })
 
   return (
     <FormContainer form={form}>
-      <Tabs defaultActiveKey="data" navigate={false}>
-        <Tab eventKey="data" title="Datos">
+      <Tabs>
+        <TabsList>
+          <Tab index={0} title="Datos" />
+          <Tab index={1} title="Permisos" />
+          <Tab index={2} title="Roles" />
+        </TabsList>
+        <TabPanel index={0}>
           <UserDataFormPanel form={form}>
             <FormRow>
               <FormGroup
@@ -77,13 +84,13 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
               />
             </FormRow>
           </UserDataFormPanel>
-        </Tab>
-        <Tab eventKey="permissions" title="Permisos">
+        </TabPanel>
+        <TabPanel index={1}>
           <PermissionsForm ref={permissionsFormRef} />
-        </Tab>
-        <Tab eventKey="roles" title="Roles">
+        </TabPanel>
+        <TabPanel index={2}>
           <UserRolesForm ref={rolesFormRef} />
-        </Tab>
+        </TabPanel>
       </Tabs>
     </FormContainer>
   )

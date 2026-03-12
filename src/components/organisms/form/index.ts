@@ -22,6 +22,7 @@ export { default as FormConfirmationFlowContainer } from './components/form-conf
 export { default as FormLazySelectGroup } from './components/form-lazy-select-group'
 export { default as FormWatchContainer } from './components/form-watch-container'
 export { default as FormMasterDetailLayout } from './components/form-master-detail-layout'
+export * from './hooks/useFormMethods';
 
 export * from './components/form-watch-container'
 export * from "./components/form-readonly-group"

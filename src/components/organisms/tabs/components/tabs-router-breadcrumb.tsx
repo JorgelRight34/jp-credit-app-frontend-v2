@@ -1,4 +1,4 @@
-import { useActiveTabRoute } from '../contexts/tabs-router-context'
+import { useActiveTabRoute } from '../providers/tabs-router-provider'
 import type { BreadcrumbSpec, BreadcrumbsByRoute } from '@/components/molecules'
 import EntityLayoutBreadcrumb from '@/components/molecules/layouts/components/page-layout-breadcrumb'
 

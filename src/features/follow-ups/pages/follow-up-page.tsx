@@ -6,7 +6,9 @@ import {
   PageLayout,
   PageLayoutBreadcrumb,
   Tab,
-  TabList,
+  TabPanel,
+  Tabs,
+  TabsList,
 } from '@/components'
 import { FollowUp } from '../models/followUp'
 import FollowUpOverview from '../components/follow-up-overview'
@@ -45,10 +47,14 @@ const FollowUpPage = ({ followUp }: { followUp: FollowUp }) => {
         />
       }
     >
-      <TabList>
-        <Tab title="Resumen" isActive />
-      </TabList>
-      <FollowUpOverview followUp={followUp} />
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Resumen</Tab>
+        </TabsList>
+        <TabPanel index={0}>
+          <FollowUpOverview followUp={followUp} />
+        </TabPanel>
+      </Tabs>
     </PageLayout>
   )
 }

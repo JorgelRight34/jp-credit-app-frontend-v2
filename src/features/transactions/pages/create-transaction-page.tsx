@@ -4,6 +4,8 @@ import {
   PageRouterLayout,
   ProtectedComponent,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import { transactionPermissionProvider } from '../lib/config/permission-provider'
@@ -22,10 +24,10 @@ interface CreateTransactionPageProps {
   amount?: number
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  pay: [paymentsBreadcrumb, createBreadcrumb],
-  disburse: [disbursementsBreadcrumb, createBreadcrumb],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [paymentsBreadcrumb, createBreadcrumb],
+  [disbursementsBreadcrumb, createBreadcrumb],
+]
 
 const CreateTransactionPage = ({
   project,
@@ -36,7 +38,6 @@ const CreateTransactionPage = ({
     <PageRouterLayout
       title="Transacciones"
       routerConfig={{
-        defaultActive: 'pay',
         baseBreadcrumbs: [transactionBreadcrumb],
         breadcrumbsByRoute,
       }}
@@ -46,15 +47,19 @@ const CreateTransactionPage = ({
         isAuthorizedFn={(p) => p.canCreate}
       >
         <TabsRouter>
-          <Tab eventKey="pay" title="Pagos">
+          <TabsList>
+            <Tab index={0}>Pagos</Tab>
+            <Tab index={1}>Desembolsos</Tab>
+          </TabsList>
+          <TabPanel index={0}>
             <CreatePaymentForm
               project={project}
               initialValues={{ loanId, amount }}
             />
-          </Tab>
-          <Tab eventKey="disburse" title="Desembolsos">
+          </TabPanel>
+          <TabPanel index={1}>
             <CreateDisbursementForm initialValues={{ loanId, amount }} />
-          </Tab>
+          </TabPanel>
         </TabsRouter>
       </ProtectedComponent>
     </PageRouterLayout>

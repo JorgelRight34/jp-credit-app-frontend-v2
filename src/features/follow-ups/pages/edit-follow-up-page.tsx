@@ -2,7 +2,9 @@ import {
   buildPageLayoutConfirmationModalOption,
   EditFormPageLayout,
   Tab,
-  TabList,
+  TabPanel,
+  Tabs,
+  TabsList,
 } from '@/components'
 import { FollowUp } from '../models/followUp'
 import { followUpPermissionProvider } from '../lib/config/permission-provider'
@@ -30,10 +32,14 @@ const EditFollowUpPage = ({ followUp }: { followUp: FollowUp }) => {
       permissionProvider={followUpPermissionProvider}
       breadcrumbs={[followUpBreadcrumb, buildFollowUpBreadcrumb(followUp)]}
     >
-      <TabList>
-        <Tab title="Formulario" isActive />
-      </TabList>
-      <FollowUpForm followUp={followUp} />
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Formulario</Tab>
+        </TabsList>
+        <TabPanel index={0}>
+          <FollowUpForm followUp={followUp} />
+        </TabPanel>
+      </Tabs>
     </EditFormPageLayout>
   )
 }

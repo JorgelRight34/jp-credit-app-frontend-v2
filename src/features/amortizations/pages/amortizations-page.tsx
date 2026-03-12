@@ -1,34 +1,35 @@
 import {
-  BreadcrumbsByRoute,
+  BreadcrumbSpec,
   CalculateIcon,
-  LoanIcon,
-  PageRouterLayout,
+  PageLayout,
+  PageLayoutBreadcrumb,
   Tab,
-  TabsRouter,
+  TabPanel,
+  Tabs,
+  TabsList,
 } from '@/components'
 import AmortizationDataTable from '../components/amortization-datatable'
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  calculator: [{ title: 'Calculadora', icon: CalculateIcon }],
-  loan: [{ title: 'Préstamos', icon: LoanIcon }],
-}
+const breadcrumbs: Array<BreadcrumbSpec> = [
+  { title: 'Amortizaciones', icon: CalculateIcon },
+  { title: 'Calculadora', icon: CalculateIcon },
+]
 
 const AmortizationsPage = () => {
   return (
-    <PageRouterLayout
+    <PageLayout
       title="Amortizaciones"
-      routerConfig={{
-        defaultActive: 'calculator',
-        baseBreadcrumbs: [{ title: 'Amortizaciones', icon: CalculateIcon }],
-        breadcrumbsByRoute,
-      }}
+      breadcrumb={<PageLayoutBreadcrumb breadcrumbs={breadcrumbs} />}
     >
-      <TabsRouter>
-        <Tab eventKey="calculator" title="Calculadora">
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Calculadora</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <AmortizationDataTable />
-        </Tab>
-      </TabsRouter>
-    </PageRouterLayout>
+        </TabPanel>
+      </Tabs>
+    </PageLayout>
   )
 }
 

@@ -6,6 +6,8 @@ import {
   FolderOpenIcon,
   PageRouterLayout,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import ProjectDataTable from '../components/project-datatable'
@@ -17,9 +19,9 @@ export const projectsBreadcrumb: BreadcrumbSpec = {
   pathname: '/projects',
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: [{ title: 'Todos', icon: AllIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Todos', icon: AllIcon }],
+]
 
 const ProjectsPage = ({ projectId }: { projectId?: Project['id'] }) => {
   return (
@@ -28,14 +30,16 @@ const ProjectsPage = ({ projectId }: { projectId?: Project['id'] }) => {
       options={[buildPageLayoutCreateOption('/projects/create')]}
       routerConfig={{
         baseBreadcrumbs: [projectsBreadcrumb],
-        defaultActive: 'all',
         breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="all" title="Todos">
+        <TabsList>
+          <Tab index={0}>Todos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <ProjectDataTable initialQuery={{ projectId }} />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

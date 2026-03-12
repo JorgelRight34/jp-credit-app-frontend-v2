@@ -7,7 +7,9 @@ import {
   FormMasterDetailLayout,
   FormWatch,
   Tab,
+  TabPanel,
   Tabs,
+  TabsList,
 } from '@/components'
 import { useReportForm } from '../hooks/useReportForm'
 import { Report } from '../models/report'
@@ -34,7 +36,12 @@ const CreateReportForm = (props: CreateReportFormProps) => {
   return (
     <FormContainer form={form}>
       <Tabs>
-        <Tab eventKey="form" title="Datos">
+        <TabsList>
+          <Tab index={0}>Datos</Tab>
+          <Tab index={1}>Archivos</Tab>
+          <Tab index={2}>Formatos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <FormMasterDetailLayout>
             <FormMasterDetailLayout.Master>
               <Form form={form}>
@@ -51,17 +58,17 @@ const CreateReportForm = (props: CreateReportFormProps) => {
               />
             </FormMasterDetailLayout.Detail>
           </FormMasterDetailLayout>
-        </Tab>
-        <Tab eventKey="files" title="Archivos">
+        </TabPanel>
+        <TabPanel index={1}>
           <FileAttachmentsForm
             ref={fileAttachmentsForm.formRef}
             form={fileAttachmentsForm.form}
             render={FileAttachmentsPanel}
           />
-        </Tab>
-        <Tab eventKey="formatters" title="Formatos">
+        </TabPanel>
+        <TabPanel index={2}>
           <FormattersDefinitionPanel />
-        </Tab>
+        </TabPanel>
       </Tabs>
     </FormContainer>
   )

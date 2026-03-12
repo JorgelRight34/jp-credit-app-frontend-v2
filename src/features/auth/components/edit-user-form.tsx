@@ -4,7 +4,15 @@ import UserRolesFormPanel from './user-roles-form-panel'
 import type { User } from '../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
-import { Form, FormContainer, FormInput, Tab, Tabs } from '@/components'
+import {
+  Form,
+  FormContainer,
+  FormInput,
+  Tab,
+  TabPanel,
+  Tabs,
+  TabsList,
+} from '@/components'
 import UserDataFormPanel from './user-data-form-panel'
 import { claimPairToString } from '../lib/utils'
 import { updateUserClaims } from '../services/userClient'
@@ -32,18 +40,23 @@ const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
   })
 
   return (
-    <Tabs defaultActiveKey="data" navigate={false}>
-      <Tab eventKey="data" title="Datos">
+    <Tabs>
+      <TabsList>
+        <Tab index={0} title="Datos" />
+        <Tab index={1} title="Permisos" />
+        <Tab index={2} title="Roles" />
+      </TabsList>
+      <TabPanel index={0}>
         <FormContainer form={form}>
           <UserDataFormPanel form={form} />
         </FormContainer>
-      </Tab>
-      <Tab eventKey="permissions" title="Permisos">
+      </TabPanel>
+      <TabPanel index={1}>
         <PermissionsForm user={user} />
-      </Tab>
-      <Tab eventKey="roles" title="Roles">
+      </TabPanel>
+      <TabPanel index={2}>
         <UserRolesForm user={user} />
-      </Tab>
+      </TabPanel>
     </Tabs>
   )
 }

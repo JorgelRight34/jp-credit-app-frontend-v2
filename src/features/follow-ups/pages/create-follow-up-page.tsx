@@ -1,4 +1,10 @@
-import { CreateFormPageLayout, Tab, TabList } from '@/components'
+import {
+  CreateFormPageLayout,
+  Tab,
+  TabPanel,
+  Tabs,
+  TabsList,
+} from '@/components'
 import { followUpPermissionProvider } from '../lib/config/permission-provider'
 import FollowUpForm from '../components/follow-up-form'
 import { followUpBreadcrumb } from './follow-up-page'
@@ -10,10 +16,14 @@ const CreateFollowUpPage = () => {
       permissionProvider={followUpPermissionProvider}
       breadcrumbs={[followUpBreadcrumb]}
     >
-      <TabList>
-        <Tab title="Formulario" isActive />
-      </TabList>
-      <FollowUpForm />
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Formulario</Tab>
+        </TabsList>
+        <TabPanel index={0}>
+          <FollowUpForm />
+        </TabPanel>
+      </Tabs>
     </CreateFormPageLayout>
   )
 }

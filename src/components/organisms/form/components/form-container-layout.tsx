@@ -5,7 +5,7 @@ type FormLayoutProps = PropsWithChildren & {
   className?: string
   errors?: ReactNode
   footer?: ReactNode
-  onSubmit: () => void
+  onSubmit?: () => void
 }
 
 const FormLayout = ({

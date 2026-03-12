@@ -7,8 +7,9 @@ import {
   PrintIcon,
   ReportIcon,
   Tab,
-  TabList,
-  TabsPanelContainer,
+  TabPanel,
+  Tabs,
+  TabsList,
 } from '@/components'
 import ReportDataTable from '../components/report-datatable'
 
@@ -33,12 +34,14 @@ const ReportsPage = () => {
       ]}
       breadcrumb={<PageLayoutBreadcrumb breadcrumbs={[reportsBreadcrumb]} />}
     >
-      <TabList>
-        <Tab title="Todos" isActive />
-      </TabList>
-      <TabsPanelContainer>
-        <ReportDataTable />
-      </TabsPanelContainer>
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Todos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
+          <ReportDataTable />
+        </TabPanel>
+      </Tabs>
     </PageLayout>
   )
 }

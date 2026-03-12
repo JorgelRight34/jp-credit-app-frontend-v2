@@ -1,78 +1,25 @@
-import { Tabs as RTabs, TabPanel } from 'react-tabs'
 import clsx from 'clsx'
-import { useTabs } from '../hooks/useTabs'
-import Tab from './tab'
-import type { UseTabsProps } from '../hooks/useTabs'
 import type { ReactNode } from 'react'
-import 'react-tabs/style/react-tabs.css'
-import { type VariationKey } from '../lib/variations'
-import TabList from './tab-list'
-import TabsPanelContainer from './tabs-panel-container'
+import { TabsProvider } from '../providers/tabs-provider'
 
-export interface TabsProps extends UseTabsProps {
+export interface TabsProps {
   children: ReactNode
-  tabListClassName?: string
-  tabClassName?: string
-  tabPanelClassName?: string
   className?: string
-  variation?: VariationKey
-  tabPanelContainerClassName?: string
-  navigate?: boolean
+  defaultActiveIndex?: number
+  onSelect?: (val: number) => void
 }
 
 const Tabs = ({
   className,
-  tabListClassName,
-  tabClassName,
-  tabPanelClassName,
-  tabPanelContainerClassName,
-  variation = 'default',
+  defaultActiveIndex = 0,
   children,
-  ...props
+  onSelect,
 }: TabsProps) => {
-  const { activeIndex, tabsArray, renderedTabs, isPending, handleOnSelect } =
-    useTabs({
-      children,
-      ...props,
-    })
-
   return (
     <div className={clsx('h-full', className)}>
-      <RTabs
-        selectedIndex={activeIndex}
-        onSelect={(tab) => {
-          handleOnSelect(tab)
-        }}
-        selectedTabClassName="text-accent"
-        className="react-tabs flex h-full flex-col"
-      >
-        <TabList variation={variation} className={tabListClassName}>
-          {tabsArray.map((tab, index) => (
-            <Tab
-              variation={variation}
-              className={tabClassName}
-              {...tab.props}
-              isActive={index === activeIndex}
-              key={index}
-            >
-              {tab.props.title}
-            </Tab>
-          ))}
-        </TabList>
-        <TabsPanelContainer className={tabPanelClassName}>
-          {tabsArray.map((tab, index) => (
-            <TabPanel
-              className={`react-tabs__tab-panel h-full`}
-              key={index}
-              forceRender={renderedTabs[index]}
-            >
-              <div className={clsx('fade-in h-full flex-1', tabPanelClassName)}>
-                {activeIndex === index && isPending ? null : tab.props.children}
-              </div>
-            </TabPanel>
-          ))}
-        </TabsPanelContainer>
-      </RTabs>
+      <TabsProvider defaultActiveKey={defaultActiveIndex} onSelect={onSelect}>
+        {children}
+      </TabsProvider>
     </div>
   )
 }

@@ -7,6 +7,8 @@ import {
   SellIcon,
   settingsBreadcrumb,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import { Collateral } from '../models/collateral'
@@ -18,17 +20,16 @@ import {
   collateralsBreadcrumb,
 } from './collateral-page'
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  liquidate: [{ title: 'Liquidar', icon: PriceCheckIcon }],
-  sell: [{ title: 'Vender', icon: SellIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Liquidar', icon: PriceCheckIcon }],
+  [{ title: 'Vender', icon: SellIcon }],
+]
 
 const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
   return (
     <PageRouterLayout
-      title={`${collateral.title}`}
+      title={collateral.title}
       routerConfig={{
-        defaultActive: 'liquidate',
         baseBreadcrumbs: [
           collateralsBreadcrumb,
           buildCollateralBreadcrumb(collateral),
@@ -42,20 +43,24 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
         isAuthorizedFn={(p) => p.canEdit}
       >
         <TabsRouter>
-          <Tab eventKey="liquidate" title="Liquidar">
+          <TabsList>
+            <Tab index={0}>Liquidar</Tab>
+            <Tab index={1}>Vender</Tab>
+          </TabsList>
+          <TabPanel index={0}>
             {collateral.liquidationDate ? (
               <ClosedProcessPanel />
             ) : (
               <CollateralLiquidateForm collateral={collateral} />
             )}
-          </Tab>
-          <Tab eventKey="sell" title="Vender">
+          </TabPanel>
+          <TabPanel index={1}>
             {collateral.sellDate ? (
               <ClosedProcessPanel />
             ) : (
               <CollateralSellForm collateral={collateral} />
             )}
-          </Tab>
+          </TabPanel>
         </TabsRouter>
       </ProtectedComponent>
     </PageRouterLayout>

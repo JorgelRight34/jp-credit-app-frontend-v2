@@ -10,6 +10,8 @@ import {
   PageRouterLayout,
   PersonIcon,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 
@@ -19,10 +21,10 @@ export const accessControlBreadcrumb: BreadcrumbSpec = {
   pathname: '/access-control',
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  users: [{ icon: PersonIcon, title: 'Usuarios' }],
-  roles: [{ icon: AdminPanelSettingsIcon, title: 'Roles' }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ icon: PersonIcon, title: 'Usuarios' }],
+  [{ icon: AdminPanelSettingsIcon, title: 'Roles' }],
+]
 
 const AccessControlPage = () => {
   return (
@@ -38,18 +40,25 @@ const AccessControlPage = () => {
         buildPageLayoutCreateOption('/access-control/users/create'),
       ]}
       routerConfig={{
-        defaultActive: 'users',
         breadcrumbsByRoute,
         baseBreadcrumbs: [accessControlBreadcrumb],
       }}
     >
       <TabsRouter>
-        <Tab eventKey="users" title="Usuarios">
+        <TabsList>
+          <Tab index={0} eventKey="users">
+            Usuarios
+          </Tab>
+          <Tab index={1} eventKey="roles">
+            Roles
+          </Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <UsersDataTable />
-        </Tab>
-        <Tab eventKey="roles" title="Roles">
+        </TabPanel>
+        <TabPanel index={1}>
           <RolesDataTable />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

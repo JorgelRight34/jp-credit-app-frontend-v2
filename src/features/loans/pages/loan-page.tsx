@@ -11,6 +11,8 @@ import {
   TabsRouter,
   BreadcrumbSpec,
   LoanIcon,
+  TabsList,
+  TabPanel,
 } from '@/components'
 import { Loan } from '../models/loan'
 import LoanOverview from '../components/loan-overview'
@@ -30,22 +32,29 @@ export const buildLoanBreadcrumb = (loan: Loan): BreadcrumbSpec => ({
   params: { id: loan.id.toString() },
 })
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: [overviewBreadcrumb],
-  amortization: [{ title: 'Amortización', icon: CalendarMonthIcon }],
-  transactions: [{ title: 'Transacciones', icon: CreditCardIcon }],
-  adjustmentNotes: [{ title: 'Notas', icon: CreditCardIcon }],
-  collaterals: [{ title: 'Garantías', icon: CollateralIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [overviewBreadcrumb],
+  [{ title: 'Amortización', icon: CalendarMonthIcon }],
+  [{ title: 'Transacciones', icon: CreditCardIcon }],
+  [{ title: 'Notas', icon: CreditCardIcon }],
+  [{ title: 'Garantías', icon: CollateralIcon }],
+]
 
 const LoanPage = ({ loan }: { loan: Loan }) => {
   return (
     <LoanPageRouterLayout loan={loan}>
       <TabsRouter>
-        <Tab eventKey="overview" title="Resumen">
+        <TabsList>
+          <Tab index={0}>Resumen</Tab>
+          <Tab index={1}>Amortización</Tab>
+          <Tab index={2}>Transacciones</Tab>
+          <Tab index={3}>Notas</Tab>
+          <Tab index={4}>Garantías</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <LoanOverview loan={loan} />
-        </Tab>
-        <Tab eventKey="amortization" title="Amortización">
+        </TabPanel>
+        <TabPanel index={1}>
           <LoanAmortizationPreview
             calculationInput={{
               principalBalance: loan.approvedAmount,
@@ -55,17 +64,17 @@ const LoanPage = ({ loan }: { loan: Loan }) => {
             }}
             startDate={loan.startDate}
           />
-        </Tab>
-        <Tab eventKey="transactions" title="Transacciones"></Tab>
-        <Tab eventKey="adjustmentNotes" title="Ajustes"></Tab>
-        <Tab eventKey="collaterals" title="Garantías">
+        </TabPanel>
+        <TabPanel index={2}></TabPanel>
+        <TabPanel index={3}></TabPanel>
+        <TabPanel index={4}>
           <DataTable
             query={{ loanId: loan.id }}
             initialState={{ columnVisibility: { loanId: false } }}
             cacheKey={[loansQueryKey, 'collaterals', loan.id]}
             {...collateralDataTableConfig}
           />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </LoanPageRouterLayout>
   )
@@ -104,7 +113,6 @@ const LoanPageRouterLayout = ({
         }),
       ]}
       routerConfig={{
-        defaultActive: 'overview',
         baseBreadcrumbs: [loanModuleBreadcrumb, buildLoanBreadcrumb(loan)],
         breadcrumbsByRoute,
       }}

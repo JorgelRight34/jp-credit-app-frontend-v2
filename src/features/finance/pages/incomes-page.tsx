@@ -1,4 +1,10 @@
-import { PageRouterLayout, Tab, TabsRouter } from '@/components'
+import {
+  PageRouterLayout,
+  Tab,
+  TabPanel,
+  TabsList,
+  TabsRouter,
+} from '@/components'
 import IncomesDataTable from '../components/incomes-datatable'
 import IncomesDataChart from '../components/incomes-datachart'
 import {
@@ -11,18 +17,21 @@ const IncomesPage = () => {
     <PageRouterLayout
       title="Ingresos"
       routerConfig={{
-        defaultActive: 'table',
         baseBreadcrumbs: [financeBreadcrumb],
         breadcrumbsByRoute: financeSectionBreadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="table" title="Tabla">
+        <TabsList>
+          <Tab index={0}>Tabla</Tab>
+          <Tab index={1}>Gráfica</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <IncomesDataTable />
-        </Tab>
-        <Tab eventKey="chart" title="Gráfica">
+        </TabPanel>
+        <TabPanel index={1}>
           <IncomesDataChart />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

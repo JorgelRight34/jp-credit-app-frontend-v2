@@ -8,7 +8,9 @@ import {
   FileAttachmentsFormContainer,
   FormContainer,
   Tab,
+  TabPanel,
   Tabs,
+  TabsList,
 } from '@/components'
 import { FileAttachmentsPanel } from '@/components/organisms/file-attachments-panel'
 
@@ -37,15 +39,19 @@ const EditProfileForm = ({ profile, ...props }: EditProfileFormProps) => {
   })
 
   return (
-    <Tabs defaultActiveKey="profile">
-      <Tab eventKey="profile" title="Pérfil">
+    <Tabs>
+      <TabsList>
+        <Tab index={0}>Pérfil</Tab>
+        <Tab index={1}>Archivos</Tab>
+      </TabsList>
+      <TabPanel index={0}>
         <FormContainer form={form}>
           <ProfileDataForm form={form} />
         </FormContainer>
-      </Tab>
-      <Tab eventKey="files" title="Archivos">
+      </TabPanel>
+      <TabPanel index={1}>
         <ProfileEditFileAttachmentsForm profile={profile} />
-      </Tab>
+      </TabPanel>
     </Tabs>
   )
 }

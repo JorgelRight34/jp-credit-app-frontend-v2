@@ -1,7 +1,7 @@
 import {
   useSetActiveTabRoute,
   useUnreactiveActiveTabRoute,
-} from '../contexts/tabs-router-context'
+} from '../providers/tabs-router-provider'
 import Tabs from './tabs'
 import type { TabsProps } from './tabs'
 
@@ -12,7 +12,7 @@ const TabsRouter = ({ children }: TabsRouterProps) => {
   const setActiveRoute = useSetActiveTabRoute()
 
   return (
-    <Tabs defaultActiveKey={defaultActiveKey} onSelect={setActiveRoute}>
+    <Tabs defaultActiveIndex={defaultActiveKey} onSelect={setActiveRoute}>
       {children}
     </Tabs>
   )

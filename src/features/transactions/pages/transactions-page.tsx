@@ -8,6 +8,8 @@ import {
   PaymentIcon,
   ScheduleIcon,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
   TransactionIcon,
 } from '@/components'
@@ -29,12 +31,12 @@ export const disbursementsBreadcrumb: BreadcrumbSpec = {
   icon: DisbursementIcon,
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: [{ title: 'Todos', icon: AllIcon }],
-  payments: [paymentsBreadcrumb],
-  disbursements: [disbursementsBreadcrumb],
-  overdue: [{ title: 'Atrasados', icon: ScheduleIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Todos', icon: AllIcon }],
+  [paymentsBreadcrumb],
+  [disbursementsBreadcrumb],
+  [{ title: 'Atrasados', icon: ScheduleIcon }],
+]
 
 const TransactionsPage = () => {
   return (
@@ -42,24 +44,29 @@ const TransactionsPage = () => {
       title="Transacciones"
       options={[buildPageLayoutCreateOption('/transactions/create')]}
       routerConfig={{
-        defaultActive: 'all',
         baseBreadcrumbs: [transactionBreadcrumb],
         breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="all" title="Todos">
+        <TabsList>
+          <Tab index={0}>Todos</Tab>
+          <Tab index={1}>Pagos</Tab>
+          <Tab index={2}>Desembolsos</Tab>
+          <Tab index={3}>Atrasados</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <TransactionDataTable />
-        </Tab>
-        <Tab eventKey="payments" title="Pagos">
+        </TabPanel>
+        <TabPanel index={2}>
           <TransactionDataTable initialQuery={{ type: 'pc' }} />
-        </Tab>
-        <Tab eventKey="disbursements" title="Desembolsos">
+        </TabPanel>
+        <TabPanel index={3}>
           <TransactionDataTable initialQuery={{ type: 'ds' }} />
-        </Tab>
-        <Tab eventKey="overdue" title="Atrasados">
+        </TabPanel>
+        <TabPanel index={4}>
           <TransactionDataTable initialQuery={{ isOverdue: true }} />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

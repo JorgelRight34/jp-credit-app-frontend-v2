@@ -13,6 +13,8 @@ import {
   PersonIcon,
   Tab,
   TableBuilder,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import { overviewBreadcrumb } from '@/lib/constants'
@@ -32,11 +34,11 @@ export const usersModuleBreadcrumb: BreadcrumbSpec = {
   search: { tab: 'users' },
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: [overviewBreadcrumb],
-  permissions: [{ title: 'Permisos', icon: PermissionIcon }],
-  roles: [{ title: 'Roles', icon: GroupsIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [overviewBreadcrumb],
+  [{ title: 'Permisos', icon: PermissionIcon }],
+  [{ title: 'Roles', icon: GroupsIcon }],
+]
 
 const UserPage = ({
   user,
@@ -54,7 +56,6 @@ const UserPage = ({
         }),
       ]}
       routerConfig={{
-        defaultActive: 'overview',
         baseBreadcrumbs: [
           accessControlBreadcrumb,
           usersModuleBreadcrumb,
@@ -64,25 +65,28 @@ const UserPage = ({
       }}
     >
       <TabsRouter>
-        <Tab eventKey="overview" title="Resumen">
+        <TabsList>
+          <Tab index={0}>Resumen</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <UserOverview user={user} />
-        </Tab>
-        <Tab eventKey="permissions" title="Permisos">
+        </TabPanel>
+        <TabPanel index={1}>
           <section>
             <TableBuilder
               columns={claimsTableColumns}
               data={userPermissions.claims}
             />
           </section>
-        </Tab>
-        <Tab eventKey="roles" title="Roles">
+        </TabPanel>
+        <TabPanel index={2}>
           <section>
             <TableBuilder
               columns={userRolesTableColumns}
               data={userPermissions.roles}
             />
           </section>
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

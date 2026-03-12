@@ -4,9 +4,7 @@ import {
   MediumTitle,
   Paragraph,
   useFormConfirmationFlowActiveStep,
-  useFormConfirmationFlowData,
 } from '@/components'
-import { useDataClient } from '@/hooks/useDataClient'
 import { ReactNode, useEffect, useState } from 'react'
 
 interface PaymentReceiptStepProps {
@@ -27,9 +25,6 @@ const PaymentReceiptStep = (props: PaymentReceiptStepProps) => {
 }
 
 const PaymentReceiptStepInner = ({ successText }: PaymentReceiptStepProps) => {
-  const dataClient = useDataClient()
-  const [body] = useFormConfirmationFlowData()
-
   return (
     <div className="flex flex-col justify-center py-3">
       <Paragraph>

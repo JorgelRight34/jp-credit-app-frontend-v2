@@ -9,18 +9,20 @@ import {
   InventoryIcon,
   PageRouterLayout,
   Tab,
+  TabPanel,
+  TableRowsIcon,
   TabsRouter,
   buildPageLayoutCreateOption,
 } from '@/components'
 import { collateralsBreadcrumb } from './collateral-page'
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: [{ title: 'Todos', icon: () => <AllIcon /> }],
-  inventory: [{ title: 'Inventario', icon: () => <InventoryIcon /> }],
-  vehicles: [{ title: 'Vehículos', icon: () => <DirectionsCarIcon /> }],
-  mortgage: [{ title: 'Hipotecas', icon: () => <ApartmentIcon /> }],
-  agriculturalLoan: [{ title: 'Agrícola', icon: () => <GrassIcon /> }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Todos', icon: AllIcon }],
+  [{ title: 'Inventario', icon: InventoryIcon }],
+  [{ title: 'Vehículos', icon: DirectionsCarIcon }],
+  [{ title: 'Hipotecas', icon: ApartmentIcon }],
+  [{ title: 'Agrícola', icon: GrassIcon }],
+]
 
 const CollateralsPage = () => {
   return (
@@ -28,39 +30,45 @@ const CollateralsPage = () => {
       title="Garantías"
       options={[buildPageLayoutCreateOption('/collaterals/create')]}
       routerConfig={{
-        defaultActive: 'all',
         baseBreadcrumbs: [collateralsBreadcrumb],
         breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="all" title="Todos">
+        <TableRowsIcon>
+          <Tab index={0}>Todos</Tab>
+          <Tab index={1}>Vehículos</Tab>
+          <Tab index={2}>Hipotecas</Tab>
+          <Tab index={3}>Agrícola</Tab>
+          <Tab index={4}>Inventario</Tab>
+        </TableRowsIcon>
+        <TabPanel index={0}>
           <CollateralDataTable />
-        </Tab>
-        <Tab eventKey="vehicles" title="Vehículos">
+        </TabPanel>
+        <TabPanel index={1}>
           <CollateralDataTable
             initialQuery={{ type: collateralTypeMap.carLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
-        </Tab>
-        <Tab eventKey="mortgage" title="Hipotecas">
+        </TabPanel>
+        <TabPanel index={2}>
           <CollateralDataTable
             initialQuery={{ type: collateralTypeMap.agriculturalLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
-        </Tab>
-        <Tab eventKey="agriculturalLoan" title="Agrícola">
+        </TabPanel>
+        <TabPanel index={3}>
           <CollateralDataTable
             initialQuery={{ type: collateralTypeMap.agriculturalLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
-        </Tab>
-        <Tab eventKey="inventory" title="Inventario">
+        </TabPanel>
+        <TabPanel index={4}>
           <CollateralDataTable
             initialQuery={{ isActive: false }}
             initialState={{ columnVisibility: { type: false } }}
           />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

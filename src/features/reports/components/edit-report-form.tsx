@@ -7,7 +7,9 @@ import {
   FormMasterDetailLayout,
   FormWatch,
   Tab,
+  TabPanel,
   Tabs,
+  TabsList,
 } from '@/components'
 import { useReportForm } from '../hooks/useReportForm'
 import { Report } from '../models/report'
@@ -29,7 +31,6 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
     initialValues: {
       title: report.title,
       description: report.description,
-      bookmark: report.bookmark,
       key: report.key,
     },
     shouldEdit: true,
@@ -37,7 +38,11 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
 
   return (
     <Tabs>
-      <Tab eventKey="form" title="Datos">
+      <TabsList>
+        <Tab index={0}>Datos</Tab>
+        <Tab index={1}>Archivos</Tab>
+      </TabsList>
+      <TabPanel index={0}>
         <FormMasterDetailLayout>
           <FormMasterDetailLayout.Master>
             <FormContainer form={form}>
@@ -56,10 +61,10 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
             />
           </FormMasterDetailLayout.Detail>
         </FormMasterDetailLayout>
-      </Tab>
-      <Tab eventKey="files" title="Archivos">
+      </TabPanel>
+      <TabPanel index={1}>
         <EditReportFormFiles report={report} />
-      </Tab>
+      </TabPanel>
     </Tabs>
   )
 }

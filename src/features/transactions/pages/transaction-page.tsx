@@ -6,6 +6,8 @@ import {
   CheckCircleIcon,
   PageRouterLayout,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
   TransactionIcon,
 } from '@/components'
@@ -25,17 +27,16 @@ export const buildTransactionBreadcrumb = (
   params: { id: transaction.id.toString() },
 })
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: [overviewBreadcrumb],
-  receipt: [{ title: 'Comprobante', icon: CheckCircleIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [overviewBreadcrumb],
+  [{ title: 'Comprobante', icon: CheckCircleIcon }],
+]
 
 const TransactionPage = ({ transaction }: { transaction: Transaction }) => {
   return (
     <PageRouterLayout
       title={buildTransactionLabel(transaction)}
       routerConfig={{
-        defaultActive: 'overview',
         baseBreadcrumbs: [
           transactionBreadcrumb,
           buildTransactionBreadcrumb(transaction),
@@ -62,10 +63,14 @@ const TransactionPage = ({ transaction }: { transaction: Transaction }) => {
       ]}
     >
       <TabsRouter>
-        <Tab eventKey="overview" title="Resumen">
+        <TabsList>
+          <Tab index={0}>Resumen</Tab>
+          <Tab index={1}>Comprobante</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <TransactionOverview transaction={transaction} />
-        </Tab>
-        <Tab eventKey="receipt" title="Comprobante"></Tab>
+        </TabPanel>
+        <TabPanel index={1}>not implemented</TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

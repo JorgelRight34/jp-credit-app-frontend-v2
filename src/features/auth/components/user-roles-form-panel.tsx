@@ -26,6 +26,7 @@ const UserRolesFormPanel = ({ form, ref }: UserRolesFormPanelProps) => {
       })),
     [data],
   )
+
   return (
     <Form ref={ref} form={form}>
       <FormInput

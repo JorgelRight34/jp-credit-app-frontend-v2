@@ -4,15 +4,7 @@ import type { CacheKey } from "@/models";
 import { useDataClient } from "@/hooks/useDataClient";
 import { useDataMutation } from "@/hooks/useMutate";
 import { toastService } from "@/components/molecules";
-import { useFormMethods } from "./useFormMethods";
-
-export type DefaultFormValues<TData> = Partial<{
-    [K in keyof TData]:
-    | TData[K]
-    | ''
-    | null
-    | TData[K]
-}>
+import { DefaultFormValues, useFormMethods } from "./useFormMethods";
 
 export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
     schema?: SchemaType<TData>;

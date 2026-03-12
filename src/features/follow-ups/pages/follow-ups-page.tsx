@@ -4,7 +4,9 @@ import {
   PageLayout,
   PageLayoutBreadcrumb,
   Tab,
-  TabList,
+  TabPanel,
+  Tabs,
+  TabsList,
 } from '@/components'
 import FollowUpDataTable from '../components/follow-up-datatable'
 import { followUpBreadcrumb } from './follow-up-page'
@@ -20,10 +22,14 @@ const FollowUpsPage = () => {
         />
       }
     >
-      <TabList>
-        <Tab title="Todos" isActive />
-      </TabList>
-      <FollowUpDataTable />
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Todos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
+          <FollowUpDataTable />
+        </TabPanel>
+      </Tabs>
     </PageLayout>
   )
 }

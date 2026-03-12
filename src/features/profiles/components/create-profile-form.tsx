@@ -4,7 +4,14 @@ import ProfileDataForm from './profile-data-form'
 import type { DataModuleFormProps } from '@/components'
 import type { Profile } from '../models/profile'
 import type { ProfileFormValues } from '../lib/schemas/profileFormSchema'
-import { FileAttachmentsForm, FormContainer, Tab, Tabs } from '@/components'
+import {
+  FileAttachmentsForm,
+  FormContainer,
+  Tab,
+  TabPanel,
+  Tabs,
+  TabsList,
+} from '@/components'
 import { FileAttachmentsPanel } from '@/components/organisms/file-attachments-panel'
 
 type CreateProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues>
@@ -12,7 +19,6 @@ type CreateProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues>
 const CreateProfileForm = (props: CreateProfileFormProps) => {
   const fileAttachmentsForm = useProfileFileAttachmentsForm({})
   const form = useProfileForm({
-    onSuccess: fileAttachmentsForm.submit,
     initialValues: {
       firstName: '',
       lastName: '',
@@ -26,22 +32,27 @@ const CreateProfileForm = (props: CreateProfileFormProps) => {
       officePhone: '',
       phoneNumber: '',
     },
+    onSuccess: fileAttachmentsForm.submit,
     ...props,
   })
 
   return (
     <FormContainer form={form}>
-      <Tabs defaultActiveKey="profile">
-        <Tab eventKey="profile" title="Pérfil">
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Pérfil</Tab>
+          <Tab index={1}>Archivos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <ProfileDataForm form={form} />
-        </Tab>
-        <Tab eventKey="files" title="Archivos">
+        </TabPanel>
+        <TabPanel index={1}>
           <FileAttachmentsForm
             ref={fileAttachmentsForm.formRef}
             form={fileAttachmentsForm.form}
             render={FileAttachmentsPanel}
           />
-        </Tab>
+        </TabPanel>
       </Tabs>
     </FormContainer>
   )

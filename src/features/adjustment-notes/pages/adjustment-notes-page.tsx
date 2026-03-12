@@ -8,6 +8,8 @@ import {
   DebitIcon,
   PageRouterLayout,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import AdjustmentNoteDataTable from '../components/adjusment-note-datatable'
@@ -18,11 +20,11 @@ export const adjustmentNotesBreadcrumb: BreadcrumbSpec = {
   icon: AdjustmentNoteIcon,
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: [{ title: 'Todos', icon: AllIcon }],
-  nc: [{ title: 'Crédito', icon: CreditIcon }],
-  nd: [{ title: 'Débito', icon: DebitIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Todos', icon: AllIcon }],
+  [{ title: 'Crédito', icon: CreditIcon }],
+  [{ title: 'Débito', icon: DebitIcon }],
+]
 
 const AdjustmentNotesPage = () => {
   return (
@@ -30,21 +32,25 @@ const AdjustmentNotesPage = () => {
       title="Notas de ajuste"
       options={[buildPageLayoutCreateOption('/adjustment-notes/create')]}
       routerConfig={{
-        defaultActive: 'nc',
         baseBreadcrumbs: [adjustmentNotesBreadcrumb],
         breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="all" title="Todos">
+        <TabsList>
+          <Tab index={0}>Todos</Tab>
+          <Tab index={1}>Crédito</Tab>
+          <Tab index={2}>Débito</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <AdjustmentNoteDataTable />
-        </Tab>
-        <Tab eventKey="nc" title="Crédito">
+        </TabPanel>
+        <TabPanel index={1}>
           <AdjustmentNoteDataTable initialQuery={{ type: 'nc' }} />
-        </Tab>
-        <Tab eventKey="nd" title="Débito">
+        </TabPanel>
+        <TabPanel index={2}>
           <AdjustmentNoteDataTable initialQuery={{ type: 'nd' }} />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

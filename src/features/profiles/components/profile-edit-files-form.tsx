@@ -18,11 +18,11 @@ const ProfileEditFilesForm = ({ profile }: ProfileEditFilesFormProps) => {
 
   return (
     <FormLayout
+      onSubmit={fileAttachmentsForm.handleSubmit}
       footer={
         <FormContainerButtons
           isDirty={isDirty}
           onReset={fileAttachmentsForm.handleReset}
-          onSubmit={fileAttachmentsForm.handleSubmit}
         />
       }
     >

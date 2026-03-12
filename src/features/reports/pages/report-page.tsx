@@ -9,6 +9,8 @@ import {
   PrintIcon,
   ReportIcon,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import { Report } from '../models/report'
@@ -22,10 +24,10 @@ export const buildReportBreadcrumb = (report: Report): BreadcrumbSpec => ({
   params: { id: report.id.toString() },
 })
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  generate: [{ icon: PrintIcon, title: 'Generar' }],
-  files: [{ icon: DownloadIcon, title: 'Archivos' }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ icon: PrintIcon, title: 'Generar' }],
+  [{ icon: DownloadIcon, title: 'Archivos' }],
+]
 
 const ReportPage = ({ report }: { report: Report }) => {
   return (
@@ -37,20 +39,23 @@ const ReportPage = ({ report }: { report: Report }) => {
         }),
       ]}
       routerConfig={{
-        defaultActive: 'generate',
         baseBreadcrumbs: [reportsBreadcrumb, buildReportBreadcrumb(report)],
         breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="generate" title="Generar">
+        <TabsList>
+          <Tab index={0}>Generar</Tab>
+          <Tab index={1}>Archivos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <SavedReportGenerationForm report={report} />
-        </Tab>
-        <Tab eventKey="files" title="Archivos">
+        </TabPanel>
+        <TabPanel index={1}>
           <section>
             <FileTable files={report.documents.map(mapApiFileToTableFile)} />
           </section>
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

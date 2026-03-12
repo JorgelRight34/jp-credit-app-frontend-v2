@@ -6,15 +6,17 @@ import {
   PageRouterLayout,
   Tab,
   TableRowsIcon,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import ProjectionsDataTable from '../components/projections-datatable'
 import ProjectionsDataChart from '../components/projections-datachart'
 
-export const financeSectionBreadcrumbsByRoute: BreadcrumbsByRoute = {
-  table: [{ title: 'Tabla', icon: TableRowsIcon }],
-  chart: [{ title: 'Grafica', icon: BarChartIcon }],
-}
+export const financeSectionBreadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Tabla', icon: TableRowsIcon }],
+  [{ title: 'Grafica', icon: BarChartIcon }],
+]
 
 export const financeBreadcrumb: BreadcrumbSpec = {
   icon: FinanceIcon,
@@ -26,18 +28,21 @@ const ProjectionsPage = () => {
     <PageRouterLayout
       title="Proyecciones"
       routerConfig={{
-        defaultActive: 'table',
         baseBreadcrumbs: [financeBreadcrumb],
         breadcrumbsByRoute: financeSectionBreadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="table" title="Tabla">
+        <TabsList>
+          <Tab index={0}>Tabla</Tab>
+          <Tab index={1}>Gráfica</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <ProjectionsDataTable />
-        </Tab>
-        <Tab eventKey="chart" title="Gráfica">
+        </TabPanel>
+        <TabPanel index={1}>
           <ProjectionsDataChart />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

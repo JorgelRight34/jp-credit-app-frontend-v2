@@ -8,6 +8,8 @@ import {
   GuarantorIcon,
   PageRouterLayout,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import {
@@ -24,44 +26,48 @@ const breadcrumb: BreadcrumbSpec = {
   icon: AccountStatementsIcon,
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: [{ title: 'Todos', icon: AllIcon }],
-  clients: [{ title: 'Clientes', icon: ClientIcon }],
-  guarantors: [{ title: 'Garantes', icon: GuarantorIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Todos', icon: AllIcon }],
+  [{ title: 'Clientes', icon: ClientIcon }],
+  [{ title: 'Garantes', icon: GuarantorIcon }],
+]
 
 const AccountStatementsPage = () => {
   return (
     <PageRouterLayout
       title="Estados de cuenta"
       routerConfig={{
-        defaultActive: 'all',
         baseBreadcrumbs: [breadcrumb],
         breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="all" title="Todos">
+        <TabsList>
+          <Tab index={0}>Todos</Tab>
+          <Tab index={1}>Clientes</Tab>
+          <Tab index={2}>Garantes</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <DataTableContainer
             searchConfig={accountStatementSearchConfig}
             datatableConfig={accountStatementDataTableConfig}
             cacheKey={[accountStatementsQueryKey]}
           />
-        </Tab>
-        <Tab eventKey="clients" title="Clientes">
+        </TabPanel>
+        <TabPanel index={1}>
           <DataTableContainer
             searchConfig={clientAccountStatementSearchConfig}
             datatableConfig={clientAccountStatementDataTableConfig}
             cacheKey={[accountStatementsQueryKey, 'clients']}
           />
-        </Tab>
-        <Tab eventKey="guarantors" title="Garantes">
+        </TabPanel>
+        <TabPanel index={2}>
           <DataTableContainer
             searchConfig={guarantorAccountStatementSearchConfig}
             datatableConfig={accountStatementDataTableConfig}
             cacheKey={[accountStatementsQueryKey, 'guarantors']}
           />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

@@ -3,7 +3,9 @@ import {
   CreateFormPageLayout,
   ScheduleIcon,
   Tab,
-  TabList,
+  TabPanel,
+  Tabs,
+  TabsList,
 } from '@/components'
 import { transactionPermissionProvider } from '../lib/config/permission-provider'
 import CreateClosedPeriodForm from '../components/create-closed-period-form'
@@ -27,10 +29,14 @@ const CreateClosedPeriodPage = ({
       breadcrumbs={[transactionBreadcrumb, closedPeriodsBreadcrumb]}
       permissionProvider={transactionPermissionProvider}
     >
-      <TabList>
-        <Tab title="Formulario" isActive />
-      </TabList>
-      <CreateClosedPeriodForm currentPeriod={currentPeriod} />
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Formulario</Tab>
+        </TabsList>
+        <TabPanel index={0}>
+          <CreateClosedPeriodForm currentPeriod={currentPeriod} />
+        </TabPanel>
+      </Tabs>
     </CreateFormPageLayout>
   )
 }

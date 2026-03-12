@@ -6,23 +6,24 @@ import {
   PageRouterLayout,
   ProtectedComponent,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import { adjustmentNotesPermissionProvider } from '../lib/config/permission-provider'
 import AdjustmentNoteForm from '../components/adjustment-note-form'
 import { adjustmentNotesBreadcrumb } from './adjustment-notes-page'
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  nc: [{ title: 'Crédito', icon: CreditIcon }, createBreadcrumb],
-  nd: [{ title: 'Débito', icon: DebitIcon }, createBreadcrumb],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Crédito', icon: CreditIcon }, createBreadcrumb],
+  [{ title: 'Débito', icon: DebitIcon }, createBreadcrumb],
+]
 
 const CreateAdjustmentNotePage = () => {
   return (
     <PageRouterLayout
       title="Crear nota de ajuste"
       routerConfig={{
-        defaultActive: 'nc',
         baseBreadcrumbs: [adjustmentNotesBreadcrumb],
         breadcrumbsByRoute,
       }}
@@ -32,12 +33,16 @@ const CreateAdjustmentNotePage = () => {
         isAuthorizedFn={(p) => p.canCreate}
       >
         <TabsRouter>
-          <Tab eventKey="nc" title="Crédito">
+          <TabsList>
+            <Tab index={0}>Crédito</Tab>
+            <Tab index={1}>Débito</Tab>
+          </TabsList>
+          <TabPanel index={0}>
             <AdjustmentNoteForm initialValues={{ type: 'nc' }} />
-          </Tab>
-          <Tab eventKey="nd" title="Débito">
+          </TabPanel>
+          <TabPanel index={1}>
             <AdjustmentNoteForm initialValues={{ type: 'nd' }} />
-          </Tab>
+          </TabPanel>
         </TabsRouter>
       </ProtectedComponent>
     </PageRouterLayout>

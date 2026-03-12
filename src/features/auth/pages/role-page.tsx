@@ -14,6 +14,8 @@ import {
   PermissionIcon,
   Tab,
   TableBuilder,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 import { claimsTableColumns } from '../lib/constants'
@@ -34,11 +36,11 @@ export const rolesModuleBreadcrumb: BreadcrumbSpec = {
   search: { tab: 'roles' },
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: [overviewBreadcrumb],
-  permissions: [{ title: 'Permisos', icon: PermissionIcon }],
-  participants: [{ title: 'Participantes', icon: GroupIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [overviewBreadcrumb],
+  [{ title: 'Permisos', icon: PermissionIcon }],
+  [{ title: 'Participantes', icon: GroupIcon }],
+]
 
 const RolePage = ({
   role,
@@ -56,7 +58,6 @@ const RolePage = ({
         }),
       ]}
       routerConfig={{
-        defaultActive: 'overview',
         baseBreadcrumbs: [
           accessControlBreadcrumb,
           rolesModuleBreadcrumb,
@@ -66,7 +67,10 @@ const RolePage = ({
       }}
     >
       <TabsRouter>
-        <Tab eventKey="overview" title="Resumen">
+        <TabsList>
+          <Tab index={0}>Resumen</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <FormRow>
             <FormReadOnlyGroup name="name" label="Nombre" value={role.name} />
           </FormRow>
@@ -87,8 +91,8 @@ const RolePage = ({
           <FormRow>
             <FormReadOnlyGroup name="id" label="Id" value={role.id} />
           </FormRow>
-        </Tab>
-        <Tab eventKey="permissions" title="Permisos">
+        </TabPanel>
+        <TabPanel index={1}>
           <Suspense fallback="...">
             <section>
               <TableBuilder
@@ -97,10 +101,10 @@ const RolePage = ({
               />
             </section>
           </Suspense>
-        </Tab>
-        <Tab eventKey="participants" title="Participantes">
+        </TabPanel>
+        <TabPanel index={2}>
           <UsersDataTable initialQuery={{ role: role.normalizedName }} />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

@@ -10,6 +10,8 @@ import {
   overviewBreadcrumb,
   PageRouterLayout,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
   UploadIcon,
 } from '@/components'
@@ -30,10 +32,10 @@ export const collateralsBreadcrumb: BreadcrumbSpec = {
   pathname: '/collaterals',
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: [overviewBreadcrumb],
-  files: [{ title: 'Archivos', icon: UploadIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [overviewBreadcrumb],
+  [{ title: 'Archivos', icon: UploadIcon }],
+]
 
 const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
   return (
@@ -48,7 +50,6 @@ const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
         }),
       ]}
       routerConfig={{
-        defaultActive: 'overview',
         baseBreadcrumbs: [
           collateralsBreadcrumb,
           buildCollateralBreadcrumb(collateral),
@@ -57,14 +58,18 @@ const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
       }}
     >
       <TabsRouter>
-        <Tab eventKey="overview" title="Resumen">
+        <TabsList>
+          <Tab index={0}>Resumen</Tab>
+          <Tab index={1}>Archivos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <CollateralOverview collateral={collateral} />
-        </Tab>
-        <Tab eventKey="files" title="Archivos">
+        </TabPanel>
+        <TabPanel index={1}>
           <section>
             <FileTable files={collateral.files.map(mapApiFileToTableFile)} />
           </section>
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

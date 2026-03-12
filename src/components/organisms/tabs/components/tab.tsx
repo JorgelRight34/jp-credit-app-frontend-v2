@@ -1,46 +1,42 @@
-import { Tab as RTab } from 'react-tabs'
 import clsx from 'clsx'
-import type { TabProps as RTabProps } from 'react-tabs'
-import type { ReactNode } from 'react'
-import type { IconName } from '@/components/atoms/icon/models/iconName'
-import { Icon } from '@/components/atoms'
+import type { PropsWithChildren } from 'react'
 import { VariationKey, variations } from '../lib/variations'
+import { useTabsActiveIndex } from '../providers/tabs-provider'
 
-export type TabProps = Omit<RTabProps, 'title'> & {
+export interface TabProps extends PropsWithChildren {
   eventKey?: string
-  title?: ReactNode
-  isActive?: boolean
-  forceRender?: boolean
+  index: number
+  className?: string
   variation?: VariationKey
-  icon?: IconName
 }
 
 const Tab = ({
   variation = 'default',
-  title,
   eventKey,
+  index,
   className,
-  isActive,
-  icon,
+  children,
   ...props
 }: TabProps) => {
+  const [activeIndex, setIndex] = useTabsActiveIndex()
+
   return (
-    <RTab
+    <li
       {...props}
       className={clsx(
         variations[variation].tab,
         'w-fit cursor-pointer focus-visible:outline-none text-secondary',
         className,
         {
-          'border-b border-secondary-color text-accent-secondary': isActive,
+          'border-b border-secondary-color text-accent-secondary':
+            index == activeIndex,
         },
       )}
+      onClick={() => setIndex(index)}
     >
-      {icon ? <Icon icon={icon}>{title}</Icon> : title}
-    </RTab>
+      {children}
+    </li>
   )
 }
-
-Object.assign(Tab, RTab)
 
 export default Tab

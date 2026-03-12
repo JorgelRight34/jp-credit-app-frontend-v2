@@ -8,13 +8,15 @@ import { usersQueryKey } from '../lib/constants'
 
 const UsersDataTable = (
   config: DataTableContainerOverrides<User, UserQuery>,
-) => (
-  <DataTableContainer
-    searchConfig={userSearchConfig}
-    datatableConfig={usersDatatableConfig}
-    cacheKey={[usersQueryKey]}
-    {...config}
-  />
-)
+) => {
+  return (
+    <DataTableContainer
+      searchConfig={userSearchConfig}
+      datatableConfig={usersDatatableConfig}
+      cacheKey={[usersQueryKey]}
+      {...config}
+    />
+  )
+}
 
 export default UsersDataTable

@@ -9,7 +9,9 @@ import {
   FormContainer,
   FormGroup,
   Tab,
+  TabPanel,
   Tabs,
+  TabsList,
 } from '@/components'
 import CollateralDataForm from './collateral-data-form'
 import { LoanSearchInput } from '@/features/loans'
@@ -38,8 +40,12 @@ const CreateCollateralForm = (props: CreateCollateralFormProps) => {
 
   return (
     <FormContainer form={form}>
-      <Tabs defaultActiveKey="data">
-        <Tab eventKey="data" title="Datos">
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Datos</Tab>
+          <Tab index={1}>Archivos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <CollateralDataForm
             loanFormGroup={
               <FormGroup
@@ -57,14 +63,14 @@ const CreateCollateralForm = (props: CreateCollateralFormProps) => {
             }
             form={form}
           />
-        </Tab>
-        <Tab eventKey="files" title="Archivos">
+        </TabPanel>
+        <TabPanel index={1}>
           <FileAttachmentsForm
             ref={fileAttachmentsForm.formRef}
             form={fileAttachmentsForm.form}
             render={FileAttachmentsPanel}
           />
-        </Tab>
+        </TabPanel>
       </Tabs>
     </FormContainer>
   )

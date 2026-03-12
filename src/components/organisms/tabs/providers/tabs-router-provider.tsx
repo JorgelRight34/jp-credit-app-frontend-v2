@@ -1,33 +1,37 @@
-import { createContext, useCallback, useContext, useState } from 'react'
+import {
+  createContext,
+  startTransition,
+  useCallback,
+  useContext,
+  useState,
+} from 'react'
 import { useSearchParams } from '@/hooks/useSearchParams'
 
-const TabsRouteValueContext = createContext<string | undefined>(undefined)
+const TabsRouteValueContext = createContext<number | undefined>(undefined)
 const TabsRouteActionsContext = createContext<
-  ((tab: string | null) => void) | undefined
+  ((tab: number) => void) | undefined
 >(undefined)
-const TabsRouteUnreactiveContext = createContext<string | undefined>(undefined)
+const TabsRouteUnreactiveContext = createContext<number | undefined>(undefined)
 
 export type TabsRouterProviderProps = {
   children: React.ReactNode
-  defaultActive: string
+  defaultActive?: number
 }
 
 export function TabsRouterProvider({
   children,
-  defaultActive,
+  defaultActive = 0,
 }: TabsRouterProviderProps) {
   const search = useSearchParams()
-  const activeRoute = search.get('tab') ?? defaultActive
-  const [defaultActiveRoute] = useState(
-    () => search.get('tab') ?? defaultActive,
-  )
+  const activeRoute = Number(search.get('tab')) ?? defaultActive
+  const [defaultActiveRoute] = useState(() => activeRoute ?? defaultActive)
 
   const setActiveRoute = useCallback(
-    (tab: string | null) => {
-      if (!tab) return
-
-      search.set('tab', tab)
-      window.history.replaceState(null, '', `?${search.toString()}`)
+    (tab: number) => {
+      startTransition(() => {
+        search.set('tab', tab.toString())
+        window.history.replaceState(null, '', `?${search.toString()}`)
+      })
     },
     [search],
   )

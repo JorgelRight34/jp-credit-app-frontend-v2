@@ -7,6 +7,8 @@ import {
   GroupsIcon,
   PageRouterLayout,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
 } from '@/components'
 
@@ -16,17 +18,17 @@ export const profilesBreadcrumb: BreadcrumbSpec = {
   pathname: '/profiles',
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: [{ title: 'Todos', icon: () => <AllIcon /> }],
-  clients: [{ title: 'Clientes', icon: () => <GroupIcon /> }],
-  guarantors: [{ title: 'Garantes', icon: () => <GroupIcon /> }],
-  'loan-officers': [
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Todos', icon: AllIcon }],
+  [{ title: 'Clientes', icon: GroupIcon }],
+  [{ title: 'Garantes', icon: GroupIcon }],
+  [
     {
       title: 'Agentes',
-      icon: () => <GroupIcon />,
+      icon: GroupIcon,
     },
   ],
-}
+]
 
 const ProfilesPage = () => {
   return (
@@ -35,23 +37,28 @@ const ProfilesPage = () => {
       options={[buildPageLayoutCreateOption('/profiles/create')]}
       routerConfig={{
         baseBreadcrumbs: [profilesBreadcrumb],
-        defaultActive: 'all',
         breadcrumbsByRoute,
       }}
     >
       <TabsRouter>
-        <Tab eventKey="all" title="Todos">
+        <TabsList>
+          <Tab index={0}>Todos</Tab>
+          <Tab index={1}>Clientes</Tab>
+          <Tab index={3}>Garantes</Tab>
+          <Tab index={4}>Asesores</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <ProfilesDataTable />
-        </Tab>
-        <Tab eventKey="clients" title="Clientes">
+        </TabPanel>
+        <TabPanel index={1}>
           <ProfilesDataTable role="client" />
-        </Tab>
-        <Tab eventKey="guarantors" title="Garantes">
+        </TabPanel>
+        <TabPanel index={2}>
           <ProfilesDataTable role="guarantor" />
-        </Tab>
-        <Tab eventKey="loan-officers" title="Asesores">
+        </TabPanel>
+        <TabPanel index={3}>
           <ProfilesDataTable role="loanOfficer" />
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

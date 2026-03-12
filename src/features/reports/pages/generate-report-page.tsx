@@ -3,7 +3,9 @@ import {
   PageLayoutBreadcrumb,
   PrintIcon,
   Tab,
+  TabPanel,
   Tabs,
+  TabsList,
 } from '@/components'
 import { reportsBreadcrumb } from './reports-page'
 import ReportGenerationForm from '../components/report-generation-form'
@@ -22,13 +24,17 @@ const GenerateReportPage = () => {
         />
       }
     >
-      <Tabs defaultActiveKey="form">
-        <Tab eventKey="form" title="Formulario">
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Formulario</Tab>
+          <Tab index={1}>Formatos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <ReportGenerationForm />
-        </Tab>
-        <Tab eventKey="formatters" title="Formatos">
+        </TabPanel>
+        <TabPanel index={1}>
           <FormattersDefinitionPanel />
-        </Tab>
+        </TabPanel>
       </Tabs>
     </PageLayout>
   )

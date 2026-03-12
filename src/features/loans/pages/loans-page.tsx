@@ -10,6 +10,8 @@ import {
   TodayIcon,
   MailIcon,
   BreadcrumbSpec,
+  TabsList,
+  TabPanel,
 } from '@/components'
 import LoanDataTable from '../components/loan-datatable'
 import { LoanStatusMap } from '../models/loanStatus'
@@ -21,19 +23,18 @@ export const loanModuleBreadcrumb: BreadcrumbSpec = {
   pathname: '/loans',
 }
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  all: [{ title: 'Todos', icon: AllIcon }],
-  inactive: [{ title: 'Inactivos', icon: RestoreIcon }],
-  active: [{ title: 'Activos', icon: TodayIcon }],
-  paidOff: [{ title: 'Saldados', icon: CheckCircleIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [{ title: 'Todos', icon: AllIcon }],
+  [{ title: 'Inactivos', icon: RestoreIcon }],
+  [{ title: 'Activos', icon: TodayIcon }],
+  [{ title: 'Saldados', icon: CheckCircleIcon }],
+]
 
 const LoansPage = () => {
   return (
     <PageRouterLayout
       title="Préstamos"
       routerConfig={{
-        defaultActive: 'all',
         baseBreadcrumbs: [loanModuleBreadcrumb],
         breadcrumbsByRoute,
       }}
@@ -41,18 +42,24 @@ const LoansPage = () => {
     >
       <ProjectSelectionGuard>
         <TabsRouter>
-          <Tab eventKey="all" title="Todos">
+          <TabsList>
+            <Tab index={0}>Todos</Tab>
+            <Tab index={1}>Activos</Tab>
+            <Tab index={2}>Inactivos</Tab>
+            <Tab index={3}>Saldados</Tab>
+          </TabsList>
+          <TabPanel index={0}>
             <LoanDataTable />
-          </Tab>
-          <Tab eventKey="active" title="Activos">
+          </TabPanel>
+          <TabPanel index={1}>
             <LoanDataTable initialQuery={{ status: LoanStatusMap.active }} />
-          </Tab>
-          <Tab eventKey="inactive" title="Inactivos">
+          </TabPanel>
+          <TabPanel index={2}>
             <LoanDataTable initialQuery={{ status: LoanStatusMap.inactive }} />
-          </Tab>
-          <Tab eventKey="paidOff" title="Saldados">
+          </TabPanel>
+          <TabPanel index={3}>
             <LoanDataTable initialQuery={{ maxPrincipalBalance: 0 }} />
-          </Tab>
+          </TabPanel>
         </TabsRouter>
       </ProjectSelectionGuard>
     </PageRouterLayout>

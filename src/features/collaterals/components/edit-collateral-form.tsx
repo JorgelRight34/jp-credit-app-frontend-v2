@@ -9,7 +9,9 @@ import {
   FormContainer,
   FormReadOnlyGroup,
   Tab,
+  TabPanel,
   Tabs,
+  TabsList,
 } from '@/components'
 import CollateralDataForm from './collateral-data-form'
 
@@ -41,8 +43,11 @@ const EditCollateralForm = ({
   })
 
   return (
-    <Tabs defaultActiveKey="data">
-      <Tab eventKey="data" title="Datos">
+    <Tabs>
+      <TabsList>
+        <Tab index={0}>Datos</Tab>
+      </TabsList>
+      <TabPanel index={0}>
         <FormContainer form={form}>
           <CollateralDataForm
             loanFormGroup={
@@ -56,10 +61,10 @@ const EditCollateralForm = ({
             form={form}
           />
         </FormContainer>
-      </Tab>
-      <Tab eventKey="files" title="Archivos">
+      </TabPanel>
+      <TabPanel index={1}>
         <EditCollateralFileAttachmentsForm collateral={collateral} />
-      </Tab>
+      </TabPanel>
     </Tabs>
   )
 }

@@ -13,7 +13,9 @@ import {
   PercentageInput,
   RichTextEditor,
   Tab,
+  TabPanel,
   Tabs,
+  TabsList,
 } from '@/components'
 import { useLoanForm } from '../hooks/useLoanForm'
 import { LoanOfficerSearchInput, ProfileSearchInput } from '@/features/profiles'
@@ -36,7 +38,11 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
   return (
     <FormContainer form={form}>
       <Tabs>
-        <Tab eventKey="data" title="Datos">
+        <TabsList>
+          <Tab index={0}>Datos</Tab>
+          <Tab index={1}>Amortización</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <Form form={form}>
             <FormMasterDetailLayout>
               <FormMasterDetailLayout.Master>
@@ -125,8 +131,8 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
               input={RichTextEditor}
             />
           </Form>
-        </Tab>
-        <Tab eventKey="amortization" title="Amortización" forceRender>
+        </TabPanel>
+        <TabPanel index={1} unmountOnExit>
           <FormWatch
             form={form}
             names={[
@@ -148,7 +154,7 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
               />
             )}
           />
-        </Tab>
+        </TabPanel>
       </Tabs>
     </FormContainer>
   )

@@ -10,6 +10,8 @@ import {
   PageRouterLayout,
   PersonIcon,
   Tab,
+  TabPanel,
+  TabsList,
   TabsRouter,
   UploadIcon,
 } from '@/components'
@@ -22,10 +24,10 @@ export const buildProfileBreadcrumb = (profile: Profile): BreadcrumbSpec => ({
   params: { id: profile.id.toString() },
 })
 
-const breadcrumbsByRoute: BreadcrumbsByRoute = {
-  overview: [overviewBreadcrumb],
-  files: [{ title: 'Archivos', icon: UploadIcon }],
-}
+const breadcrumbsByRoute: BreadcrumbsByRoute = [
+  [overviewBreadcrumb],
+  [{ title: 'Archivos', icon: UploadIcon }],
+]
 
 const ProfilePage = ({ profile }: { profile: Profile }) => {
   const title = buildProfileFullName(profile)
@@ -39,20 +41,23 @@ const ProfilePage = ({ profile }: { profile: Profile }) => {
         }),
       ]}
       routerConfig={{
-        defaultActive: 'overview',
         breadcrumbsByRoute,
         baseBreadcrumbs: [profilesBreadcrumb, buildProfileBreadcrumb(profile)],
       }}
     >
       <TabsRouter>
-        <Tab eventKey="overview" title="Resumen">
+        <TabsList>
+          <Tab index={0}>Resumen</Tab>
+          <Tab index={1}>Archivos</Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <ProfileOverview profile={profile} />
-        </Tab>
-        <Tab eventKey="files" title="Archivos">
+        </TabPanel>
+        <TabPanel index={1}>
           <section>
             <FileTable files={profile.files.map(mapApiFileToTableFile)} />
           </section>
-        </Tab>
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )
