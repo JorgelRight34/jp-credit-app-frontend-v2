@@ -1,30 +1,24 @@
 import clsx from 'clsx'
-import { useMemo } from 'react'
 import Link from './link'
 import type { LinkProps } from './link'
-import { usePathname } from '@/hooks/usePathname'
+import { ReactNode } from 'react'
 
 type NavLinkProps = Omit<LinkProps, 'className'> & {
-  className: (({ isActive }: { isActive: boolean }) => string) | string
+  children: ReactNode
 }
 
-const NavLink = ({ to, children, className }: NavLinkProps) => {
-  const pathname = usePathname()
-
-  const isActive = useMemo(
-    () => !!(to && pathname.startsWith(to.toString())),
-    [pathname, to],
-  )
-
+const NavLink = ({ to, children, ...props }: NavLinkProps) => {
   return (
-    <Link
-      to={to}
-      className={clsx(
-        'link-reset !no-underline',
-        typeof className === 'function' ? className({ isActive }) : className,
+    <Link to={to} {...props}>
+      {({ isActive }) => (
+        <span
+          className={clsx('text-secondary', {
+            'text-active font-medium': isActive,
+          })}
+        >
+          {children}
+        </span>
       )}
-    >
-      {children}
     </Link>
   )
 }

@@ -6,7 +6,7 @@ import { collateralsBreadcrumb } from './collateral-page'
 const CreateCollateralFormPage = () => {
   return (
     <CreateFormPageLayout
-      title="Garantía"
+      title="Crear garantía"
       breadcrumbs={[collateralsBreadcrumb]}
       permissionProvider={collateralsPermissionProvider}
     >

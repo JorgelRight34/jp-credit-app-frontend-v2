@@ -36,7 +36,7 @@ const TransferListBox = ({
     <div className={clsx('flex flex-col h-full', className)}>
       <div
         className={clsx(
-          'flex-shrink-0 border overflow-hidden p-3 rounded-t-xl',
+          'text-secondary flex-shrink-0 border overflow-hidden p-3 rounded-t-xl',
           headerClassName,
         )}
       >

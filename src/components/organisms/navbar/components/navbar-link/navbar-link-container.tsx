@@ -30,14 +30,10 @@ const NavbarLinkContainer = ({
       }}
     >
       <div
-        className={clsx(
-          'nav-link-option nav-link-parent rounded-right p-0',
-          className,
-          {
-            'nav-link-active text-white shadow-sm': isActive,
-            'text-muted': !isActive,
-          },
-        )}
+        className={clsx('nav-link-option p-0', className, {
+          'nav-link-active text-white shadow-sm': isActive,
+          'text-muted': !isActive,
+        })}
       >
         {children}
       </div>

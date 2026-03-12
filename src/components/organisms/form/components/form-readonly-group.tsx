@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback } from 'react'
+import { PropsWithChildren } from 'react'
 import FormGroupLayout, { FormGroupLabel } from './fom-group-layout'
 import type { FormGroupLayoutProps } from './fom-group-layout'
 import {
@@ -65,15 +65,15 @@ export const FormReadonlyGroupLabelLink = ({
 }
 
 const ReadOnlyIcon = ({ value }: { value?: string }) => {
-  const handleOnCopy = useCallback(async () => {
+  const handleOnCopy = async () => {
     if (value) {
       if (await copyToClipboard(value)) {
         toastService.success('Copiado')
       }
     }
-  }, [])
+  }
 
-  return <ContentCopyIcon onClick={handleOnCopy} />
+  return <ContentCopyIcon className="text-muted" onClick={handleOnCopy} />
 }
 
 export default FormReadOnlyGroup

@@ -13,7 +13,7 @@ const LoginPanel = () => {
   const router = useRouter()
 
   return (
-    <main className="flex items-center justify-center border h-screen">
+    <main className="flex items-center bg-background justify-center border h-screen">
       <Container className="w-[95dvw] md:w-[75dvw] flex-row rounded-xl py-5 flex shadow-sm">
         <aside className="md:p-5 border-end hidden w-6/12 flex-col items-center justify-center p-3 md:flex">
           <section

@@ -43,23 +43,21 @@ const DataTable = <T, TQuery extends Query = Query>({
   })
 
   return (
-    <div className="overflow-x-auto">
-      <TableBuilder
-        {...props}
-        allowExpand={allowExpand}
-        initialState={initialState}
-        onRowClick={onRowClick}
-        data={data?.items ?? []}
-        columns={columns}
-        pageSize={limit}
-        totalItems={data?.totalItems ?? 0}
-        isLoading={isLoading}
-        onPageChange={fetchPage}
-        onLimitChange={setLimit}
-        onSortingChange={sort}
-        onExpand={onExpand}
-      />
-    </div>
+    <TableBuilder
+      {...props}
+      allowExpand={allowExpand}
+      initialState={initialState}
+      onRowClick={onRowClick}
+      data={data?.items ?? []}
+      columns={columns}
+      pageSize={limit}
+      totalItems={data?.totalItems ?? 0}
+      isLoading={isLoading}
+      onPageChange={fetchPage}
+      onLimitChange={setLimit}
+      onSortingChange={sort}
+      onExpand={onExpand}
+    />
   )
 }
 

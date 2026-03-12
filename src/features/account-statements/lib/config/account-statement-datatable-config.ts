@@ -13,7 +13,7 @@ export const accountStatementDataTableConfig: DataTableConfig<Loan> = {
         {
             accessorKey: "projectId",
             header: "PROYECTO",
-            cell: ({ row }) => buildLinkDataCell(row.original.projectId, {
+            cell: ({ row }) => buildLinkDataCell(`Proyecto No. ${row.original.projectId}`, {
                 to: "/projects",
                 search: { projectId: row.original.projectId }
             })

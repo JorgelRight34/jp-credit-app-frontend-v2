@@ -6,13 +6,13 @@ import { EmailInput, Input, LazySelect } from "@/components";
 
 export const userSearchConfig: SearchFormConfig<UserQuery> = {
     options: [
-        { name: 'id', label: 'Id', width: 2, type: (props) => Input(props) },
-        { name: 'username', label: 'Usuario', width: 4, type: (props) => Input(props) },
-        { name: 'firstName', label: 'Nombres', width: 3, type: (props) => Input(props) },
-        { name: 'lastName', label: 'Apellidos', width: 3, type: (props) => Input(props) },
+        { name: 'username', label: 'Usuario', width: 12, type: (props) => Input(props) },
     ],
     advanced: [
-        { name: 'email', label: 'Email', width: 12, type: (props) => EmailInput(props) },
+        { name: 'id', label: 'Id', width: 6, type: (props) => Input(props) },
+        { name: 'firstName', label: 'Nombres', width: 6, type: (props) => Input(props) },
+        { name: 'lastName', label: 'Apellidos', width: 6, type: (props) => Input(props) },
+        { name: 'email', label: 'Email', width: 6, type: (props) => EmailInput(props) },
         {
             name: "role",
             label: "Rol",

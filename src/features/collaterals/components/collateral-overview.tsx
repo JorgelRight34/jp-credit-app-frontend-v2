@@ -23,11 +23,11 @@ interface CollateralOverviewProps {
 const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
   return (
     <section>
-      <div className="flex gap-6">
-        <div className="flex items-center justify-center w-6/12">
+      <div className="flex flex-col md:flex-row gap-6 mb-6">
+        <div className="flex items-center justify-center w-full md:w-6/12">
           <CollateralPhotoGallery collateral={collateral} />
         </div>
-        <aside className="w-6/12">
+        <aside className="w-full md:w-6/12">
           <FormRow>
             <FormReadOnlyGroup
               label="Título"
@@ -87,61 +87,52 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
         </aside>
       </div>
       <ViewMore className="mb-6">
-        <div className="flex gap-6">
-          <div className="w-6/12">
-            <FormRow>
-              <FormReadOnlyGroup
-                name="status"
-                label="Estado"
-                value={getCollateralStatus(collateral)}
-              />
-            </FormRow>
-            <FormRow>
-              <FormReadOnlyGroup
-                name="soldFor"
-                label="Vendido por"
-                value={
-                  collateral.soldFor ? toCurrency(collateral.soldFor) : null
-                }
-              />
-            </FormRow>
-          </div>
-          <div className="w-6/12">
-            <FormRow>
-              <FormReadOnlyGroup
-                name="sellDate"
-                label="Fecha de venta"
-                value={
-                  collateral.sellDate
-                    ? toFormattedDate(collateral.sellDate)
-                    : DASHES
-                }
-              />
-              <FormReadOnlyGroup
-                name="liquidationDate"
-                label="Fecha de liquidación"
-                optional
-                value={
-                  collateral.liquidationDate
-                    ? toFormattedDate(collateral.liquidationDate)
-                    : DASHES
-                }
-              />
-            </FormRow>
-            <FormRow>
-              <FormReadOnlyGroup
-                name="createdAt"
-                label="Fecha de creación"
-                value={toFormattedDate(collateral.createdAt)}
-              />
-              <FormReadOnlyGroup
-                name="updatedAt"
-                label="Última actualización"
-                value={toFormattedDate(collateral.updatedAt)}
-              />
-            </FormRow>
-          </div>
-        </div>
+        <FormRow>
+          <FormReadOnlyGroup
+            name="status"
+            label="Estado"
+            value={getCollateralStatus(collateral)}
+          />
+          <FormReadOnlyGroup
+            name="sellDate"
+            label="Fecha de venta"
+            value={
+              collateral.sellDate
+                ? toFormattedDate(collateral.sellDate)
+                : DASHES
+            }
+          />
+        </FormRow>
+        <FormRow>
+          <FormReadOnlyGroup
+            name="soldFor"
+            label="Vendido por"
+            value={collateral.soldFor ? toCurrency(collateral.soldFor) : null}
+          />
+          <FormReadOnlyGroup
+            name="liquidationDate"
+            label="Fecha de liquidación"
+            optional
+            value={
+              collateral.liquidationDate
+                ? toFormattedDate(collateral.liquidationDate)
+                : DASHES
+            }
+          />
+        </FormRow>
+
+        <FormRow>
+          <FormReadOnlyGroup
+            name="createdAt"
+            label="Fecha de creación"
+            value={toFormattedDate(collateral.createdAt)}
+          />
+          <FormReadOnlyGroup
+            name="updatedAt"
+            label="Última actualización"
+            value={toFormattedDate(collateral.updatedAt)}
+          />
+        </FormRow>
       </ViewMore>
       <FormHtmlDisplayGroup
         name="description"

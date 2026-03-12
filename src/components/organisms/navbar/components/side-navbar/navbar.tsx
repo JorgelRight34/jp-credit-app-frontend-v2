@@ -46,7 +46,7 @@ const Navbar = ({ onSelect }: NavbarProps) => {
         <NavbarHeader />
       </div>
       <NavbarBody onSelect={onSelect} />
-      <div className="w-full flex-shrink-0 p-3 border-t">
+      <div className="w-full flex-shrink-0 p-3">
         <NavbarFooter className="bg-active-transparent shadow-sm" />
       </div>
     </div>
@@ -97,7 +97,7 @@ const NavbarBody = ({ onSelect }: NavbarProps) => {
           onExpand={handleOnSelect}
           activeOptions={{ includeSearch: true, exact: true }}
         >
-          <div className="flex justify-between border-b border-t bg-active-transparent p-3 shadow-sm">
+          <div className="flex justify-between border-b border-t bg-surface-subtle-transparent p-3 shadow-sm">
             <div className="border-left-accent">
               <Icon
                 className="text-accent-secondary cursor-pointer"
@@ -107,7 +107,7 @@ const NavbarBody = ({ onSelect }: NavbarProps) => {
             </div>
             <div className="flex items-center">
               <Icon
-                className="text-sm text-accent-secondary"
+                wrapperClassName="text-sm text-accent-secondary"
                 iconClassName="text-accent-secondary"
                 orientation="right"
                 icon={activeNav?.icon}

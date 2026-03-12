@@ -16,7 +16,7 @@ import { TimeUnit } from '@/models'
 
 export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
   return (
-    <Link className="text-accent-secondary" {...linkProps}>
+    <Link className="text-accent-secondary break-words" {...linkProps}>
       {label}
     </Link>
   )

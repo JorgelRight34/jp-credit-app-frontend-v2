@@ -24,20 +24,7 @@ const BottomNavbar = () => {
   return (
     <div className="border-t flex h-full w-full items-center justify-between bg-surface p-2 px-3 lg:hidden">
       {options.map((option, index) => (
-        <NavLink
-          key={index}
-          className={({ isActive }) =>
-            clsx(
-              {
-                'text-accent-important': isActive,
-                'text-secondary': !isActive,
-              },
-              'bg-surface p-2',
-            )
-          }
-          activeOptions={{ exact: true }}
-          to={option.route}
-        >
+        <NavLink key={index} activeOptions={{ exact: true }} to={option.route}>
           <Icon icon={option.icon} style={{ height: '2rem' }} />
         </NavLink>
       ))}

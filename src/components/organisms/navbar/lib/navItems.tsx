@@ -234,6 +234,11 @@ export const projectsNavItem: NavItem = {
   route: '/projects',
   children: [
     {
+      ...allRouteBase,
+      route: '/projects',
+      search: { tab: 'all' },
+    },
+    {
       name: 'Configuraciones',
       icon: () => <SettingsIcon />,
       route: '/projects/settings',

@@ -1,15 +1,17 @@
 import { Menu as MuiMenu } from '@mui/material'
-import { forwardRef, useId, useImperativeHandle, useState } from 'react'
+import React, { forwardRef, useId, useImperativeHandle, useState } from 'react'
 import MenuItem from './menu-item'
 import type { MenuProps } from '@mui/material'
 import type { IconName } from '@/components/atoms/icon/models/iconName'
 import Icon, { IconProps } from '@/components/atoms/icon/components/icon'
-import { Tooltip } from '@/components/atoms'
+import { Link, LinkProps, Tooltip } from '@/components/atoms'
 
 export interface MenuOption {
   label: string
   disabled?: boolean
   tooltip?: string
+  to?: LinkProps['to']
+  params?: LinkProps['params']
   as?: IconProps['as']
   icon?: IconName
   onClick?: () => void
@@ -18,7 +20,7 @@ export interface MenuOption {
 export interface MenuRef {
   isOpen: boolean
   close: () => void
-  open: (event: React.MouseEvent<HTMLButtonElement>) => void
+  open: (event: React.MouseEvent) => void
 }
 
 type MenuRefProps = Omit<MenuProps, 'open'> & {
@@ -44,8 +46,8 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
     const id = useId()
     const open = Boolean(anchorEl)
 
-    const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-      setAnchorEl(event.currentTarget)
+    const handleMenuOpen = (event: React.MouseEvent) => {
+      setAnchorEl((event as React.MouseEvent<HTMLButtonElement>).currentTarget)
     }
 
     const handleMenuClose = () => {
@@ -70,7 +72,9 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
         {options.map((option, index) => (
           <Tooltip key={index} title={option.tooltip}>
             <MenuItem onClick={option.onClick} disabled={option.disabled}>
-              <Icon icon={option.icon} label={option.label} as={option.as} />
+              <Link to={option.to} params={option.params}>
+                <Icon icon={option.icon} label={option.label} as={option.as} />
+              </Link>
             </MenuItem>
           </Tooltip>
         ))}

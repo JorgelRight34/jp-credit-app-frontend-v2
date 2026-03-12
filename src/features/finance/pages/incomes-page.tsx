@@ -1,10 +1,10 @@
 import { PageRouterLayout, Tab, TabsRouter } from '@/components'
+import IncomesDataTable from '../components/incomes-datatable'
+import IncomesDataChart from '../components/incomes-datachart'
 import {
   financeBreadcrumb,
   financeSectionBreadcrumbsByRoute,
-} from '../lib/config/breadcrumb'
-import IncomesDataTable from '../components/incomes-datatable'
-import IncomesDataChart from '../components/incomes-datachart'
+} from './projections-page'
 
 const IncomesPage = () => {
   return (

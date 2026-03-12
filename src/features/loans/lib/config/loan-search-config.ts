@@ -5,11 +5,11 @@ import { exportLoans } from "../../services/loanClient";
 
 export const loanSearchConfig: SearchFormConfig<LoanQuery> = {
     options: [
-        { name: "id", label: "Id", width: 2, type: (p) => Input(p) },
-        { name: "clientName", label: "Cliente", width: 7, type: (p) => Input(p) },
-        { name: "status", label: "Estado", width: 7, type: (p) => Select({ ...p, options: loanStatusSelectOptions }) },
+        { name: "id", label: "Id préstamo", width: 12, type: (p) => Input(p) },
     ],
     advanced: [
+        { name: "clientName", label: "Cliente", width: 6, type: (p) => Input(p) },
+        { name: "status", label: "Estado", width: 6, type: (p) => Select({ ...p, options: loanStatusSelectOptions }) },
         { name: "minPaymentValue", label: "Cuota mínima", width: 6, type: (p) => NumericInput(p) },
         { name: "maxPaymentValue", label: "Cuota máxima", width: 6, type: (p) => NumericInput(p) },
         { name: "startDate", label: "Fecha mínima", width: 6, type: (p) => DateInput(p) },

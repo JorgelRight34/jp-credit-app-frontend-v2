@@ -37,11 +37,6 @@
   z-index: 1;
 }
 
-.nav-link-parent {
-  background-color: transparent;
-  padding-bottom: 0 !important;
-}
-
 .side-navbar .nav-link-parent {
   background-color: #fff;
 }

@@ -3,7 +3,7 @@ import Menu from '../../menu/components/menu'
 import PageLayoutOption from './page-layout-option'
 import type { MenuRef } from '../../menu/components/menu'
 import type { LayoutOption } from '../models/pageLayoutOption'
-import { ArrowDownwardIcon, LightBtn } from '@/components/atoms'
+import { Icon, MoreVertIcon } from '@/components/atoms'
 
 export type PageLayoutOptionsContainerProps = {
   options: Array<LayoutOption>
@@ -35,17 +35,14 @@ const PageLayoutOptionsMenu = ({
 
   return (
     <>
-      <LightBtn
-        icon={ArrowDownwardIcon}
+      <Icon
+        className="text-secondary"
         onClick={(e) => menuRef.current?.open(e)}
-      >
-        Opciones
-      </LightBtn>
+        icon={MoreVertIcon}
+      />
       <Menu
         ref={menuRef}
-        options={options
-          .filter((el) => el.show)
-          .map((el) => ({ ...el, label: el.title ?? '' }))}
+        options={options.map((el) => ({ ...el, label: el.title ?? '' }))}
       />
     </>
   )

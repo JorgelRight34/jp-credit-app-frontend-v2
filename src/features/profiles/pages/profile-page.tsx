@@ -16,7 +16,7 @@ import {
 import { profilesBreadcrumb } from './profiles-page'
 
 export const buildProfileBreadcrumb = (profile: Profile): BreadcrumbSpec => ({
-  title: buildProfileFullName(profile),
+  title: profile.firstName,
   icon: PersonIcon,
   pathname: '/profiles/$id',
   params: { id: profile.id.toString() },

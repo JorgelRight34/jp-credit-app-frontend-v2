@@ -9,8 +9,8 @@ import {
   TabsRouter,
 } from '@/components'
 import { adjustmentNotesPermissionProvider } from '../lib/config/permission-provider'
-import { adjustmentNotesBreadcrumb } from '../lib/config/breadcrumbs'
 import AdjustmentNoteForm from '../components/adjustment-note-form'
+import { adjustmentNotesBreadcrumb } from './adjustment-notes-page'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = {
   nc: [{ title: 'Crédito', icon: CreditIcon }, createBreadcrumb],

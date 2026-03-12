@@ -177,7 +177,9 @@ const SearchFormGroupContainer = ({
   width,
   children,
 }: { width: number } & PropsWithChildren) => {
-  return <div className={`px-1 ${WIDTH_CLASS_MAP[width]}`}>{children}</div>
+  return (
+    <div className={`px-1 w-full md:${WIDTH_CLASS_MAP[width]}`}>{children}</div>
+  )
 }
 
 export default SearchForm

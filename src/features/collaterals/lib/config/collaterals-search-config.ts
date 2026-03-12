@@ -5,10 +5,10 @@ import { exportCollaterals } from "../../services/collateralClient";
 
 export const collateralSearchConfig: SearchFormConfig<CollateralQuery> = {
     options: [
-        { name: "id", label: "Id", width: 2, type: (p) => Input(p) },
-        { name: "title", label: "Título", width: 10, type: (p) => Input(p) }
+        { name: "title", label: "Título", width: 12, type: (p) => Input(p) }
     ],
     advanced: [
+        { name: "id", label: "Id", width: 6, type: (p) => Input(p) },
         { name: "minValue", label: "Valor mínimo", width: 6, type: (p) => CurrencyInput(p) },
         { name: "maxValue", label: "Valor máximo", width: 6, type: (p) => CurrencyInput(p) }
     ],

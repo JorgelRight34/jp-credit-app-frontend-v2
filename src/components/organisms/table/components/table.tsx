@@ -5,16 +5,15 @@ type TableProps = TableHTMLAttributes<HTMLTableElement>
 
 const Table = ({ children, className, ...props }: TableProps) => {
   return (
-    <table
-      className={clsx(
-        'table-fixed border-collapse overflow-x-auto rounded-xl',
-        className,
-      )}
-      style={{ width: 'max-content', minWidth: '100%' }}
-      {...props}
-    >
-      {children}
-    </table>
+    <div className="overflow-x-auto w-full">
+      <table
+        className={clsx('border-collapse w-full rounded-xl', className)}
+        style={{ minWidth: 'max-content' }}
+        {...props}
+      >
+        {children}
+      </table>
+    </div>
   )
 }
 

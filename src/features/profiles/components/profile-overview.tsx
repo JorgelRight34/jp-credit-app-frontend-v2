@@ -9,11 +9,11 @@ interface ProfileOverviewProps {
 const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
   return (
     <section>
-      <div className="flex mb-6">
-        <div className="flex items-center justify-center w-5/12 pr-6">
+      <div className="flex flex-col md:flex-row gap-6 mb-6">
+        <div className="flex items-center justify-center w-full md:w-5/12">
           <ProfilePhotoGallery profile={profile} />
         </div>
-        <aside className="w-7/12">
+        <aside className="w-full md:w-7/12">
           <FormRow>
             <FormReadOnlyGroup
               label="Nombres"
