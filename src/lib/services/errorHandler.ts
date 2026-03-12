@@ -22,7 +22,7 @@ const errorHandler = (error: AxiosError<{ message?: string }>) => {
           break;
         case 403:
           toastService.error("No tiene permisos para ver este contenido");
-          break;
+          throw error
         case 404:
           toastService.error("No encontrado")
           break;

@@ -98,6 +98,7 @@ export { default as Skeleton } from "./skeleton/skeleton"
 export { default as ParagraphSkeleton } from "./skeleton/skeleton"
 export { default as Fieldset } from './fielset/fieldset'
 export { default as SectionHeading } from './text/section-heading'
+export { default as AppHorizontalLogo } from './logo/app-horizontal-logo'
 
 export * from './details'
 export * from './accordion'

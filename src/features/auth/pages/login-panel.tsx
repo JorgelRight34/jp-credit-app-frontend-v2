@@ -1,9 +1,9 @@
 import LoginForm from '../components/login-form'
 import {
+  AppHorizontalLogo,
   BigTitle,
   Container,
   Icon,
-  Image,
   InfoIcon,
   Subtitle,
 } from '@/components'
@@ -35,17 +35,11 @@ const LoginPanel = () => {
             </header>
           </section>
         </aside>
-        <section className="md:p-5 flex w-full flex-col justify-center p-3 md:w-6/12">
+        <section className="md:p-5 flex w-full flex-col justify-center md:w-6/12">
           <figure className="flex justify-center">
-            <Image
-              className="mb-3 hidden object-contain md:block"
-              src="/horizontal-logo.png?url"
+            <AppHorizontalLogo
               alt="header"
-            />
-            <Image
-              className="mb-5 block object-contain md:hidden"
-              src="/header.jpg?url"
-              alt="header"
+              className="mb-5 block object-contain h-32"
             />
           </figure>
           {/* Header section */}

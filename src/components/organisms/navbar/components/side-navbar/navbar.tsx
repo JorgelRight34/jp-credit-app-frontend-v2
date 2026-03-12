@@ -17,8 +17,12 @@ import {
 import NavbarLinksContainer from '../navbar-link/navbar-links-container'
 import NavbarFooter from './navbar-footer'
 import type { NavItem } from '../../models/navItem'
-import { ArrowBackIcon, Icon, Image, Link } from '@/components/atoms'
-import { useTheme } from '@/components/molecules'
+import {
+  AppHorizontalLogo,
+  ArrowBackIcon,
+  Icon,
+  Link,
+} from '@/components/atoms'
 
 const options = [
   profileNavItem,
@@ -43,34 +47,17 @@ const Navbar = ({ onSelect }: NavbarProps) => {
   return (
     <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-surface border-r shadow-sm">
       <div className="border-b flex-shrink-0">
-        <NavbarHeader />
+        <Link to="/">
+          <div className="flex items-center p-3">
+            <AppHorizontalLogo />
+          </div>
+        </Link>
       </div>
       <NavbarBody onSelect={onSelect} />
       <div className="w-full flex-shrink-0 p-3">
         <NavbarFooter className="bg-active-transparent shadow-sm" />
       </div>
     </div>
-  )
-}
-
-const NavbarHeader = () => {
-  const { theme } = useTheme()
-
-  return (
-    <Link to="/">
-      <div className="flex items-center gap-6 p-3">
-        <Image
-          className="brand h-12 object-fit"
-          src={
-            theme === 'light'
-              ? '/horizontal-logo-light.svg?url'
-              : '/horizontal-logo-dark.svg?url'
-          }
-          alt="logo"
-          style={{ objectFit: 'contain' }}
-        />
-      </div>
-    </Link>
   )
 }
 

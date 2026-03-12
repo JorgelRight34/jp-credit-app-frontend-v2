@@ -11,6 +11,7 @@ export type IconInputSlotProps = {
 export const getIconInputSlot = ({
   icon,
   iconDirection = 'right',
+  onClick,
 }: IconInputSlotProps = {}) => {
   const isDirectionRight = iconDirection === 'right' && icon
 
@@ -20,7 +21,7 @@ export const getIconInputSlot = ({
         className="text-muted"
         position={isDirectionRight ? 'end' : 'start'}
       >
-        <Icon icon={icon} />
+        <Icon wrapperClassName="text-muted" onClick={onClick} icon={icon} />
       </InputAdornment>
     ) : null,
   }
