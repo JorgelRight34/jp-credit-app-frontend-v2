@@ -11,7 +11,7 @@ const TabsPanelContainer = ({
   children,
   index,
   className,
-  unmountOnExit = true,
+  unmountOnExit = false,
 }: TabsPanelContainerProps) => {
   const [activeIndex] = useTabsActivePanelIndex()
   const hasBeenActiveRef = useRef(false)

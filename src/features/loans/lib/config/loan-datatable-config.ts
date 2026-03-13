@@ -66,13 +66,6 @@ export const loansDataTableColumns: DataTableConfig<Loan>["columns"] = [
         sortingFn: sortDateRows,
         cell: ({ row }) => buildDateDataCell(row.original.lastPaymentDate),
     },
-    {
-        accessorKey: "lastPaymentDate",
-        header: "ÚLT. PAGO",
-        enableSorting: true,
-        sortingFn: sortDateRows,
-        cell: ({ row }) => buildDateDataCell(row.original.lastPaymentDate),
-    },
 ]
 
 export const loanDataTableConfig: DataTableConfig<Loan> = {

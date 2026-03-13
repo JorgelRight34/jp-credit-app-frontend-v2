@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { Tab, Tabs } from '../../tabs'
+import { Tab, TabPanel, Tabs, TabsList } from '../../tabs'
 import FileFormExplorerTabPanel from './file-attachments-section'
 import type { FileAccept } from '../../upload-form'
 import type { UseFileAttachmentsReturn } from '../../upload-form/hooks/useFileAttachments'
@@ -31,8 +31,16 @@ const FileAttachmentsPanel = ({
 }: FileAttachmentsPanelProps) => {
   return (
     <div className={clsx('flex h-full flex-col', className)}>
-      <Tabs defaultActiveKey="uploaded" variation="minimal">
-        <Tab eventKey="uploaded" title="Subidos" icon={UploadIcon}>
+      <Tabs>
+        <TabsList variation="minimal">
+          <Tab index={0} variation="minimal">
+            <Icon icon={UploadIcon}>Subidos</Icon>
+          </Tab>
+          <Tab index={1} variation="minimal">
+            <Icon icon={DeleteIcon}>Borrados</Icon>
+          </Tab>
+        </TabsList>
+        <TabPanel index={0}>
           <FileFormExplorerTabPanel
             label="Subidos"
             existing={add.existingFiles}
@@ -63,8 +71,8 @@ const FileAttachmentsPanel = ({
               </FileInputWrapper>
             }
           />
-        </Tab>
-        <Tab eventKey="removed" title="Eliminados" icon={DeleteIcon}>
+        </TabPanel>
+        <TabPanel index={1}>
           <FileFormExplorerTabPanel
             label="Eliminados"
             extraColumns={[
@@ -86,7 +94,7 @@ const FileAttachmentsPanel = ({
             existing={remove.deletedExistingFiles}
             pending={remove.removedPendingFiles}
           />
-        </Tab>
+        </TabPanel>
       </Tabs>
       {showLimitWarning && reachedLimit && (
         <Paragraph className="ml-3 text-red-500">

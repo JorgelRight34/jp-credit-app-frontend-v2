@@ -10,7 +10,7 @@ import {
   PageRouterLayout,
   Tab,
   TabPanel,
-  TableRowsIcon,
+  TabsList,
   TabsRouter,
   buildPageLayoutCreateOption,
 } from '@/components'
@@ -35,13 +35,13 @@ const CollateralsPage = () => {
       }}
     >
       <TabsRouter>
-        <TableRowsIcon>
+        <TabsList>
           <Tab index={0}>Todos</Tab>
           <Tab index={1}>Vehículos</Tab>
           <Tab index={2}>Hipotecas</Tab>
           <Tab index={3}>Agrícola</Tab>
           <Tab index={4}>Inventario</Tab>
-        </TableRowsIcon>
+        </TabsList>
         <TabPanel index={0}>
           <CollateralDataTable />
         </TabPanel>

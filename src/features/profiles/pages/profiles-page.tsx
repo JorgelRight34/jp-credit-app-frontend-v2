@@ -44,8 +44,8 @@ const ProfilesPage = () => {
         <TabsList>
           <Tab index={0}>Todos</Tab>
           <Tab index={1}>Clientes</Tab>
-          <Tab index={3}>Garantes</Tab>
-          <Tab index={4}>Asesores</Tab>
+          <Tab index={2}>Garantes</Tab>
+          <Tab index={3}>Asesores</Tab>
         </TabsList>
         <TabPanel index={0}>
           <ProfilesDataTable />
