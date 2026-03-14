@@ -18,7 +18,7 @@ const FormGroup = <T extends FieldValues>({
   className,
   type,
   optional = false,
-  inputClassName = 'w-full bg-surface',
+  inputClassName = 'w-full',
   input,
   ...props
 }: FormGroupProps<T>) => {

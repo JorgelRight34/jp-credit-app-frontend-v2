@@ -27,7 +27,7 @@ const TabsPanelContainer = ({
   return (
     <div
       className={clsx(
-        'bg-background fade-in flex-1 h-full hidden pt-3',
+        'bg-background fade-in flex-1 hidden pt-3',
         className,
         isActive && '!block',
       )}
