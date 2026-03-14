@@ -35,7 +35,6 @@ import {
   ScheduleIcon,
   SettingsIcon,
   TrendingUpIcon,
-  UploadIcon,
 } from '@/components/atoms'
 
 const addRouteName = 'Añadir'
@@ -56,19 +55,19 @@ export const accountStatusNavItem: NavItem = {
       name: 'General',
       icon: () => <GroupIcon />,
       route: '/account-statements',
-      search: { tab: 'all' },
+      search: { tab: 0 },
     },
     {
       name: 'Cliente',
       icon: () => <GroupsIcon />,
       route: '/account-statements',
-      search: { tab: 'clients' },
+      search: { tab: 1 },
     },
     {
       name: 'Garante',
       icon: () => <GroupsIcon />,
       route: '/account-statements',
-      search: { tab: 'guarantors' },
+      search: { tab: 2 },
     },
   ],
 }
@@ -82,13 +81,13 @@ export const accessControlNavItem: NavItem = {
       name: 'Usuarios',
       icon: () => <GroupsIcon />,
       route: '/access-control',
-      search: { tab: 'users' },
+      search: { tab: 0 },
     },
     {
       name: 'Roles',
       icon: () => <AdminPanelSettingsIcon />,
       route: '/access-control',
-      search: { tab: 'roles' },
+      search: { tab: 1 },
     },
     {
       icon: addRouteIcon,
@@ -111,25 +110,25 @@ export const profileNavItem: NavItem = {
     {
       ...allRouteBase,
       route: '/profiles',
-      search: { tab: 'all' },
+      search: { tab: 0 },
     },
     {
       name: 'Clientes',
       icon: () => <GroupsIcon />,
       route: '/profiles',
-      search: { tab: 'clients' },
+      search: { tab: 1 },
     },
     {
       name: 'Garantes',
       icon: () => <PersonAddIcon />,
       route: '/profiles',
-      search: { tab: 'guarantors' },
+      search: { tab: 2 },
     },
     {
       name: 'Agentes',
       icon: () => <BadgeIcon />,
       route: '/profiles',
-      search: { tab: 'loan-officers' },
+      search: { tab: '3' },
     },
     {
       name: addRouteName,
@@ -152,25 +151,25 @@ export const collateralsNavItem: NavItem = {
       name: 'Vehículos',
       icon: () => <DirectionsCarIcon />,
       route: '/collaterals',
-      search: { tab: 'vehicles' },
+      search: { tab: 0 },
     },
     {
       name: 'Hipotecas',
       icon: () => <ApartmentIcon />,
       route: '/collaterals',
-      search: { tab: 'mortgage' },
+      search: { tab: 1 },
     },
     {
       name: 'Agrícola',
       icon: () => <GrassIcon />,
       route: '/collaterals',
-      search: { tab: 'agriculturalLoan' },
+      search: { tab: 2 },
     },
     {
       name: 'Inventario',
       icon: () => <InventoryIcon />,
       route: '/collaterals',
-      search: { tab: 'inventory' },
+      search: { tab: '3' },
     },
     {
       name: addRouteName,
@@ -188,25 +187,25 @@ export const transactionsNavItem: NavItem = {
     {
       ...allRouteBase,
       route: '/transactions',
-      search: { tab: 'all' },
+      search: { tab: 0 },
     },
     {
       name: 'Ingresos',
       icon: () => <AttachMoneyIcon />,
       route: '/transactions',
-      search: { tab: 'payments' },
+      search: { tab: 1 },
     },
     {
       name: 'Egresos',
       icon: () => <PaymentIcon />,
       route: '/transactions',
-      search: { tab: 'disbursements' },
+      search: { tab: 2 },
     },
     {
       name: 'Atrasos',
       icon: () => <ErrorIcon />,
       route: '/transactions',
-      search: { tab: 'overdue' },
+      search: { tab: 3 },
     },
     {
       name: 'Periodos contables',
@@ -217,13 +216,13 @@ export const transactionsNavItem: NavItem = {
       icon: addRouteIcon,
       name: 'Pagar',
       route: '/transactions/create',
-      search: { tab: 'pay' },
+      search: { tab: 0 },
     },
     {
       icon: addRouteIcon,
       name: 'Desembolsar',
       route: '/transactions/create',
-      search: { tab: 'disburse' },
+      search: { tab: 1 },
     },
   ],
 }
@@ -236,12 +235,17 @@ export const projectsNavItem: NavItem = {
     {
       ...allRouteBase,
       route: '/projects',
-      search: { tab: 'all' },
+      search: { tab: 0 },
     },
     {
       name: 'Configuraciones',
       icon: () => <SettingsIcon />,
       route: '/projects/settings',
+    },
+    {
+      name: addRouteName,
+      icon: addRouteIcon,
+      route: '/projects/create',
     },
   ],
 }
@@ -254,25 +258,25 @@ export const loansNavItem: NavItem = {
     {
       ...allRouteBase,
       route: '/loans',
-      search: { tab: 'all' },
+      search: { tab: 0 },
     },
     {
       name: 'Activos',
       icon: () => <PlayCircleIcon />,
       route: '/loans',
-      search: { tab: 'active' },
+      search: { tab: 0 },
     },
     {
       name: 'Inactivos',
       icon: () => <CheckCircleIcon />,
       route: '/loans',
-      search: { tab: 'inactive' },
+      search: { tab: 1 },
     },
     {
       name: 'Saldados',
       icon: () => <ErrorIcon />,
       route: '/loans',
-      search: { tab: 'paidOff' },
+      search: { tab: 2 },
     },
     {
       name: addRouteName,
@@ -295,13 +299,13 @@ export const notesNavItem: NavItem = {
       name: 'Crédito',
       icon: () => <ArrowCircleUpIcon />,
       route: '/adjustment-notes',
-      search: { tab: 'nc' },
+      search: { tab: 0 },
     },
     {
       name: 'Débito',
       icon: () => <ArrowCircleDownIcon />,
       route: '/adjustment-notes',
-      search: { tab: 'nd' },
+      search: { tab: 1 },
     },
     {
       name: addRouteName,
@@ -342,12 +346,6 @@ export const reportsNavItem: NavItem = {
     {
       ...allRouteBase,
       route: '/reports',
-    },
-    {
-      name: 'Archivos',
-      icon: () => <UploadIcon />,
-      route: '/reports',
-      search: { tab: 'uploads' },
     },
     {
       name: 'Generar',

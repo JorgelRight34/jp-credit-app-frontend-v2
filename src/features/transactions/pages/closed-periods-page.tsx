@@ -4,10 +4,7 @@ import {
   buildPageLayoutCreateOption,
   PageLayout,
   PageLayoutBreadcrumb,
-  Tab,
-  TabPanel,
-  Tabs,
-  TabsList,
+  PagePanel,
 } from '@/components'
 import ClosedPeriodDataTable from '../components/closed-period-datatable'
 import { transactionBreadcrumb } from './transactions-page'
@@ -26,14 +23,9 @@ const ClosedPeriodsPage = () => {
       breadcrumb={<PageLayoutBreadcrumb breadcrumbs={periodsBreadcrumb} />}
       options={[buildPageLayoutCreateOption('/transactions/periods/create')]}
     >
-      <Tabs>
-        <TabsList>
-          <Tab index={0}>Todos</Tab>
-        </TabsList>
-        <TabPanel index={0}>
-          <ClosedPeriodDataTable />
-        </TabPanel>
-      </Tabs>
+      <PagePanel>
+        <ClosedPeriodDataTable />
+      </PagePanel>
     </PageLayout>
   )
 }

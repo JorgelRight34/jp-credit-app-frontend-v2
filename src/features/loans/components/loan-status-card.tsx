@@ -25,7 +25,9 @@ const LoanStatusCard = ({
       {...props}
     >
       <div className="p-3 flex justify-start border-b">
-        <Icon icon={icon}>{title}</Icon>
+        <Icon wrapperClassName="text-secondary" icon={icon}>
+          {title}
+        </Icon>
       </div>
       <div className="p-3">{children}</div>
     </div>

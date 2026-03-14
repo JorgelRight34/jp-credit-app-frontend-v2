@@ -58,13 +58,13 @@ const TransactionsPage = () => {
         <TabPanel index={0}>
           <TransactionDataTable />
         </TabPanel>
-        <TabPanel index={2}>
+        <TabPanel index={1}>
           <TransactionDataTable initialQuery={{ type: 'pc' }} />
         </TabPanel>
-        <TabPanel index={3}>
+        <TabPanel index={2}>
           <TransactionDataTable initialQuery={{ type: 'ds' }} />
         </TabPanel>
-        <TabPanel index={4}>
+        <TabPanel index={3}>
           <TransactionDataTable initialQuery={{ isOverdue: true }} />
         </TabPanel>
       </TabsRouter>

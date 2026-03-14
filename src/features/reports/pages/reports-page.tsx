@@ -4,12 +4,9 @@ import {
   LightPillLinkBtn,
   PageLayout,
   PageLayoutBreadcrumb,
+  PagePanel,
   PrintIcon,
   ReportIcon,
-  Tab,
-  TabPanel,
-  Tabs,
-  TabsList,
 } from '@/components'
 import ReportDataTable from '../components/report-datatable'
 
@@ -34,14 +31,9 @@ const ReportsPage = () => {
       ]}
       breadcrumb={<PageLayoutBreadcrumb breadcrumbs={[reportsBreadcrumb]} />}
     >
-      <Tabs>
-        <TabsList>
-          <Tab index={0}>Todos</Tab>
-        </TabsList>
-        <TabPanel index={0}>
-          <ReportDataTable />
-        </TabPanel>
-      </Tabs>
+      <PagePanel>
+        <ReportDataTable />
+      </PagePanel>
     </PageLayout>
   )
 }

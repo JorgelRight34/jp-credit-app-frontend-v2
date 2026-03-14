@@ -6,10 +6,10 @@ import { ReportFormValues } from "../lib/schemas/reportFormSchema";
 import { FileStorageService } from "@/lib/services";
 import { loanTemplateDefinition } from "../lib/templates/loan-template-definition";
 import { templateMapper } from "../lib/templates/report-templates-map";
-import { getCollateral } from "@/features/collaterals";
 import { collateralTemplateDefinition } from "../lib/templates/collateral-template-definition";
 import { ReportGenerationFormValues } from "../lib/schemas/reportGenerationFormSchema";
 import { LoanReportModel } from "../models/loanReportModel";
+import { CollateralReportModel } from "../models/collateralReportModel";
 
 const baseUrl = "reports"
 
@@ -45,6 +45,11 @@ export const getLoanReportModel = async (id: number): Promise<LoanReportModel> =
     return data;
 }
 
+export const getCollateralReportModel = async (id: number): Promise<CollateralReportModel> => {
+    const { data } = await api.get(`${baseUrl}/collaterals/${id}/report-data`);
+    return data;
+}
+
 export const generateReport = async ({ id, key, file }: ReportGenerationFormValues): Promise<Blob> => {
     let context = null;
 
@@ -54,7 +59,7 @@ export const generateReport = async ({ id, key, file }: ReportGenerationFormValu
             context = templateMapper(loan, loanTemplateDefinition)
             break;
         case "collateral":
-            const colateral = await getCollateral(id as number);
+            const colateral = await getCollateralReportModel(id as number);
             context = templateMapper(colateral, collateralTemplateDefinition)
             break;
     }

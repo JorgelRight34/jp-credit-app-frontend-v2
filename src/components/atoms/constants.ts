@@ -11,9 +11,27 @@ export const SX_CONFIG = {
         },
 
         '& fieldset': {
-            borderColor: '#e5e7eb',
+            borderColor: 'var(--bs-border-color)',
         },
 
+        '&.Mui-disabled': {
+            backgroundColor: 'var(--surface-disabled, #f3f4f6)',
+            boxShadow: 'none',
+
+            '& fieldset': {
+                borderColor: '#e5e7eb !important',
+            },
+
+            '& .MuiInputBase-input': {
+                color: 'var(--text-disabled, #9ca3af)',
+                WebkitTextFillColor: 'var(--text-disabled, #9ca3af)', // overrides browser default
+                cursor: 'not-allowed',
+            },
+
+            '& .MuiSelect-icon': {
+                color: 'var(--text-disabled, #9ca3af)',
+            },
+        },
 
         '&:hover fieldset': {
             borderColor: 'var(--text-muted)',  // keep same as default, or set whatever color you want

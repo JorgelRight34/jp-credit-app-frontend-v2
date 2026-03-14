@@ -3,7 +3,7 @@ import type { UserQuery } from "../models/userQuery";
 import type { IdentityPermissions } from "../models/identityPermissions";
 import type { User } from "../models/user";
 import type { PagedResponse } from "@/models";
-import type { ChangePasswordSchemaType } from "../lib/schemas/changePasswordSchema";
+import type { ResetPassworFormValues } from "../lib/schemas/resetPasswordSchema";
 import type { UpdatePermissionsHandler } from "../hooks/usePermissionsForm";
 import api from "@/lib/services/api";
 
@@ -31,12 +31,12 @@ export const getPermissions = async (id: number): Promise<IdentityPermissions> =
 };
 
 
-export const changePassword = async (
+export const resetPassword = async (
   id: User["id"],
-  data: ChangePasswordSchemaType,
+  data: ResetPassworFormValues,
 ) => {
   const response = await api.put(
-    `${baseUrl}/${id}/change-password`,
+    `${baseUrl}/${id}/reset-password`,
     data
   );
   return response.data;

@@ -63,9 +63,9 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
     <FormContainer form={form}>
       <Tabs>
         <TabsList>
-          <Tab index={0} title="Datos" />
-          <Tab index={1} title="Permisos" />
-          <Tab index={2} title="Roles" />
+          <Tab index={0}>Datos</Tab>
+          <Tab index={1}>Permisos</Tab>
+          <Tab index={2}>Roles</Tab>
         </TabsList>
         <TabPanel index={0}>
           <UserDataFormPanel form={form}>

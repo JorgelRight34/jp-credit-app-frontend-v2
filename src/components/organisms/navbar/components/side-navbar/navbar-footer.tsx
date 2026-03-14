@@ -3,7 +3,9 @@ import CurrentUserPicCard from './current-user-pic-card'
 import {
   DarkModeIcon,
   Icon,
+  KeyIcon,
   LightModeIcon,
+  Link,
   LogoutIcon,
   MoreVertIcon,
   SettingsIcon,
@@ -39,8 +41,6 @@ const NavbarFooter = ({ className }: NavbarFooterProps) => {
 }
 
 const MenuTrigger = () => {
-  const { logout } = useAuth()
-
   return (
     <ModalTrigger
       title={<Icon icon={SettingsIcon}>Opciones</Icon>}
@@ -51,11 +51,16 @@ const MenuTrigger = () => {
         <span>
           <ThemeTogglerMenuItem />
         </span>
-        <span>
-          <MenuItem onClick={logout}>
+        <Link to="/reset-password">
+          <MenuItem>
+            <Icon icon={KeyIcon}>Resetear contraseña</Icon>
+          </MenuItem>
+        </Link>
+        <Link to="/logout">
+          <MenuItem>
             <Icon icon={LogoutIcon}>Cerrar sesión</Icon>
           </MenuItem>
-        </span>
+        </Link>
       </span>
     </ModalTrigger>
   )

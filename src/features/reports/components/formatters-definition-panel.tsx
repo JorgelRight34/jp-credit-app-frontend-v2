@@ -1,4 +1,5 @@
 import {
+  Chip,
   Fieldset,
   RuleListItem,
   Table,
@@ -64,13 +65,15 @@ const FormattersDefinitionTable = () => {
 const RulesFieldset = () => {
   return (
     <Fieldset legendClassName="text-center" className="h-full" legend="REGLAS">
-      <ul className="space-y-12 text-sm text-gray-700">
+      <ul className="space-y-12 text-sm">
         <RuleListItem icon="⚙">
           Puedes <span className="font-semibold">combinar pipes</span> para
           encadenar transformaciones:{' '}
-          <span className="italic font-mono text-xs bg-gray-100 px-1 rounded">
-            {'{{ monto | number:trim | upper }}'}
-          </span>
+          <Chip>
+            <span className="italic font-mono text-xs">
+              {'{{ monto | number:trim | upper }}'}
+            </span>
+          </Chip>
         </RuleListItem>
         <RuleListItem icon="↕">
           El <span className="font-semibold">orden importa</span> — los pipes se
@@ -78,21 +81,12 @@ const RulesFieldset = () => {
         </RuleListItem>
         <RuleListItem icon="Aa">
           Es <span className="font-semibold">case sensitive</span> —{' '}
-          <span className="font-mono text-xs bg-gray-100 px-1 rounded">
-            date:dd/MM/yyyy
-          </span>{' '}
-          es válido pero{' '}
-          <span className="font-mono text-xs bg-gray-100 px-1 rounded">
-            date:DD/mm/YYYY
-          </span>{' '}
-          no.
+          <Chip>date:dd/MM/yyyy</Chip> es válido pero{' '}
+          <Chip>date:DD/mm/YYYY</Chip> no.
         </RuleListItem>
         <RuleListItem icon="✦">
           Si la clave no existe en el contexto, se renderiza como{' '}
-          <span className="font-mono text-xs bg-gray-100 px-1 rounded">
-            vacío
-          </span>
-          .
+          <Chip>vacío</Chip>.
         </RuleListItem>
         <RuleListItem icon="↩">
           Si el formato falla (ej. texto en un campo numérico), se devuelve el{' '}

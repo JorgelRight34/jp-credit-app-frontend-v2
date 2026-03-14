@@ -44,6 +44,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         rel: 'stylesheet',
         href: appCss,
       },
+      {
+        rel: 'icon',
+        href: '/logo.svg',
+        type: 'image/svg+xml',
+      },
     ],
   }),
   shellComponent: RootDocument,
@@ -66,10 +71,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 }
                 document.documentElement.classList.remove('light','dark');
                 document.documentElement.classList.add(t);
-
-                document.documentElement.style.setProperty(
-                  '--logo-src', t === 'dark' ? 'url(/horizontal-logo-dark.svg)' : 'url(/horizontal-logo-light.svg)'
-                )
               } catch (e) {}
             })();
             `,

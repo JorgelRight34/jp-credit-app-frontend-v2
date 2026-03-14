@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import {
   PageSize,
+  Table,
   TableBodyCompositor,
   TableDataCell,
   TableFooter,
@@ -34,7 +35,7 @@ const GroupedTable = <T,>({
   onLimitChange,
   ...config
 }: GroupedTableProps<T>) => {
-  const table = useTableState({ columns, ...config }) // AVOID FLAT
+  const table = useTableState({ columns, ...config })
 
   return (
     <TableCompositor
@@ -47,17 +48,19 @@ const GroupedTable = <T,>({
         />
       }
     >
-      <TableHeaderCompositor table={table} />
-      {groups.map((group, index) => (
-        <TableStateWrapper
-          key={index}
-          columns={columns}
-          data={group}
-          pageSize={groupPageSize}
-          render={(table) => render({ table })}
-        />
-      ))}
-      <TableFooterCompositor table={table} />
+      <Table>
+        <TableHeaderCompositor table={table} />
+        {groups.map((group, index) => (
+          <TableStateWrapper
+            key={index}
+            columns={columns}
+            data={group}
+            pageSize={groupPageSize}
+            render={(table) => render({ table })}
+          />
+        ))}
+        <TableFooterCompositor table={table} />
+      </Table>
     </TableCompositor>
   )
 }

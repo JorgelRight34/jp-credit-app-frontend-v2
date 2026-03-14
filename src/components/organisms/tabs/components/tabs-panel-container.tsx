@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { HTMLAttributes, useRef } from 'react'
 import { useTabsActivePanelIndex } from '../providers/tabs-provider'
+import { Panel } from '@/components/atoms'
 
 interface TabsPanelContainerProps extends HTMLAttributes<HTMLDivElement> {
   index: number
@@ -25,15 +26,9 @@ const TabsPanelContainer = ({
   if (!isActive && hasBeenActiveRef.current && unmountOnExit) return null
 
   return (
-    <div
-      className={clsx(
-        'bg-background fade-in flex-1 hidden pt-3',
-        className,
-        isActive && '!block',
-      )}
-    >
+    <Panel className={clsx('hidden', className, isActive && '!block')}>
       {children}
-    </div>
+    </Panel>
   )
 }
 

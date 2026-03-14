@@ -52,7 +52,7 @@ const SelectInput = ({
           },
         }}
         onChange={(e) => onChange?.(e.target.value as string)}
-        sx={{ width: 'auto', minWidth: 'fit-content', ...SX_CONFIG }}
+        sx={{ width: 'auto', minWidth: 'fit-content' }}
         IconComponent={readOnly ? () => null : undefined}
         readOnly={readOnly}
         {...getIconInputSlot(icon)}

@@ -1,9 +1,9 @@
-import { Collateral } from "@/features/collaterals";
 import { ReportTemplateDefinition } from "../../models/reportTemplateDefinition";
 import { formatNumberWithCommas } from "@/lib/utils";
 import { collateralTypeMap } from "@/features/collaterals/models/collateralType";
+import { CollateralReportModel } from "../../models/collateralReportModel";
 
-export const collateralTemplateDefinition: ReportTemplateDefinition<Collateral> = [
+export const collateralTemplateDefinition: ReportTemplateDefinition<CollateralReportModel> = [
     {
         name: "id",
         description: "Identificador único del colateral.",

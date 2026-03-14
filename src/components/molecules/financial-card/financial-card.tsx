@@ -34,7 +34,9 @@ const FinancialCard = ({
             headingClassName,
           )}
         >
-          {subheading && <h6 className="truncate text-center">{subheading}</h6>}
+          {subheading && (
+            <h6 className="truncate text-primary text-center">{subheading}</h6>
+          )}
           <span className="truncate text-center text-accent text-4xl">
             {heading}
           </span>

@@ -99,7 +99,9 @@ export { default as ParagraphSkeleton } from "./skeleton/skeleton"
 export { default as Fieldset } from './fielset/fieldset'
 export { default as SectionHeading } from './text/section-heading'
 export { default as AppHorizontalLogo } from './logo/app-horizontal-logo'
+export { default as Panel } from './panel/panel'
 
 export * from './details'
 export * from './accordion'
 export * from './list'
+export * from './chip'

@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { useChangePasswordForm } from '../hooks/useChangePassword'
-import type { ChangePasswordSchemaType } from '../lib/schemas/changePasswordSchema'
+import { useResetPasswordForm } from '../hooks/useResetPassword'
 import type { DataModuleFormProps } from '@/components'
 import {
   Form,
@@ -9,14 +7,18 @@ import {
   FormRow,
   PasswordInput,
 } from '@/components'
+import { User } from '../models/user'
+import { ResetPassworFormValues } from '../lib/schemas/resetPasswordSchema'
 
-export type ChangePasswordFormProps = DataModuleFormProps<
+export type ResetPasswordFormProps = DataModuleFormProps<
   null,
-  ChangePasswordSchemaType
->
+  ResetPassworFormValues
+> & {
+  user: User
+}
 
-const ChangePasswordForm = (props: ChangePasswordFormProps) => {
-  const form = useChangePasswordForm(props)
+const ResetPasswordForm = (props: ResetPasswordFormProps) => {
+  const form = useResetPasswordForm(props)
 
   return (
     <FormContainer form={form}>
@@ -40,4 +42,4 @@ const ChangePasswordForm = (props: ChangePasswordFormProps) => {
   )
 }
 
-export default ChangePasswordForm
+export default ResetPasswordForm

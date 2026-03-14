@@ -10,9 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as mainRouteRouteImport } from './routes/(main)/route'
+import { Route as LogoutIndexRouteImport } from './routes/logout/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as mainIndexRouteImport } from './routes/(main)/index'
 import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/route'
+import { Route as mainResetPasswordIndexRouteImport } from './routes/(main)/reset-password/index'
 import { Route as mainmodulesTransactionsIndexRouteImport } from './routes/(main)/(modules)/transactions/index'
 import { Route as mainmodulesReportsIndexRouteImport } from './routes/(main)/(modules)/reports/index'
 import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(modules)/projects/index'
@@ -63,6 +65,11 @@ const mainRouteRoute = mainRouteRouteImport.update({
   id: '/(main)',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LogoutIndexRoute = LogoutIndexRouteImport.update({
+  id: '/logout/',
+  path: '/logout/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginIndexRoute = LoginIndexRouteImport.update({
   id: '/login/',
   path: '/login/',
@@ -75,6 +82,11 @@ const mainIndexRoute = mainIndexRouteImport.update({
 } as any)
 const mainmodulesRouteRoute = mainmodulesRouteRouteImport.update({
   id: '/(modules)',
+  getParentRoute: () => mainRouteRoute,
+} as any)
+const mainResetPasswordIndexRoute = mainResetPasswordIndexRouteImport.update({
+  id: '/reset-password/',
+  path: '/reset-password/',
   getParentRoute: () => mainRouteRoute,
 } as any)
 const mainmodulesTransactionsIndexRoute =
@@ -348,6 +360,8 @@ const mainmodulesAccessControlRolesIdEditIndexRoute =
 export interface FileRoutesByFullPath {
   '/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
+  '/logout/': typeof LogoutIndexRoute
+  '/reset-password/': typeof mainResetPasswordIndexRoute
   '/access-control/': typeof mainmodulesAccessControlIndexRoute
   '/account-statements/': typeof mainmodulesAccountStatementsIndexRoute
   '/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
@@ -397,6 +411,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof mainIndexRoute
   '/login': typeof LoginIndexRoute
+  '/logout': typeof LogoutIndexRoute
+  '/reset-password': typeof mainResetPasswordIndexRoute
   '/access-control': typeof mainmodulesAccessControlIndexRoute
   '/account-statements': typeof mainmodulesAccountStatementsIndexRoute
   '/adjustment-notes': typeof mainmodulesAdjustmentNotesIndexRoute
@@ -449,6 +465,8 @@ export interface FileRoutesById {
   '/(main)/(modules)': typeof mainmodulesRouteRouteWithChildren
   '/(main)/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
+  '/logout/': typeof LogoutIndexRoute
+  '/(main)/reset-password/': typeof mainResetPasswordIndexRoute
   '/(main)/(modules)/access-control/': typeof mainmodulesAccessControlIndexRoute
   '/(main)/(modules)/account-statements/': typeof mainmodulesAccountStatementsIndexRoute
   '/(main)/(modules)/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
@@ -500,6 +518,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login/'
+    | '/logout/'
+    | '/reset-password/'
     | '/access-control/'
     | '/account-statements/'
     | '/adjustment-notes/'
@@ -549,6 +569,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/logout'
+    | '/reset-password'
     | '/access-control'
     | '/account-statements'
     | '/adjustment-notes'
@@ -600,6 +622,8 @@ export interface FileRouteTypes {
     | '/(main)/(modules)'
     | '/(main)/'
     | '/login/'
+    | '/logout/'
+    | '/(main)/reset-password/'
     | '/(main)/(modules)/access-control/'
     | '/(main)/(modules)/account-statements/'
     | '/(main)/(modules)/adjustment-notes/'
@@ -650,6 +674,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   mainRouteRoute: typeof mainRouteRouteWithChildren
   LoginIndexRoute: typeof LoginIndexRoute
+  LogoutIndexRoute: typeof LogoutIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -659,6 +684,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof mainRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logout/': {
+      id: '/logout/'
+      path: '/logout'
+      fullPath: '/logout/'
+      preLoaderRoute: typeof LogoutIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login/': {
@@ -680,6 +712,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof mainmodulesRouteRouteImport
+      parentRoute: typeof mainRouteRoute
+    }
+    '/(main)/reset-password/': {
+      id: '/(main)/reset-password/'
+      path: '/reset-password'
+      fullPath: '/reset-password/'
+      preLoaderRoute: typeof mainResetPasswordIndexRouteImport
       parentRoute: typeof mainRouteRoute
     }
     '/(main)/(modules)/transactions/': {
@@ -1118,11 +1157,13 @@ const mainmodulesRouteRouteWithChildren =
 interface mainRouteRouteChildren {
   mainmodulesRouteRoute: typeof mainmodulesRouteRouteWithChildren
   mainIndexRoute: typeof mainIndexRoute
+  mainResetPasswordIndexRoute: typeof mainResetPasswordIndexRoute
 }
 
 const mainRouteRouteChildren: mainRouteRouteChildren = {
   mainmodulesRouteRoute: mainmodulesRouteRouteWithChildren,
   mainIndexRoute: mainIndexRoute,
+  mainResetPasswordIndexRoute: mainResetPasswordIndexRoute,
 }
 
 const mainRouteRouteWithChildren = mainRouteRoute._addFileChildren(
@@ -1132,6 +1173,7 @@ const mainRouteRouteWithChildren = mainRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   mainRouteRoute: mainRouteRouteWithChildren,
   LoginIndexRoute: LoginIndexRoute,
+  LogoutIndexRoute: LogoutIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

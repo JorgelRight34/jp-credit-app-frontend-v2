@@ -13,10 +13,13 @@
   --text-color: #333333; 
   --surface: #ffff; 
   --background: #fefefe;
-    --surface-subtle: #fafaf9;
+  --surface-subtle: #fafaf9;
+  --badge-text-color: #374151;
 }
 
 .light {
+  --color-scheme: light;
+  --muted: 217 33% 20%; /* dark: slate-ish tone */
   --surface-subtle: #fafaf9;
   --active-color: #583906;
   --primary-color: #d09d0c;
@@ -24,28 +27,36 @@
   --text-primary: #111827;
   --text-secondary: #374151;
   --text-muted: #6b7280;
-  --text-disabled: #9ca3af;
+  --text-disabled: #9ca3af;       /* muted gray text */
+  --surface-disabled: #f3f4f6;    /* cool light gray, clearly inactive */
   --border-gray-500: #6b7280;
-  --bs-border-color: #dee2e6; 
-  --text-color: #333333; 
-  --surface: #ffff; 
+  --bs-border-color: #dee2e6;
+  --text-color: #333333;
+  --surface: #ffffff;
   --background: #fefefe;
+  --logo-src: url(/horizontal-logo-light.svg);
+   --badge-text-color: #374151;
 }
 
 .dark {
+  --color-scheme: dark;
+    --muted: 210 40% 93%; /* light: gray-100 equivalent */
   --surface-subtle: #292524;
-  --active-color: #a87c09;  /* darkened version of #d09d0c */
+  --active-color: #a87c09;
   --secondary-color: #d09d0c;
   --primary-color: #9c6334;
-  --text-primary: #f9fafb;     /* main text (almost white) */
-  --text-secondary: #e5e7eb;   /* regular text */
-  --text-muted: #9ca3af;       /* subtle text */
-  --text-disabled: #6b7280;    /* disabled / low contrast */
-   --border-gray-500: #4a4a4a;   /* ← lifted */
-  --text-color: #e5e7eb;        /* readable light text */
---surface: #262626;        /* slightly lifted */
---background: #1e1e1e;
-   --bs-border-color: #3d3d3d;   /* ← lifted */
+  --text-primary: #f9fafb;
+  --text-secondary: #e5e7eb;
+  --text-muted: #9ca3af;
+  --text-disabled: #4b5563;       /* darker than muted, low contrast on dark bg */
+  --surface-disabled: #1a1a1a;    /* darker than surface, sunken/inactive feel */
+  --border-gray-500: #4a4a4a;
+  --text-color: #e5e7eb;
+  --surface: #262626;
+  --background: #1e1e1e;
+  --bs-border-color: #3d3d3d;
+  --logo-src: url(/horizontal-logo-dark.svg);
+   --badge-text-color: #262626;;
 }
 
 #root {
@@ -258,6 +269,10 @@ input:focus {
     --primary-color
   ) !important; /* Optional: change border color too */
   outline: none !important;
+}
+
+input[type="date"] {
+  color-scheme: var(--color-scheme);
 }
 
 .link-reset {

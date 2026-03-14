@@ -13,6 +13,7 @@ import {
   LightBtn,
   LightPillBtn,
   MenuIcon,
+  Paragraph,
   RestoreIcon,
   SearchIcon,
   SettingsIcon,
@@ -91,7 +92,9 @@ const SearchForm = <T extends Query>({
                       key={option.name as string}
                     />
                   ))}
-                {advanced.length === 0 && 'No hay opciones'}
+                {advanced.length === 0 && (
+                  <Paragraph>No hay opciones</Paragraph>
+                )}
               </div>
               <div className="flex justify-end flex-shrink-0 border-t gap-3 p-3">
                 {onExport && (

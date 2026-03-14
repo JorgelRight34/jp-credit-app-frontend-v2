@@ -24,17 +24,20 @@ const getProjectIdFn = createIsomorphicFn()
 export const Route = createFileRoute('/(main)')({
   component: RouteComponent,
   loader: () => getCurrentUserFn(),
-  beforeLoad: () => {
+  beforeLoad: async () => {
     const accessToken = getAuthorizationFn()
     if (!accessToken || !isJwtValid(accessToken)) {
       throw redirect({ to: '/login' })
     }
+
+    const user = await getCurrentUserFn()
+    return { user }
   },
   shouldReload: false,
 })
 
 function RouteComponent() {
-  const user = Route.useLoaderData()
+  const { user } = Route.useRouteContext()
 
   return (
     <div className="flex flex-col md:flex-row h-screen relative">

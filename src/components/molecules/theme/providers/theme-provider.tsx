@@ -34,7 +34,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false
 
     const initial: Theme = saved ?? (systemPrefersDark ? 'dark' : 'light')
-    console.log('saved', saved)
+
     setTheme(initial)
     applyThemeToDom(initial)
   }, [])

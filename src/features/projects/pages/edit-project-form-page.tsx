@@ -1,8 +1,8 @@
-import { EditFormPageLayout, PageLayoutContent } from '@/components'
+import { EditFormPageLayout, PagePanel } from '@/components'
 import { Project } from '../models/project'
-import ProjectForm from '../components/project-form'
 import { projectsPermissionProvider } from '../lib/config/permissionProvider'
 import { projectsBreadcrumb } from './projects-page'
+import ProjectForm from '../components/project-form'
 
 const EditProjectFormPage = ({ project }: { project: Project }) => {
   return (
@@ -11,9 +11,9 @@ const EditProjectFormPage = ({ project }: { project: Project }) => {
       permissionProvider={projectsPermissionProvider}
       title={`Proyecto No. ${project.id} | ${project.name}`}
     >
-      <PageLayoutContent>
+      <PagePanel>
         <ProjectForm project={project} />
-      </PageLayoutContent>
+      </PagePanel>
     </EditFormPageLayout>
   )
 }

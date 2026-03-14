@@ -5,7 +5,7 @@ const FormMasterDetailLayout = ({ children }: PropsWithChildren) => {
 }
 
 FormMasterDetailLayout.Master = ({ children }: PropsWithChildren) => {
-  return <div className="w-8/12">{children}</div>
+  return <div className="flex flex-col w-8/12">{children}</div>
 }
 
 FormMasterDetailLayout.Detail = ({ children }: PropsWithChildren) => {

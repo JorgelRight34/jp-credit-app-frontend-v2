@@ -49,14 +49,14 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
                 toastService.success(toastMessage(data ?? undefined))
             }
 
+            if (resetValues) methods.reset();
+
             if (data) await onSuccess?.(data)
             if (!keysToInvalidate) return;
 
             for (const key of keysToInvalidate) {
                 dataClient.invalidate({ key });
             }
-
-            if (resetValues) methods.reset();
         }
     })
 

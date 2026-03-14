@@ -19,6 +19,7 @@ import { updateUserClaims } from '../services/userClient'
 import { useUserRolesForm } from '../hooks/useUserRolesForm'
 import { usePermissionsForm } from '../hooks/usePermissionsForm'
 import PermissionsFormTransferList from './permissions-form-transfer-list'
+import ResetPasswordForm from './reset-password-form'
 
 type EditUserFormProps = DataModuleFormProps<User, UserFormValues> & {
   user: User
@@ -42,9 +43,10 @@ const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
   return (
     <Tabs>
       <TabsList>
-        <Tab index={0} title="Datos" />
-        <Tab index={1} title="Permisos" />
-        <Tab index={2} title="Roles" />
+        <Tab index={0}>Datos</Tab>
+        <Tab index={1}>Permisos</Tab>
+        <Tab index={2}>Roles</Tab>
+        <Tab index={3}>Contraseña</Tab>
       </TabsList>
       <TabPanel index={0}>
         <FormContainer form={form}>
@@ -56,6 +58,9 @@ const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
       </TabPanel>
       <TabPanel index={2}>
         <UserRolesForm user={user} />
+      </TabPanel>
+      <TabPanel index={3}>
+        <ResetPasswordForm user={user} />
       </TabPanel>
     </Tabs>
   )

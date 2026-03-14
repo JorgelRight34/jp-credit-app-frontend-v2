@@ -96,7 +96,7 @@ const LoanPageRouterLayout = ({
             onClick: () =>
               router.navigate({
                 to: '/transactions/create',
-                search: { tab: 'pay', loanId: loan.id },
+                search: { tab: 0, loanId: loan.id },
               }),
           },
           {
@@ -104,7 +104,7 @@ const LoanPageRouterLayout = ({
             onClick: () =>
               router.navigate({
                 to: '/transactions/create',
-                search: { tab: 'disburse', loanId: loan.id },
+                search: { tab: 1, loanId: loan.id },
               }),
           },
         ]),

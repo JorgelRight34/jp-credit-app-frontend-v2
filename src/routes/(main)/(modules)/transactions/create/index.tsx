@@ -7,7 +7,7 @@ import { getProjectFn } from '../../projects/settings'
 import { getProjectId } from '@/features/projects/server/utils'
 
 const searchSchema = z.object({
-  tab: z.string().optional(),
+  tab: z.number().optional(),
   loanId: z.coerce.number().int().positive().optional(),
   amount: z.coerce.number().positive().optional(),
 })

@@ -2,12 +2,9 @@ import {
   PageLayout,
   PageLayoutBreadcrumb,
   settingsBreadcrumb,
-  TabsList,
-  Tab,
   buildPageLayoutConfirmationModalOption,
   ProtectedComponent,
-  Tabs,
-  TabPanel,
+  PagePanel,
 } from '@/components'
 import { Loan } from '../models/loan'
 import { loanPermissionProvider } from '../lib/config/permission-provider'
@@ -48,14 +45,9 @@ const LoanSettingsPage = ({ loan }: { loan: Loan }) => {
         provider={loanPermissionProvider}
         isAuthorizedFn={(p) => p.canEdit}
       >
-        <Tabs>
-          <TabsList>
-            <Tab index={0}>Estado</Tab>
-          </TabsList>
-          <TabPanel index={1}>
-            <LoanStatusForm loan={loan} />
-          </TabPanel>
-        </Tabs>
+        <PagePanel>
+          <LoanStatusForm loan={loan} />
+        </PagePanel>
       </ProtectedComponent>
     </PageLayout>
   )

@@ -25,17 +25,26 @@ import {
 } from '@/components/atoms'
 
 const options = [
+  // Identity & Access
   profileNavItem,
-  accessControlNavItem,
   accountStatusNavItem,
-  collateralsNavItem,
-  transactionsNavItem,
-  notesNavItem,
+  accessControlNavItem,
+
+  // Core Financial Activity
   loansNavItem,
-  followUpsNavItem,
+  transactionsNavItem,
   financesNavItem,
-  reportsNavItem,
+
+  // Supporting Details
+  collateralsNavItem,
   projectsNavItem,
+
+  // Relationship & Follow-up
+  followUpsNavItem,
+  notesNavItem,
+
+  // Reporting
+  reportsNavItem,
   armotizationsNavItem,
 ]
 

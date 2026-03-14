@@ -1,7 +1,6 @@
 import z from "zod";
 
-export const changePasswordSchema = z.object({
-    id: z.number(),
+export const resetPasswordSchema = z.object({
     password: z.string(),
     confirmation: z.string(),
 })
@@ -10,6 +9,4 @@ export const changePasswordSchema = z.object({
         path: ["confirmation"],
     })
 
-export type ChangePasswordSchemaType = z.infer<
-    typeof changePasswordSchema
->;
+export type ResetPassworFormValues = z.infer<typeof resetPasswordSchema>;

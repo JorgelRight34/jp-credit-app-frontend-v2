@@ -33,7 +33,7 @@ const BaseInput = ({
 }: BaseInputProps) => {
   return (
     <TextField
-      className={clsx('rounded-xl', className, { 'bg-gray-50': disabled })}
+      className={clsx('rounded-xl', className)}
       value={value}
       slotProps={{
         input: {

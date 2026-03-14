@@ -15,6 +15,7 @@ interface TableBodyCompositorProps<T> extends Omit<
 > {
   table: Table<T>
   isLoading?: boolean
+  allowExpand?: boolean
   onRowSelection?: (data?: T) => void
   onExpand?: (row: Row<T>) => ReactNode
 }
@@ -22,6 +23,7 @@ interface TableBodyCompositorProps<T> extends Omit<
 const TableBodyCompositor = <T,>({
   table,
   isLoading,
+  allowExpand,
   onExpand,
   ...props
 }: TableBodyCompositorProps<T>) => {
@@ -38,7 +40,7 @@ const TableBodyCompositor = <T,>({
       {table.getRowModel().rows.map((row) => (
         <React.Fragment key={row.id}>
           <TableRowCompositor row={row} {...props} />
-          {row.getIsExpanded() && (
+          {allowExpand && row.getIsExpanded() && (
             <TableRow className="border-y !bg-surface">
               <TableDataCell
                 colSpan={row.getVisibleCells().length + 1}

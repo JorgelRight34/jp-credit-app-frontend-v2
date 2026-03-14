@@ -16,7 +16,7 @@ const Tabs = ({
   onSelect,
 }: TabsProps) => {
   return (
-    <div className={clsx('h-full', className)}>
+    <div className={clsx('flex flex-col h-full', className)}>
       <TabsProvider defaultActiveKey={defaultActiveIndex} onSelect={onSelect}>
         {children}
       </TabsProvider>

@@ -29,12 +29,13 @@ const TableBuilder = <TData,>({
   infinitePagination = false,
   className,
   isLoading,
+  allowExpand,
   onRowClick,
   onExpand,
   onLimitChange,
   ...config
 }: TableBuilderProps<TData>) => {
-  const table = useTableState({ data, pageSize, ...config })
+  const table = useTableState({ data, pageSize, allowExpand, ...config })
 
   return (
     <TableContainer
@@ -51,6 +52,7 @@ const TableBuilder = <TData,>({
         <TableHeadCompositor table={table} />
         <TableBodyCompositor<TData>
           table={table}
+          allowExpand={allowExpand}
           isLoading={isLoading}
           onRowClick={(r) => onRowClick?.(r.original)}
           onExpand={onExpand}

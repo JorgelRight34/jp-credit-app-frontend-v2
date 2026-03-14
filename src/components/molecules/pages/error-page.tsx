@@ -5,6 +5,7 @@ import {
   InfoIcon,
   Subtitle,
 } from '@/components/atoms'
+import { isRedirect } from '@tanstack/react-router'
 
 const getError = (error: any) => {
   try {
@@ -14,7 +15,9 @@ const getError = (error: any) => {
   }
 }
 
-const Error = ({ error: err }: { error: any }) => {
+const ErrorPage = ({ error: err }: { error: any }) => {
+  if (isRedirect(err)) throw err
+
   const error = getError(err)
 
   return (
@@ -41,4 +44,4 @@ const Error = ({ error: err }: { error: any }) => {
   )
 }
 
-export default Error
+export default ErrorPage
