@@ -11,11 +11,7 @@ type TabsActiveIndexContextType = [
   number,
   (value: number, unmountOnExit?: boolean) => void,
 ]
-type TabsActivePanelIndexContextType = [
-  number,
-  (value: number) => void,
-  boolean,
-]
+type TabsActivePanelIndexContextType = [number, (value: number) => void]
 
 interface ProviderProps extends PropsWithChildren {
   defaultActiveKey?: number
@@ -83,9 +79,7 @@ export const TabsActivePanelIndexProvider = ({
   }, [])
 
   return (
-    <TabsActivePanelIndexContext.Provider
-      value={[index, handleSetIndex, false]}
-    >
+    <TabsActivePanelIndexContext.Provider value={[index, handleSetIndex]}>
       {children}
     </TabsActivePanelIndexContext.Provider>
   )

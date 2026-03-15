@@ -3,7 +3,7 @@ import { SnackbarProps } from './snackbar'
 
 const SnackbarSuccess = ({ data }: SnackbarProps) => {
   return (
-    <div className="flex">
+    <div className="bg-surface flex">
       <Icon icon={CheckCircleIcon} iconClassName="text-green-400">
         {data.title}
       </Icon>
