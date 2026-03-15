@@ -52,9 +52,7 @@ const ReportPage = ({ report }: { report: Report }) => {
           <SavedReportGenerationForm report={report} />
         </TabPanel>
         <TabPanel index={1}>
-          <section>
-            <FileTable files={report.documents.map(mapApiFileToTableFile)} />
-          </section>
+          <FileTable files={report.documents.map(mapApiFileToTableFile)} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

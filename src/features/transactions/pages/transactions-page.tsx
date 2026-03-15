@@ -14,6 +14,8 @@ import {
   TransactionIcon,
 } from '@/components'
 import TransactionDataTable from '../components/transaction-datatable'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 
 export const transactionBreadcrumb: BreadcrumbSpec = {
   icon: TransactionIcon,
@@ -39,6 +41,8 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
 ]
 
 const TransactionsPage = () => {
+  const isSmall = useMediaQuery(SMALL_SCREEN_BREAKPOINT)
+
   return (
     <PageRouterLayout
       title="Transacciones"
@@ -54,6 +58,17 @@ const TransactionsPage = () => {
           <Tab index={1}>Pagos</Tab>
           <Tab index={2}>Desembolsos</Tab>
           <Tab index={3}>Atrasados</Tab>
+          <button
+            className="text-secondary"
+            onClick={() => {
+              console.log(`Current width: ${window.innerWidth}`)
+              console.log(
+                `So isSmall = ${window.innerWidth} < ${SMALL_SCREEN_BREAKPOINT} = ${isSmall}`,
+              )
+            }}
+          >
+            inner width {isSmall ? 'true' : 'false'}
+          </button>
         </TabsList>
         <TabPanel index={0}>
           <TransactionDataTable />

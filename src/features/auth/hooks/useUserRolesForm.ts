@@ -2,13 +2,16 @@ import { userRolesFormSchema } from "../lib/schemas/userRolesFormSchema";
 import { updateUserRoles } from "../services/userClient";
 import { usersQueryKey } from "../lib/constants";
 import type { User } from "../models/user";
-import type { UseDataFormProps } from "@/components";
+import type { DataModuleFormProps, FormRef, UseDataFormProps } from "@/components";
 import type { UserRolesFormValues } from "../lib/schemas/userRolesFormSchema";
 import { useForm } from "@/components";
 
 type UseUserRolesFormProps = UseDataFormProps<null, UserRolesFormValues> & {
     user?: User
 };
+
+export type UserRolesFormProps = DataModuleFormProps<null, UserRolesFormValues>
+export type UserRolesFormRef = FormRef<UserRolesFormValues>
 
 export const useUserRolesForm = ({ user, initialValues, ...props }: UseUserRolesFormProps) => {
     return useForm<any, UserRolesFormValues>({

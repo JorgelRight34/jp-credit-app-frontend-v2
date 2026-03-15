@@ -48,11 +48,7 @@ const options = [
   armotizationsNavItem,
 ]
 
-interface NavbarProps {
-  onSelect?: (link: NavItem) => void
-}
-
-const Navbar = ({ onSelect }: NavbarProps) => {
+const Navbar = () => {
   return (
     <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-surface border-r shadow-sm">
       <div className="border-b flex-shrink-0">
@@ -62,7 +58,7 @@ const Navbar = ({ onSelect }: NavbarProps) => {
           </div>
         </Link>
       </div>
-      <NavbarBody onSelect={onSelect} />
+      <NavbarBody />
       <div className="w-full flex-shrink-0 p-3">
         <NavbarFooter className="bg-active-transparent shadow-sm" />
       </div>
@@ -70,27 +66,21 @@ const Navbar = ({ onSelect }: NavbarProps) => {
   )
 }
 
-const NavbarBody = ({ onSelect }: NavbarProps) => {
+const NavbarBody = () => {
   const [activeNav, setActiveNav] = useState<NavItem | null>(null)
   const hasActiveNavChildren = useMemo(
     () => activeNav?.children && activeNav.children.length > 0,
     [activeNav],
   )
 
-  const handleOnSelect = (option: NavItem) => {
-    setActiveNav(option)
-    onSelect?.(option)
-  }
-
   return (
     <>
       <Activity mode={!hasActiveNavChildren ? 'visible' : 'hidden'}>
-        <NavbarLinksContainer options={options} onExpand={handleOnSelect} />
+        <NavbarLinksContainer options={options} onExpand={setActiveNav} />
       </Activity>
       <Activity mode={hasActiveNavChildren ? 'visible' : 'hidden'}>
         <NavbarLinksContainer
           options={activeNav?.children ?? []}
-          onExpand={handleOnSelect}
           activeOptions={{ includeSearch: true, exact: true }}
         >
           <div className="flex justify-between border-b border-t bg-surface-subtle-transparent p-3 shadow-sm">

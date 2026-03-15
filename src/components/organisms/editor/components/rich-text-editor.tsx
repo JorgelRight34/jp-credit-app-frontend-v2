@@ -12,7 +12,7 @@ const RichTextEditorInput = ({
   return (
     <div
       className={clsx(
-        'w-full flex-1 min-h-[8rem] shadow-sm rounded-xl',
+        'w-full flex-1 min-h-[16rem] md:min-h-[8rem] shadow-sm rounded-xl',
         className,
       )}
       data-color-mode="light"

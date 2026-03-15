@@ -6,7 +6,7 @@ import type { NavItem } from '../../models/navItem'
 type NavbarLinksContainerProps = React.HtmlHTMLAttributes<HTMLDivElement> &
   Omit<NavbarLinkProps, 'option' | 'onExpand'> & {
     options: Array<NavItem>
-    onExpand: (option: NavItem) => void
+    onExpand?: (option: NavItem) => void
   }
 
 const NavbarLinksContainer = ({
@@ -28,7 +28,7 @@ const NavbarLinksContainer = ({
         {options.map((option, index) => (
           <NavbarLink
             key={index}
-            onExpand={() => onExpand(option)}
+            onExpand={() => onExpand?.(option)}
             option={option}
             search={option.search}
             {...props}

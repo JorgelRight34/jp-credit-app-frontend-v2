@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
-import UserRolesFormPanel from './user-roles-form-panel'
 import type { User } from '../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
@@ -20,6 +19,7 @@ import { useUserRolesForm } from '../hooks/useUserRolesForm'
 import { usePermissionsForm } from '../hooks/usePermissionsForm'
 import PermissionsFormTransferList from './permissions-form-transfer-list'
 import ResetPasswordForm from './reset-password-form'
+import UserRolesTransferList from './user-roles-transfer-list'
 
 type EditUserFormProps = DataModuleFormProps<User, UserFormValues> & {
   user: User
@@ -80,7 +80,11 @@ const PermissionsForm = ({ user }: { user: User }) => {
     <FormContainer form={form}>
       <Form form={form}>
         <Suspense fallback="...">
-          <FormInput name="claims" as={PermissionsFormTransferList} />
+          <FormInput
+            name="claims"
+            className="max-h-96"
+            as={PermissionsFormTransferList}
+          />
         </Suspense>
       </Form>
     </FormContainer>
@@ -92,9 +96,15 @@ const UserRolesForm = ({ user }: EditUserFormProps) => {
 
   return (
     <FormContainer form={form}>
-      <Suspense fallback={null}>
-        <UserRolesFormPanel form={form} user={user} />
-      </Suspense>
+      <Form form={form}>
+        <Suspense fallback="...">
+          <FormInput
+            name="roles"
+            className="max-h-96"
+            as={UserRolesTransferList}
+          />
+        </Suspense>
+      </Form>
     </FormContainer>
   )
 }

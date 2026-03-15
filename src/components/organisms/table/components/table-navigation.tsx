@@ -37,38 +37,31 @@ const TableNavigation = <TData,>({
 
   return (
     <div className={clsx('w-full rounded-b-xl bg-surface', className)}>
-      <div className="flex w-full flex-col justify-center p-3 py-2 md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-2">
-          <Subtitle>
-            <span className="hidden md:inline">
-              Mostrando {currentRows} / {totalItems} de la página {page} /{' '}
-              {totalPages}
-            </span>
-            <span className="inline md:hidden">
-              {currentRows} / {totalItems} | pág {page}
-            </span>
-          </Subtitle>
-          <span className="inline md:hidden">
-            <PageSizeSelector
-              onChange={(val) => handlePageSizeChange(+val)}
-              value={pageSize}
-            />
-          </span>
-        </div>
-        <div className="flex flex-col flex-wrap items-center justify-end gap-3 md:flex-row md:justify-center">
+      <div className="w-full gap-3 flex flex-col justify-center p-3 py-2 md:flex-row md:items-center md:justify-between">
+        <Subtitle className="hidden md:inline">
+          Mostrando {currentRows} / {totalItems} de la página {page} /{' '}
+          {totalPages}
+        </Subtitle>
+        <div className="flex flex-wrap items-center justify-end gap-3">
           {/* Items per page selector */}
-          <div className="hidden flex-shrink-0 md:block">
+          <div className="hidden md:flex items-center flex-shrink-0">
             <PageSizeSelector
               onChange={(val) => handlePageSizeChange(+val)}
               value={pageSize}
             />
           </div>
-          <div className="mt-3 flex flex-shrink-0 items-center md:!mt-0">
+          <div className="flex flex-col items-start flex-shrink-0 gap-2 min-w-0">
             <Pagination
               count={totalPages}
               page={table.getState().pagination.pageIndex + 1}
               onChange={(_, val) => table.setPageIndex(val - 1)}
             />
+            <div className="w-full flex justify-end">
+              <Subtitle className="flex text-sm md:hidden">
+                Mostrando {currentRows} / {totalItems} de la página {page} /{' '}
+                {totalPages}
+              </Subtitle>
+            </div>
           </div>
         </div>
       </div>

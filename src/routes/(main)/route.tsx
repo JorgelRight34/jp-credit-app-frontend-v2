@@ -23,7 +23,6 @@ const getProjectIdFn = createIsomorphicFn()
 
 export const Route = createFileRoute('/(main)')({
   component: RouteComponent,
-  loader: () => getCurrentUserFn(),
   beforeLoad: async () => {
     const accessToken = getAuthorizationFn()
     if (!accessToken || !isJwtValid(accessToken)) {
@@ -33,6 +32,7 @@ export const Route = createFileRoute('/(main)')({
     const user = await getCurrentUserFn()
     return { user }
   },
+  staleTime: Infinity,
   shouldReload: false,
 })
 

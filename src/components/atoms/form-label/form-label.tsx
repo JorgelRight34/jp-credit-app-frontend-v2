@@ -1,6 +1,6 @@
 import { FormLabelProps, FormLabel as MFormLabel } from '@mui/material'
 
-const FormLabel = ({ className, ...props }: FormLabelProps) => (
+const FormLabel = ({ className = '', ...props }: FormLabelProps) => (
   <MFormLabel
     {...props}
     className={`w-full ${className}`}

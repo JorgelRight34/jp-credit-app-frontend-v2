@@ -1,9 +1,13 @@
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 import { Pagination as MPagination } from '@mui/material'
 import type { PaginationProps as MPaginationProps } from '@mui/material'
 
 type PaginationProps = MPaginationProps
 
 const Pagination = (props: PaginationProps) => {
+  const isSmall = useMediaQuery(SMALL_SCREEN_BREAKPOINT)
+
   return (
     <MPagination
       variant="outlined"
@@ -27,6 +31,8 @@ const Pagination = (props: PaginationProps) => {
           backgroundColor: 'var(--active-color)',
         },
       }}
+      hidePrevButton={isSmall}
+      hideNextButton={isSmall}
       {...props}
     />
   )

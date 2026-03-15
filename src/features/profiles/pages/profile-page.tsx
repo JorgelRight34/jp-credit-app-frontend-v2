@@ -18,7 +18,14 @@ import {
 import { profilesBreadcrumb } from './profiles-page'
 
 export const buildProfileBreadcrumb = (profile: Profile): BreadcrumbSpec => ({
-  title: profile.firstName,
+  title: (
+    <>
+      <span className="hidden md:block">{profile.firstName}</span>
+      <span className="block md:hidden">
+        {profile.firstName.split(' ')?.[0] ?? profile.firstName}
+      </span>
+    </>
+  ),
   icon: PersonIcon,
   pathname: '/profiles/$id',
   params: { id: profile.id.toString() },
@@ -54,9 +61,7 @@ const ProfilePage = ({ profile }: { profile: Profile }) => {
           <ProfileOverview profile={profile} />
         </TabPanel>
         <TabPanel index={1}>
-          <section>
-            <FileTable files={profile.files.map(mapApiFileToTableFile)} />
-          </section>
+          <FileTable files={profile.files.map(mapApiFileToTableFile)} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 export const useMediaQuery = (breakpoint: number) => {
-    const [isValid, setIsValid] = useState(false);
+    const [isValid, setIsValid] = useState(() => window.innerWidth < breakpoint);
 
     useEffect(() => {
         const handleWindowResize = () => {

@@ -66,9 +66,7 @@ const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
           <CollateralOverview collateral={collateral} />
         </TabPanel>
         <TabPanel index={1}>
-          <section>
-            <FileTable files={collateral.files.map(mapApiFileToTableFile)} />
-          </section>
+          <FileTable files={collateral.files.map(mapApiFileToTableFile)} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

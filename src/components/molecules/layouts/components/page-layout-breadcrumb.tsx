@@ -17,8 +17,11 @@ const PageLayoutBreadcrumb = ({
 
   return (
     <Breadcrumb
+      className="overflow-x-auto"
       maxItems={isSmallScreen ? 3 : 4}
-      breadcrumbs={homeBreadcrumbs.concat(breadcrumbs)}
+      breadcrumbs={
+        isSmallScreen ? breadcrumbs : homeBreadcrumbs.concat(breadcrumbs)
+      }
     />
   )
 }

@@ -16,7 +16,7 @@ export const ND = "N/D"
 
 export const DASHES = "---"
 
-export const SMALL_SCREEN_BREAKPOINT = 500;
+export const SMALL_SCREEN_BREAKPOINT = 768;
 
 export const PERMISSIONS_ENDPOINT_SUFFIX = "permissions"
 

@@ -35,12 +35,11 @@ const TransferList = ({
   } = useTransferList(config)
 
   return (
-    <div className={clsx('flex flex-col md:flex-row', className)}>
-      <div className="w-full md:w-7/15">
+    <div className={clsx('flex flex-1 flex-col md:flex-row', className)}>
+      <div className="w-full h-full md:w-7/15">
         <TransferListBox
           title={leftTitle}
           subtitle={leftSubtitle}
-          className="h-full"
           headerClassName="bg-surface-subtle"
           items={leftItems}
           checked={leftChecked}
@@ -49,7 +48,7 @@ const TransferList = ({
         />
       </div>
 
-      <div className="flex flex-row md:flex-col gap-4 md:gap-8 px-3 py-3 md:py-0 items-center justify-center md:w-1/14">
+      <div className="flex h-full flex-row md:flex-col gap-4 md:gap-8 px-3 py-3 md:py-0 items-center justify-center md:w-1/14">
         <LightBtn
           onClick={moveRight}
           disabled={disabled || leftChecked.size === 0}
@@ -81,11 +80,10 @@ const TransferList = ({
         </LightBtn>
       </div>
 
-      <div className="w-full md:w-7/15">
+      <div className="w-full h-full md:w-7/15">
         <TransferListBox
           title={rightTitle}
           subtitle={rightSubtitle}
-          className="h-full"
           headerClassName="bg-accent"
           subtitleClassName="text-light"
           items={rightItems}

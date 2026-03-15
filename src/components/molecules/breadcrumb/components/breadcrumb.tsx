@@ -11,6 +11,10 @@ const SX = {
   '& .MuiBreadcrumbs-separator': {
     color: 'var(--text-muted)',
   },
+  '& .MuiBreadcrumbs-ol': {
+    flexWrap: 'nowrap',
+    whiteSpace: 'nowrap',
+  },
 }
 
 const Breadcrumb = ({
@@ -21,7 +25,7 @@ const Breadcrumb = ({
   return (
     <div role="presentation" {...props}>
       <Breadcrumbs
-        className="opacity-70"
+        className="overflow-x-auto"
         aria-label="breadcrumb"
         maxItems={maxItems}
         sx={SX}

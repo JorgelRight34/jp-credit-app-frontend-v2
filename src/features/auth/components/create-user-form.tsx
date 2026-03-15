@@ -1,9 +1,5 @@
 import { Ref, Suspense, useRef } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
-import UserRolesFormPanel, {
-  UserRolesFormProps,
-  UserRolesFormRef,
-} from './user-roles-form-panel'
 import type { User } from '../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
@@ -21,12 +17,17 @@ import {
 } from '@/components'
 import { updateUserClaims } from '../services/userClient'
 import UserDataFormPanel from './user-data-form-panel'
-import { useUserRolesForm } from '../hooks/useUserRolesForm'
+import {
+  UserRolesFormProps,
+  UserRolesFormRef,
+  useUserRolesForm,
+} from '../hooks/useUserRolesForm'
 import {
   PermissionsFormRef,
   usePermissionsForm,
 } from '../hooks/usePermissionsForm'
 import PermissionsFormTransferList from './permissions-form-transfer-list'
+import UserRolesTransferList from './user-roles-transfer-list'
 
 type CreateUserAccessFormProps = DataModuleFormProps<User, UserFormValues>
 
@@ -102,7 +103,11 @@ const PermissionsForm = ({ ref }: { ref: Ref<PermissionsFormRef> }) => {
   return (
     <Form ref={ref} form={form}>
       <Suspense fallback="...">
-        <FormInput name="claims" as={PermissionsFormTransferList} />
+        <FormInput
+          name="claims"
+          className="max-h-96"
+          as={PermissionsFormTransferList}
+        />
       </Suspense>
     </Form>
   )
@@ -112,9 +117,15 @@ const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
   const form = useUserRolesForm(props)
 
   return (
-    <Suspense fallback="...">
-      <UserRolesFormPanel form={form} ref={ref} />
-    </Suspense>
+    <Form form={form}>
+      <Suspense fallback="...">
+        <FormInput
+          name="roles"
+          className="max-h-96"
+          as={UserRolesTransferList}
+        />
+      </Suspense>
+    </Form>
   )
 }
 

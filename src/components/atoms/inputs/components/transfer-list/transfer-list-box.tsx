@@ -18,7 +18,7 @@ interface TransferListBoxProps {
   className?: string
   headerClassName?: string
   subtitleClassName?: string
-  onToggle: (id: string, item: TransferItem) => void
+  onToggle: (id: string, item: TransferItem, disabled?: boolean) => void
 }
 
 const TransferListBox = ({
@@ -43,28 +43,26 @@ const TransferListBox = ({
         {title} <span style={{ opacity: 0.6 }}>({items.length})</span>
         <Paragraph className={subtitleClassName}>{subtitle}</Paragraph>
       </div>
-      <div className="flex flex-1 border-x border-b rounded-b-xl overflow-hidden">
-        <div className="bg-surface w-full !max-h-[20rem] overflow-y-auto">
-          {items.map((item) => {
-            const isDisabled = !!disabled || !!item.disabled
+      <div className="flex flex-col flex-1 border-x border-b rounded-b-xl bg-surface w-full overflow-y-auto min-h-0">
+        {items.map((item) => {
+          const isDisabled = !!disabled || !!item.disabled
 
-            return (
-              <FormLabel
-                key={item.id}
-                onClick={() => onToggle(item.id, item)}
-                className={clsx('flex !p-2 items-center hover:bg-stone-100', {
-                  'opacity-50 cursor-not-allowed': isDisabled,
-                })}
-              >
-                <Checkbox
-                  checked={checked.has(item.id)}
-                  disabled={isDisabled}
-                />
-                <span>{item.label}</span>
-              </FormLabel>
-            )
-          })}
-        </div>
+          return (
+            <FormLabel
+              key={item.id}
+              className={clsx('flex !p-2 items-center bg-input-hover', {
+                'opacity-50 cursor-not-allowed': isDisabled,
+              })}
+            >
+              <Checkbox
+                checked={checked.has(item.id)}
+                disabled={isDisabled}
+                onChange={() => onToggle(item.id, item, isDisabled)}
+              />
+              <span>{item.label}</span>
+            </FormLabel>
+          )
+        })}
       </div>
     </div>
   )

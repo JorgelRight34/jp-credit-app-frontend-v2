@@ -1,8 +1,9 @@
 import type { IconName } from "@/components/atoms/icon/models/iconName";
 import type { Route, RouteParams, Search } from "@/components/atoms";
+import { ReactNode } from "react";
 
 export interface BreadcrumbSpec {
-    title?: string | number;
+    title?: ReactNode;
     className?: string;
     labelClassName?: string;
     disabled?: boolean;
