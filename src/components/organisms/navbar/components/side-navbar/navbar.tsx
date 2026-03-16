@@ -23,6 +23,7 @@ import {
   Icon,
   Link,
 } from '@/components/atoms'
+import { PropsWithUser } from '@/models/user'
 
 const options = [
   // Identity & Access
@@ -48,7 +49,7 @@ const options = [
   armotizationsNavItem,
 ]
 
-const Navbar = () => {
+const Navbar = ({ user }: PropsWithUser) => {
   return (
     <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-surface border-r shadow-sm">
       <div className="border-b flex-shrink-0">
@@ -60,7 +61,7 @@ const Navbar = () => {
       </div>
       <NavbarBody />
       <div className="w-full flex-shrink-0 p-3">
-        <NavbarFooter className="bg-active-transparent shadow-sm" />
+        <NavbarFooter user={user} className="bg-active-transparent shadow-sm" />
       </div>
     </div>
   )

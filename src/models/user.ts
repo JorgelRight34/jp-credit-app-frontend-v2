@@ -1,6 +1,6 @@
-import type { Role } from "./role";
+import type { Role } from "../features/auth/models/role";
 import type { FileModel } from "@/models/fileModel";
-import type { ClaimPair } from "./claimPair";
+import type { ClaimPair } from "../features/auth/models/claimPair";
 
 export interface User {
   id: number;
@@ -16,3 +16,5 @@ export interface User {
   lastLogin: string;
   isActive: boolean;
 }
+
+export interface PropsWithUser { user: User }

@@ -7,7 +7,7 @@ import {
   FormRow,
   PasswordInput,
 } from '@/components'
-import { User } from '../models/user'
+import { User } from '../../../models/user'
 import { ResetPassworFormValues } from '../lib/schemas/resetPasswordSchema'
 
 export type ResetPasswordFormProps = DataModuleFormProps<

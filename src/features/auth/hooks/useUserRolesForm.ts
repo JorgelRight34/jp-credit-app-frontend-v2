@@ -1,7 +1,7 @@
 import { userRolesFormSchema } from "../lib/schemas/userRolesFormSchema";
 import { updateUserRoles } from "../services/userClient";
 import { usersQueryKey } from "../lib/constants";
-import type { User } from "../models/user";
+import type { User } from "../../../models/user";
 import type { DataModuleFormProps, FormRef, UseDataFormProps } from "@/components";
 import type { UserRolesFormValues } from "../lib/schemas/userRolesFormSchema";
 import { useForm } from "@/components";

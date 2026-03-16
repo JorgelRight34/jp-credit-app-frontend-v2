@@ -1,7 +1,7 @@
 import type { UserFormValues } from "../lib/schemas/userFormSchema";
 import type { UserQuery } from "../models/userQuery";
 import type { IdentityPermissions } from "../models/identityPermissions";
-import type { User } from "../models/user";
+import type { User } from "../../../models/user";
 import type { PagedResponse } from "@/models";
 import type { ResetPassworFormValues } from "../lib/schemas/resetPasswordSchema";
 import type { UpdatePermissionsHandler } from "../hooks/usePermissionsForm";

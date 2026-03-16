@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useState } from 'react'
 import Modal, { ModalProps } from './modal'
 import type { ReactNode } from 'react'
 
-interface ModalTriggerProps extends Omit<ModalProps, 'show' | 'onHide'> {
+export interface ModalTriggerProps extends Omit<ModalProps, 'show' | 'onHide'> {
   trigger: ReactNode
   triggerClassName?: string
 }
@@ -12,7 +12,7 @@ export type ModalTriggerRef = {
 }
 
 const ModalTrigger = forwardRef<ModalTriggerRef, ModalTriggerProps>(
-  ({ trigger, triggerClassName, children, ...props }, ref) => {
+  ({ trigger, triggerClassName = '', children, ...props }, ref) => {
     const [showModal, setShowModal] = useState(false)
 
     useImperativeHandle(ref, () => ({
@@ -22,7 +22,7 @@ const ModalTrigger = forwardRef<ModalTriggerRef, ModalTriggerProps>(
     return (
       <>
         <span
-          className={`cursor-pointer inline ${triggerClassName}`}
+          className={`cursor-pointer ${triggerClassName}`}
           onClick={() => setShowModal(true)}
         >
           {trigger}

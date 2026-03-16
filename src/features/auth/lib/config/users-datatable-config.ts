@@ -1,5 +1,5 @@
 import { getUsers } from "../../services/userClient"
-import type { User } from "../../models/user"
+import type { User } from "../../../../models/user"
 import type { DataTableConfig } from "@/components";
 import { buildDateDataCell, buildIsActiveDataCell, buildLinkDataCell } from "@/components"
 

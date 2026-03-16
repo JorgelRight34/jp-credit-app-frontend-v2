@@ -1,7 +1,7 @@
 import UserOverview from '../components/user-overview'
 import { userRolesTableColumns } from '../lib/config/roles-datatable-config'
 import { claimsTableColumns } from '../lib/constants'
-import type { User } from '../models/user'
+import type { User } from '../../../models/user'
 import type { IdentityPermissions } from '../models/identityPermissions'
 import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import { getFullName } from '@/lib/utils'

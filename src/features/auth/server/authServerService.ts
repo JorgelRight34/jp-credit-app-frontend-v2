@@ -1,4 +1,4 @@
-import type { User } from "../models/user";
+import type { User } from "../../../models/user";
 import type { LoginResult } from "../models/loginResult";
 import type { IdentityPermissions } from "../models/identityPermissions";
 import type { Role } from "../models/role";

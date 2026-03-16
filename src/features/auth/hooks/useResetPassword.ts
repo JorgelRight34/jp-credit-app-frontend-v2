@@ -1,7 +1,7 @@
 import { resetPassword } from "../services/userClient";
 import type { UseDataFormProps } from "@/components";
 import { useForm } from "@/components";
-import { User } from "../models/user";
+import { User } from "../../../models/user";
 import { resetPasswordSchema, ResetPassworFormValues } from "../lib/schemas/resetPasswordSchema";
 
 interface UseChangeUserPasswordFormProps extends UseDataFormProps<null, ResetPassworFormValues> {

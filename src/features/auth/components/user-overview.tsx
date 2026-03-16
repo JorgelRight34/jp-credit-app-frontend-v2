@@ -1,4 +1,4 @@
-import type { User } from '../models/user'
+import type { User } from '../../../models/user'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import type { DataModuleFormProps } from '@/components'
 import { FormReadOnlyGroup, FormRow } from '@/components'
@@ -36,10 +36,10 @@ const UserOverview = ({ user }: UserFormProps) => {
       </FormRow>
       <FormRow>
         <FormReadOnlyGroup
-        label="Habilitado"
-        name="isActive"
-        value={user.isActive ? 'Activo' : 'Deshabilitado'}
-      />
+          label="Habilitado"
+          name="isActive"
+          value={user.isActive ? 'Activo' : 'Deshabilitado'}
+        />
         <FormReadOnlyGroup
           name="lastAccess"
           label="Ultimo acceso"

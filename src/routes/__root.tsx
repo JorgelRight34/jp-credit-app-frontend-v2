@@ -10,13 +10,13 @@ import { CssBaseline } from '@mui/material'
 import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
-import type { User } from '@/features/auth'
 import {
   Provider,
   TanStackQueryDevtools,
   getContext,
 } from '@/contexts/root-provider'
 import { LoadingBar, LoadingScreen } from '@/components'
+import { User } from '@/models/user'
 
 interface MyRouterContext {
   dataClient: QueryClient

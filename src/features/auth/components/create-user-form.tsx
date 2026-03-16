@@ -1,6 +1,6 @@
 import { Ref, Suspense, useRef } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
-import type { User } from '../models/user'
+import type { User } from '../../../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import {

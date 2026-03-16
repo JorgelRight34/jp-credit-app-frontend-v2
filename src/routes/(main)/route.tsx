@@ -44,13 +44,13 @@ function RouteComponent() {
       <AuthProvider user={user}>
         <ProjectIdProvider initialProjectId={getProjectIdFn()}>
           <div className="w-full md:w-2/14 hidden md:block h-full p-0 shadow-sm">
-            <Navbar />
+            <Navbar user={user} />
           </div>
           <div className="flex bg-background flex-col flex-1 p-0 [scrollbar-gutter:stable] overflow-y-auto">
             <Outlet />
           </div>
           <div className="flex-shrink-0">
-            <BottomNavbar />
+            <BottomNavbar user={user} />
           </div>
         </ProjectIdProvider>
       </AuthProvider>

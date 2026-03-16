@@ -28,7 +28,6 @@ export * from "./lib/utils";
 // Models
 // ----------------------
 export * from "./models/role";
-export * from "./models/user";
 export * from "./models/identityPermissions";
 export * from "./models/userQuery";
 

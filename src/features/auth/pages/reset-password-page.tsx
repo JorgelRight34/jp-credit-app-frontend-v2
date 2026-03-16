@@ -5,7 +5,7 @@ import {
   PagePanel,
 } from '@/components'
 import ResetPasswordForm from '../components/reset-password-form'
-import { User } from '../models/user'
+import { User } from '../../../models/user'
 
 const ResetPasswordPage = ({ user }: { user: User }) => {
   return (
