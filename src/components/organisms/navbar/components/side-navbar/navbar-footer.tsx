@@ -16,11 +16,11 @@ const NavbarFooter = ({ className }: NavbarFooterProps) => {
   return (
     <div
       className={clsx(
-        `flex w-full flex-col rounded border bg-active-transparent p-2`,
+        `bg-active-transparent flex w-full flex-col rounded-lg border p-2`,
         className,
       )}
     >
-      <div className="!flex w-full items-center text-muted">
+      <div className="text-muted !flex w-full items-center">
         <CurrentUserPicCard user={user} className="mr-2" />
         <span className="mr-auto flex flex-col">
           <span>{getFirstAndLastName(user)}</span>

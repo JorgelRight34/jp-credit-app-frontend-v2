@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import Menu from '../../menu/components/menu'
 import PageLayoutOption from './page-layout-option'
-import type { MenuRef } from '../../menu/components/menu'
+import type { MenuOption, MenuRef } from '../../menu/components/menu'
 import type { LayoutOption } from '../models/pageLayoutOption'
 import { Icon, MoreVertIcon } from '@/components/atoms'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
@@ -9,9 +9,11 @@ import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 
 export type PageLayoutOptionsContainerProps = {
   options: Array<LayoutOption>
+  smallScreenExtraMenuOptions?: Array<MenuOption>
 }
 
 const PageLayoutOptionsContainer = ({
+  smallScreenExtraMenuOptions,
   options,
 }: PageLayoutOptionsContainerProps) => {
   return (
@@ -22,7 +24,10 @@ const PageLayoutOptionsContainer = ({
         ))}
       </div>
       <div className="ml-auto block md:hidden">
-        <PageLayoutOptionsMenu options={options} />
+        <PageLayoutOptionsMenu
+          options={options}
+          smallScreenExtraMenuOptions={smallScreenExtraMenuOptions}
+        />
       </div>
     </>
   )
@@ -30,8 +35,10 @@ const PageLayoutOptionsContainer = ({
 
 const PageLayoutOptionsMenu = ({
   options,
+  smallScreenExtraMenuOptions,
 }: {
   options: Array<LayoutOption>
+  smallScreenExtraMenuOptions?: Array<MenuOption>
 }) => {
   const isMobile = useMediaQuery(SMALL_SCREEN_BREAKPOINT)
   const menuRef = useRef<MenuRef>(null)
@@ -46,11 +53,16 @@ const PageLayoutOptionsMenu = ({
       {isMobile && (
         <Menu
           ref={menuRef}
-          options={options.map((el) => ({
-            ...el,
-            label: el.title ?? '',
-            icon: undefined,
-          }))}
+          options={options
+            .map(
+              (el) =>
+                ({
+                  ...el,
+                  label: el.title ?? '',
+                  icon: undefined,
+                }) as MenuOption,
+            )
+            .concat(smallScreenExtraMenuOptions ?? [])}
         />
       )}
     </>

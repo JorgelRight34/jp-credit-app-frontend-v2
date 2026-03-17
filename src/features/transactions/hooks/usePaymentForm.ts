@@ -10,7 +10,7 @@ interface UsePaymentFormProps extends UseDataFormProps<Transaction, PaymentFormV
     project: Project
 }
 
-export const usePaymentForm = ({ project, ...config }: UsePaymentFormProps) => {
+export const usePaymentForm = ({ project, initialValues, ...config }: UsePaymentFormProps) => {
     return useForm({
         schema: paymentFormSchema,
         defaultValues: {
@@ -20,7 +20,8 @@ export const usePaymentForm = ({ project, ...config }: UsePaymentFormProps) => {
             date: getTodayAsInputDate(),
             penaltyRate: project.defaultPenaltyRate,
             description: '',
-            daysOfGrace: project.graceDays
+            daysOfGrace: project.graceDays,
+            ...initialValues
         },
         onSubmit: createPayment,
         keysToInvalidate: [[transactionsQueryKey]],

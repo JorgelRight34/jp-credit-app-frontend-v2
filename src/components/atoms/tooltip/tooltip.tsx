@@ -1,9 +1,7 @@
 import { default as MTooltip } from '@mui/material/Tooltip'
+import { PropsWithChildren } from 'react'
 
-type TooltipProps = {
-  title?: string
-  children: React.ReactElement
-}
+interface TooltipProps extends PropsWithChildren<{ title?: string }> {}
 
 const Tooltip = ({ title, children }: TooltipProps) => {
   if (!title) return children

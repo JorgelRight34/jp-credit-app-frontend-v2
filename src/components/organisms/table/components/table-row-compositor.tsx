@@ -8,13 +8,13 @@ import { startTransition } from 'react'
 export interface TableRowCompositorProps<TData> {
   row: Row<TData>
   className?: string
-  canExpand?: boolean
-  expand?: boolean
+  allowExpand?: boolean // Using this flag is better on perfomance than row.getCanExpand()
   onRowClick?: (row: Row<TData>, event: React.MouseEvent) => void
 }
 
 const TableRowCompositor = <TData,>({
   row,
+  allowExpand,
   className,
 }: TableRowCompositorProps<TData>) => {
   return (
@@ -27,10 +27,10 @@ const TableRowCompositor = <TData,>({
           {flexRender(cell.column.columnDef.cell, cell.getContext())}
         </TableDataCell>
       ))}
-      {row.getCanExpand() && (
+      {allowExpand && (
         <TableDataCell>
           <Icon
-            wrapperClassName="!text-xs md:!text-sm"
+            iconClassName="!text-sm md:!text-base"
             icon={row.getIsExpanded() ? DoNotDisturbOnIcon : AddCircleIcon}
             onClick={(event) => {
               event.stopPropagation()

@@ -9,7 +9,7 @@ const TableHead = ({
 }: TableHeaderProps) => {
   return (
     <thead
-      className={`border-b !overflow-hidden rounded-t-xl ${className}`}
+      className={`bg-surface-subtle !overflow-hidden border-b ${className}`}
       {...props}
     >
       {children}

@@ -11,7 +11,7 @@ const Fieldset = ({
 }) => {
   return (
     <fieldset
-      className={`border w-full rounded-xl bg-surface p-3 px-4 ${className}`}
+      className={`bg-surface w-full rounded-xl border p-3 px-2 md:px-4 ${className}`}
     >
       <legend className={`${legendClassName} text-primary`}>{legend}</legend>
       {children}

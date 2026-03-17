@@ -1,12 +1,13 @@
 import PageLayoutOptionsContainer from './page-layout-options-container'
 import { Suspense, type ReactNode } from 'react'
 import type { LayoutOption } from '../models/pageLayoutOption'
-import { BigTitle } from '@/components'
+import { BigTitle, MenuOption } from '@/components'
 
 export interface PageLayoutProps {
   children: ReactNode
   title: string
   options?: Array<LayoutOption>
+  smallScreenExtraMenuOptions?: Array<MenuOption>
   breadcrumb?: ReactNode
 }
 
@@ -14,6 +15,7 @@ const PageLayout = ({
   children,
   title,
   breadcrumb,
+  smallScreenExtraMenuOptions,
   options = [],
 }: PageLayoutProps) => {
   return (
@@ -21,12 +23,15 @@ const PageLayout = ({
       <div className="hidden w-full border-b p-2 px-3 md:block md:px-5">
         {breadcrumb}
       </div>
-      <div className="flex h-[4.2rem] w-full flex-shrink-0 items-center justify-between overflow-y-auto border-l px-3 py-3 md:px-5">
+      <div className="flex w-full flex-shrink-0 items-center justify-between overflow-y-auto border-l px-3 py-3 md:h-[4.2rem] md:px-5">
         {/* Title */}
         <BigTitle className="border-left-accent mb-0 truncate pl-2">
           {title}
         </BigTitle>
-        <PageLayoutOptionsContainer options={options} />
+        <PageLayoutOptionsContainer
+          options={options}
+          smallScreenExtraMenuOptions={smallScreenExtraMenuOptions}
+        />
       </div>
       {/* Body */}
       <div className="bg-background flex flex-1 flex-col">

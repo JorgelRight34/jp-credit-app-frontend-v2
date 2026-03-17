@@ -12,11 +12,11 @@ const CurrentUserPicCard = ({
 }: CurrentUserPicCardProps) => {
   return (
     <div
-      className={`profile-pic-card-wrapper relative !p-0 md:p-1 ${className}`}
+      className={`profile-pic-card-wrapper relative !p-0 md:!p-1 ${className}`}
       style={{ height: style?.height, width: style?.height }}
       {...props}
     >
-      <div className="profile-pic-card flex items-center justify-center rounded-full bg-white">
+      <div className="profile-pic-card flex items-center justify-center rounded-full border bg-white">
         <span className="text-accent-secondary !text-xs md:text-sm">
           {getNameInitials(user)}
         </span>

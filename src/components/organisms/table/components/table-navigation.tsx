@@ -36,8 +36,8 @@ const TableNavigation = <TData,>({
   }
 
   return (
-    <div className={clsx('bg-surface w-full rounded-b-xl', className)}>
-      <div className="flex w-full flex-col justify-center gap-3 p-3 py-2 md:flex-row md:items-center md:justify-between">
+    <div className={clsx('w-full', className)}>
+      <div className="flex w-full flex-col justify-center gap-3 p-3 !py-2 md:flex-row md:items-center md:justify-between">
         <Subtitle className="hidden md:inline">
           Mostrando {currentRows} / {totalItems} de la página {page} /{' '}
           {totalPages}
@@ -46,6 +46,7 @@ const TableNavigation = <TData,>({
           {/* Items per page selector */}
           <div className="hidden flex-shrink-0 items-center md:flex">
             <PageSizeSelector
+              className="text-sm"
               onChange={(val) => handlePageSizeChange(+val)}
               value={pageSize}
             />

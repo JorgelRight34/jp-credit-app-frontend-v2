@@ -7,7 +7,7 @@ const Table = ({ children, className, ...props }: TableProps) => {
   return (
     <div className="w-full overflow-x-auto">
       <table
-        className={clsx('w-full border-collapse rounded-xl', className)}
+        className={clsx('w-full border-collapse', className)}
         style={{ minWidth: 'max-content' }}
         {...props}
       >

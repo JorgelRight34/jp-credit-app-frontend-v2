@@ -11,8 +11,10 @@ export interface MenuOption {
   disabled?: boolean
   tooltip?: string
   to?: LinkProps['to']
+  search?: LinkProps['search']
   params?: LinkProps['params']
   as?: IconProps['as']
+  className?: string
   icon?: IconName
   onClick?: () => void
 }
@@ -71,9 +73,18 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
       >
         {options.map((option, index) => (
           <Tooltip key={index} title={option.tooltip}>
-            <MenuItem onClick={option.onClick} disabled={option.disabled}>
-              <Link to={option.to} params={option.params}>
+            <MenuItem
+              className={option.className}
+              onClick={option.onClick}
+              disabled={option.disabled}
+            >
+              <Link
+                to={option.to}
+                params={option.params}
+                search={option.search}
+              >
                 <Icon icon={option.icon} label={option.label} as={option.as} />
+                {option.className}
               </Link>
             </MenuItem>
           </Tooltip>

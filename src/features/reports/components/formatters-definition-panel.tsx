@@ -14,11 +14,11 @@ import { formattersDefinition } from '../lib/config/formatters-definition'
 
 const FormattersDefinitionPanel = () => {
   return (
-    <section className="flex">
-      <div className="w-8/12 overflow-y-auto">
+    <section className="flex flex-col md:flex-row">
+      <div className="overflow-y-auto md:w-8/12">
         <FormattersDefinitionTable />
       </div>
-      <div className="w-4/12 pl-6">
+      <div className="md:w-4/12 md:pl-6">
         <RulesFieldset />
       </div>
     </section>
@@ -70,7 +70,7 @@ const RulesFieldset = () => {
           Puedes <span className="font-semibold">combinar pipes</span> para
           encadenar transformaciones:{' '}
           <Chip>
-            <span className="italic font-mono text-xs">
+            <span className="font-mono text-xs italic">
               {'{{ monto | number:trim | upper }}'}
             </span>
           </Chip>

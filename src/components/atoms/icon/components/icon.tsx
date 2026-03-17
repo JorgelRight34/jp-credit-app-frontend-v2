@@ -87,8 +87,8 @@ const Icon = ({
           <span
             className={clsx(
               `font-normal ${
-                orientation === 'left' ? 'ml-2' : 'mr-2'
-              } truncate min-w-0 flex-shrink-1`,
+                icon ? (orientation === 'left' ? 'ml-2' : 'mr-2') : ''
+              } min-w-0 flex-shrink-1 truncate`,
               labelClassName,
               className,
             )}

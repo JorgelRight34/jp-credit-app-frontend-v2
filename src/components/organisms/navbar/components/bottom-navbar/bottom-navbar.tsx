@@ -57,7 +57,7 @@ const NavItem = ({
   children,
   className = '',
 }: PropsWithChildren<{ className?: string }>) => (
-  <span className={`flex flex-col items-center gap-1 ${className}`}>
+  <span className={`text-muted flex flex-col items-center gap-1 ${className}`}>
     {children}
   </span>
 )

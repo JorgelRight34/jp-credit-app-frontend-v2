@@ -20,10 +20,10 @@ import LoanAmortizationPreview from '../components/loan-amortization-preview'
 import { collateralDataTableConfig } from '@/features/collaterals'
 import { loansQueryKey } from '../lib/constants'
 import { buildLoanLabel } from '../lib/utils'
-import { useRouter } from '@/hooks/useRouter'
-import { PropsWithChildren } from 'react'
 import { overviewBreadcrumb } from '@/lib/constants'
 import { loanModuleBreadcrumb } from './loans-page'
+import { TransactionDataTable } from '@/features/transactions'
+import { AdjustmentNoteDataTable } from '@/features/adjustment-notes'
 
 export const buildLoanBreadcrumb = (loan: Loan): BreadcrumbSpec => ({
   title: `Préstamo No.#${loan.id}`,
@@ -42,7 +42,42 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
 
 const LoanPage = ({ loan }: { loan: Loan }) => {
   return (
-    <LoanPageRouterLayout loan={loan}>
+    <PageRouterLayout
+      title={buildLoanLabel(loan)}
+      options={[
+        buildPageLayoutMenuOption([
+          {
+            label: 'Pagar cuota',
+            to: '/transactions/create',
+            search: { tab: 0, loanId: loan.id },
+          },
+          {
+            label: 'Hacer desembolso',
+            to: '/transactions/create',
+            search: { tab: 1, loanId: loan.id },
+          },
+        ]),
+        buildPageLayoutSettingsOption('/loans/$id/settings', {
+          id: loan.id.toString(),
+        }),
+      ]}
+      smallScreenExtraMenuOptions={[
+        {
+          label: 'Pagar cuota',
+          to: '/transactions/create',
+          search: { tab: 0, loanId: loan.id },
+        },
+        {
+          label: 'Hacer desembolso',
+          to: '/transactions/create',
+          search: { tab: 1, loanId: loan.id },
+        },
+      ]}
+      routerConfig={{
+        baseBreadcrumbs: [loanModuleBreadcrumb, buildLoanBreadcrumb(loan)],
+        breadcrumbsByRoute,
+      }}
+    >
       <TabsRouter>
         <TabsList>
           <Tab index={0}>Resumen</Tab>
@@ -65,8 +100,18 @@ const LoanPage = ({ loan }: { loan: Loan }) => {
             startDate={loan.startDate}
           />
         </TabPanel>
-        <TabPanel index={2}></TabPanel>
-        <TabPanel index={3}></TabPanel>
+        <TabPanel index={2}>
+          <TransactionDataTable
+            initialQuery={{ loanId: loan.id }}
+            initialState={{ columnVisibility: { loanId: false } }}
+          />
+        </TabPanel>
+        <TabPanel index={3}>
+          <AdjustmentNoteDataTable
+            initialQuery={{ loanId: loan.id }}
+            initialState={{ columnVisibility: { loanId: false } }}
+          />
+        </TabPanel>
         <TabPanel index={4}>
           <DataTable
             query={{ loanId: loan.id }}
@@ -76,48 +121,6 @@ const LoanPage = ({ loan }: { loan: Loan }) => {
           />
         </TabPanel>
       </TabsRouter>
-    </LoanPageRouterLayout>
-  )
-}
-
-const LoanPageRouterLayout = ({
-  loan,
-  children,
-}: { loan: Loan } & PropsWithChildren) => {
-  const router = useRouter()
-
-  return (
-    <PageRouterLayout
-      title={buildLoanLabel(loan)}
-      options={[
-        buildPageLayoutMenuOption([
-          {
-            label: 'Pagar cuota',
-            onClick: () =>
-              router.navigate({
-                to: '/transactions/create',
-                search: { tab: 0, loanId: loan.id },
-              }),
-          },
-          {
-            label: 'Hacer desembolso',
-            onClick: () =>
-              router.navigate({
-                to: '/transactions/create',
-                search: { tab: 1, loanId: loan.id },
-              }),
-          },
-        ]),
-        buildPageLayoutSettingsOption('/loans/$id/settings', {
-          id: loan.id.toString(),
-        }),
-      ]}
-      routerConfig={{
-        baseBreadcrumbs: [loanModuleBreadcrumb, buildLoanBreadcrumb(loan)],
-        breadcrumbsByRoute,
-      }}
-    >
-      {children}
     </PageRouterLayout>
   )
 }

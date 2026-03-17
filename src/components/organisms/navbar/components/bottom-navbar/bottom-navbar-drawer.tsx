@@ -16,12 +16,7 @@ const BottomNavbarDrawer = ({ user, ...props }: PropsWithUser<IconProps>) => {
 
   return (
     <>
-      <Icon
-        {...props}
-        iconClassName="text-secondary"
-        icon={SearchIcon}
-        onClick={toggleOpenDrawer}
-      />
+      <Icon {...props} icon={SearchIcon} onClick={toggleOpenDrawer} />
       <Drawer open={openDrawer} onClose={close}>
         <div role="presentation" className="h-full w-[70dvw]">
           <Navbar user={user} />

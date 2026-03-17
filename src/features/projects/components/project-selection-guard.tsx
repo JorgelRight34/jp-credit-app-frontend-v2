@@ -18,7 +18,10 @@ const ProjectSelectionGuard = ({ children }: PropsWithChildren) => {
   return (
     <div>
       <div className="flex justify-center">
-        <Icon icon={FolderOpenIcon} className="mx-auto mb-5 text-secondary" />
+        <Icon
+          icon={FolderOpenIcon}
+          className="text-secondary mx-auto mb-5 text-6xl"
+        />
       </div>
       <header className="mb-5">
         <h1 className="mb-3 text-center text-2xl font-semibold text-gray-800">

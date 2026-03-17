@@ -2,7 +2,7 @@ import './modal.css'
 import React, { ReactNode, useRef } from 'react'
 import clsx from 'clsx'
 import { createPortal } from 'react-dom'
-import { CloseIcon, Icon, IconName } from '@/components/atoms'
+import { BigTitle, CloseIcon, Icon, IconName } from '@/components/atoms'
 
 export interface ModalProps extends React.PropsWithChildren {
   className?: string
@@ -55,12 +55,9 @@ const Modal = ({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-shrink-0 items-center border-b pb-3">
-          <Icon
-            labelClassName="!text-2xl"
-            wrapperClassName="mb-0 mr-auto"
-            icon={icon}
-            label={title}
-          />
+          <Icon wrapperClassName="mb-0 mr-auto" icon={icon}>
+            <BigTitle>{title}</BigTitle>
+          </Icon>
           {showCloseBtn && (
             <Icon
               onClick={onHide}

@@ -24,7 +24,7 @@ const NavbarAppSettingsTrigger = ({
   return (
     <ModalTrigger
       title={<Icon icon={SettingsIcon}>Opciones</Icon>}
-      className="md:w[25dvw] w-[80dvw]"
+      className="w-[80dvw] md:!w-[25dvw]"
       trigger={children}
       ref={ref}
       {...props}
