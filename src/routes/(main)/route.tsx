@@ -40,13 +40,13 @@ function RouteComponent() {
   const { user } = Route.useRouteContext()
 
   return (
-    <div className="flex flex-col md:flex-row h-screen relative">
+    <div className="relative flex h-[100dvh] flex-col md:flex-row">
       <AuthProvider user={user}>
         <ProjectIdProvider initialProjectId={getProjectIdFn()}>
-          <div className="w-full md:w-2/14 hidden md:block h-full p-0 shadow-sm">
+          <div className="hidden h-full w-full p-0 shadow-sm md:block md:w-2/14">
             <Navbar user={user} />
           </div>
-          <div className="flex bg-background flex-col flex-1 p-0 [scrollbar-gutter:stable] overflow-y-auto">
+          <div className="bg-background flex flex-1 flex-col overflow-y-auto p-0 [scrollbar-gutter:stable]">
             <Outlet />
           </div>
           <div className="flex-shrink-0">

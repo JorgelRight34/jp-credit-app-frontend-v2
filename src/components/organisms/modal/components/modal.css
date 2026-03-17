@@ -16,10 +16,3 @@
   max-height: 99dvw !important;
   z-index: 999;
 }
-
-@media (max-width: 500px) {
-  .my-modal {
-    width: 99dvw !important;
-    height: 99dvh !important;
-  }
-}

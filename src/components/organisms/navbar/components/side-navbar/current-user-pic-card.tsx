@@ -7,15 +7,17 @@ type CurrentUserPicCardProps = HTMLAttributes<HTMLDivElement> & PropsWithUser
 const CurrentUserPicCard = ({
   user,
   className = '',
+  style,
   ...props
 }: CurrentUserPicCardProps) => {
   return (
     <div
-      className={`relative profile-pic-card-wrapper ${className}`}
+      className={`profile-pic-card-wrapper relative !p-0 md:p-1 ${className}`}
+      style={{ height: style?.height, width: style?.height }}
       {...props}
     >
-      <div className="rounded-full bg-white flex justify-center items-center profile-pic-card">
-        <span className="text-sm text-accent-secondary">
+      <div className="profile-pic-card flex items-center justify-center rounded-full bg-white">
+        <span className="text-accent-secondary !text-xs md:text-sm">
           {getNameInitials(user)}
         </span>
       </div>

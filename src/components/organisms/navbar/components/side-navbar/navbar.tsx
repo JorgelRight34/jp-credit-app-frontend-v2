@@ -51,8 +51,8 @@ const options = [
 
 const Navbar = ({ user }: PropsWithUser) => {
   return (
-    <div className="side-navbar rounded-bottom-lg relative flex h-full w-full flex-col bg-surface border-r shadow-sm">
-      <div className="border-b flex-shrink-0">
+    <div className="side-navbar rounded-bottom-lg bg-surface relative flex h-full w-full flex-col border-r shadow-sm">
+      <div className="flex-shrink-0 border-b">
         <Link to="/">
           <div className="flex items-center p-3">
             <AppHorizontalLogo />
@@ -60,7 +60,7 @@ const Navbar = ({ user }: PropsWithUser) => {
         </Link>
       </div>
       <NavbarBody />
-      <div className="w-full flex-shrink-0 p-3">
+      <div className="hidden w-full flex-shrink-0 p-3 md:block">
         <NavbarFooter user={user} className="bg-active-transparent shadow-sm" />
       </div>
     </div>
@@ -84,7 +84,7 @@ const NavbarBody = () => {
           options={activeNav?.children ?? []}
           activeOptions={{ includeSearch: true, exact: true }}
         >
-          <div className="flex justify-between border-b border-t bg-surface-subtle-transparent p-3 shadow-sm">
+          <div className="bg-surface-subtle-transparent flex justify-between border-t border-b p-3 shadow-sm">
             <div className="border-left-accent">
               <Icon
                 className="text-accent-secondary cursor-pointer"

@@ -16,7 +16,7 @@ const UserRolesTransferList = (props: InputProps) => {
   } = useDataWithPagination({
     key: [rolesQueryKey, 'form-list-options'],
     staleTime: 1,
-    loader: (page) => getRoles({ page, limit: 1 }),
+    loader: (page) => getRoles({ page, limit: 25, orderBy: 'name' }),
   })
 
   if (!data) return null

@@ -1,5 +1,5 @@
 import { Activity, useState } from 'react'
-import { Form, FormInput, useHasFormEverBeenDirty } from '../../form'
+import { Form, FormInput } from '../../form'
 import { WIDTH_CLASS_MAP } from '../lib/constants'
 import type { PropsWithChildren } from 'react'
 import type { DefaultFormValues, SchemaType } from '../../form'
@@ -7,6 +7,7 @@ import type { SearchFormOption } from '../models/searchFormOption'
 import type { Query } from '../models/query'
 import {
   AccentBtn,
+  AccentPillBtn,
   DownloadIcon,
   FormLabel,
   Icon,
@@ -18,9 +19,8 @@ import {
   SearchIcon,
   SettingsIcon,
 } from '@/components/atoms'
-import { FieldValues } from 'react-hook-form'
 import { useSearchFormSubmit } from '../providers/search-form-provider'
-import { useFormMethods, UseFormReturn } from '../../form/hooks/useFormMethods'
+import { useFormMethods } from '../../form/hooks/useFormMethods'
 import { ModalTrigger } from '../../modal'
 import { ExportForm, ExportHandler } from '@/components/molecules'
 
@@ -53,7 +53,7 @@ const SearchForm = <T extends Query>({
       <section className="py-1">
         <div className="flex flex-col items-center overflow-y-visible">
           <div className="flex w-full min-w-0">
-            <div className="flex flex-1 min-w-0 items-center">
+            <div className="flex min-w-0 flex-1 items-center">
               {options.map((option) => (
                 <SearchFormGroupContainer
                   width={option.width}
@@ -70,10 +70,14 @@ const SearchForm = <T extends Query>({
               ))}
             </div>
             <div className="flex shrink-0 items-center gap-1 pl-1">
-              <SubmitBtn form={form} />
+              <AccentBtn
+                icon={SearchIcon}
+                className="!hidden h-full shadow-sm md:!block"
+                onClick={form.submit}
+              />
               <LightBtn
                 icon={MenuIcon}
-                className="border shadow-sm"
+                className="h-full border shadow-sm"
                 type="button"
                 onClick={() => {
                   setShowAdvanced((prev) => !prev)
@@ -83,8 +87,8 @@ const SearchForm = <T extends Query>({
             </div>
           </div>
           <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
-            <div className="rounded-xl flex-col flex mt-3 flex w-full shadow-sm border bg-surface">
-              <div className="flex-1 flex flex-wrap space-y-3 p-3">
+            <div className="bg-surface mt-3 flex w-full flex-col rounded-xl border shadow-sm">
+              <div className="flex flex-1 flex-wrap space-y-3 p-3">
                 {hasOpenedAdvanced &&
                   advanced.map((option) => (
                     <AdvancedSearchFormGroup
@@ -96,7 +100,16 @@ const SearchForm = <T extends Query>({
                   <Paragraph>No hay opciones</Paragraph>
                 )}
               </div>
-              <div className="flex justify-end flex-shrink-0 border-t gap-3 p-3">
+              <div className="flex flex-shrink-0 justify-end gap-3 border-t p-3">
+                <span>
+                  <AccentPillBtn
+                    icon={SearchIcon}
+                    className="shadow-sm"
+                    onClick={form.submit}
+                  >
+                    Buscar
+                  </AccentPillBtn>
+                </span>
                 {onExport && (
                   <span>
                     <SearchFormExportBtn form={form} onExport={onExport} />
@@ -118,23 +131,6 @@ const SearchForm = <T extends Query>({
   )
 }
 
-const SubmitBtn = <T extends FieldValues>({
-  form,
-}: {
-  form: UseFormReturn<T>
-}) => {
-  const hasEverBeenDirty = useHasFormEverBeenDirty(form.control)
-
-  return (
-    <AccentBtn
-      disabled={!hasEverBeenDirty}
-      icon={SearchIcon}
-      className="shadow-sm"
-      onClick={form.submit}
-    />
-  )
-}
-
 const AdvancedSearchFormGroup = <T,>({
   option,
 }: {
@@ -142,7 +138,7 @@ const AdvancedSearchFormGroup = <T,>({
 }) => {
   return (
     <SearchFormGroupContainer width={option.width}>
-      <div className="flex flex-1 items-start flex-col gap-2">
+      <div className="flex flex-1 flex-col items-start gap-2">
         <FormLabel htmlFor={option.name as string}>
           {option.label} <span className="text-accent">&nbsp;*&nbsp;</span>
         </FormLabel>
@@ -181,7 +177,7 @@ const SearchFormGroupContainer = ({
   children,
 }: { width: number } & PropsWithChildren) => {
   return (
-    <div className={`px-1 w-full md:${WIDTH_CLASS_MAP[width]}`}>{children}</div>
+    <div className={`w-full px-1 md:${WIDTH_CLASS_MAP[width]}`}>{children}</div>
   )
 }
 

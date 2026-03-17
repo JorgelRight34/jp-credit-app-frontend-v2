@@ -17,4 +17,4 @@ export interface User {
   isActive: boolean;
 }
 
-export interface PropsWithUser { user: User }
+export type PropsWithUser<T = object> = { user: User } & T

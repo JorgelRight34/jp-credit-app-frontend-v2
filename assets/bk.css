@@ -60,9 +60,9 @@
   --badge-text-color: #262626;
 }
 
-body {
-  background-color: var(--background) !important;
-  font-family: Arial !important;
+#root {
+  height: 100dvh;
+  font-family: Arial;
   color: var(--text-color) !important;
 }
 
@@ -266,14 +266,6 @@ body {
   color: var(--active-color) !important;
 }
 
-tr:nth-child(even) {
-  background-color: var(--surface-subtle) !important;
-}
-
-tr:nth-child(odd) {
-  background-color: var(--surface) !important;
-}
-
 input:focus {
   box-shadow: 0 0 0 0.01rem var(--active-color) !important; /* Indigo ring */
   border-color: var(
@@ -384,16 +376,12 @@ tbody tr:nth-child(even) {
   background: transparent;
 }
 
-@media (max-width: 784px) {
+@media (max-width: var(--small-breakpoint)) {
   * {
     scrollbar-width: none !important;
   }
 
   *::-webkit-scrollbar {
     display: none !important;
-  }
-
-  body {
-    font-size: 14px !important;
   }
 }

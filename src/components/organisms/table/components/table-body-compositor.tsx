@@ -30,7 +30,7 @@ const TableBodyCompositor = <T,>({
   if (isLoading)
     return (
       <TableBodySkeleton
-        pageSize={table.getState().pagination.pageSize}
+        pageSize={10}
         columnsLength={table.getVisibleLeafColumns().length}
       />
     )
@@ -41,7 +41,7 @@ const TableBodyCompositor = <T,>({
         <React.Fragment key={row.id}>
           <TableRowCompositor row={row} {...props} />
           {allowExpand && row.getIsExpanded() && (
-            <TableRow className="border-y !bg-surface">
+            <TableRow className="!bg-surface border-y">
               <TableDataCell
                 colSpan={row.getVisibleCells().length + 1}
                 className="p-0 align-top"

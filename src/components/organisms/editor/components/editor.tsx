@@ -50,7 +50,7 @@ const Editor = ({
 
   return (
     <div
-      className={clsx('flex h-full flex-col bg-surface rounded-xl', className)}
+      className={clsx('bg-surface flex h-full flex-col rounded-xl', className)}
     >
       <EditorToolBar
         className="flex-shrink-0 rounded-t-xl border"
@@ -59,7 +59,7 @@ const Editor = ({
 
       <EditorContent
         editor={editor}
-        className="text-secondary flex-1 border [&_ProseMirror]:overflow-y-auto"
+        className="text-secondary flex-1 rounded-b-xl border [&_ProseMirror]:overflow-y-auto"
       />
       <div className="flex-shrink-0">{children}</div>
     </div>

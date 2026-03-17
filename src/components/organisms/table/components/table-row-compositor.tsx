@@ -30,6 +30,7 @@ const TableRowCompositor = <TData,>({
       {row.getCanExpand() && (
         <TableDataCell>
           <Icon
+            wrapperClassName="!text-xs md:!text-sm"
             icon={row.getIsExpanded() ? DoNotDisturbOnIcon : AddCircleIcon}
             onClick={(event) => {
               event.stopPropagation()

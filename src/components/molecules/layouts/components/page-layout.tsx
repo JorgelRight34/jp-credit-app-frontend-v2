@@ -17,9 +17,11 @@ const PageLayout = ({
   options = [],
 }: PageLayoutProps) => {
   return (
-    <div className="flex flex-1 w-full flex-col pb-6 shadow-sm">
-      <div className="border-b w-full p-2 px-6">{breadcrumb}</div>
-      <div className="pt-lg-0 px-6 px-lg-3 flex w-full flex-shrink-0 items-center justify-between py-3 h-[4.2rem] overflow-y-auto flex-shrink-0">
+    <div className="flex w-full flex-1 flex-col pb-3 shadow-sm">
+      <div className="hidden w-full border-b p-2 px-3 md:block md:px-5">
+        {breadcrumb}
+      </div>
+      <div className="flex h-[4.2rem] w-full flex-shrink-0 items-center justify-between overflow-y-auto border-l px-3 py-3 md:px-5">
         {/* Title */}
         <BigTitle className="border-left-accent mb-0 truncate pl-2">
           {title}
@@ -27,8 +29,8 @@ const PageLayout = ({
         <PageLayoutOptionsContainer options={options} />
       </div>
       {/* Body */}
-      <div className="flex flex-col flex-1 flex flex-1 flex-col p-0 bg-background">
-        <div className="flex flex-1 flex-col px-3">
+      <div className="bg-background flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col px-3 md:px-5">
           <Suspense fallback={null}>{children}</Suspense>
         </div>
       </div>

@@ -50,8 +50,7 @@ const PickerInputDisplay = <T, TValue>({
       {...modalProps}
       modalOverlay="bg-black/25"
       triggerClassName="w-full"
-      width="75dvw"
-      height="95dvh"
+      modalClassName="!w-[97dvw] md:!w-[75dvw] !h-[95dvh]"
       ref={modalTriggerRef}
       trigger={
         <Input

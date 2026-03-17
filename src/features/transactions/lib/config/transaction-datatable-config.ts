@@ -24,7 +24,7 @@ export const transactionDataTableConfig: DataTableConfig<Transaction> = {
             enableSorting: true,
             cell: ({ row }) => buildLinkDataCell(buildProfileFullName(row.original.client), {
                 to: "/profiles/$id",
-                params: { id: row.original.actorId?.toString() }
+                params: { id: row.original.client.profileId?.toString() }
             }),
         },
         {

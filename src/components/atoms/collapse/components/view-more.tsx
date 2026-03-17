@@ -10,7 +10,7 @@ const ViewMore = ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
       {expanded !== true && (
         <ViewButtonContainer {...props}>
           <Icon
-            className="cursor-pointer text-accent"
+            className="text-accent cursor-pointer"
             icon={ArrowDownwardIcon}
             onClick={() => setExpanded((prev) => !prev)}
           >
@@ -26,7 +26,7 @@ const ViewMore = ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
       {expanded === true && (
         <ViewButtonContainer {...props}>
           <Icon
-            className="cursor-pointer text-accent"
+            className="text-accent mt-3 cursor-pointer"
             icon={ArrowUpwardIcon}
             onClick={() => setExpanded((prev) => !prev)}
           >
@@ -43,7 +43,7 @@ const ViewButtonContainer = ({
   className,
 }: HTMLAttributes<HTMLDivElement>) => {
   return (
-    <div className={clsx('flex justify-end pb-1 border-b', className)}>
+    <div className={clsx('flex justify-end border-b pb-1', className)}>
       <span>{children}</span>
     </div>
   )

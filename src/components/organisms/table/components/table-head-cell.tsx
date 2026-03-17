@@ -7,7 +7,7 @@ const TableHeadCell = ({ children, className, ...props }: TableHeadProps) => {
   return (
     <th
       className={clsx(
-        'text-sm bg-surface-subtle text-primary font-normal transition-colors hover:bg-stone-200 px-4 py-2 whitespace-normal',
+        'bg-surface-subtle text-primary px-3 py-2 text-xs font-normal whitespace-normal transition-colors hover:bg-stone-200 md:px-4 md:text-sm',
         className,
       )}
       {...props}

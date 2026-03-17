@@ -31,8 +31,7 @@ const Pagination = (props: PaginationProps) => {
           backgroundColor: 'var(--active-color)',
         },
       }}
-      hidePrevButton={isSmall}
-      hideNextButton={isSmall}
+      siblingCount={isSmall ? 0 : undefined}
       {...props}
     />
   )

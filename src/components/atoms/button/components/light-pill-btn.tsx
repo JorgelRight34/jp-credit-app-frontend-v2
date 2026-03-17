@@ -7,7 +7,7 @@ export type LightPillBtnProps = LightBtnProps
 
 const LightPillBtn = ({ className, ...props }: LightPillBtnProps) => {
   return (
-    <LightBtn className={clsx('px-6 !rounded-full', className)} {...props} />
+    <LightBtn className={clsx('!rounded-full !px-6', className)} {...props} />
   )
 }
 
@@ -18,7 +18,7 @@ export const LightPillLinkBtn = ({
 }: LightPillBtnProps & LinkProps) => {
   return (
     <Link to={to}>
-      <LightBtn className={clsx('px-6 !rounded-full', className)} {...props} />
+      <LightBtn className={clsx('!rounded-full !px-6', className)} {...props} />
     </Link>
   )
 }

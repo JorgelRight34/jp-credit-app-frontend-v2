@@ -42,7 +42,7 @@ const LoanStatusFormInner = ({ loan, ...props }: LoanStatusFormProps) => {
 
 const LoanStatusCardsInput = ({ value, onChange }: InputProps) => {
   return (
-    <div className="grid grid-cols-2 gap-6 p-6">
+    <div className="grid grid-cols-1 gap-6 p-0 md:grid-cols-2 md:p-6">
       {LOAN_STATUS_CARD_OPTIONS.map(({ status, title, icon, description }) => (
         <LoanStatusCard
           key={status}

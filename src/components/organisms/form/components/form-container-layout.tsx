@@ -17,12 +17,12 @@ const FormLayout = ({
 }: FormLayoutProps) => {
   return (
     <form
-      className={clsx('!h-full w-full px-3 flex flex-col', className)}
+      className={clsx('flex !h-full w-full flex-col', className)}
       onSubmit={onSubmit}
     >
-      <div className="flex flex-1 gap-6 flex-col">{children}</div>
+      <div className="flex flex-1 flex-col gap-6">{children}</div>
       {errors && <div className="flex-shrink-0">{errors}</div>}
-      {footer && <div className="pt-6 flex-shrink-0">{footer}</div>}
+      {footer && <div className="flex-shrink-0 pt-6">{footer}</div>}
     </form>
   )
 }

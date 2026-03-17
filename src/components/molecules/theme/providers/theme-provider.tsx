@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react'
 
-type Theme = 'light' | 'dark'
+type Theme = 'light' | 'dark' // Change to numbers
 
 type ThemeContextValue = {
   theme: Theme
@@ -33,10 +33,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const systemPrefersDark =
       window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false
 
-    const initial: Theme = saved ?? (systemPrefersDark ? 'dark' : 'light')
-
-    setTheme(initial)
-    applyThemeToDom(initial)
+    setTheme(saved ?? (systemPrefersDark ? 'dark' : 'light'))
   }, [])
 
   const toggle = () => {

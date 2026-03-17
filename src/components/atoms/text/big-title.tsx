@@ -6,7 +6,10 @@ const BigTitle = ({
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement>) => {
   return (
-    <h1 className={clsx('text-2xl text-primary mb-0', className)} {...props}>
+    <h1
+      className={clsx('text-primary mb-0 text-xl md:text-2xl', className)}
+      {...props}
+    >
       {children}
     </h1>
   )

@@ -4,7 +4,7 @@ const FormLabel = ({ className = '', ...props }: FormLabelProps) => (
   <MFormLabel
     {...props}
     className={`w-full ${className}`}
-    sx={{ color: `var(--text-secondary)` }}
+    sx={{ color: `var(--text-secondary)`, fontSize: 'inherit' }}
   />
 )
 

@@ -12,6 +12,7 @@ const SnackbarContainer = () => {
       draggable
       pauseOnHover
       icon={false}
+      toastClassName="bg-surface"
     />
   )
 }

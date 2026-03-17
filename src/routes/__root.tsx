@@ -27,6 +27,7 @@ const context = getContext()
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
+    title: 'JP Apoyo Empresarial',
     meta: [
       {
         charSet: 'utf-8',
@@ -34,9 +35,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1',
-      },
-      {
-        title: 'JP Apoyo Empresarial',
       },
     ],
     links: [

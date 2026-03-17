@@ -7,7 +7,7 @@ export type AccentPillBtnProps = AccentBtnProps
 
 const AccentPillBtn = ({ className, ...props }: AccentPillBtnProps) => {
   return (
-    <AccentBtn className={clsx('px-6 !rounded-full', className)} {...props} />
+    <AccentBtn className={clsx('!rounded-full !px-6', className)} {...props} />
   )
 }
 
@@ -18,7 +18,10 @@ export const AccentPillLinkBtn = ({
 }: AccentPillBtnProps & LinkProps) => {
   return (
     <Link to={to}>
-      <AccentBtn className={clsx('px-6 !rounded-full', className)} {...props} />
+      <AccentBtn
+        className={clsx('!rounded-full !px-6', className)}
+        {...props}
+      />
     </Link>
   )
 }

@@ -11,7 +11,7 @@ interface CrumbProps extends LinkProps {
 const Crumb = ({ isLast, breadcrumb, ...props }: CrumbProps) => {
   return (
     <Link
-      className={clsx('flex text-sm text-muted hover-accent items-center', {
+      className={clsx('text-muted hover-accent flex items-center text-sm', {
         '!cursor-pointer': !isLast,
         'opacity-50': isLast,
       })}

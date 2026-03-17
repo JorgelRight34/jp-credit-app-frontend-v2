@@ -36,27 +36,29 @@ const TableNavigation = <TData,>({
   }
 
   return (
-    <div className={clsx('w-full rounded-b-xl bg-surface', className)}>
-      <div className="w-full gap-3 flex flex-col justify-center p-3 py-2 md:flex-row md:items-center md:justify-between">
+    <div className={clsx('bg-surface w-full rounded-b-xl', className)}>
+      <div className="flex w-full flex-col justify-center gap-3 p-3 py-2 md:flex-row md:items-center md:justify-between">
         <Subtitle className="hidden md:inline">
           Mostrando {currentRows} / {totalItems} de la página {page} /{' '}
           {totalPages}
         </Subtitle>
         <div className="flex flex-wrap items-center justify-end gap-3">
           {/* Items per page selector */}
-          <div className="hidden md:flex items-center flex-shrink-0">
+          <div className="hidden flex-shrink-0 items-center md:flex">
             <PageSizeSelector
               onChange={(val) => handlePageSizeChange(+val)}
               value={pageSize}
             />
           </div>
-          <div className="flex flex-col items-start flex-shrink-0 gap-2 min-w-0">
-            <Pagination
-              count={totalPages}
-              page={table.getState().pagination.pageIndex + 1}
-              onChange={(_, val) => table.setPageIndex(val - 1)}
-            />
-            <div className="w-full flex justify-end">
+          <div className="min-w-0 flex-shrink-0 space-y-2">
+            <div className="flex w-full justify-end">
+              <Pagination
+                count={totalPages}
+                page={table.getState().pagination.pageIndex + 1}
+                onChange={(_, val) => table.setPageIndex(val - 1)}
+              />
+            </div>
+            <div className="flex w-full justify-end">
               <Subtitle className="flex text-sm md:hidden">
                 Mostrando {currentRows} / {totalItems} de la página {page} /{' '}
                 {totalPages}

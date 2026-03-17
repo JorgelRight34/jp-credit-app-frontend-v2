@@ -29,7 +29,7 @@ const Button = ({
   return (
     <Component
       className={clsx(
-        `flex cursor-pointer w-full inline items-center justify-center rounded-xl p-2 text-white shadow-sm`,
+        `flex inline w-full cursor-pointer items-center justify-center rounded-xl p-1 text-white shadow-sm md:p-2`,
         className,
         { '!cursor-not-allowed !opacity-50': disabled },
       )}

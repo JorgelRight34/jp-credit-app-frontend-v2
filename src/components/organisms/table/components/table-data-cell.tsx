@@ -7,7 +7,7 @@ const TableDataCell = ({ children, className, ...props }: TableDataProps) => {
   return (
     <td
       className={clsx(
-        'px-4 py-1.5 text-sm text-secondary !font-light whitespace-normal',
+        'text-secondary px-3 py-2 text-xs !font-light whitespace-normal md:px-4 md:py-1.5 md:text-sm',
         className,
       )}
       {...props}

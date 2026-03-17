@@ -3,12 +3,15 @@ export const SX_CONFIG = {
     "& .MuiInputLabel-root": {        // ← moved up, outside MuiOutlinedInput-root
         color: "var(--text-muted)",
     },
+    '& .MuiInputBase-input': { fontSize: 'inherit' },
+    '& .MuiInputHelperText-root': { fontSize: 'inherit' },
     "& .MuiOutlinedInput-root": {
         borderRadius: "0.5rem",
         backgroundColor: "var(--surface)",
         '&.Mui-focused': {
             outline: 'none',
         },
+        fontSize: 'inherit',
 
         '& fieldset': {
             borderColor: 'var(--bs-border-color)',

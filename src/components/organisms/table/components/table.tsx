@@ -5,9 +5,9 @@ type TableProps = TableHTMLAttributes<HTMLTableElement>
 
 const Table = ({ children, className, ...props }: TableProps) => {
   return (
-    <div className="overflow-x-auto w-full">
+    <div className="w-full overflow-x-auto">
       <table
-        className={clsx('border-collapse w-full rounded-xl', className)}
+        className={clsx('w-full border-collapse rounded-xl', className)}
         style={{ minWidth: 'max-content' }}
         {...props}
       >
