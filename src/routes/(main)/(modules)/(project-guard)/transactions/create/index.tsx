@@ -3,8 +3,8 @@ import { createProjectQueryKey } from '@/features/projects/lib/query-keys'
 import { CreateTransactionPage } from '@/features/transactions'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
-import { getProjectFn } from '../../projects/settings'
-import { getProjectId } from '@/features/projects/server/utils'
+import { getProjectFn } from '../../../projects/settings'
+import { useSuspenseCurrentProjectId } from '../../../route'
 
 const searchSchema = z.object({
   tab: z.number().optional(),
@@ -12,13 +12,15 @@ const searchSchema = z.object({
   amount: z.coerce.number().positive().optional(),
 })
 
-export const Route = createFileRoute('/(main)/(modules)/transactions/create/')({
+export const Route = createFileRoute(
+  '/(main)/(modules)/(project-guard)/transactions/create/',
+)({
   component: RouteComponent,
   validateSearch: (search) => searchSchema.parse(search),
 })
 
 function RouteComponent() {
-  const projectId = getProjectId()
+  const projectId = useSuspenseCurrentProjectId()
   const { loanId, amount } = Route.useSearch()
 
   const { data: project } = useSuspenseData({

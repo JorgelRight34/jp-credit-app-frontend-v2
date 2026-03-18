@@ -1,16 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import {
-    PROJECT_KEY,
     TEST,
     imageExtensions,
 } from "../constants/constants";
 import type { Column } from "@/components";
-
-export const getProjectId = () => {
-    return localStorage.getItem(PROJECT_KEY)
-}
-
-
 
 export const groupBy = <T, TKey extends string | number | symbol>(
     array: Array<T>,

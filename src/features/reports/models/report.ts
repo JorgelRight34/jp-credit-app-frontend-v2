@@ -5,7 +5,7 @@ export interface Report {
     documentId: number;
     title: string;
     description?: string;
-    key: "loan" | "collateral";
+    key: "loan" | "collateral" | "transaction" | string;
     createdAt: string;
     documents: Array<FileModel>;
 }

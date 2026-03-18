@@ -1,5 +1,4 @@
 import {
-  createPickerInputWithOnSelect,
   CurrencyInput,
   DataModuleFormProps,
   DateInput,
@@ -22,13 +21,19 @@ import {
 } from '@/features/loans'
 import { useRef } from 'react'
 import { DASHES, toCurrency, toFormattedDate, toInputDate } from '@/lib/utils'
+import { Project } from '@/features/projects'
 
 interface CreateDisbursementFormProps extends DataModuleFormProps<
   Disbursement,
   DisbursementFormValues
-> {}
+> {
+  project: Project
+}
 
-const CreateDisbursementForm = (props: CreateDisbursementFormProps) => {
+const CreateDisbursementForm = ({
+  project,
+  ...props
+}: CreateDisbursementFormProps) => {
   const form = useDisbursementForm(props)
   const loanPickerInputDataControllerRef =
     useRef<PickerInputDataControllerRef<Loan>>(null)
@@ -40,13 +45,15 @@ const CreateDisbursementForm = (props: CreateDisbursementFormProps) => {
           <FormGroup
             name="loanId"
             label="Préstamo"
-            input={createPickerInputWithOnSelect(LoanSearchInput, (loan) => {
+            onSelect={(loan) => {
               loanPickerInputDataControllerRef.current?.setValue(loan)
               if (loan) {
                 form.setValue('amount', loan?.approvedAmount)
                 form.setValue('date', toInputDate(loan.startDate))
               }
-            })}
+            }}
+            config={{ initialQuery: { projectId: project.id } }}
+            input={LoanSearchInput}
           />
         </FormRow>
         <PickerInputDataController

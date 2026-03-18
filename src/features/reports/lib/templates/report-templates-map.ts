@@ -2,6 +2,7 @@ import { ReportTemplateDefinition } from "../../models/reportTemplateDefinition"
 import { Report } from "../../models/report";
 import { loanTemplateDefinition } from "./loan-template-definition";
 import { collateralTemplateDefinition } from "./collateral-template-definition";
+import { transactionTemplateDefinition } from "./transaction-template-definition";
 
 export const templateMapper = <T,>(obj: T, template: ReportTemplateDefinition<T>) => {
     const result: Record<string, string | number | undefined> = {}
@@ -15,5 +16,6 @@ export const templateMapper = <T,>(obj: T, template: ReportTemplateDefinition<T>
 
 export const reportTemplatesDefinition: Record<Report["key"], ReportTemplateDefinition<any>> = {
     loan: loanTemplateDefinition,
-    collateral: collateralTemplateDefinition
+    collateral: collateralTemplateDefinition,
+    transaction: transactionTemplateDefinition
 }

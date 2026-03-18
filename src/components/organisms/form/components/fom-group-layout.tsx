@@ -1,8 +1,10 @@
 import clsx from 'clsx'
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
 import { FormLabel } from '@/components/atoms'
 
-export interface FormGroupLayoutProps extends HTMLAttributes<HTMLDivElement> {
+export interface FormGroupLayoutProps extends PropsWithChildren<{
+  className?: string
+}> {
   label: ReactNode
   name: string
 }
@@ -14,7 +16,7 @@ const FormGroupLayout = ({
   className,
 }: FormGroupLayoutProps) => {
   return (
-    <div className={clsx('flex flex-1 items-start flex-col gap-2', className)}>
+    <div className={clsx('flex flex-1 flex-col items-start gap-2', className)}>
       <FormLabel className="w-full" htmlFor={name}>
         {label}
       </FormLabel>

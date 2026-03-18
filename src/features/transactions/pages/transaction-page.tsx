@@ -17,6 +17,7 @@ import { overviewBreadcrumb } from '@/lib/constants'
 import TransactionOverview from '../components/transaction-overview'
 import { deleteTransaction } from '../services/transactionClient'
 import { transactionBreadcrumb } from './transactions-page'
+import GenerateTransactionReceiptPanel from '../components/generate-transaction-receipt-panel'
 
 export const buildTransactionBreadcrumb = (
   transaction: Transaction,
@@ -70,7 +71,12 @@ const TransactionPage = ({ transaction }: { transaction: Transaction }) => {
         <TabPanel index={0}>
           <TransactionOverview transaction={transaction} />
         </TabPanel>
-        <TabPanel index={1}>not implemented</TabPanel>
+        <TabPanel index={1}>
+          <GenerateTransactionReceiptPanel
+            id={transaction.id}
+            type={transaction.type}
+          />
+        </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )

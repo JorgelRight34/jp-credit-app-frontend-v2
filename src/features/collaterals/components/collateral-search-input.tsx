@@ -9,7 +9,7 @@ import { buildCollateralSearchInputDataTableConfig } from '../lib/config/collate
 import { getCollateral } from '../services/collateralClient'
 
 const CollateralSearchInput = ({
-  datatable,
+  config,
   ...props
 }: DataPickerInputProps<Collateral, CollateralQuery>) => {
   return (
@@ -28,7 +28,7 @@ const CollateralSearchInput = ({
               setValue,
             )}
             cacheKey={[collateralsQueryKey]}
-            {...datatable}
+            {...config}
           />
         </PickerInputPanel>
       )}

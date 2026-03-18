@@ -35,3 +35,4 @@ export * from './snackbar'
 export * from './file-download'
 
 export * from './theme'
+export { default as GuardPanel } from './guard/guard-panel'

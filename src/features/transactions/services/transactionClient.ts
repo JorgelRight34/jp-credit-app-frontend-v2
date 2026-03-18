@@ -8,6 +8,9 @@ import { DisbursementFormValues } from "../lib/schemas/disbursementFormSchema";
 import { Disbursement } from "../models/disbursement";
 import { AccountingPeriod, ClosedPeriod } from "../models/accountingPeriod";
 import { ClosedPeriodFormValues } from "../lib/schemas/closePeriodFormSchema";
+import { getReportByQueryKey, Report } from "@/features/reports";
+import { TransactionType } from "../models/transactionType";
+import { transactionReceiptReportKeyParts } from "../lib/constants";
 
 const baseUrl = "transactions";
 
@@ -19,6 +22,10 @@ export const getTransactions = async (params: Query): Promise<PagedResponse<Tran
 export const getTransaction = async (id: Transaction["id"]): Promise<Transaction> => {
     const { data } = await api.get(baseUrl + "/" + id);
     return data;
+}
+
+export const getTransactionReceiptReport = async (type: TransactionType): Promise<Report> => {
+    return getReportByQueryKey(transactionReceiptReportKeyParts.key, transactionReceiptReportKeyParts.buildSubkey(type))
 }
 
 export const getClosedPeriods = async (params: Query): Promise<PagedResponse<ClosedPeriod>> => {

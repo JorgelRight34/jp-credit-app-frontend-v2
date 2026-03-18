@@ -13,7 +13,6 @@ export type SelectInputProps = Omit<
 > & {
   options?: SelectOptions
   children?: ReactNode
-  label?: string
   allowNoOption?: boolean
   onChange?: (val: string) => void
 }

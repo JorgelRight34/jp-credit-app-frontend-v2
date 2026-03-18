@@ -4,7 +4,6 @@ import type { RoleFormSchemaValues } from "../lib/schemas/roleFormSchema";
 import type { RoleQuery } from "../models/roleQuery";
 import type { ModulePermissions } from "../../../components/organisms/protected/models/modulePermissions";
 import type { LoginResult } from "../models/loginResult";
-import type { LoginSchemaType } from "../lib/schemas/loginSchema";
 import type { User } from "../../../models/user";
 import type { IdentityClaims } from "../models/identityClaims";
 import type { PagedResponse } from "@/models";
@@ -12,13 +11,14 @@ import type { Role } from "../models/role";
 import { SERVER_URI } from "@/lib/constants/server";
 import api from "@/lib/services/api";
 import { serverClient } from "@/lib/services/serverClient";
+import { LoginFormValues } from "../hooks/useLoginForm";
 
 export const getCurrentUser = async (): Promise<User> => {
     const { data } = await api.get(`auth/users/me`);
     return data;
 };
 
-export const login = async (body: LoginSchemaType): Promise<LoginResult> => {
+export const login = async (body: LoginFormValues): Promise<LoginResult> => {
     const { data } = await api.post(`login`, body, { baseURL: SERVER_URI });
     return data;
 };

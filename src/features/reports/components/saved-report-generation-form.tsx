@@ -1,4 +1,5 @@
 import {
+  DataModuleFormProps,
   Form,
   FormContainer,
   FormGroup,
@@ -6,6 +7,7 @@ import {
   FormMasterDetailLayout,
   FormReadOnlyGroup,
   FormRow,
+  PickerInputElement,
 } from '@/components'
 import { Report } from '../models/report'
 import {
@@ -15,9 +17,26 @@ import {
 import { downloadFile } from '@/lib/utils'
 import { useReportGenerationForm } from '../hooks/useReportGenerationForm'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
+import { ReportGenerationFormValues } from '../lib/schemas/reportGenerationFormSchema'
 
-const SavedReportGenerationForm = ({ report }: { report: Report }) => {
-  const form = useReportGenerationForm({ report, onSuccess: downloadFile })
+interface SavedReportGenerationFormProps extends DataModuleFormProps<
+  Blob,
+  ReportGenerationFormValues
+> {
+  report: Report
+}
+
+const SavedReportGenerationForm = ({
+  report,
+  initialValues,
+  ...props
+}: SavedReportGenerationFormProps) => {
+  const form = useReportGenerationForm({
+    report,
+    onSuccess: downloadFile,
+    initialValues,
+    ...props,
+  })
 
   return (
     <FormContainer form={form}>
@@ -41,8 +60,11 @@ const SavedReportGenerationForm = ({ report }: { report: Report }) => {
             <FormRow>
               <FormGroup
                 name="id"
+                disabled={!!initialValues?.id}
                 label={reportTemplateKeysLabels[report.key]}
-                input={reportTemplateKeysInputMap[report.key]}
+                input={
+                  reportTemplateKeysInputMap[report.key] as PickerInputElement
+                }
               />
             </FormRow>
             <FormHtmlDisplayGroup

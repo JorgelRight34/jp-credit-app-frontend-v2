@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import CurrentUserPicCard from './current-user-pic-card'
 import { Icon, MoreVertIcon } from '@/components/atoms'
-import { useAuth } from '@/contexts/auth-context'
 import { getFirstAndLastName } from '@/lib/utils'
 import { PropsWithUser } from '@/models/user'
 import NavbarAppSettingsTrigger from '../navbar-app-settings/navbar-app-settings'
@@ -10,9 +9,7 @@ interface NavbarFooterProps extends PropsWithUser {
   className?: string
 }
 
-const NavbarFooter = ({ className }: NavbarFooterProps) => {
-  const { user } = useAuth()
-
+const NavbarFooter = ({ user, className }: NavbarFooterProps) => {
   return (
     <div
       className={clsx(

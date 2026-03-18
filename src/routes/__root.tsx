@@ -18,14 +18,15 @@ import {
 import { LoadingBar, LoadingScreen } from '@/components'
 import { User } from '@/models/user'
 
-interface MyRouterContext {
+export interface AppRouteContext {
   dataClient: QueryClient
   user: User | null
+  projectId?: number
 }
 
 const context = getContext()
 
-export const Route = createRootRouteWithContext<MyRouterContext>()({
+export const Route = createRootRouteWithContext<AppRouteContext>()({
   head: () => ({
     title: 'JP Apoyo Empresarial',
     meta: [

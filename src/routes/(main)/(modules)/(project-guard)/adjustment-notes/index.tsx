@@ -1,12 +1,15 @@
 import { AdjustmentNotesPage } from '@/features/adjustment-notes'
 import { createFileRoute } from '@tanstack/react-router'
+import { useSuspenseCurrentProjectId } from '../../route'
 
-export const Route = createFileRoute('/(main)/(modules)/(project-guard)/adjustment-notes/')({
+export const Route = createFileRoute(
+  '/(main)/(modules)/(project-guard)/adjustment-notes/',
+)({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { projectId } = Route.useRouteContext()
+  const projectId = useSuspenseCurrentProjectId()
 
   return <AdjustmentNotesPage projectId={projectId} />
 }

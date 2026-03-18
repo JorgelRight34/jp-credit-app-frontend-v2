@@ -58,7 +58,10 @@ const CreateTransactionPage = ({
             />
           </TabPanel>
           <TabPanel index={1}>
-            <CreateDisbursementForm initialValues={{ loanId, amount }} />
+            <CreateDisbursementForm
+              project={project}
+              initialValues={{ loanId, amount }}
+            />
           </TabPanel>
         </TabsRouter>
       </ProtectedComponent>

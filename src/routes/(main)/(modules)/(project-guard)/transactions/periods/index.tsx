@@ -1,7 +1,7 @@
 import { ClosedPeriodsPage } from '@/features/transactions'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/(main)/(modules)/transactions/periods/')(
+export const Route = createFileRoute('/(main)/(modules)/(project-guard)/transactions/periods/')(
   {
     component: RouteComponent,
   },

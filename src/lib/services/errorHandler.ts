@@ -3,7 +3,7 @@ import type { AxiosError } from "axios";
 
 const errorHandler = (error: AxiosError<{ message?: string }>) => {
   const errorMsg = error.response?.data.message || error.response?.data;
-  if (typeof errorMsg === "string" && errorMsg !== "") {
+  if (error.response?.status !== 404 && typeof errorMsg === "string" && errorMsg !== "") {
     toastService.error(errorMsg);
     return;
   }
@@ -24,8 +24,7 @@ const errorHandler = (error: AxiosError<{ message?: string }>) => {
           toastService.error("No tiene permisos para ver este contenido");
           throw error
         case 404:
-          toastService.error("No encontrado")
-          break;
+          throw error;
       }
       break;
     default:

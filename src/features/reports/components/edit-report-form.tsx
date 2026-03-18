@@ -4,8 +4,13 @@ import {
   FileAttachmentsPanel,
   Form,
   FormContainer,
+  FormGroup,
   FormMasterDetailLayout,
+  FormRow,
+  FormSelectGroup,
   FormWatch,
+  Input,
+  RichTextEditor,
   Tab,
   TabPanel,
   Tabs,
@@ -16,7 +21,7 @@ import { Report } from '../models/report'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
-import ReportFormPanel from './report-form-panel'
+import { reportKeySelectOptions } from '../lib/constants'
 
 interface EditReportFormProps extends DataModuleFormProps<
   Report,
@@ -47,7 +52,22 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
           <FormMasterDetailLayout.Master>
             <FormContainer form={form}>
               <Form form={form}>
-                <ReportFormPanel />
+                <FormRow>
+                  <FormGroup name="title" label="Título" input={Input} />
+                </FormRow>
+                <FormRow>
+                  <FormSelectGroup
+                    name="key"
+                    label="Categoría"
+                    options={reportKeySelectOptions}
+                  />
+                </FormRow>
+                <FormGroup
+                  name="description"
+                  label="Descripción"
+                  input={RichTextEditor}
+                  optional
+                />
               </Form>
             </FormContainer>
           </FormMasterDetailLayout.Master>

@@ -10,7 +10,7 @@ const getTransactionFn = createIsomorphicFn()
   .server((id) => getTransactionFromServer(id))
   .client((id) => getTransaction(id))
 
-export const Route = createFileRoute('/(main)/(modules)/transactions/$id/')({
+export const Route = createFileRoute('/(main)/(modules)/(project-guard)/transactions/$id/')({
   component: RouteComponent,
 })
 

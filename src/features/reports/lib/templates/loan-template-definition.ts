@@ -1,5 +1,4 @@
 import { ReportTemplateDefinition } from "../../models/reportTemplateDefinition";
-import { formatNumberWithCommas, toPercentage } from "@/lib/utils";
 import { LoanReportModel } from "../../models/loanReportModel";
 
 export const loanTemplateDefinition:
@@ -39,7 +38,7 @@ export const loanTemplateDefinition:
             name: "interestBalance",
             description: "Saldo de intereses acumulados pendientes.",
             fieldType: "currency",
-            mapper: (l) => formatNumberWithCommas(l.interestBalance),
+            mapper: (l) => l.interestBalance,
         },
         {
             name: "lastTransactionDate",
@@ -51,7 +50,7 @@ export const loanTemplateDefinition:
             name: "outstandingAmount",
             description: "Monto total pendiente por pagar.",
             fieldType: "currency",
-            mapper: (l) => formatNumberWithCommas(l.outstandingAmount),
+            mapper: (l) => l.outstandingAmount,
         },
         {
             name: "clientFirstName",

@@ -1,12 +1,15 @@
 import { TransactionsPage } from '@/features/transactions'
 import { createFileRoute } from '@tanstack/react-router'
+import { useSuspenseCurrentProjectId } from '../../route'
 
-export const Route = createFileRoute('/(main)/(modules)/transactions/')({
+export const Route = createFileRoute(
+  '/(main)/(modules)/(project-guard)/transactions/',
+)({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { projectId } = Route.useRouteContext()
+  const projectId = useSuspenseCurrentProjectId()
 
   return <TransactionsPage projectId={projectId} />
 }

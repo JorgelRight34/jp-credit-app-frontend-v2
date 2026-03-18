@@ -13,6 +13,8 @@ export const createUserPermissionsQueryKey = (userId: number) => {
     return [permissionsQueryKey, usersQueryKey, userId]
 }
 
+export const currentUserQueryKey = ["current-user"];
+
 export const allPossibleClaimsQueryOptions = ({
     key: ['identity-claims'],
     loader: getAllPossibleClaims,

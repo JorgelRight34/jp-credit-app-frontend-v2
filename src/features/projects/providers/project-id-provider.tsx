@@ -8,12 +8,12 @@ const ProjectIdContext = createContext<ProjectIdContextValue | undefined>(
 )
 
 type ProjectIdProviderProps = {
-  initialProjectId: number | null
+  initialProjectId?: number | null
   children: ReactNode
 }
 
 export const ProjectIdProvider = ({
-  initialProjectId,
+  initialProjectId = null,
   children,
 }: ProjectIdProviderProps) => {
   const [projectId, setProjectIdState] = useState<number | null>(

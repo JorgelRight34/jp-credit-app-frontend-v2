@@ -5,16 +5,13 @@ import type { LoanQuery } from '../models/loanQuery'
 import type { Loan } from '../models/loan'
 import { DataPickerInputProps, Icon, PickerInputPanel } from '@/components'
 import { DataTableContainer, LoanIcon, PickerInput } from '@/components'
-import { useProjectId } from '@/features/projects'
 import { buildLoanLabel } from '../lib/utils'
 import { getLoan } from '../services/loanClient'
 
 const LoanSearchInput = ({
-  datatable,
+  config,
   ...props
 }: DataPickerInputProps<Loan, LoanQuery>) => {
-  const [projectId] = useProjectId()
-
   return (
     <PickerInput<Loan, number>
       modalProps={{
@@ -28,9 +25,8 @@ const LoanSearchInput = ({
           <DataTableContainer
             searchConfig={loanSearchConfig}
             datatableConfig={buildLoanSearchInputDataTableConfig(setValue)}
-            initialQuery={{ projectId: projectId! }}
-            cacheKey={[loansQueryKey, projectId!]}
-            {...datatable}
+            cacheKey={[loansQueryKey, 'projects']}
+            {...config}
           />
         </PickerInputPanel>
       )}

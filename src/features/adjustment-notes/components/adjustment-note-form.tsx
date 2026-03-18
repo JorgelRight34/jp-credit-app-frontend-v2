@@ -1,5 +1,4 @@
 import {
-  createPickerInputWithOnSelect,
   CurrencyInput,
   DataModuleFormProps,
   Form,
@@ -32,9 +31,10 @@ const AdjustmentNoteForm = (
           <FormGroup
             name="loanId"
             label="Préstamo"
-            input={createPickerInputWithOnSelect(LoanSearchInput, (loan) =>
-              loanPickerInputDataControllerRef.current?.setValue(loan),
-            )}
+            onSelect={(l) =>
+              loanPickerInputDataControllerRef.current?.setValue(l)
+            }
+            input={LoanSearchInput}
           />
         </FormRow>
         <FormRow>

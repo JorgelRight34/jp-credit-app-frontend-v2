@@ -20,12 +20,16 @@ import { LoanStatusMap } from '@/features/loans/models/loanStatus'
 interface CreateCollateralFormProps extends DataModuleFormProps<
   Collateral,
   CollateralFormValues
-> {}
+> {
+  projectId?: number
+}
 
-const CreateCollateralForm = (props: CreateCollateralFormProps) => {
+const CreateCollateralForm = ({
+  projectId,
+  ...props
+}: CreateCollateralFormProps) => {
   const fileAttachmentsForm = useCollateralFileAttachmentForm()
   const form = useCollateralForm({
-    onSuccess: fileAttachmentsForm.submit,
     initialValues: {
       title: '',
       value: '',
@@ -35,6 +39,7 @@ const CreateCollateralForm = (props: CreateCollateralFormProps) => {
       description: null,
       expirationDate: null,
     },
+    onSuccess: fileAttachmentsForm.submit,
     ...props,
   })
 
@@ -51,14 +56,10 @@ const CreateCollateralForm = (props: CreateCollateralFormProps) => {
               <FormGroup
                 name="loanId"
                 label="Préstamo"
-                input={(p) =>
-                  LoanSearchInput({
-                    ...p,
-                    datatable: {
-                      initialQuery: { status: LoanStatusMap.active },
-                    },
-                  })
-                }
+                config={{
+                  initialQuery: { status: LoanStatusMap.active, projectId },
+                }}
+                input={LoanSearchInput}
               />
             }
             form={form}

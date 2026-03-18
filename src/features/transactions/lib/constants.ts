@@ -9,3 +9,8 @@ export const transactionSelectOptions: SelectOptions<TransactionType> = [
     ['pc', 'Pago de cuota'],
     ['ds', 'Desembolso'],
 ]
+
+export const transactionReceiptReportKeyParts = {
+    key: 'transaction',
+    buildSubkey: (type: TransactionType) => `receipt.${type}`,
+}

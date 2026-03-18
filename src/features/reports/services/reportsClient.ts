@@ -40,6 +40,11 @@ export const getReport = async (id: Report["id"]): Promise<Report> => {
     return data;
 }
 
+export const getReportByQueryKey = async (key: string, subkey?: string): Promise<Report> => {
+    const { data } = await api.get(`${baseUrl}/keys/${key}${subkey ? `/${subkey}` : ""}`);
+    return data;
+}
+
 export const getLoanReportModel = async (id: number): Promise<LoanReportModel> => {
     const { data } = await api.get(`${baseUrl}/loans/${id}/report-data`);
     return data;

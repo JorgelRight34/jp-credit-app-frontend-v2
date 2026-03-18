@@ -1,6 +1,5 @@
 import { usePaymentForm } from '../hooks/usePaymentForm'
 import {
-  createPickerInputWithOnSelect,
   CurrencyInput,
   DataModuleFormProps,
   DateInput,
@@ -60,13 +59,12 @@ const CreatePayment = (props: CreatePaymentProps) => {
                 <FormGroup
                   name="loanId"
                   label="Préstamo"
-                  input={createPickerInputWithOnSelect(
-                    LoanSearchInput,
-                    (loan) => {
-                      loanPickerInputDataControllerRef.current?.setValue(loan)
-                      if (loan) form.setValue('amount', loan.paymentValue)
-                    },
-                  )}
+                  config={{ initialQuery: { project: props.project.id } }}
+                  onSelect={(loan) => {
+                    loanPickerInputDataControllerRef.current?.setValue(loan)
+                    if (loan) form.setValue('amount', loan.paymentValue)
+                  }}
+                  input={LoanSearchInput}
                 />
                 <FormLazySelectGroup
                   name="payerId"

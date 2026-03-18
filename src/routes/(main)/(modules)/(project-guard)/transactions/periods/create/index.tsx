@@ -10,7 +10,7 @@ const getCurrentAccountingPeriodFn = createIsomorphicFn()
   .client(() => getCurrentAccountingPeriod())
 
 export const Route = createFileRoute(
-  '/(main)/(modules)/transactions/periods/create/',
+  '/(main)/(modules)/(project-guard)/transactions/periods/create/',
 )({
   component: RouteComponent,
 })

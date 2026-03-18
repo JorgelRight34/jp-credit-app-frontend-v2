@@ -4,8 +4,13 @@ import {
   FileAttachmentsPanel,
   Form,
   FormContainer,
+  FormGroup,
   FormMasterDetailLayout,
+  FormRow,
+  FormSelectGroup,
   FormWatch,
+  Input,
+  RichTextEditor,
   Tab,
   TabPanel,
   Tabs,
@@ -16,21 +21,29 @@ import { Report } from '../models/report'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
-import ReportFormPanel from './report-form-panel'
 import FormattersDefinitionPanel from './formatters-definition-panel'
+import { reportKeySelectOptions } from '../lib/constants'
 
 interface CreateReportFormProps extends DataModuleFormProps<
   Report,
   ReportFormValues
 > {}
 
-const CreateReportForm = (props: CreateReportFormProps) => {
+const CreateReportForm = ({
+  initialValues,
+  ...props
+}: CreateReportFormProps) => {
   const fileAttachmentsForm = useReportFileAttachmentForm()
   const form = useReportForm({
-    ...props,
-    initialValues: { title: '', description: '', key: '' },
+    initialValues: {
+      title: '',
+      description: '',
+      key: '',
+      ...initialValues,
+    },
     resetValues: true,
     onSuccess: fileAttachmentsForm.submit,
+    ...props,
   })
 
   return (
@@ -45,7 +58,23 @@ const CreateReportForm = (props: CreateReportFormProps) => {
           <FormMasterDetailLayout>
             <FormMasterDetailLayout.Master>
               <Form form={form}>
-                <ReportFormPanel />
+                <FormRow>
+                  <FormGroup name="title" label="Título" input={Input} />
+                </FormRow>
+                <FormRow>
+                  <FormSelectGroup
+                    name="key"
+                    label="Categoría"
+                    options={reportKeySelectOptions}
+                    disabled={!!initialValues?.key}
+                  />
+                </FormRow>
+                <FormGroup
+                  name="description"
+                  label="Descripción"
+                  input={RichTextEditor}
+                  optional
+                />
               </Form>
             </FormMasterDetailLayout.Master>
             <FormMasterDetailLayout.Detail>
