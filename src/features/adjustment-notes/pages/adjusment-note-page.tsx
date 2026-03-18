@@ -18,6 +18,7 @@ const AdjustmentNotePage = ({
   adjustmentNote: AdjustmentNote
 }) => {
   const title = buildAdjustmentNoteLabel(adjustmentNote)
+
   return (
     <PageLayout
       title={title}

@@ -11,8 +11,9 @@ import {
   financeBreadcrumb,
   financeSectionBreadcrumbsByRoute,
 } from './projections-page'
+import { PropsWithProjectId } from '@/features/projects'
 
-const IncomesPage = () => {
+const IncomesPage = ({ projectId }: PropsWithProjectId) => {
   return (
     <PageRouterLayout
       title="Ingresos"
@@ -27,10 +28,10 @@ const IncomesPage = () => {
           <Tab index={1}>Gráfica</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <IncomesDataTable />
+          <IncomesDataTable initialQuery={{ projectId }} />
         </TabPanel>
         <TabPanel index={1}>
-          <IncomesDataChart />
+          <IncomesDataChart initialQuery={{ projectId }} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

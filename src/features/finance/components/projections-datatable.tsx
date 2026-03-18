@@ -1,5 +1,6 @@
 import {
   GroupedTable,
+  PropsWithInitialQuery,
   SearchFormContainer,
   SearchFormValueConsumer,
 } from '@/components'
@@ -13,7 +14,9 @@ import { useGroupedProjections } from '../hooks/useGroupedProjections'
 import { buildProjectionTableColumns } from '../lib/config/finance-datatable-config'
 import { financeTableSearchConfig } from '../lib/config/finance-search-config'
 
-const ProjectionsDataTable = () => {
+const ProjectionsDataTable = ({
+  initialQuery,
+}: PropsWithInitialQuery<FinanceQuery>) => {
   return (
     <SearchFormContainer
       searchConfig={financeTableSearchConfig}
@@ -22,6 +25,7 @@ const ProjectionsDataTable = () => {
         startDate: getTodayAsInputDate(),
         endDate: toInputDate(getTodayWithDaysFromNow(30 * 12 * 6)),
         interval: 30,
+        ...initialQuery,
       }}
     >
       <SearchFormValueConsumer<FinanceQuery>

@@ -1,4 +1,5 @@
 import {
+  PropsWithInitialQuery,
   SearchFormContainer,
   SearchFormValueConsumer,
   TableBuilder,
@@ -18,7 +19,9 @@ import FinancialSummaryCards, {
 } from './financial-summary-cards'
 import { expenseTableSearchConfig } from '../lib/config/expense-config'
 
-const ExpensesDataTable = () => {
+const ExpensesDataTable = ({
+  initialQuery,
+}: PropsWithInitialQuery<FinanceQuery>) => {
   return (
     <SearchFormContainer
       searchConfig={expenseTableSearchConfig}
@@ -27,6 +30,7 @@ const ExpensesDataTable = () => {
         startDate: toInputDate(getTodayWithDaysFromNow(-30)),
         endDate: getTodayAsInputDate(),
         interval: 30,
+        ...initialQuery,
       }}
     >
       <SearchFormValueConsumer<FinanceQuery>

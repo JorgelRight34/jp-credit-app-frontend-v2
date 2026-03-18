@@ -9,7 +9,7 @@ export interface Query extends FieldValues {
   projectId?: number;
   orderBy?: string;
   orderDesc?: boolean
-  profileId?: number;
+  profileId?: number | null;
   loanId?: number;
   createdBy?: number;
   limit?: number;
@@ -20,3 +20,5 @@ export interface Query extends FieldValues {
   exportPageTill?: string;
   exportPageLimit?: number;
 }
+
+export type PropsWithInitialQuery<T> = { initialQuery?: T }

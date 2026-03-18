@@ -10,8 +10,9 @@ import {
 } from '@/components'
 import FollowUpDataTable from '../components/follow-up-datatable'
 import { followUpBreadcrumb } from './follow-up-page'
+import { PropsWithProjectId } from '@/features/projects'
 
-const FollowUpsPage = () => {
+const FollowUpsPage = ({ projectId }: PropsWithProjectId) => {
   return (
     <PageLayout
       title="Seguimientos"
@@ -27,7 +28,7 @@ const FollowUpsPage = () => {
           <Tab index={0}>Todos</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <FollowUpDataTable />
+          <FollowUpDataTable initialQuery={{ projectId }} />
         </TabPanel>
       </Tabs>
     </PageLayout>

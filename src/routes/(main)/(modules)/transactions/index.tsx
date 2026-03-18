@@ -6,5 +6,7 @@ export const Route = createFileRoute('/(main)/(modules)/transactions/')({
 })
 
 function RouteComponent() {
-  return <TransactionsPage />
+  const { projectId } = Route.useRouteContext()
+
+  return <TransactionsPage projectId={projectId} />
 }

@@ -12,6 +12,7 @@ import {
 } from '@/components'
 import ProjectionsDataTable from '../components/projections-datatable'
 import ProjectionsDataChart from '../components/projections-datachart'
+import { PropsWithProjectId } from '@/features/projects'
 
 export const financeSectionBreadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Tabla', icon: TableRowsIcon }],
@@ -23,7 +24,7 @@ export const financeBreadcrumb: BreadcrumbSpec = {
   title: 'Finanzas',
 }
 
-const ProjectionsPage = () => {
+const ProjectionsPage = ({ projectId }: PropsWithProjectId) => {
   return (
     <PageRouterLayout
       title="Proyecciones"
@@ -38,10 +39,10 @@ const ProjectionsPage = () => {
           <Tab index={1}>Gráfica</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <ProjectionsDataTable />
+          <ProjectionsDataTable initialQuery={{ projectId }} />
         </TabPanel>
         <TabPanel index={1}>
-          <ProjectionsDataChart />
+          <ProjectionsDataChart initialQuery={{ projectId }} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

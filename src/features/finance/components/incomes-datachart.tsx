@@ -7,8 +7,12 @@ import FinancialBreakdownDataChart from './financial-breakdown-datachart'
 import { getIncomes } from '../services/financeService'
 import { transactionsQueryKey } from '@/features/transactions/lib/constants'
 import { incomeChartSearchConfig } from '../lib/config/income-config'
+import { PropsWithInitialQuery } from '@/components'
+import { FinanceQuery } from '../models/financeQuery'
 
-const IncomesDataChart = () => {
+const IncomesDataChart = ({
+  initialQuery,
+}: PropsWithInitialQuery<FinanceQuery>) => {
   return (
     <FinancialBreakdownDataChart
       searchConfig={incomeChartSearchConfig}
@@ -18,6 +22,7 @@ const IncomesDataChart = () => {
         endDate: toInputDate(getTodayWithDaysFromNow(-30)),
         interval: 30,
         chart: 'bar',
+        ...initialQuery,
       }}
       buildDataOptions={(query) => ({
         key: [

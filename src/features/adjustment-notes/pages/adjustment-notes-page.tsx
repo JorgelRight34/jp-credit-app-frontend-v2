@@ -13,6 +13,7 @@ import {
   TabsRouter,
 } from '@/components'
 import AdjustmentNoteDataTable from '../components/adjusment-note-datatable'
+import { PropsWithProjectId } from '@/features/projects'
 
 export const adjustmentNotesBreadcrumb: BreadcrumbSpec = {
   title: 'Notas de ajuste',
@@ -26,7 +27,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Débito', icon: DebitIcon }],
 ]
 
-const AdjustmentNotesPage = () => {
+const AdjustmentNotesPage = ({ projectId }: PropsWithProjectId) => {
   return (
     <PageRouterLayout
       title="Notas de ajuste"
@@ -43,13 +44,13 @@ const AdjustmentNotesPage = () => {
           <Tab index={2}>Débito</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <AdjustmentNoteDataTable />
+          <AdjustmentNoteDataTable initialQuery={{ projectId }} />
         </TabPanel>
         <TabPanel index={1}>
-          <AdjustmentNoteDataTable initialQuery={{ type: 'nc' }} />
+          <AdjustmentNoteDataTable initialQuery={{ projectId, type: 'nc' }} />
         </TabPanel>
         <TabPanel index={2}>
-          <AdjustmentNoteDataTable initialQuery={{ type: 'nd' }} />
+          <AdjustmentNoteDataTable initialQuery={{ projectId, type: 'nd' }} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

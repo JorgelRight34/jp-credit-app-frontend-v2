@@ -25,6 +25,7 @@ export const useLoanForm = ({
       annualInterestRate: '',
       projectId: project.id,
       graceDays: project.graceDays,
+      ...initialValues,
     },
     onSubmit: createLoan,
     ...props,

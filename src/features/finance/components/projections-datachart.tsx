@@ -6,8 +6,12 @@ import {
 import FinancialBreakdownDataChart from './financial-breakdown-datachart'
 import { getProjectedIncomes } from '../services/financeService'
 import { financeChartSearchConfig } from '../lib/config/finance-search-config'
+import { PropsWithInitialQuery } from '@/components'
+import { FinanceQuery } from '../models/financeQuery'
 
-const ProjectionsDataChart = () => {
+const ProjectionsDataChart = ({
+  initialQuery,
+}: PropsWithInitialQuery<FinanceQuery>) => {
   return (
     <FinancialBreakdownDataChart
       searchConfig={financeChartSearchConfig}
@@ -17,6 +21,7 @@ const ProjectionsDataChart = () => {
         endDate: toInputDate(getTodayWithDaysFromNow(30 * 12 * 6)),
         interval: 30,
         chart: 'bar',
+        ...initialQuery,
       }}
       buildDataOptions={(query) => ({
         key: [
