@@ -7,5 +7,7 @@ export const Route = createFileRoute('/(main)/(modules)/loans/')({
 })
 
 function RouteComponent() {
-  return <LoansPage />
+  const { projectId } = Route.useRouteContext()
+
+  return <LoansPage projectId={projectId} />
 }

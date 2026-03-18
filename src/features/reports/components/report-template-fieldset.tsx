@@ -22,14 +22,14 @@ const ReportTemplateDefinitionFieldset = ({
 
   return (
     <Fieldset
-      className="flex-1 shadow-sm"
+      className="h-full flex-1 shadow-sm"
       legendClassName="text-center"
       legend="DICCIONARIO"
     >
-      <BigTitle className="flex-shrink-0 text-accent text-center">
+      <BigTitle className="text-accent flex-shrink-0 text-center">
         {templateKey ? reportTemplateKeysLabels[templateKey] : DASHES}
       </BigTitle>
-      <aside className="flex-1 h-96 !overflow-y-auto">
+      <aside className="h-96 flex-1 !overflow-y-auto">
         {data?.map((field) => (
           <Accordion key={field.name} id={field.name}>
             <AccordionSummary>

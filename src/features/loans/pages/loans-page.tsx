@@ -15,7 +15,7 @@ import {
 } from '@/components'
 import LoanDataTable from '../components/loan-datatable'
 import { LoanStatusMap } from '../models/loanStatus'
-import { ProjectSelectionGuard } from '@/features/projects'
+import { ProjectSelectionGuard, PropsWithProjectId } from '@/features/projects'
 
 export const loanModuleBreadcrumb: BreadcrumbSpec = {
   title: 'Préstamos',
@@ -30,7 +30,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Saldados', icon: CheckCircleIcon }],
 ]
 
-const LoansPage = () => {
+const LoansPage = ({ projectId }: PropsWithProjectId) => {
   return (
     <PageRouterLayout
       title="Préstamos"
@@ -40,7 +40,7 @@ const LoansPage = () => {
       }}
       options={[buildPageLayoutCreateOption('/loans/create')]}
     >
-      <ProjectSelectionGuard>
+      <ProjectSelectionGuard projectId={projectId}>
         <TabsRouter>
           <TabsList>
             <Tab index={0}>Todos</Tab>

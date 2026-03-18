@@ -1,5 +1,4 @@
 import { PropsWithChildren } from 'react'
-import { useProjectId } from '../providers/project-id-provider'
 import {
   AccentBtn,
   AddIcon,
@@ -10,9 +9,10 @@ import {
   Subtitle,
 } from '@/components'
 
-const ProjectSelectionGuard = ({ children }: PropsWithChildren) => {
-  const [projectId] = useProjectId()
-
+const ProjectSelectionGuard = ({
+  projectId,
+  children,
+}: PropsWithChildren<{ projectId: number | null }>) => {
   if (projectId) return children
 
   return (

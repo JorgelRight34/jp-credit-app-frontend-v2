@@ -12,7 +12,7 @@ const TableContainer = ({
 }: TableContainerProps) => {
   return (
     <div
-      className="flex h-full flex-col !overflow-hidden rounded border shadow-sm"
+      className="flex flex-col !overflow-hidden rounded border shadow-sm"
       {...props}
     >
       <div className="flex w-full flex-col rounded-xl">{children}</div>

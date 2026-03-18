@@ -29,20 +29,19 @@ export const Route = createFileRoute('/(main)')({
       throw redirect({ to: '/login' })
     }
 
-    const user = await getCurrentUserFn()
-    return { user }
+    return { user: await getCurrentUserFn(), projectId: getProjectIdFn() }
   },
   staleTime: Infinity,
   shouldReload: false,
 })
 
 function RouteComponent() {
-  const { user } = Route.useRouteContext()
+  const { user, projectId } = Route.useRouteContext() // Consider removing contexts
 
   return (
     <div className="relative flex h-[100dvh] flex-col md:flex-row">
       <AuthProvider user={user}>
-        <ProjectIdProvider initialProjectId={getProjectIdFn()}>
+        <ProjectIdProvider initialProjectId={projectId}>
           <div className="hidden h-full w-full p-0 shadow-sm md:block md:w-2/14">
             <Navbar user={user} />
           </div>

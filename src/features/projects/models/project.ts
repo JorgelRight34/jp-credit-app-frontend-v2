@@ -10,3 +10,6 @@ export interface Project {
   defaultPenaltyRate: number;
   defaultCompound?: Compound;
 }
+
+
+export type PropsWithProjectId<T = {}> = { projectId: number | null } & T
