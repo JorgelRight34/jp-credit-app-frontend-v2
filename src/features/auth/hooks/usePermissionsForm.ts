@@ -16,7 +16,7 @@ export type UsePermissionsFormProps = UseDataFormProps<
 
 export type PermissionsFormRef = FormRef<PermissionsFormValues>;
 
-export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePermissionsFormProps) => {
+export const usePermissionsForm = ({ defaultValues, handler, ...config }: UsePermissionsFormProps) => {
   return useForm<any, PermissionsFormValues>({
     schema: permissionsFormSchema,
     onSubmit: async ({ id, claims }) => {
@@ -27,9 +27,9 @@ export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePer
       return null;
     },
     onEdit: async ({ id, claims }) => {
-      const initialValuesClaims = initialValues?.claims as Array<string> | undefined;
+      const initialValuesClaims = defaultValues?.claims as Array<string> | undefined;
       const removedClaims = initialValuesClaims?.filter(c => !claims.includes(c));
-      const claimsToAdd = claims.filter(c => !initialValues?.claims?.includes(c));
+      const claimsToAdd = claims.filter(c => !defaultValues?.claims?.includes(c));
 
       await handler(id, {
         add: getPermissionClaimPairsFromStringArray(claimsToAdd),
@@ -38,7 +38,7 @@ export const usePermissionsForm = ({ initialValues, handler, ...config }: UsePer
 
       return;
     },
-    defaultValues: { claims: [], roles: [], ...initialValues },
+    defaultValues: { claims: [], roles: [], ...defaultValues },
     ...config
   })
 

@@ -21,14 +21,14 @@ const ErrorPage = ({ error: err }: { error: any }) => {
   const error = getError(err)
 
   return (
-    <div className="min-h-screen flex items-center justify-center h-full w-full">
-      <Container className="w-[95dvw] h-[95dvh] md:w-[75dvw] md:h-[50dvh] rounded-xl py-5 flex shadow-sm">
+    <div className="flex h-full min-h-screen w-full items-center justify-center">
+      <Container className="flex h-[95dvh] w-[95dvw] rounded-xl py-5 shadow-sm md:h-[50dvh] md:w-[75dvw]">
         <section
-          className="border-accent flex rounded-xl flex-col w-full h-full items-center justify-center p-5 shadow-sm"
+          className="border-accent flex h-full w-full flex-col items-center justify-center rounded-xl p-5 shadow-sm"
           style={{ borderWidth: '1px' }}
         >
           <header className="flex flex-col items-center justify-center gap-5 p-5">
-            <BigTitle className="text-accent text-3xl mb-5 text-center">
+            <BigTitle className="text-accent mb-5 text-center text-3xl">
               {error.status}
             </BigTitle>
             {/* Version info at bottom */}

@@ -1,7 +1,7 @@
 import { LoanSearchInput } from "@/features/loans";
 import { Report } from "../models/report";
 import { CollateralSearchInput } from "@/features/collaterals";
-import { InputElement, SelectOptions } from "@/components";
+import { InputElement, PickerInputElement, SelectOptions } from "@/components";
 import { TransactionSearchInput } from "@/features/transactions";
 
 export const reportTemplateKeysLabels: Record<Report["key"], string> = {
@@ -10,11 +10,13 @@ export const reportTemplateKeysLabels: Record<Report["key"], string> = {
     transaction: "Transacciones"
 }
 
-export const reportTemplateKeysInputMap: Record<Report['key'], InputElement> = {
+export const reportTemplateKeysInputMapAside: Record<Report['key'], InputElement> = {
     loan: (p) => LoanSearchInput(p),
     collateral: (p) => CollateralSearchInput(p),
     transaction: p => TransactionSearchInput(p)
 }
+
+export const reportTemplateKeysInputMap = reportTemplateKeysInputMapAside as Record<Report['key'], PickerInputElement>;
 
 export const reportKeySelectOptions: SelectOptions<Report["key"]> = [
     ['loan', 'Préstamos'],

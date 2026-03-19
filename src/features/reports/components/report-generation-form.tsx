@@ -10,8 +10,10 @@ import {
   FormWatch,
   Input,
 } from '@/components'
-import { useReportGenerationForm } from '../hooks/useReportGenerationForm'
-import { ReportGenerationFormValues } from '../lib/schemas/reportGenerationFormSchema'
+import {
+  ReportGenerationFormValues,
+  useReportGenerationForm,
+} from '../hooks/useReportGenerationForm'
 import {
   reportKeySelectOptions,
   reportTemplateKeysInputMap,
@@ -27,7 +29,6 @@ const ReportGenerationForm = (
   const form = useReportGenerationForm({
     ...props,
     onSuccess: downloadFile,
-    initialValues: { key: 'loan', url: [], file: [] },
   })
 
   return (

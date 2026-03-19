@@ -7,9 +7,11 @@ import { FileStorageService } from "@/lib/services";
 import { loanTemplateDefinition } from "../lib/templates/loan-template-definition";
 import { templateMapper } from "../lib/templates/report-templates-map";
 import { collateralTemplateDefinition } from "../lib/templates/collateral-template-definition";
-import { ReportGenerationFormValues } from "../lib/schemas/reportGenerationFormSchema";
 import { LoanReportModel } from "../models/loanReportModel";
 import { CollateralReportModel } from "../models/collateralReportModel";
+import { TransactionReportModel } from "../models/transactionReportModel";
+import { transactionTemplateDefinition } from "../lib/templates/transaction-template-definition";
+import { ReportGenerationFormValues } from "../hooks/useReportGenerationForm";
 
 const baseUrl = "reports"
 
@@ -55,6 +57,11 @@ export const getCollateralReportModel = async (id: number): Promise<CollateralRe
     return data;
 }
 
+export const getTransactionReportModel = async (id: number): Promise<TransactionReportModel> => {
+    const { data } = await api.get(`transactions/${id}`);
+    return data;
+}
+
 export const generateReport = async ({ id, key, file }: ReportGenerationFormValues): Promise<Blob> => {
     let context = null;
 
@@ -67,13 +74,19 @@ export const generateReport = async ({ id, key, file }: ReportGenerationFormValu
             const colateral = await getCollateralReportModel(id as number);
             context = templateMapper(colateral, collateralTemplateDefinition)
             break;
+        case "transaction":
+            const transaction = await getTransactionReportModel(id as number);
+            context = templateMapper(transaction, transactionTemplateDefinition);
+            break;
     }
 
     const formData = new FormData();
     formData.append("Context", JSON.stringify(context));
 
-    for (const f of file) {
-        formData.append("File", f)
+    if (file) {
+        for (const f of file) {
+            formData.append("File", f)
+        }
     }
 
     const { data } = await api.post(`${baseUrl}/generate`, formData, {

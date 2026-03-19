@@ -10,23 +10,27 @@ interface UseLoanFormProps extends DataModuleFormProps<Loan, LoanFormValues> {
 
 export const useLoanForm = ({
   project,
-  initialValues,
+  defaultValues,
   ...props
 }: UseLoanFormProps) => {
   return useForm({
     schema: loanFormSchema,
     defaultValues: {
       approvedAmount: '',
-      description: '',
-      numberOfPayments: '',
-      paymentFrequency: '',
+      annualInterestRate: '',
       startDate: '',
       deliveryDate: '',
-      annualInterestRate: '',
+      paymentFrequency: '',
+      description: '',
+      numberOfPayments: '',
       projectId: project.id,
       graceDays: project.graceDays,
-      ...initialValues,
+      clientProfileId: null,
+      guarantorProfileId: null,
+      loanOfficerProfileId: null,
+      ...defaultValues,
     },
+    initialValues: { numberOfPayments: 5 },
     onSubmit: createLoan,
     ...props,
   })

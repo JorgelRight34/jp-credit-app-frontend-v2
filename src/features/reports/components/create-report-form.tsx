@@ -30,16 +30,16 @@ interface CreateReportFormProps extends DataModuleFormProps<
 > {}
 
 const CreateReportForm = ({
-  initialValues,
+  defaultValues,
   ...props
 }: CreateReportFormProps) => {
   const fileAttachmentsForm = useReportFileAttachmentForm()
   const form = useReportForm({
-    initialValues: {
+    defaultValues: {
       title: '',
       description: '',
       key: '',
-      ...initialValues,
+      ...defaultValues,
     },
     resetValues: true,
     onSuccess: fileAttachmentsForm.submit,
@@ -66,7 +66,7 @@ const CreateReportForm = ({
                     name="key"
                     label="Categoría"
                     options={reportKeySelectOptions}
-                    disabled={!!initialValues?.key}
+                    disabled={!!defaultValues?.key}
                   />
                 </FormRow>
                 <FormGroup

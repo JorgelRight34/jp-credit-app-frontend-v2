@@ -19,7 +19,7 @@ type CreateProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues>
 const CreateProfileForm = (props: CreateProfileFormProps) => {
   const fileAttachmentsForm = useProfileFileAttachmentsForm({})
   const form = useProfileForm({
-    initialValues: {
+    defaultValues: {
       firstName: '',
       lastName: '',
       email: '',

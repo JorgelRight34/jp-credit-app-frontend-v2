@@ -36,7 +36,7 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
   const rolesFormRef = useRef<UserRolesFormRef>(null)
 
   const form = useUserForm({
-    initialValues: {
+    defaultValues: {
       username: '',
       firstName: '',
       lastName: '',

@@ -31,7 +31,7 @@ const Button = ({
       className={clsx(
         `flex inline w-full cursor-pointer items-center justify-center rounded-xl p-1 text-white shadow-sm md:p-2`,
         className,
-        { '!cursor-not-allowed !opacity-50': disabled },
+        { '!pointer-events-none !cursor-not-allowed !opacity-50': disabled },
       )}
       type={type}
       onClick={disabled ? undefined : onClick}

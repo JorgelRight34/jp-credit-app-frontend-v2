@@ -9,6 +9,7 @@ type FormContainerProps<T extends FieldValues> = PropsWithChildren & {
   form: UseFormReturn<T>
   className?: string
   initializeAsDirty?: boolean
+  isValid?: boolean
   onSubmit?: () => void
   footer?: (isDirty: boolean) => ReactNode
 }

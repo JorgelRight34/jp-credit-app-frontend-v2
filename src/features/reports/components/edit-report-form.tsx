@@ -33,7 +33,7 @@ interface EditReportFormProps extends DataModuleFormProps<
 const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
   const form = useReportForm({
     ...props,
-    initialValues: {
+    defaultValues: {
       title: report.title,
       description: report.description,
       key: report.key,

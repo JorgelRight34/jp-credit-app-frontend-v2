@@ -27,7 +27,7 @@ const EditCollateralForm = ({
   ...props
 }: EditCollateralFormProps) => {
   const form = useCollateralForm({
-    initialValues: {
+    defaultValues: {
       title: collateral.title,
       description: collateral.description,
       value: collateral.value,

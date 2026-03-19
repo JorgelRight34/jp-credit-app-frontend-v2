@@ -5,7 +5,7 @@ import { Disbursement } from "../models/disbursement"
 import { transactionsQueryKey } from "../lib/constants"
 
 export const useDisbursementForm = ({
-    initialValues,
+    defaultValues,
     ...config
 }: UseDataFormProps<Disbursement, DisbursementFormValues>) => {
     return useForm({
@@ -14,7 +14,7 @@ export const useDisbursementForm = ({
             loanId: null,
             amount: '',
             description: '',
-            ...initialValues
+            ...defaultValues
         },
         onSubmit: createDisbursement,
         keysToInvalidate: [[transactionsQueryKey]],

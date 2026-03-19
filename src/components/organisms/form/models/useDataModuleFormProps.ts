@@ -7,6 +7,7 @@ export type DataModuleFormProps<T = object, TData extends FieldValues = FieldVal
     ref?: Ref<FormRef<TData>>;
     reset?: boolean;
     shouldEdit?: boolean;
+    initializeAsDirty?: boolean;
     toastMessage?: (data?: T) => string;
     onIsValidChange?: (isValid: boolean) => void;
     onSuccess?: (data: T) => void;

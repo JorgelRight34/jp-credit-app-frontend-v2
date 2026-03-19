@@ -27,7 +27,7 @@ type EditUserFormProps = DataModuleFormProps<User, UserFormValues> & {
 
 const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
   const form = useUserForm({
-    initialValues: {
+    defaultValues: {
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
@@ -69,9 +69,9 @@ const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
 const PermissionsForm = ({ user }: { user: User }) => {
   const form = usePermissionsForm({
     handler: updateUserClaims,
-    initialValues: {
-      claims: user.claims.map(claimPairToString),
+    defaultValues: {
       id: user.id,
+      claims: user.claims.map(claimPairToString),
       roles: [],
     },
   })

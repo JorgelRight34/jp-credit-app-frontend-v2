@@ -21,7 +21,7 @@ interface RoleFormProps extends DataModuleFormProps<
 const RoleForm = ({ role, ...props }: RoleFormProps) => {
   const permissionFormRef = useRef<PermissionsFormRef>(null)
   const form = useRoleForm({
-    initialValues: role,
+    defaultValues: role,
     shouldEdit: !!role,
     onSuccess: (data) => {
       permissionFormRef.current?.setValue('id', data.id)

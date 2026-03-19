@@ -30,7 +30,7 @@ const CreateCollateralForm = ({
 }: CreateCollateralFormProps) => {
   const fileAttachmentsForm = useCollateralFileAttachmentForm()
   const form = useCollateralForm({
-    initialValues: {
+    defaultValues: {
       title: '',
       value: '',
       condition: '',

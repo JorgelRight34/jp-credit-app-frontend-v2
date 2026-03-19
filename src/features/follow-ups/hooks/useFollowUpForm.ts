@@ -8,10 +8,10 @@ interface UseFollowUpFormProps extends UseDataFormProps<FollowUp, FollowUpFormVa
     followUpId?: number;
 }
 
-export const useFollowUpForm = ({ followUpId, initialValues, ...props }: UseFollowUpFormProps) => {
+export const useFollowUpForm = ({ followUpId, defaultValues, ...props }: UseFollowUpFormProps) => {
     return useForm({
         schema: followUpFormSchema,
-        defaultValues: initialValues ?? { title: "", body: "", loanId: "" },
+        defaultValues: defaultValues ?? { title: "", body: "", loanId: "" },
         onSubmit: createFollowUp,
         onEdit: (body) => updateFollowUp(followUpId!, body),
         keysToInvalidate: [[followUpsQueryKey]],

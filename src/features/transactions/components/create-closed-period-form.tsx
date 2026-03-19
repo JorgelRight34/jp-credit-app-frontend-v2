@@ -28,7 +28,7 @@ const CreateClosedPeriodForm = ({
 }: CreateClosedPeriodFormProps) => {
   const modalRef = useRef<ConfirmationModalRef>(null)
   const form = useClosePeriodForm({
-    initialValues: { endDate: toInputDate(currentPeriod.startDate) },
+    defaultValues: { endDate: toInputDate(currentPeriod.startDate) },
     ...props,
   })
 

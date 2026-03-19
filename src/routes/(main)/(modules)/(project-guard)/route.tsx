@@ -1,5 +1,4 @@
-import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
-import { useSuspenseCurrentProjectId } from '../route'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/(main)/(modules)/(project-guard)')({
   component: RouteComponent,
@@ -8,9 +7,5 @@ export const Route = createFileRoute('/(main)/(modules)/(project-guard)')({
 })
 
 function RouteComponent() {
-  const projectId = useSuspenseCurrentProjectId()
-
-  if (!projectId) throw redirect({ to: '/projects/guard' })
-
   return <Outlet />
 }
