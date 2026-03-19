@@ -1,9 +1,11 @@
-import { FolderOpenIcon, SearchIcon } from '@/components'
-import GuardPage from '@/components/molecules/guard/guard-panel'
+import { FolderOpenIcon, GuardPanel, SearchIcon } from '@/components'
+import { PropsWithProjectId } from '../models/project'
 
-const ProjectGuardPage = () => {
+const ProjectGuard = ({ projectId, children }: PropsWithProjectId) => {
+  if (projectId) return children
+
   return (
-    <GuardPage
+    <GuardPanel
       icon={FolderOpenIcon}
       title="Selecciona un Proyecto"
       subtitle="Para ver préstamos, garantías y transacciones, necesitas seleccionar un proyecto primero. 
@@ -18,4 +20,4 @@ const ProjectGuardPage = () => {
   )
 }
 
-export default ProjectGuardPage
+export default ProjectGuard

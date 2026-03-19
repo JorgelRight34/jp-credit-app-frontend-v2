@@ -1,6 +1,5 @@
 import { FollowUpsPage } from '@/features/follow-ups'
 import { createFileRoute } from '@tanstack/react-router'
-import { useSuspenseCurrentProjectId } from '../../route'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/(project-guard)/follow-ups/',
@@ -9,7 +8,7 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  const projectId = useSuspenseCurrentProjectId()
+  const { projectId } = Route.useRouteContext()
 
   return <FollowUpsPage projectId={projectId} />
 }

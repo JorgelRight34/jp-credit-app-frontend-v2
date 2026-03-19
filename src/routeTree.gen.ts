@@ -25,7 +25,6 @@ import { Route as mainmodulesReportsGenerateIndexRouteImport } from './routes/(m
 import { Route as mainmodulesReportsCreateIndexRouteImport } from './routes/(main)/(modules)/reports/create/index'
 import { Route as mainmodulesReportsIdIndexRouteImport } from './routes/(main)/(modules)/reports/$id/index'
 import { Route as mainmodulesProjectsSettingsIndexRouteImport } from './routes/(main)/(modules)/projects/settings/index'
-import { Route as mainmodulesProjectsGuardIndexRouteImport } from './routes/(main)/(modules)/projects/guard/index'
 import { Route as mainmodulesProjectsCreateIndexRouteImport } from './routes/(main)/(modules)/projects/create/index'
 import { Route as mainmodulesProfilesCreateIndexRouteImport } from './routes/(main)/(modules)/profiles/create/index'
 import { Route as mainmodulesProfilesIdIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/index'
@@ -148,12 +147,6 @@ const mainmodulesProjectsSettingsIndexRoute =
   mainmodulesProjectsSettingsIndexRouteImport.update({
     id: '/projects/settings/',
     path: '/projects/settings/',
-    getParentRoute: () => mainmodulesRouteRoute,
-  } as any)
-const mainmodulesProjectsGuardIndexRoute =
-  mainmodulesProjectsGuardIndexRouteImport.update({
-    id: '/projects/guard/',
-    path: '/projects/guard/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesProjectsCreateIndexRoute =
@@ -400,7 +393,6 @@ export interface FileRoutesByFullPath {
   '/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
-  '/projects/guard/': typeof mainmodulesProjectsGuardIndexRoute
   '/projects/settings/': typeof mainmodulesProjectsSettingsIndexRoute
   '/reports/$id/': typeof mainmodulesReportsIdIndexRoute
   '/reports/create/': typeof mainmodulesReportsCreateIndexRoute
@@ -453,7 +445,6 @@ export interface FileRoutesByTo {
   '/profiles/$id': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create': typeof mainmodulesProfilesCreateIndexRoute
   '/projects/create': typeof mainmodulesProjectsCreateIndexRoute
-  '/projects/guard': typeof mainmodulesProjectsGuardIndexRoute
   '/projects/settings': typeof mainmodulesProjectsSettingsIndexRoute
   '/reports/$id': typeof mainmodulesReportsIdIndexRoute
   '/reports/create': typeof mainmodulesReportsCreateIndexRoute
@@ -510,7 +501,6 @@ export interface FileRoutesById {
   '/(main)/(modules)/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/(main)/(modules)/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/(main)/(modules)/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
-  '/(main)/(modules)/projects/guard/': typeof mainmodulesProjectsGuardIndexRoute
   '/(main)/(modules)/projects/settings/': typeof mainmodulesProjectsSettingsIndexRoute
   '/(main)/(modules)/reports/$id/': typeof mainmodulesReportsIdIndexRoute
   '/(main)/(modules)/reports/create/': typeof mainmodulesReportsCreateIndexRoute
@@ -565,7 +555,6 @@ export interface FileRouteTypes {
     | '/profiles/$id/'
     | '/profiles/create/'
     | '/projects/create/'
-    | '/projects/guard/'
     | '/projects/settings/'
     | '/reports/$id/'
     | '/reports/create/'
@@ -618,7 +607,6 @@ export interface FileRouteTypes {
     | '/profiles/$id'
     | '/profiles/create'
     | '/projects/create'
-    | '/projects/guard'
     | '/projects/settings'
     | '/reports/$id'
     | '/reports/create'
@@ -674,7 +662,6 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/profiles/$id/'
     | '/(main)/(modules)/profiles/create/'
     | '/(main)/(modules)/projects/create/'
-    | '/(main)/(modules)/projects/guard/'
     | '/(main)/(modules)/projects/settings/'
     | '/(main)/(modules)/reports/$id/'
     | '/(main)/(modules)/reports/create/'
@@ -827,13 +814,6 @@ declare module '@tanstack/react-router' {
       path: '/projects/settings'
       fullPath: '/projects/settings/'
       preLoaderRoute: typeof mainmodulesProjectsSettingsIndexRouteImport
-      parentRoute: typeof mainmodulesRouteRoute
-    }
-    '/(main)/(modules)/projects/guard/': {
-      id: '/(main)/(modules)/projects/guard/'
-      path: '/projects/guard'
-      fullPath: '/projects/guard/'
-      preLoaderRoute: typeof mainmodulesProjectsGuardIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/projects/create/': {
@@ -1198,7 +1178,6 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesProfilesIdIndexRoute: typeof mainmodulesProfilesIdIndexRoute
   mainmodulesProfilesCreateIndexRoute: typeof mainmodulesProfilesCreateIndexRoute
   mainmodulesProjectsCreateIndexRoute: typeof mainmodulesProjectsCreateIndexRoute
-  mainmodulesProjectsGuardIndexRoute: typeof mainmodulesProjectsGuardIndexRoute
   mainmodulesProjectsSettingsIndexRoute: typeof mainmodulesProjectsSettingsIndexRoute
   mainmodulesReportsIdIndexRoute: typeof mainmodulesReportsIdIndexRoute
   mainmodulesReportsCreateIndexRoute: typeof mainmodulesReportsCreateIndexRoute
@@ -1224,7 +1203,6 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesProfilesIdIndexRoute: mainmodulesProfilesIdIndexRoute,
   mainmodulesProfilesCreateIndexRoute: mainmodulesProfilesCreateIndexRoute,
   mainmodulesProjectsCreateIndexRoute: mainmodulesProjectsCreateIndexRoute,
-  mainmodulesProjectsGuardIndexRoute: mainmodulesProjectsGuardIndexRoute,
   mainmodulesProjectsSettingsIndexRoute: mainmodulesProjectsSettingsIndexRoute,
   mainmodulesReportsIdIndexRoute: mainmodulesReportsIdIndexRoute,
   mainmodulesReportsCreateIndexRoute: mainmodulesReportsCreateIndexRoute,

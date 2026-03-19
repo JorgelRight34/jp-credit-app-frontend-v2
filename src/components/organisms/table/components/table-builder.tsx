@@ -4,15 +4,11 @@ import TableBodyCompositor from './table-body-compositor'
 import TableFooterCompositor from './table-footer-compositor'
 import TableNavigation from './table-navigation'
 import type { ReactNode } from 'react'
-import type { TableStateWrapperProps } from './table-state-wrapper'
 import type { Row } from '../models/row'
-import { useTableState } from '../hooks/useTableState'
+import { useTableState, UseTableStateProps } from '../hooks/useTableState'
 import Table from './table'
 
-export interface TableBuilderProps<TData> extends Omit<
-  TableStateWrapperProps<TData>,
-  'render'
-> {
+export interface TableBuilderProps<TData> extends UseTableStateProps<TData> {
   className?: string
   totalItems?: number
   infinitePagination?: boolean

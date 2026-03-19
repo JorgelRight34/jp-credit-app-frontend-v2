@@ -21,7 +21,8 @@ import { User } from '@/models/user'
 export interface AppRouteContext {
   dataClient: QueryClient
   user: User | null
-  projectId?: number
+  isAuthenticated: boolean
+  projectId: number | null
 }
 
 const context = getContext()

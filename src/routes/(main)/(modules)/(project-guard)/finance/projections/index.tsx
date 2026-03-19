@@ -1,6 +1,5 @@
 import { ProjectionsPage } from '@/features/finance'
 import { createFileRoute } from '@tanstack/react-router'
-import { useSuspenseCurrentProjectId } from '../../../route'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/(project-guard)/finance/projections/',
@@ -9,7 +8,7 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  const projectId = useSuspenseCurrentProjectId()
+  const { projectId } = Route.useRouteContext()
 
   return <ProjectionsPage projectId={projectId} />
 }

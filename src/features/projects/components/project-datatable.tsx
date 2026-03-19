@@ -6,15 +6,24 @@ import {
 import { Project } from '../models/project'
 import { ProjectQuery } from '../models/projectQuery'
 import { projectSearchConfig } from '../lib/config/project-search-config'
-import { projectsDataTableConfigColumns } from '../lib/config/project-datatable-config'
 import { projectsQueryKey } from '../lib/constants'
+import { projectsDataTableConfigColumns } from '../lib/config/project-datatable-config'
 import { getProjects } from '../services/projectClient'
-import { useProjectId } from '../providers/project-id-provider'
+import { useRouter } from '@/hooks/useRouter'
+import { setProjectId } from '../lib/utils'
 
-const ProjectDataTable = (
-  props: DataTableContainerOverrides<Project, ProjectQuery>,
-) => {
-  const [projectId, setProjectId] = useProjectId()
+interface ProjectDataTableProps extends DataTableContainerOverrides<
+  Project,
+  ProjectQuery
+> {
+  currentProjectId?: Project['id'] | null
+}
+
+const ProjectDataTable = ({
+  currentProjectId,
+  ...props
+}: ProjectDataTableProps) => {
+  const router = useRouter()
 
   return (
     <DataTableContainer
@@ -22,18 +31,17 @@ const ProjectDataTable = (
       cacheKey={[projectsQueryKey]}
       datatableConfig={{
         columns: projectsDataTableConfigColumns.concat({
-          header: 'OPCIONES',
+          header: 'Opciones',
           cell: ({ row }) => {
-            const isSelected = row.original.id === projectId
+            const isSelected = row.original.id === currentProjectId
+            const value = isSelected ? null : row.original.id
 
             return buildOptionDataCell(
               isSelected ? 'Deseleccionar' : 'Seleccionar',
               () => {
-                if (!isSelected) {
-                  setProjectId(row.original.id)
-                } else {
-                  setProjectId(null)
-                }
+                setProjectId(value)
+                router.options.context.projectId = value
+                router.invalidate()
               },
               isSelected,
             )

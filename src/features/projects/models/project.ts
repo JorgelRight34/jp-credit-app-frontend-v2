@@ -1,4 +1,5 @@
 import { Compound } from "@/models/compound";
+import { ReactNode } from "react";
 
 export interface Project {
   id: number;
@@ -12,4 +13,4 @@ export interface Project {
 }
 
 
-export type PropsWithProjectId<T = {}> = { projectId: number | undefined } & T
+export type PropsWithProjectId<T = {}> = { projectId: number | null; children?: ReactNode } & T

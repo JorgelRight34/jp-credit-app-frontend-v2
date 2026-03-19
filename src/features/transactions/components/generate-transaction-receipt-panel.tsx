@@ -28,7 +28,7 @@ const GenerateTransactionReceiptPanel = ({
         fallbackRender={() => (
           <GuardPanel
             icon={ReceiptLongIcon}
-            title={`Aún no tienes una plantilla para este tipo de transacciones (${type})`}
+            title={`Aún no tienes una plantilla para este tipo de transacciones (${type.toUpperCase()})`}
             subtitle="Para poder generar recibos en tus transacciones, primero debes crear una plantilla. 
                       Esta definirá el formato y la información que aparecerá en cada recibo."
             createLink="/transactions/receipt-report-template/create"

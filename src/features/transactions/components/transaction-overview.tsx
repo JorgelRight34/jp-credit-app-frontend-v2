@@ -102,14 +102,22 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
             <FormReadOnlyGroup
               name="actor"
               label={
-                <FormReadonlyGroupLabelLink
-                  to="/profiles/$id"
-                  params={{ id: transaction.actorId.toString() }}
-                >
-                  Actor
-                </FormReadonlyGroupLabelLink>
+                transaction.actor ? (
+                  <FormReadonlyGroupLabelLink
+                    to="/profiles/$id"
+                    params={{ id: transaction.actorId?.toString() }}
+                  >
+                    Actor
+                  </FormReadonlyGroupLabelLink>
+                ) : (
+                  'Actor'
+                )
               }
-              value={buildProfileFullName(transaction.actor!)}
+              value={
+                transaction.actor
+                  ? buildProfileFullName(transaction.actor)
+                  : 'N/A'
+              }
             />
             <FormReadOnlyGroup
               name="createdById"

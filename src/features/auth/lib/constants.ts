@@ -7,7 +7,7 @@ export const permissionsQueryKey = "permissions";
 export const usersModulePermissionsEndpoint = "users" + PERMISSIONS_ENDPOINT_SUFFIX
 export const rolesQueryKey = "roles"
 
-export const usersQueryKey = "users"
+export const usersQueryKey = 0
 
 export const usersModuleRootPath = "/access-control"
 

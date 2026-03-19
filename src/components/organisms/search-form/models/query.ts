@@ -6,7 +6,7 @@ export interface Query extends FieldValues {
   endDate?: string;
   page?: number;
   adminId?: number;
-  projectId?: number;
+  projectId?: number | null;
   orderBy?: string;
   orderDesc?: boolean
   profileId?: number | null;

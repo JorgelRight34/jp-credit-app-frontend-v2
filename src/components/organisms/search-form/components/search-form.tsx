@@ -190,11 +190,27 @@ const AdvancedSearchFormGroup = <T,>({
   )
 }
 
+const widths = [
+  '',
+  'md:!w-1/12',
+  'md:!w-2/12',
+  'md:!w-3/12',
+  'md:!w-4/12',
+  'md:!w-5/12',
+  'md:!w-6/12',
+  'md:!w-7/12',
+  'md:!w-8/12',
+  'md:!w-9/12',
+  'md:!w-10/12',
+  'md:!w-11/12',
+  'md:!w-12/12',
+]
+
 const SearchFormGroupContainer = ({
   width = 12,
   children,
 }: { width: number } & PropsWithChildren) => {
-  return <div className={`w-full px-1 md:!w-${width}/12`}>{children}</div>
+  return <div className={`w-full px-1 ${widths[width]}`}>{children}</div>
 }
 
 export default SearchForm

@@ -8,7 +8,7 @@ import {
   PagePanel,
 } from '@/components'
 import ProjectDataTable from '../components/project-datatable'
-import { Project } from '../models/project'
+import { Project, PropsWithProjectId } from '../models/project'
 
 export const projectsBreadcrumb: BreadcrumbSpec = {
   title: 'Proyectos',
@@ -16,7 +16,11 @@ export const projectsBreadcrumb: BreadcrumbSpec = {
   pathname: '/projects',
 }
 
-const ProjectsPage = ({ projectId }: { projectId?: Project['id'] }) => {
+interface ProjectsPageProps extends PropsWithProjectId {
+  queryProjectId?: Project['id']
+}
+
+const ProjectsPage = ({ projectId, queryProjectId }: ProjectsPageProps) => {
   return (
     <PageLayout
       title="Proyectos"
@@ -28,7 +32,10 @@ const ProjectsPage = ({ projectId }: { projectId?: Project['id'] }) => {
       }
     >
       <PagePanel>
-        <ProjectDataTable initialQuery={{ projectId }} />
+        <ProjectDataTable
+          currentProjectId={projectId}
+          initialQuery={{ projectId: queryProjectId }}
+        />
       </PagePanel>
     </PageLayout>
   )

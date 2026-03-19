@@ -5,18 +5,15 @@ import type { Collateral } from '../models/collateral'
 import type { CollateralQuery } from '../models/collateralQuery'
 import { DataTableContainer } from '@/components'
 import { collateralsQueryKey } from '../lib/constants'
-import { useProjectId } from '@/features/projects'
 
 const CollateralDataTable = (
   props: DataTableContainerOverrides<Collateral, CollateralQuery>,
 ) => {
-  const [projectId] = useProjectId()
-
   return (
     <DataTableContainer
       searchConfig={collateralSearchConfig}
       datatableConfig={collateralDataTableConfig}
-      cacheKey={[collateralsQueryKey, projectId]}
+      cacheKey={[collateralsQueryKey]}
       {...props}
     />
   )

@@ -18,7 +18,8 @@ export type DataTableProps<T, TQuery extends Query> = Partial<
   columns: Array<Column<T>>
   cacheKey: CacheKey
   initialState?: InitialTableState<T>
-  allowExpand?: boolean
+  allowExpand?: boolean;
+  getRowId?: (row: T) => string; 
   loader: (options: TQuery) => Promise<PagedResponse<T>>
   onPageChange?: (page: number) => void
   onExpand?: (row: Row<T>) => ReactNode
@@ -32,6 +33,7 @@ const DataTable = <T, TQuery extends Query = Query>({
   columns,
   allowExpand,
   selectedId,
+  getRowId,
   onRowClick,
   onExpand,
   ...props
@@ -57,6 +59,7 @@ const DataTable = <T, TQuery extends Query = Query>({
       onLimitChange={setLimit}
       onSortingChange={sort}
       onExpand={onExpand}
+      getRowId={getRowId}
     />
   )
 }

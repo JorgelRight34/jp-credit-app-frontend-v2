@@ -14,11 +14,14 @@ export const getRouter = () => {
     routeTree,
     context: {
       ...rqContext,
+      projectId: null,
+      isAuthenticated: false,
       user: null,
     },
     defaultNotFoundComponent: NotFound,
     defaultErrorComponent: ErrorPage,
     defaultPreload: 'intent',
+    defaultPreloadDelay: 150,
   })
 
   setupRouterSsrQueryIntegration({ router, queryClient: rqContext.dataClient })

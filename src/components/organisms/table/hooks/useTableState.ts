@@ -22,6 +22,7 @@ export interface UseTableStateProps<TData> {
     selectBehavior?: "single" | "multiple"
     allowExpand?: boolean;
     initialState?: InitialTableState<TData>;
+    getRowId?: (row: TData) => string;
     onPageChange?: (page: number) => void;
     onSortingChange?: (sort: SortingState) => void;
 }
@@ -35,6 +36,7 @@ export const useTableState = <T,>({
     selectBehavior,
     allowExpand,
     initialState,
+    getRowId,
     onPageChange,
     onSortingChange,
 }: UseTableStateProps<T>) => {
@@ -87,6 +89,7 @@ export const useTableState = <T,>({
         },
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
+        getRowId
     });
 
     return table;
