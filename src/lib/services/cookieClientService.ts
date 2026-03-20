@@ -3,7 +3,7 @@ import { parse, serialize } from 'cookie'
 export class CookieClientService {
     static get(key: string) {
         const cookies = parse(document.cookie ?? '');
-        return cookies[key]
+        return cookies[key] ?? null
     }
 
     static set(key: string,
@@ -14,7 +14,7 @@ export class CookieClientService {
             secure?: boolean
             sameSite?: 'lax' | 'strict' | 'none'
         }) {
-        const { days = 7, path = '/', secure = true, sameSite = 'lax' } = options ?? {};
+        const { days = 7, path = '/', secure = false, sameSite = 'lax' } = options ?? {};
 
         const expires = new Date()
         expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000)

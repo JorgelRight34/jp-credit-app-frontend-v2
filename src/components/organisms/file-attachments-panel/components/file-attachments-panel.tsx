@@ -40,7 +40,7 @@ const FileAttachmentsPanel = ({
             <Icon icon={DeleteIcon}>Borrados</Icon>
           </Tab>
         </TabsList>
-        <TabPanel index={0}>
+        <TabPanel className="!border-none" index={0}>
           <FileFormExplorerTabPanel
             label="Subidos"
             existing={add.existingFiles}
@@ -72,7 +72,7 @@ const FileAttachmentsPanel = ({
             }
           />
         </TabPanel>
-        <TabPanel index={1}>
+        <TabPanel className="!border-none" index={1}>
           <FileFormExplorerTabPanel
             label="Eliminados"
             extraColumns={[

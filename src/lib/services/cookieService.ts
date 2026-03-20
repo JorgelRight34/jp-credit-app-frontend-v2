@@ -4,7 +4,7 @@ import { COOKIES } from '../constants/cookies';
 export class CookieService {
     static get(name: string) {
         const cookies = getCookies()
-        return cookies[name]
+        return cookies[name] ?? null
     }
 
     static delete(name: string) {

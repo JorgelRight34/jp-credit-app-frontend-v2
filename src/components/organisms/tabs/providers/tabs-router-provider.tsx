@@ -30,6 +30,7 @@ export function TabsRouterProvider({
     (tab: number) => {
       startTransition(() => {
         search.set('tab', tab.toString())
+        window.history.replaceState(null, '', `?${search.toString()}`)
       })
     },
     [search],

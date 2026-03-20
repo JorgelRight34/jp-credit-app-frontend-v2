@@ -3,6 +3,7 @@ import { createProjectQueryKey } from '@/features/projects/lib/query-keys'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getProjectFn } from '../../../projects/settings'
+import { useSuspenseCurrentProjectId } from '../../route'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/(project-guard)/loans/create/',
@@ -11,7 +12,7 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  const { projectId } = Route.useRouteContext()
+  const projectId = useSuspenseCurrentProjectId()
 
   const { data: project } = useSuspenseData({
     key: createProjectQueryKey(projectId!),

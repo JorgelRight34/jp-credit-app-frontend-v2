@@ -4,7 +4,7 @@ import { CreateTransactionPage } from '@/features/transactions'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getProjectFn } from '../../../projects/settings'
-import { useSuspenseCurrentProjectId } from '../../../route'
+import { useSuspenseCurrentProjectId } from '../../route'
 
 const searchSchema = z.object({
   tab: z.number().optional(),

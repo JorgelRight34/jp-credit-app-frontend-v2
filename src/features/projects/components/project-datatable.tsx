@@ -9,8 +9,9 @@ import { projectSearchConfig } from '../lib/config/project-search-config'
 import { projectsQueryKey } from '../lib/constants'
 import { projectsDataTableConfigColumns } from '../lib/config/project-datatable-config'
 import { getProjects } from '../services/projectClient'
-import { useRouter } from '@/hooks/useRouter'
 import { setProjectId } from '../lib/utils'
+import { useDataClient } from '@/hooks/useDataClient'
+import { currentProjectIdQueryKey } from '../lib/query-keys'
 
 interface ProjectDataTableProps extends DataTableContainerOverrides<
   Project,
@@ -23,7 +24,7 @@ const ProjectDataTable = ({
   currentProjectId,
   ...props
 }: ProjectDataTableProps) => {
-  const router = useRouter()
+  const dataClient = useDataClient()
 
   return (
     <DataTableContainer
@@ -31,7 +32,7 @@ const ProjectDataTable = ({
       cacheKey={[projectsQueryKey]}
       datatableConfig={{
         columns: projectsDataTableConfigColumns.concat({
-          header: 'Opciones',
+          header: 'OPCIONES',
           cell: ({ row }) => {
             const isSelected = row.original.id === currentProjectId
             const value = isSelected ? null : row.original.id
@@ -40,8 +41,7 @@ const ProjectDataTable = ({
               isSelected ? 'Deseleccionar' : 'Seleccionar',
               () => {
                 setProjectId(value)
-                router.options.context.projectId = value
-                router.invalidate()
+                dataClient.invalidate({ key: currentProjectIdQueryKey })
               },
               isSelected,
             )

@@ -4,6 +4,7 @@ import { CookieService } from '@/lib/services/cookieService'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 import z from 'zod'
+import { useSuspenseCurrentProjectId } from '../(project-guard)/route'
 
 const projectSchema = z.object({ projectId: z.number().optional() })
 
@@ -17,7 +18,7 @@ export const Route = createFileRoute('/(main)/(modules)/projects/')({
 })
 
 function RouteComponent() {
-  const { projectId } = Route.useRouteContext()
+  const projectId = useSuspenseCurrentProjectId()
   const { projectId: queryProjectId } = Route.useSearch()
 
   return <ProjectsPage projectId={projectId} queryProjectId={queryProjectId} />

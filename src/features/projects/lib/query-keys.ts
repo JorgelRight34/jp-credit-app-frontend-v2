@@ -5,4 +5,4 @@ export const createProjectQueryKey = (id: Project["id"]) => {
     return [projectsQueryKey, id];
 }
 
-export const currentProjectIdQueryKey = [projectsQueryKey, "current"]
+export const currentProjectIdQueryKey = [projectsQueryKey, 0]

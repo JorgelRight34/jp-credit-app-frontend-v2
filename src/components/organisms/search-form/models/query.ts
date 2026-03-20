@@ -9,7 +9,6 @@ export interface Query extends FieldValues {
   projectId?: number | null;
   orderBy?: string;
   orderDesc?: boolean
-  profileId?: number | null;
   loanId?: number;
   createdBy?: number;
   limit?: number;

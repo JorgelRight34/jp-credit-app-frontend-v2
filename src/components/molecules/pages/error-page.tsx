@@ -16,6 +16,7 @@ const getError = (error: any) => {
 }
 
 const ErrorPage = ({ error: err }: { error: any }) => {
+  throw err
   if (isRedirect(err)) throw err
 
   const error = getError(err)

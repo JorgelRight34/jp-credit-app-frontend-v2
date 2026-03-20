@@ -13,7 +13,7 @@ export const variations = {
     minimal: {
         list: "flex justify-end",
         container: "",
-        tab: "border rounded-full px-4 mb-3 p-2 shadow-sm rounded-pill ml-3 cursor-pointer",
+        tab: "border rounded-full px-4 mb-3 p-1 md:p-2 shadow-sm rounded-pill ml-3 cursor-pointer",
     },
 } as const satisfies Record<string, Variation>;
 

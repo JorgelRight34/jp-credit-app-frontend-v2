@@ -31,13 +31,8 @@ export const useSuspenseCurrentUser = () => {
   return data
 }
 
-function RouteComponent() {
+function RouteComponentInner() {
   const user = useSuspenseCurrentUser()
-  const accessToken = getAuthorizationFn()
-
-  if (!accessToken || !isJwtValid(accessToken) || !user) {
-    throw redirect({ to: '/login' })
-  }
 
   return (
     <div className="relative flex h-[100dvh] flex-col md:flex-row">
@@ -52,4 +47,13 @@ function RouteComponent() {
       </div>
     </div>
   )
+}
+
+function RouteComponent() {
+  const accessToken = getAuthorizationFn()
+  if (!accessToken || !isJwtValid(accessToken)) {
+    throw redirect({ to: '/login' })
+  }
+
+  return <RouteComponentInner />
 }

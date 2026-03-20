@@ -23,20 +23,18 @@ const FileAttachmentsSection = ({
   extraColumns,
 }: FileAttachmentsSectionProps) => {
   return (
-    <div className="flex flex-col gap-6 p-2">
-      <section className="rounded-xl border p-4 shadow-sm">
-        <header className="flex items-center justify-between mb-3">
-          <MediumTitle className="font-semibold tracking-wide">
-            {label}
-          </MediumTitle>
-          {buttons}
-        </header>
-        <FileAttachmentsTable
-          existing={existing}
-          pending={pending}
-          extraColumns={extraColumns}
-        />
-      </section>
+    <div className="flex flex-col gap-3 p-0 md:p-2">
+      <header className="flex items-center justify-between">
+        <MediumTitle className="font-semibold tracking-wide">
+          {label}
+        </MediumTitle>
+        {buttons}
+      </header>
+      <FileAttachmentsTable
+        existing={existing}
+        pending={pending}
+        extraColumns={extraColumns}
+      />
     </div>
   )
 }

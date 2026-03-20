@@ -13,15 +13,15 @@ const LoginPanel = () => {
   const router = useRouter()
 
   return (
-    <main className="block md:flex items-center bg-background justify-center h-[100dvh]">
-      <Container className="w-full h-full md:h-auto md:w-[75dvw] flex-row rounded-xl py-5 flex shadow-sm">
-        <aside className="md:p-5 border-end hidden w-6/12 flex-col items-center justify-center p-3 md:flex">
+    <main className="bg-background block h-[100dvh] items-center justify-center md:flex">
+      <Container className="flex h-full w-full flex-row rounded-xl py-5 shadow-sm md:h-auto md:w-[75dvw]">
+        <aside className="border-end hidden w-6/12 flex-col items-center justify-center p-3 md:flex md:p-5">
           <section
-            className="border-accent flex rounded-xl flex-col w-full h-full items-center justify-center p-5 shadow-sm"
+            className="border-accent flex h-full w-full flex-col items-center justify-center rounded-xl p-5 shadow-sm"
             style={{ borderWidth: '1px' }}
           >
             <header className="flex flex-col items-center justify-center gap-5 p-5">
-              <BigTitle className="text-accent text-4xl mb-5 text-center">
+              <BigTitle className="text-accent mb-5 text-center">
                 Sistema de Crédito Empresarial
               </BigTitle>
               {/* Version info at bottom */}
@@ -35,15 +35,15 @@ const LoginPanel = () => {
             </header>
           </section>
         </aside>
-        <section className="md:p-5 flex w-full flex-col justify-center md:w-6/12">
+        <section className="flex w-full flex-col justify-center md:w-6/12 md:p-5">
           <figure className="flex justify-center">
             <AppHorizontalLogo
               alt="header"
-              className="mb-5 block object-contain h-32"
+              className="mb-5 block h-32 object-contain"
             />
           </figure>
           {/* Header section */}
-          <header className="md:mb-3 mb-12 text-center">
+          <header className="mb-12 text-center md:mb-3">
             <Subtitle className="small mb-0">
               Ingresa tus credenciales para acceder al sistema.
             </Subtitle>

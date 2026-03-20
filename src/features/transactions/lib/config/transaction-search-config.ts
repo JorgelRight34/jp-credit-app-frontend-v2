@@ -4,7 +4,7 @@ import { LoanSearchInput } from "@/features/loans";
 
 export const transactionSearchConfig: SearchFormConfig<TransactionQuery> = {
     options: [
-        { name: "id", label: "No. Documento", width: 2, type: (p) => NumericInput(p) },
+        { name: "id", label: "No. Documento", width: 12, type: (p) => NumericInput(p) },
     ],
     advanced: [
         { name: "startDate", label: "Inicio", width: 6, type: (p) => DateInput(p) },

@@ -48,11 +48,7 @@ const columns: Array<Column<TableFile>> = [
 ]
 
 const FileTable = ({ files = [], extraColumns = [] }: FileTableProps) => {
-  return (
-    <section>
-      <TableBuilder columns={columns.concat(extraColumns)} data={files} />
-    </section>
-  )
+  return <TableBuilder columns={columns.concat(extraColumns)} data={files} />
 }
 
 export default FileTable
