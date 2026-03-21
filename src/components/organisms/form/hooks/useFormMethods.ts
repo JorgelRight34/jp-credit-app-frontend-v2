@@ -27,12 +27,13 @@ export const useFormMethods = <T extends object, TData extends FieldValues, TRet
     shouldUseNativeValidation,
     handleOnSubmit,
 }: UseFormMethodsProps<TData, TReturn>) => {
-    const { control, handleSubmit, setValue, trigger, getValues, reset } = useRHFForm({
+    const methods = useRHFForm({
         resolver: schema ? zodResolver(schema) : undefined,
         defaultValues: defaultValues as Record<string, unknown>,
         values: initialValues,
         shouldUseNativeValidation,
     });
+    const { control, handleSubmit, setValue, trigger, getValues, reset } = methods
 
     const handleReset = useCallback(() => {
         reset(defaultValues, { keepErrors: false, keepDirty: false })
@@ -45,6 +46,7 @@ export const useFormMethods = <T extends object, TData extends FieldValues, TRet
 
     return useMemo(() => ({
         control,
+        methods,
         getValues,
         submit,
         handleSubmit: handleSubmit,

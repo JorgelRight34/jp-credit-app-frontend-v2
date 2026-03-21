@@ -1,7 +1,7 @@
 import FormInput from './form-input'
 import FormGroupLayout, { FormGroupLabel } from './fom-group-layout'
 import type { FormGroupLayoutProps } from './fom-group-layout'
-import type { FieldValues } from 'react-hook-form'
+import { useFormState, type FieldValues } from 'react-hook-form'
 import type { FormInputProps } from './form-input'
 import { InputProps } from '@/components/atoms'
 
@@ -35,7 +35,7 @@ const FormGroup = <
       className={className}
       label={<FormGroupLabel label={label} optional={optional} />}
     >
-      <FormInput
+      <FormGroupInput
         {...(props as any)}
         required={!optional}
         className={inputClassName}
@@ -45,6 +45,17 @@ const FormGroup = <
         as={input}
       />
     </FormGroupLayout>
+  )
+}
+
+const FormGroupInput = ({ name, ...props }: InputProps) => {
+  const { errors } = useFormState()
+
+  return (
+    <FormInput
+      {...(props as any)}
+      error={!!errors[name as keyof typeof errors]}
+    />
   )
 }
 

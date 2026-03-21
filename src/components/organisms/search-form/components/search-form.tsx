@@ -61,6 +61,9 @@ const SearchForm = <T extends Query>({
             form={form}
             onShowAdvancedClick={onShowAdvancedClick}
           />
+          <button onClick={() => console.log(form.control._proxyFormState)}>
+            quien
+          </button>
         </div>
         <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
           {hasOpenedAdvanced && (
