@@ -61,9 +61,6 @@ const SearchForm = <T extends Query>({
             form={form}
             onShowAdvancedClick={onShowAdvancedClick}
           />
-          <button onClick={() => console.log(form.control._proxyFormState)}>
-            quien
-          </button>
         </div>
         <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
           {hasOpenedAdvanced && (
@@ -88,7 +85,6 @@ const QuickSearchForm = <T,>({
   form: ReturnType<typeof useFormMethods>
   onShowAdvancedClick: () => void
 }) => {
-  console.log('rerender')
   return (
     <>
       <div className="flex min-w-0 flex-1 flex-col items-center gap-3 md:flex-row md:gap-0">

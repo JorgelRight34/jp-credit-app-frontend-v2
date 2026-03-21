@@ -1,6 +1,6 @@
 import { Breadcrumb } from '../../breadcrumb'
 import type { BreadcrumbSpec } from '../../breadcrumb'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useWindowBreakpoint } from '@/hooks/useWindowBreakpoint'
 import { HomeIcon } from '@/components/atoms'
 import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 
@@ -13,7 +13,7 @@ const PageLayoutBreadcrumb = ({
 }: {
   breadcrumbs: Array<BreadcrumbSpec>
 }) => {
-  const isSmallScreen = useMediaQuery(SMALL_SCREEN_BREAKPOINT)
+  const isSmallScreen = useWindowBreakpoint(SMALL_SCREEN_BREAKPOINT)
 
   return (
     <Breadcrumb

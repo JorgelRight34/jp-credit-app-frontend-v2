@@ -44,7 +44,10 @@ const NavbarLink = ({
               )}
             >
               <div className="flex-1 truncate">
-                <Icon icon={option.icon} className="min-w-0 flex-1">
+                <Icon
+                  icon={option.icon}
+                  className="min-w-0 flex-1 !justify-start"
+                >
                   <div className="truncate">{option.name}</div>
                 </Icon>
               </div>

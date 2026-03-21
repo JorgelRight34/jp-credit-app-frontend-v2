@@ -61,7 +61,7 @@ const Navbar = ({ user }: PropsWithUser) => {
       </div>
       <NavbarBody />
       <div className="hidden w-full flex-shrink-0 p-3 md:block">
-        <NavbarFooter user={user} className="bg-active-transparent shadow-sm" />
+        <NavbarFooter user={user} />
       </div>
     </div>
   )

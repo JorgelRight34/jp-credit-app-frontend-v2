@@ -2,9 +2,9 @@ import type { SchemaType } from "../models/schemaType";
 import type { FieldValues } from "react-hook-form";
 import type { CacheKey } from "@/models";
 import { useDataClient } from "@/hooks/useDataClient";
-import { useDataMutation } from "@/hooks/useMutate";
 import { toastService } from "@/components/molecules";
 import { DefaultFormValues, useFormMethods } from "./useFormMethods";
+import { useCallback } from "react";
 
 export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
     schema?: SchemaType<TData>;
@@ -37,37 +37,35 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
 }: UseFormBuilderProps<TData, TReturn>) => {
     const dataClient = useDataClient();
 
-    const { mutateAsync } = useDataMutation({
-        mutationFn: async (data: TData) => {
-            if (shouldEdit) {
-                const res = await onEdit!(data);
-                methods.reset()
-                return res;
-            }
-            return await onSubmit(data)
-        },
-        onSuccess: async (data) => {
-            if (toastMessage) {
-                toastService.success(toastMessage(data ?? undefined))
-            }
+    const handleMutation = useCallback(async (data: TData) => {
+        let result: TReturn
 
-            if (resetValues) methods.reset();
-
-            if (data) await onSuccess?.(data)
-            if (!keysToInvalidate) return;
-
-            for (const key of keysToInvalidate) {
-                dataClient.invalidate({ key });
-            }
+        if (shouldEdit) {
+            result = await onEdit!(data) as TReturn
+            methods.reset()
+        } else {
+            result = await onSubmit(data)
         }
-    })
+
+        if (toastMessage) {
+            toastService.success(toastMessage(result))
+        }
+
+        if (resetValues) methods.reset()
+        if (result!) await onSuccess?.(result)
+        if (!keysToInvalidate) return
+
+        for (const key of keysToInvalidate) {
+            dataClient.invalidate({ key })
+        }
+    }, [shouldEdit, onEdit, onSubmit, toastMessage, resetValues, onSuccess, keysToInvalidate, dataClient])
 
     const methods = useFormMethods({
         schema,
         defaultValues,
         shouldUseNativeValidation,
         initialValues,
-        handleOnSubmit: (data) => mutateAsync(data)
+        handleOnSubmit: handleMutation
     })
 
     return methods;

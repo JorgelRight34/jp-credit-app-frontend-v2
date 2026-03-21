@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { getIconInputSlot } from '../lib/react-utils'
 import type { IconInputSlotProps } from '../lib/react-utils'
 import type { InputBaseComponentProps } from '@mui/material'
-import type { ElementType } from 'react'
+import { useMemo, type ElementType } from 'react'
 import type { BaseTextFieldProps } from '../models/baseTextFieldProps'
 import { SX_CONFIG } from '@/components/atoms/constants'
 
@@ -21,7 +21,7 @@ export type BaseInputProps = BaseTextFieldProps & {
 
 const BaseInput = ({
   readOnly,
-  value = '', // If value is undefined the component stops being reactive to value changes
+  value = '',
   className,
   inputComponent,
   icon,
@@ -31,26 +31,41 @@ const BaseInput = ({
   disabled,
   ...props
 }: BaseInputProps) => {
+  const iconSlot = useMemo(() => getIconInputSlot(icon), [icon])
+  const slotProps = useMemo(
+    () => ({
+      input: {
+        value,
+        ...iconSlot,
+        inputComponent,
+        ...props.slotProps?.input,
+        readOnly,
+      },
+      htmlInput: {
+        min,
+        max,
+        step,
+      },
+      inputLabel: { shrink: true },
+      ...props.slotProps,
+    }),
+    [
+      value,
+      iconSlot,
+      inputComponent,
+      props.slotProps,
+      readOnly,
+      min,
+      max,
+      step,
+    ],
+  )
+
   return (
     <TextField
       className={clsx('rounded-xl', className)}
       value={value}
-      slotProps={{
-        input: {
-          value,
-          ...getIconInputSlot(icon),
-          inputComponent,
-          ...props.slotProps?.input,
-          readOnly,
-        },
-        htmlInput: {
-          min,
-          max,
-          step,
-        },
-        inputLabel: { shrink: true },
-        ...props.slotProps,
-      }}
+      slotProps={slotProps}
       disabled={disabled}
       sx={SX_CONFIG}
       size="small"

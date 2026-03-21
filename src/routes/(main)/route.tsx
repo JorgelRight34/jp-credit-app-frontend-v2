@@ -26,6 +26,7 @@ export const useSuspenseCurrentUser = () => {
   const { data } = useSuspenseData({
     key: [usersQueryKey, 0],
     loader: getCurrentUserFn,
+    staleTime: Infinity,
   })
 
   return data
@@ -37,13 +38,13 @@ function RouteComponentInner() {
   return (
     <div className="relative flex h-[100dvh] flex-col md:flex-row">
       <div className="hidden h-full w-full p-0 shadow-sm md:block md:w-2/14">
-        <Navbar user={user!} />
+        <Navbar user={user} />
       </div>
       <div className="bg-background flex flex-1 flex-col overflow-y-auto p-0 [scrollbar-gutter:stable]">
         <Outlet />
       </div>
       <div className="flex-shrink-0">
-        <BottomNavbar user={user!} />
+        <BottomNavbar user={user} />
       </div>
     </div>
   )

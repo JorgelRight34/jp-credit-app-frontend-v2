@@ -5,21 +5,25 @@ import {
   CheckCircleIcon,
   Icon,
 } from '@/components/atoms'
+import { Control, useFormState } from 'react-hook-form'
 
 export interface FormSubmitBtnProps extends ButtonProps {
   isDirty?: boolean
   isValid?: boolean
   toastMessage?: string
+  control: Control<any, any, any>
   icon?: IconName
 }
 
 const FormSubmitBtn = ({
   children = 'Confirmar',
-  isDirty,
   isValid,
+  control,
   icon = CheckCircleIcon,
   ...props
 }: FormSubmitBtnProps) => {
+  const { isDirty } = useFormState({ control })
+
   return (
     <AccentPillBtn
       type="submit"

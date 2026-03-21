@@ -1,16 +1,11 @@
-import {
-  FieldValues,
-  Path,
-  useFormContext,
-  UseFormSetValue,
-  useWatch,
-} from 'react-hook-form'
+import { FieldValues, Path, UseFormSetValue, useWatch } from 'react-hook-form'
 import { LazySelect, SelectOptions } from '@/components/atoms'
 import { CacheKey } from '@/models'
 import FormGroupLayout, { FormGroupLabel } from './fom-group-layout'
 import FormInput from './form-input'
 import { FormGroupProps } from './form-group'
 import { useMemo } from 'react'
+import { useFormControl, useFormSetValue } from '../providers/form-provider'
 
 type WatchValues = Array<string | number>
 
@@ -39,12 +34,13 @@ const FormLazySelectGroup = <T extends FieldValues>({
   loader,
   ...props
 }: FormLazySelectGroupProps<T>) => {
-  const { control, setValue } = useFormContext<T>()
+  const control = useFormControl<T>()
   const watch = useWatch({
     name: watchedValues,
     control,
   })
   const enabled = useMemo(() => enabledFn(watch), [watch])
+  const setValue = useFormSetValue<T>()
 
   return (
     <FormGroupLayout

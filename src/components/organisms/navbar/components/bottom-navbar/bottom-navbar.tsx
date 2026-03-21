@@ -8,7 +8,7 @@ import {
   NavLink,
   Paragraph,
 } from '@/components/atoms'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useWindowBreakpoint } from '@/hooks/useWindowBreakpoint'
 import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 import CurrentUserPicCard from '../side-navbar/current-user-pic-card'
 import { PropsWithUser } from '@/models/user'
@@ -16,7 +16,7 @@ import NavbarAppSettingsTrigger from '../navbar-app-settings/navbar-app-settings
 import { PropsWithChildren } from 'react'
 
 const BottomNavbar = ({ user }: PropsWithUser) => {
-  const isSmall = useMediaQuery(SMALL_SCREEN_BREAKPOINT)
+  const isSmall = useWindowBreakpoint(SMALL_SCREEN_BREAKPOINT)
   const style = { height: '1.5rem' }
 
   if (!isSmall) return null

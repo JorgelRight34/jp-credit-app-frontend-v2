@@ -1,13 +1,14 @@
-import { Controller } from 'react-hook-form'
-import type { FieldValues } from 'react-hook-form'
+import { useController } from 'react-hook-form'
+import type { FieldValues, Path } from 'react-hook-form'
 import type { ReactNode } from 'react'
 import { InputProps } from '@/components/atoms'
+import { useFormControl } from '../providers/form-provider'
 
 export type FormInputProps<
   T extends FieldValues,
   TInput extends InputProps = InputProps,
 > = {
-  name: keyof T
+  name: Path<T>
   error?: boolean
   as: (props: TInput) => ReactNode
 } & Omit<TInput, 'value' | 'onChange' | 'ref'>
@@ -21,16 +22,14 @@ const FormInput = <
   error,
   ...props
 }: FormInputProps<T, TInput>) => {
+  const control = useFormControl()
+  const { field } = useController({ control, name })
+
   return (
-    <Controller
-      name={name as string}
-      render={({ field }) => (
-        <Component
-          {...(props as unknown as TInput)}
-          {...(field as unknown as Partial<TInput>)}
-          error={error}
-        />
-      )}
+    <Component
+      {...(props as unknown as TInput)}
+      {...(field as unknown as Partial<TInput>)}
+      error={error}
     />
   )
 }

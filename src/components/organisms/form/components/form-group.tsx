@@ -4,6 +4,7 @@ import type { FormGroupLayoutProps } from './fom-group-layout'
 import { useFormState, type FieldValues } from 'react-hook-form'
 import type { FormInputProps } from './form-input'
 import { InputProps } from '@/components/atoms'
+import { useFormControl } from '../providers/form-provider'
 
 export type FormGroupProps<
   T extends FieldValues,
@@ -31,7 +32,7 @@ const FormGroup = <
 }: FormGroupProps<T, TInput>) => {
   return (
     <FormGroupLayout
-      name={name as string}
+      name={name}
       className={className}
       label={<FormGroupLabel label={label} optional={optional} />}
     >
@@ -40,8 +41,8 @@ const FormGroup = <
         required={!optional}
         className={inputClassName}
         type={type}
-        name={name as string}
-        id={name as string}
+        name={name}
+        id={name}
         as={input}
       />
     </FormGroupLayout>
@@ -49,11 +50,13 @@ const FormGroup = <
 }
 
 const FormGroupInput = ({ name, ...props }: InputProps) => {
-  const { errors } = useFormState()
+  const control = useFormControl()
+  const { errors } = useFormState({ control })
 
   return (
     <FormInput
       {...(props as any)}
+      name={name}
       error={!!errors[name as keyof typeof errors]}
     />
   )

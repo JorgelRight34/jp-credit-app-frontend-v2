@@ -4,7 +4,7 @@ import PageLayoutOption from './page-layout-option'
 import type { MenuOption, MenuRef } from '../../menu/components/menu'
 import type { LayoutOption } from '../models/pageLayoutOption'
 import { Icon, MoreVertIcon } from '@/components/atoms'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useWindowBreakpoint } from '@/hooks/useWindowBreakpoint'
 import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 
 export type PageLayoutOptionsContainerProps = {
@@ -40,7 +40,7 @@ const PageLayoutOptionsMenu = ({
   options: Array<LayoutOption>
   smallScreenExtraMenuOptions?: Array<MenuOption>
 }) => {
-  const isMobile = useMediaQuery(SMALL_SCREEN_BREAKPOINT)
+  const isMobile = useWindowBreakpoint(SMALL_SCREEN_BREAKPOINT)
   const menuRef = useRef<MenuRef>(null)
 
   return (

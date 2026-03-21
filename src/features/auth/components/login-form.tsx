@@ -3,8 +3,8 @@ import type { LoginResult } from '../models/loginResult'
 import type { DataModuleFormProps } from '@/components'
 import {
   Form,
-  FormContainer,
   FormGroup,
+  FormLayout,
   FormRow,
   FormSubmitBtn,
   Icon,
@@ -19,13 +19,13 @@ const LoginForm = (
   const form = useLoginForm(props)
 
   return (
-    <FormContainer
-      form={form}
-      footer={(isDirty) => (
-        <FormSubmitBtn isDirty={isDirty}>
+    <FormLayout
+      onSubmit={form.submit}
+      footer={
+        <FormSubmitBtn control={form.control}>
           <Icon icon={LoginIcon}>Iniciar sesión</Icon>
         </FormSubmitBtn>
-      )}
+      }
     >
       <Form form={form}>
         <FormRow>
@@ -38,7 +38,7 @@ const LoginForm = (
           input={PasswordInput}
         />
       </Form>
-    </FormContainer>
+    </FormLayout>
   )
 }
 

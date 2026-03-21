@@ -2,18 +2,10 @@ import type { ElementType } from 'react'
 import type { IconName } from '../models/iconName'
 import { SvgIconProps } from '@mui/material'
 
-/**
- * Props for the Icon component
- * Extends all standard HTML span element attributes
- */
 export interface IconProps extends React.HtmlHTMLAttributes<HTMLSpanElement> {
-  /** The Google Material Icon name to display */
   icon?: IconName
-  /** Optional CSS class name for the icon element */
   className?: string
-  /** Optional title attribute for accessibility */
   title?: string
-  /** Optional CSS class name for the wrapper element */
   wrapperClassName?: string
   dataTitle?: string
   as?: ElementType
@@ -29,7 +21,7 @@ export interface IconProps extends React.HtmlHTMLAttributes<HTMLSpanElement> {
  * The component uses Material Symbols Outlined font family for icons.
  */
 const Icon = ({
-  className = '',
+  className = 'justify-center',
   wrapperClassName = '',
   dataTitle,
   as: Component = 'span',
@@ -48,7 +40,9 @@ const Icon = ({
       title={props['data-title' as keyof typeof props] || dataTitle || title}
       onClick={onClick}
     >
-      <span className={`flex w-full items-center gap-2 ${className}`}>
+      <span
+        className={`flex !w-auto items-center justify-center gap-2 ${className}`}
+      >
         {IconComponent && <IconComponent className={className} style={style} />}
         {children}
       </span>

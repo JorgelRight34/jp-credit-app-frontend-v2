@@ -28,7 +28,7 @@ const FormConfirmationFlowContainer = <T extends FieldValues>({
   initializeAsDirty,
   form,
 }: FormConfirmationFlowContainerProps<T>) => {
-  const { isDirty, errors } = useFormState({ control: form.control })
+  const { isDirty } = useFormState({ control: form.control })
 
   return (
     <FormLayout
@@ -38,7 +38,7 @@ const FormConfirmationFlowContainer = <T extends FieldValues>({
           form={form}
         />
       }
-      errors={<FormErrorsPanel control={form.control} mutationError={errors} />}
+      errors={<FormErrorsPanel control={form.control} />}
     >
       {children}
     </FormLayout>

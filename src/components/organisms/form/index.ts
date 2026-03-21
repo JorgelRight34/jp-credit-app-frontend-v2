@@ -39,3 +39,4 @@ export * from "./models/fomRef"
 export * from './hooks/useHasFormEverBeenDirty'
 export * from './lib/utils'
 export { default as FormFileGroup } from './components/form-file-group'
+export { useFormState } from 'react-hook-form'

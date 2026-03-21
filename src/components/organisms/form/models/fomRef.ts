@@ -9,3 +9,7 @@ export interface FormRef<T extends FieldValues = FieldValues> {
     handleSubmit: UseFormHandleSubmit<T>;
     reset: () => void;
 }
+
+export type PropsWithFormRef<T extends FieldValues, TOther = object> = { ref: FormRef<T> } & TOther
+
+export type PropsWithFormControl<T extends FieldValues, TOther = object> = { control: Control<T> } & TOther; 

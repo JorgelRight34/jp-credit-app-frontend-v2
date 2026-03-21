@@ -1,4 +1,4 @@
-import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useWindowBreakpoint } from '@/hooks/useWindowBreakpoint'
 import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 import { Pagination as MPagination } from '@mui/material'
 import type { PaginationProps as MPaginationProps } from '@mui/material'
@@ -6,7 +6,7 @@ import type { PaginationProps as MPaginationProps } from '@mui/material'
 type PaginationProps = MPaginationProps
 
 const Pagination = (props: PaginationProps) => {
-  const isSmall = useMediaQuery(SMALL_SCREEN_BREAKPOINT)
+  const isSmall = useWindowBreakpoint(SMALL_SCREEN_BREAKPOINT)
 
   return (
     <MPagination

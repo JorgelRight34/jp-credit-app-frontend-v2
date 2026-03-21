@@ -1,5 +1,5 @@
-import { type PropsWithChildren, type ReactNode } from 'react'
-import { FieldValues, useFormState } from 'react-hook-form'
+import { useState, type PropsWithChildren } from 'react'
+import { FieldValues } from 'react-hook-form'
 import FormErrorsPanel from './form-errors-panel'
 import FormContainerButtons from './form-container-buttons'
 import FormLayout from './form-container-layout'
@@ -11,7 +11,6 @@ type FormContainerProps<T extends FieldValues> = PropsWithChildren & {
   initializeAsDirty?: boolean
   isValid?: boolean
   onSubmit?: () => void
-  footer?: (isDirty: boolean) => ReactNode
 }
 
 const FormContainer = <T extends FieldValues>({
@@ -20,24 +19,22 @@ const FormContainer = <T extends FieldValues>({
   className,
   initializeAsDirty,
   onSubmit = form.submit,
-  footer,
 }: FormContainerProps<T>) => {
-  const { isDirty, errors } = useFormState({ control: form.control })
+  const [mutationError, setMutationError] = useState<unknown>()
 
   return (
     <FormLayout
       className={className}
       onSubmit={onSubmit}
-      errors={<FormErrorsPanel control={form.control} mutationError={errors} />}
+      onError={setMutationError}
+      errors={
+        <FormErrorsPanel control={form.control} mutationError={mutationError} />
+      }
       footer={
-        footer ? (
-          footer(isDirty)
-        ) : (
-          <FormContainerButtons
-            form={form}
-            isDirty={isDirty || initializeAsDirty}
-          />
-        )
+        <FormContainerButtons
+          form={form}
+          initializeAsDirty={initializeAsDirty}
+        />
       }
     >
       {children}

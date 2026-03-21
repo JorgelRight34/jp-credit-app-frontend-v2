@@ -7,7 +7,7 @@ import { loanModuleBreadcrumb } from './loans-page'
 const CreateLoanFormPage = ({ project }: { project: Project }) => {
   return (
     <CreateFormPageLayout
-      title="Préstamos"
+      title="Crear préstamo"
       permissionProvider={loanPermissionProvider}
       breadcrumbs={[loanModuleBreadcrumb]}
     >
