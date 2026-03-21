@@ -1,4 +1,4 @@
-import { Activity, useState } from 'react'
+import { Activity, useCallback, useState } from 'react'
 import { Form, FormInput } from '../../form'
 import type { PropsWithChildren } from 'react'
 import type { DefaultFormValues, SchemaType } from '../../form'
@@ -47,6 +47,11 @@ const SearchForm = <T extends Query>({
     handleOnSubmit: onSubmit,
   })
 
+  const onShowAdvancedClick = useCallback(() => {
+    setShowAdvanced((prev) => !prev)
+    if (!hasOpenedAdvanced) setHasOpenedAdvanced(true)
+  }, [])
+
   return (
     <Form form={form}>
       <section className="flex flex-col items-center overflow-y-visible py-1">
@@ -54,10 +59,7 @@ const SearchForm = <T extends Query>({
           <QuickSearchForm
             options={options}
             form={form}
-            onShowAdvancedClick={() => {
-              setShowAdvanced((prev) => !prev)
-              if (!hasOpenedAdvanced) setHasOpenedAdvanced(true)
-            }}
+            onShowAdvancedClick={onShowAdvancedClick}
           />
         </div>
         <Activity mode={showAdvanced ? 'visible' : 'hidden'}>
@@ -83,6 +85,7 @@ const QuickSearchForm = <T,>({
   form: ReturnType<typeof useFormMethods>
   onShowAdvancedClick: () => void
 }) => {
+  console.log('rerender')
   return (
     <>
       <div className="flex min-w-0 flex-1 flex-col items-center gap-3 md:flex-row md:gap-0">
@@ -103,16 +106,18 @@ const QuickSearchForm = <T,>({
       </div>
       <div className="flex shrink-0 items-center gap-1 pl-1">
         <AccentBtn
-          icon={SearchIcon}
           className="!hidden h-full shadow-sm md:!block"
           onClick={form.submit}
-        />
+        >
+          <Icon icon={SearchIcon} />
+        </AccentBtn>
         <LightBtn
-          icon={MenuIcon}
           className="h-full border shadow-sm"
           type="button"
           onClick={onShowAdvancedClick}
-        />
+        >
+          <Icon icon={MenuIcon} />
+        </LightBtn>
       </div>
     </>
   )
@@ -139,18 +144,18 @@ const AdvancedSearchForm = <T,>({
         {options.length === 0 && <Paragraph>No hay opciones</Paragraph>}
       </div>
       <div className="flex flex-shrink-0 flex-wrap justify-end gap-3 border-t p-3">
-        <AccentPillBtn
-          icon={SearchIcon}
-          className="w-full md:!w-auto"
-          onClick={form.submit}
-        >
-          Buscar
+        <AccentPillBtn className="w-full md:!w-auto" onClick={form.submit}>
+          <Icon icon={SearchIcon}>Buscar</Icon>
         </AccentPillBtn>
         {onExport && (
           <ModalTrigger
             title={<Icon icon={SettingsIcon}>Configurar exporte</Icon>}
             triggerClassName="w-full md:!w-auto"
-            trigger={<LightPillBtn icon={DownloadIcon}>Exportar</LightPillBtn>}
+            trigger={
+              <LightPillBtn>
+                <Icon icon={DownloadIcon}>Exportar</Icon>
+              </LightPillBtn>
+            }
           >
             <ExportForm
               onSubmit={(body) => onExport!(body, form.getValues())}
@@ -159,10 +164,9 @@ const AdvancedSearchForm = <T,>({
         )}
         <LightPillBtn
           className="w-full md:!w-auto"
-          icon={RestoreIcon}
           onClick={() => form.reset()}
         >
-          Resetear
+          <Icon icon={RestoreIcon}>Resetear</Icon>
         </LightPillBtn>
       </div>
     </div>

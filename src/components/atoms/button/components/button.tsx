@@ -1,16 +1,11 @@
 import clsx from 'clsx'
-import Icon, { IconProps } from '../../icon/components/icon'
 import type { ElementType, ReactNode } from 'react'
-import type { IconName } from '../../icon/models/iconName'
 
 export interface ButtonProps extends React.HtmlHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode
   className?: string
-  labelClassName?: string
   type?: 'button' | 'submit' | 'reset' | undefined
   disabled?: boolean
-  icon?: IconName
-  iconDirection?: IconProps['orientation']
   as?: ElementType
 }
 
@@ -20,9 +15,6 @@ const Button = ({
   className,
   type = 'button',
   disabled,
-  labelClassName,
-  iconDirection,
-  icon,
   onClick,
   ...props
 }: ButtonProps) => {
@@ -37,17 +29,7 @@ const Button = ({
       onClick={disabled ? undefined : onClick}
       {...props}
     >
-      {icon ? (
-        <Icon
-          icon={icon}
-          orientation={iconDirection}
-          wrapperClassName="justify-center !bg-red-500"
-          label={children}
-          labelClassName={labelClassName}
-        />
-      ) : (
-        children
-      )}
+      {children}
     </Component>
   )
 }

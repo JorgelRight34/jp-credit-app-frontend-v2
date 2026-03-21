@@ -11,6 +11,7 @@ import { useExportForm } from '../hooks/useExportForm'
 import {
   AccentBtn,
   DownloadIcon,
+  Icon,
   InputProps,
   NumericInput,
   SelectInput,
@@ -29,8 +30,8 @@ const ExportForm = (props: ExportFormProps) => {
       <FormLayout
         errors={<FormErrorsPanel control={form.control} />}
         footer={
-          <AccentBtn icon={DownloadIcon} onClick={form.submit}>
-            Exportar
+          <AccentBtn onClick={form.submit}>
+            <Icon icon={DownloadIcon}>Exportar</Icon>
           </AccentBtn>
         }
       >

@@ -16,7 +16,7 @@ const ContainerWithTitle = ({
   return (
     <Container {...props}>
       <div className="flex justify-start border-b py-1">
-        <Icon icon={icon} labelClassName="text-1xl">
+        <Icon icon={icon} className="text-1xl">
           {title}
         </Icon>
       </div>

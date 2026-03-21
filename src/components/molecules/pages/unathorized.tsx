@@ -3,6 +3,7 @@ import {
   ArrowBackIcon,
   BigTitle,
   HomeIcon,
+  Icon,
   Paragraph,
   SecondaryBtn,
 } from '@/components'
@@ -36,12 +37,12 @@ const Unauthorized = () => {
         </div>
 
         {/* Main Heading */}
-        <BigTitle className="mb-6 text-3xl font-bold text-primary">
+        <BigTitle className="text-primary mb-6 text-3xl font-bold">
           Acceso Denegado
         </BigTitle>
 
         {/* Description */}
-        <Paragraph className="leading-relaxed mb-6">
+        <Paragraph className="mb-6 leading-relaxed">
           No tienes permiso para acceder a este recurso. Por favor contactae a
           su administrador o regresar a una página a la que tenga acceso.
         </Paragraph>
@@ -50,16 +51,18 @@ const Unauthorized = () => {
           <AccentBtn
             onClick={() => window.history.back()}
             className="mb-3 w-full rounded-lg"
-            icon={ArrowBackIcon}
           >
-            <span className="text-lg">Atrás</span>
+            <Icon icon={ArrowBackIcon} className="text-lg">
+              Atrás
+            </Icon>
           </AccentBtn>
           <SecondaryBtn
             onClick={() => (window.location.href = '/')}
-            className="w-full rounded-lg !bg-surface"
-            icon={HomeIcon}
+            className="!bg-surface w-full rounded-lg"
           >
-            <span className="text-lg">Inicio</span>
+            <Icon icon={HomeIcon} className="text-lg">
+              Inicio
+            </Icon>
           </SecondaryBtn>
         </div>
       </div>

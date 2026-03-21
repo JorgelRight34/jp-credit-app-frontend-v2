@@ -26,7 +26,6 @@ export * from "./menu"
 export * from "./pagination"
 export * from "./layouts"
 export * from "./breadcrumb"
-export * from "./messages"
 
 export { default as PhotoGallery } from "./photo-gallery/photo-gallery"
 

@@ -7,6 +7,7 @@ import {
   FormGroup,
   FormRow,
   FormSubmitBtn,
+  Icon,
   Input,
   LoginIcon,
   PasswordInput,
@@ -21,11 +22,9 @@ const LoginForm = (
     <FormContainer
       form={form}
       footer={(isDirty) => (
-        <FormSubmitBtn
-          isDirty={isDirty}
-          text="Iniciar sesión"
-          icon={LoginIcon}
-        />
+        <FormSubmitBtn isDirty={isDirty}>
+          <Icon icon={LoginIcon}>Iniciar sesión</Icon>
+        </FormSubmitBtn>
       )}
     >
       <Form form={form}>

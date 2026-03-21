@@ -3,6 +3,7 @@ import {
   ArrowForwardIcon,
   FormErrorsPanel,
   FormLayout,
+  Icon,
   RestartAllIcon,
   SecondaryPillBtn,
   UseFormReturn,
@@ -60,19 +61,11 @@ const FormConfirmationButtons = <T extends FieldValues>({
 
   return (
     <div className="flex items-center gap-3">
-      <SecondaryPillBtn
-        icon={RestartAllIcon}
-        disabled={!isDirty}
-        onClick={form.reset}
-      >
-        Resetear
+      <SecondaryPillBtn disabled={!isDirty} onClick={form.reset}>
+        <Icon icon={RestartAllIcon}>Resetear</Icon>
       </SecondaryPillBtn>
-      <AccentPillBtn
-        disabled={!isDirty}
-        icon={ArrowForwardIcon}
-        onClick={handleOnSubmit}
-      >
-        Continuar
+      <AccentPillBtn disabled={!isDirty} onClick={handleOnSubmit}>
+        <Icon icon={ArrowForwardIcon}>Continuar</Icon>
       </AccentPillBtn>
     </div>
   )

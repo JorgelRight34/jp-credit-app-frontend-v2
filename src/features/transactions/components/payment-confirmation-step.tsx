@@ -11,6 +11,7 @@ import {
   FormLayout,
   FormReadOnlyGroup,
   FormRow,
+  Icon,
   LightPillBtn,
   Paragraph,
   useFormConfirmationFlowActiveStep,
@@ -48,7 +49,7 @@ const PaymentConfirmationStep = <T extends FieldValues>({
         Verifique su pago. Para aceptar, presione <b>Continuar</b>
       </Paragraph>
       <div className="flex">
-        <div className="flex flex-col w-7/12">
+        <div className="flex w-7/12 flex-col">
           <PaymentDetails transaction={data.transaction} />
         </div>
         <div className="flex w-5/12 px-6">
@@ -200,19 +201,16 @@ const Footer = () => {
   const [_, setActive] = useFormConfirmationFlowActiveStep()
 
   return (
-    <div className="flex border-t pt-3 justify-between">
+    <div className="flex justify-between border-t pt-3">
       <span>
-        <LightPillBtn icon={ArrowBackIcon} onClick={() => setActive(0)}>
-          Atrás
+        <LightPillBtn onClick={() => setActive(0)}>
+          <Icon icon={ArrowBackIcon}>Atrás</Icon>
         </LightPillBtn>
       </span>
       <span>
-        <AccentPillBtn
-          icon={ArrowForwardIcon}
-          iconDirection="right"
-          onClick={() => setActive(2)}
-        >
-          Continuar
+        <AccentPillBtn onClick={() => setActive(2)}>
+          Continuar&nbsp;
+          <Icon icon={ArrowForwardIcon} />
         </AccentPillBtn>
       </span>
     </div>

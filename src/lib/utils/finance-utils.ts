@@ -18,15 +18,6 @@ export const getTotalInterest = (pmt: number, nPer: number, amount: number) => {
     return total;
 };
 
-export const toCurrency = (money: number): string | number => {
-    const formattedAmount = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-    }).format(money);
-
-    return formattedAmount;
-};
-
 export const formatNumberWithCommas = (value: number): string => {
     return new Intl.NumberFormat().format(value);
 }

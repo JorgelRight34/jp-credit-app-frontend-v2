@@ -8,9 +8,14 @@ import { ArrowDownwardIcon, ArrowUpwardIcon, Icon } from '@/components/atoms'
 interface TableHeadProps<T> {
   table: Table<T>
   className?: string
+  allowExpand?: boolean
 }
 
-const TableHeadCompositor = <T,>({ table, className }: TableHeadProps<T>) => {
+const TableHeadCompositor = <T,>({
+  table,
+  allowExpand,
+  className,
+}: TableHeadProps<T>) => {
   return (
     <TableHead className={className}>
       {table.getHeaderGroups().map((headerGroup) => (
@@ -20,7 +25,7 @@ const TableHeadCompositor = <T,>({ table, className }: TableHeadProps<T>) => {
               <div
                 className={
                   'flex items-center' +
-                  (header.column.getCanSort() ? ' cursor-pointer hover' : '')
+                  (header.column.getCanSort() ? ' hover cursor-pointer' : '')
                 }
                 onClick={header.column.getToggleSortingHandler()}
               >
@@ -43,9 +48,7 @@ const TableHeadCompositor = <T,>({ table, className }: TableHeadProps<T>) => {
               </div>
             </TableHeadCell>
           ))}
-          {table.getCanSomeRowsExpand() && (
-            <TableHeadCell colSpan={1}>&nbsp;</TableHeadCell>
-          )}
+          {allowExpand && <TableHeadCell colSpan={1}></TableHeadCell>}
         </TableRow>
       ))}
     </TableHead>

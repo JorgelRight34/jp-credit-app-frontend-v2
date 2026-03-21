@@ -93,15 +93,17 @@ const NavbarBody = () => {
               />
             </div>
             <div className="flex items-center">
-              <Icon
-                wrapperClassName="text-sm text-accent-secondary"
-                iconClassName="text-accent-secondary"
-                orientation="right"
-                icon={activeNav?.icon}
-              >
-                /&nbsp;
-                {activeNav?.name}
-              </Icon>
+              {activeNav && (
+                <span className="flex items-center">
+                  <Icon
+                    wrapperClassName="text-sm text-accent-secondary"
+                    className="text-accent-secondary"
+                    icon={activeNav.icon}
+                  />
+                  &nbsp;
+                  {activeNav?.name}
+                </span>
+              )}
             </div>
           </div>
         </NavbarLinksContainer>

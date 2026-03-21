@@ -56,11 +56,15 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
       setAnchorEl(null)
     }
 
-    useImperativeHandle(ref, () => ({
-      isOpen: open,
-      close: handleMenuClose,
-      open: handleMenuOpen,
-    }))
+    useImperativeHandle(
+      ref,
+      () => ({
+        isOpen: open,
+        close: handleMenuClose,
+        open: handleMenuOpen,
+      }),
+      [open, handleMenuClose, handleMenuOpen],
+    )
 
     return (
       <MuiMenu
@@ -83,8 +87,9 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
                 params={option.params}
                 search={option.search}
               >
-                <Icon icon={option.icon} label={option.label} as={option.as} />
-                {option.className}
+                <Icon icon={option.icon} as={option.as}>
+                  {option.label}
+                </Icon>
               </Link>
             </MenuItem>
           </Tooltip>

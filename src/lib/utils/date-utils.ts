@@ -14,6 +14,8 @@ export const normalizeDate = (d: Date) => {
     return date;
 };
 
+const dateFormatter = new Intl.DateTimeFormat("fr-FR")
+
 /** Format to French locale (or "---" if invalid) */
 export const toFormattedDate = (date: string | Date): string | null => {
     if (!date) return null;
@@ -21,7 +23,7 @@ export const toFormattedDate = (date: string | Date): string | null => {
     if (isNaN(date.getTime())) return "---";
 
     try {
-        return new Intl.DateTimeFormat("fr-FR").format(date);
+        return dateFormatter.format(date);
     } catch {
         return date.toString();
     }

@@ -14,7 +14,7 @@ import { generateUsername } from '../lib/utils'
 export const updateUsernameOnForm: WatchedValuesChangeHandler<
   UserFormValues
 > = (context) => {
-  if (context.formState.isDirty === false) return
+  if (context.state.isDirty === false) return
 
   const { lastName, firstName } = context.getValues()
 

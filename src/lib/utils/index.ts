@@ -7,3 +7,4 @@ export * from "./params-utils"
 export * from "./array-utils"
 export * from './dom-utils'
 export * from './file-utils'
+export * from './currency-utils'

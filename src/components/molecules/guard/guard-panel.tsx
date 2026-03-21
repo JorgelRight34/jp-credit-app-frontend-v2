@@ -41,8 +41,8 @@ const GuardPanel = ({
       <div className="flex justify-center">
         <Icon
           icon={icon}
-          iconClassName="!text-9xl"
-          className="text-secondary mx-auto mb-5"
+          wrapperClassName="mx-auto mb-5"
+          className="text-secondary !text-9xl"
         />
       </div>
       <header className="mb-12 space-y-3 px-0 md:px-6">
@@ -54,8 +54,8 @@ const GuardPanel = ({
       <div className="flex flex-col gap-6 px-0 md:flex-row md:px-6">
         {hasSecondary && (
           <Link className="w-full md:w-6/12" to={secondaryLink}>
-            <SecondaryPillBtn icon={secondaryIcon}>
-              {secondaryLabel}
+            <SecondaryPillBtn>
+              <Icon icon={secondaryIcon}>{secondaryLabel}</Icon>
             </SecondaryPillBtn>
           </Link>
         )}
@@ -63,7 +63,9 @@ const GuardPanel = ({
           className={hasSecondary ? 'w-full md:w-6/12' : 'w-full'}
           to={createLink}
         >
-          <AccentPillBtn icon={createIcon}>{createLabel}</AccentPillBtn>
+          <AccentPillBtn>
+            <Icon icon={createIcon}>{createLabel}</Icon>
+          </AccentPillBtn>
         </Link>
       </div>
     </div>

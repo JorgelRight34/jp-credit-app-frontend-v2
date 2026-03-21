@@ -1,8 +1,12 @@
 import type { IconName } from '@/components/atoms/icon/models/iconName'
-import { AccentPillBtn, CheckCircleIcon } from '@/components/atoms'
+import {
+  AccentPillBtn,
+  ButtonProps,
+  CheckCircleIcon,
+  Icon,
+} from '@/components/atoms'
 
-export interface FormSubmitBtnProps {
-  text?: string
+export interface FormSubmitBtnProps extends ButtonProps {
   isDirty?: boolean
   isValid?: boolean
   toastMessage?: string
@@ -10,18 +14,19 @@ export interface FormSubmitBtnProps {
 }
 
 const FormSubmitBtn = ({
-  text = 'Confirmar',
+  children = 'Confirmar',
   isDirty,
   isValid,
   icon = CheckCircleIcon,
+  ...props
 }: FormSubmitBtnProps) => {
   return (
     <AccentPillBtn
       type="submit"
       disabled={isValid !== undefined ? !isDirty || !isValid : !isDirty}
-      icon={icon}
+      {...props}
     >
-      {text}
+      <Icon icon={icon}>{children}</Icon>
     </AccentPillBtn>
   )
 }

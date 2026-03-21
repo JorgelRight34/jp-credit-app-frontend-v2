@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm as useRHFForm } from "react-hook-form";
 import type { SchemaType } from "../models/schemaType";
 import type { FieldValues } from "react-hook-form";
+import { useCallback, useMemo } from "react";
 
 export type DefaultFormValues<TData> = Partial<{
     [K in keyof TData]:
@@ -26,27 +27,31 @@ export const useFormMethods = <T extends object, TData extends FieldValues, TRet
     shouldUseNativeValidation,
     handleOnSubmit,
 }: UseFormMethodsProps<TData, TReturn>) => {
-    const methods = useRHFForm({
+    const { control, handleSubmit, setValue, trigger, getValues, reset } = useRHFForm({
         resolver: schema ? zodResolver(schema) : undefined,
         defaultValues: defaultValues as Record<string, unknown>,
         values: initialValues,
         shouldUseNativeValidation,
     });
 
-    const handleReset = () => {
-        methods.reset(defaultValues, { keepErrors: false, keepDirty: false });
-    };
+    const handleReset = useCallback(() => {
+        reset(defaultValues, { keepErrors: false, keepDirty: false })
+    }, [reset])
 
-    return {
-        control: methods.control,
-        methods,
-        getValues: methods.getValues,
-        submit: methods.handleSubmit(handleOnSubmit),
-        handleSubmit: methods.handleSubmit,
-        setValue: methods.setValue,
-        validate: methods.trigger,
+    const submit = useMemo(
+        () => handleSubmit(handleOnSubmit),
+        [handleSubmit, handleOnSubmit]
+    )
+
+    return useMemo(() => ({
+        control,
+        getValues,
+        submit,
+        handleSubmit: handleSubmit,
+        setValue: setValue,
+        validate: trigger,
         reset: handleReset,
-    };
+    }), [control, getValues, submit, handleSubmit, setValue, trigger, handleReset]);
 };
 
 export type UseFormReturn<TData extends FieldValues = FieldValues> = ReturnType<typeof useFormMethods<object, TData>>;

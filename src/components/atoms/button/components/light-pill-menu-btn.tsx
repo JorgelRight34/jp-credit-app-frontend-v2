@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { ArrowDropDownCircleIcon } from '../../icon'
+import { ArrowDropDownCircleIcon, Icon } from '../../icon'
 import { LightBtnProps } from './light-btn'
 import Menu, {
   MenuOption,
@@ -20,12 +20,8 @@ const LightPillMenuBtn = ({
 
   return (
     <span>
-      <LightPillBtn
-        {...props}
-        icon={ArrowDropDownCircleIcon}
-        onClick={(e) => menuRef.current?.open(e)}
-      >
-        {children}
+      <LightPillBtn {...props} onClick={(e) => menuRef.current?.open(e)}>
+        <Icon icon={ArrowDropDownCircleIcon}>{children}</Icon>
       </LightPillBtn>
       <Menu ref={menuRef} options={options} />
     </span>

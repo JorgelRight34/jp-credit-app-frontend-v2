@@ -32,21 +32,21 @@ const NavbarLink = ({
           isActive={isActive}
         >
           <span
-            className={clsx('flex bg-surface items-center p-2', {
-              'text-active font-medium bg-active-transparent': isActive,
-            })}
+            className={clsx(
+              'bg-surface flex items-center p-2',
+              isActive && 'text-active bg-active-transparent font-medium',
+            )}
           >
             <div
-              className={clsx('flex min-w-0 flex-1 items-center', {
-                'text-link-active': isActive,
-              })}
+              className={clsx(
+                'flex min-w-0 flex-1 items-center',
+                isActive && 'text-link-active',
+              )}
             >
               <div className="flex-1 truncate">
-                <Icon
-                  icon={option.icon}
-                  label={option.name}
-                  labelClassName="truncate flex-1 truncate min-w-0"
-                />
+                <Icon icon={option.icon} className="min-w-0 flex-1">
+                  <div className="truncate">{option.name}</div>
+                </Icon>
               </div>
             </div>
             <NavbarLinkExpandTrigger option={option} onExpand={onExpand} />

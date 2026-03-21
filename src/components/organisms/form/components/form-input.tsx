@@ -2,6 +2,7 @@ import { Controller, useFormState } from 'react-hook-form'
 import type { FieldValues } from 'react-hook-form'
 import type { ReactNode } from 'react'
 import { InputProps } from '@/components/atoms'
+import { useFormControl } from '../providers/form-provider'
 
 export type FormInputProps<
   T extends FieldValues,
@@ -15,16 +16,16 @@ const FormInput = <
   T extends FieldValues,
   TInput extends InputProps = InputProps,
 >({
-  as,
+  as: Component,
   name,
   ...props
 }: FormInputProps<T, TInput>) => {
-  const { errors } = useFormState()
-
-  const Component = as
+  const control = useFormControl()
+  const { errors } = useFormState({ control })
 
   return (
     <Controller
+      control={control}
       name={name as string}
       render={({ field }) => (
         <Component
