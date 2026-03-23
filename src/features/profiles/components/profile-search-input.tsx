@@ -31,7 +31,7 @@ export type ProfileRoleSearchInputProps = DataPickerInputProps<
 const ProfileSearchInput = ({
   title = 'Pérfiles',
   role = 'profile',
-  datatable,
+  config,
   ...props
 }: ProfileSearchInputProps) => {
   return (
@@ -51,6 +51,7 @@ const ProfileSearchInput = ({
               setValue,
               role,
             )}
+            {...config}
           />
         </PickerInputPanel>
       )}

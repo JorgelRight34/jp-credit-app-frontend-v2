@@ -41,17 +41,17 @@ export const loansDataTableColumns: DataTableConfig<Loan>["columns"] = [
         cell: ({ row }) => toCurrency(row.original.accruedInterest),
     },
     {
-        accessorKey: "totalFees",
+        accessorKey: "penaltyBalance",
         header: "MORA",
-        cell: ({ row }) => toCurrency(row.original.totalFees),
+        cell: ({ row }) => toCurrency(row.original.penaltyBalance),
     },
 
     {
-        accessorKey: "lastPaymentDate",
+        accessorKey: "lastTransactionDate",
         header: "ÚLT. PAGO",
         enableSorting: true,
         sortingFn: sortDateRows,
-        cell: ({ row }) => buildDateDataCell(row.original.lastPaymentDate),
+        cell: ({ row }) => buildDateDataCell(row.original.lastTransactionDate),
     },
     {
         accessorKey: "createdAt",

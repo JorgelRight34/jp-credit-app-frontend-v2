@@ -15,13 +15,18 @@ type FormContainerButtonsProps<T extends FieldValues> =
 const FormContainerButtons = <T extends FieldValues>({
   form: { control, reset },
   text,
+  initializeAsDirty,
   onReset = reset,
   icon,
 }: FormContainerButtonsProps<T>) => {
   return (
     <div className="flex items-center gap-3">
       <FormResetBtn control={control} onReset={onReset} />
-      <FormSubmitBtn icon={icon} control={control}>
+      <FormSubmitBtn
+        icon={icon}
+        control={control}
+        initializeAsDirty={initializeAsDirty}
+      >
         {text}
       </FormSubmitBtn>
     </div>

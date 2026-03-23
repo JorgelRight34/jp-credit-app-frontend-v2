@@ -86,11 +86,11 @@ const CreateDisbursementForm = ({
                   disabled
                 />
                 <FormReadOnlyGroup
-                  name="lastPaymentDate"
+                  name="lastTransactionDate"
                   label="Fecha ult. pago"
                   value={
-                    loan?.lastPaymentDate
-                      ? toFormattedDate(loan.lastPaymentDate)
+                    loan?.lastTransactionDate
+                      ? toFormattedDate(loan.lastTransactionDate)
                       : DASHES
                   }
                   disabled

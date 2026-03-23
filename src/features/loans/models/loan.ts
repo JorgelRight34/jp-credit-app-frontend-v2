@@ -10,9 +10,9 @@ export interface Loan {
     interestBalance: number;
     lastTransactionDate?: string;
     feePaid: number;
-    outstandingAmount: number;
+    arrearBalance: number;
     client: ProfileSummary;
-    totalFees: number;
+    penaltyBalance: number;
     guarantor?: ProfileSummary;
     loanOfficer?: ProfileSummary;
     isActive: boolean;
@@ -35,7 +35,6 @@ export interface Loan {
     expirationDate: Date | string;
     latePaymentCredit: number; // Abono de mora (mora pagada)
     isOverdue: boolean;
-    lastPaymentDate?: string;
     effectivePaymentDate: string;
 
     // Details
@@ -47,8 +46,6 @@ export interface Loan {
     clientId: number
     overduePayments: number;
     delinquency: number;
-
-    hasPayments: boolean;
 
     // Audit fields
     createdAt: Date | string; // DateTime in C# is replaced by string (ISO format) in TypeScript

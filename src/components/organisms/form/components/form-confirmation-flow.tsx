@@ -6,7 +6,7 @@ import {
 
 interface FormConfirmationFlowProps extends PropsWithChildren {
   confirmation: ReactNode
-  receipt: ReactNode
+  overview: ReactNode
 }
 
 const FormConfirmationFlow = ({
@@ -24,7 +24,7 @@ const FormConfirmationFlow = ({
 
 const FormConfirmationFlowInner = ({
   confirmation,
-  receipt,
+  overview,
   children,
 }: FormConfirmationFlowProps) => {
   const [active] = useFormConfirmationFlowActiveStep()
@@ -35,7 +35,7 @@ const FormConfirmationFlowInner = ({
       <Activity mode={active === 1 ? 'visible' : 'hidden'}>
         <Suspense fallback="confirmation...">{confirmation}</Suspense>
       </Activity>
-      <Activity mode={active === 2 ? 'visible' : 'hidden'}>{receipt}</Activity>
+      <Activity mode={active === 2 ? 'visible' : 'hidden'}>{overview}</Activity>
     </>
   )
 }

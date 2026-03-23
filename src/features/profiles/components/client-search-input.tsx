@@ -2,10 +2,7 @@ import ProfileSearchInput, {
   ProfileRoleSearchInputProps,
 } from './profile-search-input'
 
-const ClientSearchInput = ({
-  datatable,
-  ...props
-}: ProfileRoleSearchInputProps) => {
+const ClientSearchInput = ({ ...props }: ProfileRoleSearchInputProps) => {
   return <ProfileSearchInput title="Clientes" role="client" {...props} />
 }
 

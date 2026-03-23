@@ -19,7 +19,7 @@ export const getCurrentUser = async (): Promise<User> => {
 };
 
 export const login = async (body: LoginFormValues): Promise<LoginResult> => {
-    const { data } = await api.post(`login`, body, { baseURL: SERVER_URI });
+    const { data } = await api.post(`login/`, body, { baseURL: SERVER_URI });
     return data;
 };
 

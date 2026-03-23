@@ -27,7 +27,7 @@ import { loanStatusSpanishTranslations } from '@/features/loans/lib/constants'
 interface PaymentConfirmationStepProps<T extends FieldValues> {
   form: UseFormReturn<T>
   previewLoader: (data: T) => Promise<PaymentResult>
-  cacheKeyBuilder: (data: T) => CacheKey
+  cacheKeyBuilder: (data?: T) => CacheKey
 }
 
 const PaymentConfirmationStep = <T extends FieldValues>({
@@ -48,11 +48,11 @@ const PaymentConfirmationStep = <T extends FieldValues>({
       <Paragraph>
         Verifique su pago. Para aceptar, presione <b>Continuar</b>
       </Paragraph>
-      <div className="flex">
-        <div className="flex w-7/12 flex-col">
+      <div className="flex flex-col gap-6 md:flex-row md:gap-0">
+        <div className="flex flex-col md:w-7/12">
           <PaymentDetails transaction={data.transaction} />
         </div>
-        <div className="flex w-5/12 px-6">
+        <div className="flex md:w-5/12 md:pl-6">
           <PaymentLoanChangesCard paymentResult={data} />
         </div>
       </div>
@@ -110,9 +110,9 @@ const PaymentDetails = ({
           value={toFormattedDate(transaction.date)}
         />
         <FormReadOnlyGroup
-          name="outstandingAmount"
+          name="arrearBalance"
           label="Balance pendiente pagado"
-          value={toCurrency(transaction.outstandingAmount)}
+          value={toCurrency(transaction.arrearBalance!)}
         />
       </FormRow>
       <FormHtmlDisplayGroup
@@ -161,7 +161,7 @@ const PaymentLoanChangesCard = ({
           />
           <DetailRow
             title="Monto atrasado"
-            subtitle={toCurrency(loanBefore.outstandingAmount)}
+            subtitle={toCurrency(loanBefore.arrearBalance)}
           />
           <DetailRow
             title="Estado"
@@ -185,7 +185,7 @@ const PaymentLoanChangesCard = ({
           />
           <DetailRow
             title="Monto atrasado"
-            subtitle={toCurrency(loanAfter.outstandingAmount)}
+            subtitle={toCurrency(loanAfter.arrearBalance)}
           />
           <DetailRow
             title="Estado"
@@ -201,18 +201,16 @@ const Footer = () => {
   const [_, setActive] = useFormConfirmationFlowActiveStep()
 
   return (
-    <div className="flex justify-between border-t pt-3">
-      <span>
-        <LightPillBtn onClick={() => setActive(0)}>
-          <Icon icon={ArrowBackIcon}>Atrás</Icon>
-        </LightPillBtn>
-      </span>
-      <span>
-        <AccentPillBtn onClick={() => setActive(2)}>
-          Continuar&nbsp;
-          <Icon icon={ArrowForwardIcon} />
-        </AccentPillBtn>
-      </span>
+    <div className="flex justify-between gap-3 border-t pt-3">
+      <LightPillBtn className="w-full md:!w-fit" onClick={() => setActive(0)}>
+        <Icon icon={ArrowBackIcon}>Atrás</Icon>
+      </LightPillBtn>
+
+      <AccentPillBtn className="w-full md:!w-fit" onClick={() => setActive(2)}>
+        <Icon icon={ArrowForwardIcon} className="!flex-row-reverse">
+          Continuar
+        </Icon>
+      </AccentPillBtn>
     </div>
   )
 }

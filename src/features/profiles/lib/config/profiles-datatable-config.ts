@@ -5,7 +5,7 @@ import type { Profile } from "../../models/profile";
 import type { DataTableConfig } from "@/components";
 import type { PagedResponse } from "@/models";
 import { buildDateDataCell, buildLinkDataCell, buildSingleSelectCell } from "@/components";
-import { DASHES, toAllTitleCase } from "@/lib/utils";
+import { DASHES, toAllTitleCase, toDNI } from "@/lib/utils";
 
 const loadersMap: Record<ProfileRole, (q: ProfileQuery) => Promise<PagedResponse<Profile>>> = {
     "profile": getProfiles,
@@ -36,6 +36,7 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
         {
             accessorKey: "dni",
             header: "DOCUMENTO",
+            cell: ({ row }) => toDNI(row.original.dni),
             enableSorting: true
         },
         {

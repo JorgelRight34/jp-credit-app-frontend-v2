@@ -21,7 +21,7 @@ const LoanSettingsPage = ({ loan }: { loan: Loan }) => {
       options={[
         buildPageLayoutConfirmationModalOption(
           {
-            disabled: loan.hasPayments,
+            disabled: !!loan.lastTransactionDate,
             tooltip: 'Un préstamo con transacciones no puede ser borrado.',
           },
           {

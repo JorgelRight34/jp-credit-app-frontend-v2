@@ -52,7 +52,7 @@ export const accountStatementDataTableConfig: DataTableConfig<Loan> = {
             accessorKey: "lastTransactionDate",
             header: "FECHA ULT. MOV.",
             enableSorting: true,
-            cell: ({ row }) => buildDateDataCell(row.original.lastPaymentDate),
+            cell: ({ row }) => buildDateDataCell(row.original.lastTransactionDate),
         }
     ],
     loader: getLoans

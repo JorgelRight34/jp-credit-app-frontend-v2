@@ -84,9 +84,13 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
           </FormRow>
           <FormRow>
             <FormReadOnlyGroup
-              name="outstandingAmount"
+              name="arrearBalance"
               label="Balance pendiente pagado"
-              value={toCurrency(transaction.outstandingAmount)}
+              value={
+                transaction.arrearBalance
+                  ? toCurrency(transaction.arrearBalance)
+                  : 'N/A'
+              }
             />
             <FormReadOnlyGroup
               name="feePaid"

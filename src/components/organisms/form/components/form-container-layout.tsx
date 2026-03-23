@@ -8,6 +8,7 @@ type FormLayoutProps = PropsWithChildren & {
   footer?: ReactNode
   onError?: (err: unknown) => void
   onSubmit?: () => void
+  onSuccess?: () => void
 }
 
 const FormLayout = ({
@@ -17,9 +18,11 @@ const FormLayout = ({
   footer,
   onSubmit,
   onError,
+  onSuccess,
 }: FormLayoutProps) => {
   const { mutateAsync } = useDataMutation({
     mutationFn: async () => onSubmit?.(),
+    onSuccess,
     onError,
   })
 

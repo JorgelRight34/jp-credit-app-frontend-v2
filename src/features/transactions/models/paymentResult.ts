@@ -12,8 +12,8 @@ export interface PaymentResult {
 interface LoanSnapshot {
     accruedCapital: number;
     totalFees: number;
-    feePaid: number;
-    outstandingAmount: number;
+    penaltyBalance: number;
+    arrearBalance: number;
     accruedInterest: number;
     status: LoanStatus
 }

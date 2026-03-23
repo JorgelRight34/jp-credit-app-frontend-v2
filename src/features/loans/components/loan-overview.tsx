@@ -130,9 +130,9 @@ const LoanOverview = ({ loan }: { loan: Loan }) => {
                 value={toCurrency(loan.feePaid)}
               />
               <FormReadOnlyGroup
-                name="totalFees"
+                name="penaltyBalance"
                 label="Mora total"
-                value={toCurrency(loan.totalFees)}
+                value={toCurrency(loan.penaltyBalance)}
               />
             </FormRow>
           </Fieldset>

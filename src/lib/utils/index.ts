@@ -8,3 +8,4 @@ export * from "./array-utils"
 export * from './dom-utils'
 export * from './file-utils'
 export * from './currency-utils'
+export * from './person-utils'

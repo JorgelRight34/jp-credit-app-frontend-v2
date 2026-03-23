@@ -46,10 +46,12 @@ const CreatePayment = (props: CreatePaymentProps) => {
         <TransactionConfirmationStep
           form={form}
           previewLoader={getPaymentPreview}
-          cacheKeyBuilder={() => []}
+          cacheKeyBuilder={(body) =>
+            body ? ['create-payment', body?.loanId, body.amount] : []
+          }
         />
       }
-      receipt={<TransactionReceiptStep successText="Pago realizado" />}
+      overview={<TransactionReceiptStep successText="Pago realizado" />}
     >
       <FormConfirmationFlowContainer form={form}>
         <Form form={form}>

@@ -52,7 +52,7 @@ const CollateralLiquidateForm = ({
           ]}
         />
       }
-      receipt={
+      overview={
         <PaymentReceiptStep successText="El pago con garantía ha sido realizado" />
       }
     >

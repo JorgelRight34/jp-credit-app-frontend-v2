@@ -23,5 +23,6 @@ export interface Profile {
     photo?: Photo;
     label?: string;
     createdAt: string;
+    updatedAt?: string;
     city: string;
 }

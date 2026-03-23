@@ -29,6 +29,7 @@ const FormInput = <
     <Component
       {...(props as unknown as TInput)}
       {...(field as unknown as Partial<TInput>)}
+      name={name}
       error={error}
     />
   )

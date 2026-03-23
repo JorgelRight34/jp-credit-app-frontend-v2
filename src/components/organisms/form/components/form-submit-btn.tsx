@@ -12,25 +12,32 @@ export interface FormSubmitBtnProps extends ButtonProps {
   isValid?: boolean
   toastMessage?: string
   control: Control<any, any, any>
+  initializeAsDirty?: boolean
+  text?: string
   icon?: IconName
 }
 
 const FormSubmitBtn = ({
-  children = 'Confirmar',
+  text = 'Confirmar',
+  children,
   isValid,
   control,
+  initializeAsDirty,
   icon = CheckCircleIcon,
   ...props
 }: FormSubmitBtnProps) => {
   const { isDirty } = useFormState({ control })
+  const isReallyDirty = isDirty || initializeAsDirty
 
   return (
     <AccentPillBtn
       type="submit"
-      disabled={isValid !== undefined ? !isDirty || !isValid : !isDirty}
+      disabled={
+        isValid !== undefined ? !isReallyDirty || !isValid : !isReallyDirty
+      }
       {...props}
     >
-      <Icon icon={icon}>{children}</Icon>
+      {children ?? <Icon icon={icon}>{text}</Icon>}
     </AccentPillBtn>
   )
 }

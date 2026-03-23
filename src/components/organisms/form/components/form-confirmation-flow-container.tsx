@@ -28,14 +28,12 @@ const FormConfirmationFlowContainer = <T extends FieldValues>({
   initializeAsDirty,
   form,
 }: FormConfirmationFlowContainerProps<T>) => {
-  const { isDirty } = useFormState({ control: form.control })
-
   return (
     <FormLayout
       footer={
         <FormConfirmationButtons
-          isDirty={isDirty || initializeAsDirty === true}
           form={form}
+          initializeAsDirty={initializeAsDirty}
         />
       }
       errors={<FormErrorsPanel control={form.control} />}
@@ -46,9 +44,12 @@ const FormConfirmationFlowContainer = <T extends FieldValues>({
 }
 
 const FormConfirmationButtons = <T extends FieldValues>({
-  isDirty,
+  initializeAsDirty,
   form,
 }: FormConfirmationFlowContainerProps<T>) => {
+  const { isDirty } = useFormState({ control: form.control })
+  const isReallyDirty = isDirty || initializeAsDirty
+
   const [_, setActive] = useFormConfirmationFlowActiveStep()
   const [__, setData] = useFormConfirmationFlowData()
 
@@ -61,10 +62,10 @@ const FormConfirmationButtons = <T extends FieldValues>({
 
   return (
     <div className="flex items-center gap-3">
-      <SecondaryPillBtn disabled={!isDirty} onClick={form.reset}>
+      <SecondaryPillBtn disabled={!isReallyDirty} onClick={form.reset}>
         <Icon icon={RestartAllIcon}>Resetear</Icon>
       </SecondaryPillBtn>
-      <AccentPillBtn disabled={!isDirty} onClick={handleOnSubmit}>
+      <AccentPillBtn disabled={!isReallyDirty} onClick={handleOnSubmit}>
         <Icon icon={ArrowForwardIcon}>Continuar</Icon>
       </AccentPillBtn>
     </div>

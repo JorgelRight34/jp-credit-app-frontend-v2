@@ -26,7 +26,9 @@ const PaymentPreviewCard = ({ loan, amount = 0 }: PaymentPreviewCardProps) => {
         ['Días de gracia', loan?.daysOfGrace ?? ND],
         [
           'Últ. Pago',
-          loan?.lastPaymentDate ? toFormattedDate(loan.lastPaymentDate) : ND,
+          loan?.lastTransactionDate
+            ? toFormattedDate(loan.lastTransactionDate)
+            : ND,
         ],
         ['Fecha pago', nextPaymentDate ? toFormattedDate(nextPaymentDate) : ND],
         ['Días de atraso', loan ? lateDays : ND],

@@ -47,10 +47,10 @@ export const loanTemplateDefinition:
             mapper: (l) => l.lastTransactionDate,
         },
         {
-            name: "outstandingAmount",
+            name: "arrearBalance",
             description: "Monto total pendiente por pagar.",
             fieldType: "currency",
-            mapper: (l) => l.outstandingAmount,
+            mapper: (l) => l.arrearBalance,
         },
         {
             name: "clientFirstName",

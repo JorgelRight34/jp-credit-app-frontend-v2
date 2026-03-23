@@ -14,7 +14,6 @@ export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
     tagsToInvalidate?: Array<string>;
     shouldEdit?: boolean;
     shouldUseNativeValidation?: boolean;
-    initialValues?: Partial<TData>;
     toastMessage?: (data: TReturn | undefined) => string;
     onSuccess?: (data: TReturn) => void;
     onDelete?: () => void;
@@ -29,7 +28,6 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
     resetValues = shouldEdit ? false : true,
     keysToInvalidate,
     shouldUseNativeValidation,
-    initialValues,
     toastMessage,
     onEdit,
     onSuccess,
@@ -58,13 +56,12 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
         for (const key of keysToInvalidate) {
             dataClient.invalidate({ key })
         }
-    }, [shouldEdit, onEdit, onSubmit, toastMessage, resetValues, onSuccess, keysToInvalidate, dataClient])
+    }, [shouldEdit, resetValues, keysToInvalidate, dataClient, onEdit, onSubmit, toastMessage, onSuccess])
 
     const methods = useFormMethods({
         schema,
         defaultValues,
         shouldUseNativeValidation,
-        initialValues,
         handleOnSubmit: handleMutation
     })
 
