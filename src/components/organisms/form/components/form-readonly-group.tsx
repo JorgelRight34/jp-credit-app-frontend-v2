@@ -27,12 +27,14 @@ const FormReadOnlyGroup = ({
   name,
   value,
   label,
+  className,
   optional,
   disabled,
 }: FormReadOnlyProps) => {
   return (
     <FormGroupLayout
       name={name}
+      className={className}
       label={<FormGroupLabel label={label} optional={optional} />}
     >
       <Input

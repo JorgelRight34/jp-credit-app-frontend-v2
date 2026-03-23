@@ -11,7 +11,7 @@ import {
 } from '@/components/atoms'
 import SafeHtml from '@/components/molecules/safe-html/safe-html'
 import { HeaderContext } from '@tanstack/react-table'
-import { DASHES, getDateGroupingLabel } from '@/lib/utils'
+import { DASHES, getDateGroupingLabel, getUTCDate } from '@/lib/utils'
 import { TimeUnit } from '@/models'
 
 export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
@@ -49,8 +49,8 @@ export const buildDateGroupingFooter =
     if (!date) return DASHES
 
     return getDateGroupingLabel(date, timeUnit ?? 1, {
-      minDate: new Date(minDate),
-      maxDate: new Date(maxDate),
+      minDate: getUTCDate(minDate).toDate(),
+      maxDate: getUTCDate(maxDate).toDate(),
     })
   }
 

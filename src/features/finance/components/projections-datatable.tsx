@@ -4,15 +4,11 @@ import {
   SearchFormContainer,
   SearchFormValueConsumer,
 } from '@/components'
-import {
-  getTodayAsInputDate,
-  getTodayWithDaysFromNow,
-  toInputDate,
-} from '@/lib/utils'
 import { FinanceQuery } from '../models/financeQuery'
 import { useGroupedProjections } from '../hooks/useGroupedProjections'
 import { buildProjectionTableColumns } from '../lib/config/finance-datatable-config'
 import { financeTableSearchConfig } from '../lib/config/finance-search-config'
+import { financeInitialQuery } from '../lib/constants'
 
 const ProjectionsDataTable = ({
   initialQuery,
@@ -21,10 +17,7 @@ const ProjectionsDataTable = ({
     <SearchFormContainer
       searchConfig={financeTableSearchConfig}
       initialQuery={{
-        option: 1,
-        startDate: getTodayAsInputDate(),
-        endDate: toInputDate(getTodayWithDaysFromNow(30 * 12 * 6)),
-        interval: 30,
+        ...financeInitialQuery,
         ...initialQuery,
       }}
     >
@@ -36,10 +29,11 @@ const ProjectionsDataTable = ({
 }
 
 const ProjectionsGroupedTable = ({ query }: { query: FinanceQuery }) => {
-  const { projections, period, periods, ...table } = useGroupedProjections({
-    query,
-    periodsOfMargin: 0,
-  })
+  const { projections, period, periods, groupMap, ...table } =
+    useGroupedProjections({
+      query,
+      periodsOfMargin: 0,
+    })
 
   return (
     <GroupedTable
@@ -51,6 +45,14 @@ const ProjectionsGroupedTable = ({ query }: { query: FinanceQuery }) => {
         period?.end,
         query.interval,
       )}
+      getGroupColumns={(_, index) =>
+        buildProjectionTableColumns(
+          projections?.loansMap,
+          groupMap[index],
+          groupMap[index],
+          query.interval,
+        )
+      }
       totalItems={periods.length}
       {...table}
     />

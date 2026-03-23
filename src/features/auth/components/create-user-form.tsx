@@ -4,11 +4,11 @@ import type { User } from '../../../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import {
-  Form,
   FormContainer,
   FormGroup,
   FormInput,
   FormRow,
+  FormWithRef,
   PasswordInput,
   Tab,
   TabPanel,
@@ -101,7 +101,7 @@ const PermissionsForm = ({ ref }: { ref: Ref<PermissionsFormRef> }) => {
   const form = usePermissionsForm({ handler: updateUserClaims })
 
   return (
-    <Form ref={ref} form={form}>
+    <FormWithRef ref={ref} form={form}>
       <Suspense fallback="...">
         <FormInput
           name="claims"
@@ -109,7 +109,7 @@ const PermissionsForm = ({ ref }: { ref: Ref<PermissionsFormRef> }) => {
           as={PermissionsFormTransferList}
         />
       </Suspense>
-    </Form>
+    </FormWithRef>
   )
 }
 
@@ -117,7 +117,7 @@ const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
   const form = useUserRolesForm(props)
 
   return (
-    <Form form={form}>
+    <FormWithRef form={form}>
       <Suspense fallback="...">
         <FormInput
           name="roles"
@@ -125,7 +125,7 @@ const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
           as={UserRolesTransferList}
         />
       </Suspense>
-    </Form>
+    </FormWithRef>
   )
 }
 

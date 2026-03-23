@@ -21,7 +21,7 @@ const SearchFormContainer = <TQuery extends Query>({
 }: SearchFormContainerProps<TQuery>) => {
   return (
     <SearchFormProvider initialQuery={initialQuery}>
-      <section className="flex flex-col w-full">
+      <section className="flex w-full flex-col">
         <div className="mb-3">
           <SearchForm
             options={searchConfig.options}

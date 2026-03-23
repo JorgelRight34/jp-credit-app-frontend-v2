@@ -24,9 +24,9 @@ const ViewMore = ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
         </Activity>
       )}
       {expanded === true && (
-        <ViewButtonContainer {...props}>
+        <ViewButtonContainer className="mt-3" {...props}>
           <Icon
-            className="text-accent mt-3 cursor-pointer"
+            className="text-accent cursor-pointer"
             icon={ArrowUpwardIcon}
             onClick={() => setExpanded((prev) => !prev)}
           >

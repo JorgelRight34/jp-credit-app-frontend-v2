@@ -1,56 +1,60 @@
-import { PropsWithChildren, useEffect, useMemo } from 'react'
+import { PropsWithChildren, useEffect, useMemo, useRef } from 'react'
 import {
   Control,
   FieldValues,
   Path,
+  PathValue,
+  ReadFormState,
   UseFormSetValue,
-  useFormState,
-  UseFormStateReturn,
   useWatch,
 } from 'react-hook-form'
 import { useFormControl, useFormSetValue } from '../providers/form-provider'
 
-export type WatchedValuesChangeHandler<T extends FieldValues> = (form: {
-  state: UseFormStateReturn<FieldValues>
-  getValues: () => T
-  setValue: UseFormSetValue<T>
-  control: Control<T, unknown, T>
-}) => void
+export type WatchedValuesChangeHandler<T extends FieldValues> = (
+  form: {
+    getValues: () => T
+    setValue: UseFormSetValue<T>
+    state: ReadFormState
+    control: Control<T, unknown, T>
+  },
+  prev: PathValue<T, Path<T>>[],
+) => void
 
-export interface FormWatchContainerProps<
+export interface FormWatchConsumerProps<
   T extends FieldValues,
 > extends PropsWithChildren {
   watchedValues: ReadonlyArray<Path<T>>
   onWatchedValuesChange: WatchedValuesChangeHandler<T>
 }
 
-const FormWatchContainer = <T extends FieldValues>({
+const FormWatchConsumer = <T extends FieldValues>({
   watchedValues,
   children,
   onWatchedValuesChange,
-}: FormWatchContainerProps<T>) => {
+}: FormWatchConsumerProps<T>) => {
   const control = useFormControl<T>()
-  const state = useFormState({ control })
   const watch = useWatch({
     name: watchedValues,
     control: control,
   })
+  const prevWatchRef = useRef<typeof watch>(watch)
   const setValue = useFormSetValue<T>()
 
   const context = useMemo(
     () => ({
       control,
-      state,
+      state: control._proxyFormState,
       getValues: () => control._formValues as T,
       setValue,
     }),
-    [control, state],
+    [control],
   )
   useEffect(() => {
-    onWatchedValuesChange(context)
+    onWatchedValuesChange(context, prevWatchRef.current)
+    prevWatchRef.current = watch
   }, [watch])
 
   return children
 }
 
-export default FormWatchContainer
+export default FormWatchConsumer

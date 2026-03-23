@@ -15,7 +15,7 @@ interface ProfileOverviewProps {
 const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
   return (
     <section>
-      <div className="mb-0 flex flex-col gap-6 md:mb-6 md:flex-row">
+      <div className="flex flex-col gap-6 md:flex-row">
         <div className="flex w-full items-center justify-center md:w-5/12">
           <ProfilePhotoGallery profile={profile} />
         </div>
@@ -67,26 +67,31 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
               optional
             />
           </FormRow>
-          <ViewMore>
-            <FormRow>
-              <FormReadOnlyGroup
-                label="Ingreso"
-                name="createdAt"
-                value={toFormattedDate(profile.createdAt)}
-              />
-              <FormReadOnlyGroup
-                label="Actualizado"
-                name="updatedAt"
-                value={
-                  profile.updatedAt ? toFormattedDate(profile.updatedAt) : 'N/D'
-                }
-                optional
-              />
-            </FormRow>
-          </ViewMore>
         </aside>
       </div>
-      <FormReadOnlyGroup label="Dirección" name="address" optional />
+      <ViewMore>
+        <FormRow>
+          <FormReadOnlyGroup
+            label="Ingreso"
+            name="createdAt"
+            value={toFormattedDate(profile.createdAt)}
+          />
+          <FormReadOnlyGroup
+            label="Actualizado"
+            name="updatedAt"
+            value={
+              profile.updatedAt ? toFormattedDate(profile.updatedAt) : 'N/D'
+            }
+            optional
+          />
+        </FormRow>
+      </ViewMore>
+      <FormReadOnlyGroup
+        className="mt-0 md:mt-6"
+        label="Dirección"
+        name="address"
+        optional
+      />
     </section>
   )
 }

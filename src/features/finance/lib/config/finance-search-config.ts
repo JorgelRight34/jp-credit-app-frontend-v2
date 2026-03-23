@@ -11,10 +11,10 @@ import { FinanceQuery } from "../../models/financeQuery";
 import { getTodayAsInputDate, getTodayWithDaysFromNow, toInputDate } from "@/lib/utils";
 import { exportProjections } from "../../services/financeService";
 
-const onFinanceOptionChange: WatchedValuesChangeHandler<FinanceQuery> = (context) => {
-    if (!context.formState.isDirty) return;
-
+const onFinanceOptionChange: WatchedValuesChangeHandler<FinanceQuery> = (context, prev) => {
     const { option } = context.getValues();
+    if (option === prev[0]) return;
+
     if (option) {
         let days = 0;
         switch (option) {

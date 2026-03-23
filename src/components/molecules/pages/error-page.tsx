@@ -5,6 +5,7 @@ import {
   InfoIcon,
   Subtitle,
 } from '@/components/atoms'
+import { IS_DEV_MODE } from '@/lib/utils'
 import { isRedirect } from '@tanstack/react-router'
 
 const getError = (error: any) => {
@@ -16,7 +17,7 @@ const getError = (error: any) => {
 }
 
 const ErrorPage = ({ error: err }: { error: any }) => {
-  throw err
+  if (IS_DEV_MODE) throw err
   if (isRedirect(err)) throw err
 
   const error = getError(err)

@@ -2,7 +2,7 @@ import type { BreadcrumbSpec } from '../models/breadcrumb'
 import { OverviewIcon, SettingsIcon } from '@/components/atoms'
 
 export const overviewBreadcrumb: BreadcrumbSpec = {
-  title: 'Overview',
+  title: 'Resumen',
   icon: () => <OverviewIcon />,
 }
 

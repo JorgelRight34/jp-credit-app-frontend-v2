@@ -45,7 +45,7 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
         <TabsRouter>
           <TabsList>
             <Tab index={0}>Liquidar</Tab>
-            <Tab index={1}>Vender</Tab>
+            <Tab index={1}>Vender </Tab>
           </TabsList>
           <TabPanel index={0}>
             {collateral.liquidationDate ? (
@@ -55,7 +55,7 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
             )}
           </TabPanel>
           <TabPanel index={1}>
-            {collateral.sellDate ? (
+            {collateral.sellDate || collateral.isActive ? (
               <ClosedProcessPanel />
             ) : (
               <CollateralSellForm collateral={collateral} />

@@ -40,7 +40,6 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
 
         if (shouldEdit) {
             result = await onEdit!(data) as TReturn
-            methods.reset()
         } else {
             result = await onSubmit(data)
         }
@@ -56,6 +55,8 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
         for (const key of keysToInvalidate) {
             dataClient.invalidate({ key })
         }
+
+        return result;
     }, [shouldEdit, resetValues, keysToInvalidate, dataClient, onEdit, onSubmit, toastMessage, onSuccess])
 
     const methods = useFormMethods({

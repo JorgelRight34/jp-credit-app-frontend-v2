@@ -21,6 +21,8 @@ const LoadingBar = () => {
     } else {
       ref.current?.complete()
     }
+
+    return () => ref.current?.complete()
   }, [isFetching])
 
   return <TopLoadingBar color="#d09d0c" ref={ref} />

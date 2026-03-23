@@ -20,11 +20,11 @@ export { default as FormErrorsPanel } from './components/form-errors-panel'
 export { default as FormConfirmationFlow } from './components/form-confirmation-flow'
 export { default as FormConfirmationFlowContainer } from './components/form-confirmation-flow-container'
 export { default as FormLazySelectGroup } from './components/form-lazy-select-group'
-export { default as FormWatchContainer } from './components/form-watch-container'
+export { default as FormWatchConsumer } from './components/form-watch-consumer'
 export { default as FormMasterDetailLayout } from './components/form-master-detail-layout'
 export * from './hooks/useFormMethods';
 
-export * from './components/form-watch-container'
+export * from './components/form-watch-consumer'
 export * from "./components/form-readonly-group"
 export * from './providers/form-confirmation-provider'
 export type { FieldValues, UseFormSetValue } from 'react-hook-form';
@@ -40,3 +40,4 @@ export * from './hooks/useHasFormEverBeenDirty'
 export * from './lib/utils'
 export { default as FormFileGroup } from './components/form-file-group'
 export { useFormState } from 'react-hook-form'
+export { default as FormWithRef } from './components/form-with-ref'

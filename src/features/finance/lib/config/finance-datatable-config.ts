@@ -7,9 +7,11 @@ import { buildProfileFullName } from "@/features/profiles";
 import { TimeUnit } from "@/models";
 import { LoanProjection } from "../../models/projectionResult";
 
-export const buildFinancialBreakdownColumns = (startDate?: string,
+export const buildFinancialBreakdownColumns = (
+    startDate?: string,
     endDate?: string,
-    timeDiff?: TimeUnit): Array<Column<FinancialBreakdown>> => [
+    timeDiff?: TimeUnit
+): Array<Column<FinancialBreakdown>> => [
         {
             accessorKey: "date",
             header: "Fecha",
@@ -30,7 +32,7 @@ export const buildFinancialBreakdownColumns = (startDate?: string,
             footer: (info) => getFooterTotalAsCurrency(info, "interest"),
         },
         {
-            accessorKey: "interest",
+            accessorKey: "fee",
             header: "MORA",
             cell: ({ row }) => toCurrency(row.original.fee),
             footer: (info) => getFooterTotalAsCurrency(info, "fee"),
@@ -47,7 +49,7 @@ export const buildProjectionTableColumns = (
     return [
         {
             accessorKey: "date",
-            header: "Fecha",
+            header: "FECHA",
             enableSorting: true,
             cell: ({ row }) => buildDateDataCell(row.original.date),
             footer: buildDateGroupingFooter(r => r.date, startDate, endDate, timeDiff)
@@ -89,6 +91,12 @@ export const buildProjectionTableColumns = (
             header: "INTERES",
             cell: ({ row }) => toCurrency(row.original.interest),
             footer: (info) => getFooterTotalAsCurrency(info, "interest"),
+        },
+        {
+            accessorKey: "fee",
+            header: "MORA",
+            cell: ({ row }) => toCurrency(row.original.fee),
+            footer: (info) => getFooterTotalAsCurrency(info, "fee"),
         },
     ]
 }

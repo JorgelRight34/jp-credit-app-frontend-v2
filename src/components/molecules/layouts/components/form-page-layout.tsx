@@ -52,7 +52,7 @@ export const CreateFormPageLayout = ({
       <ProtectedComponent
         provider={permissionProvider}
         isAuthorizedFn={(p) => p.canCreate}
-        fallback={<Unauthorized />}
+        fallback={Unauthorized}
       >
         {children}
       </ProtectedComponent>
@@ -83,7 +83,7 @@ export const EditFormPageLayout = ({
       <ProtectedComponent
         provider={permissionProvider}
         isAuthorizedFn={(p) => p.canEdit}
-        fallback={<Unauthorized />}
+        fallback={Unauthorized}
       >
         {children}
       </ProtectedComponent>

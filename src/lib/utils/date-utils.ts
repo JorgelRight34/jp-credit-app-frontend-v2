@@ -3,7 +3,9 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import type { Row } from "@/components";
 import "dayjs/locale/es"
 import { TimeUnit } from "@/models";
+import utc from 'dayjs/plugin/utc'
 
+dayjs.extend(utc)
 dayjs.extend(relativeTime)
 dayjs.locale("es")
 
@@ -29,26 +31,34 @@ export const toFormattedDate = (date: string | Date): string | null => {
     }
 };
 
-export const getDateGroupingLabel = (input: Date | string, timeUnit: TimeUnit, config?: { minDate: Date, maxDate: Date }): string => {
-    const date = new Date(input);
+export const getUTCDate = (date: string | Date) => dayjs.utc(date);
+
+export const getDateGroupingLabel = (
+    input: Date | string,
+    timeUnit: TimeUnit,
+    config: { minDate: Date; maxDate: Date }
+): string => {
+    const date = getUTCDate(input);
 
     if (timeUnit === TimeUnit.year) {
-        return date.getFullYear().toString();
+        return date.year().toString();
     }
-
-    const yearA = config?.minDate.getFullYear();
-    const yearB = config?.maxDate.getFullYear();
 
     if (timeUnit === TimeUnit.month) {
-        return `${getLocaleMonth(date)}${yearA == yearB ? "" : " " + date.getFullYear()}`
+        const sameMonth = config.minDate.getUTCMonth() === config.maxDate.getUTCMonth();
+        const sameYear = config.minDate.getUTCFullYear() === config.maxDate.getUTCFullYear();
+        const monthLabel = sameMonth
+            ? date.format('MMMM')
+            : `${getLocaleMonth(config.minDate)} - ${getLocaleMonth(config.maxDate)}`;
+        return sameYear ? monthLabel : `${monthLabel} ${date.year()}`;
     }
 
-    if (yearA === yearB && yearA !== undefined) {
-        return `${getLocaleMonth(date)} ${date.getDate()}`
+    if (config.minDate.getUTCFullYear() === config.maxDate.getUTCFullYear()) {
+        return `${date.format('MMMM')} ${date.date()}`;
     }
-    return dateToIsoString(date);
 
-}
+    return dateToIsoString(date.toDate());
+};
 
 export const getTodayAsInputDate = () => {
     return new Date().toISOString().split('T')[0]
@@ -179,8 +189,7 @@ export const getDayTimeDifference = (startDate?: Date, endDate?: Date) => {
 
 /** Localized month name */
 export const getLocaleMonth = (dateInput: Date | string) => {
-    const date = new Date(dateInput);
-    return date.toLocaleString(undefined, { month: "long" });
+    return getUTCDate(dateInput).format('MMMM')
 };
 
 /** Current year */

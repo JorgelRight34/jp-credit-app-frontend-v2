@@ -1,6 +1,8 @@
 import { TimeUnit } from "@/models";
 import { Period } from "../models/period";
 import dayjs, { Dayjs } from "dayjs";
+import utc from 'dayjs/plugin/utc'
+dayjs.extend(utc)
 
 type EndComputer = (cursor: Dayjs) => Dayjs
 
@@ -10,8 +12,8 @@ export function splitIntoPeriods(
     timeUnit: TimeUnit,
     daysPerPeriod: number
 ): Array<Period> {
-    const dateStart = dayjs(start);
-    const dateEnd = dayjs(end);
+    const dateStart = dayjs.utc(start);
+    const dateEnd = dayjs.utc(end);
     const periods: Period[] = [];
 
     // cursor always moves to previous period's end + 1 day (inclusive)
@@ -36,10 +38,10 @@ export function splitIntoPeriods(
 const getEndComputer = (timeUnit: TimeUnit, daysPerPeriod: number): EndComputer => {
     switch (timeUnit) {
         case TimeUnit.year:
-            return (cursor) => cursor.endOf('year')
+            return (cursor) => cursor.add(1, 'year').startOf('year')
         case TimeUnit.month:
-            return (cursor) => cursor.endOf('month')
+            return (cursor) => cursor.add(1, 'month').startOf('month')
         default:
-            return (cursor) => cursor.add(daysPerPeriod - 1, 'day')
+            return (cursor) => cursor.add(daysPerPeriod, 'day')
     }
 }

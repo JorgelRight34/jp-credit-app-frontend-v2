@@ -61,15 +61,17 @@ export const getExpenses = async (query: FinanceQuery) => {
     return data.items
 }
 
+export const getFinanceEndpointParams = (params: FinanceQuery, other?: object) => ({
+    start: params.startDate,
+    end: params.endDate,
+    timeDiff: params.interval,
+    ...params,
+    ...other
+})
+
 export const exportIncomes: ExportHandler<FinanceQuery> = async (body, params): Promise<Blob> => {
     const { data } = await api.get(`${baseUrl}/incomes/export`, {
-        params: {
-            ...body,
-            start: params.startDate,
-            end: params.endDate,
-            timeDiff: params.interval,
-            ...params
-        },
+        params: getFinanceEndpointParams(params, body),
         responseType: "blob"
     })
     return data;
@@ -77,29 +79,23 @@ export const exportIncomes: ExportHandler<FinanceQuery> = async (body, params): 
 
 export const exportExpenses: ExportHandler<FinanceQuery> = async (body, params): Promise<Blob> => {
     const { data } = await api.get(`${baseUrl}/expenses/export`, {
-        params: {
-            ...body,
-            start: params.startDate,
-            end: params.endDate,
-            timeDiff: params.interval,
-            ...params
-        },
+        params: getFinanceEndpointParams(params, body),
         responseType: "blob"
     })
     return data;
 }
 
-
 export const exportProjections: ExportHandler<FinanceQuery> = async (body, params): Promise<Blob> => {
     const { data } = await api.get(`${baseUrl}/payment-projection/export`, {
-        params: {
-            ...body,
-            start: params.startDate,
-            end: params.endDate,
-            timeDiff: params.interval,
-            ...params
-        },
+        params: getFinanceEndpointParams(params, body),
         responseType: "blob"
     })
+    return data;
+}
+
+export const getProjectionSummary = async (params: FinanceQuery): Promise<FinancialBreakdown> => {
+    const { data } = await api.get(`${baseUrl}/payment-projection/summary`, {
+        params: getFinanceEndpointParams(params)
+    });
     return data;
 }

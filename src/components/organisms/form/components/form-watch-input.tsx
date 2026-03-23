@@ -1,12 +1,12 @@
 import FormInput from './form-input'
 import type { FieldValues } from 'react-hook-form'
 import type { FormInputProps } from './form-input'
-import FormWatchContainer, {
-  FormWatchContainerProps,
-} from './form-watch-container'
+import FormWatchConsumer, {
+  FormWatchConsumerProps,
+} from './form-watch-consumer'
 
 export type FormWatchInputProps<T extends FieldValues> = FormInputProps<T> &
-  FormWatchContainerProps<T>
+  FormWatchConsumerProps<T>
 
 const FormWatchInput = <T extends FieldValues>({
   watchedValues,
@@ -14,12 +14,12 @@ const FormWatchInput = <T extends FieldValues>({
   ...props
 }: FormWatchInputProps<T>) => {
   return (
-    <FormWatchContainer
+    <FormWatchConsumer
       watchedValues={watchedValues}
       onWatchedValuesChange={onWatchedValuesChange}
     >
       <FormInput {...props} />
-    </FormWatchContainer>
+    </FormWatchConsumer>
   )
 }
 

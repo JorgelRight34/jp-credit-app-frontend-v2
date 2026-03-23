@@ -5,9 +5,9 @@ import { splitIntoPeriods } from "../lib/utils";
 import { useState } from "react";
 import { useFinancePeriodNavigator, UseFinancePeriodNavigatorProps } from "./useFinancePeriodNavigator";
 import { getProjectionsPerInterval } from "../services/financeService";
-import { loansQueryKey } from "@/features/loans";
 import { useGroupedFinancialBreakdown } from "./useGroupedFinancialBreakdown";
 import { toInputDate } from "@/lib/utils";
+import { projectionsQueryKey, projectionsSummaryQueryKey } from "../lib/query-keys";
 
 interface UseGroupedProjectionsProps extends Partial<UseFinancePeriodNavigatorProps> {
     query: FinanceQuery;
@@ -22,7 +22,7 @@ export const useGroupedProjections = ({ data: initialData, query, periodsOfMargi
     });
 
     const { data } = useData({
-        key: [loansQueryKey, "projections", { query }, period],
+        key: [projectionsQueryKey, projectionsSummaryQueryKey, { query }, period],
         loader: () => getProjectionsPerInterval({
             startDate: toInputDate(period!.start!),
             endDate: toInputDate(period!.end!)
@@ -31,7 +31,7 @@ export const useGroupedProjections = ({ data: initialData, query, periodsOfMargi
     })
 
 
-    const { groups } = useGroupedFinancialBreakdown({
+    const [groups, groupMap] = useGroupedFinancialBreakdown({
         data: data?.items ?? initialData ?? [],
         timeUnit: query.interval,
     });
@@ -40,6 +40,7 @@ export const useGroupedProjections = ({ data: initialData, query, periodsOfMargi
         projections: data,
         periods,
         groups,
+        groupMap,
         pageSize: periodsOfMargin <= 0 ? 1 : periodsOfMargin,
         period,
         periodIndex,

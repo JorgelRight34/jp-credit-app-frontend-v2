@@ -6,18 +6,20 @@ interface FinancialSummaryCardsProps {
   capital: number
   interest: number
   fee: number
+  className?: string
 }
 
 const FinancialSummaryCards = ({
   capital,
   interest,
   fee,
+  className = 'flex-col',
 }: FinancialSummaryCardsProps) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className={`flex gap-3 ${className}`}>
       <FinancialSummaryCard title="Capital" value={capital} />
       <FinancialSummaryCard title="Interés" value={interest} />
-      <FinancialSummaryCard title="Capital" value={fee} />
+      <FinancialSummaryCard title="Mora" value={fee} />
     </div>
   )
 }
@@ -35,9 +37,9 @@ const FinancialSummaryCard = ({
       legend={title}
       legendClassName="text-center"
     >
-      <section className="flex flex-1 h-full flex-col p-3 px-6">
+      <section className="flex h-full flex-1 flex-col p-3 px-6">
         <div className="flex flex-col justify-center py-2">
-          <span className="truncate text-center text-accent text-4xl">
+          <span className="text-accent truncate text-center text-4xl">
             {toCurrency(value)}
           </span>
         </div>

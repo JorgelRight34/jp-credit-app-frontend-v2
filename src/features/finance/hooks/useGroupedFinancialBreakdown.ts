@@ -7,21 +7,21 @@ interface UseGroupedFinancialBreakdownProps<T extends { date: Date | string }> {
 };
 
 export const useGroupedFinancialBreakdown = <T extends { date: Date | string }>(
-    { data, timeUnit }: UseGroupedFinancialBreakdownProps<T>) => {
+    { data, timeUnit }: UseGroupedFinancialBreakdownProps<T>): [T[][], string[]] => {
 
-    const groupsMap = useMemo<Record<string, T[]>>(() => {
-        if (!data) return {};
+    return useMemo(() => {
+        if (!data) return [[], []];
 
-        return data.reduce<Record<string, T[]>>((acc, curr) => {
+        const map = data.reduce<Record<string, T[]>>((acc, curr) => {
             const currDate = new Date(curr.date);
             let key: string;
 
             switch (timeUnit) {
                 case TimeUnit.year:
-                    key = currDate.getFullYear().toString();
+                    key = currDate.getUTCFullYear().toString();
                     break;
                 default:
-                    key = `${currDate.getFullYear()}-${String(currDate.getMonth() + 1).padStart(2, "0")}`;
+                    key = `${currDate.getUTCFullYear()}-${String(currDate.getUTCMonth() + 1).padStart(2, "0")}`;
                     break;
             }
 
@@ -30,9 +30,7 @@ export const useGroupedFinancialBreakdown = <T extends { date: Date | string }>(
 
             return acc;
         }, {});
+
+        return [Object.values(map), Object.keys(map)];
     }, [data, timeUnit])
-
-    const groups = useMemo<T[][]>(() => Object.values(groupsMap), [groupsMap])
-
-    return { groupsMap, groups }
-} 
+}
