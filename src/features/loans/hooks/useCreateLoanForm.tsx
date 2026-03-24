@@ -1,20 +1,26 @@
 import { DataModuleFormProps, useForm } from '@/components'
-import { loanFormSchema, LoanFormValues } from '../lib/schemas/loanFormSchema'
+import {
+  loanCreateFormSchema,
+  LoanCreateFormValues,
+} from '../lib/schemas/loanCreateFormSchema'
 import { Loan } from '../models/loan'
 import { createLoan } from '../services/loanClient'
 import { Project } from '@/features/projects'
 
-interface UseLoanFormProps extends DataModuleFormProps<Loan, LoanFormValues> {
+interface UseCreateLoanFormProps extends DataModuleFormProps<
+  Loan,
+  LoanCreateFormValues
+> {
   project: Project
 }
 
-export const useLoanForm = ({
+export const useCreateLoanForm = ({
   project,
   defaultValues,
   ...props
-}: UseLoanFormProps) => {
+}: UseCreateLoanFormProps) => {
   return useForm({
-    schema: loanFormSchema,
+    schema: loanCreateFormSchema,
     defaultValues: {
       approvedAmount: '',
       annualInterestRate: '',

@@ -13,6 +13,7 @@ export interface Loan {
     arrearBalance: number;
     client: ProfileSummary;
     penaltyBalance: number;
+    loanPurposeId: number;
     guarantor?: ProfileSummary;
     loanOfficer?: ProfileSummary;
     isActive: boolean;

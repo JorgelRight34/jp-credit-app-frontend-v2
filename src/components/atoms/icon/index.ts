@@ -183,6 +183,7 @@ export { default as ExpandMoreIcon } from '@mui/icons-material/ExpandMoreOutline
 export { default as BookmarkIcon } from '@mui/icons-material/Bookmark';
 export { default as TurnedInNotIcon } from '@mui/icons-material/TurnedInNot';
 export { default as PrintIcon } from '@mui/icons-material/PrintOutlined'
+export { default as FlagIcon } from '@mui/icons-material/FlagCircleOutlined'
 
 export { default as Icon } from "./components/icon";
 export * from './components/icon'

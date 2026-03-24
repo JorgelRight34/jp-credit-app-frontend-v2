@@ -2,10 +2,14 @@ import type { Loan } from "../models/loan"
 import type { LoanQuery } from "../models/loanQuery"
 import type { PagedResponse } from "@/models"
 import api from "@/lib/services/api"
-import { LoanFormValues } from "../lib/schemas/loanFormSchema"
+import { LoanCreateFormValues } from "../lib/schemas/loanCreateFormSchema"
 import { LoanStatus } from "../models/loanStatus"
 import { ExportHandler } from "@/components"
 import { ProfileSummary } from "@/features/profiles"
+import { LoanPurposeQuery } from "../models/loanPurposeQuery"
+import { LoanPurpose } from "../models/loanPurpose"
+import { LoanPurposeFormValues } from "../lib/schemas/loanPurposeFormSchema"
+import { LoanEditFormValues } from "../lib/schemas/loanEditFormSchema"
 
 const baseUrl = "loans"
 
@@ -19,7 +23,7 @@ export const getLoan = async (id: Loan["id"]): Promise<Loan> => {
     return data;
 }
 
-export const createLoan = async (body: LoanFormValues): Promise<Loan> => {
+export const createLoan = async (body: LoanCreateFormValues): Promise<Loan> => {
     const { data } = await api.post(baseUrl, body);
     return data;
 }
@@ -44,4 +48,27 @@ export const getLoanActors = async (loanId: Loan["id"]): Promise<{
 export const exportLoans: ExportHandler<LoanQuery> = async (options, params) => {
     const { data } = await api.get(baseUrl, { params: { ...params, ...options } })
     return data;
+}
+
+export const getLoanPurpouses = async (params: LoanPurposeQuery): Promise<PagedResponse<LoanPurpose>> => {
+    const { data } = await api.get(`${baseUrl}/purpouses`, { params })
+    return data;
+}
+
+export const getLoanPurpose = async (id: LoanPurpose["id"]): Promise<LoanPurpose> => {
+    const { data } = await api.get(`${baseUrl}/purpouses/${id}`)
+    return data;
+}
+
+export const createLoanPurpose = async (body: LoanPurposeFormValues): Promise<LoanPurpose> => {
+    const { data } = await api.post(`${baseUrl}/purpouses`, body);
+    return data;
+}
+
+export const editLoanPurpose = async (id: LoanPurpose["id"], body: LoanPurposeFormValues) => {
+    await api.put(`${baseUrl}/purpouses/${id}`, body);
+}
+
+export const editLoan = async (id: Loan["id"], body: LoanEditFormValues) => {
+    await api.put(`${baseUrl}/${id}`, body)
 }

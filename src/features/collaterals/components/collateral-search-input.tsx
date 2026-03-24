@@ -3,7 +3,6 @@ import { DataPickerInputProps, Icon, PickerInputPanel } from '@/components'
 import { DataTableContainer, LoanIcon, PickerInput } from '@/components'
 import { Collateral } from '../models/collateral'
 import { CollateralQuery } from '../models/collateralQuery'
-import { DASHES } from '@/lib/utils'
 import { collateralSearchConfig } from '../lib/config/collaterals-search-config'
 import { buildCollateralSearchInputDataTableConfig } from '../lib/config/collateral-datatable-config'
 import { getCollateral } from '../services/collateralClient'
@@ -19,7 +18,7 @@ const CollateralSearchInput = ({
       }}
       cacheKey={[collateralsQueryKey]}
       accesorFn={(l) => l?.id}
-      visibleValueFn={(c) => c?.title ?? DASHES}
+      visibleValueFn={(c) => c?.title ?? '---'}
       render={(setValue) => (
         <PickerInputPanel reset={() => setValue(null)}>
           <DataTableContainer

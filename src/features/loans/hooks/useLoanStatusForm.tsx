@@ -6,7 +6,7 @@ import {
 import { Loan } from '../models/loan'
 import { updateLoanStatus } from '../services/loanClient'
 import { LoanStatus } from '../models/loanStatus'
-import { loansQueryKey } from '../lib/constants'
+import { loansQueryKey } from '../lib/query-keys'
 
 interface UseLoanStatusFormProps extends UseDataFormProps<
   null,

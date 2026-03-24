@@ -2,8 +2,6 @@ import { CheckCircleIcon, GavelIcon, IconName, PauseCircleIcon, ScheduleIcon, Se
 import { LoanStatus, LoanStatusMap } from "../models/loanStatus";
 import { LoanPaymentFrequency } from "../models/loan";
 
-export const loansQueryKey = "loans"
-
 export const loanStatusSpanishTranslations: Record<LoanStatus, string> = {
     [LoanStatusMap.active]: "Activo",
     [LoanStatusMap.inactive]: "Inactivo",

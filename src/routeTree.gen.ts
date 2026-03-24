@@ -43,6 +43,7 @@ import { Route as mainmodulesAccessControlRolesIdIndexRouteImport } from './rout
 import { Route as mainmodulesprojectGuardTransactionsPeriodsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/periods/index'
 import { Route as mainmodulesprojectGuardTransactionsCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/create/index'
 import { Route as mainmodulesprojectGuardTransactionsIdIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/$id/index'
+import { Route as mainmodulesprojectGuardLoansPurpousesIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/purpouses/index'
 import { Route as mainmodulesprojectGuardLoansCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/create/index'
 import { Route as mainmodulesprojectGuardLoansIdIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/$id/index'
 import { Route as mainmodulesprojectGuardFollowUpsCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/follow-ups/create/index'
@@ -58,10 +59,12 @@ import { Route as mainmodulesAccessControlUsersUsernameEditIndexRouteImport } fr
 import { Route as mainmodulesAccessControlRolesIdEditIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/edit/index'
 import { Route as mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/receipt-report-template/create/index'
 import { Route as mainmodulesprojectGuardTransactionsPeriodsCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/periods/create/index'
+import { Route as mainmodulesprojectGuardLoansPurpousesCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/purpouses/create/index'
 import { Route as mainmodulesprojectGuardLoansIdSettingsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/$id/settings/index'
 import { Route as mainmodulesprojectGuardFollowUpsIdEditIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/follow-ups/$id/edit/index'
 import { Route as mainmodulesprojectGuardCollateralsIdSettingsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/collaterals/$id/settings/index'
 import { Route as mainmodulesprojectGuardCollateralsIdEditIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/collaterals/$id/edit/index'
+import { Route as mainmodulesprojectGuardLoansPurpousesIdEditIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/index'
 
 const mainRouteRoute = mainRouteRouteImport.update({
   id: '/(main)',
@@ -257,6 +260,12 @@ const mainmodulesprojectGuardTransactionsIdIndexRoute =
     path: '/transactions/$id/',
     getParentRoute: () => mainmodulesprojectGuardRouteRoute,
   } as any)
+const mainmodulesprojectGuardLoansPurpousesIndexRoute =
+  mainmodulesprojectGuardLoansPurpousesIndexRouteImport.update({
+    id: '/loans/purpouses/',
+    path: '/loans/purpouses/',
+    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+  } as any)
 const mainmodulesprojectGuardLoansCreateIndexRoute =
   mainmodulesprojectGuardLoansCreateIndexRouteImport.update({
     id: '/loans/create/',
@@ -349,6 +358,12 @@ const mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute =
     path: '/transactions/periods/create/',
     getParentRoute: () => mainmodulesprojectGuardRouteRoute,
   } as any)
+const mainmodulesprojectGuardLoansPurpousesCreateIndexRoute =
+  mainmodulesprojectGuardLoansPurpousesCreateIndexRouteImport.update({
+    id: '/loans/purpouses/create/',
+    path: '/loans/purpouses/create/',
+    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+  } as any)
 const mainmodulesprojectGuardLoansIdSettingsIndexRoute =
   mainmodulesprojectGuardLoansIdSettingsIndexRouteImport.update({
     id: '/loans/$id/settings/',
@@ -371,6 +386,12 @@ const mainmodulesprojectGuardCollateralsIdEditIndexRoute =
   mainmodulesprojectGuardCollateralsIdEditIndexRouteImport.update({
     id: '/collaterals/$id/edit/',
     path: '/collaterals/$id/edit/',
+    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+  } as any)
+const mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute =
+  mainmodulesprojectGuardLoansPurpousesIdEditIndexRouteImport.update({
+    id: '/loans/purpouses/$id/edit/',
+    path: '/loans/purpouses/$id/edit/',
     getParentRoute: () => mainmodulesprojectGuardRouteRoute,
   } as any)
 
@@ -408,6 +429,7 @@ export interface FileRoutesByFullPath {
   '/follow-ups/create/': typeof mainmodulesprojectGuardFollowUpsCreateIndexRoute
   '/loans/$id/': typeof mainmodulesprojectGuardLoansIdIndexRoute
   '/loans/create/': typeof mainmodulesprojectGuardLoansCreateIndexRoute
+  '/loans/purpouses/': typeof mainmodulesprojectGuardLoansPurpousesIndexRoute
   '/transactions/$id/': typeof mainmodulesprojectGuardTransactionsIdIndexRoute
   '/transactions/create/': typeof mainmodulesprojectGuardTransactionsCreateIndexRoute
   '/transactions/periods/': typeof mainmodulesprojectGuardTransactionsPeriodsIndexRoute
@@ -421,10 +443,12 @@ export interface FileRoutesByFullPath {
   '/collaterals/$id/settings/': typeof mainmodulesprojectGuardCollateralsIdSettingsIndexRoute
   '/follow-ups/$id/edit/': typeof mainmodulesprojectGuardFollowUpsIdEditIndexRoute
   '/loans/$id/settings/': typeof mainmodulesprojectGuardLoansIdSettingsIndexRoute
+  '/loans/purpouses/create/': typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRoute
   '/transactions/periods/create/': typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute
   '/transactions/receipt-report-template/create/': typeof mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute
   '/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
+  '/loans/purpouses/$id/edit/': typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof mainIndexRoute
@@ -460,6 +484,7 @@ export interface FileRoutesByTo {
   '/follow-ups/create': typeof mainmodulesprojectGuardFollowUpsCreateIndexRoute
   '/loans/$id': typeof mainmodulesprojectGuardLoansIdIndexRoute
   '/loans/create': typeof mainmodulesprojectGuardLoansCreateIndexRoute
+  '/loans/purpouses': typeof mainmodulesprojectGuardLoansPurpousesIndexRoute
   '/transactions/$id': typeof mainmodulesprojectGuardTransactionsIdIndexRoute
   '/transactions/create': typeof mainmodulesprojectGuardTransactionsCreateIndexRoute
   '/transactions/periods': typeof mainmodulesprojectGuardTransactionsPeriodsIndexRoute
@@ -473,10 +498,12 @@ export interface FileRoutesByTo {
   '/collaterals/$id/settings': typeof mainmodulesprojectGuardCollateralsIdSettingsIndexRoute
   '/follow-ups/$id/edit': typeof mainmodulesprojectGuardFollowUpsIdEditIndexRoute
   '/loans/$id/settings': typeof mainmodulesprojectGuardLoansIdSettingsIndexRoute
+  '/loans/purpouses/create': typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRoute
   '/transactions/periods/create': typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute
   '/transactions/receipt-report-template/create': typeof mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute
   '/access-control/roles/$id/edit': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
+  '/loans/purpouses/$id/edit': typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -516,6 +543,7 @@ export interface FileRoutesById {
   '/(main)/(modules)/(project-guard)/follow-ups/create/': typeof mainmodulesprojectGuardFollowUpsCreateIndexRoute
   '/(main)/(modules)/(project-guard)/loans/$id/': typeof mainmodulesprojectGuardLoansIdIndexRoute
   '/(main)/(modules)/(project-guard)/loans/create/': typeof mainmodulesprojectGuardLoansCreateIndexRoute
+  '/(main)/(modules)/(project-guard)/loans/purpouses/': typeof mainmodulesprojectGuardLoansPurpousesIndexRoute
   '/(main)/(modules)/(project-guard)/transactions/$id/': typeof mainmodulesprojectGuardTransactionsIdIndexRoute
   '/(main)/(modules)/(project-guard)/transactions/create/': typeof mainmodulesprojectGuardTransactionsCreateIndexRoute
   '/(main)/(modules)/(project-guard)/transactions/periods/': typeof mainmodulesprojectGuardTransactionsPeriodsIndexRoute
@@ -529,10 +557,12 @@ export interface FileRoutesById {
   '/(main)/(modules)/(project-guard)/collaterals/$id/settings/': typeof mainmodulesprojectGuardCollateralsIdSettingsIndexRoute
   '/(main)/(modules)/(project-guard)/follow-ups/$id/edit/': typeof mainmodulesprojectGuardFollowUpsIdEditIndexRoute
   '/(main)/(modules)/(project-guard)/loans/$id/settings/': typeof mainmodulesprojectGuardLoansIdSettingsIndexRoute
+  '/(main)/(modules)/(project-guard)/loans/purpouses/create/': typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRoute
   '/(main)/(modules)/(project-guard)/transactions/periods/create/': typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute
   '/(main)/(modules)/(project-guard)/transactions/receipt-report-template/create/': typeof mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute
   '/(main)/(modules)/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/(main)/(modules)/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
+  '/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/': typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -570,6 +600,7 @@ export interface FileRouteTypes {
     | '/follow-ups/create/'
     | '/loans/$id/'
     | '/loans/create/'
+    | '/loans/purpouses/'
     | '/transactions/$id/'
     | '/transactions/create/'
     | '/transactions/periods/'
@@ -583,10 +614,12 @@ export interface FileRouteTypes {
     | '/collaterals/$id/settings/'
     | '/follow-ups/$id/edit/'
     | '/loans/$id/settings/'
+    | '/loans/purpouses/create/'
     | '/transactions/periods/create/'
     | '/transactions/receipt-report-template/create/'
     | '/access-control/roles/$id/edit/'
     | '/access-control/users/$username/edit/'
+    | '/loans/purpouses/$id/edit/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -622,6 +655,7 @@ export interface FileRouteTypes {
     | '/follow-ups/create'
     | '/loans/$id'
     | '/loans/create'
+    | '/loans/purpouses'
     | '/transactions/$id'
     | '/transactions/create'
     | '/transactions/periods'
@@ -635,10 +669,12 @@ export interface FileRouteTypes {
     | '/collaterals/$id/settings'
     | '/follow-ups/$id/edit'
     | '/loans/$id/settings'
+    | '/loans/purpouses/create'
     | '/transactions/periods/create'
     | '/transactions/receipt-report-template/create'
     | '/access-control/roles/$id/edit'
     | '/access-control/users/$username/edit'
+    | '/loans/purpouses/$id/edit'
   id:
     | '__root__'
     | '/(main)'
@@ -677,6 +713,7 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/(project-guard)/follow-ups/create/'
     | '/(main)/(modules)/(project-guard)/loans/$id/'
     | '/(main)/(modules)/(project-guard)/loans/create/'
+    | '/(main)/(modules)/(project-guard)/loans/purpouses/'
     | '/(main)/(modules)/(project-guard)/transactions/$id/'
     | '/(main)/(modules)/(project-guard)/transactions/create/'
     | '/(main)/(modules)/(project-guard)/transactions/periods/'
@@ -690,10 +727,12 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/(project-guard)/collaterals/$id/settings/'
     | '/(main)/(modules)/(project-guard)/follow-ups/$id/edit/'
     | '/(main)/(modules)/(project-guard)/loans/$id/settings/'
+    | '/(main)/(modules)/(project-guard)/loans/purpouses/create/'
     | '/(main)/(modules)/(project-guard)/transactions/periods/create/'
     | '/(main)/(modules)/(project-guard)/transactions/receipt-report-template/create/'
     | '/(main)/(modules)/access-control/roles/$id/edit/'
     | '/(main)/(modules)/access-control/users/$username/edit/'
+    | '/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -942,6 +981,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesprojectGuardTransactionsIdIndexRouteImport
       parentRoute: typeof mainmodulesprojectGuardRouteRoute
     }
+    '/(main)/(modules)/(project-guard)/loans/purpouses/': {
+      id: '/(main)/(modules)/(project-guard)/loans/purpouses/'
+      path: '/loans/purpouses'
+      fullPath: '/loans/purpouses/'
+      preLoaderRoute: typeof mainmodulesprojectGuardLoansPurpousesIndexRouteImport
+      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    }
     '/(main)/(modules)/(project-guard)/loans/create/': {
       id: '/(main)/(modules)/(project-guard)/loans/create/'
       path: '/loans/create'
@@ -1047,6 +1093,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRouteImport
       parentRoute: typeof mainmodulesprojectGuardRouteRoute
     }
+    '/(main)/(modules)/(project-guard)/loans/purpouses/create/': {
+      id: '/(main)/(modules)/(project-guard)/loans/purpouses/create/'
+      path: '/loans/purpouses/create'
+      fullPath: '/loans/purpouses/create/'
+      preLoaderRoute: typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRouteImport
+      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    }
     '/(main)/(modules)/(project-guard)/loans/$id/settings/': {
       id: '/(main)/(modules)/(project-guard)/loans/$id/settings/'
       path: '/loans/$id/settings'
@@ -1075,6 +1128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesprojectGuardCollateralsIdEditIndexRouteImport
       parentRoute: typeof mainmodulesprojectGuardRouteRoute
     }
+    '/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/': {
+      id: '/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/'
+      path: '/loans/purpouses/$id/edit'
+      fullPath: '/loans/purpouses/$id/edit/'
+      preLoaderRoute: typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    }
   }
 }
 
@@ -1096,6 +1156,7 @@ interface mainmodulesprojectGuardRouteRouteChildren {
   mainmodulesprojectGuardFollowUpsCreateIndexRoute: typeof mainmodulesprojectGuardFollowUpsCreateIndexRoute
   mainmodulesprojectGuardLoansIdIndexRoute: typeof mainmodulesprojectGuardLoansIdIndexRoute
   mainmodulesprojectGuardLoansCreateIndexRoute: typeof mainmodulesprojectGuardLoansCreateIndexRoute
+  mainmodulesprojectGuardLoansPurpousesIndexRoute: typeof mainmodulesprojectGuardLoansPurpousesIndexRoute
   mainmodulesprojectGuardTransactionsIdIndexRoute: typeof mainmodulesprojectGuardTransactionsIdIndexRoute
   mainmodulesprojectGuardTransactionsCreateIndexRoute: typeof mainmodulesprojectGuardTransactionsCreateIndexRoute
   mainmodulesprojectGuardTransactionsPeriodsIndexRoute: typeof mainmodulesprojectGuardTransactionsPeriodsIndexRoute
@@ -1103,8 +1164,10 @@ interface mainmodulesprojectGuardRouteRouteChildren {
   mainmodulesprojectGuardCollateralsIdSettingsIndexRoute: typeof mainmodulesprojectGuardCollateralsIdSettingsIndexRoute
   mainmodulesprojectGuardFollowUpsIdEditIndexRoute: typeof mainmodulesprojectGuardFollowUpsIdEditIndexRoute
   mainmodulesprojectGuardLoansIdSettingsIndexRoute: typeof mainmodulesprojectGuardLoansIdSettingsIndexRoute
+  mainmodulesprojectGuardLoansPurpousesCreateIndexRoute: typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRoute
   mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute: typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute
   mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute: typeof mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute
+  mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute: typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute
 }
 
 const mainmodulesprojectGuardRouteRouteChildren: mainmodulesprojectGuardRouteRouteChildren =
@@ -1143,6 +1206,8 @@ const mainmodulesprojectGuardRouteRouteChildren: mainmodulesprojectGuardRouteRou
       mainmodulesprojectGuardLoansIdIndexRoute,
     mainmodulesprojectGuardLoansCreateIndexRoute:
       mainmodulesprojectGuardLoansCreateIndexRoute,
+    mainmodulesprojectGuardLoansPurpousesIndexRoute:
+      mainmodulesprojectGuardLoansPurpousesIndexRoute,
     mainmodulesprojectGuardTransactionsIdIndexRoute:
       mainmodulesprojectGuardTransactionsIdIndexRoute,
     mainmodulesprojectGuardTransactionsCreateIndexRoute:
@@ -1157,10 +1222,14 @@ const mainmodulesprojectGuardRouteRouteChildren: mainmodulesprojectGuardRouteRou
       mainmodulesprojectGuardFollowUpsIdEditIndexRoute,
     mainmodulesprojectGuardLoansIdSettingsIndexRoute:
       mainmodulesprojectGuardLoansIdSettingsIndexRoute,
+    mainmodulesprojectGuardLoansPurpousesCreateIndexRoute:
+      mainmodulesprojectGuardLoansPurpousesCreateIndexRoute,
     mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute:
       mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute,
     mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute:
       mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute,
+    mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute:
+      mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute,
   }
 
 const mainmodulesprojectGuardRouteRouteWithChildren =

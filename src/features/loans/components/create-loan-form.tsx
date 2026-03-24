@@ -17,23 +17,24 @@ import {
   Tabs,
   TabsList,
 } from '@/components'
-import { useLoanForm } from '../hooks/useLoanForm'
+import { useCreateLoanForm } from '../hooks/useCreateLoanForm'
 import { LoanOfficerSearchInput, ProfileSearchInput } from '@/features/profiles'
 import LoanProjectionCard from './loan-projection-card'
 import { Loan } from '../models/loan'
-import { LoanFormValues } from '../lib/schemas/loanFormSchema'
+import { LoanCreateFormValues } from '../lib/schemas/loanCreateFormSchema'
 import LoanAmortizationPreview from './loan-amortization-preview'
 import { Project } from '@/features/projects'
+import LoanPurposeSearchInput from './loan-purpose-search-input'
 
 interface CreateLoanFormProps extends DataModuleFormProps<
   Loan,
-  LoanFormValues
+  LoanCreateFormValues
 > {
   project: Project
 }
 
 const CreateLoanForm = (props: CreateLoanFormProps) => {
-  const form = useLoanForm(props)
+  const form = useCreateLoanForm(props)
 
   return (
     <FormContainer form={form}>
@@ -43,7 +44,7 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
           <Tab index={1}>Amortización</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <Form form={form}>
+          <Form className="h-full" form={form}>
             <FormMasterDetailLayout>
               <FormMasterDetailLayout.Master>
                 <FormRow>
@@ -101,6 +102,11 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                     label="Oficial"
                     input={LoanOfficerSearchInput}
                   />
+                  <FormGroup
+                    name="loanPurposeId"
+                    label="Destino"
+                    input={LoanPurposeSearchInput}
+                  />
                 </FormRow>
               </FormMasterDetailLayout.Master>
               <FormMasterDetailLayout.Detail>
@@ -128,6 +134,7 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
               name="description"
               label="Descripción"
               input={RichTextEditor}
+              optional
             />
           </Form>
         </TabPanel>

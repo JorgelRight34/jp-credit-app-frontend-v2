@@ -1,4 +1,4 @@
-import CollateralDataTable from '../components/collaterals-datatable'
+import CollateralDataTable from '../components/collateral-datatable'
 import { collateralTypeMap } from '../models/collateralType'
 import type { BreadcrumbsByRoute } from '@/components'
 import {

@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const loanFormSchema = z
+export const loanCreateFormSchema = z
     .object({
         approvedAmount: z.preprocess(
             (val) => Number(val),
@@ -32,6 +32,7 @@ export const loanFormSchema = z
         loanOfficerProfileId: z.number().optional(),
         guarantorProfileId: z.number().optional(),
         projectId: z.number(),
+        loanPurposeId: z.number().min(1),
         clientProfileId: z.union([
             z
                 .object({
@@ -65,4 +66,4 @@ export const loanFormSchema = z
         }
     });
 
-export type LoanFormValues = z.infer<typeof loanFormSchema>;
+export type LoanCreateFormValues = z.infer<typeof loanCreateFormSchema>;

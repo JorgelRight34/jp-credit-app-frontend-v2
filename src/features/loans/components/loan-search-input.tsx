@@ -1,4 +1,3 @@
-import { loansQueryKey } from '../lib/constants'
 import { loanSearchConfig } from '../lib/config/loan-search-config'
 import { buildLoanSearchInputDataTableConfig } from '../lib/config/loan-datatable-config'
 import type { LoanQuery } from '../models/loanQuery'
@@ -7,6 +6,7 @@ import { DataPickerInputProps, Icon, PickerInputPanel } from '@/components'
 import { DataTableContainer, LoanIcon, PickerInput } from '@/components'
 import { buildLoanLabel } from '../lib/utils'
 import { getLoan } from '../services/loanClient'
+import { loansQueryKey } from '../lib/query-keys'
 
 const LoanSearchInput = ({
   config,
@@ -25,7 +25,7 @@ const LoanSearchInput = ({
           <DataTableContainer
             searchConfig={loanSearchConfig}
             datatableConfig={buildLoanSearchInputDataTableConfig(setValue)}
-            cacheKey={[loansQueryKey, 'projects']}
+            cacheKey={[loansQueryKey]}
             {...config}
           />
         </PickerInputPanel>

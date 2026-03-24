@@ -2,7 +2,7 @@ import { UseDataFormProps, useForm } from "@/components";
 import { collateralLiquidateFormSchema, CollateralLiquidateFormValues } from "../lib/schemas/collateralLiquidateFormSchema";
 import { liquidateCollateral } from "../services/collateralClient";
 import { collateralsQueryKey } from "../lib/constants";
-import { loansQueryKey } from "@/features/loans/lib/constants";
+import { loansQueryKey } from "@/features/loans";
 
 interface UseCollateralLiquidateFormProps extends UseDataFormProps<null, CollateralLiquidateFormValues> {
     collateralId: number;

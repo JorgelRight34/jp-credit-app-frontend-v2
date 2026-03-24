@@ -16,6 +16,7 @@ import {
   CreditCardIcon,
   DirectionsCarIcon,
   ErrorIcon,
+  FlagIcon,
   FolderOpenIcon,
   GrassIcon,
   GroupIcon,
@@ -279,9 +280,19 @@ export const loansNavItem: NavItem = {
       search: { tab: 2 },
     },
     {
+      name: 'Destinos',
+      icon: () => <FlagIcon />,
+      route: '/loans/purpouses',
+    },
+    {
       name: addRouteName,
       icon: addRouteIcon,
       route: '/loans/create',
+    },
+    {
+      name: 'Añadir destino',
+      icon: addRouteIcon,
+      route: '/loans/purpouses/create',
     },
   ],
 }

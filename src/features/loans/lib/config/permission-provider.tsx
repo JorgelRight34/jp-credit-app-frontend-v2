@@ -1,6 +1,6 @@
 import { PermissionsProvider } from '@/components'
-import { loansQueryKey } from '../constants'
 import { getModulePermissions } from '@/features/auth'
+import { loansQueryKey } from '../query-keys'
 
 export const loanPermissionProvider: PermissionsProvider = {
   cacheKey: [loansQueryKey],
