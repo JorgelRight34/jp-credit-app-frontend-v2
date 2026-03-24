@@ -127,7 +127,6 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
             <FormGroup
               name="description"
               label="Descripción"
-              className="h-100"
               input={RichTextEditor}
             />
           </Form>
