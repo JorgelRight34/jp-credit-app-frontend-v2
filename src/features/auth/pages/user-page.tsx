@@ -1,7 +1,7 @@
 import UserOverview from '../components/user-overview'
 import { userRolesTableColumns } from '../lib/config/roles-datatable-config'
 import { claimsTableColumns } from '../lib/constants'
-import type { User } from '../../../models/user'
+import type { PropsWithUser, User } from '../../../models/user'
 import type { IdentityPermissions } from '../models/identityPermissions'
 import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import { getFullName } from '@/lib/utils'
@@ -31,7 +31,7 @@ export const usersModuleBreadcrumb: BreadcrumbSpec = {
   icon: PersonIcon,
   title: 'Usuarios',
   pathname: '/access-control',
-  search: { tab: 'users' },
+  search: { tab: 0 },
 }
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = [
@@ -43,10 +43,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
 const UserPage = ({
   user,
   userPermissions,
-}: {
-  user: User
-  userPermissions: IdentityPermissions
-}) => {
+}: PropsWithUser<{ userPermissions: IdentityPermissions }>) => {
   return (
     <PageRouterLayout
       title={`${getFullName(user)} - ${user.username}`}

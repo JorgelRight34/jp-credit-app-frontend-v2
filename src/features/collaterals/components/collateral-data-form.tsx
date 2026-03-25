@@ -23,45 +23,43 @@ interface CollateralDataFormProps {
 const CollateralDataForm = ({
   form,
   loanFormGroup,
-}: CollateralDataFormProps) => {
-  return (
-    <Form form={form}>
-      <FormRow>
-        <FormGroup label="Título" name="title" input={Input} />
-      </FormRow>
-      <FormRow>
-        <FormGroup label="Valor" name="value" input={CurrencyInput} />
-        {loanFormGroup}
-      </FormRow>
-      <FormRow>
-        <FormSelectGroup
-          options={collateralConditionsOptions}
-          name="condition"
-          label="Condición"
-        />
-        <FormSelectGroup
-          options={collateralTypeOptions}
-          name="type"
-          label="Tipo"
-        />
-      </FormRow>
-      <FormRow>
-        <FormGroup name="location" label="Localidad" input={Input} optional />
-        <FormGroup
-          name="expirationDate"
-          label="Expiración"
-          input={DateInput}
-          optional
-        />
-      </FormRow>
+}: CollateralDataFormProps) => (
+  <Form className="h-full" form={form}>
+    <FormRow>
+      <FormGroup label="Título" name="title" input={Input} />
+    </FormRow>
+    <FormRow>
+      <FormGroup label="Valor" name="value" input={CurrencyInput} />
+      {loanFormGroup}
+    </FormRow>
+    <FormRow>
+      <FormSelectGroup
+        options={collateralConditionsOptions}
+        name="condition"
+        label="Condición"
+      />
+      <FormSelectGroup
+        options={collateralTypeOptions}
+        name="type"
+        label="Tipo"
+      />
+    </FormRow>
+    <FormRow>
+      <FormGroup name="location" label="Localidad" input={Input} optional />
       <FormGroup
-        name="description"
-        label="Descripción"
-        input={RichTextEditor}
+        name="expirationDate"
+        label="Expiración"
+        input={DateInput}
         optional
       />
-    </Form>
-  )
-}
+    </FormRow>
+    <FormGroup
+      name="description"
+      label="Descripción"
+      input={RichTextEditor}
+      optional
+    />
+  </Form>
+)
 
 export default CollateralDataForm

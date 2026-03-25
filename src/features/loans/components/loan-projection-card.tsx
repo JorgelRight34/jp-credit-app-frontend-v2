@@ -1,12 +1,14 @@
 import { FinancialCard } from '@/components'
 import { getPmt, getTotalInterest, toCurrency } from '@/lib/utils'
 import { useMemo } from 'react'
+import { loanPaymentFrequencyStringMap } from '../lib/constants'
+import { LoanPaymentFrequency } from '../models/loan'
 
 interface LoanProjectionCardProps {
   amount: number
   annualInterestRate: number
   nPer: number
-  paymentFrequency: number
+  paymentFrequency: LoanPaymentFrequency
   className?: string
 }
 
@@ -46,9 +48,14 @@ const LoanProjectionCard = ({
             ? `${(annualInterestRate * 100).toFixed(2)}%`
             : `0%`,
         ],
-        ['Interés total pagado', toCurrency(details.totalInterest || 0)],
-        ['Capital total pagado', toCurrency(amount || 0)],
-        ['Pagos por año', paymentFrequency ? paymentFrequency : 'N/D'],
+        ['Interés total', toCurrency(details.totalInterest || 0)],
+        ['Capital total', toCurrency(amount || 0)],
+        [
+          'Frecuencia',
+          paymentFrequency
+            ? loanPaymentFrequencyStringMap[paymentFrequency]
+            : 'N/D',
+        ],
       ]}
     />
   )
