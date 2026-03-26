@@ -4,7 +4,7 @@ import {
   FormContainer,
   FormGroup,
   FormHtmlDisplayGroup,
-  FormMasterDetailLayout,
+  MasterDetailLayout,
   FormReadOnlyGroup,
   FormRow,
 } from '@/components'
@@ -43,8 +43,8 @@ const SavedReportGenerationForm = ({
   return (
     <FormContainer form={form} initializeAsDirty={initializeAsDirty}>
       <Form form={form}>
-        <FormMasterDetailLayout>
-          <FormMasterDetailLayout.Master>
+        <MasterDetailLayout>
+          <MasterDetailLayout.Master>
             <FormRow>
               <FormReadOnlyGroup
                 name="title"
@@ -73,11 +73,11 @@ const SavedReportGenerationForm = ({
               value={report.description}
               optional
             />
-          </FormMasterDetailLayout.Master>
-          <FormMasterDetailLayout.Detail>
+          </MasterDetailLayout.Master>
+          <MasterDetailLayout.Detail>
             <ReportTemplateDefinitionFieldset templateKey={report.key} />
-          </FormMasterDetailLayout.Detail>
-        </FormMasterDetailLayout>
+          </MasterDetailLayout.Detail>
+        </MasterDetailLayout>
       </Form>
     </FormContainer>
   )

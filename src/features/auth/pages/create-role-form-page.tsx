@@ -14,7 +14,7 @@ import { rolesModuleBreadcrumb } from './role-page'
 const CreateRoleFormPage = ({ role }: { role?: Role }) => {
   return (
     <CreateFormPageLayout
-      title="Grupo"
+      title="Crear grupo"
       permissionProvider={rolesPermissionProvider}
       breadcrumbs={[accessControlBreadcrumb, rolesModuleBreadcrumb]}
     >

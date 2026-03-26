@@ -3,9 +3,10 @@ import { getDefaultProfilePicModel } from '../lib/constants'
 import type { Profile } from '../models/profile'
 import {
   FormReadOnlyGroup,
-  FormRow,
+  Row,
   PhotoGallery,
   ViewMore,
+  OverviewLayout,
 } from '@/components'
 
 interface ProfileOverviewProps {
@@ -14,13 +15,13 @@ interface ProfileOverviewProps {
 
 const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
   return (
-    <section>
+    <OverviewLayout>
       <div className="flex flex-col gap-6 md:flex-row">
         <div className="flex w-full items-center justify-center md:w-5/12">
           <ProfilePhotoGallery profile={profile} />
         </div>
-        <aside className="w-full md:w-7/12">
-          <FormRow>
+        <aside className="flex w-full flex-col gap-6 md:w-7/12">
+          <Row>
             <FormReadOnlyGroup
               label="Nombres"
               name="firstName"
@@ -31,8 +32,8 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
               name="lastName"
               value={profile.lastName}
             />
-          </FormRow>
-          <FormRow>
+          </Row>
+          <Row>
             <FormReadOnlyGroup
               label="Género"
               name="gender"
@@ -43,8 +44,8 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
               name="dateOfBirth"
               value={profile.dateOfBirth}
             />
-          </FormRow>
-          <FormRow>
+          </Row>
+          <Row>
             <FormReadOnlyGroup label="Cédula" name="dni" value={profile.dni} />
             <FormReadOnlyGroup
               label="Email"
@@ -52,8 +53,8 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
               value={profile.email}
               optional
             />
-          </FormRow>
-          <FormRow>
+          </Row>
+          <Row>
             <FormReadOnlyGroup
               label="Teléfono casa"
               name="landline"
@@ -66,11 +67,11 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
               value={profile.phoneNumber}
               optional
             />
-          </FormRow>
+          </Row>
         </aside>
       </div>
       <ViewMore>
-        <FormRow>
+        <Row>
           <FormReadOnlyGroup
             label="Ingreso"
             name="createdAt"
@@ -84,15 +85,10 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
             }
             optional
           />
-        </FormRow>
+        </Row>
       </ViewMore>
-      <FormReadOnlyGroup
-        className="mt-0 md:mt-6"
-        label="Dirección"
-        name="address"
-        optional
-      />
-    </section>
+      <FormReadOnlyGroup label="Dirección" name="address" optional />
+    </OverviewLayout>
   )
 }
 

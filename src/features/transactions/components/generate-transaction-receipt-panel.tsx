@@ -64,12 +64,14 @@ const GenerateTransactionReceiptPanelInner = ({
   })
 
   return (
-    <SavedReportGenerationForm
-      report={data}
-      initialValues={{ id }}
-      reset={false}
-      initializeAsDirty
-    />
+    <>
+      <SavedReportGenerationForm
+        report={data}
+        initialValues={{ id }}
+        reset={false}
+        initializeAsDirty
+      />
+    </>
   )
 }
 

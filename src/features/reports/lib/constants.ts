@@ -7,7 +7,7 @@ import { TransactionSearchInput } from "@/features/transactions";
 export const reportTemplateKeysLabels: Record<Report["key"], string> = {
     loan: "Préstamo",
     collateral: "Garantía",
-    transaction: "Transacciones"
+    transaction: "Transacción"
 }
 
 export const reportTemplateKeysInputMapAside: Record<Report['key'], InputElement> = {
@@ -20,6 +20,6 @@ export const reportTemplateKeysInputMap = reportTemplateKeysInputMapAside as Rec
 
 export const reportKeySelectOptions: SelectOptions<Report["key"]> = [
     ['loan', 'Préstamos'],
-    ['collateral', 'Garantía'],
-    ['transaction', 'Transación']
+    ['collateral', 'Garantías'],
+    ['transaction', 'Transacciónes']
 ]

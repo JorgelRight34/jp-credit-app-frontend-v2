@@ -3,10 +3,13 @@ import { buildLoanQueryKey } from '@/features/loans/lib/query-keys'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getLoanFn } from '..'
+import { getModulePermissionsBeforeLoad } from '@/routes/(main)/(modules)/route'
+import { loanPermissionProvider } from '@/features/loans/lib/config/permission-provider'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/(project-guard)/loans/$id/settings/',
 )({
+  beforeLoad: getModulePermissionsBeforeLoad(loanPermissionProvider),
   component: RouteComponent,
 })
 

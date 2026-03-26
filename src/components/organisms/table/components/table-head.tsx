@@ -8,10 +8,7 @@ const TableHead = ({
   ...props
 }: TableHeaderProps) => {
   return (
-    <thead
-      className={`bg-surface-subtle !overflow-hidden border-b ${className}`}
-      {...props}
-    >
+    <thead className={`!overflow-hidden border-b ${className}`} {...props}>
       {children}
     </thead>
   )

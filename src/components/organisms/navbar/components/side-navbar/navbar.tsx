@@ -92,19 +92,7 @@ const NavbarBody = () => {
                 onClick={() => setActiveNav(null)}
               />
             </div>
-            <div className="flex items-center">
-              {activeNav && (
-                <span className="flex items-center">
-                  <Icon
-                    wrapperClassName="text-sm text-accent-secondary"
-                    className="text-accent-secondary"
-                    icon={activeNav.icon}
-                  />
-                  &nbsp;
-                  {activeNav?.name}
-                </span>
-              )}
-            </div>
+            {activeNav?.name}
           </div>
         </NavbarLinksContainer>
       </Activity>

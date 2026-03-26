@@ -14,4 +14,4 @@ export const getPaymentLoanActorsSelectOptions = async (
     return options
 }
 
-export const buildTransactionLabel = (transaction: Transaction) => `${transaction.type.toUpperCase()} - ${transaction.id}`
+export const buildTransactionLabel = (transaction: Transaction) => `${transaction.type.toUpperCase()}-${transaction.id}`

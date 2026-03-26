@@ -16,12 +16,12 @@ import LightPillMenuBtn from '@/components/atoms/button/components/light-pill-me
 import { buildConfirmationModalTrigger, BuildConfirmationModalTriggerProps } from '../../menu'
 
 export const buildPageLayoutCreateOption = (
-  createPath: Route,
+  createPath: Route, title = "Añadir", component = AccentPillLinkBtn
 ): LayoutOption => ({
-  title: 'Añadir',
+  title,
   to: createPath,
   icon: AddIcon,
-  component: AccentPillLinkBtn,
+  component,
 })
 
 

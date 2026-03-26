@@ -18,7 +18,7 @@ import { Loan } from '../models/loan'
 import LoanOverview from '../components/loan-overview'
 import LoanAmortizationPreview from '../components/loan-amortization-preview'
 import { collateralDataTableConfig } from '@/features/collaterals'
-import { buildLoanLabel } from '../lib/utils'
+import { buildLoanLabel, buildLoanLabelById } from '../lib/utils'
 import { overviewBreadcrumb } from '@/lib/constants'
 import { loanModuleBreadcrumb } from './loans-page'
 import { TransactionDataTable } from '@/features/transactions'
@@ -26,7 +26,7 @@ import { AdjustmentNoteDataTable } from '@/features/adjustment-notes'
 import { loansQueryKey } from '../lib/query-keys'
 
 export const buildLoanBreadcrumb = (loan: Loan): BreadcrumbSpec => ({
-  title: `Préstamo No.#${loan.id}`,
+  title: buildLoanLabelById(loan.id),
   icon: LoanIcon,
   pathname: '/loans/$id',
   params: { id: loan.id.toString() },

@@ -3,18 +3,22 @@ import type { Loan } from "../../models/loan";
 import type { BuildSearchInputDataTableConfigHandler, DataTableConfig } from "@/components";
 import { buildDateDataCell, buildExpandableDescriptionCell, buildLinkDataCell, buildSingleSelectCell } from "@/components";
 import { sortDateRows, toCurrency } from "@/lib/utils";
+import { buildProfileFullName } from "@/features/profiles";
+import { buildLoanLabelById } from "../utils";
 
 export const loansDataTableColumns: DataTableConfig<Loan>["columns"] = [
-    { accessorKey: "id", header: "ID" },
+    {
+        accessorKey: "id", header: "ID", cell: ({ row }) => buildLinkDataCell(
+            buildLoanLabelById(row.original.id),
+            {
+                to: "/loans/$id", params: { id: row.original.id.toString() }
+            }),
+    },
     {
         header: "CLIENTE",
         accessorFn: (row) => row.client?.lastName,
         enableSorting: true,
-        cell: ({ row }) => buildLinkDataCell(
-            `${row.original.client.lastName}, ${row.original.client.firstName}`,
-            {
-                to: "/loans/$id", params: { id: row.original.id.toString() }
-            }),
+        cell: ({ row }) => buildProfileFullName(row.original.client)
     },
     {
         accessorKey: "disbursedAmount",

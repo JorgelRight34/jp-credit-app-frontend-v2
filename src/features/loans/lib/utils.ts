@@ -3,8 +3,8 @@ import { Loan, LoanPaymentFrequency } from "../models/loan"
 import { SelectOptions } from "@/components"
 import { getLoanActors } from "../services/loanClient"
 
-export const buildLoanLabel = (loan: { id: number }) => `Préstamo No. ${loan.id}`
-export const buildLoanLabelById = (id: number) => `Préstamo No. ${id}`
+export const buildLoanLabel = ({ id }: { id: number; }) => `PR-${id}`
+export const buildLoanLabelById = (id: number) => `PR-${id}`
 
 const MS_PER_DAY = 24 * 60 * 60 * 1000
 

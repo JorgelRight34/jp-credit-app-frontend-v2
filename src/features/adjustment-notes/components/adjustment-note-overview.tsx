@@ -2,7 +2,8 @@ import {
   Fieldset,
   FormHtmlDisplayGroup,
   FormReadOnlyGroup,
-  FormRow,
+  OverviewLayout,
+  Row,
 } from '@/components'
 import { AdjustmentNote } from '../models/adjustmentNote'
 import { buildLoanLabelById } from '@/features/loans'
@@ -15,45 +16,41 @@ const AdjustmentNoteOverview = ({
   adjustmentNote: AdjustmentNote
 }) => {
   return (
-    <section className="flex flex-col h-full">
-      <FormRow>
-        <Fieldset legend="Contrato">
-          <FormRow>
-            <FormReadOnlyGroup
-              name="loanId"
-              label="Préstamo"
-              value={buildLoanLabelById(adjustmentNote.loanId)}
-            />
-            <FormReadOnlyGroup
-              name="clientName"
-              label="Cliente"
-              value={buildProfileFullName(adjustmentNote.client)}
-            />
-          </FormRow>
-        </Fieldset>
-      </FormRow>
-      <FormRow>
-        <Fieldset legend="Detalles">
-          <FormRow>
-            <FormReadOnlyGroup
-              name="amount"
-              label="Monto"
-              value={toCurrency(adjustmentNote.amount)}
-            />
-            <FormReadOnlyGroup
-              name="date"
-              label="Fecha"
-              value={toFormattedDate(adjustmentNote.date)}
-            />
-          </FormRow>
-        </Fieldset>
-      </FormRow>
+    <OverviewLayout>
+      <Fieldset legend="Contrato">
+        <Row>
+          <FormReadOnlyGroup
+            name="loanId"
+            label="Préstamo"
+            value={buildLoanLabelById(adjustmentNote.loanId)}
+          />
+          <FormReadOnlyGroup
+            name="clientName"
+            label="Cliente"
+            value={buildProfileFullName(adjustmentNote.client)}
+          />
+        </Row>
+      </Fieldset>
+      <Fieldset legend="Detalles">
+        <Row>
+          <FormReadOnlyGroup
+            name="amount"
+            label="Monto"
+            value={toCurrency(adjustmentNote.amount)}
+          />
+          <FormReadOnlyGroup
+            name="date"
+            label="Fecha"
+            value={toFormattedDate(adjustmentNote.date)}
+          />
+        </Row>
+      </Fieldset>
       <FormHtmlDisplayGroup
         name="description"
         label="Descripción"
         value={adjustmentNote.description ?? 'Sin descripción'}
       />
-    </section>
+    </OverviewLayout>
   )
 }
 

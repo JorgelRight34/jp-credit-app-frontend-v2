@@ -3,6 +3,7 @@ import type { LoanStatus } from "./loanStatus";
 
 export interface Loan {
     id: number;
+    legacyId: number;
     projectId: number;
     guarantorId?: number;
     loanOfficerId?: number;
@@ -47,10 +48,13 @@ export interface Loan {
     clientId: number
     overduePayments: number;
     delinquency: number;
+    loanPurpose: string
 
     // Audit fields
     createdAt: Date | string; // DateTime in C# is replaced by string (ISO format) in TypeScript
     updatedAt: Date | string; // Same as above
 }
+
+export type PropsWithLoan<T = object> = { loan: Loan } & T;
 
 export type LoanPaymentFrequency = 1 | 12 | 4 | 2

@@ -4,7 +4,7 @@ import {
   FormContainer,
   FormFileGroup,
   FormGroup,
-  FormMasterDetailLayout,
+  MasterDetailLayout,
   FormRow,
   FormSelectGroup,
   FormWatch,
@@ -33,8 +33,8 @@ const ReportGenerationForm = (
 
   return (
     <FormContainer form={form}>
-      <FormMasterDetailLayout>
-        <FormMasterDetailLayout.Master>
+      <MasterDetailLayout>
+        <MasterDetailLayout.Master>
           <Form form={form}>
             <FormRow>
               <FormFileGroup
@@ -68,8 +68,8 @@ const ReportGenerationForm = (
               />
             </FormRow>
           </Form>
-        </FormMasterDetailLayout.Master>
-        <FormMasterDetailLayout.Detail>
+        </MasterDetailLayout.Master>
+        <MasterDetailLayout.Detail>
           <FormWatch
             form={form}
             names={['key']}
@@ -77,8 +77,8 @@ const ReportGenerationForm = (
               <ReportTemplateDefinitionFieldset templateKey={key} />
             )}
           />
-        </FormMasterDetailLayout.Detail>
-      </FormMasterDetailLayout>
+        </MasterDetailLayout.Detail>
+      </MasterDetailLayout>
     </FormContainer>
   )
 }

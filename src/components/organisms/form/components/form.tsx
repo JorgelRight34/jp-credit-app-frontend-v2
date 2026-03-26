@@ -15,7 +15,7 @@ const Form = <T extends FieldValues>({
   children,
 }: FormProps<T>) => {
   return (
-    <section className={`flex w-full flex-1 flex-col ${className}`}>
+    <section className={`flex w-full flex-1 flex-col gap-6 ${className}`}>
       <FormProvider setValue={form.setValue} control={form.control}>
         {children}
       </FormProvider>

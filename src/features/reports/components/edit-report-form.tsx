@@ -5,7 +5,7 @@ import {
   Form,
   FormContainer,
   FormGroup,
-  FormMasterDetailLayout,
+  MasterDetailLayout,
   FormRow,
   FormSelectGroup,
   FormWatch,
@@ -48,8 +48,8 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
         <Tab index={1}>Archivos</Tab>
       </TabsList>
       <TabPanel index={0}>
-        <FormMasterDetailLayout>
-          <FormMasterDetailLayout.Master>
+        <MasterDetailLayout>
+          <MasterDetailLayout.Master>
             <FormContainer form={form}>
               <Form form={form}>
                 <FormRow>
@@ -70,8 +70,8 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
                 />
               </Form>
             </FormContainer>
-          </FormMasterDetailLayout.Master>
-          <FormMasterDetailLayout.Detail>
+          </MasterDetailLayout.Master>
+          <MasterDetailLayout.Detail>
             <FormWatch
               form={form}
               names={['key']}
@@ -79,8 +79,8 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
                 <ReportTemplateDefinitionFieldset templateKey={key} />
               )}
             />
-          </FormMasterDetailLayout.Detail>
-        </FormMasterDetailLayout>
+          </MasterDetailLayout.Detail>
+        </MasterDetailLayout>
       </TabPanel>
       <TabPanel index={1}>
         <EditReportFormFiles report={report} />

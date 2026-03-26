@@ -1,4 +1,4 @@
-import { DASHES, toCurrency, toFormattedDate } from '@/lib/utils'
+import { toCurrency, toFormattedDate } from '@/lib/utils'
 import {
   collateralConditionTranslations,
   collateralTypeTranslations,
@@ -9,7 +9,8 @@ import {
   FormHtmlDisplayGroup,
   FormReadOnlyGroup,
   FormReadonlyGroupLabelLink,
-  FormRow,
+  Row,
+  OverviewLayout,
   PhotoGallery,
   ViewMore,
 } from '@/components'
@@ -22,20 +23,20 @@ interface CollateralOverviewProps {
 
 const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
   return (
-    <section>
-      <div className="flex flex-col md:flex-row gap-6 mb-6">
-        <div className="flex items-center justify-center w-full md:w-6/12">
+    <OverviewLayout>
+      <div className="flex flex-col gap-6 md:flex-row">
+        <div className="flex w-full items-center justify-center md:w-6/12">
           <CollateralPhotoGallery collateral={collateral} />
         </div>
-        <aside className="w-full md:w-6/12">
-          <FormRow>
+        <aside className="flex w-full flex-col gap-6 md:w-6/12">
+          <Row>
             <FormReadOnlyGroup
               label="Título"
               name="title"
               value={collateral.title}
             />
-          </FormRow>
-          <FormRow>
+          </Row>
+          <Row>
             <FormReadOnlyGroup
               label="Valor"
               name="value"
@@ -53,8 +54,8 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
               }
               value={buildLoanLabelById(collateral.loanId)}
             />
-          </FormRow>
-          <FormRow>
+          </Row>
+          <Row>
             <FormReadOnlyGroup
               name="condition"
               label="Condición"
@@ -65,8 +66,8 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
               label="Tipo"
               value={collateralTypeTranslations[collateral.type]}
             />
-          </FormRow>
-          <FormRow>
+          </Row>
+          <Row>
             <FormReadOnlyGroup
               name="location"
               label="Localidad"
@@ -83,11 +84,11 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
               }
               optional
             />
-          </FormRow>
+          </Row>
         </aside>
       </div>
-      <ViewMore className="mb-6">
-        <FormRow>
+      <ViewMore>
+        <Row>
           <FormReadOnlyGroup
             name="status"
             label="Estado"
@@ -97,13 +98,11 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
             name="sellDate"
             label="Fecha de venta"
             value={
-              collateral.sellDate
-                ? toFormattedDate(collateral.sellDate)
-                : DASHES
+              collateral.sellDate ? toFormattedDate(collateral.sellDate) : '---'
             }
           />
-        </FormRow>
-        <FormRow>
+        </Row>
+        <Row>
           <FormReadOnlyGroup
             name="soldFor"
             label="Vendido por"
@@ -116,12 +115,12 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
             value={
               collateral.liquidationDate
                 ? toFormattedDate(collateral.liquidationDate)
-                : DASHES
+                : '---'
             }
           />
-        </FormRow>
+        </Row>
 
-        <FormRow>
+        <Row>
           <FormReadOnlyGroup
             name="createdAt"
             label="Fecha de creación"
@@ -132,7 +131,7 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
             label="Última actualización"
             value={toFormattedDate(collateral.updatedAt)}
           />
-        </FormRow>
+        </Row>
       </ViewMore>
       <FormHtmlDisplayGroup
         name="description"
@@ -140,7 +139,7 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
         value={collateral.description}
         optional
       />
-    </section>
+    </OverviewLayout>
   )
 }
 
@@ -149,7 +148,7 @@ const CollateralPhotoGallery = ({ collateral }: CollateralOverviewProps) => {
 
   return (
     <PhotoGallery
-      className="w-full shadow-sm max-h-[400px]"
+      className="max-h-[400px] w-full shadow-sm"
       itemBackground="black"
       itemHeight={350}
       photos={images.length > 0 ? images : [defaultCollateralPicFileModel]}

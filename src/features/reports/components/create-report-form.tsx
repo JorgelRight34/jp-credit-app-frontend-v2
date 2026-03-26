@@ -5,7 +5,7 @@ import {
   Form,
   FormContainer,
   FormGroup,
-  FormMasterDetailLayout,
+  MasterDetailLayout,
   FormRow,
   FormSelectGroup,
   FormWatch,
@@ -55,8 +55,8 @@ const CreateReportForm = ({
           <Tab index={2}>Formatos</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <FormMasterDetailLayout>
-            <FormMasterDetailLayout.Master>
+          <MasterDetailLayout>
+            <MasterDetailLayout.Master>
               <Form form={form}>
                 <FormRow>
                   <FormGroup name="title" label="Título" input={Input} />
@@ -76,8 +76,8 @@ const CreateReportForm = ({
                   optional
                 />
               </Form>
-            </FormMasterDetailLayout.Master>
-            <FormMasterDetailLayout.Detail>
+            </MasterDetailLayout.Master>
+            <MasterDetailLayout.Detail>
               <FormWatch
                 form={form}
                 names={['key']}
@@ -85,8 +85,8 @@ const CreateReportForm = ({
                   <ReportTemplateDefinitionFieldset templateKey={key} />
                 )}
               />
-            </FormMasterDetailLayout.Detail>
-          </FormMasterDetailLayout>
+            </MasterDetailLayout.Detail>
+          </MasterDetailLayout>
         </TabPanel>
         <TabPanel index={1}>
           <FileAttachmentsForm

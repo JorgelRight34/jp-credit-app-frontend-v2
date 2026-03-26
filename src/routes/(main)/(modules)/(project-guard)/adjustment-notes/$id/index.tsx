@@ -10,11 +10,11 @@ const getAdjustmentNoteFn = createIsomorphicFn()
   .server((id) => getAdjustmentNoteFromServer(id))
   .client((id) => getAdjustmentNote(id))
 
-export const Route = createFileRoute('/(main)/(modules)/(project-guard)/adjustment-notes/$id/')(
-  {
-    component: RouteComponent,
-  },
-)
+export const Route = createFileRoute(
+  '/(main)/(modules)/(project-guard)/adjustment-notes/$id/',
+)({
+  component: RouteComponent,
+})
 
 function RouteComponent() {
   const { id } = Route.useParams()

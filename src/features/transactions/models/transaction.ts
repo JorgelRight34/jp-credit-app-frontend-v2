@@ -3,6 +3,7 @@ import { ProfileSummary } from "@/features/profiles";
 
 export interface Transaction {
     id: number;
+    legacyId?: number;
     capitalValue: number;
     description?: string;
     interestValue: number;

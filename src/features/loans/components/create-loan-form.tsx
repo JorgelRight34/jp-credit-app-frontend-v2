@@ -5,7 +5,7 @@ import {
   Form,
   FormContainer,
   FormGroup,
-  FormMasterDetailLayout,
+  MasterDetailLayout,
   FormRow,
   FormWatch,
   NumericInput,
@@ -45,8 +45,8 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
         </TabsList>
         <TabPanel index={0}>
           <Form className="h-full" form={form}>
-            <FormMasterDetailLayout>
-              <FormMasterDetailLayout.Master>
+            <MasterDetailLayout>
+              <MasterDetailLayout.Master>
                 <FormRow>
                   <FormGroup
                     name="approvedAmount"
@@ -108,8 +108,8 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                     input={LoanPurposeSearchInput}
                   />
                 </FormRow>
-              </FormMasterDetailLayout.Master>
-              <FormMasterDetailLayout.Detail>
+              </MasterDetailLayout.Master>
+              <MasterDetailLayout.Detail>
                 <FormWatch
                   form={form}
                   names={[
@@ -128,8 +128,8 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                     />
                   )}
                 />
-              </FormMasterDetailLayout.Detail>
-            </FormMasterDetailLayout>
+              </MasterDetailLayout.Detail>
+            </MasterDetailLayout>
             <FormGroup
               name="description"
               label="Descripción"

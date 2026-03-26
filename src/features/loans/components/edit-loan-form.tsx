@@ -3,7 +3,7 @@ import {
   Form,
   FormContainer,
   FormGroup,
-  FormMasterDetailLayout,
+  MasterDetailLayout,
   FormReadOnlyGroup,
   FormRow,
   RichTextEditor,
@@ -34,8 +34,8 @@ const EditLoanForm = ({ loan, ...props }: EditLoanFormProps) => {
   return (
     <FormContainer form={form}>
       <Form form={form}>
-        <FormMasterDetailLayout>
-          <FormMasterDetailLayout.Master>
+        <MasterDetailLayout>
+          <MasterDetailLayout.Master>
             <FormRow>
               <FormReadOnlyGroup
                 name="approvedAmount"
@@ -105,8 +105,8 @@ const EditLoanForm = ({ loan, ...props }: EditLoanFormProps) => {
                 input={LoanPurposeSearchInput}
               />
             </FormRow>
-          </FormMasterDetailLayout.Master>
-          <FormMasterDetailLayout.Detail>
+          </MasterDetailLayout.Master>
+          <MasterDetailLayout.Detail>
             <LoanProjectionCard
               className="h-full w-full shadow-sm"
               amount={loan.approvedAmount}
@@ -114,8 +114,8 @@ const EditLoanForm = ({ loan, ...props }: EditLoanFormProps) => {
               annualInterestRate={loan.annualInterestRate}
               paymentFrequency={loan.paymentFrequency}
             />
-          </FormMasterDetailLayout.Detail>
-        </FormMasterDetailLayout>
+          </MasterDetailLayout.Detail>
+        </MasterDetailLayout>
         <FormGroup
           name="description"
           label="Descripción"

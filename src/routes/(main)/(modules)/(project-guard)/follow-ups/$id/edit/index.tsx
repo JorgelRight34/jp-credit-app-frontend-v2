@@ -3,8 +3,13 @@ import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getFollowUpFn } from '..'
 import { EditFollowUpPage } from '@/features/follow-ups'
+import { getModulePermissionsBeforeLoad } from '@/routes/(main)/(modules)/route'
+import { followUpPermissionProvider } from '@/features/follow-ups/lib/config/permission-provider'
 
-export const Route = createFileRoute('/(main)/(modules)/(project-guard)/follow-ups/$id/edit/')({
+export const Route = createFileRoute(
+  '/(main)/(modules)/(project-guard)/follow-ups/$id/edit/',
+)({
+  beforeLoad: getModulePermissionsBeforeLoad(followUpPermissionProvider),
   component: RouteComponent,
 })
 

@@ -3,8 +3,11 @@ import { getProfileFn } from '..'
 import { createProfileKey } from '@/features/profiles/lib/query-keys'
 import { useSuspenseData } from '@/hooks/useData'
 import { EditProfileFormPage } from '@/features/profiles'
+import { getModulePermissionsBeforeLoad } from '../../../route'
+import { profilesPermissionProvider } from '@/features/profiles/lib/config/permissionProvider'
 
 export const Route = createFileRoute('/(main)/(modules)/profiles/$id/edit/')({
+  beforeLoad: getModulePermissionsBeforeLoad(profilesPermissionProvider),
   component: RouteComponent,
 })
 

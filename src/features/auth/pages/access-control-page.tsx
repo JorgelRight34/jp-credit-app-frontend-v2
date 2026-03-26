@@ -2,10 +2,9 @@ import RolesDataTable from '../components/roles-datatable'
 import UsersDataTable from '../components/users-datatable'
 import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import {
-  AddIcon,
   AdminPanelSettingsIcon,
   buildPageLayoutCreateOption,
-  LightPillBtn,
+  LightPillLinkBtn,
   LockIcon,
   PageRouterLayout,
   PersonIcon,
@@ -31,12 +30,11 @@ const AccessControlPage = () => {
     <PageRouterLayout
       title="Accesos"
       options={[
-        {
-          title: 'Roles',
-          icon: AddIcon,
-          to: '/access-control/roles/create',
-          component: LightPillBtn,
-        },
+        buildPageLayoutCreateOption(
+          '/access-control/roles/create',
+          'Roles',
+          LightPillLinkBtn,
+        ),
         buildPageLayoutCreateOption('/access-control/users/create'),
       ]}
       routerConfig={{

@@ -3,7 +3,7 @@ import Menu from '../../menu/components/menu'
 import PageLayoutOption from './page-layout-option'
 import type { MenuOption, MenuRef } from '../../menu/components/menu'
 import type { LayoutOption } from '../models/pageLayoutOption'
-import { Icon, MoreVertIcon } from '@/components/atoms'
+import { AccentPillBtn, Icon, MoreVertIcon } from '@/components/atoms'
 import { useWindowBreakpoint } from '@/hooks/useWindowBreakpoint'
 import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 
@@ -19,6 +19,7 @@ const PageLayoutOptionsContainer = ({
   return (
     <>
       <div className="hidden items-center gap-3 md:flex">
+        <AccentPillBtn className="invisible">a</AccentPillBtn>
         {options.map((option, index) => (
           <PageLayoutOption key={index} option={option} />
         ))}

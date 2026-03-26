@@ -1,36 +1,22 @@
 import clsx from 'clsx'
 import type { NavbarLinkProps } from './navbar-link'
-import { useRouter } from '@/hooks/useRouter'
 
 const NavbarLinkContainer = ({
   option,
   children,
   isActive,
   className,
-  onClick,
+  ...props
 }: NavbarLinkProps & { isActive: boolean }) => {
-  const router = useRouter()
-
   return (
     <div
       className="nav-link-container position-relative"
-      onClick={(e) => {
-        if (e.defaultPrevented) return
-        onClick?.()
-        router.navigate({ to: option.route })
-      }}
       role="link"
       tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          onClick?.()
-          router.navigate({ to: option.route })
-        }
-      }}
+      {...props}
     >
       <div
-        className={clsx('nav-link-option p-0', className, {
+        className={clsx('nav-link-option p-0 hover:!shadow-sm', className, {
           'nav-link-active text-white shadow-sm': isActive,
           'text-muted': !isActive,
         })}

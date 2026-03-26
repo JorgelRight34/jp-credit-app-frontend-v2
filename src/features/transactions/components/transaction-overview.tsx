@@ -1,10 +1,10 @@
 import {
   Fieldset,
   FormHtmlDisplayGroup,
+  MasterDetailLayout,
   FormReadOnlyGroup,
   FormReadonlyGroupLabelLink,
-  FormRow,
-  ViewMore,
+  Row,
 } from '@/components'
 import { Transaction } from '../models/transaction'
 import { buildLoanLabelById } from '@/features/loans'
@@ -13,52 +13,26 @@ import { buildProfileFullName } from '@/features/profiles'
 
 const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
   return (
-    <section>
-      <FormRow>
-        <Fieldset legend="Datos">
-          <FormRow>
-            <FormReadOnlyGroup
-              name="id"
-              label={
-                <FormReadonlyGroupLabelLink
-                  to="/loans/$id"
-                  params={{ id: transaction.loanId.toString() }}
-                >
-                  Préstamo
-                </FormReadonlyGroupLabelLink>
-              }
-              value={buildLoanLabelById(transaction.loanId)}
-            />
-            <FormReadOnlyGroup
-              name="client"
-              label={
-                <FormReadonlyGroupLabelLink
-                  to="/profiles/$id"
-                  params={{ id: transaction.clientId.toString() }}
-                >
-                  Cliente
-                </FormReadonlyGroupLabelLink>
-              }
-              value={buildProfileFullName(transaction.client)}
-            />
-          </FormRow>
-          <FormRow>
+    <MasterDetailLayout>
+      <MasterDetailLayout.Master>
+        <Fieldset legend="Desglose">
+          <Row>
             <FormReadOnlyGroup
               name="value"
               label="Monto"
               value={toCurrency(transaction.value)}
             />
             <FormReadOnlyGroup
-              name="date"
-              label="Fecha"
-              value={toFormattedDate(transaction.date)}
+              name="arrearBalance"
+              label="Balance pendiente pagado"
+              value={
+                transaction.arrearBalance
+                  ? toCurrency(transaction.arrearBalance)
+                  : 'N/A'
+              }
             />
-          </FormRow>
-        </Fieldset>
-      </FormRow>
-      <FormRow>
-        <Fieldset legend="Desglose">
-          <FormRow>
+          </Row>
+          <Row>
             <FormReadOnlyGroup
               name="capitalValue"
               label="Capital"
@@ -69,40 +43,22 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
               label="Interés"
               value={toCurrency(transaction.interestValue)}
             />
-          </FormRow>
-          <FormRow>
+          </Row>
+          <Row>
             <FormReadOnlyGroup
               name="penaltyFee"
               label="Mora"
               value={toCurrency(transaction.penaltyFee)}
             />
             <FormReadOnlyGroup
-              name="lateDays"
-              label="Atraso"
-              value={`${transaction.lateDays} días`}
-            />
-          </FormRow>
-          <FormRow>
-            <FormReadOnlyGroup
-              name="arrearBalance"
-              label="Balance pendiente pagado"
-              value={
-                transaction.arrearBalance
-                  ? toCurrency(transaction.arrearBalance)
-                  : 'N/A'
-              }
-            />
-            <FormReadOnlyGroup
               name="feePaid"
               label="Mora pendiente pagada"
               value={toCurrency(transaction.feePaid)}
             />
-          </FormRow>
+          </Row>
         </Fieldset>
-      </FormRow>
-      <ViewMore className="mb-6">
         <Fieldset legend="Autores">
-          <FormRow>
+          <Row>
             <FormReadOnlyGroup
               name="actor"
               label={
@@ -135,15 +91,69 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
               }
               value={transaction.createdByUsername}
             />
-          </FormRow>
+          </Row>
         </Fieldset>
-      </ViewMore>
-      <FormHtmlDisplayGroup
-        name="description"
-        label="Descripción"
-        value={transaction.description}
-      />
-    </section>
+        <FormHtmlDisplayGroup
+          name="description"
+          label="Descripción"
+          value={transaction.description}
+        />
+      </MasterDetailLayout.Master>
+      <MasterDetailLayout.Detail>
+        <Fieldset legend="Datos">
+          <Row>
+            <FormReadOnlyGroup
+              name="id"
+              label={
+                <FormReadonlyGroupLabelLink
+                  to="/loans/$id"
+                  params={{ id: transaction.loanId.toString() }}
+                >
+                  Préstamo
+                </FormReadonlyGroupLabelLink>
+              }
+              value={buildLoanLabelById(transaction.loanId)}
+            />
+          </Row>
+          <Row>
+            <FormReadOnlyGroup
+              name="client"
+              label={
+                <FormReadonlyGroupLabelLink
+                  to="/profiles/$id"
+                  params={{ id: transaction.clientId.toString() }}
+                >
+                  Cliente
+                </FormReadonlyGroupLabelLink>
+              }
+              value={buildProfileFullName(transaction.client)}
+            />
+          </Row>
+          <Row>
+            <FormReadOnlyGroup
+              name="date"
+              label="Fecha"
+              value={toFormattedDate(transaction.date)}
+            />
+          </Row>
+          <Row>
+            <FormReadOnlyGroup
+              name="lateDays"
+              label="Atraso"
+              value={`${transaction.lateDays} días`}
+            />
+          </Row>
+          <Row>
+            <FormReadOnlyGroup
+              name="legacyId"
+              label="Id legado"
+              value={transaction.legacyId}
+              optional
+            />
+          </Row>
+        </Fieldset>
+      </MasterDetailLayout.Detail>
+    </MasterDetailLayout>
   )
 }
 

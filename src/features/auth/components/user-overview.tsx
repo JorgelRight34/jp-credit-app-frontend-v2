@@ -1,52 +1,47 @@
-import type { User } from '../../../models/user'
-import type { UserFormValues } from '../lib/schemas/userFormSchema'
-import type { DataModuleFormProps } from '@/components'
-import { FormReadOnlyGroup, FormRow } from '@/components'
+import { Fieldset, FormReadOnlyGroup, Row, OverviewLayout } from '@/components'
 import { getDateLabelSinceDate } from '@/lib/utils'
+import { PropsWithUser } from '@/models/user'
 
-export type UserFormProps = Omit<
-  DataModuleFormProps<User, UserFormValues>,
-  'shouldEdit'
-> & {
-  user: User
-}
-
-const UserOverview = ({ user }: UserFormProps) => {
+const UserOverview = ({ user }: PropsWithUser) => {
   return (
-    <section>
-      <FormRow>
-        <FormReadOnlyGroup
-          label="Nombres"
-          name="firstName"
-          value={user.firstName}
-        />
-        <FormReadOnlyGroup
-          label="Apellidos"
-          name="lastName"
-          value={user.lastName}
-        />
-      </FormRow>
-      <FormRow>
-        <FormReadOnlyGroup
-          label="Usuario"
-          name="username"
-          value={user.username}
-        />
-        <FormReadOnlyGroup label="Email" name="email" value={user.email} />
-      </FormRow>
-      <FormRow>
-        <FormReadOnlyGroup
-          label="Habilitado"
-          name="isActive"
-          value={user.isActive ? 'Activo' : 'Deshabilitado'}
-        />
-        <FormReadOnlyGroup
-          name="lastAccess"
-          label="Ultimo acceso"
-          value={getDateLabelSinceDate(user.lastLogin)}
-        />
-      </FormRow>
-    </section>
+    <OverviewLayout>
+      <Fieldset legend="Nombres">
+        <Row>
+          <FormReadOnlyGroup
+            label="Primer nombre"
+            name="firstName"
+            value={user.firstName}
+          />
+          <FormReadOnlyGroup
+            label="Apellidos"
+            name="lastName"
+            value={user.lastName}
+          />
+        </Row>
+      </Fieldset>
+      <Fieldset legend="Datos">
+        <Row>
+          <FormReadOnlyGroup
+            label="Usuario"
+            name="username"
+            value={user.username}
+          />
+          <FormReadOnlyGroup label="Email" name="email" value={user.email} />
+        </Row>
+        <Row>
+          <FormReadOnlyGroup
+            label="Estado"
+            name="isActive"
+            value={user.isActive ? 'Activo' : 'Deshabilitado'}
+          />
+          <FormReadOnlyGroup
+            name="lastAccess"
+            label="Ultimo acceso"
+            value={getDateLabelSinceDate(user.lastLogin)}
+          />
+        </Row>
+      </Fieldset>
+    </OverviewLayout>
   )
 }
 

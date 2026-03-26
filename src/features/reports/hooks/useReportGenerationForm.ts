@@ -13,7 +13,7 @@ export interface ReportGenerationFormValues extends FieldValues {
     key?: string;
 }
 
-export const useReportGenerationForm = ({ report, ...config }: UseReportGenerationFormValuesProps) => {
+export const useReportGenerationForm = ({ report, initialValues, ...config }: UseReportGenerationFormValuesProps) => {
     return useForm<Blob, ReportGenerationFormValues, Blob>({
         onSubmit: generateReport,
         onEdit: async (body) => {
@@ -22,7 +22,7 @@ export const useReportGenerationForm = ({ report, ...config }: UseReportGenerati
         },
         shouldEdit: !!report,
         shouldUseNativeValidation: true,
-        defaultValues: { key: 'loan', url: [], file: [] },
+        defaultValues: { key: 'loan', url: [], file: [], ...initialValues },
         ...config
     })
 }

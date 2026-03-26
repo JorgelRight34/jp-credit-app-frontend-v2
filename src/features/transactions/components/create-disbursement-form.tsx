@@ -20,7 +20,7 @@ import {
   LoanSearchInput,
 } from '@/features/loans'
 import { useRef } from 'react'
-import { DASHES, toCurrency, toFormattedDate, toInputDate } from '@/lib/utils'
+import { toCurrency, toFormattedDate, toInputDate } from '@/lib/utils'
 import { Project } from '@/features/projects'
 
 interface CreateDisbursementFormProps extends DataModuleFormProps<
@@ -64,13 +64,13 @@ const CreateDisbursementForm = ({
                 <FormReadOnlyGroup
                   name="approvedAmount"
                   label="Monto aprobado"
-                  value={loan ? toCurrency(loan?.approvedAmount) : DASHES}
+                  value={loan ? toCurrency(loan?.approvedAmount) : '---'}
                   disabled
                 />
                 <FormReadOnlyGroup
                   name="disbursedAmount"
                   label="Total desembolsado"
-                  value={loan ? toCurrency(loan?.disbursedAmount) : DASHES}
+                  value={loan ? toCurrency(loan?.disbursedAmount) : '---'}
                   disabled
                 />
               </FormRow>
@@ -81,17 +81,17 @@ const CreateDisbursementForm = ({
                   value={
                     loan
                       ? toFormattedDate(calculateNextPaymentDate(loan))
-                      : DASHES
+                      : '---'
                   }
                   disabled
                 />
                 <FormReadOnlyGroup
                   name="lastTransactionDate"
-                  label="Fecha ult. pago"
+                  label="Fecha últ. pago"
                   value={
                     loan?.lastTransactionDate
                       ? toFormattedDate(loan.lastTransactionDate)
-                      : DASHES
+                      : '---'
                   }
                   disabled
                 />
@@ -99,7 +99,6 @@ const CreateDisbursementForm = ({
             </>
           )}
         />
-
         <FormRow>
           <FormGroup name="amount" label="Monto" input={CurrencyInput} />
           <FormGroup name="date" label="Fecha" input={DateInput} />
