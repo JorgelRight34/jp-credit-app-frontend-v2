@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react'
 
 const MasterDetailLayout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="flex h-full w-full flex-col gap-6 md:flex-row md:gap-0">
+    <div className="flex h-full w-full flex-1 flex-col gap-6 md:flex-row md:gap-0">
       {children}
     </div>
   )

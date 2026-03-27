@@ -1,4 +1,4 @@
-import { Fieldset } from '@/components'
+import { Fieldset, Paragraph } from '@/components'
 import { toCurrency } from '@/lib/utils'
 import { PropsWithChildren } from 'react'
 
@@ -38,11 +38,9 @@ const FinancialSummaryCard = ({
       legendClassName="text-center"
     >
       <section className="flex h-full flex-1 flex-col p-3 px-6">
-        <div className="flex flex-col justify-center py-2">
-          <span className="text-accent truncate text-center text-4xl">
-            {toCurrency(value)}
-          </span>
-        </div>
+        <Paragraph className="text-accent py-2 text-center text-4xl whitespace-nowrap">
+          {toCurrency(value)}
+        </Paragraph>
       </section>
     </Fieldset>
   )

@@ -43,7 +43,7 @@ const ViewButtonContainer = ({
   className,
 }: HTMLAttributes<HTMLDivElement>) => {
   return (
-    <div className={clsx('flex justify-end border-b pb-1', className)}>
+    <div className={clsx('flex w-full justify-end border-b pb-1', className)}>
       <span>{children}</span>
     </div>
   )

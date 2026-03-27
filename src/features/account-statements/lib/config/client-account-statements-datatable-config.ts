@@ -35,14 +35,14 @@ export const clientAccountStatementDataTableConfig: DataTableConfig<Transaction>
         },
         {
             accessorKey: "penaltyFee",
-            header: "Mora",
+            header: "MORA",
             enableSorting: true,
             cell: ({ row }) => toCurrency(row.original.penaltyFee),
             footer: (info) => getFooterTotalAsCurrency(info, "penaltyFee"),
         },
         {
             accessorKey: "total",
-            header: "Total Pagado",
+            header: "MONTO",
             enableSorting: true,
             cell: ({ row }) => toCurrency(row.original.value),
             footer: (info) => getFooterTotalAsCurrency(info, "value"),

@@ -1,12 +1,11 @@
-import { CheckCircleIcon, Icon } from '@/components/atoms'
+import { CheckCircleIcon, Icon, Paragraph } from '@/components/atoms'
 import { SnackbarProps } from './snackbar'
 
 const SnackbarSuccess = ({ data }: SnackbarProps) => {
   return (
-    <div className="bg-surface flex">
-      <Icon icon={CheckCircleIcon} className="text-green-400">
-        {data.title}
-      </Icon>
+    <div className="flex w-full items-center gap-2 rounded-lg">
+      <Icon icon={CheckCircleIcon} className="text-green-400" />
+      <Paragraph>{data.title}</Paragraph>
     </div>
   )
 }

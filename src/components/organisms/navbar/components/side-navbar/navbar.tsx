@@ -84,7 +84,7 @@ const NavbarBody = () => {
           options={activeNav?.children ?? []}
           activeOptions={{ includeSearch: true, exact: true }}
         >
-          <div className="bg-surface-subtle-transparent flex justify-between border-t border-b p-3 shadow-sm">
+          <div className="text-primary bg-surface-subtle-transparent flex justify-between border-t border-b p-3 shadow-sm">
             <div className="border-left-accent">
               <Icon
                 className="text-accent-secondary cursor-pointer"

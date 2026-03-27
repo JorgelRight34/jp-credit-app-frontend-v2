@@ -30,12 +30,21 @@ const SERIES_CONFIG: Record<
   },
 }
 
-const SERIES_KEYS = Object.keys(SERIES_CONFIG) as SeriesKey[]
+const SERIES_KEYS = ['capital', 'interest', 'fee'] as SeriesKey[]
 
 const currencyYAxis = {
   y: {
     ticks: {
-      callback: (value: number | string) => toCurrency(value as number),
+      callback: (value: number | string) => {
+        value = +value
+
+        if (value >= 1_000_000_000)
+          return `${(value / 1_000_000_000).toFixed(1)}B`
+        if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`
+        if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`
+
+        return value
+      },
     },
   },
 }

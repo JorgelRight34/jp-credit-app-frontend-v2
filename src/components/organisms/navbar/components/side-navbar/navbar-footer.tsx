@@ -12,7 +12,7 @@ const NavbarFooter = ({ user }: NavbarFooterProps) => {
       <div className="text-muted !flex w-full items-center">
         <CurrentUserPicCard user={user} className="mr-2" />
         <span className="mr-auto flex flex-col">
-          <span>{getFirstAndLastName(user)}</span>
+          <span className="truncate">{getFirstAndLastName(user)}</span>
         </span>
         <NavbarAppSettingsTrigger>
           <Icon icon={MoreVertIcon} />

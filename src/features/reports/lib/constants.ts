@@ -21,5 +21,5 @@ export const reportTemplateKeysInputMap = reportTemplateKeysInputMapAside as Rec
 export const reportKeySelectOptions: SelectOptions<Report["key"]> = [
     ['loan', 'Préstamos'],
     ['collateral', 'Garantías'],
-    ['transaction', 'Transacciónes']
+    ['transaction', 'Transacciones']
 ]

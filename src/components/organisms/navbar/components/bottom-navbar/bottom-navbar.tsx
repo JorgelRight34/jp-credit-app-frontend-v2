@@ -8,18 +8,13 @@ import {
   NavLink,
   Paragraph,
 } from '@/components/atoms'
-import { useWindowBreakpoint } from '@/hooks/useWindowBreakpoint'
-import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 import CurrentUserPicCard from '../side-navbar/current-user-pic-card'
 import { PropsWithUser } from '@/models/user'
 import NavbarAppSettingsTrigger from '../navbar-app-settings/navbar-app-settings'
 import { PropsWithChildren } from 'react'
 
 const BottomNavbar = ({ user }: PropsWithUser) => {
-  const isSmall = useWindowBreakpoint(SMALL_SCREEN_BREAKPOINT)
   const style = { height: '1.5rem' }
-
-  if (!isSmall) return null
 
   return (
     <div className="bg-surface flex h-full w-full items-center justify-between border-t p-2 px-3 lg:hidden">

@@ -149,6 +149,7 @@ const AdvancedSearchForm = <T,>({
         {onExport && (
           <ModalTrigger
             title={<Icon icon={SettingsIcon}>Configurar exporte</Icon>}
+            modalClassName="w-[90dvw] md:w-auto"
             triggerClassName="w-full md:!w-auto"
             trigger={
               <LightPillBtn>

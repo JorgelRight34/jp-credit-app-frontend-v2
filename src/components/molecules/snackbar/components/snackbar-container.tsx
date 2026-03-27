@@ -1,3 +1,4 @@
+import { CloseIcon } from '@/components/atoms'
 import { ToastContainer } from 'react-toastify'
 
 const SnackbarContainer = () => {
@@ -12,7 +13,8 @@ const SnackbarContainer = () => {
       draggable
       pauseOnHover
       icon={false}
-      toastClassName="bg-surface"
+      closeButton={() => <CloseIcon className="text-primary" />}
+      toastClassName="!bg-transparent p-0 shadow-none"
     />
   )
 }

@@ -4,10 +4,15 @@ import PageLayoutOption from './page-layout-option'
 import type { MenuOption, MenuRef } from '../../menu/components/menu'
 import type { LayoutOption } from '../models/pageLayoutOption'
 import { AccentPillBtn, Icon, MoreVertIcon } from '@/components/atoms'
-import { useWindowBreakpoint } from '@/hooks/useWindowBreakpoint'
 import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
+import { VisibleFrom } from '@/components/organisms'
 
 export type PageLayoutOptionsContainerProps = {
+  options: Array<LayoutOption>
+  smallScreenExtraMenuOptions?: Array<MenuOption>
+}
+
+interface PageLayoutMenuProps {
   options: Array<LayoutOption>
   smallScreenExtraMenuOptions?: Array<MenuOption>
 }
@@ -25,10 +30,12 @@ const PageLayoutOptionsContainer = ({
         ))}
       </div>
       <div className="ml-auto block md:hidden">
-        <PageLayoutOptionsMenu
-          options={options}
-          smallScreenExtraMenuOptions={smallScreenExtraMenuOptions}
-        />
+        <VisibleFrom breakpoint={SMALL_SCREEN_BREAKPOINT}>
+          <PageLayoutOptionsMenu
+            options={options}
+            smallScreenExtraMenuOptions={smallScreenExtraMenuOptions}
+          />
+        </VisibleFrom>
       </div>
     </>
   )
@@ -37,11 +44,22 @@ const PageLayoutOptionsContainer = ({
 const PageLayoutOptionsMenu = ({
   options,
   smallScreenExtraMenuOptions,
-}: {
-  options: Array<LayoutOption>
-  smallScreenExtraMenuOptions?: Array<MenuOption>
-}) => {
-  const isMobile = useWindowBreakpoint(SMALL_SCREEN_BREAKPOINT)
+}: PageLayoutMenuProps) => {
+  if (options.length + (smallScreenExtraMenuOptions?.length ?? 0) === 0)
+    return null
+
+  return (
+    <PageLayoutOptionsInner
+      options={options}
+      smallScreenExtraMenuOptions={smallScreenExtraMenuOptions}
+    />
+  )
+}
+
+const PageLayoutOptionsInner = ({
+  options,
+  smallScreenExtraMenuOptions,
+}: PageLayoutMenuProps) => {
   const menuRef = useRef<MenuRef>(null)
 
   return (
@@ -51,7 +69,7 @@ const PageLayoutOptionsMenu = ({
         onClick={(e) => menuRef.current?.open(e)}
         icon={MoreVertIcon}
       />
-      {isMobile && (
+      {options.length + (smallScreenExtraMenuOptions?.length ?? 0) > 0 && (
         <Menu
           ref={menuRef}
           options={options

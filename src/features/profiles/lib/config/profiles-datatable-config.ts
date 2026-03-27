@@ -40,12 +40,6 @@ export const createProfilesDataTableConfig = (role: ProfileRole): DataTableConfi
             enableSorting: true
         },
         {
-            accessorKey: 'dateOfBirth',
-            header: 'FECH. NACIMIENTO',
-            enableSorting: true,
-            cell: ({ row }) => buildDateDataCell(row.original.dateOfBirth),
-        },
-        {
             accessorKey: 'createdAt',
             header: 'FECHA',
             enableSorting: true,

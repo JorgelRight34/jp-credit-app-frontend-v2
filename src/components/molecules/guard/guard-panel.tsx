@@ -51,16 +51,16 @@ const GuardPanel = ({
         </BigTitle>
         <Subtitle className="leading-relaxed">{subtitle}</Subtitle>
       </header>
-      <div className="flex flex-col gap-6 px-0 md:flex-row md:px-6">
+      <div className="flex w-full flex-col gap-6 px-0 md:flex-row md:justify-center">
         {hasSecondary && (
-          <Link className="w-full md:w-6/12" to={secondaryLink}>
+          <Link className="w-full md:w-3/12" to={secondaryLink}>
             <SecondaryPillBtn>
               <Icon icon={secondaryIcon}>{secondaryLabel}</Icon>
             </SecondaryPillBtn>
           </Link>
         )}
         <Link
-          className={hasSecondary ? 'w-full md:w-6/12' : 'w-full'}
+          className={hasSecondary ? 'w-full md:w-3/12' : 'w-full'}
           to={createLink}
         >
           <AccentPillBtn>

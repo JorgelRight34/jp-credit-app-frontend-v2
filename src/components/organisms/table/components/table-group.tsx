@@ -69,7 +69,7 @@ export const TableGroupTable = <T,>({ table }: TableGroupTableProps<T>) => {
     <>
       <TableBodyCompositor table={table} />
       <TableFooterCompositor
-        className="[display:table-header-group]"
+        className="[display:table-header-group] border-t border-b"
         table={table}
       />
     </>

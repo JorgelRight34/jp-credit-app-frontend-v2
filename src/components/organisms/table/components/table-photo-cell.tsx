@@ -20,7 +20,11 @@ const TablePhotoCell = ({ fallback, getImage, icon }: TablePhotoCellProps) => {
 
   return (
     <>
-      <Icon icon={icon ? icon : ImageIcon} onClick={handleOnClick} />
+      <Icon
+        className="!text-sm"
+        icon={icon ? icon : ImageIcon}
+        onClick={handleOnClick}
+      />
       <LightBox
         files={
           image

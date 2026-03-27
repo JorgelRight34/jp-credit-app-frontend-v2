@@ -83,8 +83,8 @@ const LoanPage = ({ loan }: { loan: Loan }) => {
           <Tab index={0}>Resumen</Tab>
           <Tab index={1}>Amortización</Tab>
           <Tab index={2}>Transacciones</Tab>
-          <Tab index={3}>Notas</Tab>
-          <Tab index={4}>Garantías</Tab>
+          <Tab index={3}>Garantías</Tab>
+          <Tab index={4}>Notas</Tab>
         </TabsList>
         <TabPanel index={0}>
           <LoanOverview loan={loan} />
@@ -107,17 +107,17 @@ const LoanPage = ({ loan }: { loan: Loan }) => {
           />
         </TabPanel>
         <TabPanel index={3}>
-          <AdjustmentNoteDataTable
-            initialQuery={{ loanId: loan.id }}
-            initialState={{ columnVisibility: { loanId: false } }}
-          />
-        </TabPanel>
-        <TabPanel index={4}>
           <DataTable
             query={{ loanId: loan.id }}
             initialState={{ columnVisibility: { loanId: false } }}
             cacheKey={[loansQueryKey, 'collaterals', loan.id]}
             {...collateralDataTableConfig}
+          />
+        </TabPanel>
+        <TabPanel index={4}>
+          <AdjustmentNoteDataTable
+            initialQuery={{ loanId: loan.id }}
+            initialState={{ columnVisibility: { loanId: false } }}
           />
         </TabPanel>
       </TabsRouter>

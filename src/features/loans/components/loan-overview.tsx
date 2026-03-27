@@ -71,6 +71,24 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
             />
           </Row>
         </Fieldset>
+        <ViewMore>
+          <Fieldset legend="Fechas">
+            <Row>
+              <FormReadOnlyGroup
+                name="startDate"
+                label="Fecha de inicio"
+                value={toFormattedDate(loan.startDate)}
+              />
+            </Row>
+            <Row>
+              <FormReadOnlyGroup
+                name="deliveryDate"
+                label="Fecha de entrega"
+                value={toFormattedDate(loan.deliveryDate)}
+              />
+            </Row>
+          </Fieldset>
+        </ViewMore>
         <FormHtmlDisplayGroup
           name="description"
           label="Descripción"
@@ -161,24 +179,6 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
             />
           </Row>
         </Fieldset>
-        <ViewMore>
-          <Fieldset legend="Fechas">
-            <Row>
-              <FormReadOnlyGroup
-                name="startDate"
-                label="Fecha de inicio"
-                value={toFormattedDate(loan.startDate)}
-              />
-            </Row>
-            <Row>
-              <FormReadOnlyGroup
-                name="deliveryDate"
-                label="Fecha de entrega"
-                value={toFormattedDate(loan.deliveryDate)}
-              />
-            </Row>
-          </Fieldset>
-        </ViewMore>
       </MasterDetailLayout.Detail>
     </MasterDetailLayout>
   )

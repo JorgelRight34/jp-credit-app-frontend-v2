@@ -55,7 +55,7 @@ const ProfilePage = ({ profile }: { profile: Profile }) => {
       <TabsRouter>
         <TabsList>
           <Tab index={0}>Resumen</Tab>
-          <Tab index={1}>Archivos</Tab>
+          <Tab index={1}>Documentos</Tab>
         </TabsList>
         <TabPanel index={0}>
           <ProfileOverview profile={profile} />

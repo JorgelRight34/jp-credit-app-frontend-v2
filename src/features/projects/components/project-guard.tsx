@@ -15,7 +15,7 @@ const ProjectGuard = ({ projectId, children }: PropsWithProjectId) => {
       secondaryLabel="Seleccionar proyecto"
       secondaryIcon={SearchIcon}
       createLink="/projects/create"
-      createLabel="Crear Proyecto"
+      createLabel="Crear proyecto"
     />
   )
 }

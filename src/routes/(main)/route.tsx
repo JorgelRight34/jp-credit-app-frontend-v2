@@ -5,7 +5,7 @@ import {
   redirect,
 } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
-import { BottomNavbar, Navbar } from '@/components'
+import { BottomNavbar, Navbar, VisibleFrom } from '@/components'
 import { CookieService } from '@/lib/services/cookieService'
 import { getAuthorizationFromClient, isJwtValid } from '@/lib/utils/auth-utils'
 import { getCurrentUser } from '@/features/auth/services/authService'
@@ -54,15 +54,17 @@ function RouteComponentInner() {
 
   return (
     <div className="relative flex h-[100dvh] flex-col md:flex-row">
-      <div className="hidden h-full w-full p-0 shadow-sm md:block md:w-2/14">
+      <div className="hidden h-full w-full p-0 shadow-sm md:block md:w-2/15">
         <Navbar user={user!} />
       </div>
       <div className="bg-background flex flex-1 flex-col overflow-y-auto p-0 [scrollbar-gutter:stable]">
         <Outlet />
       </div>
-      <div className="flex-shrink-0">
-        <BottomNavbar user={user!} />
-      </div>
+      <VisibleFrom breakpoint={768}>
+        <div className="flex-shrink-0">
+          <BottomNavbar user={user!} />
+        </div>
+      </VisibleFrom>
     </div>
   )
 }
