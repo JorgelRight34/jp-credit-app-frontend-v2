@@ -26,3 +26,4 @@ export * from "./components/data-table-container"
 
 
 export { default as DataTableBuilder } from './components/data-table-builder'
+export { default as DataTableContainerWithGuard } from './components/data-table-container-with-guard'

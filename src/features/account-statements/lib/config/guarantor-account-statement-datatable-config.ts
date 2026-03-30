@@ -1,22 +1,15 @@
 import { buildDateDataCell, buildLinkDataCell, DataTableConfig, getFooterTotalAsCurrency } from "@/components";
 import { buildLoanLabelById, getLoans, Loan } from "@/features/loans";
+import { buildProfileFullName } from "@/features/profiles";
 import { toCurrency } from "@/lib/utils";
 
-export const accountStatementDataTableConfig: DataTableConfig<Loan> = {
+export const guarantorAccountStatementDataTableConfig: DataTableConfig<Loan> = {
     columns: [
         {
             accessorKey: "startDate",
             header: "FECHA",
             enableSorting: true,
             cell: ({ row }) => buildDateDataCell(row.original.startDate),
-        },
-        {
-            accessorKey: "projectId",
-            header: "PROYECTO",
-            cell: ({ row }) => buildLinkDataCell(`Proyecto No. ${row.original.projectId}`, {
-                to: "/projects",
-                search: { projectId: row.original.projectId }
-            })
         },
         {
             accessorKey: "id",
@@ -28,11 +21,9 @@ export const accountStatementDataTableConfig: DataTableConfig<Loan> = {
             })
         },
         {
-            accessorKey: "approvedAmount",
-            header: "MONTO APROBADO",
-            enableSorting: true,
-            cell: ({ row }) => toCurrency(row.original.approvedAmount),
-            footer: (info) => getFooterTotalAsCurrency(info, "approvedAmount"),
+            accessorKey: "disbursedAmount",
+            header: "DESEMBOLSADO",
+            cell: ({ row }) => toCurrency(row.original.disbursedAmount)
         },
         {
             accessorKey: "principalBalance",
@@ -49,10 +40,13 @@ export const accountStatementDataTableConfig: DataTableConfig<Loan> = {
             footer: (info) => getFooterTotalAsCurrency(info, "interestBalance"),
         },
         {
-            accessorKey: "lastTransactionDate",
-            header: "FECHA ULT. MOV.",
+            accessorFn: (l) => l.client.firstName,
+            header: "CLIENTE",
             enableSorting: true,
-            cell: ({ row }) => buildDateDataCell(row.original.lastTransactionDate),
+            cell: ({ row }) => buildLinkDataCell(buildProfileFullName(row.original.client), {
+                to: "/profiles/$id",
+                params: { id: row.original.clientId.toString() }
+            }),
         }
     ],
     loader: getLoans

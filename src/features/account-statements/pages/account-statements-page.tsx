@@ -1,10 +1,8 @@
 import {
   AccountStatementsIcon,
-  AllIcon,
   BreadcrumbsByRoute,
   BreadcrumbSpec,
   ClientIcon,
-  DataTableContainer,
   GuarantorIcon,
   PageRouterLayout,
   Tab,
@@ -12,14 +10,8 @@ import {
   TabsList,
   TabsRouter,
 } from '@/components'
-import {
-  accountStatementSearchConfig,
-  clientAccountStatementSearchConfig,
-  guarantorAccountStatementSearchConfig,
-} from '../lib/config/account-statement-search-config'
-import { accountStatementDataTableConfig } from '../lib/config/account-statement-datatable-config'
-import { accountStatementsQueryKey } from '../lib/query-keys'
-import { clientAccountStatementDataTableConfig } from '../lib/config/client-account-statements-datatable-config'
+import ClientAccountStatementsDataTable from '../components/client-account-statements-datatable'
+import GuarantorAccountStatementsDataTable from '../components/guarantor-account-statements-datatable'
 
 const breadcrumb: BreadcrumbSpec = {
   title: 'Estados de cuenta',
@@ -27,7 +19,6 @@ const breadcrumb: BreadcrumbSpec = {
 }
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = [
-  [{ title: 'Todos', icon: AllIcon }],
   [{ title: 'Clientes', icon: ClientIcon }],
   [{ title: 'Garantes', icon: GuarantorIcon }],
 ]
@@ -43,30 +34,14 @@ const AccountStatementsPage = () => {
     >
       <TabsRouter>
         <TabsList>
-          <Tab index={0}>Todos</Tab>
-          <Tab index={1}>Clientes</Tab>
-          <Tab index={2}>Garantes</Tab>
+          <Tab index={0}>Clientes</Tab>
+          <Tab index={1}>Garantes</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <DataTableContainer
-            searchConfig={accountStatementSearchConfig}
-            datatableConfig={accountStatementDataTableConfig}
-            cacheKey={[accountStatementsQueryKey]}
-          />
+          <ClientAccountStatementsDataTable />
         </TabPanel>
         <TabPanel index={1}>
-          <DataTableContainer
-            searchConfig={clientAccountStatementSearchConfig}
-            datatableConfig={clientAccountStatementDataTableConfig}
-            cacheKey={[accountStatementsQueryKey, 'clients']}
-          />
-        </TabPanel>
-        <TabPanel index={2}>
-          <DataTableContainer
-            searchConfig={guarantorAccountStatementSearchConfig}
-            datatableConfig={accountStatementDataTableConfig}
-            cacheKey={[accountStatementsQueryKey, 'guarantors']}
-          />
+          <GuarantorAccountStatementsDataTable />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
