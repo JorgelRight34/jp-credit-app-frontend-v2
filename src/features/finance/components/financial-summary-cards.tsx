@@ -38,7 +38,7 @@ const FinancialSummaryCard = ({
       legendClassName="text-center"
     >
       <section className="flex h-full flex-1 flex-col p-3 px-6">
-        <Paragraph className="text-accent py-2 text-center text-4xl whitespace-nowrap">
+        <Paragraph className="text-accent py-2 text-center text-2xl whitespace-nowrap">
           {toCurrency(value)}
         </Paragraph>
       </section>
@@ -61,7 +61,7 @@ FinancialSummaryCardsLayout.Main = ({ children }: PropsWithChildren) => {
 }
 
 FinancialSummaryCardsLayout.Aside = ({ children }: PropsWithChildren) => {
-  return <div className="w-3/12 px-3">{children}</div>
+  return <div className="w-3/12 pl-3">{children}</div>
 }
 
 export default FinancialSummaryCards

@@ -1,4 +1,4 @@
-import { buildDateDataCell, buildDateGroupingFooter, buildLinkDataCell, buildTotalRowsFooter, Column, getFooterTotalAsCurrency } from "@/components";
+import { buildDateDataCell, buildDateGroupingCell, buildDateGroupingFooter, buildLinkDataCell, buildTotalRowsFooter, Column, getFooterTotalAsCurrency } from "@/components";
 import { toCurrency } from "@/lib/utils";
 import { FinancialBreakdown } from "../../models/financialBreakdown";
 import { Projection } from "../../models/projection";
@@ -8,16 +8,18 @@ import { TimeUnit } from "@/models";
 import { LoanProjection } from "../../models/projectionResult";
 
 export const buildFinancialBreakdownColumns = (
-    startDate?: string,
     endDate?: string,
     timeDiff?: TimeUnit
-): Array<Column<FinancialBreakdown>> => [
+): Array<Column<FinancialBreakdown>> => {
+    const endDateObj = endDate ? new Date(endDate) : endDate;
+
+    return [
         {
             accessorKey: "date",
-            header: "Fecha",
+            header: "FECHA",
             enableSorting: true,
-            cell: ({ row }) => buildDateDataCell(row.original.date),
-            footer: buildDateGroupingFooter(r => r.date, startDate, endDate, timeDiff)
+            cell: ({ row }) => buildDateGroupingCell(row.original.date, endDateObj as Date, timeDiff),
+            footer: buildTotalRowsFooter("Transacciones")
         },
         {
             accessorKey: "capital",
@@ -38,6 +40,7 @@ export const buildFinancialBreakdownColumns = (
             footer: (info) => getFooterTotalAsCurrency(info, "fee"),
         },
     ]
+}
 
 
 export const buildProjectionTableColumns = (

@@ -2,7 +2,7 @@ import {
   FormHtmlDisplayGroup,
   FormReadOnlyGroup,
   OverviewLayout,
-  Row,
+  LayoutRow,
 } from '@/components'
 import { FollowUp } from '../models/followUp'
 import { buildLoanLabelById } from '@/features/loans'
@@ -12,10 +12,10 @@ import { buildProfileFullName } from '@/features/profiles'
 const FollowUpOverview = ({ followUp }: { followUp: FollowUp }) => {
   return (
     <OverviewLayout>
-      <Row>
+      <LayoutRow>
         <FormReadOnlyGroup name="title" label="Título" value={followUp.title} />
-      </Row>
-      <Row>
+      </LayoutRow>
+      <LayoutRow>
         <FormReadOnlyGroup
           name="loanId"
           label="Préstamo"
@@ -26,15 +26,15 @@ const FollowUpOverview = ({ followUp }: { followUp: FollowUp }) => {
           label="Cliente"
           value={buildProfileFullName(followUp.client)}
         />
-      </Row>
-      <Row>
+      </LayoutRow>
+      <LayoutRow>
         <FormReadOnlyGroup
           name="date"
           label="Fecha"
           value={toFormattedDate(followUp.date)}
           disabled
         />
-      </Row>
+      </LayoutRow>
       <FormHtmlDisplayGroup name="body" label="Cuerpo" value={followUp.body} />
     </OverviewLayout>
   )

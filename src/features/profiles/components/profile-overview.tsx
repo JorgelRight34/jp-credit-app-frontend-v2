@@ -3,7 +3,7 @@ import { getDefaultProfilePicModel } from '../lib/constants'
 import type { Profile } from '../models/profile'
 import {
   FormReadOnlyGroup,
-  Row,
+  LayoutRow,
   PhotoGallery,
   ViewMore,
   OverviewLayout,
@@ -21,7 +21,7 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
           <ProfilePhotoGallery profile={profile} />
         </div>
         <aside className="flex w-full flex-col gap-6 md:w-7/12">
-          <Row>
+          <LayoutRow>
             <FormReadOnlyGroup
               label="Nombres"
               name="firstName"
@@ -32,8 +32,8 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
               name="lastName"
               value={profile.lastName}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               label="Género"
               name="gender"
@@ -44,8 +44,8 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
               name="dateOfBirth"
               value={profile.dateOfBirth}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup label="Cédula" name="dni" value={profile.dni} />
             <FormReadOnlyGroup
               label="Email"
@@ -53,8 +53,8 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
               value={profile.email}
               optional
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               label="Teléfono casa"
               name="landline"
@@ -67,11 +67,11 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
               value={profile.phoneNumber}
               optional
             />
-          </Row>
+          </LayoutRow>
         </aside>
       </div>
       <ViewMore>
-        <Row>
+        <LayoutRow>
           <FormReadOnlyGroup
             label="Ingreso"
             name="createdAt"
@@ -85,7 +85,7 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
             }
             optional
           />
-        </Row>
+        </LayoutRow>
       </ViewMore>
       <FormReadOnlyGroup label="Dirección" name="address" optional />
     </OverviewLayout>

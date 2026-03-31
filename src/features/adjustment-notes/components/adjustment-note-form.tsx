@@ -37,11 +37,11 @@ const AdjustmentNoteForm = (
             input={LoanSearchInput}
           />
         </FormRow>
-        <FormRow>
-          <PickerInputDataController
-            ref={loanPickerInputDataControllerRef}
-            render={(loan) => (
-              <>
+        <PickerInputDataController
+          ref={loanPickerInputDataControllerRef}
+          render={(loan) => (
+            <>
+              <FormRow>
                 <FormReadOnlyGroup
                   name="principalBalance"
                   label="Balance capital"
@@ -49,15 +49,29 @@ const AdjustmentNoteForm = (
                   disabled
                 />
                 <FormReadOnlyGroup
-                  name="interestBalance"
-                  label="Balance interés"
-                  value={toCurrency(loan?.interestBalance ?? 0)}
+                  name="penaltyBalance"
+                  value={toCurrency(loan?.penaltyBalance ?? 0)}
+                  label="Mora"
                   disabled
                 />
-              </>
-            )}
-          />
-        </FormRow>
+              </FormRow>
+              <FormRow>
+                <FormReadOnlyGroup
+                  name="approvedAmount"
+                  value={toCurrency(loan?.approvedAmount ?? 0)}
+                  label="Monto préstamo"
+                  disabled
+                />
+                <FormReadOnlyGroup
+                  name="paymentValue"
+                  label="Valor cuota"
+                  value={toCurrency(loan?.paymentValue ?? 0)}
+                  disabled
+                />
+              </FormRow>
+            </>
+          )}
+        />
         <FormRow>
           <FormGroup name="amount" label="Monto" input={CurrencyInput} />
         </FormRow>

@@ -1,4 +1,11 @@
-import { createContext, PropsWithChildren, ReactNode, useContext } from 'react'
+import {
+  createContext,
+  Dispatch,
+  PropsWithChildren,
+  ReactNode,
+  SetStateAction,
+  useContext,
+} from 'react'
 import type { Query } from '../models/query'
 import { useSearchContainer } from '../hooks/useSearchContainer'
 
@@ -58,7 +65,7 @@ export const useSearchFormSubmit = <TQuery extends Query>() => {
     )
   }
 
-  return ctx as (q: TQuery) => Promise<TQuery>
+  return ctx as Dispatch<SetStateAction<TQuery>>
 }
 
 export const SearchFormValueConsumer = <TQuery extends Query>({

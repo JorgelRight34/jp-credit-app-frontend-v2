@@ -16,10 +16,11 @@ const NavbarLinkContainer = ({
       {...props}
     >
       <div
-        className={clsx('nav-link-option p-0 hover:!shadow-sm', className, {
-          'nav-link-active text-white shadow-sm': isActive,
-          'text-muted': !isActive,
-        })}
+        className={clsx(
+          'nav-link-option p-0 hover:!shadow-sm',
+          className,
+          isActive ? 'nav-link-active text-white shadow-sm' : 'text-muted',
+        )}
       >
         {children}
       </div>

@@ -3,7 +3,7 @@ import {
   FormHtmlDisplayGroup,
   FormReadOnlyGroup,
   OverviewLayout,
-  Row,
+  LayoutRow,
 } from '@/components'
 import { AdjustmentNote } from '../models/adjustmentNote'
 import { buildLoanLabelById } from '@/features/loans'
@@ -18,7 +18,7 @@ const AdjustmentNoteOverview = ({
   return (
     <OverviewLayout>
       <Fieldset legend="Contrato">
-        <Row>
+        <LayoutRow>
           <FormReadOnlyGroup
             name="loanId"
             label="Préstamo"
@@ -29,10 +29,10 @@ const AdjustmentNoteOverview = ({
             label="Cliente"
             value={buildProfileFullName(adjustmentNote.client)}
           />
-        </Row>
+        </LayoutRow>
       </Fieldset>
       <Fieldset legend="Detalles">
-        <Row>
+        <LayoutRow>
           <FormReadOnlyGroup
             name="amount"
             label="Monto"
@@ -43,7 +43,7 @@ const AdjustmentNoteOverview = ({
             label="Fecha"
             value={toFormattedDate(adjustmentNote.date)}
           />
-        </Row>
+        </LayoutRow>
       </Fieldset>
       <FormHtmlDisplayGroup
         name="description"

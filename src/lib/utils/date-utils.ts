@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime"
-import type { Row } from "@/components";
 import "dayjs/locale/es"
 import { TimeUnit } from "@/models";
 import utc from 'dayjs/plugin/utc'
+import { Row } from "@/components";
 
 dayjs.extend(utc)
 dayjs.extend(relativeTime)

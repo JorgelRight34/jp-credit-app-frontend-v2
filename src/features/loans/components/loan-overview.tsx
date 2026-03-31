@@ -4,7 +4,7 @@ import {
   MasterDetailLayout,
   FormReadOnlyGroup,
   FormReadonlyGroupLabelLink,
-  Row,
+  LayoutRow,
   ViewMore,
 } from '@/components'
 import { PropsWithLoan } from '../models/loan'
@@ -20,7 +20,7 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
     <MasterDetailLayout>
       <MasterDetailLayout.Master>
         <Fieldset legend="Finanzas">
-          <Row>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="approvedAmount"
               label="Monto aprobado"
@@ -31,8 +31,8 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
               label="Tasa de interés"
               value={toPercentage(loan.annualInterestRate)}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="paymentFrequency"
               label="Frecuencia de pago"
@@ -43,10 +43,10 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
               label="Número de pagos"
               value={loan.numberOfPayments}
             />
-          </Row>
+          </LayoutRow>
         </Fieldset>
         <Fieldset legend="Balances">
-          <Row>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="principalBalance"
               label="Balance capital"
@@ -57,8 +57,8 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
               label="Balance interés"
               value={toCurrency(loan.interestBalance)}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="feePaid"
               label="Mora pagada"
@@ -69,24 +69,24 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
               label="Mora total"
               value={toCurrency(loan.penaltyBalance)}
             />
-          </Row>
+          </LayoutRow>
         </Fieldset>
         <ViewMore>
           <Fieldset legend="Fechas">
-            <Row>
+            <LayoutRow>
               <FormReadOnlyGroup
                 name="startDate"
                 label="Fecha de inicio"
                 value={toFormattedDate(loan.startDate)}
               />
-            </Row>
-            <Row>
+            </LayoutRow>
+            <LayoutRow>
               <FormReadOnlyGroup
                 name="deliveryDate"
                 label="Fecha de entrega"
                 value={toFormattedDate(loan.deliveryDate)}
               />
-            </Row>
+            </LayoutRow>
           </Fieldset>
         </ViewMore>
         <FormHtmlDisplayGroup
@@ -98,7 +98,7 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
       </MasterDetailLayout.Master>
       <MasterDetailLayout.Detail>
         <Fieldset legend="Miembros">
-          <Row>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="client"
               label={
@@ -111,8 +111,8 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
               }
               value={getProfileInvertedName(loan.client)}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="guarantor"
               label={
@@ -131,8 +131,8 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
                 loan.guarantor ? getProfileInvertedName(loan.guarantor) : null
               }
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="loanOfficer"
               label={
@@ -153,31 +153,31 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
                   : null
               }
             />
-          </Row>
+          </LayoutRow>
         </Fieldset>
         <Fieldset legend="Detalles">
-          <Row>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="status"
               label="Estado"
               value={loanStatusSpanishTranslations[loan.status]}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="loanPurpose"
               label="Destino"
               value={loan.loanPurpose}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="legacyId"
               label="Id legado"
               value={loan.legacyId}
               optional
             />
-          </Row>
+          </LayoutRow>
         </Fieldset>
       </MasterDetailLayout.Detail>
     </MasterDetailLayout>

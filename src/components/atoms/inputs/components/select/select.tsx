@@ -56,7 +56,6 @@ const SelectInput = ({
         readOnly={readOnly}
         {...getIconInputSlot(icon)}
       >
-        {allowNoOption && <MenuItem value="">---</MenuItem>}
         {options &&
           options.map((option, key) => (
             <MenuItem key={key} value={option[0] ?? ''}>

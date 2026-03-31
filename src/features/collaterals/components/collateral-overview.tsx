@@ -9,7 +9,7 @@ import {
   FormHtmlDisplayGroup,
   FormReadOnlyGroup,
   FormReadonlyGroupLabelLink,
-  Row,
+  LayoutRow,
   OverviewLayout,
   PhotoGallery,
   ViewMore,
@@ -29,14 +29,14 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
           <CollateralPhotoGallery collateral={collateral} />
         </div>
         <aside className="flex w-full flex-col gap-6 md:w-6/12">
-          <Row>
+          <LayoutRow>
             <FormReadOnlyGroup
               label="Título"
               name="title"
               value={collateral.title}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               label="Valor"
               name="value"
@@ -54,8 +54,8 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
               }
               value={buildLoanLabelById(collateral.loanId)}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="condition"
               label="Condición"
@@ -66,8 +66,8 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
               label="Tipo"
               value={collateralTypeTranslations[collateral.type]}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="location"
               label="Localidad"
@@ -84,11 +84,11 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
               }
               optional
             />
-          </Row>
+          </LayoutRow>
         </aside>
       </div>
       <ViewMore>
-        <Row>
+        <LayoutRow>
           <FormReadOnlyGroup
             name="status"
             label="Estado"
@@ -101,8 +101,8 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
               collateral.sellDate ? toFormattedDate(collateral.sellDate) : '---'
             }
           />
-        </Row>
-        <Row>
+        </LayoutRow>
+        <LayoutRow>
           <FormReadOnlyGroup
             name="soldFor"
             label="Vendido por"
@@ -118,9 +118,9 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
                 : '---'
             }
           />
-        </Row>
+        </LayoutRow>
 
-        <Row>
+        <LayoutRow>
           <FormReadOnlyGroup
             name="createdAt"
             label="Fecha de creación"
@@ -131,7 +131,7 @@ const CollateralOverview = ({ collateral }: CollateralOverviewProps) => {
             label="Última actualización"
             value={toFormattedDate(collateral.updatedAt)}
           />
-        </Row>
+        </LayoutRow>
       </ViewMore>
       <FormHtmlDisplayGroup
         name="description"

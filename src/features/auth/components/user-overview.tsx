@@ -1,4 +1,9 @@
-import { Fieldset, FormReadOnlyGroup, Row, OverviewLayout } from '@/components'
+import {
+  Fieldset,
+  FormReadOnlyGroup,
+  LayoutRow,
+  OverviewLayout,
+} from '@/components'
 import { getDateLabelSinceDate } from '@/lib/utils'
 import { PropsWithUser } from '@/models/user'
 
@@ -6,7 +11,7 @@ const UserOverview = ({ user }: PropsWithUser) => {
   return (
     <OverviewLayout>
       <Fieldset legend="Nombres">
-        <Row>
+        <LayoutRow>
           <FormReadOnlyGroup
             label="Primer nombre"
             name="firstName"
@@ -17,18 +22,18 @@ const UserOverview = ({ user }: PropsWithUser) => {
             name="lastName"
             value={user.lastName}
           />
-        </Row>
+        </LayoutRow>
       </Fieldset>
       <Fieldset legend="Datos">
-        <Row>
+        <LayoutRow>
           <FormReadOnlyGroup
             label="Usuario"
             name="username"
             value={user.username}
           />
           <FormReadOnlyGroup label="Email" name="email" value={user.email} />
-        </Row>
-        <Row>
+        </LayoutRow>
+        <LayoutRow>
           <FormReadOnlyGroup
             label="Estado"
             name="isActive"
@@ -39,7 +44,7 @@ const UserOverview = ({ user }: PropsWithUser) => {
             label="Ultimo acceso"
             value={getDateLabelSinceDate(user.lastLogin)}
           />
-        </Row>
+        </LayoutRow>
       </Fieldset>
     </OverviewLayout>
   )

@@ -1,8 +1,8 @@
-import { Row } from '@/components/molecules'
+import { LayoutRow } from '@/components/molecules'
 import type { PropsWithChildren } from 'react'
 
-const FormRow = ({ children }: PropsWithChildren) => {
-  return <Row>{children}</Row>
+const FormLayoutRow = ({ children }: PropsWithChildren) => {
+  return <LayoutRow>{children}</LayoutRow>
 }
 
-export default FormRow
+export default FormLayoutRow

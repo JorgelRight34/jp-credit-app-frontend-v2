@@ -14,9 +14,11 @@ const getFinanceReport = async (
 ): Promise<FinanceReport<Transaction>> => {
     const { data } = await api.get(`${baseUrl}/${type}`, {
         params: {
-            start: params.startDate,
-            end: params.endDate,
+            startDate: params.startDate,
+            endDate: params.endDate,
             timeDiff: params.interval,
+            page: params.page,
+            limit: params.limit
         },
     });
 
@@ -62,12 +64,17 @@ export const getExpenses = async (query: FinanceQuery) => {
 }
 
 export const getFinanceEndpointParams = (params: FinanceQuery, other?: object) => ({
-    start: params.startDate,
-    end: params.endDate,
+    startDate: params.startDate,
+    endDate: params.endDate,
     timeDiff: params.interval,
     ...params,
     ...other
 })
+
+export const getFinancialBreakdownSummary = async (params: FinanceQuery): Promise<FinancialBreakdown> => {
+    const { data } = await api.get(`${baseUrl}/summary`, { params: getFinanceEndpointParams(params) });
+    return data;
+}
 
 export const exportIncomes: ExportHandler<FinanceQuery> = async (body, params): Promise<Blob> => {
     const { data } = await api.get(`${baseUrl}/incomes/export`, {

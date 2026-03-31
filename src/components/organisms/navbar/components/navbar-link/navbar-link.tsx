@@ -11,14 +11,12 @@ export interface NavbarLinkProps extends Partial<LinkProps> {
   children?: ReactNode
   option: NavItem
   className?: string
-  onClick?: () => void
   onExpand?: () => void
 }
 
 const NavbarLink = ({
   option,
   className,
-  onClick,
   onExpand,
   ...linkProps
 }: NavbarLinkProps) => {
@@ -27,7 +25,6 @@ const NavbarLink = ({
       {({ isActive }) => (
         <NavbarLinkContainer
           option={option}
-          onClick={onClick}
           className={className}
           isActive={isActive}
         >
@@ -36,6 +33,7 @@ const NavbarLink = ({
               'bg-surface flex items-center p-2',
               isActive && 'text-active bg-active-transparent font-medium',
             )}
+            onClick={onExpand} // Expand after navigation
           >
             <div
               className={clsx(

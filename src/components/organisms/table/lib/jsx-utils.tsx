@@ -9,10 +9,16 @@ import {
   Link,
   TurnedInNotIcon,
 } from '@/components/atoms'
-import SafeHtml from '@/components/molecules/safe-html/safe-html'
 import { HeaderContext } from '@tanstack/react-table'
-import { DASHES, getDateGroupingLabel, getUTCDate } from '@/lib/utils'
+import {
+  DASHES,
+  getDateGroupingLabel,
+  getLocaleMonth,
+  getUTCDate,
+  toFormattedDate,
+} from '@/lib/utils'
 import { TimeUnit } from '@/models'
+import SafeHtml from '@/components/molecules/safe-html/safe-html'
 
 export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
   return (
@@ -53,6 +59,25 @@ export const buildDateGroupingFooter =
       maxDate: getUTCDate(maxDate).toDate(),
     })
   }
+
+export const buildDateGroupingCell = (
+  date: Date | string,
+  maxDate?: Date,
+  timeUnit?: TimeUnit,
+) => {
+  switch (timeUnit) {
+    case 365:
+      return new Date(date).getUTCFullYear()
+    case 30:
+      const year = new Date(date).getUTCFullYear()
+      return (
+        getLocaleMonth(date) +
+        (maxDate && maxDate.getUTCFullYear() > year ? ` ${year}` : '')
+      )
+    default:
+      return toFormattedDate(date)
+  }
+}
 
 export const buildTotalRowsFooter =
   <T,>(suffix: string) =>

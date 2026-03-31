@@ -4,7 +4,7 @@ import {
   MasterDetailLayout,
   FormReadOnlyGroup,
   FormReadonlyGroupLabelLink,
-  Row,
+  LayoutRow,
 } from '@/components'
 import { Transaction } from '../models/transaction'
 import { buildLoanLabelById } from '@/features/loans'
@@ -16,7 +16,7 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
     <MasterDetailLayout>
       <MasterDetailLayout.Master>
         <Fieldset legend="Desglose">
-          <Row>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="value"
               label="Monto"
@@ -31,8 +31,8 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
                   : 'N/A'
               }
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="capitalValue"
               label="Capital"
@@ -43,8 +43,8 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
               label="Interés"
               value={toCurrency(transaction.interestValue)}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="penaltyFee"
               label="Mora"
@@ -55,10 +55,10 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
               label="Mora pendiente pagada"
               value={toCurrency(transaction.feePaid)}
             />
-          </Row>
+          </LayoutRow>
         </Fieldset>
         <Fieldset legend="Autores">
-          <Row>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="actor"
               label={
@@ -91,7 +91,7 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
               }
               value={transaction.createdByUsername}
             />
-          </Row>
+          </LayoutRow>
         </Fieldset>
         <FormHtmlDisplayGroup
           name="description"
@@ -101,7 +101,7 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
       </MasterDetailLayout.Master>
       <MasterDetailLayout.Detail>
         <Fieldset legend="Datos">
-          <Row>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="id"
               label={
@@ -114,8 +114,8 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
               }
               value={buildLoanLabelById(transaction.loanId)}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="client"
               label={
@@ -128,29 +128,29 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
               }
               value={buildProfileFullName(transaction.client)}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="date"
               label="Fecha"
               value={toFormattedDate(transaction.date)}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="lateDays"
               label="Atraso"
               value={`${transaction.lateDays} días`}
             />
-          </Row>
-          <Row>
+          </LayoutRow>
+          <LayoutRow>
             <FormReadOnlyGroup
               name="legacyId"
               label="Id legado"
               value={transaction.legacyId}
               optional
             />
-          </Row>
+          </LayoutRow>
         </Fieldset>
       </MasterDetailLayout.Detail>
     </MasterDetailLayout>
