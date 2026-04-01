@@ -1,0 +1,10 @@
+import { TransactionsPage } from '@/features/transactions'
+import { createFileRoute } from '@tanstack/react-router'
+
+export const Route = createFileRoute('/(main)/(modules)/transactions/')({
+  component: RouteComponent,
+})
+
+function RouteComponent() {
+  return <TransactionsPage />
+}

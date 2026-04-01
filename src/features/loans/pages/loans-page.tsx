@@ -15,7 +15,6 @@ import {
 } from '@/components'
 import LoanDataTable from '../components/loan-datatable'
 import { LoanStatusMap } from '../models/loanStatus'
-import { PropsWithProjectId } from '@/features/projects'
 
 export const loanModuleBreadcrumb: BreadcrumbSpec = {
   title: 'Préstamos',
@@ -30,7 +29,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Saldados', icon: CheckCircleIcon }],
 ]
 
-const LoansPage = ({ projectId }: PropsWithProjectId) => {
+const LoansPage = () => {
   return (
     <PageRouterLayout
       title="Préstamos"
@@ -48,20 +47,16 @@ const LoansPage = ({ projectId }: PropsWithProjectId) => {
           <Tab index={3}>Saldados</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <LoanDataTable initialQuery={{ projectId }} />
+          <LoanDataTable />
         </TabPanel>
         <TabPanel index={1}>
-          <LoanDataTable
-            initialQuery={{ projectId, status: LoanStatusMap.active }}
-          />
+          <LoanDataTable initialQuery={{ status: LoanStatusMap.active }} />
         </TabPanel>
         <TabPanel index={2}>
-          <LoanDataTable
-            initialQuery={{ projectId, status: LoanStatusMap.inactive }}
-          />
+          <LoanDataTable initialQuery={{ status: LoanStatusMap.inactive }} />
         </TabPanel>
         <TabPanel index={3}>
-          <LoanDataTable initialQuery={{ projectId, maxPrincipalBalance: 0 }} />
+          <LoanDataTable initialQuery={{ maxPrincipalBalance: 0 }} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

@@ -17,7 +17,6 @@ import {
   DirectionsCarIcon,
   ErrorIcon,
   FlagIcon,
-  FolderOpenIcon,
   GrassIcon,
   GroupIcon,
   GroupsIcon,
@@ -30,6 +29,7 @@ import {
   PersonIcon,
   PlayCircleIcon,
   PrintIcon,
+  ProjectIcon,
   PublicIcon,
   QueryStatsIcon,
   ReportIcon,
@@ -230,14 +230,9 @@ export const transactionsNavItem: NavItem = {
 
 export const projectsNavItem: NavItem = {
   name: 'Proyectos',
-  icon: () => <FolderOpenIcon />,
-  route: '/projects',
+  icon: () => <ProjectIcon />,
+  route: '.',
   children: [
-    {
-      ...allRouteBase,
-      route: '/projects',
-      search: { tab: 0 },
-    },
     {
       name: 'Configuraciones',
       icon: () => <SettingsIcon />,

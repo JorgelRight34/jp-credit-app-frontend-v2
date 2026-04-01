@@ -16,7 +16,7 @@ const FinancialSummaryCards = ({
   className = 'flex-col',
 }: FinancialSummaryCardsProps) => {
   return (
-    <div className={`flex gap-3 ${className}`}>
+    <div className={`flex gap-6 ${className}`}>
       <FinancialSummaryCard title="Capital" value={capital} />
       <FinancialSummaryCard title="Interés" value={interest} />
       <FinancialSummaryCard title="Mora" value={fee} />

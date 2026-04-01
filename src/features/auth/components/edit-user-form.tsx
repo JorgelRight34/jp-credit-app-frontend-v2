@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
-import type { User } from '../../../models/user'
+import type { PropsWithUser, User } from '../../../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import {
@@ -20,10 +20,14 @@ import { usePermissionsForm } from '../hooks/usePermissionsForm'
 import PermissionsFormTransferList from './permissions-form-transfer-list'
 import ResetPasswordForm from './reset-password-form'
 import UserRolesTransferList from './user-roles-transfer-list'
+import {
+  ProjectUserTransferList,
+  useProjectUserForm,
+} from '@/features/projects'
 
-type EditUserFormProps = DataModuleFormProps<User, UserFormValues> & {
-  user: User
-}
+type EditUserFormProps = PropsWithUser<
+  DataModuleFormProps<User, UserFormValues>
+>
 
 const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
   const form = useUserForm({
@@ -46,7 +50,8 @@ const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
         <Tab index={0}>Datos</Tab>
         <Tab index={1}>Permisos</Tab>
         <Tab index={2}>Roles</Tab>
-        <Tab index={3}>Contraseña</Tab>
+        <Tab index={3}>Proyectos</Tab>
+        <Tab index={4}>Contraseña</Tab>
       </TabsList>
       <TabPanel index={0}>
         <FormContainer form={form}>
@@ -60,18 +65,21 @@ const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
         <UserRolesForm user={user} />
       </TabPanel>
       <TabPanel index={3}>
+        <ProjectUserForm user={user} />
+      </TabPanel>
+      <TabPanel index={4}>
         <ResetPasswordForm user={user} />
       </TabPanel>
     </Tabs>
   )
 }
 
-const PermissionsForm = ({ user }: { user: User }) => {
+const PermissionsForm = ({ user }: PropsWithUser) => {
   const form = usePermissionsForm({
     handler: updateUserClaims,
     defaultValues: {
       id: user.id,
-      claims: user.claims.map(claimPairToString),
+      claims: user.claims.map((c) => c.claimValue),
       roles: [],
     },
   })
@@ -91,7 +99,7 @@ const PermissionsForm = ({ user }: { user: User }) => {
   )
 }
 
-const UserRolesForm = ({ user }: EditUserFormProps) => {
+const UserRolesForm = ({ user }: PropsWithUser) => {
   const form = useUserRolesForm({ user })
 
   return (
@@ -102,6 +110,29 @@ const UserRolesForm = ({ user }: EditUserFormProps) => {
             name="roles"
             className="max-h-96"
             as={UserRolesTransferList}
+          />
+        </Suspense>
+      </Form>
+    </FormContainer>
+  )
+}
+
+const ProjectUserForm = ({ user }: PropsWithUser) => {
+  const form = useProjectUserForm({
+    defaultValues: {
+      userId: user.id,
+      projectIds: user.projects.map((p) => p.id),
+    },
+  })
+
+  return (
+    <FormContainer form={form}>
+      <Form form={form}>
+        <Suspense fallback="...">
+          <FormInput
+            name="projectIds"
+            className="max-h-96"
+            as={ProjectUserTransferList}
           />
         </Suspense>
       </Form>

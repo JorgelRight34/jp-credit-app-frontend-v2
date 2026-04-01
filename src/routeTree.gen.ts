@@ -15,12 +15,19 @@ import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as mainIndexRouteImport } from './routes/(main)/index'
 import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/route'
 import { Route as mainResetPasswordIndexRouteImport } from './routes/(main)/reset-password/index'
-import { Route as mainmodulesprojectGuardRouteRouteImport } from './routes/(main)/(modules)/(project-guard)/route'
+import { Route as mainmodulesTransactionsIndexRouteImport } from './routes/(main)/(modules)/transactions/index'
 import { Route as mainmodulesReportsIndexRouteImport } from './routes/(main)/(modules)/reports/index'
-import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(modules)/projects/index'
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
+import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
+import { Route as mainmodulesFollowUpsIndexRouteImport } from './routes/(main)/(modules)/follow-ups/index'
+import { Route as mainmodulesCollateralsIndexRouteImport } from './routes/(main)/(modules)/collaterals/index'
 import { Route as mainmodulesAmortizationsIndexRouteImport } from './routes/(main)/(modules)/amortizations/index'
+import { Route as mainmodulesAdjustmentNotesIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/index'
+import { Route as mainmodulesAccountStatementsIndexRouteImport } from './routes/(main)/(modules)/account-statements/index'
 import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
+import { Route as mainmodulesTransactionsPeriodsIndexRouteImport } from './routes/(main)/(modules)/transactions/periods/index'
+import { Route as mainmodulesTransactionsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/create/index'
+import { Route as mainmodulesTransactionsIdIndexRouteImport } from './routes/(main)/(modules)/transactions/$id/index'
 import { Route as mainmodulesReportsGenerateIndexRouteImport } from './routes/(main)/(modules)/reports/generate/index'
 import { Route as mainmodulesReportsCreateIndexRouteImport } from './routes/(main)/(modules)/reports/create/index'
 import { Route as mainmodulesReportsIdIndexRouteImport } from './routes/(main)/(modules)/reports/$id/index'
@@ -28,43 +35,34 @@ import { Route as mainmodulesProjectsSettingsIndexRouteImport } from './routes/(
 import { Route as mainmodulesProjectsCreateIndexRouteImport } from './routes/(main)/(modules)/projects/create/index'
 import { Route as mainmodulesProfilesCreateIndexRouteImport } from './routes/(main)/(modules)/profiles/create/index'
 import { Route as mainmodulesProfilesIdIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/index'
-import { Route as mainmodulesprojectGuardTransactionsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/index'
-import { Route as mainmodulesprojectGuardLoansIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/index'
-import { Route as mainmodulesprojectGuardFollowUpsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/follow-ups/index'
-import { Route as mainmodulesprojectGuardCollateralsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/collaterals/index'
-import { Route as mainmodulesprojectGuardAdjustmentNotesIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/adjustment-notes/index'
-import { Route as mainmodulesprojectGuardAccountStatementsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/account-statements/index'
+import { Route as mainmodulesLoansPurpousesIndexRouteImport } from './routes/(main)/(modules)/loans/purpouses/index'
+import { Route as mainmodulesLoansCreateIndexRouteImport } from './routes/(main)/(modules)/loans/create/index'
+import { Route as mainmodulesLoansIdIndexRouteImport } from './routes/(main)/(modules)/loans/$id/index'
+import { Route as mainmodulesFollowUpsCreateIndexRouteImport } from './routes/(main)/(modules)/follow-ups/create/index'
+import { Route as mainmodulesFollowUpsIdIndexRouteImport } from './routes/(main)/(modules)/follow-ups/$id/index'
+import { Route as mainmodulesFinanceProjectionsIndexRouteImport } from './routes/(main)/(modules)/finance/projections/index'
+import { Route as mainmodulesFinanceIncomesIndexRouteImport } from './routes/(main)/(modules)/finance/incomes/index'
+import { Route as mainmodulesFinanceExpensesIndexRouteImport } from './routes/(main)/(modules)/finance/expenses/index'
+import { Route as mainmodulesCollateralsCreateIndexRouteImport } from './routes/(main)/(modules)/collaterals/create/index'
+import { Route as mainmodulesCollateralsIdIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/index'
+import { Route as mainmodulesAdjustmentNotesCreateIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/create/index'
+import { Route as mainmodulesAdjustmentNotesIdIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/$id/index'
+import { Route as mainmodulesTransactionsReceiptReportTemplateCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/receipt-report-template/create/index'
+import { Route as mainmodulesTransactionsPeriodsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/periods/create/index'
 import { Route as mainmodulesReportsIdEditIndexRouteImport } from './routes/(main)/(modules)/reports/$id/edit/index'
 import { Route as mainmodulesProfilesIdEditIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/edit/index'
+import { Route as mainmodulesLoansPurpousesCreateIndexRouteImport } from './routes/(main)/(modules)/loans/purpouses/create/index'
+import { Route as mainmodulesLoansIdSettingsIndexRouteImport } from './routes/(main)/(modules)/loans/$id/settings/index'
+import { Route as mainmodulesFollowUpsIdEditIndexRouteImport } from './routes/(main)/(modules)/follow-ups/$id/edit/index'
+import { Route as mainmodulesCollateralsIdSettingsIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/settings/index'
+import { Route as mainmodulesCollateralsIdEditIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/edit/index'
 import { Route as mainmodulesAccessControlUsersCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/users/create/index'
 import { Route as mainmodulesAccessControlUsersUsernameIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/index'
 import { Route as mainmodulesAccessControlRolesCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/create/index'
 import { Route as mainmodulesAccessControlRolesIdIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/index'
-import { Route as mainmodulesprojectGuardTransactionsPeriodsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/periods/index'
-import { Route as mainmodulesprojectGuardTransactionsCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/create/index'
-import { Route as mainmodulesprojectGuardTransactionsIdIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/$id/index'
-import { Route as mainmodulesprojectGuardLoansPurpousesIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/purpouses/index'
-import { Route as mainmodulesprojectGuardLoansCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/create/index'
-import { Route as mainmodulesprojectGuardLoansIdIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/$id/index'
-import { Route as mainmodulesprojectGuardFollowUpsCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/follow-ups/create/index'
-import { Route as mainmodulesprojectGuardFollowUpsIdIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/follow-ups/$id/index'
-import { Route as mainmodulesprojectGuardFinanceProjectionsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/finance/projections/index'
-import { Route as mainmodulesprojectGuardFinanceIncomesIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/finance/incomes/index'
-import { Route as mainmodulesprojectGuardFinanceExpensesIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/finance/expenses/index'
-import { Route as mainmodulesprojectGuardCollateralsCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/collaterals/create/index'
-import { Route as mainmodulesprojectGuardCollateralsIdIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/collaterals/$id/index'
-import { Route as mainmodulesprojectGuardAdjustmentNotesCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/adjustment-notes/create/index'
-import { Route as mainmodulesprojectGuardAdjustmentNotesIdIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/adjustment-notes/$id/index'
+import { Route as mainmodulesLoansPurpousesIdEditIndexRouteImport } from './routes/(main)/(modules)/loans/purpouses/$id/edit/index'
 import { Route as mainmodulesAccessControlUsersUsernameEditIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/edit/index'
 import { Route as mainmodulesAccessControlRolesIdEditIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/edit/index'
-import { Route as mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/receipt-report-template/create/index'
-import { Route as mainmodulesprojectGuardTransactionsPeriodsCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/transactions/periods/create/index'
-import { Route as mainmodulesprojectGuardLoansPurpousesCreateIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/purpouses/create/index'
-import { Route as mainmodulesprojectGuardLoansIdSettingsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/$id/settings/index'
-import { Route as mainmodulesprojectGuardFollowUpsIdEditIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/follow-ups/$id/edit/index'
-import { Route as mainmodulesprojectGuardCollateralsIdSettingsIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/collaterals/$id/settings/index'
-import { Route as mainmodulesprojectGuardCollateralsIdEditIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/collaterals/$id/edit/index'
-import { Route as mainmodulesprojectGuardLoansPurpousesIdEditIndexRouteImport } from './routes/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/index'
 
 const mainRouteRoute = mainRouteRouteImport.update({
   id: '/(main)',
@@ -94,9 +92,10 @@ const mainResetPasswordIndexRoute = mainResetPasswordIndexRouteImport.update({
   path: '/reset-password/',
   getParentRoute: () => mainRouteRoute,
 } as any)
-const mainmodulesprojectGuardRouteRoute =
-  mainmodulesprojectGuardRouteRouteImport.update({
-    id: '/(project-guard)',
+const mainmodulesTransactionsIndexRoute =
+  mainmodulesTransactionsIndexRouteImport.update({
+    id: '/transactions/',
+    path: '/transactions/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesReportsIndexRoute = mainmodulesReportsIndexRouteImport.update({
@@ -104,16 +103,27 @@ const mainmodulesReportsIndexRoute = mainmodulesReportsIndexRouteImport.update({
   path: '/reports/',
   getParentRoute: () => mainmodulesRouteRoute,
 } as any)
-const mainmodulesProjectsIndexRoute =
-  mainmodulesProjectsIndexRouteImport.update({
-    id: '/projects/',
-    path: '/projects/',
-    getParentRoute: () => mainmodulesRouteRoute,
-  } as any)
 const mainmodulesProfilesIndexRoute =
   mainmodulesProfilesIndexRouteImport.update({
     id: '/profiles/',
     path: '/profiles/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesLoansIndexRoute = mainmodulesLoansIndexRouteImport.update({
+  id: '/loans/',
+  path: '/loans/',
+  getParentRoute: () => mainmodulesRouteRoute,
+} as any)
+const mainmodulesFollowUpsIndexRoute =
+  mainmodulesFollowUpsIndexRouteImport.update({
+    id: '/follow-ups/',
+    path: '/follow-ups/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsIndexRoute =
+  mainmodulesCollateralsIndexRouteImport.update({
+    id: '/collaterals/',
+    path: '/collaterals/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesAmortizationsIndexRoute =
@@ -122,10 +132,40 @@ const mainmodulesAmortizationsIndexRoute =
     path: '/amortizations/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesAdjustmentNotesIndexRoute =
+  mainmodulesAdjustmentNotesIndexRouteImport.update({
+    id: '/adjustment-notes/',
+    path: '/adjustment-notes/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesAccountStatementsIndexRoute =
+  mainmodulesAccountStatementsIndexRouteImport.update({
+    id: '/account-statements/',
+    path: '/account-statements/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesAccessControlIndexRoute =
   mainmodulesAccessControlIndexRouteImport.update({
     id: '/access-control/',
     path: '/access-control/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesTransactionsPeriodsIndexRoute =
+  mainmodulesTransactionsPeriodsIndexRouteImport.update({
+    id: '/transactions/periods/',
+    path: '/transactions/periods/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesTransactionsCreateIndexRoute =
+  mainmodulesTransactionsCreateIndexRouteImport.update({
+    id: '/transactions/create/',
+    path: '/transactions/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesTransactionsIdIndexRoute =
+  mainmodulesTransactionsIdIndexRouteImport.update({
+    id: '/transactions/$id/',
+    path: '/transactions/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesReportsGenerateIndexRoute =
@@ -170,41 +210,88 @@ const mainmodulesProfilesIdIndexRoute =
     path: '/profiles/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesprojectGuardTransactionsIndexRoute =
-  mainmodulesprojectGuardTransactionsIndexRouteImport.update({
-    id: '/transactions/',
-    path: '/transactions/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+const mainmodulesLoansPurpousesIndexRoute =
+  mainmodulesLoansPurpousesIndexRouteImport.update({
+    id: '/loans/purpouses/',
+    path: '/loans/purpouses/',
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesprojectGuardLoansIndexRoute =
-  mainmodulesprojectGuardLoansIndexRouteImport.update({
-    id: '/loans/',
-    path: '/loans/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+const mainmodulesLoansCreateIndexRoute =
+  mainmodulesLoansCreateIndexRouteImport.update({
+    id: '/loans/create/',
+    path: '/loans/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesprojectGuardFollowUpsIndexRoute =
-  mainmodulesprojectGuardFollowUpsIndexRouteImport.update({
-    id: '/follow-ups/',
-    path: '/follow-ups/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+const mainmodulesLoansIdIndexRoute = mainmodulesLoansIdIndexRouteImport.update({
+  id: '/loans/$id/',
+  path: '/loans/$id/',
+  getParentRoute: () => mainmodulesRouteRoute,
+} as any)
+const mainmodulesFollowUpsCreateIndexRoute =
+  mainmodulesFollowUpsCreateIndexRouteImport.update({
+    id: '/follow-ups/create/',
+    path: '/follow-ups/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesprojectGuardCollateralsIndexRoute =
-  mainmodulesprojectGuardCollateralsIndexRouteImport.update({
-    id: '/collaterals/',
-    path: '/collaterals/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+const mainmodulesFollowUpsIdIndexRoute =
+  mainmodulesFollowUpsIdIndexRouteImport.update({
+    id: '/follow-ups/$id/',
+    path: '/follow-ups/$id/',
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesprojectGuardAdjustmentNotesIndexRoute =
-  mainmodulesprojectGuardAdjustmentNotesIndexRouteImport.update({
-    id: '/adjustment-notes/',
-    path: '/adjustment-notes/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+const mainmodulesFinanceProjectionsIndexRoute =
+  mainmodulesFinanceProjectionsIndexRouteImport.update({
+    id: '/finance/projections/',
+    path: '/finance/projections/',
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesprojectGuardAccountStatementsIndexRoute =
-  mainmodulesprojectGuardAccountStatementsIndexRouteImport.update({
-    id: '/account-statements/',
-    path: '/account-statements/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+const mainmodulesFinanceIncomesIndexRoute =
+  mainmodulesFinanceIncomesIndexRouteImport.update({
+    id: '/finance/incomes/',
+    path: '/finance/incomes/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesFinanceExpensesIndexRoute =
+  mainmodulesFinanceExpensesIndexRouteImport.update({
+    id: '/finance/expenses/',
+    path: '/finance/expenses/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsCreateIndexRoute =
+  mainmodulesCollateralsCreateIndexRouteImport.update({
+    id: '/collaterals/create/',
+    path: '/collaterals/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsIdIndexRoute =
+  mainmodulesCollateralsIdIndexRouteImport.update({
+    id: '/collaterals/$id/',
+    path: '/collaterals/$id/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesAdjustmentNotesCreateIndexRoute =
+  mainmodulesAdjustmentNotesCreateIndexRouteImport.update({
+    id: '/adjustment-notes/create/',
+    path: '/adjustment-notes/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesAdjustmentNotesIdIndexRoute =
+  mainmodulesAdjustmentNotesIdIndexRouteImport.update({
+    id: '/adjustment-notes/$id/',
+    path: '/adjustment-notes/$id/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute =
+  mainmodulesTransactionsReceiptReportTemplateCreateIndexRouteImport.update({
+    id: '/transactions/receipt-report-template/create/',
+    path: '/transactions/receipt-report-template/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesTransactionsPeriodsCreateIndexRoute =
+  mainmodulesTransactionsPeriodsCreateIndexRouteImport.update({
+    id: '/transactions/periods/create/',
+    path: '/transactions/periods/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesReportsIdEditIndexRoute =
   mainmodulesReportsIdEditIndexRouteImport.update({
@@ -216,6 +303,36 @@ const mainmodulesProfilesIdEditIndexRoute =
   mainmodulesProfilesIdEditIndexRouteImport.update({
     id: '/profiles/$id/edit/',
     path: '/profiles/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesLoansPurpousesCreateIndexRoute =
+  mainmodulesLoansPurpousesCreateIndexRouteImport.update({
+    id: '/loans/purpouses/create/',
+    path: '/loans/purpouses/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesLoansIdSettingsIndexRoute =
+  mainmodulesLoansIdSettingsIndexRouteImport.update({
+    id: '/loans/$id/settings/',
+    path: '/loans/$id/settings/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesFollowUpsIdEditIndexRoute =
+  mainmodulesFollowUpsIdEditIndexRouteImport.update({
+    id: '/follow-ups/$id/edit/',
+    path: '/follow-ups/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsIdSettingsIndexRoute =
+  mainmodulesCollateralsIdSettingsIndexRouteImport.update({
+    id: '/collaterals/$id/settings/',
+    path: '/collaterals/$id/settings/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsIdEditIndexRoute =
+  mainmodulesCollateralsIdEditIndexRouteImport.update({
+    id: '/collaterals/$id/edit/',
+    path: '/collaterals/$id/edit/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesAccessControlUsersCreateIndexRoute =
@@ -242,95 +359,11 @@ const mainmodulesAccessControlRolesIdIndexRoute =
     path: '/access-control/roles/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesprojectGuardTransactionsPeriodsIndexRoute =
-  mainmodulesprojectGuardTransactionsPeriodsIndexRouteImport.update({
-    id: '/transactions/periods/',
-    path: '/transactions/periods/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardTransactionsCreateIndexRoute =
-  mainmodulesprojectGuardTransactionsCreateIndexRouteImport.update({
-    id: '/transactions/create/',
-    path: '/transactions/create/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardTransactionsIdIndexRoute =
-  mainmodulesprojectGuardTransactionsIdIndexRouteImport.update({
-    id: '/transactions/$id/',
-    path: '/transactions/$id/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardLoansPurpousesIndexRoute =
-  mainmodulesprojectGuardLoansPurpousesIndexRouteImport.update({
-    id: '/loans/purpouses/',
-    path: '/loans/purpouses/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardLoansCreateIndexRoute =
-  mainmodulesprojectGuardLoansCreateIndexRouteImport.update({
-    id: '/loans/create/',
-    path: '/loans/create/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardLoansIdIndexRoute =
-  mainmodulesprojectGuardLoansIdIndexRouteImport.update({
-    id: '/loans/$id/',
-    path: '/loans/$id/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardFollowUpsCreateIndexRoute =
-  mainmodulesprojectGuardFollowUpsCreateIndexRouteImport.update({
-    id: '/follow-ups/create/',
-    path: '/follow-ups/create/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardFollowUpsIdIndexRoute =
-  mainmodulesprojectGuardFollowUpsIdIndexRouteImport.update({
-    id: '/follow-ups/$id/',
-    path: '/follow-ups/$id/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardFinanceProjectionsIndexRoute =
-  mainmodulesprojectGuardFinanceProjectionsIndexRouteImport.update({
-    id: '/finance/projections/',
-    path: '/finance/projections/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardFinanceIncomesIndexRoute =
-  mainmodulesprojectGuardFinanceIncomesIndexRouteImport.update({
-    id: '/finance/incomes/',
-    path: '/finance/incomes/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardFinanceExpensesIndexRoute =
-  mainmodulesprojectGuardFinanceExpensesIndexRouteImport.update({
-    id: '/finance/expenses/',
-    path: '/finance/expenses/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardCollateralsCreateIndexRoute =
-  mainmodulesprojectGuardCollateralsCreateIndexRouteImport.update({
-    id: '/collaterals/create/',
-    path: '/collaterals/create/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardCollateralsIdIndexRoute =
-  mainmodulesprojectGuardCollateralsIdIndexRouteImport.update({
-    id: '/collaterals/$id/',
-    path: '/collaterals/$id/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardAdjustmentNotesCreateIndexRoute =
-  mainmodulesprojectGuardAdjustmentNotesCreateIndexRouteImport.update({
-    id: '/adjustment-notes/create/',
-    path: '/adjustment-notes/create/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardAdjustmentNotesIdIndexRoute =
-  mainmodulesprojectGuardAdjustmentNotesIdIndexRouteImport.update({
-    id: '/adjustment-notes/$id/',
-    path: '/adjustment-notes/$id/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
+const mainmodulesLoansPurpousesIdEditIndexRoute =
+  mainmodulesLoansPurpousesIdEditIndexRouteImport.update({
+    id: '/loans/purpouses/$id/edit/',
+    path: '/loans/purpouses/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesAccessControlUsersUsernameEditIndexRoute =
   mainmodulesAccessControlUsersUsernameEditIndexRouteImport.update({
@@ -344,56 +377,6 @@ const mainmodulesAccessControlRolesIdEditIndexRoute =
     path: '/access-control/roles/$id/edit/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute =
-  mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRouteImport.update(
-    {
-      id: '/transactions/receipt-report-template/create/',
-      path: '/transactions/receipt-report-template/create/',
-      getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-    } as any,
-  )
-const mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute =
-  mainmodulesprojectGuardTransactionsPeriodsCreateIndexRouteImport.update({
-    id: '/transactions/periods/create/',
-    path: '/transactions/periods/create/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardLoansPurpousesCreateIndexRoute =
-  mainmodulesprojectGuardLoansPurpousesCreateIndexRouteImport.update({
-    id: '/loans/purpouses/create/',
-    path: '/loans/purpouses/create/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardLoansIdSettingsIndexRoute =
-  mainmodulesprojectGuardLoansIdSettingsIndexRouteImport.update({
-    id: '/loans/$id/settings/',
-    path: '/loans/$id/settings/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardFollowUpsIdEditIndexRoute =
-  mainmodulesprojectGuardFollowUpsIdEditIndexRouteImport.update({
-    id: '/follow-ups/$id/edit/',
-    path: '/follow-ups/$id/edit/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardCollateralsIdSettingsIndexRoute =
-  mainmodulesprojectGuardCollateralsIdSettingsIndexRouteImport.update({
-    id: '/collaterals/$id/settings/',
-    path: '/collaterals/$id/settings/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardCollateralsIdEditIndexRoute =
-  mainmodulesprojectGuardCollateralsIdEditIndexRouteImport.update({
-    id: '/collaterals/$id/edit/',
-    path: '/collaterals/$id/edit/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
-const mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute =
-  mainmodulesprojectGuardLoansPurpousesIdEditIndexRouteImport.update({
-    id: '/loans/purpouses/$id/edit/',
-    path: '/loans/purpouses/$id/edit/',
-    getParentRoute: () => mainmodulesprojectGuardRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof mainIndexRoute
@@ -401,16 +384,27 @@ export interface FileRoutesByFullPath {
   '/logout/': typeof LogoutIndexRoute
   '/reset-password/': typeof mainResetPasswordIndexRoute
   '/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/account-statements/': typeof mainmodulesAccountStatementsIndexRoute
+  '/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
   '/amortizations/': typeof mainmodulesAmortizationsIndexRoute
+  '/collaterals/': typeof mainmodulesCollateralsIndexRoute
+  '/follow-ups/': typeof mainmodulesFollowUpsIndexRoute
+  '/loans/': typeof mainmodulesLoansIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
-  '/projects/': typeof mainmodulesProjectsIndexRoute
   '/reports/': typeof mainmodulesReportsIndexRoute
-  '/account-statements/': typeof mainmodulesprojectGuardAccountStatementsIndexRoute
-  '/adjustment-notes/': typeof mainmodulesprojectGuardAdjustmentNotesIndexRoute
-  '/collaterals/': typeof mainmodulesprojectGuardCollateralsIndexRoute
-  '/follow-ups/': typeof mainmodulesprojectGuardFollowUpsIndexRoute
-  '/loans/': typeof mainmodulesprojectGuardLoansIndexRoute
-  '/transactions/': typeof mainmodulesprojectGuardTransactionsIndexRoute
+  '/transactions/': typeof mainmodulesTransactionsIndexRoute
+  '/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
+  '/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
+  '/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
+  '/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
+  '/finance/expenses/': typeof mainmodulesFinanceExpensesIndexRoute
+  '/finance/incomes/': typeof mainmodulesFinanceIncomesIndexRoute
+  '/finance/projections/': typeof mainmodulesFinanceProjectionsIndexRoute
+  '/follow-ups/$id/': typeof mainmodulesFollowUpsIdIndexRoute
+  '/follow-ups/create/': typeof mainmodulesFollowUpsCreateIndexRoute
+  '/loans/$id/': typeof mainmodulesLoansIdIndexRoute
+  '/loans/create/': typeof mainmodulesLoansCreateIndexRoute
+  '/loans/purpouses/': typeof mainmodulesLoansPurpousesIndexRoute
   '/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
@@ -418,37 +412,25 @@ export interface FileRoutesByFullPath {
   '/reports/$id/': typeof mainmodulesReportsIdIndexRoute
   '/reports/create/': typeof mainmodulesReportsCreateIndexRoute
   '/reports/generate/': typeof mainmodulesReportsGenerateIndexRoute
-  '/adjustment-notes/$id/': typeof mainmodulesprojectGuardAdjustmentNotesIdIndexRoute
-  '/adjustment-notes/create/': typeof mainmodulesprojectGuardAdjustmentNotesCreateIndexRoute
-  '/collaterals/$id/': typeof mainmodulesprojectGuardCollateralsIdIndexRoute
-  '/collaterals/create/': typeof mainmodulesprojectGuardCollateralsCreateIndexRoute
-  '/finance/expenses/': typeof mainmodulesprojectGuardFinanceExpensesIndexRoute
-  '/finance/incomes/': typeof mainmodulesprojectGuardFinanceIncomesIndexRoute
-  '/finance/projections/': typeof mainmodulesprojectGuardFinanceProjectionsIndexRoute
-  '/follow-ups/$id/': typeof mainmodulesprojectGuardFollowUpsIdIndexRoute
-  '/follow-ups/create/': typeof mainmodulesprojectGuardFollowUpsCreateIndexRoute
-  '/loans/$id/': typeof mainmodulesprojectGuardLoansIdIndexRoute
-  '/loans/create/': typeof mainmodulesprojectGuardLoansCreateIndexRoute
-  '/loans/purpouses/': typeof mainmodulesprojectGuardLoansPurpousesIndexRoute
-  '/transactions/$id/': typeof mainmodulesprojectGuardTransactionsIdIndexRoute
-  '/transactions/create/': typeof mainmodulesprojectGuardTransactionsCreateIndexRoute
-  '/transactions/periods/': typeof mainmodulesprojectGuardTransactionsPeriodsIndexRoute
+  '/transactions/$id/': typeof mainmodulesTransactionsIdIndexRoute
+  '/transactions/create/': typeof mainmodulesTransactionsCreateIndexRoute
+  '/transactions/periods/': typeof mainmodulesTransactionsPeriodsIndexRoute
   '/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/access-control/users/create/': typeof mainmodulesAccessControlUsersCreateIndexRoute
+  '/collaterals/$id/edit/': typeof mainmodulesCollateralsIdEditIndexRoute
+  '/collaterals/$id/settings/': typeof mainmodulesCollateralsIdSettingsIndexRoute
+  '/follow-ups/$id/edit/': typeof mainmodulesFollowUpsIdEditIndexRoute
+  '/loans/$id/settings/': typeof mainmodulesLoansIdSettingsIndexRoute
+  '/loans/purpouses/create/': typeof mainmodulesLoansPurpousesCreateIndexRoute
   '/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
   '/reports/$id/edit/': typeof mainmodulesReportsIdEditIndexRoute
-  '/collaterals/$id/edit/': typeof mainmodulesprojectGuardCollateralsIdEditIndexRoute
-  '/collaterals/$id/settings/': typeof mainmodulesprojectGuardCollateralsIdSettingsIndexRoute
-  '/follow-ups/$id/edit/': typeof mainmodulesprojectGuardFollowUpsIdEditIndexRoute
-  '/loans/$id/settings/': typeof mainmodulesprojectGuardLoansIdSettingsIndexRoute
-  '/loans/purpouses/create/': typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRoute
-  '/transactions/periods/create/': typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute
-  '/transactions/receipt-report-template/create/': typeof mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute
+  '/transactions/periods/create/': typeof mainmodulesTransactionsPeriodsCreateIndexRoute
+  '/transactions/receipt-report-template/create/': typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute
   '/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
-  '/loans/purpouses/$id/edit/': typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute
+  '/loans/purpouses/$id/edit/': typeof mainmodulesLoansPurpousesIdEditIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof mainIndexRoute
@@ -456,16 +438,27 @@ export interface FileRoutesByTo {
   '/logout': typeof LogoutIndexRoute
   '/reset-password': typeof mainResetPasswordIndexRoute
   '/access-control': typeof mainmodulesAccessControlIndexRoute
+  '/account-statements': typeof mainmodulesAccountStatementsIndexRoute
+  '/adjustment-notes': typeof mainmodulesAdjustmentNotesIndexRoute
   '/amortizations': typeof mainmodulesAmortizationsIndexRoute
+  '/collaterals': typeof mainmodulesCollateralsIndexRoute
+  '/follow-ups': typeof mainmodulesFollowUpsIndexRoute
+  '/loans': typeof mainmodulesLoansIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
-  '/projects': typeof mainmodulesProjectsIndexRoute
   '/reports': typeof mainmodulesReportsIndexRoute
-  '/account-statements': typeof mainmodulesprojectGuardAccountStatementsIndexRoute
-  '/adjustment-notes': typeof mainmodulesprojectGuardAdjustmentNotesIndexRoute
-  '/collaterals': typeof mainmodulesprojectGuardCollateralsIndexRoute
-  '/follow-ups': typeof mainmodulesprojectGuardFollowUpsIndexRoute
-  '/loans': typeof mainmodulesprojectGuardLoansIndexRoute
-  '/transactions': typeof mainmodulesprojectGuardTransactionsIndexRoute
+  '/transactions': typeof mainmodulesTransactionsIndexRoute
+  '/adjustment-notes/$id': typeof mainmodulesAdjustmentNotesIdIndexRoute
+  '/adjustment-notes/create': typeof mainmodulesAdjustmentNotesCreateIndexRoute
+  '/collaterals/$id': typeof mainmodulesCollateralsIdIndexRoute
+  '/collaterals/create': typeof mainmodulesCollateralsCreateIndexRoute
+  '/finance/expenses': typeof mainmodulesFinanceExpensesIndexRoute
+  '/finance/incomes': typeof mainmodulesFinanceIncomesIndexRoute
+  '/finance/projections': typeof mainmodulesFinanceProjectionsIndexRoute
+  '/follow-ups/$id': typeof mainmodulesFollowUpsIdIndexRoute
+  '/follow-ups/create': typeof mainmodulesFollowUpsCreateIndexRoute
+  '/loans/$id': typeof mainmodulesLoansIdIndexRoute
+  '/loans/create': typeof mainmodulesLoansCreateIndexRoute
+  '/loans/purpouses': typeof mainmodulesLoansPurpousesIndexRoute
   '/profiles/$id': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create': typeof mainmodulesProfilesCreateIndexRoute
   '/projects/create': typeof mainmodulesProjectsCreateIndexRoute
@@ -473,37 +466,25 @@ export interface FileRoutesByTo {
   '/reports/$id': typeof mainmodulesReportsIdIndexRoute
   '/reports/create': typeof mainmodulesReportsCreateIndexRoute
   '/reports/generate': typeof mainmodulesReportsGenerateIndexRoute
-  '/adjustment-notes/$id': typeof mainmodulesprojectGuardAdjustmentNotesIdIndexRoute
-  '/adjustment-notes/create': typeof mainmodulesprojectGuardAdjustmentNotesCreateIndexRoute
-  '/collaterals/$id': typeof mainmodulesprojectGuardCollateralsIdIndexRoute
-  '/collaterals/create': typeof mainmodulesprojectGuardCollateralsCreateIndexRoute
-  '/finance/expenses': typeof mainmodulesprojectGuardFinanceExpensesIndexRoute
-  '/finance/incomes': typeof mainmodulesprojectGuardFinanceIncomesIndexRoute
-  '/finance/projections': typeof mainmodulesprojectGuardFinanceProjectionsIndexRoute
-  '/follow-ups/$id': typeof mainmodulesprojectGuardFollowUpsIdIndexRoute
-  '/follow-ups/create': typeof mainmodulesprojectGuardFollowUpsCreateIndexRoute
-  '/loans/$id': typeof mainmodulesprojectGuardLoansIdIndexRoute
-  '/loans/create': typeof mainmodulesprojectGuardLoansCreateIndexRoute
-  '/loans/purpouses': typeof mainmodulesprojectGuardLoansPurpousesIndexRoute
-  '/transactions/$id': typeof mainmodulesprojectGuardTransactionsIdIndexRoute
-  '/transactions/create': typeof mainmodulesprojectGuardTransactionsCreateIndexRoute
-  '/transactions/periods': typeof mainmodulesprojectGuardTransactionsPeriodsIndexRoute
+  '/transactions/$id': typeof mainmodulesTransactionsIdIndexRoute
+  '/transactions/create': typeof mainmodulesTransactionsCreateIndexRoute
+  '/transactions/periods': typeof mainmodulesTransactionsPeriodsIndexRoute
   '/access-control/roles/$id': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/access-control/users/create': typeof mainmodulesAccessControlUsersCreateIndexRoute
+  '/collaterals/$id/edit': typeof mainmodulesCollateralsIdEditIndexRoute
+  '/collaterals/$id/settings': typeof mainmodulesCollateralsIdSettingsIndexRoute
+  '/follow-ups/$id/edit': typeof mainmodulesFollowUpsIdEditIndexRoute
+  '/loans/$id/settings': typeof mainmodulesLoansIdSettingsIndexRoute
+  '/loans/purpouses/create': typeof mainmodulesLoansPurpousesCreateIndexRoute
   '/profiles/$id/edit': typeof mainmodulesProfilesIdEditIndexRoute
   '/reports/$id/edit': typeof mainmodulesReportsIdEditIndexRoute
-  '/collaterals/$id/edit': typeof mainmodulesprojectGuardCollateralsIdEditIndexRoute
-  '/collaterals/$id/settings': typeof mainmodulesprojectGuardCollateralsIdSettingsIndexRoute
-  '/follow-ups/$id/edit': typeof mainmodulesprojectGuardFollowUpsIdEditIndexRoute
-  '/loans/$id/settings': typeof mainmodulesprojectGuardLoansIdSettingsIndexRoute
-  '/loans/purpouses/create': typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRoute
-  '/transactions/periods/create': typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute
-  '/transactions/receipt-report-template/create': typeof mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute
+  '/transactions/periods/create': typeof mainmodulesTransactionsPeriodsCreateIndexRoute
+  '/transactions/receipt-report-template/create': typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute
   '/access-control/roles/$id/edit': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
-  '/loans/purpouses/$id/edit': typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute
+  '/loans/purpouses/$id/edit': typeof mainmodulesLoansPurpousesIdEditIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -512,19 +493,29 @@ export interface FileRoutesById {
   '/(main)/': typeof mainIndexRoute
   '/login/': typeof LoginIndexRoute
   '/logout/': typeof LogoutIndexRoute
-  '/(main)/(modules)/(project-guard)': typeof mainmodulesprojectGuardRouteRouteWithChildren
   '/(main)/reset-password/': typeof mainResetPasswordIndexRoute
   '/(main)/(modules)/access-control/': typeof mainmodulesAccessControlIndexRoute
+  '/(main)/(modules)/account-statements/': typeof mainmodulesAccountStatementsIndexRoute
+  '/(main)/(modules)/adjustment-notes/': typeof mainmodulesAdjustmentNotesIndexRoute
   '/(main)/(modules)/amortizations/': typeof mainmodulesAmortizationsIndexRoute
+  '/(main)/(modules)/collaterals/': typeof mainmodulesCollateralsIndexRoute
+  '/(main)/(modules)/follow-ups/': typeof mainmodulesFollowUpsIndexRoute
+  '/(main)/(modules)/loans/': typeof mainmodulesLoansIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
-  '/(main)/(modules)/projects/': typeof mainmodulesProjectsIndexRoute
   '/(main)/(modules)/reports/': typeof mainmodulesReportsIndexRoute
-  '/(main)/(modules)/(project-guard)/account-statements/': typeof mainmodulesprojectGuardAccountStatementsIndexRoute
-  '/(main)/(modules)/(project-guard)/adjustment-notes/': typeof mainmodulesprojectGuardAdjustmentNotesIndexRoute
-  '/(main)/(modules)/(project-guard)/collaterals/': typeof mainmodulesprojectGuardCollateralsIndexRoute
-  '/(main)/(modules)/(project-guard)/follow-ups/': typeof mainmodulesprojectGuardFollowUpsIndexRoute
-  '/(main)/(modules)/(project-guard)/loans/': typeof mainmodulesprojectGuardLoansIndexRoute
-  '/(main)/(modules)/(project-guard)/transactions/': typeof mainmodulesprojectGuardTransactionsIndexRoute
+  '/(main)/(modules)/transactions/': typeof mainmodulesTransactionsIndexRoute
+  '/(main)/(modules)/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
+  '/(main)/(modules)/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
+  '/(main)/(modules)/collaterals/$id/': typeof mainmodulesCollateralsIdIndexRoute
+  '/(main)/(modules)/collaterals/create/': typeof mainmodulesCollateralsCreateIndexRoute
+  '/(main)/(modules)/finance/expenses/': typeof mainmodulesFinanceExpensesIndexRoute
+  '/(main)/(modules)/finance/incomes/': typeof mainmodulesFinanceIncomesIndexRoute
+  '/(main)/(modules)/finance/projections/': typeof mainmodulesFinanceProjectionsIndexRoute
+  '/(main)/(modules)/follow-ups/$id/': typeof mainmodulesFollowUpsIdIndexRoute
+  '/(main)/(modules)/follow-ups/create/': typeof mainmodulesFollowUpsCreateIndexRoute
+  '/(main)/(modules)/loans/$id/': typeof mainmodulesLoansIdIndexRoute
+  '/(main)/(modules)/loans/create/': typeof mainmodulesLoansCreateIndexRoute
+  '/(main)/(modules)/loans/purpouses/': typeof mainmodulesLoansPurpousesIndexRoute
   '/(main)/(modules)/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/(main)/(modules)/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/(main)/(modules)/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
@@ -532,37 +523,25 @@ export interface FileRoutesById {
   '/(main)/(modules)/reports/$id/': typeof mainmodulesReportsIdIndexRoute
   '/(main)/(modules)/reports/create/': typeof mainmodulesReportsCreateIndexRoute
   '/(main)/(modules)/reports/generate/': typeof mainmodulesReportsGenerateIndexRoute
-  '/(main)/(modules)/(project-guard)/adjustment-notes/$id/': typeof mainmodulesprojectGuardAdjustmentNotesIdIndexRoute
-  '/(main)/(modules)/(project-guard)/adjustment-notes/create/': typeof mainmodulesprojectGuardAdjustmentNotesCreateIndexRoute
-  '/(main)/(modules)/(project-guard)/collaterals/$id/': typeof mainmodulesprojectGuardCollateralsIdIndexRoute
-  '/(main)/(modules)/(project-guard)/collaterals/create/': typeof mainmodulesprojectGuardCollateralsCreateIndexRoute
-  '/(main)/(modules)/(project-guard)/finance/expenses/': typeof mainmodulesprojectGuardFinanceExpensesIndexRoute
-  '/(main)/(modules)/(project-guard)/finance/incomes/': typeof mainmodulesprojectGuardFinanceIncomesIndexRoute
-  '/(main)/(modules)/(project-guard)/finance/projections/': typeof mainmodulesprojectGuardFinanceProjectionsIndexRoute
-  '/(main)/(modules)/(project-guard)/follow-ups/$id/': typeof mainmodulesprojectGuardFollowUpsIdIndexRoute
-  '/(main)/(modules)/(project-guard)/follow-ups/create/': typeof mainmodulesprojectGuardFollowUpsCreateIndexRoute
-  '/(main)/(modules)/(project-guard)/loans/$id/': typeof mainmodulesprojectGuardLoansIdIndexRoute
-  '/(main)/(modules)/(project-guard)/loans/create/': typeof mainmodulesprojectGuardLoansCreateIndexRoute
-  '/(main)/(modules)/(project-guard)/loans/purpouses/': typeof mainmodulesprojectGuardLoansPurpousesIndexRoute
-  '/(main)/(modules)/(project-guard)/transactions/$id/': typeof mainmodulesprojectGuardTransactionsIdIndexRoute
-  '/(main)/(modules)/(project-guard)/transactions/create/': typeof mainmodulesprojectGuardTransactionsCreateIndexRoute
-  '/(main)/(modules)/(project-guard)/transactions/periods/': typeof mainmodulesprojectGuardTransactionsPeriodsIndexRoute
+  '/(main)/(modules)/transactions/$id/': typeof mainmodulesTransactionsIdIndexRoute
+  '/(main)/(modules)/transactions/create/': typeof mainmodulesTransactionsCreateIndexRoute
+  '/(main)/(modules)/transactions/periods/': typeof mainmodulesTransactionsPeriodsIndexRoute
   '/(main)/(modules)/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/(main)/(modules)/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/(main)/(modules)/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/(main)/(modules)/access-control/users/create/': typeof mainmodulesAccessControlUsersCreateIndexRoute
+  '/(main)/(modules)/collaterals/$id/edit/': typeof mainmodulesCollateralsIdEditIndexRoute
+  '/(main)/(modules)/collaterals/$id/settings/': typeof mainmodulesCollateralsIdSettingsIndexRoute
+  '/(main)/(modules)/follow-ups/$id/edit/': typeof mainmodulesFollowUpsIdEditIndexRoute
+  '/(main)/(modules)/loans/$id/settings/': typeof mainmodulesLoansIdSettingsIndexRoute
+  '/(main)/(modules)/loans/purpouses/create/': typeof mainmodulesLoansPurpousesCreateIndexRoute
   '/(main)/(modules)/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
   '/(main)/(modules)/reports/$id/edit/': typeof mainmodulesReportsIdEditIndexRoute
-  '/(main)/(modules)/(project-guard)/collaterals/$id/edit/': typeof mainmodulesprojectGuardCollateralsIdEditIndexRoute
-  '/(main)/(modules)/(project-guard)/collaterals/$id/settings/': typeof mainmodulesprojectGuardCollateralsIdSettingsIndexRoute
-  '/(main)/(modules)/(project-guard)/follow-ups/$id/edit/': typeof mainmodulesprojectGuardFollowUpsIdEditIndexRoute
-  '/(main)/(modules)/(project-guard)/loans/$id/settings/': typeof mainmodulesprojectGuardLoansIdSettingsIndexRoute
-  '/(main)/(modules)/(project-guard)/loans/purpouses/create/': typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRoute
-  '/(main)/(modules)/(project-guard)/transactions/periods/create/': typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute
-  '/(main)/(modules)/(project-guard)/transactions/receipt-report-template/create/': typeof mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute
+  '/(main)/(modules)/transactions/periods/create/': typeof mainmodulesTransactionsPeriodsCreateIndexRoute
+  '/(main)/(modules)/transactions/receipt-report-template/create/': typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute
   '/(main)/(modules)/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/(main)/(modules)/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
-  '/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/': typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute
+  '/(main)/(modules)/loans/purpouses/$id/edit/': typeof mainmodulesLoansPurpousesIdEditIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -572,23 +551,15 @@ export interface FileRouteTypes {
     | '/logout/'
     | '/reset-password/'
     | '/access-control/'
-    | '/amortizations/'
-    | '/profiles/'
-    | '/projects/'
-    | '/reports/'
     | '/account-statements/'
     | '/adjustment-notes/'
+    | '/amortizations/'
     | '/collaterals/'
     | '/follow-ups/'
     | '/loans/'
+    | '/profiles/'
+    | '/reports/'
     | '/transactions/'
-    | '/profiles/$id/'
-    | '/profiles/create/'
-    | '/projects/create/'
-    | '/projects/settings/'
-    | '/reports/$id/'
-    | '/reports/create/'
-    | '/reports/generate/'
     | '/adjustment-notes/$id/'
     | '/adjustment-notes/create/'
     | '/collaterals/$id/'
@@ -601,6 +572,13 @@ export interface FileRouteTypes {
     | '/loans/$id/'
     | '/loans/create/'
     | '/loans/purpouses/'
+    | '/profiles/$id/'
+    | '/profiles/create/'
+    | '/projects/create/'
+    | '/projects/settings/'
+    | '/reports/$id/'
+    | '/reports/create/'
+    | '/reports/generate/'
     | '/transactions/$id/'
     | '/transactions/create/'
     | '/transactions/periods/'
@@ -608,13 +586,13 @@ export interface FileRouteTypes {
     | '/access-control/roles/create/'
     | '/access-control/users/$username/'
     | '/access-control/users/create/'
-    | '/profiles/$id/edit/'
-    | '/reports/$id/edit/'
     | '/collaterals/$id/edit/'
     | '/collaterals/$id/settings/'
     | '/follow-ups/$id/edit/'
     | '/loans/$id/settings/'
     | '/loans/purpouses/create/'
+    | '/profiles/$id/edit/'
+    | '/reports/$id/edit/'
     | '/transactions/periods/create/'
     | '/transactions/receipt-report-template/create/'
     | '/access-control/roles/$id/edit/'
@@ -627,23 +605,15 @@ export interface FileRouteTypes {
     | '/logout'
     | '/reset-password'
     | '/access-control'
-    | '/amortizations'
-    | '/profiles'
-    | '/projects'
-    | '/reports'
     | '/account-statements'
     | '/adjustment-notes'
+    | '/amortizations'
     | '/collaterals'
     | '/follow-ups'
     | '/loans'
+    | '/profiles'
+    | '/reports'
     | '/transactions'
-    | '/profiles/$id'
-    | '/profiles/create'
-    | '/projects/create'
-    | '/projects/settings'
-    | '/reports/$id'
-    | '/reports/create'
-    | '/reports/generate'
     | '/adjustment-notes/$id'
     | '/adjustment-notes/create'
     | '/collaterals/$id'
@@ -656,6 +626,13 @@ export interface FileRouteTypes {
     | '/loans/$id'
     | '/loans/create'
     | '/loans/purpouses'
+    | '/profiles/$id'
+    | '/profiles/create'
+    | '/projects/create'
+    | '/projects/settings'
+    | '/reports/$id'
+    | '/reports/create'
+    | '/reports/generate'
     | '/transactions/$id'
     | '/transactions/create'
     | '/transactions/periods'
@@ -663,13 +640,13 @@ export interface FileRouteTypes {
     | '/access-control/roles/create'
     | '/access-control/users/$username'
     | '/access-control/users/create'
-    | '/profiles/$id/edit'
-    | '/reports/$id/edit'
     | '/collaterals/$id/edit'
     | '/collaterals/$id/settings'
     | '/follow-ups/$id/edit'
     | '/loans/$id/settings'
     | '/loans/purpouses/create'
+    | '/profiles/$id/edit'
+    | '/reports/$id/edit'
     | '/transactions/periods/create'
     | '/transactions/receipt-report-template/create'
     | '/access-control/roles/$id/edit'
@@ -682,19 +659,29 @@ export interface FileRouteTypes {
     | '/(main)/'
     | '/login/'
     | '/logout/'
-    | '/(main)/(modules)/(project-guard)'
     | '/(main)/reset-password/'
     | '/(main)/(modules)/access-control/'
+    | '/(main)/(modules)/account-statements/'
+    | '/(main)/(modules)/adjustment-notes/'
     | '/(main)/(modules)/amortizations/'
+    | '/(main)/(modules)/collaterals/'
+    | '/(main)/(modules)/follow-ups/'
+    | '/(main)/(modules)/loans/'
     | '/(main)/(modules)/profiles/'
-    | '/(main)/(modules)/projects/'
     | '/(main)/(modules)/reports/'
-    | '/(main)/(modules)/(project-guard)/account-statements/'
-    | '/(main)/(modules)/(project-guard)/adjustment-notes/'
-    | '/(main)/(modules)/(project-guard)/collaterals/'
-    | '/(main)/(modules)/(project-guard)/follow-ups/'
-    | '/(main)/(modules)/(project-guard)/loans/'
-    | '/(main)/(modules)/(project-guard)/transactions/'
+    | '/(main)/(modules)/transactions/'
+    | '/(main)/(modules)/adjustment-notes/$id/'
+    | '/(main)/(modules)/adjustment-notes/create/'
+    | '/(main)/(modules)/collaterals/$id/'
+    | '/(main)/(modules)/collaterals/create/'
+    | '/(main)/(modules)/finance/expenses/'
+    | '/(main)/(modules)/finance/incomes/'
+    | '/(main)/(modules)/finance/projections/'
+    | '/(main)/(modules)/follow-ups/$id/'
+    | '/(main)/(modules)/follow-ups/create/'
+    | '/(main)/(modules)/loans/$id/'
+    | '/(main)/(modules)/loans/create/'
+    | '/(main)/(modules)/loans/purpouses/'
     | '/(main)/(modules)/profiles/$id/'
     | '/(main)/(modules)/profiles/create/'
     | '/(main)/(modules)/projects/create/'
@@ -702,37 +689,25 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/reports/$id/'
     | '/(main)/(modules)/reports/create/'
     | '/(main)/(modules)/reports/generate/'
-    | '/(main)/(modules)/(project-guard)/adjustment-notes/$id/'
-    | '/(main)/(modules)/(project-guard)/adjustment-notes/create/'
-    | '/(main)/(modules)/(project-guard)/collaterals/$id/'
-    | '/(main)/(modules)/(project-guard)/collaterals/create/'
-    | '/(main)/(modules)/(project-guard)/finance/expenses/'
-    | '/(main)/(modules)/(project-guard)/finance/incomes/'
-    | '/(main)/(modules)/(project-guard)/finance/projections/'
-    | '/(main)/(modules)/(project-guard)/follow-ups/$id/'
-    | '/(main)/(modules)/(project-guard)/follow-ups/create/'
-    | '/(main)/(modules)/(project-guard)/loans/$id/'
-    | '/(main)/(modules)/(project-guard)/loans/create/'
-    | '/(main)/(modules)/(project-guard)/loans/purpouses/'
-    | '/(main)/(modules)/(project-guard)/transactions/$id/'
-    | '/(main)/(modules)/(project-guard)/transactions/create/'
-    | '/(main)/(modules)/(project-guard)/transactions/periods/'
+    | '/(main)/(modules)/transactions/$id/'
+    | '/(main)/(modules)/transactions/create/'
+    | '/(main)/(modules)/transactions/periods/'
     | '/(main)/(modules)/access-control/roles/$id/'
     | '/(main)/(modules)/access-control/roles/create/'
     | '/(main)/(modules)/access-control/users/$username/'
     | '/(main)/(modules)/access-control/users/create/'
+    | '/(main)/(modules)/collaterals/$id/edit/'
+    | '/(main)/(modules)/collaterals/$id/settings/'
+    | '/(main)/(modules)/follow-ups/$id/edit/'
+    | '/(main)/(modules)/loans/$id/settings/'
+    | '/(main)/(modules)/loans/purpouses/create/'
     | '/(main)/(modules)/profiles/$id/edit/'
     | '/(main)/(modules)/reports/$id/edit/'
-    | '/(main)/(modules)/(project-guard)/collaterals/$id/edit/'
-    | '/(main)/(modules)/(project-guard)/collaterals/$id/settings/'
-    | '/(main)/(modules)/(project-guard)/follow-ups/$id/edit/'
-    | '/(main)/(modules)/(project-guard)/loans/$id/settings/'
-    | '/(main)/(modules)/(project-guard)/loans/purpouses/create/'
-    | '/(main)/(modules)/(project-guard)/transactions/periods/create/'
-    | '/(main)/(modules)/(project-guard)/transactions/receipt-report-template/create/'
+    | '/(main)/(modules)/transactions/periods/create/'
+    | '/(main)/(modules)/transactions/receipt-report-template/create/'
     | '/(main)/(modules)/access-control/roles/$id/edit/'
     | '/(main)/(modules)/access-control/users/$username/edit/'
-    | '/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/'
+    | '/(main)/(modules)/loans/purpouses/$id/edit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -785,11 +760,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainResetPasswordIndexRouteImport
       parentRoute: typeof mainRouteRoute
     }
-    '/(main)/(modules)/(project-guard)': {
-      id: '/(main)/(modules)/(project-guard)'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof mainmodulesprojectGuardRouteRouteImport
+    '/(main)/(modules)/transactions/': {
+      id: '/(main)/(modules)/transactions/'
+      path: '/transactions'
+      fullPath: '/transactions/'
+      preLoaderRoute: typeof mainmodulesTransactionsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/reports/': {
@@ -799,18 +774,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesReportsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/projects/': {
-      id: '/(main)/(modules)/projects/'
-      path: '/projects'
-      fullPath: '/projects/'
-      preLoaderRoute: typeof mainmodulesProjectsIndexRouteImport
-      parentRoute: typeof mainmodulesRouteRoute
-    }
     '/(main)/(modules)/profiles/': {
       id: '/(main)/(modules)/profiles/'
       path: '/profiles'
       fullPath: '/profiles/'
       preLoaderRoute: typeof mainmodulesProfilesIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/': {
+      id: '/(main)/(modules)/loans/'
+      path: '/loans'
+      fullPath: '/loans/'
+      preLoaderRoute: typeof mainmodulesLoansIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/follow-ups/': {
+      id: '/(main)/(modules)/follow-ups/'
+      path: '/follow-ups'
+      fullPath: '/follow-ups/'
+      preLoaderRoute: typeof mainmodulesFollowUpsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/': {
+      id: '/(main)/(modules)/collaterals/'
+      path: '/collaterals'
+      fullPath: '/collaterals/'
+      preLoaderRoute: typeof mainmodulesCollateralsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/amortizations/': {
@@ -820,11 +809,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesAmortizationsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/adjustment-notes/': {
+      id: '/(main)/(modules)/adjustment-notes/'
+      path: '/adjustment-notes'
+      fullPath: '/adjustment-notes/'
+      preLoaderRoute: typeof mainmodulesAdjustmentNotesIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/account-statements/': {
+      id: '/(main)/(modules)/account-statements/'
+      path: '/account-statements'
+      fullPath: '/account-statements/'
+      preLoaderRoute: typeof mainmodulesAccountStatementsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/access-control/': {
       id: '/(main)/(modules)/access-control/'
       path: '/access-control'
       fullPath: '/access-control/'
       preLoaderRoute: typeof mainmodulesAccessControlIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/transactions/periods/': {
+      id: '/(main)/(modules)/transactions/periods/'
+      path: '/transactions/periods'
+      fullPath: '/transactions/periods/'
+      preLoaderRoute: typeof mainmodulesTransactionsPeriodsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/transactions/create/': {
+      id: '/(main)/(modules)/transactions/create/'
+      path: '/transactions/create'
+      fullPath: '/transactions/create/'
+      preLoaderRoute: typeof mainmodulesTransactionsCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/transactions/$id/': {
+      id: '/(main)/(modules)/transactions/$id/'
+      path: '/transactions/$id'
+      fullPath: '/transactions/$id/'
+      preLoaderRoute: typeof mainmodulesTransactionsIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/reports/generate/': {
@@ -876,47 +900,103 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesProfilesIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/(project-guard)/transactions/': {
-      id: '/(main)/(modules)/(project-guard)/transactions/'
-      path: '/transactions'
-      fullPath: '/transactions/'
-      preLoaderRoute: typeof mainmodulesprojectGuardTransactionsIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    '/(main)/(modules)/loans/purpouses/': {
+      id: '/(main)/(modules)/loans/purpouses/'
+      path: '/loans/purpouses'
+      fullPath: '/loans/purpouses/'
+      preLoaderRoute: typeof mainmodulesLoansPurpousesIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/(project-guard)/loans/': {
-      id: '/(main)/(modules)/(project-guard)/loans/'
-      path: '/loans'
-      fullPath: '/loans/'
-      preLoaderRoute: typeof mainmodulesprojectGuardLoansIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    '/(main)/(modules)/loans/create/': {
+      id: '/(main)/(modules)/loans/create/'
+      path: '/loans/create'
+      fullPath: '/loans/create/'
+      preLoaderRoute: typeof mainmodulesLoansCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/(project-guard)/follow-ups/': {
-      id: '/(main)/(modules)/(project-guard)/follow-ups/'
-      path: '/follow-ups'
-      fullPath: '/follow-ups/'
-      preLoaderRoute: typeof mainmodulesprojectGuardFollowUpsIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    '/(main)/(modules)/loans/$id/': {
+      id: '/(main)/(modules)/loans/$id/'
+      path: '/loans/$id'
+      fullPath: '/loans/$id/'
+      preLoaderRoute: typeof mainmodulesLoansIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/(project-guard)/collaterals/': {
-      id: '/(main)/(modules)/(project-guard)/collaterals/'
-      path: '/collaterals'
-      fullPath: '/collaterals/'
-      preLoaderRoute: typeof mainmodulesprojectGuardCollateralsIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    '/(main)/(modules)/follow-ups/create/': {
+      id: '/(main)/(modules)/follow-ups/create/'
+      path: '/follow-ups/create'
+      fullPath: '/follow-ups/create/'
+      preLoaderRoute: typeof mainmodulesFollowUpsCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/(project-guard)/adjustment-notes/': {
-      id: '/(main)/(modules)/(project-guard)/adjustment-notes/'
-      path: '/adjustment-notes'
-      fullPath: '/adjustment-notes/'
-      preLoaderRoute: typeof mainmodulesprojectGuardAdjustmentNotesIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    '/(main)/(modules)/follow-ups/$id/': {
+      id: '/(main)/(modules)/follow-ups/$id/'
+      path: '/follow-ups/$id'
+      fullPath: '/follow-ups/$id/'
+      preLoaderRoute: typeof mainmodulesFollowUpsIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/(project-guard)/account-statements/': {
-      id: '/(main)/(modules)/(project-guard)/account-statements/'
-      path: '/account-statements'
-      fullPath: '/account-statements/'
-      preLoaderRoute: typeof mainmodulesprojectGuardAccountStatementsIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    '/(main)/(modules)/finance/projections/': {
+      id: '/(main)/(modules)/finance/projections/'
+      path: '/finance/projections'
+      fullPath: '/finance/projections/'
+      preLoaderRoute: typeof mainmodulesFinanceProjectionsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/finance/incomes/': {
+      id: '/(main)/(modules)/finance/incomes/'
+      path: '/finance/incomes'
+      fullPath: '/finance/incomes/'
+      preLoaderRoute: typeof mainmodulesFinanceIncomesIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/finance/expenses/': {
+      id: '/(main)/(modules)/finance/expenses/'
+      path: '/finance/expenses'
+      fullPath: '/finance/expenses/'
+      preLoaderRoute: typeof mainmodulesFinanceExpensesIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/create/': {
+      id: '/(main)/(modules)/collaterals/create/'
+      path: '/collaterals/create'
+      fullPath: '/collaterals/create/'
+      preLoaderRoute: typeof mainmodulesCollateralsCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/$id/': {
+      id: '/(main)/(modules)/collaterals/$id/'
+      path: '/collaterals/$id'
+      fullPath: '/collaterals/$id/'
+      preLoaderRoute: typeof mainmodulesCollateralsIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/adjustment-notes/create/': {
+      id: '/(main)/(modules)/adjustment-notes/create/'
+      path: '/adjustment-notes/create'
+      fullPath: '/adjustment-notes/create/'
+      preLoaderRoute: typeof mainmodulesAdjustmentNotesCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/adjustment-notes/$id/': {
+      id: '/(main)/(modules)/adjustment-notes/$id/'
+      path: '/adjustment-notes/$id'
+      fullPath: '/adjustment-notes/$id/'
+      preLoaderRoute: typeof mainmodulesAdjustmentNotesIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/transactions/receipt-report-template/create/': {
+      id: '/(main)/(modules)/transactions/receipt-report-template/create/'
+      path: '/transactions/receipt-report-template/create'
+      fullPath: '/transactions/receipt-report-template/create/'
+      preLoaderRoute: typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/transactions/periods/create/': {
+      id: '/(main)/(modules)/transactions/periods/create/'
+      path: '/transactions/periods/create'
+      fullPath: '/transactions/periods/create/'
+      preLoaderRoute: typeof mainmodulesTransactionsPeriodsCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/reports/$id/edit/': {
       id: '/(main)/(modules)/reports/$id/edit/'
@@ -930,6 +1010,41 @@ declare module '@tanstack/react-router' {
       path: '/profiles/$id/edit'
       fullPath: '/profiles/$id/edit/'
       preLoaderRoute: typeof mainmodulesProfilesIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/purpouses/create/': {
+      id: '/(main)/(modules)/loans/purpouses/create/'
+      path: '/loans/purpouses/create'
+      fullPath: '/loans/purpouses/create/'
+      preLoaderRoute: typeof mainmodulesLoansPurpousesCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/$id/settings/': {
+      id: '/(main)/(modules)/loans/$id/settings/'
+      path: '/loans/$id/settings'
+      fullPath: '/loans/$id/settings/'
+      preLoaderRoute: typeof mainmodulesLoansIdSettingsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/follow-ups/$id/edit/': {
+      id: '/(main)/(modules)/follow-ups/$id/edit/'
+      path: '/follow-ups/$id/edit'
+      fullPath: '/follow-ups/$id/edit/'
+      preLoaderRoute: typeof mainmodulesFollowUpsIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/$id/settings/': {
+      id: '/(main)/(modules)/collaterals/$id/settings/'
+      path: '/collaterals/$id/settings'
+      fullPath: '/collaterals/$id/settings/'
+      preLoaderRoute: typeof mainmodulesCollateralsIdSettingsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/$id/edit/': {
+      id: '/(main)/(modules)/collaterals/$id/edit/'
+      path: '/collaterals/$id/edit'
+      fullPath: '/collaterals/$id/edit/'
+      preLoaderRoute: typeof mainmodulesCollateralsIdEditIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/access-control/users/create/': {
@@ -960,110 +1075,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesAccessControlRolesIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/(project-guard)/transactions/periods/': {
-      id: '/(main)/(modules)/(project-guard)/transactions/periods/'
-      path: '/transactions/periods'
-      fullPath: '/transactions/periods/'
-      preLoaderRoute: typeof mainmodulesprojectGuardTransactionsPeriodsIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/transactions/create/': {
-      id: '/(main)/(modules)/(project-guard)/transactions/create/'
-      path: '/transactions/create'
-      fullPath: '/transactions/create/'
-      preLoaderRoute: typeof mainmodulesprojectGuardTransactionsCreateIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/transactions/$id/': {
-      id: '/(main)/(modules)/(project-guard)/transactions/$id/'
-      path: '/transactions/$id'
-      fullPath: '/transactions/$id/'
-      preLoaderRoute: typeof mainmodulesprojectGuardTransactionsIdIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/loans/purpouses/': {
-      id: '/(main)/(modules)/(project-guard)/loans/purpouses/'
-      path: '/loans/purpouses'
-      fullPath: '/loans/purpouses/'
-      preLoaderRoute: typeof mainmodulesprojectGuardLoansPurpousesIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/loans/create/': {
-      id: '/(main)/(modules)/(project-guard)/loans/create/'
-      path: '/loans/create'
-      fullPath: '/loans/create/'
-      preLoaderRoute: typeof mainmodulesprojectGuardLoansCreateIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/loans/$id/': {
-      id: '/(main)/(modules)/(project-guard)/loans/$id/'
-      path: '/loans/$id'
-      fullPath: '/loans/$id/'
-      preLoaderRoute: typeof mainmodulesprojectGuardLoansIdIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/follow-ups/create/': {
-      id: '/(main)/(modules)/(project-guard)/follow-ups/create/'
-      path: '/follow-ups/create'
-      fullPath: '/follow-ups/create/'
-      preLoaderRoute: typeof mainmodulesprojectGuardFollowUpsCreateIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/follow-ups/$id/': {
-      id: '/(main)/(modules)/(project-guard)/follow-ups/$id/'
-      path: '/follow-ups/$id'
-      fullPath: '/follow-ups/$id/'
-      preLoaderRoute: typeof mainmodulesprojectGuardFollowUpsIdIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/finance/projections/': {
-      id: '/(main)/(modules)/(project-guard)/finance/projections/'
-      path: '/finance/projections'
-      fullPath: '/finance/projections/'
-      preLoaderRoute: typeof mainmodulesprojectGuardFinanceProjectionsIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/finance/incomes/': {
-      id: '/(main)/(modules)/(project-guard)/finance/incomes/'
-      path: '/finance/incomes'
-      fullPath: '/finance/incomes/'
-      preLoaderRoute: typeof mainmodulesprojectGuardFinanceIncomesIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/finance/expenses/': {
-      id: '/(main)/(modules)/(project-guard)/finance/expenses/'
-      path: '/finance/expenses'
-      fullPath: '/finance/expenses/'
-      preLoaderRoute: typeof mainmodulesprojectGuardFinanceExpensesIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/collaterals/create/': {
-      id: '/(main)/(modules)/(project-guard)/collaterals/create/'
-      path: '/collaterals/create'
-      fullPath: '/collaterals/create/'
-      preLoaderRoute: typeof mainmodulesprojectGuardCollateralsCreateIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/collaterals/$id/': {
-      id: '/(main)/(modules)/(project-guard)/collaterals/$id/'
-      path: '/collaterals/$id'
-      fullPath: '/collaterals/$id/'
-      preLoaderRoute: typeof mainmodulesprojectGuardCollateralsIdIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/adjustment-notes/create/': {
-      id: '/(main)/(modules)/(project-guard)/adjustment-notes/create/'
-      path: '/adjustment-notes/create'
-      fullPath: '/adjustment-notes/create/'
-      preLoaderRoute: typeof mainmodulesprojectGuardAdjustmentNotesCreateIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/adjustment-notes/$id/': {
-      id: '/(main)/(modules)/(project-guard)/adjustment-notes/$id/'
-      path: '/adjustment-notes/$id'
-      fullPath: '/adjustment-notes/$id/'
-      preLoaderRoute: typeof mainmodulesprojectGuardAdjustmentNotesIdIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
+    '/(main)/(modules)/loans/purpouses/$id/edit/': {
+      id: '/(main)/(modules)/loans/purpouses/$id/edit/'
+      path: '/loans/purpouses/$id/edit'
+      fullPath: '/loans/purpouses/$id/edit/'
+      preLoaderRoute: typeof mainmodulesLoansPurpousesIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/access-control/users/$username/edit/': {
       id: '/(main)/(modules)/access-control/users/$username/edit/'
@@ -1079,171 +1096,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesAccessControlRolesIdEditIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/(project-guard)/transactions/receipt-report-template/create/': {
-      id: '/(main)/(modules)/(project-guard)/transactions/receipt-report-template/create/'
-      path: '/transactions/receipt-report-template/create'
-      fullPath: '/transactions/receipt-report-template/create/'
-      preLoaderRoute: typeof mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/transactions/periods/create/': {
-      id: '/(main)/(modules)/(project-guard)/transactions/periods/create/'
-      path: '/transactions/periods/create'
-      fullPath: '/transactions/periods/create/'
-      preLoaderRoute: typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/loans/purpouses/create/': {
-      id: '/(main)/(modules)/(project-guard)/loans/purpouses/create/'
-      path: '/loans/purpouses/create'
-      fullPath: '/loans/purpouses/create/'
-      preLoaderRoute: typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/loans/$id/settings/': {
-      id: '/(main)/(modules)/(project-guard)/loans/$id/settings/'
-      path: '/loans/$id/settings'
-      fullPath: '/loans/$id/settings/'
-      preLoaderRoute: typeof mainmodulesprojectGuardLoansIdSettingsIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/follow-ups/$id/edit/': {
-      id: '/(main)/(modules)/(project-guard)/follow-ups/$id/edit/'
-      path: '/follow-ups/$id/edit'
-      fullPath: '/follow-ups/$id/edit/'
-      preLoaderRoute: typeof mainmodulesprojectGuardFollowUpsIdEditIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/collaterals/$id/settings/': {
-      id: '/(main)/(modules)/(project-guard)/collaterals/$id/settings/'
-      path: '/collaterals/$id/settings'
-      fullPath: '/collaterals/$id/settings/'
-      preLoaderRoute: typeof mainmodulesprojectGuardCollateralsIdSettingsIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/collaterals/$id/edit/': {
-      id: '/(main)/(modules)/(project-guard)/collaterals/$id/edit/'
-      path: '/collaterals/$id/edit'
-      fullPath: '/collaterals/$id/edit/'
-      preLoaderRoute: typeof mainmodulesprojectGuardCollateralsIdEditIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
-    '/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/': {
-      id: '/(main)/(modules)/(project-guard)/loans/purpouses/$id/edit/'
-      path: '/loans/purpouses/$id/edit'
-      fullPath: '/loans/purpouses/$id/edit/'
-      preLoaderRoute: typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRouteImport
-      parentRoute: typeof mainmodulesprojectGuardRouteRoute
-    }
   }
 }
-
-interface mainmodulesprojectGuardRouteRouteChildren {
-  mainmodulesprojectGuardAccountStatementsIndexRoute: typeof mainmodulesprojectGuardAccountStatementsIndexRoute
-  mainmodulesprojectGuardAdjustmentNotesIndexRoute: typeof mainmodulesprojectGuardAdjustmentNotesIndexRoute
-  mainmodulesprojectGuardCollateralsIndexRoute: typeof mainmodulesprojectGuardCollateralsIndexRoute
-  mainmodulesprojectGuardFollowUpsIndexRoute: typeof mainmodulesprojectGuardFollowUpsIndexRoute
-  mainmodulesprojectGuardLoansIndexRoute: typeof mainmodulesprojectGuardLoansIndexRoute
-  mainmodulesprojectGuardTransactionsIndexRoute: typeof mainmodulesprojectGuardTransactionsIndexRoute
-  mainmodulesprojectGuardAdjustmentNotesIdIndexRoute: typeof mainmodulesprojectGuardAdjustmentNotesIdIndexRoute
-  mainmodulesprojectGuardAdjustmentNotesCreateIndexRoute: typeof mainmodulesprojectGuardAdjustmentNotesCreateIndexRoute
-  mainmodulesprojectGuardCollateralsIdIndexRoute: typeof mainmodulesprojectGuardCollateralsIdIndexRoute
-  mainmodulesprojectGuardCollateralsCreateIndexRoute: typeof mainmodulesprojectGuardCollateralsCreateIndexRoute
-  mainmodulesprojectGuardFinanceExpensesIndexRoute: typeof mainmodulesprojectGuardFinanceExpensesIndexRoute
-  mainmodulesprojectGuardFinanceIncomesIndexRoute: typeof mainmodulesprojectGuardFinanceIncomesIndexRoute
-  mainmodulesprojectGuardFinanceProjectionsIndexRoute: typeof mainmodulesprojectGuardFinanceProjectionsIndexRoute
-  mainmodulesprojectGuardFollowUpsIdIndexRoute: typeof mainmodulesprojectGuardFollowUpsIdIndexRoute
-  mainmodulesprojectGuardFollowUpsCreateIndexRoute: typeof mainmodulesprojectGuardFollowUpsCreateIndexRoute
-  mainmodulesprojectGuardLoansIdIndexRoute: typeof mainmodulesprojectGuardLoansIdIndexRoute
-  mainmodulesprojectGuardLoansCreateIndexRoute: typeof mainmodulesprojectGuardLoansCreateIndexRoute
-  mainmodulesprojectGuardLoansPurpousesIndexRoute: typeof mainmodulesprojectGuardLoansPurpousesIndexRoute
-  mainmodulesprojectGuardTransactionsIdIndexRoute: typeof mainmodulesprojectGuardTransactionsIdIndexRoute
-  mainmodulesprojectGuardTransactionsCreateIndexRoute: typeof mainmodulesprojectGuardTransactionsCreateIndexRoute
-  mainmodulesprojectGuardTransactionsPeriodsIndexRoute: typeof mainmodulesprojectGuardTransactionsPeriodsIndexRoute
-  mainmodulesprojectGuardCollateralsIdEditIndexRoute: typeof mainmodulesprojectGuardCollateralsIdEditIndexRoute
-  mainmodulesprojectGuardCollateralsIdSettingsIndexRoute: typeof mainmodulesprojectGuardCollateralsIdSettingsIndexRoute
-  mainmodulesprojectGuardFollowUpsIdEditIndexRoute: typeof mainmodulesprojectGuardFollowUpsIdEditIndexRoute
-  mainmodulesprojectGuardLoansIdSettingsIndexRoute: typeof mainmodulesprojectGuardLoansIdSettingsIndexRoute
-  mainmodulesprojectGuardLoansPurpousesCreateIndexRoute: typeof mainmodulesprojectGuardLoansPurpousesCreateIndexRoute
-  mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute: typeof mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute
-  mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute: typeof mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute
-  mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute: typeof mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute
-}
-
-const mainmodulesprojectGuardRouteRouteChildren: mainmodulesprojectGuardRouteRouteChildren =
-  {
-    mainmodulesprojectGuardAccountStatementsIndexRoute:
-      mainmodulesprojectGuardAccountStatementsIndexRoute,
-    mainmodulesprojectGuardAdjustmentNotesIndexRoute:
-      mainmodulesprojectGuardAdjustmentNotesIndexRoute,
-    mainmodulesprojectGuardCollateralsIndexRoute:
-      mainmodulesprojectGuardCollateralsIndexRoute,
-    mainmodulesprojectGuardFollowUpsIndexRoute:
-      mainmodulesprojectGuardFollowUpsIndexRoute,
-    mainmodulesprojectGuardLoansIndexRoute:
-      mainmodulesprojectGuardLoansIndexRoute,
-    mainmodulesprojectGuardTransactionsIndexRoute:
-      mainmodulesprojectGuardTransactionsIndexRoute,
-    mainmodulesprojectGuardAdjustmentNotesIdIndexRoute:
-      mainmodulesprojectGuardAdjustmentNotesIdIndexRoute,
-    mainmodulesprojectGuardAdjustmentNotesCreateIndexRoute:
-      mainmodulesprojectGuardAdjustmentNotesCreateIndexRoute,
-    mainmodulesprojectGuardCollateralsIdIndexRoute:
-      mainmodulesprojectGuardCollateralsIdIndexRoute,
-    mainmodulesprojectGuardCollateralsCreateIndexRoute:
-      mainmodulesprojectGuardCollateralsCreateIndexRoute,
-    mainmodulesprojectGuardFinanceExpensesIndexRoute:
-      mainmodulesprojectGuardFinanceExpensesIndexRoute,
-    mainmodulesprojectGuardFinanceIncomesIndexRoute:
-      mainmodulesprojectGuardFinanceIncomesIndexRoute,
-    mainmodulesprojectGuardFinanceProjectionsIndexRoute:
-      mainmodulesprojectGuardFinanceProjectionsIndexRoute,
-    mainmodulesprojectGuardFollowUpsIdIndexRoute:
-      mainmodulesprojectGuardFollowUpsIdIndexRoute,
-    mainmodulesprojectGuardFollowUpsCreateIndexRoute:
-      mainmodulesprojectGuardFollowUpsCreateIndexRoute,
-    mainmodulesprojectGuardLoansIdIndexRoute:
-      mainmodulesprojectGuardLoansIdIndexRoute,
-    mainmodulesprojectGuardLoansCreateIndexRoute:
-      mainmodulesprojectGuardLoansCreateIndexRoute,
-    mainmodulesprojectGuardLoansPurpousesIndexRoute:
-      mainmodulesprojectGuardLoansPurpousesIndexRoute,
-    mainmodulesprojectGuardTransactionsIdIndexRoute:
-      mainmodulesprojectGuardTransactionsIdIndexRoute,
-    mainmodulesprojectGuardTransactionsCreateIndexRoute:
-      mainmodulesprojectGuardTransactionsCreateIndexRoute,
-    mainmodulesprojectGuardTransactionsPeriodsIndexRoute:
-      mainmodulesprojectGuardTransactionsPeriodsIndexRoute,
-    mainmodulesprojectGuardCollateralsIdEditIndexRoute:
-      mainmodulesprojectGuardCollateralsIdEditIndexRoute,
-    mainmodulesprojectGuardCollateralsIdSettingsIndexRoute:
-      mainmodulesprojectGuardCollateralsIdSettingsIndexRoute,
-    mainmodulesprojectGuardFollowUpsIdEditIndexRoute:
-      mainmodulesprojectGuardFollowUpsIdEditIndexRoute,
-    mainmodulesprojectGuardLoansIdSettingsIndexRoute:
-      mainmodulesprojectGuardLoansIdSettingsIndexRoute,
-    mainmodulesprojectGuardLoansPurpousesCreateIndexRoute:
-      mainmodulesprojectGuardLoansPurpousesCreateIndexRoute,
-    mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute:
-      mainmodulesprojectGuardTransactionsPeriodsCreateIndexRoute,
-    mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute:
-      mainmodulesprojectGuardTransactionsReceiptReportTemplateCreateIndexRoute,
-    mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute:
-      mainmodulesprojectGuardLoansPurpousesIdEditIndexRoute,
-  }
-
-const mainmodulesprojectGuardRouteRouteWithChildren =
-  mainmodulesprojectGuardRouteRoute._addFileChildren(
-    mainmodulesprojectGuardRouteRouteChildren,
-  )
 
 interface mainmodulesRouteRouteChildren {
-  mainmodulesprojectGuardRouteRoute: typeof mainmodulesprojectGuardRouteRouteWithChildren
   mainmodulesAccessControlIndexRoute: typeof mainmodulesAccessControlIndexRoute
+  mainmodulesAccountStatementsIndexRoute: typeof mainmodulesAccountStatementsIndexRoute
+  mainmodulesAdjustmentNotesIndexRoute: typeof mainmodulesAdjustmentNotesIndexRoute
   mainmodulesAmortizationsIndexRoute: typeof mainmodulesAmortizationsIndexRoute
+  mainmodulesCollateralsIndexRoute: typeof mainmodulesCollateralsIndexRoute
+  mainmodulesFollowUpsIndexRoute: typeof mainmodulesFollowUpsIndexRoute
+  mainmodulesLoansIndexRoute: typeof mainmodulesLoansIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
-  mainmodulesProjectsIndexRoute: typeof mainmodulesProjectsIndexRoute
   mainmodulesReportsIndexRoute: typeof mainmodulesReportsIndexRoute
+  mainmodulesTransactionsIndexRoute: typeof mainmodulesTransactionsIndexRoute
+  mainmodulesAdjustmentNotesIdIndexRoute: typeof mainmodulesAdjustmentNotesIdIndexRoute
+  mainmodulesAdjustmentNotesCreateIndexRoute: typeof mainmodulesAdjustmentNotesCreateIndexRoute
+  mainmodulesCollateralsIdIndexRoute: typeof mainmodulesCollateralsIdIndexRoute
+  mainmodulesCollateralsCreateIndexRoute: typeof mainmodulesCollateralsCreateIndexRoute
+  mainmodulesFinanceExpensesIndexRoute: typeof mainmodulesFinanceExpensesIndexRoute
+  mainmodulesFinanceIncomesIndexRoute: typeof mainmodulesFinanceIncomesIndexRoute
+  mainmodulesFinanceProjectionsIndexRoute: typeof mainmodulesFinanceProjectionsIndexRoute
+  mainmodulesFollowUpsIdIndexRoute: typeof mainmodulesFollowUpsIdIndexRoute
+  mainmodulesFollowUpsCreateIndexRoute: typeof mainmodulesFollowUpsCreateIndexRoute
+  mainmodulesLoansIdIndexRoute: typeof mainmodulesLoansIdIndexRoute
+  mainmodulesLoansCreateIndexRoute: typeof mainmodulesLoansCreateIndexRoute
+  mainmodulesLoansPurpousesIndexRoute: typeof mainmodulesLoansPurpousesIndexRoute
   mainmodulesProfilesIdIndexRoute: typeof mainmodulesProfilesIdIndexRoute
   mainmodulesProfilesCreateIndexRoute: typeof mainmodulesProfilesCreateIndexRoute
   mainmodulesProjectsCreateIndexRoute: typeof mainmodulesProjectsCreateIndexRoute
@@ -1251,24 +1129,55 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesReportsIdIndexRoute: typeof mainmodulesReportsIdIndexRoute
   mainmodulesReportsCreateIndexRoute: typeof mainmodulesReportsCreateIndexRoute
   mainmodulesReportsGenerateIndexRoute: typeof mainmodulesReportsGenerateIndexRoute
+  mainmodulesTransactionsIdIndexRoute: typeof mainmodulesTransactionsIdIndexRoute
+  mainmodulesTransactionsCreateIndexRoute: typeof mainmodulesTransactionsCreateIndexRoute
+  mainmodulesTransactionsPeriodsIndexRoute: typeof mainmodulesTransactionsPeriodsIndexRoute
   mainmodulesAccessControlRolesIdIndexRoute: typeof mainmodulesAccessControlRolesIdIndexRoute
   mainmodulesAccessControlRolesCreateIndexRoute: typeof mainmodulesAccessControlRolesCreateIndexRoute
   mainmodulesAccessControlUsersUsernameIndexRoute: typeof mainmodulesAccessControlUsersUsernameIndexRoute
   mainmodulesAccessControlUsersCreateIndexRoute: typeof mainmodulesAccessControlUsersCreateIndexRoute
+  mainmodulesCollateralsIdEditIndexRoute: typeof mainmodulesCollateralsIdEditIndexRoute
+  mainmodulesCollateralsIdSettingsIndexRoute: typeof mainmodulesCollateralsIdSettingsIndexRoute
+  mainmodulesFollowUpsIdEditIndexRoute: typeof mainmodulesFollowUpsIdEditIndexRoute
+  mainmodulesLoansIdSettingsIndexRoute: typeof mainmodulesLoansIdSettingsIndexRoute
+  mainmodulesLoansPurpousesCreateIndexRoute: typeof mainmodulesLoansPurpousesCreateIndexRoute
   mainmodulesProfilesIdEditIndexRoute: typeof mainmodulesProfilesIdEditIndexRoute
   mainmodulesReportsIdEditIndexRoute: typeof mainmodulesReportsIdEditIndexRoute
+  mainmodulesTransactionsPeriodsCreateIndexRoute: typeof mainmodulesTransactionsPeriodsCreateIndexRoute
+  mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute: typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute
   mainmodulesAccessControlRolesIdEditIndexRoute: typeof mainmodulesAccessControlRolesIdEditIndexRoute
   mainmodulesAccessControlUsersUsernameEditIndexRoute: typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
+  mainmodulesLoansPurpousesIdEditIndexRoute: typeof mainmodulesLoansPurpousesIdEditIndexRoute
 }
 
 const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
-  mainmodulesprojectGuardRouteRoute:
-    mainmodulesprojectGuardRouteRouteWithChildren,
   mainmodulesAccessControlIndexRoute: mainmodulesAccessControlIndexRoute,
+  mainmodulesAccountStatementsIndexRoute:
+    mainmodulesAccountStatementsIndexRoute,
+  mainmodulesAdjustmentNotesIndexRoute: mainmodulesAdjustmentNotesIndexRoute,
   mainmodulesAmortizationsIndexRoute: mainmodulesAmortizationsIndexRoute,
+  mainmodulesCollateralsIndexRoute: mainmodulesCollateralsIndexRoute,
+  mainmodulesFollowUpsIndexRoute: mainmodulesFollowUpsIndexRoute,
+  mainmodulesLoansIndexRoute: mainmodulesLoansIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
-  mainmodulesProjectsIndexRoute: mainmodulesProjectsIndexRoute,
   mainmodulesReportsIndexRoute: mainmodulesReportsIndexRoute,
+  mainmodulesTransactionsIndexRoute: mainmodulesTransactionsIndexRoute,
+  mainmodulesAdjustmentNotesIdIndexRoute:
+    mainmodulesAdjustmentNotesIdIndexRoute,
+  mainmodulesAdjustmentNotesCreateIndexRoute:
+    mainmodulesAdjustmentNotesCreateIndexRoute,
+  mainmodulesCollateralsIdIndexRoute: mainmodulesCollateralsIdIndexRoute,
+  mainmodulesCollateralsCreateIndexRoute:
+    mainmodulesCollateralsCreateIndexRoute,
+  mainmodulesFinanceExpensesIndexRoute: mainmodulesFinanceExpensesIndexRoute,
+  mainmodulesFinanceIncomesIndexRoute: mainmodulesFinanceIncomesIndexRoute,
+  mainmodulesFinanceProjectionsIndexRoute:
+    mainmodulesFinanceProjectionsIndexRoute,
+  mainmodulesFollowUpsIdIndexRoute: mainmodulesFollowUpsIdIndexRoute,
+  mainmodulesFollowUpsCreateIndexRoute: mainmodulesFollowUpsCreateIndexRoute,
+  mainmodulesLoansIdIndexRoute: mainmodulesLoansIdIndexRoute,
+  mainmodulesLoansCreateIndexRoute: mainmodulesLoansCreateIndexRoute,
+  mainmodulesLoansPurpousesIndexRoute: mainmodulesLoansPurpousesIndexRoute,
   mainmodulesProfilesIdIndexRoute: mainmodulesProfilesIdIndexRoute,
   mainmodulesProfilesCreateIndexRoute: mainmodulesProfilesCreateIndexRoute,
   mainmodulesProjectsCreateIndexRoute: mainmodulesProjectsCreateIndexRoute,
@@ -1276,6 +1185,11 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesReportsIdIndexRoute: mainmodulesReportsIdIndexRoute,
   mainmodulesReportsCreateIndexRoute: mainmodulesReportsCreateIndexRoute,
   mainmodulesReportsGenerateIndexRoute: mainmodulesReportsGenerateIndexRoute,
+  mainmodulesTransactionsIdIndexRoute: mainmodulesTransactionsIdIndexRoute,
+  mainmodulesTransactionsCreateIndexRoute:
+    mainmodulesTransactionsCreateIndexRoute,
+  mainmodulesTransactionsPeriodsIndexRoute:
+    mainmodulesTransactionsPeriodsIndexRoute,
   mainmodulesAccessControlRolesIdIndexRoute:
     mainmodulesAccessControlRolesIdIndexRoute,
   mainmodulesAccessControlRolesCreateIndexRoute:
@@ -1284,12 +1198,26 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
     mainmodulesAccessControlUsersUsernameIndexRoute,
   mainmodulesAccessControlUsersCreateIndexRoute:
     mainmodulesAccessControlUsersCreateIndexRoute,
+  mainmodulesCollateralsIdEditIndexRoute:
+    mainmodulesCollateralsIdEditIndexRoute,
+  mainmodulesCollateralsIdSettingsIndexRoute:
+    mainmodulesCollateralsIdSettingsIndexRoute,
+  mainmodulesFollowUpsIdEditIndexRoute: mainmodulesFollowUpsIdEditIndexRoute,
+  mainmodulesLoansIdSettingsIndexRoute: mainmodulesLoansIdSettingsIndexRoute,
+  mainmodulesLoansPurpousesCreateIndexRoute:
+    mainmodulesLoansPurpousesCreateIndexRoute,
   mainmodulesProfilesIdEditIndexRoute: mainmodulesProfilesIdEditIndexRoute,
   mainmodulesReportsIdEditIndexRoute: mainmodulesReportsIdEditIndexRoute,
+  mainmodulesTransactionsPeriodsCreateIndexRoute:
+    mainmodulesTransactionsPeriodsCreateIndexRoute,
+  mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute:
+    mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute,
   mainmodulesAccessControlRolesIdEditIndexRoute:
     mainmodulesAccessControlRolesIdEditIndexRoute,
   mainmodulesAccessControlUsersUsernameEditIndexRoute:
     mainmodulesAccessControlUsersUsernameEditIndexRoute,
+  mainmodulesLoansPurpousesIdEditIndexRoute:
+    mainmodulesLoansPurpousesIdEditIndexRoute,
 }
 
 const mainmodulesRouteRouteWithChildren =

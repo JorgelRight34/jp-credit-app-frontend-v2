@@ -3,6 +3,7 @@ import type { LoginResult } from "../models/loginResult";
 import type { UseDataFormProps } from "@/components";
 import { useForm } from "@/components";
 import { ACCESS_TOKEN } from "@/lib/utils";
+import { useDataClient } from "@/hooks/useDataClient";
 
 export interface LoginFormValues {
     username: string;
@@ -10,6 +11,8 @@ export interface LoginFormValues {
 }
 
 export const useLoginForm = ({ onSuccess, ...props }: UseDataFormProps<LoginResult, LoginFormValues>) => {
+    const dataClient = useDataClient();
+
     return useForm({
         ...props,
         onSubmit: login,
@@ -19,6 +22,7 @@ export const useLoginForm = ({ onSuccess, ...props }: UseDataFormProps<LoginResu
         toastMessage: () => `Bienvenido!`,
         onSuccess: (data) => {
             localStorage.setItem(ACCESS_TOKEN, data.token)
+            dataClient.clear();
             onSuccess?.(data);
         },
     });

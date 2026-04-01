@@ -20,4 +20,5 @@ export type BaseTextFieldProps = Pick<
     | "required"
     | "onChange"
     | "inputRef"
+    | "children"
 > 

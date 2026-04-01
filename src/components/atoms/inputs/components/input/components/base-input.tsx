@@ -20,6 +20,7 @@ export type BaseInputProps = BaseTextFieldProps & {
 }
 
 const BaseInput = ({
+  children,
   readOnly,
   value = '',
   className,
@@ -70,7 +71,9 @@ const BaseInput = ({
       sx={SX_CONFIG}
       size="small"
       {...props}
-    />
+    >
+      {children}
+    </TextField>
   )
 }
 

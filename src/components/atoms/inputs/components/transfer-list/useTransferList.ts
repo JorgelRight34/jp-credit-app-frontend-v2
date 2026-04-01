@@ -1,16 +1,16 @@
 import { useMemo, useState } from "react"
 import type { TransferItem } from "./transfer-list-box"
 
-export interface UseTransferListProps {
-    value: Array<string>
-    items: Array<TransferItem>
-    onChange?: (next: Array<string>) => void
+export interface UseTransferListProps<T> {
+    value: Array<T>
+    items: Array<TransferItem<T>>
+    onChange?: (next: Array<T>) => void
 }
 
-export const useTransferList = ({ value, items, onChange }: UseTransferListProps) => {
-    const [leftChecked, setLeftChecked] = useState<Set<string>>(new Set())
-    const [rightChecked, setRightChecked] = useState<Set<string>>(new Set())
-    const [seenItems, setSeenItems] = useState<Map<string, TransferItem>>(new Map())
+export const useTransferList = <T,>({ value, items, onChange }: UseTransferListProps<T>) => {
+    const [leftChecked, setLeftChecked] = useState<Set<T>>(new Set())
+    const [rightChecked, setRightChecked] = useState<Set<T>>(new Set())
+    const [seenItems, setSeenItems] = useState<Map<T, TransferItem<T>>>(new Map())
 
     useMemo(() => {
         setSeenItems((prev) => {
@@ -36,7 +36,7 @@ export const useTransferList = ({ value, items, onChange }: UseTransferListProps
     )
 
     const rightItems = useMemo(
-        () => value.map((id) => seenItems.get(id)).filter(Boolean) as TransferItem[],
+        () => value.map((id) => seenItems.get(id)).filter(Boolean) as TransferItem<T>[],
         [value, seenItems],
     )
 
@@ -45,7 +45,7 @@ export const useTransferList = ({ value, items, onChange }: UseTransferListProps
         [leftChecked, leftItems],
     )
 
-    const toggle = (side: 'left' | 'right', id: string, itemDisabled?: boolean) => {
+    const toggle = (side: 'left' | 'right', id: T, itemDisabled?: boolean) => {
         if (itemDisabled) return
 
         const set = side === 'left' ? leftChecked : rightChecked

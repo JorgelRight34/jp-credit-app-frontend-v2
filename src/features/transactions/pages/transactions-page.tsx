@@ -14,7 +14,6 @@ import {
   TransactionIcon,
 } from '@/components'
 import TransactionDataTable from '../components/transaction-datatable'
-import { PropsWithProjectId } from '@/features/projects'
 
 export const transactionBreadcrumb: BreadcrumbSpec = {
   icon: TransactionIcon,
@@ -39,7 +38,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Atrasados', icon: ScheduleIcon }],
 ]
 
-const TransactionsPage = ({ projectId }: PropsWithProjectId) => {
+const TransactionsPage = () => {
   return (
     <PageRouterLayout
       title="Transacciones"
@@ -60,13 +59,13 @@ const TransactionsPage = ({ projectId }: PropsWithProjectId) => {
           <TransactionDataTable />
         </TabPanel>
         <TabPanel index={1}>
-          <TransactionDataTable initialQuery={{ type: 'pc', projectId }} />
+          <TransactionDataTable initialQuery={{ type: 'pc' }} />
         </TabPanel>
         <TabPanel index={2}>
-          <TransactionDataTable initialQuery={{ type: 'ds', projectId }} />
+          <TransactionDataTable initialQuery={{ type: 'ds' }} />
         </TabPanel>
         <TabPanel index={3}>
-          <TransactionDataTable initialQuery={{ isOverdue: true, projectId }} />
+          <TransactionDataTable initialQuery={{ isOverdue: true }} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

@@ -3,25 +3,25 @@ import Paragraph from '../../../text/paragraph'
 import FormLabel from '../../../form-label/form-label'
 import Checkbox from '../checkbox/checkbox'
 
-export type TransferItem = {
-  id: string
+export type TransferItem<T> = {
+  id: T
   label: string
   disabled?: boolean
 }
 
-interface TransferListBoxProps {
+interface TransferListBoxProps<T> {
   title: string
-  items: Array<TransferItem>
-  checked: Set<string>
+  items: Array<TransferItem<T>>
+  checked: Set<T>
   disabled?: boolean
   subtitle?: string
   className?: string
   headerClassName?: string
   subtitleClassName?: string
-  onToggle: (id: string, item: TransferItem, disabled?: boolean) => void
+  onToggle: (id: T, item: TransferItem<T>, disabled?: boolean) => void
 }
 
-const TransferListBox = ({
+const TransferListBox = <T,>({
   title,
   subtitle,
   items,
@@ -31,27 +31,27 @@ const TransferListBox = ({
   checked,
   disabled,
   onToggle,
-}: TransferListBoxProps) => {
+}: TransferListBoxProps<T>) => {
   return (
-    <div className={clsx('flex flex-col h-full', className)}>
+    <div className={clsx('flex h-full flex-col', className)}>
       <div
         className={clsx(
-          'text-secondary flex-shrink-0 border overflow-hidden p-3 rounded-t-xl',
+          'text-secondary flex-shrink-0 overflow-hidden rounded-t-xl border p-3',
           headerClassName,
         )}
       >
         {title} <span style={{ opacity: 0.6 }}>({items.length})</span>
         <Paragraph className={subtitleClassName}>{subtitle}</Paragraph>
       </div>
-      <div className="flex flex-col flex-1 border-x border-b rounded-b-xl bg-surface w-full overflow-y-auto min-h-0">
+      <div className="bg-surface flex min-h-0 w-full flex-1 flex-col overflow-y-auto rounded-b-xl border-x border-b">
         {items.map((item) => {
           const isDisabled = !!disabled || !!item.disabled
 
           return (
             <FormLabel
-              key={item.id}
-              className={clsx('flex !p-2 items-center bg-input-hover', {
-                'opacity-50 cursor-not-allowed': isDisabled,
+              key={item.id as string}
+              className={clsx('bg-input-hover flex items-center !p-2', {
+                'cursor-not-allowed opacity-50': isDisabled,
               })}
             >
               <Checkbox

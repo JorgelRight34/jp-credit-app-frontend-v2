@@ -8,7 +8,7 @@ interface NavbarFooterProps extends PropsWithUser {}
 
 const NavbarFooter = ({ user }: NavbarFooterProps) => {
   return (
-    <div className="bg-active-transparent bg-active-transparent flex w-full flex-col rounded-lg border p-2 shadow-sm">
+    <div className="bg-active-transparent flex w-full flex-col rounded-lg border p-2 shadow-sm">
       <div className="text-muted !flex w-full items-center">
         <CurrentUserPicCard user={user} className="mr-2" />
         <span className="mr-auto flex flex-col">

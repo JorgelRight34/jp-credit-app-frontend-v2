@@ -15,7 +15,6 @@ import {
   buildPageLayoutCreateOption,
 } from '@/components'
 import { collateralsBreadcrumb } from './collateral-page'
-import { PropsWithProjectId } from '@/features/projects'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Todos', icon: AllIcon }],
@@ -25,7 +24,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Agrícola', icon: GrassIcon }],
 ]
 
-const CollateralsPage = ({ projectId }: PropsWithProjectId) => {
+const CollateralsPage = () => {
   return (
     <PageRouterLayout
       title="Garantías"
@@ -48,31 +47,25 @@ const CollateralsPage = ({ projectId }: PropsWithProjectId) => {
         </TabPanel>
         <TabPanel index={1}>
           <CollateralDataTable
-            initialQuery={{ projectId, type: collateralTypeMap.carLoan }}
+            initialQuery={{ type: collateralTypeMap.carLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </TabPanel>
         <TabPanel index={2}>
           <CollateralDataTable
-            initialQuery={{
-              projectId,
-              type: collateralTypeMap.agriculturalLoan,
-            }}
+            initialQuery={{ type: collateralTypeMap.agriculturalLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </TabPanel>
         <TabPanel index={3}>
           <CollateralDataTable
-            initialQuery={{
-              projectId,
-              type: collateralTypeMap.agriculturalLoan,
-            }}
+            initialQuery={{ type: collateralTypeMap.agriculturalLoan }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </TabPanel>
         <TabPanel index={4}>
           <CollateralDataTable
-            initialQuery={{ projectId, isActive: false }}
+            initialQuery={{ isActive: false }}
             initialState={{ columnVisibility: { type: false } }}
           />
         </TabPanel>

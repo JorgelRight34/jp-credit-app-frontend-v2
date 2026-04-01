@@ -1,8 +1,17 @@
-import { EditFormPageLayout, PagePanel } from '@/components'
+import {
+  BreadcrumbSpec,
+  EditFormPageLayout,
+  PagePanel,
+  ProjectIcon,
+} from '@/components'
 import { Project } from '../models/project'
 import { projectsPermissionProvider } from '../lib/config/permissionProvider'
-import { projectsBreadcrumb } from './projects-page'
 import ProjectForm from '../components/project-form'
+
+export const projectsBreadcrumb: BreadcrumbSpec = {
+  title: 'Proyectos',
+  icon: ProjectIcon,
+}
 
 const EditProjectFormPage = ({ project }: { project: Project }) => {
   return (

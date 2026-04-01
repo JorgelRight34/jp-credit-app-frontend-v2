@@ -20,7 +20,7 @@ const PageLayout = ({
 }: PageLayoutProps) => {
   return (
     <div className="flex w-full flex-1 flex-col pb-3 shadow-sm">
-      <div className="mb-1 hidden w-full border-b p-2 px-3 md:block md:px-5">
+      <div className="mb-1 hidden w-full border-b p-1 px-3 md:block md:px-5">
         {breadcrumb}
       </div>
       <div className="flex w-full flex-shrink-0 items-center justify-between overflow-y-auto px-3 py-2 md:px-5">

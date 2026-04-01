@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
 import FormGroupLayout, { FormGroupLabel } from './fom-group-layout'
 import type { FormGroupLayoutProps } from './fom-group-layout'
 import {
@@ -13,7 +13,7 @@ import { copyToClipboard } from '@/lib/utils'
 import { toastService } from '@/components/molecules'
 
 export interface FormReadOnlyProps extends FormGroupLayoutProps {
-  value?: string | number | null
+  value?: ReactNode
   optional?: boolean
   disabled?: boolean
 }
@@ -46,7 +46,9 @@ const FormReadOnlyGroup = ({
         }}
         disabled={disabled}
         readOnly
-      />
+      >
+        {value}
+      </Input>
     </FormGroupLayout>
   )
 }

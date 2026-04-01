@@ -15,6 +15,7 @@ export interface User {
   roles: Array<Role>;
   lastLogin: string;
   isActive: boolean;
+  projects: Array<{ id: number; name: string }>
 }
 
 export type PropsWithUser<T = object> = { user: User } & T

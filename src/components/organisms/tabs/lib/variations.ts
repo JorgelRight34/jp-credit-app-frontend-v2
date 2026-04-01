@@ -8,7 +8,7 @@ export const variations = {
     default: {
         list: "!px-0 flex sticky-top flex-shrink-0 w-full !z-20 overflow-x-auto !overflow-y-hidden whitespace-nowrap",
         container: "px-6 px-lg-3",
-        tab: "w-fit py-2 px-3"
+        tab: "w-fit pb-2 px-3"
     },
     minimal: {
         list: "flex justify-end",

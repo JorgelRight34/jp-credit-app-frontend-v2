@@ -12,6 +12,7 @@ import { getCurrentUser } from '@/features/auth/services/authService'
 import { getCurrentUserFromServer } from '@/features/auth/server/authServerService'
 import { usersQueryKey } from '@/features/auth'
 import { useSuspenseData } from '@/hooks/useData'
+import { ProjectSelector } from '@/features/projects'
 
 const getCurrentUserFn = createIsomorphicFn()
   .server(() => getCurrentUserFromServer())
@@ -55,7 +56,14 @@ function RouteComponentInner() {
   return (
     <div className="relative flex h-[100dvh] flex-col md:flex-row">
       <div className="hidden h-full w-full p-0 shadow-sm md:block md:w-2/15">
-        <Navbar user={user!} />
+        <Navbar
+          user={user!}
+          header={
+            <ProjectSelector
+              initialData={{ id: user.projectId, name: user.projectName }}
+            />
+          }
+        />
       </div>
       <div className="bg-background flex flex-1 flex-col overflow-y-auto p-0 [scrollbar-gutter:stable]">
         <Outlet />

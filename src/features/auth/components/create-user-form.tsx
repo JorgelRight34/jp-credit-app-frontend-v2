@@ -1,7 +1,7 @@
-import { Ref, Suspense, useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { useUserForm } from '../hooks/useUserForm'
 import type { User } from '../../../models/user'
-import type { DataModuleFormProps } from '@/components'
+import type { DataModuleFormProps, PropsWithFormRef } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
 import {
   FormContainer,
@@ -28,32 +28,41 @@ import {
 } from '../hooks/usePermissionsForm'
 import PermissionsFormTransferList from './permissions-form-transfer-list'
 import UserRolesTransferList from './user-roles-transfer-list'
+import {
+  ProjectUserFormRef,
+  ProjectUserTransferList,
+  useProjectUserForm,
+} from '@/features/projects'
 
 type CreateUserAccessFormProps = DataModuleFormProps<User, UserFormValues>
+
+const defaultValues = {
+  username: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmation: '',
+  isActive: true,
+}
 
 const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
   const permissionsFormRef = useRef<PermissionsFormRef>(null)
   const rolesFormRef = useRef<UserRolesFormRef>(null)
+  const projectUserFormRef = useRef<ProjectUserFormRef>(null)
 
   const form = useUserForm({
-    defaultValues: {
-      username: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmation: '',
-      isActive: true,
-    },
+    defaultValues,
     onSuccess: async ({ id, username }) => {
       permissionsFormRef.current?.setValue('id', id)
-
+      projectUserFormRef.current?.setValue('userId', id)
       rolesFormRef.current?.setValue('userId', id)
       rolesFormRef.current?.setValue('username', username)
 
       await Promise.all([
         permissionsFormRef.current?.submit(),
         rolesFormRef.current?.submit(),
+        projectUserFormRef.current?.submit(),
       ])
     },
     toastMessage: () => 'Guardado',
@@ -67,6 +76,7 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
           <Tab index={0}>Datos</Tab>
           <Tab index={1}>Permisos</Tab>
           <Tab index={2}>Roles</Tab>
+          <Tab index={3}>Proyectos</Tab>
         </TabsList>
         <TabPanel index={0}>
           <UserDataFormPanel form={form}>
@@ -92,12 +102,15 @@ const CreateUserAccessForm = (props: CreateUserAccessFormProps) => {
         <TabPanel index={2}>
           <UserRolesForm ref={rolesFormRef} />
         </TabPanel>
+        <TabPanel index={3}>
+          <ProjectUserForm ref={projectUserFormRef} />
+        </TabPanel>
       </Tabs>
     </FormContainer>
   )
 }
 
-const PermissionsForm = ({ ref }: { ref: Ref<PermissionsFormRef> }) => {
+const PermissionsForm = ({ ref }: PropsWithFormRef<PermissionsFormRef>) => {
   const form = usePermissionsForm({ handler: updateUserClaims })
 
   return (
@@ -105,7 +118,7 @@ const PermissionsForm = ({ ref }: { ref: Ref<PermissionsFormRef> }) => {
       <Suspense fallback="...">
         <FormInput
           name="claims"
-          className="max-h-96"
+          className="!max-h-fit"
           as={PermissionsFormTransferList}
         />
       </Suspense>
@@ -117,12 +130,28 @@ const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
   const form = useUserRolesForm(props)
 
   return (
-    <FormWithRef form={form}>
+    <FormWithRef ref={ref} form={form}>
       <Suspense fallback="...">
         <FormInput
           name="roles"
           className="max-h-96"
           as={UserRolesTransferList}
+        />
+      </Suspense>
+    </FormWithRef>
+  )
+}
+
+const ProjectUserForm = ({ ref }: PropsWithFormRef<ProjectUserFormRef>) => {
+  const form = useProjectUserForm()
+
+  return (
+    <FormWithRef ref={ref} form={form}>
+      <Suspense fallback="...">
+        <FormInput
+          name="projectIds"
+          className="max-h-96"
+          as={ProjectUserTransferList}
         />
       </Suspense>
     </FormWithRef>

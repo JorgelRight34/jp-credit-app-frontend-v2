@@ -41,10 +41,7 @@ export const useFormMethods = <T extends object, TData extends FieldValues, TRet
         handleSubmit: handleSubmit,
         setValue: setValue,
         validate: trigger,
-        reset: () => reset(defaultValues, {
-            keepErrors: false,
-            keepDirty: false
-        }),
+        reset,
     }), [control, getValues, handleSubmit, handleOnSubmit, setValue, trigger, reset]);
 };
 

@@ -30,6 +30,7 @@ export * from "./lib/utils";
 export * from "./models/role";
 export * from "./models/identityPermissions";
 export * from "./models/userQuery";
+export * from './models/currentUser'
 
 // ----------------------
 // Pages (default)

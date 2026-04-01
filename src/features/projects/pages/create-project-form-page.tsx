@@ -1,7 +1,7 @@
 import { CreateFormPageLayout, PagePanel } from '@/components'
 import { projectsPermissionProvider } from '../lib/config/permissionProvider'
 import ProjectForm from '../components/project-form'
-import { projectsBreadcrumb } from './projects-page'
+import { projectsBreadcrumb } from './edit-project-form-page'
 
 const CreateProjectFormPage = () => {
   return (

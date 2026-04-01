@@ -1,4 +1,5 @@
 import {
+  Chip,
   Fieldset,
   FormReadOnlyGroup,
   LayoutRow,
@@ -43,6 +44,20 @@ const UserOverview = ({ user }: PropsWithUser) => {
             name="lastAccess"
             label="Ultimo acceso"
             value={getDateLabelSinceDate(user.lastLogin)}
+          />
+        </LayoutRow>
+      </Fieldset>
+      <Fieldset legend="Permisos">
+        <LayoutRow>
+          <FormReadOnlyGroup
+            label="Roles"
+            name="roles"
+            value={user.roles.map((r) => r.name).join(', ')}
+          />
+          <FormReadOnlyGroup
+            label="Permisos"
+            name="claims"
+            value={user.claims.map((c) => c.claimValue).join(', ')}
           />
         </LayoutRow>
       </Fieldset>

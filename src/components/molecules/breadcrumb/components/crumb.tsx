@@ -22,7 +22,10 @@ const Crumb = ({ isLast, breadcrumb, ...props }: CrumbProps) => {
       search={breadcrumb.search}
       {...props}
     >
-      <Icon icon={breadcrumb.icon} className={breadcrumb.labelClassName}>
+      <Icon
+        icon={breadcrumb.icon}
+        className={breadcrumb.labelClassName + '!text-6xl'}
+      >
         {breadcrumb.title}
       </Icon>
     </Link>

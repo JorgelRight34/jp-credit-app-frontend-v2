@@ -1,3 +1,4 @@
+import { RefObject } from "react";
 import type { Control, FieldValues, UseFormGetValues, UseFormHandleSubmit, UseFormSetValue, UseFormTrigger } from "react-hook-form";
 
 export interface FormRef<T extends FieldValues = FieldValues> {
@@ -10,6 +11,6 @@ export interface FormRef<T extends FieldValues = FieldValues> {
     reset: () => void;
 }
 
-export type PropsWithFormRef<T extends FieldValues, TOther = object> = { ref: FormRef<T> } & TOther
+export type PropsWithFormRef<T extends FieldValues, TOther = object> = { ref: RefObject<T | null> } & TOther
 
 export type PropsWithFormControl<T extends FieldValues, TOther = object> = { control: Control<T> } & TOther; 

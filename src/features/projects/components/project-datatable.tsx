@@ -6,7 +6,7 @@ import {
 import { Project } from '../models/project'
 import { ProjectQuery } from '../models/projectQuery'
 import { projectSearchConfig } from '../lib/config/project-search-config'
-import { projectsQueryKey } from '../lib/constants'
+import { projectSelectorQueryKey, projectsQueryKey } from '../lib/constants'
 import { projectsDataTableConfigColumns } from '../lib/config/project-datatable-config'
 import { getProjects } from '../services/projectClient'
 import { setProjectId } from '../lib/utils'
@@ -42,6 +42,7 @@ const ProjectDataTable = ({
               () => {
                 setProjectId(value)
                 dataClient.invalidate({ key: currentProjectIdQueryKey })
+                dataClient.set(projectSelectorQueryKey, row.original)
               },
               isSelected,
             )

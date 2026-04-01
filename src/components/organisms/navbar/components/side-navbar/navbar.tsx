@@ -1,5 +1,5 @@
 import '../_navbar.css'
-import { Activity, useMemo, useState } from 'react'
+import { Activity, ReactNode, useMemo, useState } from 'react'
 import {
   accessControlNavItem,
   accountStatusNavItem,
@@ -17,12 +17,7 @@ import {
 import NavbarLinksContainer from '../navbar-link/navbar-links-container'
 import NavbarFooter from './navbar-footer'
 import type { NavItem } from '../../models/navItem'
-import {
-  AppHorizontalLogo,
-  ArrowBackIcon,
-  Icon,
-  Link,
-} from '@/components/atoms'
+import { ArrowBackIcon, Icon } from '@/components/atoms'
 import { PropsWithUser } from '@/models/user'
 
 const options = [
@@ -49,18 +44,14 @@ const options = [
   armotizationsNavItem,
 ]
 
-const Navbar = ({ user }: PropsWithUser) => {
+const Navbar = ({ header, user }: PropsWithUser<{ header?: ReactNode }>) => {
   return (
     <div className="side-navbar rounded-bottom-lg bg-surface relative flex h-full w-full flex-col border-r shadow-sm">
       <div className="flex-shrink-0 border-b">
-        <Link to="/">
-          <div className="flex items-center p-3">
-            <AppHorizontalLogo />
-          </div>
-        </Link>
+        <div className="flex items-center p-2 py-3">{header}</div>
       </div>
       <NavbarBody />
-      <div className="hidden w-full flex-shrink-0 p-3 md:block">
+      <div className="hidden w-full flex-shrink-0 p-2 md:block">
         <NavbarFooter user={user} />
       </div>
     </div>

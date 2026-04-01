@@ -4,7 +4,7 @@ import TransferListBox from './transfer-list-box'
 import { useTransferList } from './useTransferList'
 import type { UseTransferListProps } from './useTransferList'
 
-type TransferListProps = UseTransferListProps & {
+type TransferListProps<T = object> = UseTransferListProps<T> & {
   leftTitle?: string
   leftSubtitle?: string
   rightTitle?: string
@@ -13,7 +13,7 @@ type TransferListProps = UseTransferListProps & {
   className?: string
 }
 
-const TransferList = ({
+const TransferList = <T,>({
   leftTitle = 'Disponibles',
   rightTitle = 'Seleccionados',
   rightSubtitle,
@@ -21,7 +21,7 @@ const TransferList = ({
   disabled,
   className,
   ...config
-}: TransferListProps) => {
+}: TransferListProps<T>) => {
   const {
     leftItems,
     leftChecked,
@@ -34,9 +34,14 @@ const TransferList = ({
     toggle,
   } = useTransferList(config)
 
+  const transferListClassName = clsx(
+    'h-full w-full md:w-7/15 overflow-y-auto',
+    className,
+  )
+
   return (
-    <div className={clsx('flex flex-1 flex-col md:flex-row', className)}>
-      <div className="w-full h-full md:w-7/15">
+    <div className={clsx('flex flex-1 flex-col md:flex-row')}>
+      <div className={transferListClassName}>
         <TransferListBox
           title={leftTitle}
           subtitle={leftSubtitle}
@@ -48,7 +53,7 @@ const TransferList = ({
         />
       </div>
 
-      <div className="flex h-full flex-row md:flex-col gap-4 md:gap-8 px-3 py-3 md:py-0 items-center justify-center md:w-1/14">
+      <div className="flex h-full flex-row items-center justify-center gap-4 px-3 py-3 md:w-1/14 md:flex-col md:gap-8 md:py-0">
         <LightBtn
           onClick={moveRight}
           disabled={disabled || leftChecked.size === 0}
@@ -80,7 +85,7 @@ const TransferList = ({
         </LightBtn>
       </div>
 
-      <div className="w-full h-full md:w-7/15">
+      <div className={transferListClassName}>
         <TransferListBox
           title={rightTitle}
           subtitle={rightSubtitle}

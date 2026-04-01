@@ -29,7 +29,7 @@ export const useUserRolesForm = ({ user, initialValues, ...props }: UseUserRoles
             await updateUserRoles(userId, { add, remove })
             return null;
         },
-        resetValues: !!user,
+        resetValues: user ? false : true,
         keysToInvalidate: [[usersQueryKey]],
         ...props
     })
