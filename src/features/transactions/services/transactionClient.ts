@@ -11,11 +11,12 @@ import { ClosedPeriodFormValues } from "../lib/schemas/closePeriodFormSchema";
 import { getReportByQueryKey, Report } from "@/features/reports";
 import { TransactionType } from "../models/transactionType";
 import { transactionReceiptReportKeyParts } from "../lib/constants";
+import { withProjectIdParams } from "@/features/projects";
 
 const baseUrl = "transactions";
 
 export const getTransactions = async (params: Query): Promise<PagedResponse<Transaction>> => {
-    const { data } = await api.get(baseUrl, { params })
+    const { data } = await api.get(baseUrl, { params: withProjectIdParams(params) })
     return data;
 }
 

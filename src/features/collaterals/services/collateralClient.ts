@@ -8,11 +8,12 @@ import { CollateralLiquidateFormValues } from "../lib/schemas/collateralLiquidat
 import { PaymentResult } from "@/features/transactions";
 import { CollateralSellFormValues } from "../lib/schemas/collateralSellFormSchema";
 import { ExportHandler } from "@/components";
+import { withProjectIdParams } from "@/features/projects";
 
 const baseUrl = "collaterals"
 
 export const getCollaterals = async (params: CollateralQuery): Promise<PagedResponse<Collateral>> => {
-    const { data } = await api.get(baseUrl, { params });
+    const { data } = await api.get(baseUrl, { params: withProjectIdParams(params) });
     return data;
 }
 

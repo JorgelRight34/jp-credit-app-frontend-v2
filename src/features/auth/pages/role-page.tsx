@@ -8,7 +8,7 @@ import {
   BadgeIcon,
   buildPageLayoutEditOption,
   FormReadOnlyGroup,
-  FormRow,
+  LayoutRow,
   GroupIcon,
   PageRouterLayout,
   PermissionIcon,
@@ -17,6 +17,7 @@ import {
   TabPanel,
   TabsList,
   TabsRouter,
+  OverviewLayout,
 } from '@/components'
 import { claimsTableColumns } from '../lib/constants'
 import { overviewBreadcrumb } from '@/lib/constants'
@@ -71,26 +72,28 @@ const RolePage = ({
           <Tab index={0}>Resumen</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <FormRow>
-            <FormReadOnlyGroup name="name" label="Nombre" value={role.name} />
-          </FormRow>
-          <FormRow>
-            <FormReadOnlyGroup
-              name="normalizedName"
-              label="Nombre normalizado"
-              value={role.normalizedName}
-            />
-          </FormRow>
-          <FormRow>
-            <FormReadOnlyGroup
-              name="participants"
-              label="Número de usuarios"
-              value={role.usersCount}
-            />
-          </FormRow>
-          <FormRow>
-            <FormReadOnlyGroup name="id" label="Id" value={role.id} />
-          </FormRow>
+          <OverviewLayout>
+            <LayoutRow>
+              <FormReadOnlyGroup name="name" label="Nombre" value={role.name} />
+            </LayoutRow>
+            <LayoutRow>
+              <FormReadOnlyGroup
+                name="normalizedName"
+                label="Nombre normalizado"
+                value={role.normalizedName}
+              />
+            </LayoutRow>
+            <LayoutRow>
+              <FormReadOnlyGroup
+                name="participants"
+                label="Número de usuarios"
+                value={role.usersCount}
+              />
+            </LayoutRow>
+            <LayoutRow>
+              <FormReadOnlyGroup name="id" label="Id" value={role.id} />
+            </LayoutRow>
+          </OverviewLayout>
         </TabPanel>
         <TabPanel index={1}>
           <Suspense fallback="...">

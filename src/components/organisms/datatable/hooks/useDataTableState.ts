@@ -2,7 +2,7 @@ import { startTransition, useMemo, useState } from "react";
 import { PaginationLimitManager } from "../services/paginationLimitManager";
 import type { CacheKey } from "@/models";
 import type { SortingState } from "../../table";
-import { defaultPageSize } from "@/lib/utils";
+import { DEFAULT_PAGE_SIZE } from "../../table/lib/constants";
 
 interface UseDatatableStateProps {
     cacheKey: CacheKey;
@@ -14,7 +14,7 @@ export const useDataTableState = ({ cacheKey, pageSize }: UseDatatableStateProps
     const [order, setOrder] = useState<{ orderBy: string, orderDesc: boolean } | null>(null);
     const identifier = useMemo(() => JSON.stringify(cacheKey), [cacheKey])
     const [limit, setLimit] = useState(() =>
-        PaginationLimitManager.getLimit(identifier) || pageSize || defaultPageSize
+        PaginationLimitManager.getLimit(identifier) || pageSize || DEFAULT_PAGE_SIZE
     );
 
     const fetchPage = (receivedPage: number) => {

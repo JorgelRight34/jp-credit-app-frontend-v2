@@ -1,10 +1,8 @@
-import { PERMISSIONS_ENDPOINT_SUFFIX } from "../../../lib/constants/constants";
 import type { ClaimPair } from "../models/claimPair";
 import type { Column } from "@/components";
 
 export const permissionsQueryKey = "permissions";
 
-export const usersModulePermissionsEndpoint = "users" + PERMISSIONS_ENDPOINT_SUFFIX
 export const rolesQueryKey = "roles"
 
 export const usersQueryKey = 0

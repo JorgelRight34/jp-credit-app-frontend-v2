@@ -18,15 +18,7 @@ export const DASHES = "---"
 
 export const SMALL_SCREEN_BREAKPOINT = 768;
 
-export const PERMISSIONS_ENDPOINT_SUFFIX = "permissions"
-
 export const TEST = false;
-
-export const CREATE_URL_SUFFIX = "create";
-
-export const EDIT_URL_SUFFIX = "edit";
-
-export const nullFieldLabel = "---";
 
 export const createDefaultPagedResponse = <T>(): PagedResponse<T> => ({
   totalItems: 0,
@@ -35,17 +27,6 @@ export const createDefaultPagedResponse = <T>(): PagedResponse<T> => ({
   pageSize: 0,
   items: [],
 });
-
-export const primaryColor = "#d09d0c";
-
-export const secondaryColor = "#9c6334";
-
-export const PROJECT_KEY = "project";
-export const ACCESS_TOKEN = "accessToken";
-
-export const PROJECT_URL_PARAM = "projectId";
-
-export const defaultPageSize = 20;
 
 export const getMonthYearAfterAddingDays = (
   startDate: Date,

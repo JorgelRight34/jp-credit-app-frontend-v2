@@ -231,7 +231,7 @@ export const transactionsNavItem: NavItem = {
 export const projectsNavItem: NavItem = {
   name: 'Proyectos',
   icon: () => <ProjectIcon />,
-  route: '.',
+  route: '/projects',
   children: [
     {
       name: 'Configuraciones',

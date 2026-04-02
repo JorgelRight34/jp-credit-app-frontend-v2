@@ -1,5 +1,5 @@
 import '../_navbar.css'
-import { Activity, ReactNode, useMemo, useState } from 'react'
+import { Activity, useMemo, useState } from 'react'
 import {
   accessControlNavItem,
   accountStatusNavItem,
@@ -17,7 +17,12 @@ import {
 import NavbarLinksContainer from '../navbar-link/navbar-links-container'
 import NavbarFooter from './navbar-footer'
 import type { NavItem } from '../../models/navItem'
-import { ArrowBackIcon, Icon } from '@/components/atoms'
+import {
+  AppHorizontalLogo,
+  ArrowBackIcon,
+  Icon,
+  Link,
+} from '@/components/atoms'
 import { PropsWithUser } from '@/models/user'
 
 const options = [
@@ -44,14 +49,22 @@ const options = [
   armotizationsNavItem,
 ]
 
-const Navbar = ({ header, user }: PropsWithUser<{ header?: ReactNode }>) => {
+const Navbar = ({ user }: PropsWithUser<{ header: string }>) => {
   return (
     <div className="side-navbar rounded-bottom-lg bg-surface relative flex h-full w-full flex-col border-r shadow-sm">
       <div className="flex-shrink-0 border-b">
-        <div className="flex items-center p-2 py-3">{header}</div>
+        <Link to="/">
+          <div className="flex items-center p-2">
+            <img
+              className="brand small-logo h-10 w-10"
+              alt="logo"
+              style={{ objectFit: 'contain', display: 'block' }}
+            />
+          </div>
+        </Link>
       </div>
       <NavbarBody />
-      <div className="hidden w-full flex-shrink-0 p-2 md:block">
+      <div className="hidden w-full flex-shrink-0 border-t p-2 md:block">
         <NavbarFooter user={user} />
       </div>
     </div>

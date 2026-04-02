@@ -10,11 +10,12 @@ import { LoanPurposeQuery } from "../models/loanPurposeQuery"
 import { LoanPurpose } from "../models/loanPurpose"
 import { LoanPurposeFormValues } from "../lib/schemas/loanPurposeFormSchema"
 import { LoanEditFormValues } from "../lib/schemas/loanEditFormSchema"
+import { withProjectIdParams } from "@/features/projects"
 
 const baseUrl = "loans"
 
 export const getLoans = async (params: LoanQuery): Promise<PagedResponse<Loan>> => {
-    const { data } = await api.get(baseUrl, { params })
+    const { data } = await api.get(baseUrl, { params: withProjectIdParams(params) })
     return data;
 }
 

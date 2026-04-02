@@ -11,16 +11,10 @@ import { SERVER_URI } from "@/lib/constants/server";
 import api from "@/lib/services/api";
 import { serverClient } from "@/lib/services/serverClient";
 import { LoginFormValues } from "../hooks/useLoginForm";
-import { CookieClientService } from "@/lib/services/cookieClientService";
-import { PROJECT_ID_STORAGE_KEY } from "@/features/projects";
 import { CurrentUser } from "../models/currentUser";
 
 export const getCurrentUser = async (): Promise<CurrentUser> => {
-    const { data } = await api.get(`auth/users/me`, {
-        headers: {
-            'X-Project-Id': CookieClientService.get(PROJECT_ID_STORAGE_KEY)
-        }
-    });
+    const { data } = await api.get(`auth/users/me`);
     return data;
 };
 

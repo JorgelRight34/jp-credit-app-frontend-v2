@@ -13,7 +13,7 @@ import { PropsWithUser } from '@/models/user'
 import NavbarAppSettingsTrigger from '../navbar-app-settings/navbar-app-settings'
 import { PropsWithChildren } from 'react'
 
-const BottomNavbar = ({ user }: PropsWithUser) => {
+const BottomNavbar = ({ user, header }: PropsWithUser<{ header: string }>) => {
   const style = { height: '1.5rem' }
 
   return (
@@ -25,7 +25,7 @@ const BottomNavbar = ({ user }: PropsWithUser) => {
         </NavItem>
       </NavLink>
       <NavItem>
-        <BottomNavbarDrawer user={user} style={style} />
+        <BottomNavbarDrawer header={header} user={user} style={style} />
         <NavItemParagraph>Buscar</NavItemParagraph>
       </NavItem>
       <NavLink activeOptions={{ exact: true }} to="/loans">

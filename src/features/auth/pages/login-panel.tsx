@@ -21,7 +21,7 @@ const LoginPanel = () => {
             style={{ borderWidth: '1px' }}
           >
             <header className="flex flex-col items-center justify-center gap-5 p-5">
-              <BigTitle className="text-accent mb-5 text-center">
+              <BigTitle className="text-accent mb-5 text-center text-5xl">
                 Sistema de Crédito Empresarial
               </BigTitle>
               {/* Version info at bottom */}
@@ -39,7 +39,7 @@ const LoginPanel = () => {
           <figure className="flex justify-center">
             <AppHorizontalLogo
               alt="header"
-              className="mb-5 block h-32 object-contain"
+              className="mb-5 block w-full object-contain"
             />
           </figure>
           {/* Header section */}

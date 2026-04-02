@@ -17,6 +17,7 @@ import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/
 import { Route as mainResetPasswordIndexRouteImport } from './routes/(main)/reset-password/index'
 import { Route as mainmodulesTransactionsIndexRouteImport } from './routes/(main)/(modules)/transactions/index'
 import { Route as mainmodulesReportsIndexRouteImport } from './routes/(main)/(modules)/reports/index'
+import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(modules)/projects/index'
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
 import { Route as mainmodulesFollowUpsIndexRouteImport } from './routes/(main)/(modules)/follow-ups/index'
@@ -103,6 +104,12 @@ const mainmodulesReportsIndexRoute = mainmodulesReportsIndexRouteImport.update({
   path: '/reports/',
   getParentRoute: () => mainmodulesRouteRoute,
 } as any)
+const mainmodulesProjectsIndexRoute =
+  mainmodulesProjectsIndexRouteImport.update({
+    id: '/projects/',
+    path: '/projects/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesProfilesIndexRoute =
   mainmodulesProfilesIndexRouteImport.update({
     id: '/profiles/',
@@ -391,6 +398,7 @@ export interface FileRoutesByFullPath {
   '/follow-ups/': typeof mainmodulesFollowUpsIndexRoute
   '/loans/': typeof mainmodulesLoansIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
+  '/projects/': typeof mainmodulesProjectsIndexRoute
   '/reports/': typeof mainmodulesReportsIndexRoute
   '/transactions/': typeof mainmodulesTransactionsIndexRoute
   '/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
@@ -445,6 +453,7 @@ export interface FileRoutesByTo {
   '/follow-ups': typeof mainmodulesFollowUpsIndexRoute
   '/loans': typeof mainmodulesLoansIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
+  '/projects': typeof mainmodulesProjectsIndexRoute
   '/reports': typeof mainmodulesReportsIndexRoute
   '/transactions': typeof mainmodulesTransactionsIndexRoute
   '/adjustment-notes/$id': typeof mainmodulesAdjustmentNotesIdIndexRoute
@@ -502,6 +511,7 @@ export interface FileRoutesById {
   '/(main)/(modules)/follow-ups/': typeof mainmodulesFollowUpsIndexRoute
   '/(main)/(modules)/loans/': typeof mainmodulesLoansIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
+  '/(main)/(modules)/projects/': typeof mainmodulesProjectsIndexRoute
   '/(main)/(modules)/reports/': typeof mainmodulesReportsIndexRoute
   '/(main)/(modules)/transactions/': typeof mainmodulesTransactionsIndexRoute
   '/(main)/(modules)/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
@@ -558,6 +568,7 @@ export interface FileRouteTypes {
     | '/follow-ups/'
     | '/loans/'
     | '/profiles/'
+    | '/projects/'
     | '/reports/'
     | '/transactions/'
     | '/adjustment-notes/$id/'
@@ -612,6 +623,7 @@ export interface FileRouteTypes {
     | '/follow-ups'
     | '/loans'
     | '/profiles'
+    | '/projects'
     | '/reports'
     | '/transactions'
     | '/adjustment-notes/$id'
@@ -668,6 +680,7 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/follow-ups/'
     | '/(main)/(modules)/loans/'
     | '/(main)/(modules)/profiles/'
+    | '/(main)/(modules)/projects/'
     | '/(main)/(modules)/reports/'
     | '/(main)/(modules)/transactions/'
     | '/(main)/(modules)/adjustment-notes/$id/'
@@ -772,6 +785,13 @@ declare module '@tanstack/react-router' {
       path: '/reports'
       fullPath: '/reports/'
       preLoaderRoute: typeof mainmodulesReportsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/projects/': {
+      id: '/(main)/(modules)/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof mainmodulesProjectsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/profiles/': {
@@ -1108,6 +1128,7 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesFollowUpsIndexRoute: typeof mainmodulesFollowUpsIndexRoute
   mainmodulesLoansIndexRoute: typeof mainmodulesLoansIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
+  mainmodulesProjectsIndexRoute: typeof mainmodulesProjectsIndexRoute
   mainmodulesReportsIndexRoute: typeof mainmodulesReportsIndexRoute
   mainmodulesTransactionsIndexRoute: typeof mainmodulesTransactionsIndexRoute
   mainmodulesAdjustmentNotesIdIndexRoute: typeof mainmodulesAdjustmentNotesIdIndexRoute
@@ -1160,6 +1181,7 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesFollowUpsIndexRoute: mainmodulesFollowUpsIndexRoute,
   mainmodulesLoansIndexRoute: mainmodulesLoansIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
+  mainmodulesProjectsIndexRoute: mainmodulesProjectsIndexRoute,
   mainmodulesReportsIndexRoute: mainmodulesReportsIndexRoute,
   mainmodulesTransactionsIndexRoute: mainmodulesTransactionsIndexRoute,
   mainmodulesAdjustmentNotesIdIndexRoute:

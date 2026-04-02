@@ -11,7 +11,7 @@ import type {
     SortingState,
     TableOptions
 } from "@tanstack/react-table";
-import { defaultPageSize } from "@/lib/constants/constants";
+import { DEFAULT_PAGE_SIZE } from "../lib/constants";
 
 export type InitialTableState<TData> = TableOptions<TData>["initialState"]
 
@@ -42,7 +42,7 @@ export const useTableState = <T,>({
 }: UseTableStateProps<T>) => {
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
-        pageSize: pageSize ?? defaultPageSize,
+        pageSize: pageSize ?? DEFAULT_PAGE_SIZE,
     });
     const [sorting, setSorting] = useState<SortingState>([]);
     const [expanded, setExpanded] = useState<ExpandedState>({});

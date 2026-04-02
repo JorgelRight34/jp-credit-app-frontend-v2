@@ -1,6 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { getFirstAndLastName, getPicWithInitials } from "./utils";
-import { ACCESS_TOKEN, defaultProfilePic } from ".";
+import { defaultProfilePic } from ".";
+import { ACCESS_TOKEN_KEY } from "../constants";
 
 export function isJwtValid(token?: string) {
     if (!token) return false;
@@ -29,4 +30,4 @@ export const getNameInitials = (names: { firstName: string; lastName: string }) 
     return (first + last).toUpperCase();
 };
 
-export const getAuthorizationFromClient = () => localStorage.getItem(ACCESS_TOKEN)
+export const getAuthorizationFromClient = () => localStorage.getItem(ACCESS_TOKEN_KEY)

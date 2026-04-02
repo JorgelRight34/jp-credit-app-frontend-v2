@@ -1,3 +1,4 @@
+import { withProjectIdParams } from "@/features/projects";
 import type { ProfileFormValues } from "../lib/schemas/profileFormSchema";
 import type { Profile } from "../models/profile";
 import type { ProfileQuery } from "../models/profileQuery";
@@ -7,7 +8,7 @@ import api from "@/lib/services/api";
 const baseUrl = "profiles"
 
 const createGetProfileRoleHandler = (suffix: string) => async (params: ProfileQuery) => {
-    const { data } = await api.get(baseUrl + suffix, { params });
+    const { data } = await api.get(baseUrl + suffix, { params: withProjectIdParams(params) });
     return data;
 }
 

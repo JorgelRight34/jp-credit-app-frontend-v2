@@ -10,6 +10,7 @@ import {
   Icon,
   Input,
   LoginIcon,
+  NumericInput,
   PasswordInput,
 } from '@/components'
 
@@ -29,14 +30,19 @@ const LoginForm = (
     >
       <Form form={form}>
         <FormRow>
+          <FormGroup label="Proyecto" name="projectId" input={NumericInput} />
+        </FormRow>
+        <FormRow>
           <FormGroup label="Usuario" name="username" input={Input} />
         </FormRow>
-        <FormGroup
-          label="Contraseña"
-          name="password"
-          autoComplete="new-password"
-          input={PasswordInput}
-        />
+        <FormRow>
+          <FormGroup
+            label="Contraseña"
+            name="password"
+            autoComplete="new-password"
+            input={PasswordInput}
+          />
+        </FormRow>
       </Form>
     </FormLayout>
   )

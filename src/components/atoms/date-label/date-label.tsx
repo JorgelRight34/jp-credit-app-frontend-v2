@@ -1,5 +1,4 @@
 import { getFullDateString, toFormattedDate } from '@/lib/utils'
-import { nullFieldLabel } from '@/lib/constants/constants'
 
 interface DataLabelProps {
   date?: string | Date
@@ -10,7 +9,7 @@ const DateLabel = ({ date }: DataLabelProps) => {
 
   return (
     <span className="cursor-pointer" title={title} data-title={title}>
-      {date ? toFormattedDate(date) : nullFieldLabel}
+      {date ? toFormattedDate(date) : '---'}
     </span>
   )
 }

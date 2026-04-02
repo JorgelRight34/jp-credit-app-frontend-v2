@@ -16,7 +16,7 @@ const CurrentUserPicCard = ({
       style={{ height: style?.height, width: style?.height }}
       {...props}
     >
-      <div className="profile-pic-card flex items-center justify-center rounded-full border bg-white">
+      <div className="flex h-6 w-6 items-center justify-center rounded-full border bg-white">
         <span className="text-accent-secondary !text-xs md:text-sm">
           {getNameInitials(user)}
         </span>

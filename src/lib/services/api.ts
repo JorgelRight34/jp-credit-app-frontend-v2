@@ -1,7 +1,8 @@
 import axios from "axios";
-import { ACCESS_TOKEN, IS_DEV_MODE } from "../constants/constants";
+import { IS_DEV_MODE } from "../constants/constants";
 import { isJwtValid } from "../utils/auth-utils";
 import type { InternalAxiosRequestConfig } from "axios";
+import { ACCESS_TOKEN_KEY } from "../constants";
 
 const URLS = {
   PROD: "https://jp-credit-app.onrender.com/api/",
@@ -16,7 +17,7 @@ api.interceptors.request.use(
   (
     config: InternalAxiosRequestConfig
   ): InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig> => {
-    const accessToken = localStorage.getItem(ACCESS_TOKEN);
+    const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
     if (accessToken) {
       if (isJwtValid(accessToken)) {
         config.headers.Authorization = `Bearer ${accessToken}`;

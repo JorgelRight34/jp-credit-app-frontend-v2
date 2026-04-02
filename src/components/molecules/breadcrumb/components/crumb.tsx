@@ -24,7 +24,7 @@ const Crumb = ({ isLast, breadcrumb, ...props }: CrumbProps) => {
     >
       <Icon
         icon={breadcrumb.icon}
-        className={breadcrumb.labelClassName + '!text-6xl'}
+        className={breadcrumb.labelClassName + ' text-sm'}
       >
         {breadcrumb.title}
       </Icon>

@@ -4,7 +4,6 @@ import type { IdentityPermissions } from "../models/identityPermissions";
 import type { Role } from "../models/role";
 import { CookieService } from "@/lib/services/cookieService";
 import { serverClient } from "@/lib/services/serverClient";
-import { PROJECT_ID_STORAGE_KEY } from "@/features/projects";
 import { CurrentUser } from "../models/currentUser";
 
 export const loginWithIdp = async (data: { username: string; password: string; }) => {
@@ -16,7 +15,6 @@ export const getCurrentUserFromServer = async (): Promise<CurrentUser> => {
     return await serverClient.get("auth/users/me", {
         headers: {
             "Authorization": `Bearer ${CookieService.getAuthorization()}`,
-            "X-Project-Id": CookieService.get(PROJECT_ID_STORAGE_KEY)
         }
     });
 }

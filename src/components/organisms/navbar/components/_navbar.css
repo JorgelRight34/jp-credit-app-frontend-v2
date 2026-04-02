@@ -49,11 +49,6 @@
   background-color: var(--primary-color);
 }
 
-.profile-pic-card {
-  height: 1.5rem;
-  width: 1.5rem;
-}
-
 @media (max-width: 500px) {
   .nav-link {
     background-color: transparent;

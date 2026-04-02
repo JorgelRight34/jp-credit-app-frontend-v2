@@ -38,11 +38,5 @@ export const Route = createFileRoute('/(main)/(modules)')({
 })
 
 function RouteComponent() {
-  const projectId = useSuspenseCurrentProjectId()
-
-  return (
-    <ProjectGuard projectId={projectId}>
-      <Outlet />
-    </ProjectGuard>
-  )
+  return <Outlet />
 }

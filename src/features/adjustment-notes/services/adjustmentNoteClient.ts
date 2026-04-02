@@ -3,11 +3,12 @@ import { PagedResponse } from "@/models"
 import { AdjustmentNote } from "../models/adjustmentNote"
 import api from "@/lib/services/api"
 import { AdjustmentNoteFormValues } from "../lib/schemas/adjustmentNoteFormSchema"
+import { withProjectIdParams } from "@/features/projects"
 
 const baseUrl = "adjustment-notes"
 
 export const getAdjustmentNotes = async (params: Query): Promise<PagedResponse<AdjustmentNote>> => {
-    const { data } = await api.get(baseUrl, { params });
+    const { data } = await api.get(baseUrl, { params: withProjectIdParams(params) });
     return data;
 }
 

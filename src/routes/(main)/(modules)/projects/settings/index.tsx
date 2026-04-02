@@ -5,7 +5,7 @@ import { getProject } from '@/features/projects/services/projectClient'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
-import { useSuspenseCurrentProjectId } from '../../(project-guard)/route'
+import { useSuspenseCurrentProjectId } from '../../route'
 
 export const getProjectFn = createIsomorphicFn()
   .server((id) => getProjectFromServer(id))
