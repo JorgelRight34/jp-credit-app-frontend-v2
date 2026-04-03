@@ -255,13 +255,6 @@ body {
   background-color: #fff;
 }
 
-.profile-pic-card-wrapper {
-  position: relative;
-  display: inline;
-  border-radius: 50%;
-  background: conic-gradient(var(--secondary-color), var(--primary-color));
-}
-
 .profile-pic-card {
   height: 12rem;
   object-fit: cover;

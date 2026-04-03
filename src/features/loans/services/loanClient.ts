@@ -47,7 +47,10 @@ export const getLoanActors = async (loanId: Loan["id"]): Promise<{
 }
 
 export const exportLoans: ExportHandler<LoanQuery> = async (options, params) => {
-    const { data } = await api.get(baseUrl, { params: { ...params, ...options } })
+    const { data } = await api.get(baseUrl + "/export", {
+        params: withProjectIdParams({ ...params, ...options }),
+        responseType: "blob"
+    })
     return data;
 }
 

@@ -1,4 +1,4 @@
-import { Query } from "@/components";
+import { ExportHandler, Query } from "@/components";
 import api from "@/lib/services/api";
 import { PagedResponse } from "@/models";
 import { Transaction } from "../models/transaction";
@@ -12,6 +12,7 @@ import { getReportByQueryKey, Report } from "@/features/reports";
 import { TransactionType } from "../models/transactionType";
 import { transactionReceiptReportKeyParts } from "../lib/constants";
 import { withProjectIdParams } from "@/features/projects";
+import { TransactionQuery } from "../models/transactionQuery";
 
 const baseUrl = "transactions";
 
@@ -78,4 +79,12 @@ export const deleteTransaction = async (id: Transaction["id"], type: Transaction
     }
 
     await api.delete(endpoint + id);
+}
+
+export const exportTransactions: ExportHandler<TransactionQuery> = async (options, params) => {
+    const { data } = await api.get(baseUrl + "/export", {
+        params: withProjectIdParams({ ...params, ...options }),
+        responseType: "blob"
+    })
+    return data;
 }

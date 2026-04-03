@@ -1,19 +1,18 @@
 import { getNameInitials } from '@/lib/utils/auth-utils'
 import { PropsWithUser } from '@/models/user'
 import { HTMLAttributes } from 'react'
+import '../_navbar.css'
 
 type CurrentUserPicCardProps = HTMLAttributes<HTMLDivElement> & PropsWithUser
 
 const CurrentUserPicCard = ({
   user,
   className = '',
-  style,
   ...props
 }: CurrentUserPicCardProps) => {
   return (
     <div
-      className={`profile-pic-card-wrapper relative !p-0 md:!p-1 ${className}`}
-      style={{ height: style?.height, width: style?.height }}
+      className={`profile-pic-card-wrapper flex h-full w-full items-center justify-center rounded-full !p-0 ${className}`}
       {...props}
     >
       <div className="flex h-6 w-6 items-center justify-center rounded-full border bg-white">

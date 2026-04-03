@@ -1,6 +1,7 @@
 import { DateInput, NumericInput, SearchFormConfig } from "@/components";
 import { TransactionQuery } from "../../models/transactionQuery";
 import { LoanSearchInput } from "@/features/loans";
+import { exportTransactions } from "../../services/transactionClient";
 
 export const transactionSearchConfig: SearchFormConfig<TransactionQuery> = {
     options: [
@@ -11,4 +12,5 @@ export const transactionSearchConfig: SearchFormConfig<TransactionQuery> = {
         { name: "endDate", label: "Fin", width: 6, type: (p) => DateInput(p) },
         { name: "loanId", label: "Préstamo", width: 12, type: p => LoanSearchInput(p) }
     ],
+    onExport: exportTransactions
 }

@@ -70,7 +70,7 @@ const Modal = ({
         </div>
         <div
           className={clsx(
-            'flex-1 overflow-x-auto overflow-y-auto py-3',
+            'flex-1 overflow-x-auto overflow-y-auto pt-3',
             className,
           )}
         >

@@ -2,6 +2,7 @@ import { CreateClosedPeriodPage } from '@/features/transactions'
 import { createCurrentAccountingPeriodQueryKey } from '@/features/transactions/lib/query-keys'
 import { getCurrentAccountingPeriod } from '@/features/transactions/services/transactionClient'
 import { useSuspenseData } from '@/hooks/useData'
+import { buildPageTitle } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
@@ -12,6 +13,7 @@ const getCurrentAccountingPeriodFn = createIsomorphicFn()
 export const Route = createFileRoute(
   '/(main)/(modules)/transactions/periods/create/',
 )({
+  head: () => ({ meta: [{ title: buildPageTitle('Cerrar periodo') }] }),
   component: RouteComponent,
 })
 

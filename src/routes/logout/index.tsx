@@ -1,6 +1,6 @@
+import { ACCESS_TOKEN_KEY } from '@/lib/constants'
 import { COOKIES } from '@/lib/constants/cookies'
 import { CookieService } from '@/lib/services/cookieService'
-import { ACCESS_TOKEN } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { useEffect } from 'react'
@@ -20,7 +20,7 @@ function RouteComponent() {
   const navigate = Route.useNavigate()
 
   useEffect(() => {
-    localStorage.removeItem(ACCESS_TOKEN)
+    localStorage.removeItem(ACCESS_TOKEN_KEY)
     navigate({ to: '/login' })
   }, [])
 

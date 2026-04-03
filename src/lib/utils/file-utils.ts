@@ -1,5 +1,6 @@
 
 export const downloadFile = (file: Blob, filename?: string) => {
+    console.log(file)
     const url = URL.createObjectURL(file);
 
     const a = document.createElement("a");

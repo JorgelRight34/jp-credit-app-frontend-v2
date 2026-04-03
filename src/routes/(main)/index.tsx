@@ -1,7 +1,8 @@
+import { buildPageTitle } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/(main)/')({
-  head: () => ({ title: 'Index', meta: [] }),
+  head: () => ({ meta: [{ title: buildPageTitle('Index') }] }),
   component: App,
 })
 

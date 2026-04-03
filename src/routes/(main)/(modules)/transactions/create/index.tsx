@@ -11,6 +11,7 @@ import {
   getModulePermissionsBeforeLoad,
   useSuspenseCurrentProjectId,
 } from '../../route'
+import { buildPageTitle } from '@/lib/utils'
 
 const searchSchema = z.object({
   tab: z.number().optional(),
@@ -19,6 +20,7 @@ const searchSchema = z.object({
 })
 
 export const Route = createFileRoute('/(main)/(modules)/transactions/create/')({
+  head: () => ({ meta: [{ title: buildPageTitle('Crear transacción') }] }),
   component: RouteComponent,
   beforeLoad: getModulePermissionsBeforeLoad(transactionPermissionProvider),
   validateSearch: (search) => searchSchema.parse(search),

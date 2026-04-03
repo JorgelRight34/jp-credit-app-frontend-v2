@@ -3,6 +3,7 @@ import { projectFormSchema, ProjectFormValues } from "../lib/schemas/projectForm
 import { createProject, editProject } from "../services/projectClient"
 import { Project } from "../models/project"
 import { projectsQueryKey } from "../lib/constants"
+import { usersQueryKey } from "@/features/auth"
 
 interface UseProjectFormProps extends UseDataFormProps<Project, ProjectFormValues> {
     project?: Project
@@ -19,7 +20,7 @@ export const useProjectForm = ({ project, ...config }: UseProjectFormProps) => {
         shouldEdit: !!project,
         onSubmit: createProject,
         onEdit: (body) => editProject(project!.id, body),
-        keysToInvalidate: [[projectsQueryKey]],
+        keysToInvalidate: [[projectsQueryKey, usersQueryKey]],
         ...config
     })
 }

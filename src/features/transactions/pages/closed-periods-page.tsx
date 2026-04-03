@@ -19,7 +19,7 @@ const periodsBreadcrumb: Array<BreadcrumbSpec> = [
 const ClosedPeriodsPage = () => {
   return (
     <PageLayout
-      title="Transacciones / Periodos Contables"
+      title="Periodos contables"
       breadcrumb={<PageLayoutBreadcrumb breadcrumbs={periodsBreadcrumb} />}
       options={[buildPageLayoutCreateOption('/transactions/periods/create')]}
     >

@@ -4,11 +4,11 @@ import { loginWithIdp } from '@/features/auth/server/authServerService'
 import { COOKIES } from '@/lib/constants/cookies'
 import { LoginPanel } from '@/features/auth'
 import { withErrorHandler } from '@/lib/utils/server-utils'
-import { IS_DEV_MODE } from '@/lib/utils'
+import { buildPageTitle, IS_DEV_MODE } from '@/lib/utils'
 
 export const Route = createFileRoute('/login/')({
   component: RouteComponent,
-  head: () => ({ meta: [{ title: 'Iniciar sesión' }] }),
+  head: () => ({ meta: [{ title: buildPageTitle('Iniciar sesión') }] }),
   server: {
     handlers: {
       POST: async ({ request }) => {

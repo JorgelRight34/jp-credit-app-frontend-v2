@@ -1,5 +1,5 @@
 import '../_navbar.css'
-import { Activity, useMemo, useState } from 'react'
+import { Activity, startTransition, useMemo, useState } from 'react'
 import {
   accessControlNavItem,
   accountStatusNavItem,
@@ -24,6 +24,7 @@ import {
   Link,
 } from '@/components/atoms'
 import { PropsWithUser } from '@/models/user'
+import NavbarCard from './navbar-card'
 
 const options = [
   // Identity & Access
@@ -49,22 +50,21 @@ const options = [
   armotizationsNavItem,
 ]
 
-const Navbar = ({ user }: PropsWithUser<{ header: string }>) => {
+const Navbar = ({ user, header }: PropsWithUser<{ header: string }>) => {
   return (
     <div className="side-navbar rounded-bottom-lg bg-surface relative flex h-full w-full flex-col border-r shadow-sm">
-      <div className="flex-shrink-0 border-b">
+      <div className="flex-shrink-0 p-2">
         <Link to="/">
-          <div className="flex items-center p-2">
-            <img
-              className="brand small-logo h-10 w-10"
-              alt="logo"
-              style={{ objectFit: 'contain', display: 'block' }}
-            />
-          </div>
+          <NavbarCard
+            image={
+              <img className="brand small-logo h-full w-full" alt="logo" />
+            }
+            text={header}
+          />
         </Link>
       </div>
       <NavbarBody />
-      <div className="hidden w-full flex-shrink-0 border-t p-2 md:block">
+      <div className="hidden w-full flex-shrink-0 p-2 md:block">
         <NavbarFooter user={user} />
       </div>
     </div>
@@ -81,7 +81,10 @@ const NavbarBody = () => {
   return (
     <>
       <Activity mode={!hasActiveNavChildren ? 'visible' : 'hidden'}>
-        <NavbarLinksContainer options={options} onExpand={setActiveNav} />
+        <NavbarLinksContainer
+          options={options}
+          onExpand={(n) => startTransition(() => setActiveNav(n))}
+        />
       </Activity>
       <Activity mode={hasActiveNavChildren ? 'visible' : 'hidden'}>
         <NavbarLinksContainer

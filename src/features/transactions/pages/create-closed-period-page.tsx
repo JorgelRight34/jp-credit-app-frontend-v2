@@ -25,7 +25,7 @@ const CreateClosedPeriodPage = ({
 }) => {
   return (
     <CreateFormPageLayout
-      title="Cerrar Periodo Contable"
+      title="Cerrar periodo contable"
       breadcrumbs={[transactionBreadcrumb, closedPeriodsBreadcrumb]}
       permissionProvider={transactionPermissionProvider}
     >

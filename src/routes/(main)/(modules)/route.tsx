@@ -1,5 +1,5 @@
 import { PermissionsProvider } from '@/components'
-import { PROJECT_ID_STORAGE_KEY, ProjectGuard } from '@/features/projects'
+import { PROJECT_ID_STORAGE_KEY } from '@/features/projects'
 import { currentProjectIdQueryKey } from '@/features/projects/lib/query-keys'
 import { useSuspenseData } from '@/hooks/useData'
 import { CookieClientService } from '@/lib/services/cookieClientService'

@@ -53,22 +53,16 @@ export const accountStatusNavItem: NavItem = {
   route: '/account-statements',
   children: [
     {
-      name: 'General',
-      icon: () => <GroupIcon />,
+      name: 'Clientes',
+      icon: () => <GroupsIcon />,
       route: '/account-statements',
       search: { tab: 0 },
     },
     {
-      name: 'Cliente',
+      name: 'Garantes',
       icon: () => <GroupsIcon />,
       route: '/account-statements',
       search: { tab: 1 },
-    },
-    {
-      name: 'Garante',
-      icon: () => <GroupsIcon />,
-      route: '/account-statements',
-      search: { tab: 2 },
     },
   ],
 }
@@ -212,6 +206,12 @@ export const transactionsNavItem: NavItem = {
       name: 'Periodos contables',
       icon: () => <ScheduleIcon />,
       route: '/transactions/periods',
+    },
+    {
+      icon: addRouteIcon,
+      name: 'Cerrar período',
+      route: '/transactions/periods/create',
+      search: { tab: 0 },
     },
     {
       icon: addRouteIcon,

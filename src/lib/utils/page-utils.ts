@@ -1,0 +1,1 @@
+export const buildPageTitle = (title: string) => `${title} | Sistema de crédito`
