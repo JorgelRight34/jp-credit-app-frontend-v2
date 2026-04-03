@@ -44,12 +44,8 @@ const AccessControlPage = () => {
     >
       <TabsRouter>
         <TabsList>
-          <Tab index={0} eventKey="users">
-            Usuarios
-          </Tab>
-          <Tab index={1} eventKey="roles">
-            Roles
-          </Tab>
+          <Tab index={0}>Usuarios</Tab>
+          <Tab index={1}>Roles</Tab>
         </TabsList>
         <TabPanel index={0}>
           <UsersDataTable />

@@ -62,4 +62,8 @@
     position: relative;
     height: 2.5rem;
   }
+
+  .profile-pic-card-wrapper {
+    background: none;
+  }
 }

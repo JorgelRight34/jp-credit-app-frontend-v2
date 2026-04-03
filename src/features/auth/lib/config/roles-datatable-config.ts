@@ -29,8 +29,8 @@ export const userRolesTableColumns: DataTableConfig<Role>["columns"] = [
 
 
 export const rolesDataTableConfig: DataTableConfig<Role> = {
-    title: "Roles",
     columns: rolesTableColumns,
+    allowExpand: true,
     onExpand: (row) => UsersDataTable({ initialQuery: { role: row.original.normalizedName } }),
     loader: getRoles
 }

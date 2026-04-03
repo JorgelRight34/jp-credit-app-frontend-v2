@@ -55,7 +55,7 @@ const CollateralSettingsPage = ({ collateral }: { collateral: Collateral }) => {
             )}
           </TabPanel>
           <TabPanel index={1}>
-            {collateral.sellDate || collateral.isActive ? (
+            {collateral.soldDate || collateral.isActive ? (
               <ClosedProcessPanel />
             ) : (
               <CollateralSellForm collateral={collateral} />

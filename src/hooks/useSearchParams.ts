@@ -5,5 +5,5 @@ export const useSearchParams = () => {
         select: (state) => state.location.search,
     });
 
-    return new URLSearchParams(search);
+    return new URLSearchParams(search as any);
 };

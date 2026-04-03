@@ -18,6 +18,6 @@ export interface Collateral {
     liquidationDate?: string;
     soldFor?: number;
     loanClientName: string;
-    sellDate?: string;
+    soldDate?: string;
     files: Array<FileModel>;
 }

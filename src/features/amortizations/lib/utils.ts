@@ -30,7 +30,6 @@ export const calculateAmortization = ({
     paymentFrequency,
     numberOfPayments,
 }: AmortizationCalculatorInput): Amortization => {
-    console.log("deja que te hable")
     if (!isFiniteNumber(principalBalance) || principalBalance <= 0) {
         return { amortizations: [], paymentValue: 0, totalInterest: 0 }
     }
@@ -41,7 +40,6 @@ export const calculateAmortization = ({
         return { amortizations: [], paymentValue: 0, totalInterest: 0 }
     }
 
-    console.log("calculating")
     const periodsPerYear = paymentFrequency ?? 12
     const r = toRate01(annualInterestRate) / periodsPerYear // periodic rate
     const n = numberOfPayments

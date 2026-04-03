@@ -1,4 +1,4 @@
-import type { Route, Search } from "@/components";
+import type { LinkProps, Route, Search } from "@/components";
 import type { IconName } from "@/components/atoms/icon/models/iconName";
 
 export interface NavItem {
@@ -6,5 +6,6 @@ export interface NavItem {
     route: Route,
     search?: Search,
     children?: Array<NavItem>,
+    activeOptions?: LinkProps["activeOptions"]
     icon: IconName,
 }

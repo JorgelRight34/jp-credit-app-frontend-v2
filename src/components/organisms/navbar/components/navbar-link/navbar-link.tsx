@@ -18,10 +18,16 @@ const NavbarLink = ({
   option,
   className,
   onExpand,
+  activeOptions,
   ...linkProps
 }: NavbarLinkProps) => {
   return (
-    <Link to={option.route} className="block" {...linkProps}>
+    <Link
+      to={option.route}
+      className="block"
+      activeOptions={option.activeOptions ?? activeOptions}
+      {...linkProps}
+    >
       {({ isActive }) => (
         <NavbarLinkContainer
           option={option}

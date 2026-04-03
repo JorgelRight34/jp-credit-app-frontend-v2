@@ -86,6 +86,17 @@ const FinancialBreakdownChart = ({
             responsive: true,
             maintainAspectRatio: false,
             scales: currencyYAxis,
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+            datasets: {
+              bar: {
+                barPercentage: 1, // 👈 bar thickness
+                categoryPercentage: 0.7, // 👈 space between groups
+              },
+            },
           }}
         />
       )

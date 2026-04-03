@@ -18,7 +18,6 @@ import {
   ErrorIcon,
   FlagIcon,
   GrassIcon,
-  GroupIcon,
   GroupsIcon,
   InventoryIcon,
   ListAltIcon,
@@ -123,7 +122,7 @@ export const profileNavItem: NavItem = {
       name: 'Agentes',
       icon: () => <BadgeIcon />,
       route: '/profiles',
-      search: { tab: '3' },
+      search: { tab: 3 },
     },
     {
       name: addRouteName,
@@ -219,12 +218,6 @@ export const transactionsNavItem: NavItem = {
       route: '/transactions/create',
       search: { tab: 0 },
     },
-    {
-      icon: addRouteIcon,
-      name: 'Desembolsar',
-      route: '/transactions/create',
-      search: { tab: 1 },
-    },
   ],
 }
 
@@ -260,19 +253,19 @@ export const loansNavItem: NavItem = {
       name: 'Activos',
       icon: () => <PlayCircleIcon />,
       route: '/loans',
-      search: { tab: 0 },
+      search: { tab: 1 },
     },
     {
       name: 'Inactivos',
       icon: () => <CheckCircleIcon />,
       route: '/loans',
-      search: { tab: 1 },
+      search: { tab: 2 },
     },
     {
       name: 'Saldados',
       icon: () => <ErrorIcon />,
       route: '/loans',
-      search: { tab: 2 },
+      search: { tab: 3 },
     },
     {
       name: 'Destinos',
@@ -375,16 +368,19 @@ export const financesNavItem: NavItem = {
       name: 'Proyecciones',
       icon: () => <TrendingUpIcon />,
       route: '/finance/projections',
+      activeOptions: { exact: false },
     },
     {
       name: 'Ingresos',
       icon: () => <AttachMoneyIcon />,
       route: '/finance/incomes',
+      activeOptions: { exact: false },
     },
     {
       name: 'Egresos',
       icon: () => <AccountBalanceWalletIcon />,
       route: '/finance/expenses',
+      activeOptions: { exact: false },
     },
   ],
 }

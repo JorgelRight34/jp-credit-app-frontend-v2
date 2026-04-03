@@ -4,8 +4,7 @@ import { Project } from "../models/project";
 import api from "@/lib/services/api";
 import { ProjectFormValues } from "../lib/schemas/projectFormSchema";
 import { ProjectUserFormValues } from "../lib/schemas/projectUserFormSchema";
-import { CookieClientService } from "@/lib/services/cookieClientService";
-import { PROJECT_ID_STORAGE_KEY } from "../lib/constants";
+import { PROJECT_ID_KEY } from "@/lib/constants";
 
 const baseUrl = "projects"
 
@@ -20,7 +19,7 @@ export const getProject = async (id: Project["id"] | string) => {
 }
 
 export const getCurrentProject = async (): Promise<Project | null> => {
-    const projectId = CookieClientService.get(PROJECT_ID_STORAGE_KEY)
+    const projectId = localStorage.getItem(PROJECT_ID_KEY)
     if (projectId) return getProject(projectId)
 
     return null;

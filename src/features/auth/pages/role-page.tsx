@@ -70,40 +70,17 @@ const RolePage = ({
       <TabsRouter>
         <TabsList>
           <Tab index={0}>Resumen</Tab>
+          <Tab index={1}>Permisos</Tab>
+          <Tab index={2}>Usuarios</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <OverviewLayout>
-            <LayoutRow>
-              <FormReadOnlyGroup name="name" label="Nombre" value={role.name} />
-            </LayoutRow>
-            <LayoutRow>
-              <FormReadOnlyGroup
-                name="normalizedName"
-                label="Nombre normalizado"
-                value={role.normalizedName}
-              />
-            </LayoutRow>
-            <LayoutRow>
-              <FormReadOnlyGroup
-                name="participants"
-                label="Número de usuarios"
-                value={role.usersCount}
-              />
-            </LayoutRow>
-            <LayoutRow>
-              <FormReadOnlyGroup name="id" label="Id" value={role.id} />
-            </LayoutRow>
-          </OverviewLayout>
+          <RoleOverview role={role} />
         </TabPanel>
         <TabPanel index={1}>
-          <Suspense fallback="...">
-            <section>
-              <TableBuilder
-                columns={claimsTableColumns}
-                data={rolePermissions.claims}
-              />
-            </section>
-          </Suspense>
+          <TableBuilder
+            columns={claimsTableColumns}
+            data={rolePermissions.claims}
+          />
         </TabPanel>
         <TabPanel index={2}>
           <UsersDataTable initialQuery={{ role: role.normalizedName }} />
@@ -112,5 +89,30 @@ const RolePage = ({
     </PageRouterLayout>
   )
 }
+
+const RoleOverview = ({ role }: { role: Role }) => (
+  <OverviewLayout>
+    <LayoutRow>
+      <FormReadOnlyGroup name="name" label="Nombre" value={role.name} />
+    </LayoutRow>
+    <LayoutRow>
+      <FormReadOnlyGroup
+        name="normalizedName"
+        label="Nombre normalizado"
+        value={role.normalizedName}
+      />
+    </LayoutRow>
+    <LayoutRow>
+      <FormReadOnlyGroup
+        name="participants"
+        label="Número de usuarios"
+        value={role.usersCount}
+      />
+    </LayoutRow>
+    <LayoutRow>
+      <FormReadOnlyGroup name="id" label="Id" value={role.id} />
+    </LayoutRow>
+  </OverviewLayout>
+)
 
 export default RolePage

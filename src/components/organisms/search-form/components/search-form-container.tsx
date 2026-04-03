@@ -21,8 +21,8 @@ const SearchFormContainer = <TQuery extends Query>({
 }: SearchFormContainerProps<TQuery>) => {
   return (
     <SearchFormProvider initialQuery={initialQuery}>
-      <section className="flex w-full flex-col">
-        <div className="mb-3">
+      <section className="flex h-full w-full flex-col">
+        <div className="mb-3 flex-shrink-0">
           <SearchForm
             options={searchConfig.options}
             defaultValues={initialQuery}
@@ -31,7 +31,7 @@ const SearchFormContainer = <TQuery extends Query>({
             onExport={searchConfig.onExport}
           />
         </div>
-        <div>{children}</div>
+        <div className="flex-1">{children}</div>
       </section>
     </SearchFormProvider>
   )

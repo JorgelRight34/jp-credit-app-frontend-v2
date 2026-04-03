@@ -18,7 +18,9 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  const { type } = Route.useSearch()
+  const { type } = Route.useSearch({
+    select: (search) => ({ type: search.type }),
+  })
 
   return <CreateTransactionReceiptTemplatePage type={type ?? 'pc'} />
 }

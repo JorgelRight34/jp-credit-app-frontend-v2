@@ -19,16 +19,20 @@ const searchSchema = z.object({
   amount: z.coerce.number().positive().optional(),
 })
 
+type SearchParams = z.infer<typeof searchSchema>
+
 export const Route = createFileRoute('/(main)/(modules)/transactions/create/')({
   head: () => ({ meta: [{ title: buildPageTitle('Crear transacción') }] }),
   component: RouteComponent,
   beforeLoad: getModulePermissionsBeforeLoad(transactionPermissionProvider),
-  validateSearch: (search) => searchSchema.parse(search),
+  validateSearch: (search) => search as SearchParams,
 })
 
 function RouteComponent() {
   const projectId = useSuspenseCurrentProjectId()
-  const { loanId, amount } = Route.useSearch()
+  const { loanId, amount } = Route.useSearch({
+    select: (search) => ({ loanId: search.loanId, amount: search.amount }),
+  })
 
   const { data: project } = useSuspenseData({
     key: createProjectQueryKey(projectId),

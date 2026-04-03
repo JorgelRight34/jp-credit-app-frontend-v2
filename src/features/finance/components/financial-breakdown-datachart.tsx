@@ -51,7 +51,7 @@ const FinancialBreakdownChartContainer = ({
   if (!data || !query.chart) return null
 
   return (
-    <div className="flex h-96 justify-center overflow-x-visible">
+    <div className="flex h-full flex-col">
       <FinancialBreakdownChart data={data} type={query.chart} />
     </div>
   )
