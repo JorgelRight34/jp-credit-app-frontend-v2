@@ -1,6 +1,6 @@
 import {
-  useActiveTabRoute,
   useSetActiveTabRoute,
+  useUnreactiveActiveTabRoute,
 } from '../providers/tabs-router-provider'
 import Tabs from './tabs'
 import type { TabsProps } from './tabs'
@@ -8,7 +8,7 @@ import type { TabsProps } from './tabs'
 export type TabsRouterProps = Omit<TabsProps, 'defaultActiveKey'>
 
 const TabsRouter = ({ children }: TabsRouterProps) => {
-  const defaultActiveKey = useActiveTabRoute()
+  const defaultActiveKey = useUnreactiveActiveTabRoute()
   const setActiveRoute = useSetActiveTabRoute()
 
   return (

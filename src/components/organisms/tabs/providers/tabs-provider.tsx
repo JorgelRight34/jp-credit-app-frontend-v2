@@ -3,7 +3,6 @@ import {
   PropsWithChildren,
   useCallback,
   useContext,
-  useEffect,
   useState,
   useTransition,
 } from 'react'
@@ -61,9 +60,6 @@ export const TabsActiveIndexProvider = ({
     },
     [onSelect],
   )
-
-  // Change index when navigating between tabs outside the tabs
-  useEffect(() => handleSetIndex(defaultActiveKey), [defaultActiveKey])
 
   return (
     <TabsActiveIndexContext.Provider value={[index, handleSetIndex]}>

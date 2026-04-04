@@ -22,11 +22,9 @@ export function TabsRouterProvider({
   children,
   defaultActive = 0,
 }: TabsRouterProviderProps) {
-  const search = useSearchParams('tab')
+  const search = useSearchParams()
   const reactiveActiveRoute = Number(search.get('tab')) ?? defaultActive
-  const [unreactiveActiveRoute] = useState(
-    () => reactiveActiveRoute ?? defaultActive,
-  )
+  const [unreactiveRoute] = useState(() => reactiveActiveRoute ?? defaultActive)
 
   const setActiveRoute = useCallback(
     (tab: number) => {
@@ -40,9 +38,8 @@ export function TabsRouterProvider({
 
   return (
     <TabsRouteValueContext.Provider value={reactiveActiveRoute}>
-      <>pre: {reactiveActiveRoute}</>
       <TabsRouteActionsContext.Provider value={setActiveRoute}>
-        <TabsRouteUnreactiveContext.Provider value={unreactiveActiveRoute}>
+        <TabsRouteUnreactiveContext.Provider value={unreactiveRoute}>
           {children}
         </TabsRouteUnreactiveContext.Provider>
       </TabsRouteActionsContext.Provider>

@@ -56,6 +56,7 @@ const Navbar = ({ user, header }: PropsWithUser<{ header: string }>) => {
       <div className="flex-shrink-0 p-2">
         <Link to="/">
           <NavbarCard
+            className="text-primary"
             image={
               <img className="brand small-logo h-full w-full" alt="logo" />
             }

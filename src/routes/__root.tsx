@@ -79,7 +79,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body className="antialiased">
         <Provider dataClient={context.dataClient}>
-          <LoadingBar />
+          {/* <LoadingBar /> */}
           <LoadingScreen />
           <CssBaseline />
           {children}

@@ -93,11 +93,6 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
             />
           </LayoutRow>
         </Fieldset>
-        <FormHtmlDisplayGroup
-          name="description"
-          label="Descripción"
-          value={transaction.description}
-        />
       </MasterDetailLayout.Master>
       <MasterDetailLayout.Detail>
         <Fieldset legend="Datos">
@@ -153,6 +148,13 @@ const TransactionOverview = ({ transaction }: { transaction: Transaction }) => {
           </LayoutRow>
         </Fieldset>
       </MasterDetailLayout.Detail>
+      <MasterDetailLayout.MasterFooter>
+        <FormHtmlDisplayGroup
+          name="description"
+          label="Descripción"
+          value={transaction.description}
+        />
+      </MasterDetailLayout.MasterFooter>
     </MasterDetailLayout>
   )
 }

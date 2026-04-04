@@ -33,7 +33,7 @@ export const amortizationDatatableColumns: Array<Column<AmortizationPayment>> = 
 export const createAmortizationPaymentNumberColumn = (startDate?: Date | string, paymentFrequencyPerYear?: number): Column<AmortizationPayment> => (
     {
         accessorKey: "number",
-        header: "No.",
+        header: "FECHA",
         cell: ({ row }) => {
             if (!startDate || !paymentFrequencyPerYear)
                 return row.original.number;

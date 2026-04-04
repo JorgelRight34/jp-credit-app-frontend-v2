@@ -56,7 +56,7 @@ const CreateReportForm = ({
         </TabsList>
         <TabPanel index={0}>
           <MasterDetailLayout>
-            <MasterDetailLayout.Master>
+            <MasterDetailLayout.MasterExpanded>
               <Form form={form}>
                 <FormRow>
                   <FormGroup name="title" label="Título" input={Input} />
@@ -76,7 +76,7 @@ const CreateReportForm = ({
                   optional
                 />
               </Form>
-            </MasterDetailLayout.Master>
+            </MasterDetailLayout.MasterExpanded>
             <MasterDetailLayout.Detail>
               <FormWatch
                 form={form}

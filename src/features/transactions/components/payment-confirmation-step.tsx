@@ -13,6 +13,7 @@ import {
   FormRow,
   Icon,
   LightPillBtn,
+  OverviewLayout,
   Paragraph,
   useFormConfirmationFlowActiveStep,
   useFormConfirmationFlowData,
@@ -66,7 +67,7 @@ const PaymentDetails = ({
   transaction: PaymentResult['transaction']
 }) => {
   return (
-    <>
+    <OverviewLayout>
       <FormRow>
         <FormReadOnlyGroup
           name="loanId"
@@ -121,7 +122,7 @@ const PaymentDetails = ({
         value={transaction.description}
         optional
       />
-    </>
+    </OverviewLayout>
   )
 }
 
@@ -157,7 +158,7 @@ const PaymentLoanChangesCard = ({
           />
           <DetailRow
             title="Mora pendiente"
-            subtitle={toCurrency(loanBefore.totalFees)}
+            subtitle={toCurrency(loanBefore.penaltyBalance)}
           />
           <DetailRow
             title="Monto atrasado"

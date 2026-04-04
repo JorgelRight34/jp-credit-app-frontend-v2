@@ -36,7 +36,7 @@ const CreateTransactionPage = ({
 }: CreateTransactionPageProps) => {
   return (
     <PageRouterLayout
-      title="Transacciones"
+      title="Crear transacción"
       routerConfig={{
         baseBreadcrumbs: [transactionBreadcrumb],
         breadcrumbsByRoute,

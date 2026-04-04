@@ -56,7 +56,7 @@ const CreatePayment = (props: CreatePaymentProps) => {
       <FormConfirmationFlowContainer form={form}>
         <Form form={form}>
           <MasterDetailLayout>
-            <MasterDetailLayout.Master>
+            <MasterDetailLayout.MasterExpanded>
               <FormRow>
                 <FormGroup
                   name="loanId"
@@ -97,7 +97,7 @@ const CreatePayment = (props: CreatePaymentProps) => {
                 label="Descripción"
                 input={RichTextEditor}
               />
-            </MasterDetailLayout.Master>
+            </MasterDetailLayout.MasterExpanded>
             <MasterDetailLayout.Detail>
               <PickerInputDataController
                 ref={loanPickerInputDataControllerRef}
