@@ -2,7 +2,6 @@ import { useData } from "@/hooks/useData";
 import { FinanceQuery } from "../models/financeQuery"
 import { Projection } from "../models/projection";
 import { splitIntoPeriods } from "../lib/utils";
-import { useState } from "react";
 import { useFinancePeriodNavigator, UseFinancePeriodNavigatorProps } from "./useFinancePeriodNavigator";
 import { getProjectionsPerInterval } from "../services/financeService";
 import { useGroupedFinancialBreakdown } from "./useGroupedFinancialBreakdown";
@@ -14,22 +13,17 @@ interface UseGroupedProjectionsProps extends Partial<UseFinancePeriodNavigatorPr
     data?: Array<Projection>
 }
 
-export const useGroupedProjections = ({ data: initialData, query, periodsOfMargin = 2 }: UseGroupedProjectionsProps) => {
+export const useGroupedProjections = ({ data: initialData, query }: UseGroupedProjectionsProps) => {
     const periods = handleSplitIntoPeriods(query)
-    const [controlledPeriodsOfMargin, setControlledPeriodsOfMargin] = useState(periodsOfMargin)
-    const { period, periodIndex, selectPeriod } = useFinancePeriodNavigator({
-        query, periods, periodsOfMargin: controlledPeriodsOfMargin
-    });
-
+    const { period, periodIndex, selectPeriod } = useFinancePeriodNavigator({ query, periods });
     const { data } = useData({
         key: [projectionsQueryKey, projectionsSummaryQueryKey, { query }, period],
         loader: () => getProjectionsPerInterval({
             startDate: toInputDate(period!.start!),
-            endDate: toInputDate(period!.end!)
+            endDate: toInputDate(period!.end!),
         }),
         enabled: !!period?.start || !!period?.end || initialData !== undefined
     })
-
 
     const [groups, groupMap] = useGroupedFinancialBreakdown({
         data: data?.items ?? initialData ?? [],
@@ -41,10 +35,8 @@ export const useGroupedProjections = ({ data: initialData, query, periodsOfMargi
         periods,
         groups,
         groupMap,
-        pageSize: periodsOfMargin <= 0 ? 1 : periodsOfMargin,
         period,
         periodIndex,
-        onLimitChange: setControlledPeriodsOfMargin,
         onPageChange: (p: number) => selectPeriod(p - 1),
     }
 }

@@ -28,7 +28,6 @@ const TableBuilder = <TData,>({
   allowExpand,
   onRowClick,
   onExpand,
-  onLimitChange,
   ...config
 }: TableBuilderProps<TData>) => {
   const table = useTableState({ data, pageSize, allowExpand, ...config })
@@ -40,7 +39,6 @@ const TableBuilder = <TData,>({
           table={table}
           totalItems={totalItems}
           infinitePagination={infinitePagination}
-          onLimitChange={onLimitChange}
         />
       }
     >

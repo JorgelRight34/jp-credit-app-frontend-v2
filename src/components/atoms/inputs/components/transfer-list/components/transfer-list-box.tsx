@@ -1,7 +1,7 @@
+import FormLabel from '@/components/atoms/form-label/form-label'
+import Paragraph from '@/components/atoms/text/paragraph'
 import clsx from 'clsx'
-import Paragraph from '../../../text/paragraph'
-import FormLabel from '../../../form-label/form-label'
-import Checkbox from '../checkbox/checkbox'
+import Checkbox from '../../checkbox/checkbox'
 
 export type TransferItem<T> = {
   id: T

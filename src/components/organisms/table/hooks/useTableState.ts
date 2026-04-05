@@ -11,7 +11,7 @@ import type {
     SortingState,
     TableOptions
 } from "@tanstack/react-table";
-import { DEFAULT_PAGE_SIZE } from "../lib/constants";
+import { DEFAULT_PAGE_SIZE } from "@/components/molecules";
 
 export type InitialTableState<TData> = TableOptions<TData>["initialState"]
 
@@ -24,6 +24,7 @@ export interface UseTableStateProps<TData> {
     initialState?: InitialTableState<TData>;
     getRowId?: (row: TData) => string;
     onPageChange?: (page: number) => void;
+    onLimitChange?: (limit: number) => void;
     onSortingChange?: (sort: SortingState) => void;
 }
 
@@ -37,6 +38,7 @@ export const useTableState = <T,>({
     allowExpand,
     initialState,
     getRowId,
+    onLimitChange,
     onPageChange,
     onSortingChange,
 }: UseTableStateProps<T>) => {
@@ -72,12 +74,13 @@ export const useTableState = <T,>({
                 setPagination((prev) => {
                     const next = getUpdaterOrValue(updaterOrValue, prev)
                     onPageChange?.(next.pageIndex + 1);
+                    onLimitChange?.(next.pageSize as PageSize)
 
                     return next;
                 });
             })
         },
-        getExpandedRowModel: getExpandedRowModel(),
+        getExpandedRowModel: allowExpand ? getExpandedRowModel() : undefined,
         getRowCanExpand: () => allowExpand ?? false,
         onSortingChange: (updaterOrValue) => {
             setSorting((prev) => {

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import type { TransferItem } from "./transfer-list-box"
+import type { TransferItem } from "../components/transfer-list-box"
 
 export interface UseTransferListProps<T> {
     value: Array<T>

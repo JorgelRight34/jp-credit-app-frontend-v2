@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import { LightBtn } from '../../../button'
+import { LightBtn } from '../../../../button'
 import TransferListBox from './transfer-list-box'
-import { useTransferList } from './useTransferList'
-import type { UseTransferListProps } from './useTransferList'
+import { useTransferList } from '../hooks/useTransferList'
+import type { UseTransferListProps } from '../hooks/useTransferList'
 
 type TransferListProps<T = object> = UseTransferListProps<T> & {
   leftTitle?: string
@@ -35,7 +35,7 @@ const TransferList = <T,>({
   } = useTransferList(config)
 
   const transferListClassName = clsx(
-    'h-full w-full md:w-7/15 overflow-y-auto',
+    'h-full min-h-0 w-full md:w-7/15 overflow-y-auto',
     className,
   )
 

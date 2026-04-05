@@ -3,7 +3,7 @@ import { SMALL_SCREEN_BREAKPOINT } from '@/lib/utils'
 import { Pagination as MPagination } from '@mui/material'
 import type { PaginationProps as MPaginationProps } from '@mui/material'
 
-type PaginationProps = MPaginationProps
+export type PaginationProps = MPaginationProps
 
 const Pagination = (props: PaginationProps) => {
   const isSmall = useWindowBreakpoint(SMALL_SCREEN_BREAKPOINT)

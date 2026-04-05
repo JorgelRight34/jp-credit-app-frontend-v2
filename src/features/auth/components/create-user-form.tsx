@@ -116,11 +116,7 @@ const PermissionsForm = ({ ref }: PropsWithFormRef<PermissionsFormRef>) => {
   return (
     <FormWithRef ref={ref} form={form}>
       <Suspense fallback="...">
-        <FormInput
-          name="claims"
-          className="!max-h-fit"
-          as={PermissionsFormTransferList}
-        />
+        <FormInput name="claims" as={PermissionsFormTransferList} />
       </Suspense>
     </FormWithRef>
   )
@@ -132,11 +128,7 @@ const UserRolesForm = ({ ref, ...props }: UserRolesFormProps) => {
   return (
     <FormWithRef ref={ref} form={form}>
       <Suspense fallback="...">
-        <FormInput
-          name="roles"
-          className="max-h-96"
-          as={UserRolesTransferList}
-        />
+        <FormInput name="roles" as={UserRolesTransferList} />
       </Suspense>
     </FormWithRef>
   )
@@ -148,11 +140,7 @@ const ProjectUserForm = ({ ref }: PropsWithFormRef<ProjectUserFormRef>) => {
   return (
     <FormWithRef ref={ref} form={form}>
       <Suspense fallback="...">
-        <FormInput
-          name="projectIds"
-          className="max-h-96"
-          as={ProjectUserTransferList}
-        />
+        <FormInput name="projectIds" as={ProjectUserTransferList} />
       </Suspense>
     </FormWithRef>
   )

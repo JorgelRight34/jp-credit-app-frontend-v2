@@ -10,7 +10,7 @@ type FormProps<T extends FieldValues> = {
 }
 
 const Form = <T extends FieldValues>({
-  className = '',
+  className = 'h-full',
   form,
   children,
 }: FormProps<T>) => {

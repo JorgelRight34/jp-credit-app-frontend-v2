@@ -7,6 +7,7 @@ import {
   TableFooterCompositor,
   TableHeaderCompositor,
   TableNavigation,
+  TableRow,
   useTableState,
 } from '..'
 import { TableBuilderProps } from './table-builder'
@@ -17,8 +18,14 @@ type TableGroupTableProps<T> = {
   table: ReturnType<typeof useTableState<T>>
 }
 
-interface GroupedTableProps<T> extends TableBuilderProps<T> {
-  groups: Array<Array<T>>
+interface GroupTableNavigationProps<T> extends Omit<
+  TableBuilderProps<T>,
+  'data' | 'getRowId'
+> {
+  data: Array<Array<T>> // Groups
+}
+
+interface GroupedTableProps<T> extends GroupTableNavigationProps<T> {
   groupPageSize?: PageSize
   getGroupColumns: (group: Array<T>, index: number) => Array<Column<T>>
   render?: ({ table }: TableGroupTableProps<T>) => ReactNode
@@ -27,11 +34,12 @@ interface GroupedTableProps<T> extends TableBuilderProps<T> {
 const GroupedTable = <T,>({
   totalItems,
   infinitePagination,
-  groups,
-  groupPageSize,
   getGroupColumns,
   render = TableGroupTable,
   onLimitChange,
+  data,
+  pageSize,
+  groupPageSize,
   ...config
 }: GroupedTableProps<T>) => {
   const table = useTableState(config)
@@ -39,17 +47,16 @@ const GroupedTable = <T,>({
   return (
     <TableCompositor
       navigation={
-        <TableNavigation
-          table={table}
+        <GroupTableNavigation
+          data={data}
           totalItems={totalItems}
-          infinitePagination={infinitePagination}
-          onLimitChange={onLimitChange}
+          {...config}
+          pageSize={pageSize}
         />
       }
     >
       <Table>
-        <TableHeaderCompositor table={table} />
-        {groups.map((group, index) => (
+        {data.map((group, index) => (
           <TableStateWrapper
             key={index}
             columns={getGroupColumns(group, index)}
@@ -64,14 +71,33 @@ const GroupedTable = <T,>({
   )
 }
 
+const GroupTableNavigation = <T,>({
+  data,
+  totalItems,
+  ...config
+}: GroupTableNavigationProps<T>) => {
+  const table = useTableState<Array<T>>({ ...config, data, columns: [] })
+
+  return <TableNavigation table={table} totalItems={totalItems} />
+}
+
 export const TableGroupTable = <T,>({ table }: TableGroupTableProps<T>) => {
   return (
     <>
+      <TableHeaderCompositor table={table} />
       <TableBodyCompositor table={table} />
       <TableFooterCompositor
         className="[display:table-header-group] border-t border-b"
         table={table}
       />
+      <TableRow>
+        <td colSpan={9999} className="p-0">
+          <TableNavigation
+            table={table}
+            totalItems={table.getPrePaginationRowModel().rows.length}
+          />
+        </td>
+      </TableRow>
     </>
   )
 }

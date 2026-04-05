@@ -1,8 +1,7 @@
-import { startTransition, useMemo } from 'react'
+import { useMemo } from 'react'
 import clsx from 'clsx'
 import type { TableBuilderProps } from './table-builder'
 import type { Table } from '@tanstack/react-table'
-import type { PageSize } from '../models/pageSize'
 import { PageSizeSelector, Pagination } from '@/components/molecules'
 import { Subtitle } from '@/components/atoms'
 
@@ -11,14 +10,12 @@ interface TableNavigationProps<TData> {
   totalItems?: number
   infinitePagination?: TableBuilderProps<TData>['infinitePagination']
   className?: string
-  onLimitChange?: (limit: PageSize) => void
 }
 
 const TableNavigation = <TData,>({
   table,
   totalItems = 0,
   className,
-  onLimitChange,
 }: TableNavigationProps<TData>) => {
   const pagination = table.getState().pagination
   const pageSize = pagination.pageSize
@@ -29,11 +26,6 @@ const TableNavigation = <TData,>({
     () => Math.ceil(totalItems / pageSize),
     [totalItems, pageSize],
   )
-
-  const handlePageSizeChange = (val: number) => {
-    table.setPageSize(val)
-    startTransition(() => onLimitChange?.(val))
-  }
 
   return (
     <div className={clsx('w-full', className)}>
@@ -47,7 +39,7 @@ const TableNavigation = <TData,>({
           <div className="hidden flex-shrink-0 items-center md:flex">
             <PageSizeSelector
               className="text-sm"
-              onChange={(val) => handlePageSizeChange(+val)}
+              onChange={(val) => table.setPageSize(+val)}
               value={pageSize}
             />
           </div>
@@ -55,7 +47,7 @@ const TableNavigation = <TData,>({
             <div className="flex w-full justify-end">
               <Pagination
                 count={totalPages}
-                page={table.getState().pagination.pageIndex + 1}
+                page={page}
                 onChange={(_, val) => table.setPageIndex(val - 1)}
               />
             </div>
