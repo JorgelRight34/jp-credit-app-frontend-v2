@@ -35,7 +35,7 @@ export const useTableState = <T,>({
     data,
     columns,
     selectBehavior,
-    allowExpand,
+    allowExpand = false,
     initialState,
     getRowId,
     onLimitChange,
@@ -55,7 +55,6 @@ export const useTableState = <T,>({
         columns,
         manualPagination: !!onPageChange,
         state: { pagination, sorting, expanded },
-        enableRowSelection: true,
         getPaginationRowModel: onPageChange ? undefined : getPaginationRowModel(),
         onExpandedChange: (updater) => {
             const newExpandedState = typeof updater === 'function' ? updater(expanded) : updater;
@@ -81,7 +80,7 @@ export const useTableState = <T,>({
             })
         },
         getExpandedRowModel: allowExpand ? getExpandedRowModel() : undefined,
-        getRowCanExpand: () => allowExpand ?? false,
+        getRowCanExpand: () => allowExpand,
         onSortingChange: (updaterOrValue) => {
             setSorting((prev) => {
                 const next = getUpdaterOrValue(updaterOrValue, prev)

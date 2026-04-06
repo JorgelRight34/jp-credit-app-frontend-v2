@@ -46,7 +46,7 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
         <TabPanel index={0}>
           <Form className="h-full" form={form}>
             <MasterDetailLayout>
-              <MasterDetailLayout.Master>
+              <MasterDetailLayout.MasterExpanded>
                 <FormRow>
                   <FormGroup
                     name="approvedAmount"
@@ -108,7 +108,14 @@ const CreateLoanForm = (props: CreateLoanFormProps) => {
                     input={LoanPurposeSearchInput}
                   />
                 </FormRow>
-              </MasterDetailLayout.Master>
+                <FormRow>
+                  <FormGroup
+                    name="penaltyRate"
+                    label="Penalidad por mora"
+                    input={PercentageInput}
+                  />
+                </FormRow>
+              </MasterDetailLayout.MasterExpanded>
               <MasterDetailLayout.Detail>
                 <FormWatch
                   form={form}

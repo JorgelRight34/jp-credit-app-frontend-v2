@@ -20,7 +20,7 @@ export type ConfirmationModalRef = {
 }
 
 export type ConfirmationModalProps = Omit<ModalProps, 'onHide' | 'show'> & {
-  title?: string
+  header?: string
   confirmationMessage: string
   cacheKey?: CacheKey
   destructive?: boolean
@@ -37,7 +37,7 @@ const ConfirmationModal = forwardRef<
 >(
   (
     {
-      title = 'Confirmar acción',
+      header = 'Confirmar acción',
       confirmationMessage = '',
       destructive = false,
       confirmText = 'Confirmar',
@@ -87,7 +87,7 @@ const ConfirmationModal = forwardRef<
     useImperativeHandle(ref, () => ({ show, hide }), [show, hide])
 
     return (
-      <Modal {...props} title={title} show={isOpen} onHide={hide}>
+      <Modal {...props} title={header} show={isOpen} onHide={hide}>
         <div className="mb-5 w-full space-y-3">
           <div>
             <p className="mb-3">
@@ -112,7 +112,7 @@ const ConfirmationModal = forwardRef<
 
           {description && (
             <div>
-              <p className="mb-5 text-muted">{description}</p>
+              <p className="text-muted mb-5">{description}</p>
             </div>
           )}
 
@@ -133,7 +133,7 @@ const ConfirmationModal = forwardRef<
           </div>
         </div>
 
-        <div className="mt-auto w-full flex flex-shrink-0">
+        <div className="mt-auto flex w-full flex-shrink-0">
           <div className="w-6/12 pr-1">
             <SecondaryBtn
               className="w-full"

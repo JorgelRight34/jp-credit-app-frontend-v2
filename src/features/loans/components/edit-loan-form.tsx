@@ -7,6 +7,7 @@ import {
   FormReadOnlyGroup,
   FormRow,
   RichTextEditor,
+  PercentageInput,
 } from '@/components'
 import LoanProjectionCard from './loan-projection-card'
 import { Loan } from '../models/loan'
@@ -35,7 +36,7 @@ const EditLoanForm = ({ loan, ...props }: EditLoanFormProps) => {
     <FormContainer form={form}>
       <Form form={form}>
         <MasterDetailLayout>
-          <MasterDetailLayout.Master>
+          <MasterDetailLayout.MasterExpanded>
             <FormRow>
               <FormReadOnlyGroup
                 name="approvedAmount"
@@ -105,7 +106,14 @@ const EditLoanForm = ({ loan, ...props }: EditLoanFormProps) => {
                 input={LoanPurposeSearchInput}
               />
             </FormRow>
-          </MasterDetailLayout.Master>
+            <FormRow>
+              <FormGroup
+                name="penaltyRate"
+                label="Penalidad por mora"
+                input={PercentageInput}
+              />
+            </FormRow>
+          </MasterDetailLayout.MasterExpanded>
           <MasterDetailLayout.Detail>
             <LoanProjectionCard
               className="h-full w-full shadow-sm"

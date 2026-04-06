@@ -20,6 +20,7 @@ export const useEditLoanForm = ({ loan, ...props }: UseEditLoanFormProps) => {
     defaultValues: {
       description: loan.description,
       loanPurposeId: loan.loanPurposeId,
+      penaltyRate: loan.penaltyRate,
     },
     onSubmit: (body) => editLoan(loan.id, body),
     keysToInvalidate: [[loansQueryKey]],

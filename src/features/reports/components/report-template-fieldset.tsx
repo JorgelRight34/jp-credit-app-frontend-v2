@@ -22,26 +22,24 @@ const ReportTemplateDefinitionFieldset = ({
 
   return (
     <Fieldset
-      className="flex h-full flex-1 flex-col items-center shadow-sm"
+      className="h-full shadow-sm"
       legendClassName="text-center"
       legend="DICCIONARIO"
     >
       <BigTitle className="text-accent flex-shrink-0 text-center">
         {templateKey ? reportTemplateKeysLabels[templateKey] : DASHES}
       </BigTitle>
-      <div className="!flex h-full !flex-col !items-center">
-        <div className="max-h-96 !overflow-y-auto">
-          {data?.map((field) => (
-            <Accordion key={field.name} id={field.name}>
-              <AccordionSummary>
-                {field.name} | {field.fieldType}
-              </AccordionSummary>
-              <AccordionDetails>
-                <Paragraph>{field.description}</Paragraph>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </div>
+      <div className="flex max-h-96 flex-1 flex-col overflow-y-auto">
+        {data?.map((field) => (
+          <Accordion key={field.name} id={field.name}>
+            <AccordionSummary>
+              {field.name} | {field.fieldType}
+            </AccordionSummary>
+            <AccordionDetails>
+              <Paragraph>{field.description}</Paragraph>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </div>
     </Fieldset>
   )

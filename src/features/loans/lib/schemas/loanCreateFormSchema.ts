@@ -27,6 +27,7 @@ export const loanCreateFormSchema = z
                 .refine((val) => val > 0, { message: "Debe ser mayor que 0" }),
             z.number(),
         ]),
+        penaltyRate: z.number(),
         startDate: z.string().default(new Date().toISOString()),
         deliveryDate: z.string(),
         loanOfficerProfileId: z.number().optional(),

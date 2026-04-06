@@ -33,29 +33,25 @@ const ProjectionsGroupedTable = ({ query }: { query: FinanceQuery }) => {
     useGroupedProjections({ query })
 
   return (
-    <>
-      <GroupedTable
-        data={groups}
-        columns={buildProjectionTableColumns(
+    <GroupedTable
+      data={groups}
+      columns={buildProjectionTableColumns(
+        projections?.loansMap,
+        period?.start,
+        period?.end,
+        query.interval,
+      )}
+      getGroupColumns={(_, index) =>
+        buildProjectionTableColumns(
           projections?.loansMap,
-          period?.start,
-          period?.end,
+          groupMap[index],
+          groupMap[index],
           query.interval,
-        )}
-        getGroupColumns={(_, index) =>
-          buildProjectionTableColumns(
-            projections?.loansMap,
-            groupMap[index],
-            groupMap[index],
-            query.interval,
-          )
-        }
-        pageSize={1} // it should be periods of margin
-        totalItems={periods.length}
-        {...table}
-      />
-      {periods.length}
-    </>
+        )
+      }
+      totalItems={periods.length}
+      {...table}
+    />
   )
 }
 

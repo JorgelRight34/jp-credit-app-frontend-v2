@@ -10,23 +10,24 @@ interface ConfirmationModalTriggerProps extends Omit<
   'ref'
 > {
   wrapper?: ElementType
+  disabled?: boolean
   children?: ReactNode
 }
 
 const ConfirmationModalTrigger = ({
   children,
-  wrapper = 'span',
+  wrapper: Component = 'span',
+  disabled,
   ...props
 }: ConfirmationModalTriggerProps) => {
   const confirmationModalRef = useRef<ConfirmationModalRef>(null)
 
-  const Component = wrapper
-
   return (
     <>
       <Component
-        className="cursor-pointer w-full"
+        className="w-full cursor-pointer"
         onClick={() => confirmationModalRef.current?.show()}
+        disabled={disabled}
       >
         {children}
       </Component>

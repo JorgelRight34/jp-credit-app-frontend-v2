@@ -28,7 +28,7 @@ const EditCollateralFormPage = ({ collateral }: { collateral: Collateral }) => {
               'No puede eliminar una garantía que ha sido usada para pago o esté inactiva',
           },
           {
-            title: 'Borrar garantía',
+            header: 'Borrar garantía',
             confirmationMessage: 'Deseo borrar esta garantía',
             onConfirm: () => deleteCollateral(collateral.id),
           },

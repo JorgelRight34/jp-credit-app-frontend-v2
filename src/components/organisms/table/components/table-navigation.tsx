@@ -3,18 +3,20 @@ import clsx from 'clsx'
 import type { TableBuilderProps } from './table-builder'
 import type { Table } from '@tanstack/react-table'
 import { PageSizeSelector, Pagination } from '@/components/molecules'
-import { Subtitle } from '@/components/atoms'
+import { SelectOptions, Subtitle } from '@/components/atoms'
 
 interface TableNavigationProps<TData> {
   table: Table<TData>
   totalItems?: number
   infinitePagination?: TableBuilderProps<TData>['infinitePagination']
+  pageSizeOptions?: SelectOptions<number>
   className?: string
 }
 
 const TableNavigation = <TData,>({
   table,
   totalItems = 0,
+  pageSizeOptions,
   className,
 }: TableNavigationProps<TData>) => {
   const pagination = table.getState().pagination
@@ -39,8 +41,9 @@ const TableNavigation = <TData,>({
           <div className="hidden flex-shrink-0 items-center md:flex">
             <PageSizeSelector
               className="text-sm"
-              onChange={(val) => table.setPageSize(+val)}
+              onChange={table.setPageSize}
               value={pageSize}
+              options={pageSizeOptions}
             />
           </div>
           <div className="min-w-0 flex-shrink-0 space-y-2">

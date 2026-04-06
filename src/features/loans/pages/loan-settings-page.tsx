@@ -35,7 +35,7 @@ const LoanSettingsPage = ({ loan }: { loan: Loan }) => {
             tooltip: 'Un préstamo con transacciones no puede ser borrado.',
           },
           {
-            title: 'Borrar préstamo',
+            header: 'Borrar préstamo',
             confirmationMessage: 'Deseo borrar este préstamo',
             onConfirm: () => deleteLoan(loan.id),
           },

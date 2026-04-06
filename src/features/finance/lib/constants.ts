@@ -7,3 +7,5 @@ export const financeInitialQuery: FinanceQuery = {
     endDate: toInputDate(getTodayWithDaysFromNow(2160)),
     interval: 30,
 }
+
+export const groupedProjectionsPageSizeIdentifier = "12";

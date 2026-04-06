@@ -156,7 +156,6 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
           </LayoutRow>
         </Fieldset>
       </MasterDetailLayout.Detail>
-      {/* I want this to be at the bottom on mobile but keep it just below Master in medium screens but without being too far down because of the column height that matches the detail column */}
       <MasterDetailLayout.MasterFooter>
         <ViewMore>
           <Fieldset legend="Fechas">
@@ -166,12 +165,17 @@ const LoanOverview = ({ loan }: PropsWithLoan) => {
                 label="Fecha de inicio"
                 value={toFormattedDate(loan.startDate)}
               />
-            </LayoutRow>
-            <LayoutRow>
               <FormReadOnlyGroup
                 name="deliveryDate"
                 label="Fecha de entrega"
                 value={toFormattedDate(loan.deliveryDate)}
+              />
+            </LayoutRow>
+            <LayoutRow>
+              <FormReadOnlyGroup
+                name="penaltyRate"
+                label="Penalidad por mora"
+                value={toPercentage(loan.penaltyRate)}
               />
             </LayoutRow>
           </Fieldset>

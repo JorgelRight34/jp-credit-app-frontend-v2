@@ -7,17 +7,17 @@ import type { InputProps } from '../input/components/input'
 import { type ReactNode } from 'react'
 import { MenuItem } from '@/components/molecules'
 
-export type SelectInputProps = Omit<
+export type SelectInputProps<T> = Omit<
   InputProps,
   'onChange' | 'ref' | 'size' | 'slotProps'
 > & {
-  options?: SelectOptions
+  options?: SelectOptions<T>
   children?: ReactNode
   allowNoOption?: boolean
-  onChange?: (val: string) => void
+  onChange?: (val: T) => void
 }
 
-const SelectInput = ({
+const SelectInput = <T,>({
   options,
   children,
   label,
@@ -27,7 +27,7 @@ const SelectInput = ({
   value = '',
   onChange,
   ...props
-}: SelectInputProps) => {
+}: SelectInputProps<T>) => {
   return (
     <FormControl
       className={clsx('flex-shrink-0', props.className)}
@@ -50,7 +50,7 @@ const SelectInput = ({
             },
           },
         }}
-        onChange={(e) => onChange?.(e.target.value as string)}
+        onChange={(e) => onChange?.(e.target.value)}
         sx={{ width: 'auto', minWidth: 'fit-content' }}
         IconComponent={readOnly ? () => null : undefined}
         readOnly={readOnly}
@@ -58,7 +58,7 @@ const SelectInput = ({
       >
         {options &&
           options.map((option, key) => (
-            <MenuItem key={key} value={option[0] ?? ''}>
+            <MenuItem key={key} value={(option[0] as string) ?? ''}>
               {option[1]}
             </MenuItem>
           ))}

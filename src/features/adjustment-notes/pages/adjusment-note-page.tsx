@@ -31,7 +31,7 @@ const AdjustmentNotePage = ({
           },
           {
             onConfirm: () => deleteAdjustmentNote(adjustmentNote.id),
-            title: 'Eliminar nota de ajuste',
+            header: 'Eliminar nota de ajuste',
             description:
               'Esta acción eliminará permanentemente la nota de ajuste seleccionada. Esta operación no se puede deshacer.',
             confirmationMessage:

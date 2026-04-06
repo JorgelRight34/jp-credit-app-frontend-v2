@@ -34,12 +34,11 @@ interface GroupedTableProps<T> extends GroupTableNavigationProps<T> {
 const GroupedTable = <T,>({
   totalItems,
   infinitePagination,
-  getGroupColumns,
-  render = TableGroupTable,
-  onLimitChange,
   data,
   pageSize,
   groupPageSize,
+  getGroupColumns,
+  render = TableGroupTable,
   ...config
 }: GroupedTableProps<T>) => {
   const table = useTableState(config)
@@ -78,7 +77,17 @@ const GroupTableNavigation = <T,>({
 }: GroupTableNavigationProps<T>) => {
   const table = useTableState<Array<T>>({ ...config, data, columns: [] })
 
-  return <TableNavigation table={table} totalItems={totalItems} />
+  return (
+    <TableNavigation
+      table={table}
+      totalItems={totalItems}
+      pageSizeOptions={[
+        [1, 1],
+        [2, 2],
+        [3, 3],
+      ]}
+    />
+  )
 }
 
 export const TableGroupTable = <T,>({ table }: TableGroupTableProps<T>) => {

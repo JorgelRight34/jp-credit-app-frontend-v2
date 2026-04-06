@@ -22,7 +22,7 @@ const EditFollowUpPage = ({ followUp }: { followUp: FollowUp }) => {
             title: 'Eliminar',
           },
           {
-            title: 'Eliminar seguimiento',
+            header: 'Eliminar seguimiento',
             description: 'Eliminar seguimiento',
             confirmationMessage: 'Seguro que desea eliminar este seguimiento?',
             onConfirm: () => deleteFollowUp(followUp.id),

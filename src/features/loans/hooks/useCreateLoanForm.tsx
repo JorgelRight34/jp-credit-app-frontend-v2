@@ -30,6 +30,7 @@ export const useCreateLoanForm = ({
       description: '',
       numberOfPayments: '',
       projectId: project.id,
+      penaltyRate: project.defaultPenaltyRate,
       graceDays: project.graceDays,
       clientProfileId: null,
       guarantorProfileId: null,

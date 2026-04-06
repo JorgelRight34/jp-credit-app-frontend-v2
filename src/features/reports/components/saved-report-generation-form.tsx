@@ -44,7 +44,7 @@ const SavedReportGenerationForm = ({
     <FormContainer form={form} initializeAsDirty={initializeAsDirty}>
       <Form form={form}>
         <MasterDetailLayout>
-          <MasterDetailLayout.Master>
+          <MasterDetailLayout.MasterExpanded>
             <FormRow>
               <FormReadOnlyGroup
                 name="title"
@@ -73,7 +73,7 @@ const SavedReportGenerationForm = ({
               value={report.description}
               optional
             />
-          </MasterDetailLayout.Master>
+          </MasterDetailLayout.MasterExpanded>
           <MasterDetailLayout.Detail>
             <ReportTemplateDefinitionFieldset templateKey={report.key} />
           </MasterDetailLayout.Detail>
