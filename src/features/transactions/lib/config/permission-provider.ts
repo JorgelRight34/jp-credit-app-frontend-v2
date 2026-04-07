@@ -6,3 +6,6 @@ export const transactionPermissionProvider: PermissionsProvider = {
     cacheKey: [transactionsQueryKey],
     loader: () => getModulePermissions("transactions/permissions")
 }
+
+
+export const transactionReportPermissionProvider = transactionPermissionProvider

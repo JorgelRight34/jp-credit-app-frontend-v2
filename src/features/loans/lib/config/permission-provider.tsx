@@ -6,3 +6,5 @@ export const loanPermissionProvider: PermissionsProvider = {
   cacheKey: [loansQueryKey],
   loader: () => getModulePermissions('loans/permissions'),
 }
+
+export const loanReportPermissionProvider = loanPermissionProvider

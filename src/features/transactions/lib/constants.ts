@@ -1,5 +1,6 @@
 import { SelectOptions } from "@/components"
 import { TransactionType } from "../models/transactionType"
+import { Report } from "@/features/reports"
 
 export const transactionsQueryKey = "transactions"
 
@@ -10,7 +11,7 @@ export const transactionSelectOptions: SelectOptions<TransactionType> = [
     ['ds', 'Desembolso'],
 ]
 
-export const transactionReceiptReportKeyParts = {
-    key: 'transaction',
-    buildSubkey: (type: TransactionType) => `receipt.${type}`,
+export const transactionReceiptReportKeyParts: { key: Report["key"]; buildSubkey: ((type: TransactionType) => string) } = {
+    key: 'Transaction',
+    buildSubkey: (type) => `receipt.${type}`,
 }

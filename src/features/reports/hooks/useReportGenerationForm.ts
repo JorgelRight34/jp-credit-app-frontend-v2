@@ -5,20 +5,20 @@ import { fileFromUrl } from "@/lib/utils";
 
 interface UseReportGenerationFormValuesProps extends UseDataFormProps<Blob, ReportGenerationFormValues> {
     report?: Report
+    reportKey: Report["key"]
 }
 
 export interface ReportGenerationFormValues extends FieldValues {
     file?: Array<File>;
     id?: number | string;
-    key?: string;
 }
 
-export const useReportGenerationForm = ({ report, initialValues, ...config }: UseReportGenerationFormValuesProps) => {
+export const useReportGenerationForm = ({ report, reportKey, initialValues, ...config }: UseReportGenerationFormValuesProps) => {
     return useForm<Blob, ReportGenerationFormValues, Blob>({
-        onSubmit: generateReport,
+        onSubmit: (body) => generateReport(body, reportKey),
         onEdit: async (body) => {
             const files = await Promise.all(report!.documents.map(d => fileFromUrl(d.url)))
-            return await generateReport({ id: body.id, key: report!.key, file: files })
+            return await generateReport({ id: body.id, file: files }, reportKey)
         },
         shouldEdit: !!report,
         shouldUseNativeValidation: true,

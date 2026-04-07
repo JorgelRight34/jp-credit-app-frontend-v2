@@ -16,7 +16,6 @@ import { Route as mainIndexRouteImport } from './routes/(main)/index'
 import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/route'
 import { Route as mainResetPasswordIndexRouteImport } from './routes/(main)/reset-password/index'
 import { Route as mainmodulesTransactionsIndexRouteImport } from './routes/(main)/(modules)/transactions/index'
-import { Route as mainmodulesReportsIndexRouteImport } from './routes/(main)/(modules)/reports/index'
 import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(modules)/projects/index'
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
@@ -26,16 +25,15 @@ import { Route as mainmodulesAmortizationsIndexRouteImport } from './routes/(mai
 import { Route as mainmodulesAdjustmentNotesIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/index'
 import { Route as mainmodulesAccountStatementsIndexRouteImport } from './routes/(main)/(modules)/account-statements/index'
 import { Route as mainmodulesAccessControlIndexRouteImport } from './routes/(main)/(modules)/access-control/index'
+import { Route as mainmodulesTransactionsReportsIndexRouteImport } from './routes/(main)/(modules)/transactions/reports/index'
 import { Route as mainmodulesTransactionsPeriodsIndexRouteImport } from './routes/(main)/(modules)/transactions/periods/index'
 import { Route as mainmodulesTransactionsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/create/index'
 import { Route as mainmodulesTransactionsIdIndexRouteImport } from './routes/(main)/(modules)/transactions/$id/index'
-import { Route as mainmodulesReportsGenerateIndexRouteImport } from './routes/(main)/(modules)/reports/generate/index'
-import { Route as mainmodulesReportsCreateIndexRouteImport } from './routes/(main)/(modules)/reports/create/index'
-import { Route as mainmodulesReportsIdIndexRouteImport } from './routes/(main)/(modules)/reports/$id/index'
 import { Route as mainmodulesProjectsSettingsIndexRouteImport } from './routes/(main)/(modules)/projects/settings/index'
 import { Route as mainmodulesProjectsCreateIndexRouteImport } from './routes/(main)/(modules)/projects/create/index'
 import { Route as mainmodulesProfilesCreateIndexRouteImport } from './routes/(main)/(modules)/profiles/create/index'
 import { Route as mainmodulesProfilesIdIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/index'
+import { Route as mainmodulesLoansReportsIndexRouteImport } from './routes/(main)/(modules)/loans/reports/index'
 import { Route as mainmodulesLoansPurpousesIndexRouteImport } from './routes/(main)/(modules)/loans/purpouses/index'
 import { Route as mainmodulesLoansCreateIndexRouteImport } from './routes/(main)/(modules)/loans/create/index'
 import { Route as mainmodulesLoansIdIndexRouteImport } from './routes/(main)/(modules)/loans/$id/index'
@@ -48,10 +46,14 @@ import { Route as mainmodulesCollateralsCreateIndexRouteImport } from './routes/
 import { Route as mainmodulesCollateralsIdIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/index'
 import { Route as mainmodulesAdjustmentNotesCreateIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/create/index'
 import { Route as mainmodulesAdjustmentNotesIdIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/$id/index'
-import { Route as mainmodulesTransactionsReceiptReportTemplateCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/receipt-report-template/create/index'
+import { Route as mainmodulesTransactionsReportsGenerateIndexRouteImport } from './routes/(main)/(modules)/transactions/reports/generate/index'
+import { Route as mainmodulesTransactionsReportsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/reports/create/index'
+import { Route as mainmodulesTransactionsReportsIdIndexRouteImport } from './routes/(main)/(modules)/transactions/reports/$id/index'
 import { Route as mainmodulesTransactionsPeriodsCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/periods/create/index'
-import { Route as mainmodulesReportsIdEditIndexRouteImport } from './routes/(main)/(modules)/reports/$id/edit/index'
 import { Route as mainmodulesProfilesIdEditIndexRouteImport } from './routes/(main)/(modules)/profiles/$id/edit/index'
+import { Route as mainmodulesLoansReportsGenerateIndexRouteImport } from './routes/(main)/(modules)/loans/reports/generate/index'
+import { Route as mainmodulesLoansReportsCreateIndexRouteImport } from './routes/(main)/(modules)/loans/reports/create/index'
+import { Route as mainmodulesLoansReportsIdIndexRouteImport } from './routes/(main)/(modules)/loans/reports/$id/index'
 import { Route as mainmodulesLoansPurpousesCreateIndexRouteImport } from './routes/(main)/(modules)/loans/purpouses/create/index'
 import { Route as mainmodulesLoansIdSettingsIndexRouteImport } from './routes/(main)/(modules)/loans/$id/settings/index'
 import { Route as mainmodulesFollowUpsIdEditIndexRouteImport } from './routes/(main)/(modules)/follow-ups/$id/edit/index'
@@ -61,6 +63,8 @@ import { Route as mainmodulesAccessControlUsersCreateIndexRouteImport } from './
 import { Route as mainmodulesAccessControlUsersUsernameIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/index'
 import { Route as mainmodulesAccessControlRolesCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/create/index'
 import { Route as mainmodulesAccessControlRolesIdIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/index'
+import { Route as mainmodulesTransactionsReportsReceiptCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/reports/receipt/create/index'
+import { Route as mainmodulesTransactionsReportsIdEditIndexRouteImport } from './routes/(main)/(modules)/transactions/reports/$id/edit/index'
 import { Route as mainmodulesLoansPurpousesIdEditIndexRouteImport } from './routes/(main)/(modules)/loans/purpouses/$id/edit/index'
 import { Route as mainmodulesAccessControlUsersUsernameEditIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/edit/index'
 import { Route as mainmodulesAccessControlRolesIdEditIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/edit/index'
@@ -99,11 +103,6 @@ const mainmodulesTransactionsIndexRoute =
     path: '/transactions/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesReportsIndexRoute = mainmodulesReportsIndexRouteImport.update({
-  id: '/reports/',
-  path: '/reports/',
-  getParentRoute: () => mainmodulesRouteRoute,
-} as any)
 const mainmodulesProjectsIndexRoute =
   mainmodulesProjectsIndexRouteImport.update({
     id: '/projects/',
@@ -157,6 +156,12 @@ const mainmodulesAccessControlIndexRoute =
     path: '/access-control/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesTransactionsReportsIndexRoute =
+  mainmodulesTransactionsReportsIndexRouteImport.update({
+    id: '/transactions/reports/',
+    path: '/transactions/reports/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesTransactionsPeriodsIndexRoute =
   mainmodulesTransactionsPeriodsIndexRouteImport.update({
     id: '/transactions/periods/',
@@ -173,24 +178,6 @@ const mainmodulesTransactionsIdIndexRoute =
   mainmodulesTransactionsIdIndexRouteImport.update({
     id: '/transactions/$id/',
     path: '/transactions/$id/',
-    getParentRoute: () => mainmodulesRouteRoute,
-  } as any)
-const mainmodulesReportsGenerateIndexRoute =
-  mainmodulesReportsGenerateIndexRouteImport.update({
-    id: '/reports/generate/',
-    path: '/reports/generate/',
-    getParentRoute: () => mainmodulesRouteRoute,
-  } as any)
-const mainmodulesReportsCreateIndexRoute =
-  mainmodulesReportsCreateIndexRouteImport.update({
-    id: '/reports/create/',
-    path: '/reports/create/',
-    getParentRoute: () => mainmodulesRouteRoute,
-  } as any)
-const mainmodulesReportsIdIndexRoute =
-  mainmodulesReportsIdIndexRouteImport.update({
-    id: '/reports/$id/',
-    path: '/reports/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesProjectsSettingsIndexRoute =
@@ -215,6 +202,12 @@ const mainmodulesProfilesIdIndexRoute =
   mainmodulesProfilesIdIndexRouteImport.update({
     id: '/profiles/$id/',
     path: '/profiles/$id/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesLoansReportsIndexRoute =
+  mainmodulesLoansReportsIndexRouteImport.update({
+    id: '/loans/reports/',
+    path: '/loans/reports/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesLoansPurpousesIndexRoute =
@@ -288,10 +281,22 @@ const mainmodulesAdjustmentNotesIdIndexRoute =
     path: '/adjustment-notes/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute =
-  mainmodulesTransactionsReceiptReportTemplateCreateIndexRouteImport.update({
-    id: '/transactions/receipt-report-template/create/',
-    path: '/transactions/receipt-report-template/create/',
+const mainmodulesTransactionsReportsGenerateIndexRoute =
+  mainmodulesTransactionsReportsGenerateIndexRouteImport.update({
+    id: '/transactions/reports/generate/',
+    path: '/transactions/reports/generate/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesTransactionsReportsCreateIndexRoute =
+  mainmodulesTransactionsReportsCreateIndexRouteImport.update({
+    id: '/transactions/reports/create/',
+    path: '/transactions/reports/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesTransactionsReportsIdIndexRoute =
+  mainmodulesTransactionsReportsIdIndexRouteImport.update({
+    id: '/transactions/reports/$id/',
+    path: '/transactions/reports/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesTransactionsPeriodsCreateIndexRoute =
@@ -300,16 +305,28 @@ const mainmodulesTransactionsPeriodsCreateIndexRoute =
     path: '/transactions/periods/create/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
-const mainmodulesReportsIdEditIndexRoute =
-  mainmodulesReportsIdEditIndexRouteImport.update({
-    id: '/reports/$id/edit/',
-    path: '/reports/$id/edit/',
-    getParentRoute: () => mainmodulesRouteRoute,
-  } as any)
 const mainmodulesProfilesIdEditIndexRoute =
   mainmodulesProfilesIdEditIndexRouteImport.update({
     id: '/profiles/$id/edit/',
     path: '/profiles/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesLoansReportsGenerateIndexRoute =
+  mainmodulesLoansReportsGenerateIndexRouteImport.update({
+    id: '/loans/reports/generate/',
+    path: '/loans/reports/generate/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesLoansReportsCreateIndexRoute =
+  mainmodulesLoansReportsCreateIndexRouteImport.update({
+    id: '/loans/reports/create/',
+    path: '/loans/reports/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesLoansReportsIdIndexRoute =
+  mainmodulesLoansReportsIdIndexRouteImport.update({
+    id: '/loans/reports/$id/',
+    path: '/loans/reports/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesLoansPurpousesCreateIndexRoute =
@@ -366,6 +383,18 @@ const mainmodulesAccessControlRolesIdIndexRoute =
     path: '/access-control/roles/$id/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesTransactionsReportsReceiptCreateIndexRoute =
+  mainmodulesTransactionsReportsReceiptCreateIndexRouteImport.update({
+    id: '/transactions/reports/receipt/create/',
+    path: '/transactions/reports/receipt/create/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesTransactionsReportsIdEditIndexRoute =
+  mainmodulesTransactionsReportsIdEditIndexRouteImport.update({
+    id: '/transactions/reports/$id/edit/',
+    path: '/transactions/reports/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesLoansPurpousesIdEditIndexRoute =
   mainmodulesLoansPurpousesIdEditIndexRouteImport.update({
     id: '/loans/purpouses/$id/edit/',
@@ -399,7 +428,6 @@ export interface FileRoutesByFullPath {
   '/loans/': typeof mainmodulesLoansIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
   '/projects/': typeof mainmodulesProjectsIndexRoute
-  '/reports/': typeof mainmodulesReportsIndexRoute
   '/transactions/': typeof mainmodulesTransactionsIndexRoute
   '/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
   '/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
@@ -413,16 +441,15 @@ export interface FileRoutesByFullPath {
   '/loans/$id/': typeof mainmodulesLoansIdIndexRoute
   '/loans/create/': typeof mainmodulesLoansCreateIndexRoute
   '/loans/purpouses/': typeof mainmodulesLoansPurpousesIndexRoute
+  '/loans/reports/': typeof mainmodulesLoansReportsIndexRoute
   '/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
   '/projects/settings/': typeof mainmodulesProjectsSettingsIndexRoute
-  '/reports/$id/': typeof mainmodulesReportsIdIndexRoute
-  '/reports/create/': typeof mainmodulesReportsCreateIndexRoute
-  '/reports/generate/': typeof mainmodulesReportsGenerateIndexRoute
   '/transactions/$id/': typeof mainmodulesTransactionsIdIndexRoute
   '/transactions/create/': typeof mainmodulesTransactionsCreateIndexRoute
   '/transactions/periods/': typeof mainmodulesTransactionsPeriodsIndexRoute
+  '/transactions/reports/': typeof mainmodulesTransactionsReportsIndexRoute
   '/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -432,13 +459,19 @@ export interface FileRoutesByFullPath {
   '/follow-ups/$id/edit/': typeof mainmodulesFollowUpsIdEditIndexRoute
   '/loans/$id/settings/': typeof mainmodulesLoansIdSettingsIndexRoute
   '/loans/purpouses/create/': typeof mainmodulesLoansPurpousesCreateIndexRoute
+  '/loans/reports/$id/': typeof mainmodulesLoansReportsIdIndexRoute
+  '/loans/reports/create/': typeof mainmodulesLoansReportsCreateIndexRoute
+  '/loans/reports/generate/': typeof mainmodulesLoansReportsGenerateIndexRoute
   '/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
-  '/reports/$id/edit/': typeof mainmodulesReportsIdEditIndexRoute
   '/transactions/periods/create/': typeof mainmodulesTransactionsPeriodsCreateIndexRoute
-  '/transactions/receipt-report-template/create/': typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute
+  '/transactions/reports/$id/': typeof mainmodulesTransactionsReportsIdIndexRoute
+  '/transactions/reports/create/': typeof mainmodulesTransactionsReportsCreateIndexRoute
+  '/transactions/reports/generate/': typeof mainmodulesTransactionsReportsGenerateIndexRoute
   '/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
   '/loans/purpouses/$id/edit/': typeof mainmodulesLoansPurpousesIdEditIndexRoute
+  '/transactions/reports/$id/edit/': typeof mainmodulesTransactionsReportsIdEditIndexRoute
+  '/transactions/reports/receipt/create/': typeof mainmodulesTransactionsReportsReceiptCreateIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof mainIndexRoute
@@ -454,7 +487,6 @@ export interface FileRoutesByTo {
   '/loans': typeof mainmodulesLoansIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
   '/projects': typeof mainmodulesProjectsIndexRoute
-  '/reports': typeof mainmodulesReportsIndexRoute
   '/transactions': typeof mainmodulesTransactionsIndexRoute
   '/adjustment-notes/$id': typeof mainmodulesAdjustmentNotesIdIndexRoute
   '/adjustment-notes/create': typeof mainmodulesAdjustmentNotesCreateIndexRoute
@@ -468,16 +500,15 @@ export interface FileRoutesByTo {
   '/loans/$id': typeof mainmodulesLoansIdIndexRoute
   '/loans/create': typeof mainmodulesLoansCreateIndexRoute
   '/loans/purpouses': typeof mainmodulesLoansPurpousesIndexRoute
+  '/loans/reports': typeof mainmodulesLoansReportsIndexRoute
   '/profiles/$id': typeof mainmodulesProfilesIdIndexRoute
   '/profiles/create': typeof mainmodulesProfilesCreateIndexRoute
   '/projects/create': typeof mainmodulesProjectsCreateIndexRoute
   '/projects/settings': typeof mainmodulesProjectsSettingsIndexRoute
-  '/reports/$id': typeof mainmodulesReportsIdIndexRoute
-  '/reports/create': typeof mainmodulesReportsCreateIndexRoute
-  '/reports/generate': typeof mainmodulesReportsGenerateIndexRoute
   '/transactions/$id': typeof mainmodulesTransactionsIdIndexRoute
   '/transactions/create': typeof mainmodulesTransactionsCreateIndexRoute
   '/transactions/periods': typeof mainmodulesTransactionsPeriodsIndexRoute
+  '/transactions/reports': typeof mainmodulesTransactionsReportsIndexRoute
   '/access-control/roles/$id': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/access-control/roles/create': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username': typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -487,13 +518,19 @@ export interface FileRoutesByTo {
   '/follow-ups/$id/edit': typeof mainmodulesFollowUpsIdEditIndexRoute
   '/loans/$id/settings': typeof mainmodulesLoansIdSettingsIndexRoute
   '/loans/purpouses/create': typeof mainmodulesLoansPurpousesCreateIndexRoute
+  '/loans/reports/$id': typeof mainmodulesLoansReportsIdIndexRoute
+  '/loans/reports/create': typeof mainmodulesLoansReportsCreateIndexRoute
+  '/loans/reports/generate': typeof mainmodulesLoansReportsGenerateIndexRoute
   '/profiles/$id/edit': typeof mainmodulesProfilesIdEditIndexRoute
-  '/reports/$id/edit': typeof mainmodulesReportsIdEditIndexRoute
   '/transactions/periods/create': typeof mainmodulesTransactionsPeriodsCreateIndexRoute
-  '/transactions/receipt-report-template/create': typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute
+  '/transactions/reports/$id': typeof mainmodulesTransactionsReportsIdIndexRoute
+  '/transactions/reports/create': typeof mainmodulesTransactionsReportsCreateIndexRoute
+  '/transactions/reports/generate': typeof mainmodulesTransactionsReportsGenerateIndexRoute
   '/access-control/roles/$id/edit': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/edit': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
   '/loans/purpouses/$id/edit': typeof mainmodulesLoansPurpousesIdEditIndexRoute
+  '/transactions/reports/$id/edit': typeof mainmodulesTransactionsReportsIdEditIndexRoute
+  '/transactions/reports/receipt/create': typeof mainmodulesTransactionsReportsReceiptCreateIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -512,7 +549,6 @@ export interface FileRoutesById {
   '/(main)/(modules)/loans/': typeof mainmodulesLoansIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
   '/(main)/(modules)/projects/': typeof mainmodulesProjectsIndexRoute
-  '/(main)/(modules)/reports/': typeof mainmodulesReportsIndexRoute
   '/(main)/(modules)/transactions/': typeof mainmodulesTransactionsIndexRoute
   '/(main)/(modules)/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
   '/(main)/(modules)/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
@@ -526,16 +562,15 @@ export interface FileRoutesById {
   '/(main)/(modules)/loans/$id/': typeof mainmodulesLoansIdIndexRoute
   '/(main)/(modules)/loans/create/': typeof mainmodulesLoansCreateIndexRoute
   '/(main)/(modules)/loans/purpouses/': typeof mainmodulesLoansPurpousesIndexRoute
+  '/(main)/(modules)/loans/reports/': typeof mainmodulesLoansReportsIndexRoute
   '/(main)/(modules)/profiles/$id/': typeof mainmodulesProfilesIdIndexRoute
   '/(main)/(modules)/profiles/create/': typeof mainmodulesProfilesCreateIndexRoute
   '/(main)/(modules)/projects/create/': typeof mainmodulesProjectsCreateIndexRoute
   '/(main)/(modules)/projects/settings/': typeof mainmodulesProjectsSettingsIndexRoute
-  '/(main)/(modules)/reports/$id/': typeof mainmodulesReportsIdIndexRoute
-  '/(main)/(modules)/reports/create/': typeof mainmodulesReportsCreateIndexRoute
-  '/(main)/(modules)/reports/generate/': typeof mainmodulesReportsGenerateIndexRoute
   '/(main)/(modules)/transactions/$id/': typeof mainmodulesTransactionsIdIndexRoute
   '/(main)/(modules)/transactions/create/': typeof mainmodulesTransactionsCreateIndexRoute
   '/(main)/(modules)/transactions/periods/': typeof mainmodulesTransactionsPeriodsIndexRoute
+  '/(main)/(modules)/transactions/reports/': typeof mainmodulesTransactionsReportsIndexRoute
   '/(main)/(modules)/access-control/roles/$id/': typeof mainmodulesAccessControlRolesIdIndexRoute
   '/(main)/(modules)/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/(main)/(modules)/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -545,13 +580,19 @@ export interface FileRoutesById {
   '/(main)/(modules)/follow-ups/$id/edit/': typeof mainmodulesFollowUpsIdEditIndexRoute
   '/(main)/(modules)/loans/$id/settings/': typeof mainmodulesLoansIdSettingsIndexRoute
   '/(main)/(modules)/loans/purpouses/create/': typeof mainmodulesLoansPurpousesCreateIndexRoute
+  '/(main)/(modules)/loans/reports/$id/': typeof mainmodulesLoansReportsIdIndexRoute
+  '/(main)/(modules)/loans/reports/create/': typeof mainmodulesLoansReportsCreateIndexRoute
+  '/(main)/(modules)/loans/reports/generate/': typeof mainmodulesLoansReportsGenerateIndexRoute
   '/(main)/(modules)/profiles/$id/edit/': typeof mainmodulesProfilesIdEditIndexRoute
-  '/(main)/(modules)/reports/$id/edit/': typeof mainmodulesReportsIdEditIndexRoute
   '/(main)/(modules)/transactions/periods/create/': typeof mainmodulesTransactionsPeriodsCreateIndexRoute
-  '/(main)/(modules)/transactions/receipt-report-template/create/': typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute
+  '/(main)/(modules)/transactions/reports/$id/': typeof mainmodulesTransactionsReportsIdIndexRoute
+  '/(main)/(modules)/transactions/reports/create/': typeof mainmodulesTransactionsReportsCreateIndexRoute
+  '/(main)/(modules)/transactions/reports/generate/': typeof mainmodulesTransactionsReportsGenerateIndexRoute
   '/(main)/(modules)/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/(main)/(modules)/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
   '/(main)/(modules)/loans/purpouses/$id/edit/': typeof mainmodulesLoansPurpousesIdEditIndexRoute
+  '/(main)/(modules)/transactions/reports/$id/edit/': typeof mainmodulesTransactionsReportsIdEditIndexRoute
+  '/(main)/(modules)/transactions/reports/receipt/create/': typeof mainmodulesTransactionsReportsReceiptCreateIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -569,7 +610,6 @@ export interface FileRouteTypes {
     | '/loans/'
     | '/profiles/'
     | '/projects/'
-    | '/reports/'
     | '/transactions/'
     | '/adjustment-notes/$id/'
     | '/adjustment-notes/create/'
@@ -583,16 +623,15 @@ export interface FileRouteTypes {
     | '/loans/$id/'
     | '/loans/create/'
     | '/loans/purpouses/'
+    | '/loans/reports/'
     | '/profiles/$id/'
     | '/profiles/create/'
     | '/projects/create/'
     | '/projects/settings/'
-    | '/reports/$id/'
-    | '/reports/create/'
-    | '/reports/generate/'
     | '/transactions/$id/'
     | '/transactions/create/'
     | '/transactions/periods/'
+    | '/transactions/reports/'
     | '/access-control/roles/$id/'
     | '/access-control/roles/create/'
     | '/access-control/users/$username/'
@@ -602,13 +641,19 @@ export interface FileRouteTypes {
     | '/follow-ups/$id/edit/'
     | '/loans/$id/settings/'
     | '/loans/purpouses/create/'
+    | '/loans/reports/$id/'
+    | '/loans/reports/create/'
+    | '/loans/reports/generate/'
     | '/profiles/$id/edit/'
-    | '/reports/$id/edit/'
     | '/transactions/periods/create/'
-    | '/transactions/receipt-report-template/create/'
+    | '/transactions/reports/$id/'
+    | '/transactions/reports/create/'
+    | '/transactions/reports/generate/'
     | '/access-control/roles/$id/edit/'
     | '/access-control/users/$username/edit/'
     | '/loans/purpouses/$id/edit/'
+    | '/transactions/reports/$id/edit/'
+    | '/transactions/reports/receipt/create/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -624,7 +669,6 @@ export interface FileRouteTypes {
     | '/loans'
     | '/profiles'
     | '/projects'
-    | '/reports'
     | '/transactions'
     | '/adjustment-notes/$id'
     | '/adjustment-notes/create'
@@ -638,16 +682,15 @@ export interface FileRouteTypes {
     | '/loans/$id'
     | '/loans/create'
     | '/loans/purpouses'
+    | '/loans/reports'
     | '/profiles/$id'
     | '/profiles/create'
     | '/projects/create'
     | '/projects/settings'
-    | '/reports/$id'
-    | '/reports/create'
-    | '/reports/generate'
     | '/transactions/$id'
     | '/transactions/create'
     | '/transactions/periods'
+    | '/transactions/reports'
     | '/access-control/roles/$id'
     | '/access-control/roles/create'
     | '/access-control/users/$username'
@@ -657,13 +700,19 @@ export interface FileRouteTypes {
     | '/follow-ups/$id/edit'
     | '/loans/$id/settings'
     | '/loans/purpouses/create'
+    | '/loans/reports/$id'
+    | '/loans/reports/create'
+    | '/loans/reports/generate'
     | '/profiles/$id/edit'
-    | '/reports/$id/edit'
     | '/transactions/periods/create'
-    | '/transactions/receipt-report-template/create'
+    | '/transactions/reports/$id'
+    | '/transactions/reports/create'
+    | '/transactions/reports/generate'
     | '/access-control/roles/$id/edit'
     | '/access-control/users/$username/edit'
     | '/loans/purpouses/$id/edit'
+    | '/transactions/reports/$id/edit'
+    | '/transactions/reports/receipt/create'
   id:
     | '__root__'
     | '/(main)'
@@ -681,7 +730,6 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/loans/'
     | '/(main)/(modules)/profiles/'
     | '/(main)/(modules)/projects/'
-    | '/(main)/(modules)/reports/'
     | '/(main)/(modules)/transactions/'
     | '/(main)/(modules)/adjustment-notes/$id/'
     | '/(main)/(modules)/adjustment-notes/create/'
@@ -695,16 +743,15 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/loans/$id/'
     | '/(main)/(modules)/loans/create/'
     | '/(main)/(modules)/loans/purpouses/'
+    | '/(main)/(modules)/loans/reports/'
     | '/(main)/(modules)/profiles/$id/'
     | '/(main)/(modules)/profiles/create/'
     | '/(main)/(modules)/projects/create/'
     | '/(main)/(modules)/projects/settings/'
-    | '/(main)/(modules)/reports/$id/'
-    | '/(main)/(modules)/reports/create/'
-    | '/(main)/(modules)/reports/generate/'
     | '/(main)/(modules)/transactions/$id/'
     | '/(main)/(modules)/transactions/create/'
     | '/(main)/(modules)/transactions/periods/'
+    | '/(main)/(modules)/transactions/reports/'
     | '/(main)/(modules)/access-control/roles/$id/'
     | '/(main)/(modules)/access-control/roles/create/'
     | '/(main)/(modules)/access-control/users/$username/'
@@ -714,13 +761,19 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/follow-ups/$id/edit/'
     | '/(main)/(modules)/loans/$id/settings/'
     | '/(main)/(modules)/loans/purpouses/create/'
+    | '/(main)/(modules)/loans/reports/$id/'
+    | '/(main)/(modules)/loans/reports/create/'
+    | '/(main)/(modules)/loans/reports/generate/'
     | '/(main)/(modules)/profiles/$id/edit/'
-    | '/(main)/(modules)/reports/$id/edit/'
     | '/(main)/(modules)/transactions/periods/create/'
-    | '/(main)/(modules)/transactions/receipt-report-template/create/'
+    | '/(main)/(modules)/transactions/reports/$id/'
+    | '/(main)/(modules)/transactions/reports/create/'
+    | '/(main)/(modules)/transactions/reports/generate/'
     | '/(main)/(modules)/access-control/roles/$id/edit/'
     | '/(main)/(modules)/access-control/users/$username/edit/'
     | '/(main)/(modules)/loans/purpouses/$id/edit/'
+    | '/(main)/(modules)/transactions/reports/$id/edit/'
+    | '/(main)/(modules)/transactions/reports/receipt/create/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -778,13 +831,6 @@ declare module '@tanstack/react-router' {
       path: '/transactions'
       fullPath: '/transactions/'
       preLoaderRoute: typeof mainmodulesTransactionsIndexRouteImport
-      parentRoute: typeof mainmodulesRouteRoute
-    }
-    '/(main)/(modules)/reports/': {
-      id: '/(main)/(modules)/reports/'
-      path: '/reports'
-      fullPath: '/reports/'
-      preLoaderRoute: typeof mainmodulesReportsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/projects/': {
@@ -850,6 +896,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesAccessControlIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/transactions/reports/': {
+      id: '/(main)/(modules)/transactions/reports/'
+      path: '/transactions/reports'
+      fullPath: '/transactions/reports/'
+      preLoaderRoute: typeof mainmodulesTransactionsReportsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/transactions/periods/': {
       id: '/(main)/(modules)/transactions/periods/'
       path: '/transactions/periods'
@@ -869,27 +922,6 @@ declare module '@tanstack/react-router' {
       path: '/transactions/$id'
       fullPath: '/transactions/$id/'
       preLoaderRoute: typeof mainmodulesTransactionsIdIndexRouteImport
-      parentRoute: typeof mainmodulesRouteRoute
-    }
-    '/(main)/(modules)/reports/generate/': {
-      id: '/(main)/(modules)/reports/generate/'
-      path: '/reports/generate'
-      fullPath: '/reports/generate/'
-      preLoaderRoute: typeof mainmodulesReportsGenerateIndexRouteImport
-      parentRoute: typeof mainmodulesRouteRoute
-    }
-    '/(main)/(modules)/reports/create/': {
-      id: '/(main)/(modules)/reports/create/'
-      path: '/reports/create'
-      fullPath: '/reports/create/'
-      preLoaderRoute: typeof mainmodulesReportsCreateIndexRouteImport
-      parentRoute: typeof mainmodulesRouteRoute
-    }
-    '/(main)/(modules)/reports/$id/': {
-      id: '/(main)/(modules)/reports/$id/'
-      path: '/reports/$id'
-      fullPath: '/reports/$id/'
-      preLoaderRoute: typeof mainmodulesReportsIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/projects/settings/': {
@@ -918,6 +950,13 @@ declare module '@tanstack/react-router' {
       path: '/profiles/$id'
       fullPath: '/profiles/$id/'
       preLoaderRoute: typeof mainmodulesProfilesIdIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/reports/': {
+      id: '/(main)/(modules)/loans/reports/'
+      path: '/loans/reports'
+      fullPath: '/loans/reports/'
+      preLoaderRoute: typeof mainmodulesLoansReportsIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/loans/purpouses/': {
@@ -1004,11 +1043,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesAdjustmentNotesIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/transactions/receipt-report-template/create/': {
-      id: '/(main)/(modules)/transactions/receipt-report-template/create/'
-      path: '/transactions/receipt-report-template/create'
-      fullPath: '/transactions/receipt-report-template/create/'
-      preLoaderRoute: typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRouteImport
+    '/(main)/(modules)/transactions/reports/generate/': {
+      id: '/(main)/(modules)/transactions/reports/generate/'
+      path: '/transactions/reports/generate'
+      fullPath: '/transactions/reports/generate/'
+      preLoaderRoute: typeof mainmodulesTransactionsReportsGenerateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/transactions/reports/create/': {
+      id: '/(main)/(modules)/transactions/reports/create/'
+      path: '/transactions/reports/create'
+      fullPath: '/transactions/reports/create/'
+      preLoaderRoute: typeof mainmodulesTransactionsReportsCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/transactions/reports/$id/': {
+      id: '/(main)/(modules)/transactions/reports/$id/'
+      path: '/transactions/reports/$id'
+      fullPath: '/transactions/reports/$id/'
+      preLoaderRoute: typeof mainmodulesTransactionsReportsIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/transactions/periods/create/': {
@@ -1018,18 +1071,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesTransactionsPeriodsCreateIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
-    '/(main)/(modules)/reports/$id/edit/': {
-      id: '/(main)/(modules)/reports/$id/edit/'
-      path: '/reports/$id/edit'
-      fullPath: '/reports/$id/edit/'
-      preLoaderRoute: typeof mainmodulesReportsIdEditIndexRouteImport
-      parentRoute: typeof mainmodulesRouteRoute
-    }
     '/(main)/(modules)/profiles/$id/edit/': {
       id: '/(main)/(modules)/profiles/$id/edit/'
       path: '/profiles/$id/edit'
       fullPath: '/profiles/$id/edit/'
       preLoaderRoute: typeof mainmodulesProfilesIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/reports/generate/': {
+      id: '/(main)/(modules)/loans/reports/generate/'
+      path: '/loans/reports/generate'
+      fullPath: '/loans/reports/generate/'
+      preLoaderRoute: typeof mainmodulesLoansReportsGenerateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/reports/create/': {
+      id: '/(main)/(modules)/loans/reports/create/'
+      path: '/loans/reports/create'
+      fullPath: '/loans/reports/create/'
+      preLoaderRoute: typeof mainmodulesLoansReportsCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/reports/$id/': {
+      id: '/(main)/(modules)/loans/reports/$id/'
+      path: '/loans/reports/$id'
+      fullPath: '/loans/reports/$id/'
+      preLoaderRoute: typeof mainmodulesLoansReportsIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/loans/purpouses/create/': {
@@ -1095,6 +1162,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesAccessControlRolesIdIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/transactions/reports/receipt/create/': {
+      id: '/(main)/(modules)/transactions/reports/receipt/create/'
+      path: '/transactions/reports/receipt/create'
+      fullPath: '/transactions/reports/receipt/create/'
+      preLoaderRoute: typeof mainmodulesTransactionsReportsReceiptCreateIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/transactions/reports/$id/edit/': {
+      id: '/(main)/(modules)/transactions/reports/$id/edit/'
+      path: '/transactions/reports/$id/edit'
+      fullPath: '/transactions/reports/$id/edit/'
+      preLoaderRoute: typeof mainmodulesTransactionsReportsIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/loans/purpouses/$id/edit/': {
       id: '/(main)/(modules)/loans/purpouses/$id/edit/'
       path: '/loans/purpouses/$id/edit'
@@ -1129,7 +1210,6 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesLoansIndexRoute: typeof mainmodulesLoansIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
   mainmodulesProjectsIndexRoute: typeof mainmodulesProjectsIndexRoute
-  mainmodulesReportsIndexRoute: typeof mainmodulesReportsIndexRoute
   mainmodulesTransactionsIndexRoute: typeof mainmodulesTransactionsIndexRoute
   mainmodulesAdjustmentNotesIdIndexRoute: typeof mainmodulesAdjustmentNotesIdIndexRoute
   mainmodulesAdjustmentNotesCreateIndexRoute: typeof mainmodulesAdjustmentNotesCreateIndexRoute
@@ -1143,16 +1223,15 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesLoansIdIndexRoute: typeof mainmodulesLoansIdIndexRoute
   mainmodulesLoansCreateIndexRoute: typeof mainmodulesLoansCreateIndexRoute
   mainmodulesLoansPurpousesIndexRoute: typeof mainmodulesLoansPurpousesIndexRoute
+  mainmodulesLoansReportsIndexRoute: typeof mainmodulesLoansReportsIndexRoute
   mainmodulesProfilesIdIndexRoute: typeof mainmodulesProfilesIdIndexRoute
   mainmodulesProfilesCreateIndexRoute: typeof mainmodulesProfilesCreateIndexRoute
   mainmodulesProjectsCreateIndexRoute: typeof mainmodulesProjectsCreateIndexRoute
   mainmodulesProjectsSettingsIndexRoute: typeof mainmodulesProjectsSettingsIndexRoute
-  mainmodulesReportsIdIndexRoute: typeof mainmodulesReportsIdIndexRoute
-  mainmodulesReportsCreateIndexRoute: typeof mainmodulesReportsCreateIndexRoute
-  mainmodulesReportsGenerateIndexRoute: typeof mainmodulesReportsGenerateIndexRoute
   mainmodulesTransactionsIdIndexRoute: typeof mainmodulesTransactionsIdIndexRoute
   mainmodulesTransactionsCreateIndexRoute: typeof mainmodulesTransactionsCreateIndexRoute
   mainmodulesTransactionsPeriodsIndexRoute: typeof mainmodulesTransactionsPeriodsIndexRoute
+  mainmodulesTransactionsReportsIndexRoute: typeof mainmodulesTransactionsReportsIndexRoute
   mainmodulesAccessControlRolesIdIndexRoute: typeof mainmodulesAccessControlRolesIdIndexRoute
   mainmodulesAccessControlRolesCreateIndexRoute: typeof mainmodulesAccessControlRolesCreateIndexRoute
   mainmodulesAccessControlUsersUsernameIndexRoute: typeof mainmodulesAccessControlUsersUsernameIndexRoute
@@ -1162,13 +1241,19 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesFollowUpsIdEditIndexRoute: typeof mainmodulesFollowUpsIdEditIndexRoute
   mainmodulesLoansIdSettingsIndexRoute: typeof mainmodulesLoansIdSettingsIndexRoute
   mainmodulesLoansPurpousesCreateIndexRoute: typeof mainmodulesLoansPurpousesCreateIndexRoute
+  mainmodulesLoansReportsIdIndexRoute: typeof mainmodulesLoansReportsIdIndexRoute
+  mainmodulesLoansReportsCreateIndexRoute: typeof mainmodulesLoansReportsCreateIndexRoute
+  mainmodulesLoansReportsGenerateIndexRoute: typeof mainmodulesLoansReportsGenerateIndexRoute
   mainmodulesProfilesIdEditIndexRoute: typeof mainmodulesProfilesIdEditIndexRoute
-  mainmodulesReportsIdEditIndexRoute: typeof mainmodulesReportsIdEditIndexRoute
   mainmodulesTransactionsPeriodsCreateIndexRoute: typeof mainmodulesTransactionsPeriodsCreateIndexRoute
-  mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute: typeof mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute
+  mainmodulesTransactionsReportsIdIndexRoute: typeof mainmodulesTransactionsReportsIdIndexRoute
+  mainmodulesTransactionsReportsCreateIndexRoute: typeof mainmodulesTransactionsReportsCreateIndexRoute
+  mainmodulesTransactionsReportsGenerateIndexRoute: typeof mainmodulesTransactionsReportsGenerateIndexRoute
   mainmodulesAccessControlRolesIdEditIndexRoute: typeof mainmodulesAccessControlRolesIdEditIndexRoute
   mainmodulesAccessControlUsersUsernameEditIndexRoute: typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
   mainmodulesLoansPurpousesIdEditIndexRoute: typeof mainmodulesLoansPurpousesIdEditIndexRoute
+  mainmodulesTransactionsReportsIdEditIndexRoute: typeof mainmodulesTransactionsReportsIdEditIndexRoute
+  mainmodulesTransactionsReportsReceiptCreateIndexRoute: typeof mainmodulesTransactionsReportsReceiptCreateIndexRoute
 }
 
 const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
@@ -1182,7 +1267,6 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesLoansIndexRoute: mainmodulesLoansIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
   mainmodulesProjectsIndexRoute: mainmodulesProjectsIndexRoute,
-  mainmodulesReportsIndexRoute: mainmodulesReportsIndexRoute,
   mainmodulesTransactionsIndexRoute: mainmodulesTransactionsIndexRoute,
   mainmodulesAdjustmentNotesIdIndexRoute:
     mainmodulesAdjustmentNotesIdIndexRoute,
@@ -1200,18 +1284,18 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesLoansIdIndexRoute: mainmodulesLoansIdIndexRoute,
   mainmodulesLoansCreateIndexRoute: mainmodulesLoansCreateIndexRoute,
   mainmodulesLoansPurpousesIndexRoute: mainmodulesLoansPurpousesIndexRoute,
+  mainmodulesLoansReportsIndexRoute: mainmodulesLoansReportsIndexRoute,
   mainmodulesProfilesIdIndexRoute: mainmodulesProfilesIdIndexRoute,
   mainmodulesProfilesCreateIndexRoute: mainmodulesProfilesCreateIndexRoute,
   mainmodulesProjectsCreateIndexRoute: mainmodulesProjectsCreateIndexRoute,
   mainmodulesProjectsSettingsIndexRoute: mainmodulesProjectsSettingsIndexRoute,
-  mainmodulesReportsIdIndexRoute: mainmodulesReportsIdIndexRoute,
-  mainmodulesReportsCreateIndexRoute: mainmodulesReportsCreateIndexRoute,
-  mainmodulesReportsGenerateIndexRoute: mainmodulesReportsGenerateIndexRoute,
   mainmodulesTransactionsIdIndexRoute: mainmodulesTransactionsIdIndexRoute,
   mainmodulesTransactionsCreateIndexRoute:
     mainmodulesTransactionsCreateIndexRoute,
   mainmodulesTransactionsPeriodsIndexRoute:
     mainmodulesTransactionsPeriodsIndexRoute,
+  mainmodulesTransactionsReportsIndexRoute:
+    mainmodulesTransactionsReportsIndexRoute,
   mainmodulesAccessControlRolesIdIndexRoute:
     mainmodulesAccessControlRolesIdIndexRoute,
   mainmodulesAccessControlRolesCreateIndexRoute:
@@ -1228,18 +1312,30 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesLoansIdSettingsIndexRoute: mainmodulesLoansIdSettingsIndexRoute,
   mainmodulesLoansPurpousesCreateIndexRoute:
     mainmodulesLoansPurpousesCreateIndexRoute,
+  mainmodulesLoansReportsIdIndexRoute: mainmodulesLoansReportsIdIndexRoute,
+  mainmodulesLoansReportsCreateIndexRoute:
+    mainmodulesLoansReportsCreateIndexRoute,
+  mainmodulesLoansReportsGenerateIndexRoute:
+    mainmodulesLoansReportsGenerateIndexRoute,
   mainmodulesProfilesIdEditIndexRoute: mainmodulesProfilesIdEditIndexRoute,
-  mainmodulesReportsIdEditIndexRoute: mainmodulesReportsIdEditIndexRoute,
   mainmodulesTransactionsPeriodsCreateIndexRoute:
     mainmodulesTransactionsPeriodsCreateIndexRoute,
-  mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute:
-    mainmodulesTransactionsReceiptReportTemplateCreateIndexRoute,
+  mainmodulesTransactionsReportsIdIndexRoute:
+    mainmodulesTransactionsReportsIdIndexRoute,
+  mainmodulesTransactionsReportsCreateIndexRoute:
+    mainmodulesTransactionsReportsCreateIndexRoute,
+  mainmodulesTransactionsReportsGenerateIndexRoute:
+    mainmodulesTransactionsReportsGenerateIndexRoute,
   mainmodulesAccessControlRolesIdEditIndexRoute:
     mainmodulesAccessControlRolesIdEditIndexRoute,
   mainmodulesAccessControlUsersUsernameEditIndexRoute:
     mainmodulesAccessControlUsersUsernameEditIndexRoute,
   mainmodulesLoansPurpousesIdEditIndexRoute:
     mainmodulesLoansPurpousesIdEditIndexRoute,
+  mainmodulesTransactionsReportsIdEditIndexRoute:
+    mainmodulesTransactionsReportsIdEditIndexRoute,
+  mainmodulesTransactionsReportsReceiptCreateIndexRoute:
+    mainmodulesTransactionsReportsReceiptCreateIndexRoute,
 }
 
 const mainmodulesRouteRouteWithChildren =

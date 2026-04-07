@@ -40,10 +40,14 @@ import {
 const addRouteName = 'Añadir'
 const addRouteIcon = () => <AddIcon />
 
-const allRouteBase: NavItem = {
+const allRouteBase: Omit<NavItem, 'route'> = {
   name: 'Todos',
   icon: () => <PublicIcon />,
-  route: '.',
+}
+
+const reportRouteBase: Omit<NavItem, 'route'> = {
+  icon: () => <ReportIcon />,
+  name: 'Reportes',
 }
 
 export const accountStatusNavItem: NavItem = {
@@ -179,6 +183,26 @@ export const transactionsNavItem: NavItem = {
   route: '/transactions',
   children: [
     {
+      ...reportRouteBase,
+      route: '/transactions/reports',
+      children: [
+        {
+          ...allRouteBase,
+          route: '/transactions/reports',
+        },
+        {
+          name: 'Generar',
+          icon: () => <PrintIcon />,
+          route: '/transactions/reports/generate',
+        },
+        {
+          name: addRouteName,
+          icon: addRouteIcon,
+          route: '/transactions/reports/create',
+        },
+      ],
+    },
+    {
       ...allRouteBase,
       route: '/transactions',
       search: { tab: 0 },
@@ -244,6 +268,26 @@ export const loansNavItem: NavItem = {
   icon: () => <MailIcon />,
   route: '/loans',
   children: [
+    {
+      ...reportRouteBase,
+      route: '/loans/reports',
+      children: [
+        {
+          ...allRouteBase,
+          route: '/loans/reports',
+        },
+        {
+          name: 'Generar',
+          icon: () => <PrintIcon />,
+          route: '/loans/reports/generate',
+        },
+        {
+          name: addRouteName,
+          icon: addRouteIcon,
+          route: '/loans/reports/create',
+        },
+      ],
+    },
     {
       ...allRouteBase,
       route: '/loans',
@@ -337,24 +381,28 @@ export const followUpsNavItem: NavItem = {
   ],
 }
 
-export const reportsNavItem: NavItem = {
-  name: 'Reportes',
-  icon: () => <ReportIcon />,
-  route: '/reports',
+export const systemNavItem: NavItem = {
+  name: 'Sistema',
+  icon: () => <QueryStatsIcon />,
+  route: '/finance/projections',
   children: [
     {
-      ...allRouteBase,
-      route: '/reports',
+      name: 'Proyecciones',
+      icon: () => <TrendingUpIcon />,
+      route: '/finance/projections',
+      activeOptions: { exact: false },
     },
     {
-      name: 'Generar',
-      icon: () => <PrintIcon />,
-      route: '/reports/generate',
+      name: 'Ingresos',
+      icon: () => <AttachMoneyIcon />,
+      route: '/finance/incomes',
+      activeOptions: { exact: false },
     },
     {
-      name: addRouteName,
-      icon: addRouteIcon,
-      route: '/reports/create',
+      name: 'Egresos',
+      icon: () => <AccountBalanceWalletIcon />,
+      route: '/finance/expenses',
+      activeOptions: { exact: false },
     },
   ],
 }

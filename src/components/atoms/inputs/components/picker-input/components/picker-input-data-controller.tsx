@@ -21,15 +21,9 @@ export const PickerInputDataControllerInner = <T,>(
 ) => {
   const [value, setValue] = useState<T | null>(null)
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      setValue,
-    }),
-    [],
-  )
+  useImperativeHandle(ref, () => ({ setValue }), [])
 
-  return <>{render(value)}</>
+  return render(value)
 }
 
 export const PickerInputDataController = forwardRef(

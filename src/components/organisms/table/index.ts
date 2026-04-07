@@ -41,7 +41,7 @@ export { useTableState } from "./hooks/useTableState";
 // ==============================
 // Models / Types
 // ==============================
-export type { Column } from "./models/column";
+export * from "./models/column";
 export type { Row } from "./models/row";
 export type { PageSize } from "./models/pageSize";
 export * from "./components/table-builder";

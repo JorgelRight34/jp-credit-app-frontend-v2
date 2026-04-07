@@ -14,6 +14,7 @@ export interface FileAttachmentsFormProps {
 
 export type FileAttachmentsFormRef = {
   submit: () => void
+  reset: () => void
 }
 
 const FileAttachmentsForm = forwardRef(
@@ -29,7 +30,8 @@ const FileAttachmentsForm = forwardRef(
     }, [isDirty, onDirtyChange])
 
     useImperativeHandle(ref, () => ({
-      submit: () => config.onSubmit(),
+      submit: config.onSubmit,
+      reset,
     }))
 
     return render({ isDirty, ...methods })

@@ -15,7 +15,7 @@ export const templateMapper = <T,>(obj: T, template: ReportTemplateDefinition<T>
 }
 
 export const reportTemplatesDefinition: Record<Report["key"], ReportTemplateDefinition<any>> = {
-    loan: loanTemplateDefinition,
-    collateral: collateralTemplateDefinition,
-    transaction: transactionTemplateDefinition
+    Loan: loanTemplateDefinition,
+    Collateral: collateralTemplateDefinition,
+    Transaction: transactionTemplateDefinition
 }

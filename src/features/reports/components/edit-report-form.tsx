@@ -7,8 +7,6 @@ import {
   FormGroup,
   MasterDetailLayout,
   FormRow,
-  FormSelectGroup,
-  FormWatch,
   Input,
   RichTextEditor,
   Tab,
@@ -21,7 +19,6 @@ import { Report } from '../models/report'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
-import { reportKeySelectOptions } from '../lib/constants'
 
 interface EditReportFormProps extends DataModuleFormProps<
   Report,
@@ -33,10 +30,10 @@ interface EditReportFormProps extends DataModuleFormProps<
 const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
   const form = useReportForm({
     ...props,
+    reportKey: report.key,
     defaultValues: {
       title: report.title,
       description: report.description,
-      key: report.key,
     },
     shouldEdit: true,
   })
@@ -49,18 +46,11 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
       </TabsList>
       <TabPanel index={0}>
         <MasterDetailLayout>
-          <MasterDetailLayout.Master>
+          <MasterDetailLayout.MasterExpanded>
             <FormContainer form={form}>
               <Form form={form}>
                 <FormRow>
                   <FormGroup name="title" label="Título" input={Input} />
-                </FormRow>
-                <FormRow>
-                  <FormSelectGroup
-                    name="key"
-                    label="Categoría"
-                    options={reportKeySelectOptions}
-                  />
                 </FormRow>
                 <FormGroup
                   name="description"
@@ -70,15 +60,9 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
                 />
               </Form>
             </FormContainer>
-          </MasterDetailLayout.Master>
+          </MasterDetailLayout.MasterExpanded>
           <MasterDetailLayout.Detail>
-            <FormWatch
-              form={form}
-              names={['key']}
-              render={([key]) => (
-                <ReportTemplateDefinitionFieldset templateKey={key} />
-              )}
-            />
+            <ReportTemplateDefinitionFieldset templateKey={report.key} />
           </MasterDetailLayout.Detail>
         </MasterDetailLayout>
       </TabPanel>

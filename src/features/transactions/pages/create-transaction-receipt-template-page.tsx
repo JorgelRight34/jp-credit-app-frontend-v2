@@ -20,8 +20,8 @@ const CreateTransactionReceiptTemplatePage = ({
       permissionProvider={transactionPermissionProvider}
     >
       <CreateReportForm
-        initialValues={{
-          key: transactionReceiptReportKeyParts.key,
+        reportKey="Transaction"
+        defaultValues={{
           subkey: transactionReceiptReportKeyParts.buildSubkey(type),
           description: 'Recibo',
         }}

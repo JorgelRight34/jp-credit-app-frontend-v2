@@ -6,7 +6,7 @@ import { buildPageTitle } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute(
-  '/(main)/(modules)/transactions/receipt-report-template/create/',
+  '/(main)/(modules)/transactions/reports/receipt/create/',
 )({
   head: () => ({
     meta: [{ title: buildPageTitle('Crear plantilla comprobante') }],

@@ -2,23 +2,21 @@ import {
   DataModuleFormProps,
   Form,
   FormContainer,
-  FormGroup,
-  FormHtmlDisplayGroup,
   MasterDetailLayout,
   FormReadOnlyGroup,
   FormRow,
+  FormGroup,
+  FormHtmlDisplayGroup,
 } from '@/components'
 import { Report } from '../models/report'
-import {
-  reportTemplateKeysInputMap,
-  reportTemplateKeysLabels,
-} from '../lib/constants'
 import { downloadFile } from '@/lib/utils'
 import {
   ReportGenerationFormValues,
   useReportGenerationForm,
 } from '../hooks/useReportGenerationForm'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
+import { reportTemplateKeysLabels } from '../lib/constants'
+import { reportTemplateKeysInputMap } from '../lib/jsx-constants'
 
 interface SavedReportGenerationFormProps extends DataModuleFormProps<
   Blob,
@@ -36,6 +34,7 @@ const SavedReportGenerationForm = ({
   const form = useReportGenerationForm({
     report,
     initialValues,
+    reportKey: report.key,
     onSuccess: downloadFile,
     ...props,
   })
@@ -50,13 +49,6 @@ const SavedReportGenerationForm = ({
                 name="title"
                 label="Título"
                 value={report.title}
-              />
-            </FormRow>
-            <FormRow>
-              <FormReadOnlyGroup
-                name="key"
-                label="Categoría"
-                value={reportTemplateKeysLabels[report.key]}
               />
             </FormRow>
             <FormRow>

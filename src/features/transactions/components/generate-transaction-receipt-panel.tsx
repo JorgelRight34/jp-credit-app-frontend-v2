@@ -31,7 +31,7 @@ const GenerateTransactionReceiptPanel = ({
             title={`Aún no tienes una plantilla para este tipo de transacciones (${type.toUpperCase()})`}
             subtitle="Para poder generar recibos en tus transacciones, primero debes crear una plantilla. 
                       Esta definirá el formato y la información que aparecerá en cada recibo."
-            createLink="/transactions/receipt-report-template/create"
+            createLink="/transactions/reports/receipt/create"
             createLinkSearch={{ type }}
             createLabel="Crear plantilla de recibo"
           />
@@ -57,7 +57,7 @@ const GenerateTransactionReceiptPanelInner = ({
     loader: async () => {
       const report = await getTransactionReceiptReport(type)
 
-      dataClient.set(buildReportQueryKey(report.id), report)
+      dataClient.set(buildReportQueryKey(report.id, 'Transaction'), report)
 
       return report
     },

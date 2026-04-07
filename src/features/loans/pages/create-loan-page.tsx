@@ -4,7 +4,7 @@ import CreateLoanForm from '../components/create-loan-form'
 import { Project } from '@/features/projects'
 import { loanModuleBreadcrumb } from './loans-page'
 
-const CreateLoanFormPage = ({ project }: { project: Project }) => {
+const CreateLoanPage = ({ project }: { project: Project }) => {
   return (
     <CreateFormPageLayout
       title="Crear préstamo"
@@ -16,4 +16,4 @@ const CreateLoanFormPage = ({ project }: { project: Project }) => {
   )
 }
 
-export default CreateLoanFormPage
+export default CreateLoanPage

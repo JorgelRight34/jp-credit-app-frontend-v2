@@ -7,8 +7,6 @@ import {
   FormGroup,
   MasterDetailLayout,
   FormRow,
-  FormSelectGroup,
-  FormWatch,
   Input,
   RichTextEditor,
   Tab,
@@ -22,14 +20,16 @@ import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
 import FormattersDefinitionPanel from './formatters-definition-panel'
-import { reportKeySelectOptions } from '../lib/constants'
 
 interface CreateReportFormProps extends DataModuleFormProps<
   Report,
   ReportFormValues
-> {}
+> {
+  reportKey: Report['key']
+}
 
 const CreateReportForm = ({
+  reportKey,
   defaultValues,
   ...props
 }: CreateReportFormProps) => {
@@ -38,9 +38,9 @@ const CreateReportForm = ({
     defaultValues: {
       title: '',
       description: '',
-      key: '',
       ...defaultValues,
     },
+    reportKey,
     resetValues: true,
     onSuccess: fileAttachmentsForm.submit,
     ...props,
@@ -61,14 +61,6 @@ const CreateReportForm = ({
                 <FormRow>
                   <FormGroup name="title" label="Título" input={Input} />
                 </FormRow>
-                <FormRow>
-                  <FormSelectGroup
-                    name="key"
-                    label="Categoría"
-                    options={reportKeySelectOptions}
-                    disabled={!!defaultValues?.key}
-                  />
-                </FormRow>
                 <FormGroup
                   name="description"
                   label="Descripción"
@@ -78,13 +70,7 @@ const CreateReportForm = ({
               </Form>
             </MasterDetailLayout.MasterExpanded>
             <MasterDetailLayout.Detail>
-              <FormWatch
-                form={form}
-                names={['key']}
-                render={([key]) => (
-                  <ReportTemplateDefinitionFieldset templateKey={key} />
-                )}
-              />
+              <ReportTemplateDefinitionFieldset templateKey={reportKey} />
             </MasterDetailLayout.Detail>
           </MasterDetailLayout>
         </TabPanel>

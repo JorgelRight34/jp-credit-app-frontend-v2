@@ -1,4 +1,4 @@
-import { CreateLoanFormPage } from '@/features/loans'
+import { CreateLoanPage } from '@/features/loans'
 import { createProjectQueryKey } from '@/features/projects/lib/query-keys'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
@@ -25,5 +25,5 @@ function RouteComponent() {
     enabled: !!projectId,
   })
 
-  return <CreateLoanFormPage project={project} />
+  return <CreateLoanPage project={project} />
 }

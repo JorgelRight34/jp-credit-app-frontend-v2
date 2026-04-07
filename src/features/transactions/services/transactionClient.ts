@@ -8,7 +8,7 @@ import { DisbursementFormValues } from "../lib/schemas/disbursementFormSchema";
 import { Disbursement } from "../models/disbursement";
 import { AccountingPeriod, ClosedPeriod } from "../models/accountingPeriod";
 import { ClosedPeriodFormValues } from "../lib/schemas/closePeriodFormSchema";
-import { getReportByQueryKey, Report } from "@/features/reports";
+import { getTransactionReportByKey, Report } from "@/features/reports";
 import { TransactionType } from "../models/transactionType";
 import { transactionReceiptReportKeyParts } from "../lib/constants";
 import { withProjectIdParams } from "@/features/projects";
@@ -27,7 +27,7 @@ export const getTransaction = async (id: Transaction["id"]): Promise<Transaction
 }
 
 export const getTransactionReceiptReport = async (type: TransactionType): Promise<Report> => {
-    return getReportByQueryKey(transactionReceiptReportKeyParts.key, transactionReceiptReportKeyParts.buildSubkey(type))
+    return getTransactionReportByKey(transactionReceiptReportKeyParts.buildSubkey(type))
 }
 
 export const getClosedPeriods = async (params: Query): Promise<PagedResponse<ClosedPeriod>> => {

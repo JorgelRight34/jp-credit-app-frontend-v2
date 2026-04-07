@@ -17,3 +17,5 @@ export * from './models/transactionType'
 
 export * from './lib/config/transaction-datatable-config'
 export * from './lib/query-keys'
+
+export * from './pages/transactions-page'

@@ -7,5 +7,6 @@ export interface NavItem {
     search?: Search,
     children?: Array<NavItem>,
     activeOptions?: LinkProps["activeOptions"]
+    parentIndex?: number;
     icon: IconName,
 }

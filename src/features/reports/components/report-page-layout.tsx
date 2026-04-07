@@ -4,6 +4,7 @@ import {
   buildPageLayoutEditOption,
   DownloadIcon,
   FileTable,
+  LinkProps,
   mapApiFileToTableFile,
   PageRouterLayout,
   PrintIcon,
@@ -14,14 +15,13 @@ import {
   TabsRouter,
 } from '@/components'
 import { Report } from '../models/report'
-import { reportsBreadcrumb } from './reports-page'
-import SavedReportGenerationForm from '../components/saved-report-generation-form.tsx'
+import { reportsBreadcrumb } from './reports-page-layout'
+import SavedReportGenerationForm from './saved-report-generation-form'
 
 export const buildReportBreadcrumb = (report: Report): BreadcrumbSpec => ({
   icon: ReportIcon,
   title: report.title,
-  pathname: '/reports/$id',
-  params: { id: report.id.toString() },
+  pathname: '..',
 })
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = [
@@ -29,17 +29,35 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ icon: DownloadIcon, title: 'Archivos' }],
 ]
 
-const ReportPage = ({ report }: { report: Report }) => {
+export interface ReportPageProps {
+  report: Report
+}
+
+interface ReportPageLayoutProps extends ReportPageProps {
+  report: Report
+  editRoute: LinkProps['to']
+  breadcrumb: BreadcrumbSpec
+}
+
+const ReportPageLayout = ({
+  report,
+  breadcrumb,
+  editRoute,
+}: ReportPageLayoutProps) => {
   return (
     <PageRouterLayout
       title={report.title}
       options={[
-        buildPageLayoutEditOption('/reports/$id/edit', {
+        buildPageLayoutEditOption(editRoute, {
           id: report.id.toString(),
         }),
       ]}
       routerConfig={{
-        baseBreadcrumbs: [reportsBreadcrumb, buildReportBreadcrumb(report)],
+        baseBreadcrumbs: [
+          reportsBreadcrumb,
+          breadcrumb,
+          buildReportBreadcrumb(report),
+        ],
         breadcrumbsByRoute,
       }}
     >
@@ -59,4 +77,4 @@ const ReportPage = ({ report }: { report: Report }) => {
   )
 }
 
-export default ReportPage
+export default ReportPageLayout
