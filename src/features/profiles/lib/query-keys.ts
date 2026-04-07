@@ -1,3 +1,6 @@
+import { CacheKey } from "@/models";
 import { profilesQueryKey } from "./constants";
 
-export const createProfileKey = (id: number | string) => [profilesQueryKey, +id] as const;
+export const buildProfileKey = (id: number | string): CacheKey => [profilesQueryKey, +id] as const;
+
+export const buildProfileChangeHistoryKey = (id: number): CacheKey => [profilesQueryKey, id, "ch"]

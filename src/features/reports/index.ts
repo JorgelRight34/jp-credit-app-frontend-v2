@@ -5,7 +5,7 @@ export { default as SavedReportGenerationForm } from './components/saved-report-
 export * from './models/report'
 export * from './services/reportsClient'
 export * from './lib/query-keys'
-export { default as ReportsPageLayout } from './components/reports-page-layout'
+export { default as ReportsPageLayout } from './layouts/reports-page-layout'
 export { default as ReportsDataTable } from './components/report-datatable'
 // export { default as CreateReportPageLayout } from './components/create-report-page-layout'
 // export { default as EditReportPageLayout } from './components/edit-report-page-layout'

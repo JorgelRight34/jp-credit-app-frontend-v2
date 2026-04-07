@@ -4,6 +4,7 @@ import type { Profile } from "../models/profile";
 import type { ProfileQuery } from "../models/profileQuery";
 import { FileStorageService } from "@/lib/services";
 import api from "@/lib/services/api";
+import { ChangeHistory, ChangeLogQuery } from "@/features/audit";
 
 const baseUrl = "profiles"
 
@@ -16,6 +17,11 @@ export const getProfiles = createGetProfileRoleHandler("");
 export const getClients = createGetProfileRoleHandler("/clients")
 export const getGuarantors = createGetProfileRoleHandler("/guarantors")
 export const getLoanOfficers = createGetProfileRoleHandler("/loan-officers")
+
+export const getProfileChangeHistory = async (id: number, params: ChangeLogQuery): Promise<ChangeHistory> => {
+    const { data } = await api.get(`${baseUrl}/${id}/changes`, { params })
+    return data;
+}
 
 export const createProfile = async (body: ProfileFormValues): Promise<Profile> => {
     const { data } = await api.post(baseUrl, body);

@@ -1,3 +1,5 @@
 export * from './models/changeLog';
-export { default as EntityChangeLogDataTable } from './components/entity-change-log-datatable'
-export { default as EntityChangeLogsPage } from './components/entity-change-logs-page'
+export * from './models/changeLogQuery'
+export * from './lib/constants'
+export { default as ChangeHistoryDataTable } from './components/change-history-datatable'
+export { default as ChangeHistoryPageLayout } from './components/change-history-page-layout'

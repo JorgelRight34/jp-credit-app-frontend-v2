@@ -9,6 +9,7 @@ import { PaymentResult } from "@/features/transactions";
 import { CollateralSellFormValues } from "../lib/schemas/collateralSellFormSchema";
 import { ExportHandler } from "@/components";
 import { withProjectIdParams } from "@/features/projects";
+import { ChangeHistory, ChangeLogQuery } from "@/features/audit";
 
 const baseUrl = "collaterals"
 
@@ -60,5 +61,10 @@ export const sellCollateral = async (id: Collateral["id"], body: CollateralSellF
 
 export const exportCollaterals: ExportHandler<CollateralQuery> = async (options, params) => {
     const { data } = await api.get(baseUrl, { params: { ...params, ...options } })
+    return data;
+}
+
+export const getCollateralChangeHistory = async (id: Collateral["id"], params: ChangeLogQuery): Promise<ChangeHistory> => {
+    const { data } = await api.get(`${baseUrl}/${id}/changes`, { params })
     return data;
 }

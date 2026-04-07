@@ -20,19 +20,22 @@ import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
 import FormattersDefinitionPanel from './formatters-definition-panel'
+import { CreateReportHandler } from '../models/handlers'
+import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 
-interface CreateReportFormProps extends DataModuleFormProps<
+interface CreateReportFormProps<T> extends DataModuleFormProps<
   Report,
   ReportFormValues
 > {
-  reportKey: Report['key']
+  templateDefinition: ReportTemplateDefinition<T>
+  onSubmit: CreateReportHandler
 }
 
-const CreateReportForm = ({
-  reportKey,
+const CreateReportForm = <T,>({
   defaultValues,
+  templateDefinition,
   ...props
-}: CreateReportFormProps) => {
+}: CreateReportFormProps<T>) => {
   const fileAttachmentsForm = useReportFileAttachmentForm()
   const form = useReportForm({
     defaultValues: {
@@ -40,7 +43,6 @@ const CreateReportForm = ({
       description: '',
       ...defaultValues,
     },
-    reportKey,
     resetValues: true,
     onSuccess: fileAttachmentsForm.submit,
     ...props,
@@ -70,7 +72,9 @@ const CreateReportForm = ({
               </Form>
             </MasterDetailLayout.MasterExpanded>
             <MasterDetailLayout.Detail>
-              <ReportTemplateDefinitionFieldset templateKey={reportKey} />
+              <ReportTemplateDefinitionFieldset
+                templateDefinition={templateDefinition}
+              />
             </MasterDetailLayout.Detail>
           </MasterDetailLayout>
         </TabPanel>

@@ -4,7 +4,7 @@ import { ProfilePage } from '@/features/profiles'
 import { getProfileFromServer } from '@/features/profiles/server/profileServerClient'
 import { getProfile } from '@/features/profiles/services/profileClient'
 import { useSuspenseData } from '@/hooks/useData'
-import { createProfileKey } from '@/features/profiles/lib/query-keys'
+import { buildProfileKey } from '@/features/profiles/lib/query-keys'
 
 export const getProfileFn = createIsomorphicFn()
   .server((id: number) => getProfileFromServer(id))
@@ -18,7 +18,7 @@ export const Route = createFileRoute('/(main)/(modules)/profiles/$id/')({
 function RouteComponent() {
   const { id } = Route.useParams()
   const { data: profile } = useSuspenseData({
-    key: createProfileKey(id),
+    key: buildProfileKey(id),
     loader: () => getProfileFn(+id),
   })
 

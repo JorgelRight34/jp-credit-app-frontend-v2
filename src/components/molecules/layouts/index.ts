@@ -6,8 +6,6 @@ export * from "./components/form-page-layout";
 export { default as PageLayoutBreadcrumb } from "./components/page-layout-breadcrumb"
 export { default as PageRouterLayout } from "./components/page-router-layout"
 
-// hooks
-export { useFormPage } from "./hooks/useFormPage";
 
 // models
 export * from "./models/pageLayoutOption";

@@ -9,5 +9,12 @@
     "**/routeTree.gen.ts": true
   },
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "python-envs.pythonProjects": [
+    {
+      "path": "src/routes/(main)/(modules)/access-control/users/$username/changes",
+      "envManager": "ms-python.python:venv",
+      "packageManager": "ms-python.python:pip"
+    }
+  ]
 }

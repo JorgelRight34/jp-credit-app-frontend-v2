@@ -14,12 +14,14 @@ const AccentPillBtn = ({ className, ...props }: AccentPillBtnProps) => {
 export const AccentPillLinkBtn = ({
   className,
   to,
+  disabled,
   ...props
 }: AccentPillBtnProps & LinkProps) => {
   return (
-    <Link to={to}>
+    <Link to={to} disabled={disabled}>
       <AccentBtn
         className={clsx('!rounded-full !px-6', className)}
+        disabled={disabled}
         {...props}
       />
     </Link>

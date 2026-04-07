@@ -6,20 +6,15 @@ import {
   Fieldset,
   Paragraph,
 } from '@/components'
-import { Report } from '../models/report'
-import { reportTemplateKeysLabels } from '../lib/constants'
-import { DASHES } from '@/lib/utils'
-import { reportTemplatesDefinition } from '../lib/templates/report-templates-map'
+import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 
-interface ReportTemplateDefinitionFieldsetProps {
-  templateKey?: Report['key']
+interface ReportTemplateDefinitionFieldsetProps<T> {
+  templateDefinition: ReportTemplateDefinition<T>
 }
 
-const ReportTemplateDefinitionFieldset = ({
-  templateKey,
-}: ReportTemplateDefinitionFieldsetProps) => {
-  const data = templateKey ? reportTemplatesDefinition[templateKey] : null
-
+const ReportTemplateDefinitionFieldset = <T,>({
+  templateDefinition,
+}: ReportTemplateDefinitionFieldsetProps<T>) => {
   return (
     <Fieldset
       className="h-full shadow-sm"
@@ -27,10 +22,10 @@ const ReportTemplateDefinitionFieldset = ({
       legend="DICCIONARIO"
     >
       <BigTitle className="text-accent flex-shrink-0 text-center">
-        {templateKey ? reportTemplateKeysLabels[templateKey] : DASHES}
+        {templateDefinition.title}
       </BigTitle>
       <div className="flex max-h-96 flex-1 flex-col overflow-y-auto">
-        {data?.map((field) => (
+        {templateDefinition.definitions.map((field) => (
           <Accordion key={field.name} id={field.name}>
             <AccordionSummary>
               {field.name} | {field.fieldType}

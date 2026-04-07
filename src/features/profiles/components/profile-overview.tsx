@@ -87,7 +87,12 @@ const ProfileOverview = ({ profile }: ProfileOverviewProps) => {
           />
         </LayoutRow>
       </ViewMore>
-      <FormReadOnlyGroup label="Dirección" name="address" optional />
+      <FormReadOnlyGroup
+        label="Dirección"
+        name="address"
+        value={profile.address}
+        optional
+      />
     </OverviewLayout>
   )
 }

@@ -5,13 +5,13 @@ import { ReportQuery } from "../models/reportQuery";
 import { ReportFormValues } from "../lib/schemas/reportFormSchema";
 import { FileStorageService } from "@/lib/services";
 import { loanTemplateDefinition } from "../lib/templates/loan-template-definition";
-import { templateMapper } from "../lib/templates/report-templates-map";
 import { collateralTemplateDefinition } from "../lib/templates/collateral-template-definition";
 import { LoanReportModel } from "../models/loanReportModel";
 import { CollateralReportModel } from "../models/collateralReportModel";
 import { TransactionReportModel } from "../models/transactionReportModel";
 import { transactionTemplateDefinition } from "../lib/templates/transaction-template-definition";
 import { ReportGenerationFormValues } from "../hooks/useReportGenerationForm";
+import { mapTemplate } from "../lib/templates/map-template";
 
 const baseUrl = "reports";
 
@@ -51,7 +51,7 @@ const createUpdateReportHandler = (prefix: string) =>
 export const getLoanReports = createGetReportsHandler("loans");
 export const getLoanReport = createGetReportHandler("loans");
 export const createLoanReport = createCreateReportHandler("loans");
-export const updateLoanReport = createUpdateReportHandler("loans");
+export const editLoanReport = createUpdateReportHandler("loans");
 
 export const getLoanReportModel = async (id: number): Promise<LoanReportModel> => {
     const { data } = await api.get(`${baseUrl}/loans/${id}/report-data`);
@@ -60,7 +60,7 @@ export const getLoanReportModel = async (id: number): Promise<LoanReportModel> =
 
 export const generateLoanReport = async ({ id, file }: ReportGenerationFormValues): Promise<Blob> => {
     const loan = await getLoanReportModel(id as number);
-    const context = templateMapper(loan, loanTemplateDefinition);
+    const context = mapTemplate(loan, loanTemplateDefinition);
     return postGenerateReport(context, file);
 };
 
@@ -69,7 +69,7 @@ export const generateLoanReport = async ({ id, file }: ReportGenerationFormValue
 export const getCollateralsReport = createGetReportsHandler("collaterals");
 export const getCollateralReport = createGetReportHandler("collaterals");
 export const createCollateralReport = createCreateReportHandler("collaterals");
-export const updateCollateralReport = createUpdateReportHandler("collaterals");
+export const editCollateralReport = createUpdateReportHandler("collaterals");
 
 export const getCollateralReportModel = async (id: number): Promise<CollateralReportModel> => {
     const { data } = await api.get(`${baseUrl}/collaterals/${id}/report-data`);
@@ -78,7 +78,7 @@ export const getCollateralReportModel = async (id: number): Promise<CollateralRe
 
 export const generateCollateralReport = async ({ id, file }: ReportGenerationFormValues): Promise<Blob> => {
     const collateral = await getCollateralReportModel(id as number);
-    const context = templateMapper(collateral, collateralTemplateDefinition);
+    const context = mapTemplate(collateral, collateralTemplateDefinition);
     return postGenerateReport(context, file);
 };
 
@@ -88,7 +88,7 @@ export const getTransactionReports = createGetReportsHandler("transactions");
 export const getTransactionReport = createGetReportHandler("transactions");
 export const getTransactionReportByKey = createGetReportByKeyHandler("transactions");
 export const createTransactionReport = createCreateReportHandler("transactions");
-export const updateTransactionReport = createUpdateReportHandler("transactions");
+export const editTransactionReport = createUpdateReportHandler("transactions");
 
 export const getTransactionReportModel = async (id: number): Promise<TransactionReportModel> => {
     const { data } = await api.get(`transactions/${id}`);
@@ -97,7 +97,7 @@ export const getTransactionReportModel = async (id: number): Promise<Transaction
 
 export const generateTransactionReport = async ({ id, file }: ReportGenerationFormValues): Promise<Blob> => {
     const transaction = await getTransactionReportModel(id as number);
-    const context = templateMapper(transaction, transactionTemplateDefinition);
+    const context = mapTemplate(transaction, transactionTemplateDefinition);
     return postGenerateReport(context, file);
 };
 
@@ -112,46 +112,6 @@ export const deleteReportFiles = async (ids: Array<number>) => {
 };
 
 // ─── Generic dispatchers (use only when key is not known at call site) ─────────
-
-type ReportKey = Report["key"];
-
-const reportHandlers: Record<ReportKey, {
-    getAll: (params: ReportQuery) => Promise<PagedResponse<Report>>;
-    create: (body: ReportFormValues) => Promise<Report>;
-    update: (id: Report["id"], body: ReportFormValues) => Promise<void>;
-    generate: (form: ReportGenerationFormValues) => Promise<Blob>;
-}> = {
-    Loan: {
-        getAll: getLoanReports,
-        create: createLoanReport,
-        update: updateLoanReport,
-        generate: generateLoanReport,
-    },
-    Collateral: {
-        getAll: getCollateralsReport,
-        create: createCollateralReport,
-        update: updateCollateralReport,
-        generate: generateCollateralReport,
-    },
-    Transaction: {
-        getAll: getTransactionReports,
-        create: createTransactionReport,
-        update: updateTransactionReport,
-        generate: generateTransactionReport,
-    },
-};
-
-export const getReports = (params: ReportQuery, key: ReportKey) =>
-    reportHandlers[key].getAll(params);
-
-export const createReport = (body: ReportFormValues, key: ReportKey) =>
-    reportHandlers[key].create(body);
-
-export const updateReport = (id: Report["id"], body: ReportFormValues, key: ReportKey) =>
-    reportHandlers[key].update(id, body);
-
-export const generateReport = (form: ReportGenerationFormValues, key: ReportKey) =>
-    reportHandlers[key].generate(form);
 
 // ─── Internal ──────────────────────────────────────────────────────────────────
 

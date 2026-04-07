@@ -19,3 +19,6 @@ export const allPossibleClaimsQueryOptions = ({
     key: ['identity-claims'],
     loader: getAllPossibleClaims,
 })
+
+
+export const buildUserChangeHistoryQueryKey = (username: string) => [usersQueryKey, "users", username, "ch"]

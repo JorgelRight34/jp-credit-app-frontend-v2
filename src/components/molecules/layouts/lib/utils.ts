@@ -28,8 +28,12 @@ export const buildPageLayoutCreateOption = (
 export const buildPageLayoutEditOption = (
   editPath: Route,
   params?: RouteParams,
+  disabled?: boolean,
+  tooltip?: string
 ): LayoutOption => ({
   title: 'Editar',
+  tooltip: disabled ? tooltip : undefined,
+  disabled,
   to: editPath,
   params,
   icon: EditIcon,

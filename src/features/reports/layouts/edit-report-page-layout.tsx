@@ -5,26 +5,31 @@ import {
 } from '@/components'
 import EditReportForm from '../components/edit-report-form'
 import { Report } from '../models/report'
+import { EditReportHandler } from '../models/handlers'
+import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 import { reportsBreadcrumb } from './reports-page-layout'
 import { buildReportBreadcrumb } from './report-page-layout'
 
-interface EditReportPageProps {
+interface EditReportPageProps<T> {
   report: Report
   permissionProvider: PermissionsProvider
   breadcrumb: BreadcrumbSpec
+  templateDefinition: ReportTemplateDefinition<T>
+  onEdit: EditReportHandler
 }
 
-const EditReportPageLayout = ({
+const EditReportPageLayout = <T,>({
   report,
   breadcrumb,
   permissionProvider,
-}: EditReportPageProps) => (
+  ...config
+}: EditReportPageProps<T>) => (
   <EditFormPageLayout
     title={`Editar ${report.title}`}
     breadcrumbs={[reportsBreadcrumb, breadcrumb, buildReportBreadcrumb(report)]}
     permissionProvider={permissionProvider}
   >
-    <EditReportForm report={report} />
+    <EditReportForm report={report} {...config} />
   </EditFormPageLayout>
 )
 

@@ -1,5 +1,5 @@
 import { CollateralSettingsPage } from '@/features/collaterals'
-import { createCollateralKey } from '@/features/collaterals/lib/query-keys'
+import { buildCollateralQueryKey } from '@/features/collaterals/lib/query-keys'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getCollateralFn } from '..'
@@ -13,7 +13,7 @@ export const Route = createFileRoute(
 function RouteComponent() {
   const { id } = Route.useParams()
   const { data: collateral } = useSuspenseData({
-    key: createCollateralKey(+id),
+    key: buildCollateralQueryKey(+id),
     loader: () => getCollateralFn(+id),
   })
 

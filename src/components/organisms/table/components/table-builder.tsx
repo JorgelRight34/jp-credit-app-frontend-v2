@@ -44,7 +44,7 @@ const TableBuilder = <TData,>({
     >
       <Table className={className}>
         <TableHeadCompositor table={table} allowExpand={allowExpand} />
-        <TableBodyCompositor<TData>
+        <TableBodyCompositor
           table={table}
           allowExpand={allowExpand}
           isLoading={isLoading}

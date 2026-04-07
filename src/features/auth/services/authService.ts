@@ -23,10 +23,6 @@ export const login = async (body: LoginFormValues): Promise<LoginResult> => {
     return data;
 };
 
-export const logout = async () => {
-
-}
-
 export const getAllPossibleClaims = async (): Promise<IdentityClaims> => {
     const { data } = await api.get("permissions");
     return data;

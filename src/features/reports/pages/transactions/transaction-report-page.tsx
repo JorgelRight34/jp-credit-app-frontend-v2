@@ -1,13 +1,21 @@
+import {
+  transactionBreadcrumb,
+  TransactionSearchInput,
+} from '@/features/transactions'
+import { generateTransactionReport } from '../../services/reportsClient'
+import { transactionTemplateDefinition } from '../../lib/templates/transaction-template-definition'
 import ReportPageLayout, {
   ReportPageProps,
-} from '../../components/report-page-layout'
-import { transactionBreadcrumb } from '@/features/transactions'
+} from '../../layouts/report-page-layout'
 
 const TransactionReportPage = ({ report }: ReportPageProps) => (
   <ReportPageLayout
     breadcrumb={transactionBreadcrumb}
+    templateDefinition={transactionTemplateDefinition}
     editRoute="/transactions/reports/$id"
     report={report}
+    searchInput={TransactionSearchInput}
+    onSubmit={generateTransactionReport}
   />
 )
 

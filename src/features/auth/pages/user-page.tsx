@@ -7,6 +7,7 @@ import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import { getFullName } from '@/lib/utils'
 import {
   buildPageLayoutEditOption,
+  buildPageLayoutMenuOption,
   GroupsIcon,
   PageRouterLayout,
   PermissionIcon,
@@ -19,6 +20,7 @@ import {
 } from '@/components'
 import { overviewBreadcrumb } from '@/lib/constants'
 import { accessControlBreadcrumb } from './access-control-page'
+import { changeHistoryLinkLabel } from '@/features/audit'
 
 export const buildUserBreadcrumb = (user: User): BreadcrumbSpec => ({
   icon: PersonIcon,
@@ -44,12 +46,21 @@ const UserPage = ({
   user,
   userPermissions,
 }: PropsWithUser<{ userPermissions: IdentityPermissions }>) => {
+  const username = user.username
+
   return (
     <PageRouterLayout
-      title={`${getFullName(user)} - ${user.username}`}
+      title={`${getFullName(user)} - ${username}`}
       options={[
+        buildPageLayoutMenuOption([
+          {
+            label: changeHistoryLinkLabel,
+            to: '/access-control/users/$username/changes',
+            params: { username },
+          },
+        ]),
         buildPageLayoutEditOption('/access-control/users/$username/edit', {
-          username: user.username,
+          username,
         }),
       ]}
       routerConfig={{

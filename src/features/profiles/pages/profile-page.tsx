@@ -4,6 +4,7 @@ import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import type { Profile } from '../models/profile'
 import {
   buildPageLayoutEditOption,
+  buildPageLayoutMenuOption,
   FileTable,
   mapApiFileToTableFile,
   overviewBreadcrumb,
@@ -16,6 +17,7 @@ import {
   UploadIcon,
 } from '@/components'
 import { profilesBreadcrumb } from './profiles-page'
+import { changeHistoryLinkLabel } from '@/features/audit'
 
 export const buildProfileBreadcrumb = (profile: Profile): BreadcrumbSpec => ({
   title: (
@@ -38,14 +40,20 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
 
 const ProfilePage = ({ profile }: { profile: Profile }) => {
   const title = buildProfileFullName(profile)
+  const id = profile.id.toString()
 
   return (
     <PageRouterLayout
       title={title}
       options={[
-        buildPageLayoutEditOption('/profiles/$id/edit', {
-          id: profile.id.toString(),
-        }),
+        buildPageLayoutMenuOption([
+          {
+            label: changeHistoryLinkLabel,
+            to: '/profiles/$id/changes',
+            params: { id },
+          },
+        ]),
+        buildPageLayoutEditOption('/profiles/$id/edit', { id }),
       ]}
       routerConfig={{
         breadcrumbsByRoute,

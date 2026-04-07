@@ -7,6 +7,7 @@ export { default as LoginForm } from "./components/login-form";
 export { default as CreateUserForm } from "./components/create-user-form";
 export { default as CreateRoleFormPage } from "./pages/create-role-form-page"
 export { default as EditRoleFormPage } from "./pages/edit-role-form-page"
+export { default as UserChangeHistoryPage } from './pages/user-change-history-page'
 // export { default as UsersSection } from "./components/UsersSection";
 export * from "./services/authService"
 

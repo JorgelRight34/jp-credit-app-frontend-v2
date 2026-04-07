@@ -14,3 +14,4 @@ export { default as CreateLoanPurposePage } from './pages/create-loan-purpose-pa
 export { default as EditLoanPurposePage } from './pages/edit-loan-purpose-page'
 export * from './lib/config/permission-provider'
 export * from './pages/loans-page'
+export { default as LoanChangeHistoryPage } from './pages/loan-change-history-page'

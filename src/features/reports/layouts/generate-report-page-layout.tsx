@@ -1,5 +1,6 @@
 import {
   BreadcrumbSpec,
+  InputElement,
   PageLayout,
   PageLayoutBreadcrumb,
   PrintIcon,
@@ -10,17 +11,21 @@ import {
 } from '@/components'
 import ReportGenerationForm from '../components/report-generation-form'
 import FormattersDefinitionPanel from '../components/formatters-definition-panel'
+import { GenerateReportHandler } from '../models/handlers'
+import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 import { reportsBreadcrumb } from './reports-page-layout'
-import { PropsWithReportKey } from '../models/report'
 
-interface GenerateReportPageLayoutProps extends PropsWithReportKey {
+interface GenerateReportPageLayoutProps<T> {
   breadcrumb: BreadcrumbSpec
+  templateDefinition: ReportTemplateDefinition<T>
+  onSubmit: GenerateReportHandler
+  searchInput: InputElement
 }
 
-const GenerateReportPageLayout = ({
-  reportKey,
+const GenerateReportPageLayout = <T,>({
   breadcrumb,
-}: GenerateReportPageLayoutProps) => (
+  ...props
+}: GenerateReportPageLayoutProps<T>) => (
   <PageLayout
     title="Generar reporte"
     breadcrumb={
@@ -39,7 +44,7 @@ const GenerateReportPageLayout = ({
         <Tab index={1}>Formatos</Tab>
       </TabsList>
       <TabPanel index={0}>
-        <ReportGenerationForm reportKey={reportKey} />
+        <ReportGenerationForm {...props} />
       </TabPanel>
       <TabPanel index={1}>
         <FormattersDefinitionPanel />

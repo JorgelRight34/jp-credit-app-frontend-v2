@@ -23,6 +23,7 @@ export const profileFormSchema = z.object({
 
     email: z
         .email("El correo electrónico no tiene un formato válido")
+        .nullable()
         .optional(),
 
     gender: z
@@ -68,11 +69,6 @@ export const profileFormSchema = z.object({
     landline: z
         .string()
         .regex(/^\d{10}$/, "El teléfono fijo debe tener 10 dígitos")
-        .optional(),
-
-    officePhone: z
-        .string()
-        .regex(/^\d{10}$/, "El teléfono de oficina debe tener 10 dígitos")
         .optional(),
 
     phoneNumber: z

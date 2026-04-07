@@ -6,33 +6,34 @@ import {
   FormGroup,
   MasterDetailLayout,
   FormRow,
-  FormWatch,
   Input,
+  InputElement,
 } from '@/components'
 import {
   ReportGenerationFormValues,
   useReportGenerationForm,
 } from '../hooks/useReportGenerationForm'
-import { Report } from '../models/report'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { downloadFile } from '@/lib/utils'
-import { reportTemplateKeysLabels } from '../lib/constants'
-import { reportTemplateKeysInputMap } from '../lib/jsx-constants'
+import { GenerateReportHandler } from '../models/handlers'
+import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 
-interface ReportGenerationFormProps extends DataModuleFormProps<
+interface ReportGenerationFormProps<T> extends DataModuleFormProps<
   Blob,
   ReportGenerationFormValues
 > {
-  reportKey: Report['key']
+  templateDefinition: ReportTemplateDefinition<T>
+  onSubmit: GenerateReportHandler
+  searchInput: InputElement
 }
 
-const ReportGenerationForm = ({
-  reportKey,
+const ReportGenerationForm = <T,>({
+  templateDefinition,
+  searchInput: SearchInput,
   ...props
-}: ReportGenerationFormProps) => {
+}: ReportGenerationFormProps<T>) => {
   const form = useReportGenerationForm({
     ...props,
-    reportKey,
     onSuccess: downloadFile,
   })
 
@@ -55,19 +56,15 @@ const ReportGenerationForm = ({
             <FormRow>
               <FormGroup
                 name="id"
-                label={reportTemplateKeysLabels[reportKey]}
-                input={reportTemplateKeysInputMap[reportKey]}
+                label={templateDefinition.label}
+                input={SearchInput}
               />
             </FormRow>
           </Form>
         </MasterDetailLayout.Master>
         <MasterDetailLayout.Detail>
-          <FormWatch
-            form={form}
-            names={['key']}
-            render={([key]) => (
-              <ReportTemplateDefinitionFieldset templateKey={key} />
-            )}
+          <ReportTemplateDefinitionFieldset
+            templateDefinition={templateDefinition}
           />
         </MasterDetailLayout.Detail>
       </MasterDetailLayout>

@@ -7,6 +7,7 @@ import {
   FormRow,
   FormGroup,
   FormHtmlDisplayGroup,
+  InputElement,
 } from '@/components'
 import { Report } from '../models/report'
 import { downloadFile } from '@/lib/utils'
@@ -15,26 +16,30 @@ import {
   useReportGenerationForm,
 } from '../hooks/useReportGenerationForm'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
-import { reportTemplateKeysLabels } from '../lib/constants'
-import { reportTemplateKeysInputMap } from '../lib/jsx-constants'
+import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
+import { GenerateReportHandler } from '../models/handlers'
 
-interface SavedReportGenerationFormProps extends DataModuleFormProps<
+interface SavedReportGenerationFormProps<T> extends DataModuleFormProps<
   Blob,
   ReportGenerationFormValues
 > {
+  templateDefinition: ReportTemplateDefinition<T>
   report: Report
+  onSubmit: GenerateReportHandler
+  searchInput: InputElement
 }
 
-const SavedReportGenerationForm = ({
+const SavedReportGenerationForm = <T,>({
   report,
   initialValues,
   initializeAsDirty,
+  templateDefinition,
+  searchInput,
   ...props
-}: SavedReportGenerationFormProps) => {
+}: SavedReportGenerationFormProps<T>) => {
   const form = useReportGenerationForm({
     report,
     initialValues,
-    reportKey: report.key,
     onSuccess: downloadFile,
     ...props,
   })
@@ -55,8 +60,8 @@ const SavedReportGenerationForm = ({
               <FormGroup
                 name="id"
                 disabled={!!initialValues?.id}
-                label={reportTemplateKeysLabels[report.key]}
-                input={reportTemplateKeysInputMap[report.key]}
+                label={templateDefinition.label}
+                input={searchInput}
               />
             </FormRow>
             <FormHtmlDisplayGroup
@@ -67,7 +72,9 @@ const SavedReportGenerationForm = ({
             />
           </MasterDetailLayout.MasterExpanded>
           <MasterDetailLayout.Detail>
-            <ReportTemplateDefinitionFieldset templateKey={report.key} />
+            <ReportTemplateDefinitionFieldset
+              templateDefinition={templateDefinition}
+            />
           </MasterDetailLayout.Detail>
         </MasterDetailLayout>
       </Form>

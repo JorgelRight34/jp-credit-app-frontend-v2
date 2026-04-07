@@ -1,10 +1,14 @@
-import { loanModuleBreadcrumb } from '@/features/loans'
-import GenerateReportPageLayout from '../../components/generate-report-page-layout'
+import { loanModuleBreadcrumb, LoanSearchInput } from '@/features/loans'
+import { generateLoanReport } from '../../services/reportsClient'
+import { loanTemplateDefinition } from '../../lib/templates/loan-template-definition'
+import GenerateReportPageLayout from '../../layouts/generate-report-page-layout'
 
 const GenerateLoanReportPage = () => (
   <GenerateReportPageLayout
     breadcrumb={loanModuleBreadcrumb}
-    reportKey="Loan"
+    templateDefinition={loanTemplateDefinition}
+    searchInput={LoanSearchInput}
+    onSubmit={generateLoanReport}
   />
 )
 

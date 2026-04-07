@@ -18,7 +18,6 @@ export interface Profile {
     maritalStatus: MaritalStatus;
     dni: string;
     landline: string;
-    officePhone?: string;
     nationality: string;
     photo?: Photo;
     label?: string;
@@ -26,3 +25,5 @@ export interface Profile {
     updatedAt?: string;
     city: string;
 }
+
+export type PropsWithProfile = { profile: Profile }

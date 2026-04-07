@@ -4,13 +4,10 @@ import {
   PageLayout,
   PageLayoutBreadcrumb,
   PageLayoutProps,
+  PagePanel,
 } from '@/components'
 
-interface EntityChangeLogsPageProps extends Omit<
-  PageLayoutProps,
-  'children' | 'breadcrumb'
-> {
-  type: string
+interface ChangeHistoryPageProps extends Omit<PageLayoutProps, 'breadcrumb'> {
   breadcrumbs: Array<BreadcrumbSpec>
 }
 
@@ -20,21 +17,23 @@ const breadcrumb: BreadcrumbSpec = {
   disabled: true,
 }
 
-const EntityChangeLogsPage = ({
-  type,
+const ChangeHistoryPageLayout = ({
   breadcrumbs,
+  children,
+  title,
   ...props
-}: EntityChangeLogsPageProps) => {
+}: ChangeHistoryPageProps) => {
   return (
     <PageLayout
       breadcrumb={
         <PageLayoutBreadcrumb breadcrumbs={breadcrumbs.concat(breadcrumb)} />
       }
+      title={title + ' / Historial'}
       {...props}
     >
-      aun
+      <PagePanel>{children}</PagePanel>
     </PageLayout>
   )
 }
 
-export default EntityChangeLogsPage
+export default ChangeHistoryPageLayout

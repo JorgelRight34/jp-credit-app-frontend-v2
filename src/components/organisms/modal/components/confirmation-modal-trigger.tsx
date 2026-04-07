@@ -36,4 +36,10 @@ const ConfirmationModalTrigger = ({
   )
 }
 
+// {
+//   "header": "Borrar garantía",
+//   "confirmationMessage": "Deseo borrar esta garantía",
+//   "title": "No puede eliminar una garantía que ha sido usada para pago o esté inactiva",
+//   "data-tsd-source": "/src/components/molecules/layouts/components/page-layout-option.tsx:12:5"
+// }
 export default ConfirmationModalTrigger

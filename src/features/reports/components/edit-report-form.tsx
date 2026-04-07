@@ -19,18 +19,25 @@ import { Report } from '../models/report'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
+import { EditReportHandler } from '../models/handlers'
+import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 
-interface EditReportFormProps extends DataModuleFormProps<
+interface EditReportFormProps<T> extends DataModuleFormProps<
   Report,
   ReportFormValues
 > {
+  templateDefinition: ReportTemplateDefinition<T>
   report: Report
+  onEdit: EditReportHandler
 }
 
-const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
+const EditReportForm = <T,>({
+  templateDefinition,
+  report,
+  ...props
+}: EditReportFormProps<T>) => {
   const form = useReportForm({
     ...props,
-    reportKey: report.key,
     defaultValues: {
       title: report.title,
       description: report.description,
@@ -62,7 +69,9 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
             </FormContainer>
           </MasterDetailLayout.MasterExpanded>
           <MasterDetailLayout.Detail>
-            <ReportTemplateDefinitionFieldset templateKey={report.key} />
+            <ReportTemplateDefinitionFieldset
+              templateDefinition={templateDefinition}
+            />
           </MasterDetailLayout.Detail>
         </MasterDetailLayout>
       </TabPanel>
@@ -73,9 +82,9 @@ const EditReportForm = ({ report, ...props }: EditReportFormProps) => {
   )
 }
 
-const EditReportFormFiles = ({
+const EditReportFormFiles = <T,>({
   report,
-}: Pick<EditReportFormProps, 'report'>) => {
+}: Pick<EditReportFormProps<T>, 'report'>) => {
   const fileAttachmentsForm = useReportFileAttachmentForm({
     report,
   })

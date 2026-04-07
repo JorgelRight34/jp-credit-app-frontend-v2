@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 import { CollateralPage } from '@/features/collaterals'
-import { createCollateralKey } from '@/features/collaterals/lib/query-keys'
+import { buildCollateralQueryKey } from '@/features/collaterals/lib/query-keys'
 import { getCollateralFromServer } from '@/features/collaterals/server/collateralClient'
 import { getCollateral } from '@/features/collaterals/services/collateralClient'
 import { useSuspenseData } from '@/hooks/useData'
@@ -18,7 +18,7 @@ export const Route = createFileRoute('/(main)/(modules)/collaterals/$id/')({
 function RouteComponent() {
   const { id } = Route.useParams()
   const { data: collateral } = useSuspenseData({
-    key: createCollateralKey(+id),
+    key: buildCollateralQueryKey(+id),
     loader: () => getCollateralFn(+id),
   })
 

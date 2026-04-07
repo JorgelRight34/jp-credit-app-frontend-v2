@@ -13,6 +13,7 @@ import {
   BadgeIcon,
   CheckCircleIcon,
   CollateralIcon,
+  ComputerIcon,
   CreditCardIcon,
   DirectionsCarIcon,
   ErrorIcon,
@@ -383,7 +384,7 @@ export const followUpsNavItem: NavItem = {
 
 export const systemNavItem: NavItem = {
   name: 'Sistema',
-  icon: () => <QueryStatsIcon />,
+  icon: () => <ComputerIcon />,
   route: '/finance/projections',
   children: [
     {

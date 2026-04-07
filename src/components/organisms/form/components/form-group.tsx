@@ -3,7 +3,7 @@ import FormGroupLayout, { FormGroupLabel } from './fom-group-layout'
 import type { FormGroupLayoutProps } from './fom-group-layout'
 import { useFormState, type FieldValues } from 'react-hook-form'
 import type { FormInputProps } from './form-input'
-import { InputProps } from '@/components/atoms'
+import { InputProps, Paragraph } from '@/components/atoms'
 import { useFormControl } from '../providers/form-provider'
 
 export type FormGroupProps<
@@ -52,13 +52,17 @@ const FormGroup = <
 const FormGroupInput = ({ name, ...props }: InputProps) => {
   const control = useFormControl()
   const { errors } = useFormState({ control })
+  const error = errors[name as keyof typeof errors]
 
   return (
-    <FormInput
-      {...(props as any)}
-      name={name}
-      error={!!errors[name as keyof typeof errors]}
-    />
+    <>
+      <FormInput {...(props as any)} name={name} error={!!error} />
+      {error?.message && (
+        <Paragraph className="text-red-500">
+          {error?.message?.toString()}
+        </Paragraph>
+      )}
+    </>
   )
 }
 

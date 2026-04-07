@@ -21,3 +21,5 @@ export interface Collateral {
     soldDate?: string;
     files: Array<FileModel>;
 }
+
+export interface PropsWithCollateral { collateral: Collateral }

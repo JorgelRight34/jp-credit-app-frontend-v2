@@ -48,7 +48,7 @@ const TableHeadCompositor = <T,>({
               </div>
             </TableHeadCell>
           ))}
-          {allowExpand && <TableHeadCell colSpan={1}></TableHeadCell>}
+          {allowExpand && <TableHeadCell colSpan={1}>VER</TableHeadCell>}
         </TableRow>
       ))}
     </TableHead>

@@ -2,13 +2,16 @@ import {
   loanModuleBreadcrumb,
   loanReportPermissionProvider,
 } from '@/features/loans'
-import CreateReportPageLayout from '../../components/create-report-page-layout'
+import { createLoanReport } from '../../services/reportsClient'
+import { loanTemplateDefinition } from '../../lib/templates/loan-template-definition'
+import CreateReportPageLayout from '../../layouts/create-report-page-layout'
 
 const CreateLoanReportPage = () => (
   <CreateReportPageLayout
     breadcrumb={loanModuleBreadcrumb}
-    reportKey="Loan"
     permissionProvider={loanReportPermissionProvider}
+    templateDefinition={loanTemplateDefinition}
+    onSubmit={createLoanReport}
   />
 )
 

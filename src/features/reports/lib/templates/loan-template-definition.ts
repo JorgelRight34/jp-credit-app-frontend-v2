@@ -3,7 +3,9 @@ import { LoanReportModel } from "../../models/loanReportModel";
 
 export const loanTemplateDefinition:
     ReportTemplateDefinition<LoanReportModel>
-    = [
+    = {
+    title: "PRESTAMOS",
+    definitions: [
         {
             name: "id",
             description: "Identificador único del préstamo.",
@@ -209,4 +211,5 @@ export const loanTemplateDefinition:
                 }
             }
         }
-    ];
+    ]
+};

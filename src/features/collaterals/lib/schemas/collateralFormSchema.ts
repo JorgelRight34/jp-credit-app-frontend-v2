@@ -33,6 +33,7 @@ export const collateralFormSchema = z.object({
         .string()
         .trim()
         .max(120, "La ubicación no puede exceder 120 caracteres")
+        .nullable()
         .optional(),
 
     expirationDate: z

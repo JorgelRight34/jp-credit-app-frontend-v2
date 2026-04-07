@@ -11,7 +11,7 @@ import {
   collateralsBreadcrumb,
 } from './collateral-page'
 
-const EditCollateralFormPage = ({ collateral }: { collateral: Collateral }) => {
+const EditCollateralPage = ({ collateral }: { collateral: Collateral }) => {
   return (
     <EditFormPageLayout
       title={collateral.title}
@@ -40,4 +40,4 @@ const EditCollateralFormPage = ({ collateral }: { collateral: Collateral }) => {
   )
 }
 
-export default EditCollateralFormPage
+export default EditCollateralPage

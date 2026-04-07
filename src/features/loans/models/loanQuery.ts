@@ -5,6 +5,7 @@ export type LoanQuery = Query & {
     clientName?: string;
     status?: LoanStatus
     profileId?: number;
+    hasTransactions?: boolean;
     startDate?: string;
     minPrincipalBalance?: number;
     maxPrincipalBalance?: number;

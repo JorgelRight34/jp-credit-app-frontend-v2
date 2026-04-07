@@ -4,19 +4,22 @@ import {
   buildPageLayoutEditOption,
   DownloadIcon,
   FileTable,
-  LinkProps,
+  InputElement,
   mapApiFileToTableFile,
   PageRouterLayout,
   PrintIcon,
   ReportIcon,
+  Route,
   Tab,
   TabPanel,
   TabsList,
   TabsRouter,
 } from '@/components'
 import { Report } from '../models/report'
+import { GenerateReportHandler } from '../models/handlers'
+import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 import { reportsBreadcrumb } from './reports-page-layout'
-import SavedReportGenerationForm from './saved-report-generation-form'
+import SavedReportGenerationForm from '../components/saved-report-generation-form'
 
 export const buildReportBreadcrumb = (report: Report): BreadcrumbSpec => ({
   icon: ReportIcon,
@@ -33,17 +36,21 @@ export interface ReportPageProps {
   report: Report
 }
 
-interface ReportPageLayoutProps extends ReportPageProps {
+interface ReportPageLayoutProps<T> extends ReportPageProps {
   report: Report
-  editRoute: LinkProps['to']
+  editRoute: Route
   breadcrumb: BreadcrumbSpec
+  templateDefinition: ReportTemplateDefinition<T>
+  onSubmit: GenerateReportHandler
+  searchInput: InputElement
 }
 
-const ReportPageLayout = ({
+const ReportPageLayout = <T,>({
   report,
   breadcrumb,
   editRoute,
-}: ReportPageLayoutProps) => {
+  ...config
+}: ReportPageLayoutProps<T>) => {
   return (
     <PageRouterLayout
       title={report.title}
@@ -67,7 +74,7 @@ const ReportPageLayout = ({
           <Tab index={1}>Archivos</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <SavedReportGenerationForm report={report} />
+          <SavedReportGenerationForm report={report} {...config} />
         </TabPanel>
         <TabPanel index={1}>
           <FileTable files={report.documents.map(mapApiFileToTableFile)} />

@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import { useUserForm } from '../hooks/useUserForm'
 import type { PropsWithUser, User } from '../../../models/user'
 import type { DataModuleFormProps } from '@/components'
 import type { UserFormValues } from '../lib/schemas/userFormSchema'
@@ -13,7 +12,6 @@ import {
   TabsList,
 } from '@/components'
 import UserDataFormPanel from './user-data-form-panel'
-import { claimPairToString } from '../lib/utils'
 import { updateUserClaims } from '../services/userClient'
 import { useUserRolesForm } from '../hooks/useUserRolesForm'
 import { usePermissionsForm } from '../hooks/usePermissionsForm'
@@ -24,22 +22,15 @@ import {
   ProjectUserTransferList,
   useProjectUserForm,
 } from '@/features/projects'
+import { useEditUserForm } from '../hooks/useEditUserForm'
 
 type EditUserFormProps = PropsWithUser<
-  DataModuleFormProps<User, UserFormValues>
+  DataModuleFormProps<void, UserFormValues>
 >
 
 const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
-  const form = useUserForm({
-    defaultValues: {
-      username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      isActive: user.isActive,
-    },
-    shouldEdit: true,
-    userId: user.id,
+  const form = useEditUserForm({
+    user,
     toastMessage: () => 'Guardado',
     ...props,
   })

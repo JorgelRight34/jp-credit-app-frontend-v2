@@ -11,6 +11,7 @@ import { LoanPurpose } from "../models/loanPurpose"
 import { LoanPurposeFormValues } from "../lib/schemas/loanPurposeFormSchema"
 import { LoanEditFormValues } from "../lib/schemas/loanEditFormSchema"
 import { withProjectIdParams } from "@/features/projects"
+import { ChangeHistory, ChangeLogQuery } from "@/features/audit"
 
 const baseUrl = "loans"
 
@@ -47,7 +48,7 @@ export const getLoanActors = async (loanId: Loan["id"]): Promise<{
 }
 
 export const exportLoans: ExportHandler<LoanQuery> = async (options, params) => {
-    const { data } = await api.get(baseUrl + "/export", {
+    const { data } = await api.get(baseUrl + "/reports/export", {
         params: withProjectIdParams({ ...params, ...options }),
         responseType: "blob"
     })
@@ -74,5 +75,10 @@ export const editLoanPurpose = async (id: LoanPurpose["id"], body: LoanPurposeFo
 }
 
 export const editLoan = async (id: Loan["id"], body: LoanEditFormValues) => {
-    await api.put(`${baseUrl}/${id}`, body)
+    await api.patch(`${baseUrl}/${id}`, body)
+}
+
+export const getLoanHistory = async (id: Loan["id"], params: ChangeLogQuery): Promise<ChangeHistory> => {
+    const { data } = await api.get(`${baseUrl}/${id}/changes`, { params })
+    return data;
 }

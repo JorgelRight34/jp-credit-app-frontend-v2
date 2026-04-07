@@ -4,8 +4,9 @@ import { ChangeLog } from '../models/changeLog'
 import { CacheKey, PagedResponse } from '@/models'
 import { changeLogDataTableColumns } from '../lib/config/change-log-datatable-config'
 import { changeLogSearchFormConfig } from '../lib/config/change-log-search-config'
+import HistoryChangesPreview from './history-changes-preview'
 
-interface EntityChangeLogDataTableProps extends DataTableContainerOverrides<
+interface ChangeHistoryDataTableProps extends DataTableContainerOverrides<
   ChangeLog,
   ChangeLogQuery
 > {
@@ -13,19 +14,24 @@ interface EntityChangeLogDataTableProps extends DataTableContainerOverrides<
   loader: (query: ChangeLogQuery) => Promise<PagedResponse<ChangeLog>>
 }
 
-const EntityChangeLogDataTable = ({
+const ChangeHistoryDataTable = ({
   cacheKey,
   loader,
   ...props
-}: EntityChangeLogDataTableProps) => {
+}: ChangeHistoryDataTableProps) => {
   return (
     <DataTableContainer
       searchConfig={changeLogSearchFormConfig}
-      datatableConfig={{ columns: changeLogDataTableColumns, loader }}
+      datatableConfig={{
+        columns: changeLogDataTableColumns,
+        allowExpand: true,
+        loader,
+        onExpand: HistoryChangesPreview,
+      }}
       cacheKey={cacheKey}
       {...props}
     />
   )
 }
 
-export default EntityChangeLogDataTable
+export default ChangeHistoryDataTable

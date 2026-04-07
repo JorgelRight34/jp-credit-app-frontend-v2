@@ -24,6 +24,7 @@ import { loanModuleBreadcrumb } from './loans-page'
 import { TransactionDataTable } from '@/features/transactions'
 import { AdjustmentNoteDataTable } from '@/features/adjustment-notes'
 import { loansQueryKey } from '../lib/query-keys'
+import { changeHistoryLinkLabel } from '@/features/audit'
 
 export const buildLoanBreadcrumb = (loan: Loan): BreadcrumbSpec => ({
   title: buildLoanLabelById(loan.id),
@@ -55,6 +56,11 @@ const LoanPage = ({ loan }: { loan: Loan }) => {
             label: 'Hacer desembolso',
             to: '/transactions/create',
             search: { tab: 1, loanId: loan.id },
+          },
+          {
+            label: changeHistoryLinkLabel,
+            to: '/loans/$id/changes',
+            params: { id: loan.id.toString() },
           },
         ]),
         buildPageLayoutSettingsOption('/loans/$id/settings', {

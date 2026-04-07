@@ -57,7 +57,11 @@ const CreateCollateralForm = ({
                 name="loanId"
                 label="Préstamo"
                 config={{
-                  initialQuery: { status: LoanStatusMap.active, projectId },
+                  initialQuery: {
+                    status: LoanStatusMap.active,
+                    hasTransactions: false,
+                    projectId,
+                  },
                 }}
                 input={LoanSearchInput}
               />

@@ -31,7 +31,9 @@ const TableBodyCompositor = <T,>({
     return (
       <TableBodySkeleton
         pageSize={10}
-        columnsLength={table.getVisibleLeafColumns().length}
+        columnsLength={
+          table.getVisibleLeafColumns().length + (allowExpand ? 1 : 0)
+        }
       />
     )
 

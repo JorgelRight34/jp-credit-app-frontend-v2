@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { getProfileFn } from '..'
-import { createProfileKey } from '@/features/profiles/lib/query-keys'
+import { buildProfileKey } from '@/features/profiles/lib/query-keys'
 import { useSuspenseData } from '@/hooks/useData'
 import { EditProfileFormPage } from '@/features/profiles'
 import { getModulePermissionsBeforeLoad } from '../../../route'
@@ -14,7 +14,7 @@ export const Route = createFileRoute('/(main)/(modules)/profiles/$id/edit/')({
 function RouteComponent() {
   const { id } = Route.useParams()
   const { data: profile } = useSuspenseData({
-    key: createProfileKey(id),
+    key: buildProfileKey(id),
     loader: () => getProfileFn(+id),
   })
 

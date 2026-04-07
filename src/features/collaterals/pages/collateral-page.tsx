@@ -3,6 +3,7 @@ import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import type { Collateral } from '../models/collateral'
 import {
   buildPageLayoutEditOption,
+  buildPageLayoutMenuOption,
   buildPageLayoutSettingsOptionLight,
   CollateralIcon,
   FileTable,
@@ -16,6 +17,7 @@ import {
   UploadIcon,
 } from '@/components'
 import { collateralIconByTypeMap } from '../lib/jsx-utils'
+import { changeHistoryLinkLabel } from '@/features/audit'
 
 export const buildCollateralBreadcrumb = (
   collateral: Collateral,
@@ -38,16 +40,30 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
 ]
 
 const CollateralPage = ({ collateral }: { collateral: Collateral }) => {
+  const id = collateral.id.toString()
+
   return (
     <PageRouterLayout
       title={collateral.title}
       options={[
-        buildPageLayoutSettingsOptionLight('/collaterals/$id/settings', {
-          id: collateral.id.toString(),
-        }),
-        buildPageLayoutEditOption('/collaterals/$id/edit', {
-          id: collateral.id.toString(),
-        }),
+        buildPageLayoutMenuOption([
+          {
+            label: 'Configuración',
+            to: '/collaterals/$id/settings',
+            params: { id },
+          },
+          {
+            label: changeHistoryLinkLabel,
+            to: '/collaterals/$id/changes',
+            params: { id },
+          },
+        ]),
+        buildPageLayoutEditOption(
+          '/collaterals/$id/edit',
+          { id },
+          collateral.isActive === false,
+          'No puede editar una garantía desactiva',
+        ),
       ]}
       routerConfig={{
         baseBreadcrumbs: [

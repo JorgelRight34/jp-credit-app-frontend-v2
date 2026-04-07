@@ -19,11 +19,14 @@ const errorHandler = (error: AxiosError<{ message?: string }>) => {
       switch (error.response?.status) {
         case 400:
           toastService.error("Mala solicitud.");
-          break;
+          throw error;
         case 403:
           toastService.error("No tiene permisos para ver este contenido");
           throw error
         case 404:
+          throw error;
+        default:
+          toastService.error("Ha ocurrido un error.");
           throw error;
       }
       break;

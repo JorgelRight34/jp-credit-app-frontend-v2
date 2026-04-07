@@ -4,6 +4,7 @@ import type { UserFormValues } from "../lib/schemas/userFormSchema";
 import type { User } from "../../../models/user";
 import type { UseDataFormProps } from "@/components";
 import { useForm } from "@/components";
+import { usersQueryKey } from "../lib/constants";
 
 export type UseUserFormProps = UseDataFormProps<User, UserFormValues> & {
   userId?: number;
@@ -17,6 +18,7 @@ export const useUserForm = ({ userId, initialValues, ...props }: UseUserFormProp
     onEdit: async (data) => {
       await editUser(data, userId!)
     },
+    keysToInvalidate: [[usersQueryKey]],
     ...props
   });
 }

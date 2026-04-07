@@ -30,7 +30,6 @@ const EditProfileForm = ({ profile, ...props }: EditProfileFormProps) => {
       dni: profile.dni,
       address: profile.address,
       landline: profile.landline,
-      officePhone: profile.officePhone,
       phoneNumber: profile.phoneNumber,
     },
     profileId: profile.id,

@@ -1,11 +1,11 @@
 import { FieldValues, UseDataFormProps, useForm } from "@/components"
 import { Report } from "../models/report";
-import { generateReport } from "../services/reportsClient";
 import { fileFromUrl } from "@/lib/utils";
+import { GenerateReportHandler } from "../models/handlers";
 
 interface UseReportGenerationFormValuesProps extends UseDataFormProps<Blob, ReportGenerationFormValues> {
     report?: Report
-    reportKey: Report["key"]
+    onSubmit: GenerateReportHandler;
 }
 
 export interface ReportGenerationFormValues extends FieldValues {
@@ -13,12 +13,12 @@ export interface ReportGenerationFormValues extends FieldValues {
     id?: number | string;
 }
 
-export const useReportGenerationForm = ({ report, reportKey, initialValues, ...config }: UseReportGenerationFormValuesProps) => {
+export const useReportGenerationForm = ({ onSubmit, report, initialValues, ...config }: UseReportGenerationFormValuesProps) => {
     return useForm<Blob, ReportGenerationFormValues, Blob>({
-        onSubmit: (body) => generateReport(body, reportKey),
+        onSubmit,
         onEdit: async (body) => {
             const files = await Promise.all(report!.documents.map(d => fileFromUrl(d.url)))
-            return await generateReport({ id: body.id, file: files }, reportKey)
+            return await onSubmit?.({ id: body.id, file: files })
         },
         shouldEdit: !!report,
         shouldUseNativeValidation: true,

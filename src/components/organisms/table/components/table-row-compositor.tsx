@@ -28,7 +28,7 @@ const TableRowCompositor = <TData,>({
         </TableDataCell>
       ))}
       {allowExpand && (
-        <TableDataCell>
+        <TableDataCell colSpan={1}>
           <Icon
             className="!text-sm md:!text-base"
             icon={row.getIsExpanded() ? DoNotDisturbOnIcon : AddCircleIcon}

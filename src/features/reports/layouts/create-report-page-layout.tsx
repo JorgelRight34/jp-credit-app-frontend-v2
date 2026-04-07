@@ -4,26 +4,29 @@ import {
   PermissionsProvider,
 } from '@/components'
 import CreateReportForm from '../components/create-report-form'
-import { PropsWithReportKey } from '../models/report'
+import { CreateReportHandler } from '../models/handlers'
+import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 import { reportsBreadcrumb } from './reports-page-layout'
 
-interface CreateReportPageLayoutProps extends PropsWithReportKey {
+interface CreateReportPageLayoutProps<T> {
   permissionProvider: PermissionsProvider
   breadcrumb: BreadcrumbSpec
+  templateDefinition: ReportTemplateDefinition<T>
+  onSubmit: CreateReportHandler
 }
 
-const CreateReportPageLayout = ({
-  reportKey,
+const CreateReportPageLayout = <T,>({
   breadcrumb,
   permissionProvider,
-}: CreateReportPageLayoutProps) => {
+  ...config
+}: CreateReportPageLayoutProps<T>) => {
   return (
     <CreateFormPageLayout
       title="Crear reporte"
       breadcrumbs={[reportsBreadcrumb, breadcrumb]}
       permissionProvider={permissionProvider}
     >
-      <CreateReportForm reportKey={reportKey} />
+      <CreateReportForm {...config} />
     </CreateFormPageLayout>
   )
 }

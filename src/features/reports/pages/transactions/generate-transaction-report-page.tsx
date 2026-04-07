@@ -1,10 +1,17 @@
-import GenerateReportPageLayout from '../../components/generate-report-page-layout'
-import { transactionBreadcrumb } from '@/features/transactions'
+import {
+  transactionBreadcrumb,
+  TransactionSearchInput,
+} from '@/features/transactions'
+import { generateTransactionReport } from '../../services/reportsClient'
+import { transactionTemplateDefinition } from '../../lib/templates/transaction-template-definition'
+import GenerateReportPageLayout from '../../layouts/generate-report-page-layout'
 
 const GenerateTransactionReportPage = () => (
   <GenerateReportPageLayout
     breadcrumb={transactionBreadcrumb}
-    reportKey="Loan"
+    templateDefinition={transactionTemplateDefinition}
+    searchInput={TransactionSearchInput}
+    onSubmit={generateTransactionReport}
   />
 )
 
