@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
-import { RolePage, createRoleQueryKey } from '@/features/auth'
+import { RolePage, buildRoleQueryKey } from '@/features/auth'
 import { getRoleFromServer } from '@/features/auth/server/authServerService'
 import { getRole } from '@/features/auth/services/authService'
 import { useSuspenseData } from '@/hooks/useData'
@@ -18,9 +18,14 @@ export const Route = createFileRoute(
 function RouteComponent() {
   const { id } = Route.useParams()
   const { data: role } = useSuspenseData({
-    key: createRoleQueryKey(id),
+    key: buildRoleQueryKey(id),
     loader: () => getRoleFn(+id),
   })
 
-  return <RolePage role={role} rolePermissions={role.permissions!} />
+  return (
+    <RolePage
+      role={role}
+      rolePermissions={{ claims: role.claims, roles: [] }}
+    />
+  )
 }

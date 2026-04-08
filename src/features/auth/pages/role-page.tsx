@@ -1,6 +1,5 @@
-import { Suspense } from 'react'
 import UsersDataTable from '../components/users-datatable'
-import type { Role } from '../models/role'
+import type { PropsWithRole, Role } from '../models/role'
 import type { IdentityPermissions } from '../models/identityPermissions'
 import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import {
@@ -18,10 +17,12 @@ import {
   TabsList,
   TabsRouter,
   OverviewLayout,
+  buildPageLayoutMenuOption,
 } from '@/components'
 import { claimsTableColumns } from '../lib/constants'
 import { overviewBreadcrumb } from '@/lib/constants'
 import { accessControlBreadcrumb } from './access-control-page'
+import { changeHistoryLinkLabel } from '@/features/audit'
 
 export const buildRoleBreadcrumb = (role: Role): BreadcrumbSpec => ({
   title: role.name,
@@ -34,7 +35,7 @@ export const rolesModuleBreadcrumb: BreadcrumbSpec = {
   icon: AdminPanelSettingsIcon,
   title: 'Roles',
   pathname: '/access-control',
-  search: { tab: 'roles' },
+  search: { tab: 1 },
 }
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = [
@@ -46,16 +47,22 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
 const RolePage = ({
   role,
   rolePermissions,
-}: {
-  role: Role
-  rolePermissions: IdentityPermissions
-}) => {
+}: PropsWithRole<{ rolePermissions: IdentityPermissions }>) => {
+  const id = role.id.toString()
+
   return (
     <PageRouterLayout
       title={`${role.id} - ${role.name}`}
       options={[
+        buildPageLayoutMenuOption([
+          {
+            label: changeHistoryLinkLabel,
+            to: '/access-control/roles/$id/changes',
+            params: { id },
+          },
+        ]),
         buildPageLayoutEditOption('/access-control/roles/$id/edit', {
-          id: role.id.toString(),
+          id,
         }),
       ]}
       routerConfig={{
@@ -90,7 +97,7 @@ const RolePage = ({
   )
 }
 
-const RoleOverview = ({ role }: { role: Role }) => (
+const RoleOverview = ({ role }: PropsWithRole) => (
   <OverviewLayout>
     <LayoutRow>
       <FormReadOnlyGroup name="name" label="Nombre" value={role.name} />

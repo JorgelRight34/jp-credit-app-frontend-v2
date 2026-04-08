@@ -1,11 +1,11 @@
 import { getAllPossibleClaims } from "../services/authService"
 import { permissionsQueryKey, rolesQueryKey, usersQueryKey } from "./constants"
 
-export const createUserQueryKey = (username: string) => {
+export const buildUserQueryKey = (username: string) => {
     return [usersQueryKey, "users", username]
 }
 
-export const createRoleQueryKey = (id: number | string) => {
+export const buildRoleQueryKey = (id: number | string) => {
     return [rolesQueryKey, +id]
 }
 
@@ -22,3 +22,5 @@ export const allPossibleClaimsQueryOptions = ({
 
 
 export const buildUserChangeHistoryQueryKey = (username: string) => [usersQueryKey, "users", username, "ch"]
+
+export const buildRoleChangeHistoryQueryKey = (id: number) => [rolesQueryKey, +id, "ch"]

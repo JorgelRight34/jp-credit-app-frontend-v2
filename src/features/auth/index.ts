@@ -43,6 +43,7 @@ export { default as EditUserFormPage } from "./pages/edit-user-form-page"
 export { default as UserPage } from './pages/user-page'
 export { default as RolePage } from './pages/role-page'
 export { default as ResetPasswordPage } from './pages/reset-password-page'
+export { default as RoleChangeHistoryPage } from './pages/role-change-history-page'
 
 // ----------------------
 // Services

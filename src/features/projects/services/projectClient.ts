@@ -34,6 +34,6 @@ export const editProject = async (id: Project["id"], body: ProjectFormValues) =>
     await api.patch(baseUrl + "/" + id, body);
 }
 
-export const addProjectsToUser = async (body: ProjectUserFormValues) => {
-    await api.post(`${baseUrl}/users`, body);
+export const addProjectsToUser = async (userId: number, body: { add: Array<Project["id"]>; remove: Array<Project["id"]> }) => {
+    await api.patch(`auth/users/${userId}/projects`, body);
 }

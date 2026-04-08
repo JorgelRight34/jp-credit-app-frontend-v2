@@ -1,4 +1,4 @@
-import { createUserQueryKey, UserChangeHistoryPage } from '@/features/auth'
+import { buildUserQueryKey, UserChangeHistoryPage } from '@/features/auth'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getUserFn } from '..'
@@ -14,7 +14,7 @@ export const Route = createFileRoute(
 function RouteComponent() {
   const { username } = Route.useParams()
   const { data: user } = useSuspenseData({
-    key: createUserQueryKey(username),
+    key: buildUserQueryKey(username),
     loader: () => getUserFn(username),
   })
 

@@ -68,6 +68,7 @@ const EditUserAccessForm = ({ user, ...props }: EditUserFormProps) => {
 const PermissionsForm = ({ user }: PropsWithUser) => {
   const form = usePermissionsForm({
     handler: updateUserClaims,
+    resetValues: false,
     defaultValues: {
       id: user.id,
       claims: user.claims.map((c) => c.claimValue),
@@ -91,7 +92,7 @@ const PermissionsForm = ({ user }: PropsWithUser) => {
 }
 
 const UserRolesForm = ({ user }: PropsWithUser) => {
-  const form = useUserRolesForm({ user })
+  const form = useUserRolesForm({ user, resetValues: false })
 
   return (
     <FormContainer form={form}>
@@ -110,6 +111,8 @@ const UserRolesForm = ({ user }: PropsWithUser) => {
 
 const ProjectUserForm = ({ user }: PropsWithUser) => {
   const form = useProjectUserForm({
+    resetValues: false,
+    shouldEdit: true,
     defaultValues: {
       userId: user.id,
       projectIds: user.projects.map((p) => p.id),

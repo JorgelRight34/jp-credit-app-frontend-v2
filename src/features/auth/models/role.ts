@@ -1,9 +1,11 @@
-import type { IdentityPermissions } from "./identityPermissions";
+import { ClaimPair } from "./claimPair";
 
 export type Role = {
     id: number;
     name: string;
     normalizedName: string;
     usersCount: number;
-    permissions?: IdentityPermissions
+    claims: Array<ClaimPair>;
 }
+
+export type PropsWithRole<T = object> = { role: Role } & T;

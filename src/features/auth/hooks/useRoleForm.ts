@@ -10,10 +10,9 @@ type UseRoleFormProps = UseDataFormProps<Role, RoleFormSchemaValues> & {
     roleId?: number;
 };
 
-export const useRoleForm = ({ defaultValues, roleId, shouldEdit, ...config }: UseRoleFormProps) => {
+export const useRoleForm = ({ roleId, ...config }: UseRoleFormProps) => {
     return useForm({
         schema: roleFormSchema,
-        defaultValues: defaultValues ?? { name: "" },
         onSubmit: createRole,
         onEdit: (data) => updateRole(roleId!, data),
         keysToInvalidate: [[rolesQueryKey]],

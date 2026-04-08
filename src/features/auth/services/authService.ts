@@ -12,6 +12,7 @@ import api from "@/lib/services/api";
 import { serverClient } from "@/lib/services/serverClient";
 import { LoginFormValues } from "../hooks/useLoginForm";
 import { CurrentUser } from "../models/currentUser";
+import { ChangeHistory, ChangeLogQuery } from "@/features/audit";
 
 export const getCurrentUser = async (): Promise<CurrentUser> => {
     const { data } = await api.get(`auth/users/me`);
@@ -39,6 +40,11 @@ export const getRoles = async (params: RoleQuery): Promise<PagedResponse<Role>> 
 
 export const getRole = async (id: number): Promise<Role> => {
     const { data } = await api.get("auth/roles/" + id);
+    return data;
+}
+
+export const getRoleChangeHistory = async (id: number, params: ChangeLogQuery): Promise<ChangeHistory> => {
+    const { data } = await api.get("auth/roles/" + id + "/changes", { params })
     return data;
 }
 

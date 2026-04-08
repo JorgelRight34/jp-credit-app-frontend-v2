@@ -21,7 +21,7 @@ export interface UseFormBuilderProps<TData extends FieldValues, TReturn> {
     onEdit?: ((data: TData) => Promise<void | TReturn>);
 }
 
-export const useForm = <T extends object, TData extends FieldValues, TReturn = T>({
+export const useForm = <T, TData extends FieldValues, TReturn = T>({
     schema,
     shouldEdit,
     defaultValues,
@@ -40,7 +40,7 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
 
         if (shouldEdit) {
             result = await onEdit!(data) as TReturn
-            methods.reset(result as DefaultFormValues<TData>);
+            methods.reset(data as DefaultFormValues<TData>);
         } else {
             result = await onSubmit(data)
         }
@@ -49,10 +49,12 @@ export const useForm = <T extends object, TData extends FieldValues, TReturn = T
             toastService.success(toastMessage(result))
         }
 
-        if (resetValues) methods.reset(defaultValues, {
-            keepErrors: false,
-            keepDirty: false
-        });
+        if (resetValues) {
+            methods.reset(defaultValues, {
+                keepErrors: false,
+                keepDirty: false
+            });
+        }
         if (result!) await onSuccess?.(result)
         if (!keysToInvalidate) return
 

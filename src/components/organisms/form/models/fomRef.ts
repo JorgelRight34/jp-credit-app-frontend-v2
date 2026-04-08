@@ -11,6 +11,6 @@ export interface FormRef<T extends FieldValues = FieldValues> {
     reset: () => void;
 }
 
-export type PropsWithFormRef<T extends FieldValues, TOther = object> = { ref: RefObject<T | null> } & TOther
+export type PropsWithFormRef<T extends FieldValues, TOther = object> = { ref: RefObject<T | null>; initialValues?: Partial<T> } & TOther
 
 export type PropsWithFormControl<T extends FieldValues, TOther = object> = { control: Control<T> } & TOther; 

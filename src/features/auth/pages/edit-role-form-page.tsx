@@ -1,11 +1,11 @@
 import { EditFormPageLayout } from '@/components'
-import RoleForm from '../components/role-form'
 import { rolesPermissionProvider } from '../lib/config/permissionProvider'
-import type { Role } from '../models/role'
+import type { PropsWithRole } from '../models/role'
 import { accessControlBreadcrumb } from './access-control-page'
 import { buildRoleBreadcrumb, rolesModuleBreadcrumb } from './role-page'
+import EditRoleForm from '../components/edit-role-form'
 
-const EditRoleFormPage = ({ role }: { role: Role }) => {
+const EditRoleFormPage = ({ role }: PropsWithRole) => {
   return (
     <EditFormPageLayout
       title={role.name}
@@ -16,7 +16,7 @@ const EditRoleFormPage = ({ role }: { role: Role }) => {
         buildRoleBreadcrumb(role),
       ]}
     >
-      <RoleForm role={role} />
+      <EditRoleForm role={role} />
     </EditFormPageLayout>
   )
 }
