@@ -1,22 +1,22 @@
-import { loanModuleBreadcrumb } from '@/features/loans'
+import { collateralsBreadcrumb } from '@/features/collaterals'
 import {
-  getLoanReports,
+  getCollateralsReport,
   ReportsDataTable,
   ReportsPageLayout,
 } from '@/features/reports'
 
-const LoanReportsPage = () => (
+const CollateralReportsPage = () => (
   <ReportsPageLayout
     title="Reportes"
     createRoute="/loans/reports/create"
     generateRoute="/loans/reports/generate"
-    breadcrumb={loanModuleBreadcrumb}
+    breadcrumb={collateralsBreadcrumb}
   >
     <ReportsDataTable
       reportPageRoute="/loans/reports/$id"
-      loader={getLoanReports}
+      loader={getCollateralsReport}
     />
   </ReportsPageLayout>
 )
 
-export default LoanReportsPage
+export default CollateralReportsPage

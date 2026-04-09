@@ -1,33 +1,18 @@
-import { useMemo, useRef } from "react"
 import { deleteProfilePhoto, uploadProfilePhoto } from "../services/profileClient"
-import type { FileAttachmentsFormRef, UseDeferredFileAttachmentsFormReturn } from "@/components";
+import { useDataFileAttachmentsForm } from "@/components";
 import type { Profile } from "../models/profile"
 import { profilesQueryKey } from "../lib/constants";
 
-export const useProfileFileAttachmentsForm = ({ profile }: { profile?: Profile }): UseDeferredFileAttachmentsFormReturn<Profile> => {
-    const profileRef = useRef<Profile | undefined>(profile);
-    const formRef = useRef<FileAttachmentsFormRef>(null)
-
-    const memoizedProfileFiles = useMemo(() => {
-        return profile?.files ? profile.files : undefined
-    }, [profile])
-
-    return {
-        form: {
-            onUpload: (files) => uploadProfilePhoto(profileRef.current!.id, files[0]),
-            onDelete: (files) => deleteProfilePhoto(files[0].id),
+export const useProfileFileAttachmentsForm = ({ profile }: { profile?: Profile } = {}) => {
+    return useDataFileAttachmentsForm({
+        entity: profile,
+        getFiles: (p) => p?.files,
+        formConfig: (ref) => ({
+            onUpload: (files) => uploadProfilePhoto(ref.current!.id, files[0]),
+            onDelete: (files) => deleteProfilePhoto(ref.current!.id, files[0].publicId!),
+            keysToInvalidate: [[profilesQueryKey]],
             filesMaxLength: 1,
             accept: "image/*",
-            initialFiles: memoizedProfileFiles,
-            keysToInvalidate: [[profilesQueryKey]],
-        },
-        setRef: (value) => profileRef.current = value,
-        submit: async (value) => {
-            profileRef.current = value;
-            await formRef.current?.submit();
-        },
-        handleSubmit: async () => formRef.current?.submit(),
-        handleReset: () => formRef.current?.reset(),
-        formRef,
-    };
+        }),
+    });
 }

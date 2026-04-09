@@ -3,6 +3,7 @@ import { TransactionReportModel } from "../../models/transactionReportModel";
 
 export const transactionTemplateDefinition: ReportTemplateDefinition<TransactionReportModel> = {
     title: "TRANSACCIONES",
+    label: "Transacción",
     definitions: [
         {
             name: "id",

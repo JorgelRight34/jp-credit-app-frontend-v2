@@ -61,8 +61,8 @@ const ReportPageLayout = <T,>({
       ]}
       routerConfig={{
         baseBreadcrumbs: [
-          reportsBreadcrumb,
           breadcrumb,
+          reportsBreadcrumb,
           buildReportBreadcrumb(report),
         ],
         breadcrumbsByRoute,

@@ -4,7 +4,11 @@ import {
   PermissionsProvider,
 } from '@/components'
 import CreateReportForm from '../components/create-report-form'
-import { CreateReportHandler } from '../models/handlers'
+import {
+  CreateReportHandler,
+  DeleteFilesHandler,
+  UploadFilesHandler,
+} from '../models/handlers'
 import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 import { reportsBreadcrumb } from './reports-page-layout'
 
@@ -12,6 +16,8 @@ interface CreateReportPageLayoutProps<T> {
   permissionProvider: PermissionsProvider
   breadcrumb: BreadcrumbSpec
   templateDefinition: ReportTemplateDefinition<T>
+  onUpload: UploadFilesHandler
+  onDelete: DeleteFilesHandler
   onSubmit: CreateReportHandler
 }
 
@@ -23,7 +29,7 @@ const CreateReportPageLayout = <T,>({
   return (
     <CreateFormPageLayout
       title="Crear reporte"
-      breadcrumbs={[reportsBreadcrumb, breadcrumb]}
+      breadcrumbs={[breadcrumb, reportsBreadcrumb]}
       permissionProvider={permissionProvider}
     >
       <CreateReportForm {...config} />

@@ -13,4 +13,4 @@ export interface Project {
 }
 
 
-export type PropsWithProjectId<T = {}> = { projectId: number | null; children?: ReactNode } & T
+export type PropsWithProjectId<T = {}> = { projectId: number; children?: ReactNode } & T

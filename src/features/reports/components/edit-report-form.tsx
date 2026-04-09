@@ -19,7 +19,11 @@ import { Report } from '../models/report'
 import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
-import { EditReportHandler } from '../models/handlers'
+import {
+  DeleteFilesHandler,
+  EditReportHandler,
+  UploadFilesHandler,
+} from '../models/handlers'
 import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 
 interface EditReportFormProps<T> extends DataModuleFormProps<
@@ -28,12 +32,16 @@ interface EditReportFormProps<T> extends DataModuleFormProps<
 > {
   templateDefinition: ReportTemplateDefinition<T>
   report: Report
+  onUpload: UploadFilesHandler
+  onDelete: DeleteFilesHandler
   onEdit: EditReportHandler
 }
 
 const EditReportForm = <T,>({
   templateDefinition,
   report,
+  onUpload,
+  onDelete,
   ...props
 }: EditReportFormProps<T>) => {
   const form = useReportForm({
@@ -76,7 +84,11 @@ const EditReportForm = <T,>({
         </MasterDetailLayout>
       </TabPanel>
       <TabPanel index={1}>
-        <EditReportFormFiles report={report} />
+        <EditReportFormFiles
+          onUpload={onUpload}
+          onDelete={onDelete}
+          report={report}
+        />
       </TabPanel>
     </Tabs>
   )
@@ -84,9 +96,13 @@ const EditReportForm = <T,>({
 
 const EditReportFormFiles = <T,>({
   report,
-}: Pick<EditReportFormProps<T>, 'report'>) => {
+  onUpload,
+  onDelete,
+}: Pick<EditReportFormProps<T>, 'report' | 'onUpload' | 'onDelete'>) => {
   const fileAttachmentsForm = useReportFileAttachmentForm({
     report,
+    onUpload,
+    onDelete,
   })
 
   return (

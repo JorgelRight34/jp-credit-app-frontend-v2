@@ -15,10 +15,8 @@ import { Collateral } from '../models/collateral'
 import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
 import CollateralLiquidateForm from '../components/collateral-liquidate-form'
 import CollateralSellForm from '../components/collateral-sell-form'
-import {
-  buildCollateralBreadcrumb,
-  collateralsBreadcrumb,
-} from './collateral-page'
+import { buildCollateralBreadcrumb } from './collateral-page'
+import { collateralsBreadcrumb } from './collaterals-page'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Liquidar', icon: PriceCheckIcon }],

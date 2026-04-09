@@ -3,7 +3,7 @@ import { Report } from "../models/report";
 import { PagedResponse } from "@/models";
 import { ReportQuery } from "../models/reportQuery";
 import { ReportFormValues } from "../lib/schemas/reportFormSchema";
-import { FileStorageService } from "@/lib/services";
+import { FileStorageApiService } from "@/lib/services";
 import { loanTemplateDefinition } from "../lib/templates/loan-template-definition";
 import { collateralTemplateDefinition } from "../lib/templates/collateral-template-definition";
 import { LoanReportModel } from "../models/loanReportModel";
@@ -31,7 +31,7 @@ const createGetReportHandler = (prefix: string) =>
 
 const createGetReportByKeyHandler = (prefix: string) =>
     async (subkey: string): Promise<Report> => {
-        const { data } = await api.get(`${prefix}/subkeys/${subkey}`);
+        const { data } = await api.get(`${prefix}/reports/subkeys/${subkey}`);
         return data;
     };
 
@@ -46,30 +46,55 @@ const createUpdateReportHandler = (prefix: string) =>
         await api.patch(`${prefix}/reports/${id}`, body);
     };
 
+const createDeleteReportHandler = (prefix: string) =>
+    async (id: Report["id"]) => await api.delete(`${prefix}/reports/${id}`);
+
+const createUploadReportFilesHandler = (prefix: string) =>
+    async (id: Report["id"], files: Array<File>) => {
+        await FileStorageApiService.upload(files, `${prefix}/reports/${id}/files`);
+    };
+
+const createDeleteReportFilesHandler = (prefix: string) =>
+    async (id: Report["id"], files: Array<string>) => {
+        await FileStorageApiService.delete(files, `${prefix}/reports/${id}/files`);
+    };
+
 // ─── Loan ──────────────────────────────────────────────────────────────────────
 
-export const getLoanReports = createGetReportsHandler("loans");
-export const getLoanReport = createGetReportHandler("loans");
-export const createLoanReport = createCreateReportHandler("loans");
-export const editLoanReport = createUpdateReportHandler("loans");
+const loanBaseUrl = "loans";
+
+export const getLoanReports = createGetReportsHandler(loanBaseUrl);
+export const getLoanReport = createGetReportHandler(loanBaseUrl);
+export const getLoanReportByKey = createGetReportByKeyHandler(loanBaseUrl);
+export const createLoanReport = createCreateReportHandler(loanBaseUrl);
+export const editLoanReport = createUpdateReportHandler(loanBaseUrl);
+export const deleteLoanReport = createDeleteReportHandler(loanBaseUrl);
+export const uploadLoanReportFiles = createUploadReportFilesHandler(loanBaseUrl);
+export const deleteLoanReportFiles = createDeleteReportFilesHandler(loanBaseUrl);
 
 export const getLoanReportModel = async (id: number): Promise<LoanReportModel> => {
-    const { data } = await api.get(`${baseUrl}/loans/${id}/report-data`);
+    const { data } = await api.get(`/loans/${baseUrl}/${id}/report-data`);
     return data;
 };
 
 export const generateLoanReport = async ({ id, file }: ReportGenerationFormValues): Promise<Blob> => {
     const loan = await getLoanReportModel(id as number);
     const context = mapTemplate(loan, loanTemplateDefinition);
-    return postGenerateReport(context, file);
+    return postGenerateReport(loanBaseUrl, context, file);
 };
 
 // ─── Collateral ────────────────────────────────────────────────────────────────
 
-export const getCollateralsReport = createGetReportsHandler("collaterals");
-export const getCollateralReport = createGetReportHandler("collaterals");
-export const createCollateralReport = createCreateReportHandler("collaterals");
-export const editCollateralReport = createUpdateReportHandler("collaterals");
+const collateralsBaseUrl = "collaterals";
+
+export const getCollateralsReport = createGetReportsHandler(collateralsBaseUrl);
+export const getCollateralReport = createGetReportHandler(collateralsBaseUrl);
+export const getCollateralReportByKey = createGetReportByKeyHandler(collateralsBaseUrl);
+export const createCollateralReport = createCreateReportHandler(collateralsBaseUrl);
+export const editCollateralReport = createUpdateReportHandler(collateralsBaseUrl);
+export const deleteCollateralReport = createDeleteReportHandler(collateralsBaseUrl);
+export const uploadCollateralReportFiles = createUploadReportFilesHandler(collateralsBaseUrl);
+export const deleteCollateralReportFiles = createDeleteReportFilesHandler(collateralsBaseUrl);
 
 export const getCollateralReportModel = async (id: number): Promise<CollateralReportModel> => {
     const { data } = await api.get(`${baseUrl}/collaterals/${id}/report-data`);
@@ -79,16 +104,21 @@ export const getCollateralReportModel = async (id: number): Promise<CollateralRe
 export const generateCollateralReport = async ({ id, file }: ReportGenerationFormValues): Promise<Blob> => {
     const collateral = await getCollateralReportModel(id as number);
     const context = mapTemplate(collateral, collateralTemplateDefinition);
-    return postGenerateReport(context, file);
+    return postGenerateReport(collateralsBaseUrl, context, file);
 };
 
 // ─── Transaction ───────────────────────────────────────────────────────────────
 
-export const getTransactionReports = createGetReportsHandler("transactions");
-export const getTransactionReport = createGetReportHandler("transactions");
-export const getTransactionReportByKey = createGetReportByKeyHandler("transactions");
-export const createTransactionReport = createCreateReportHandler("transactions");
-export const editTransactionReport = createUpdateReportHandler("transactions");
+const transactionsBaseUrl = "transactions";
+
+export const getTransactionReports = createGetReportsHandler(transactionsBaseUrl);
+export const getTransactionReport = createGetReportHandler(transactionsBaseUrl);
+export const getTransactionReportByKey = createGetReportByKeyHandler(transactionsBaseUrl);
+export const createTransactionReport = createCreateReportHandler(transactionsBaseUrl);
+export const editTransactionReport = createUpdateReportHandler(transactionsBaseUrl);
+export const deleteTransactionReport = createDeleteReportHandler(transactionsBaseUrl);
+export const uploadTransactionReportFiles = createUploadReportFilesHandler(transactionsBaseUrl);
+export const deleteTransactionReportFiles = createDeleteReportFilesHandler(transactionsBaseUrl);
 
 export const getTransactionReportModel = async (id: number): Promise<TransactionReportModel> => {
     const { data } = await api.get(`transactions/${id}`);
@@ -98,24 +128,12 @@ export const getTransactionReportModel = async (id: number): Promise<Transaction
 export const generateTransactionReport = async ({ id, file }: ReportGenerationFormValues): Promise<Blob> => {
     const transaction = await getTransactionReportModel(id as number);
     const context = mapTemplate(transaction, transactionTemplateDefinition);
-    return postGenerateReport(context, file);
+    return postGenerateReport(transactionsBaseUrl, context, file);
 };
-
-// ─── Files ─────────────────────────────────────────────────────────────────────
-
-export const uploadReportFiles = async (id: Report["id"], files: Array<File>) => {
-    return FileStorageService.upload(files, { reportId: id });
-};
-
-export const deleteReportFiles = async (ids: Array<number>) => {
-    await FileStorageService.delete(ids);
-};
-
-// ─── Generic dispatchers (use only when key is not known at call site) ─────────
 
 // ─── Internal ──────────────────────────────────────────────────────────────────
 
-const postGenerateReport = async (context: unknown, file: ReportGenerationFormValues["file"]): Promise<Blob> => {
+const postGenerateReport = async (prefix: string, context: unknown, file: ReportGenerationFormValues["file"]): Promise<Blob> => {
     const formData = new FormData();
     formData.append("Context", JSON.stringify(context));
 
@@ -125,7 +143,7 @@ const postGenerateReport = async (context: unknown, file: ReportGenerationFormVa
         }
     }
 
-    const { data } = await api.post(`${baseUrl}/generate`, formData, {
+    const { data } = await api.post(`${prefix}/${baseUrl}/generate`, formData, {
         responseType: "blob",
     });
 

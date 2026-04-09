@@ -14,6 +14,7 @@ import {
   TabsList,
 } from '@/components'
 import CollateralDataForm from './collateral-data-form'
+import { buildLoanLabelById } from '@/features/loans'
 
 interface EditCollateralFormProps extends DataModuleFormProps<
   Collateral,
@@ -46,6 +47,7 @@ const EditCollateralForm = ({
     <Tabs>
       <TabsList>
         <Tab index={0}>Datos</Tab>
+        <Tab index={1}>Archivos</Tab>
       </TabsList>
       <TabPanel index={0}>
         <FormContainer form={form}>
@@ -54,7 +56,7 @@ const EditCollateralForm = ({
               <FormReadOnlyGroup
                 name="loanId"
                 label="Préstamo"
-                value={`Préstamo No.${collateral.loanId}`}
+                value={buildLoanLabelById(collateral.loanId)}
                 disabled
               />
             }

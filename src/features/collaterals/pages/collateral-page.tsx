@@ -4,8 +4,6 @@ import type { Collateral } from '../models/collateral'
 import {
   buildPageLayoutEditOption,
   buildPageLayoutMenuOption,
-  buildPageLayoutSettingsOptionLight,
-  CollateralIcon,
   FileTable,
   mapApiFileToTableFile,
   overviewBreadcrumb,
@@ -18,6 +16,7 @@ import {
 } from '@/components'
 import { collateralIconByTypeMap } from '../lib/jsx-utils'
 import { changeHistoryLinkLabel } from '@/features/audit'
+import { collateralsBreadcrumb } from './collaterals-page'
 
 export const buildCollateralBreadcrumb = (
   collateral: Collateral,
@@ -27,12 +26,6 @@ export const buildCollateralBreadcrumb = (
   pathname: '/collaterals/$id',
   params: { id: collateral.id.toString() },
 })
-
-export const collateralsBreadcrumb: BreadcrumbSpec = {
-  title: 'Garantías',
-  icon: CollateralIcon,
-  pathname: '/collaterals',
-}
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [overviewBreadcrumb],

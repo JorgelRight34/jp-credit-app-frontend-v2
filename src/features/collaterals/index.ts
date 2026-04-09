@@ -11,3 +11,5 @@ export { default as CollateralSearchInput } from './components/collateral-search
 export * from './models/collateralCondition'
 export { default as CollateralDataTable } from './components/collateral-datatable'
 export { default as CollateralChangeHistoryPage } from './pages/collateral-change-history-page'
+export * from './pages/collaterals-page'
+export * from './lib/config/permissionsProvider'

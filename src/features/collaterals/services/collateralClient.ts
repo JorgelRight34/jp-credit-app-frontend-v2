@@ -3,7 +3,7 @@ import type { CollateralQuery } from "../models/collateralQuery";
 import type { Collateral } from "../models/collateral";
 import type { PagedResponse } from "@/models";
 import api from "@/lib/services/api";
-import { FileStorageService } from "@/lib/services";
+import { FileStorageApiService } from "@/lib/services";
 import { CollateralLiquidateFormValues } from "../lib/schemas/collateralLiquidateFormSchema";
 import { PaymentResult } from "@/features/transactions";
 import { CollateralSellFormValues } from "../lib/schemas/collateralSellFormSchema";
@@ -24,6 +24,8 @@ export const getCollateral = async (id: number): Promise<Collateral> => {
 }
 
 export const createCollateral = async (body: CollateralFormValues): Promise<Collateral> => {
+    if (body.expirationDate === '') body.expirationDate = null;
+
     const { data } = await api.post(baseUrl, body);
     return data;
 }
@@ -33,11 +35,11 @@ export const updateCollateral = async (id: Collateral["id"], body: CollateralFor
 }
 
 export const uploadCollateralFiles = async (id: Collateral["id"], files: Array<File>) => {
-    return FileStorageService.upload(files, { collateralId: id })
+    return FileStorageApiService.upload(files, `${baseUrl}/${id}/files`)
 }
 
-export const deleteCollateralFiles = async (ids: Array<number>) => {
-    await FileStorageService.delete(ids);
+export const deleteCollateralFiles = async (id: Collateral["id"], ids: Array<string>) => {
+    await FileStorageApiService.delete(ids, `${baseUrl}/${id}/files`);
 }
 
 export const deleteCollateral = async (id: Collateral["id"]) => {

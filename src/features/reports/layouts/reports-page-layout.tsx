@@ -43,7 +43,7 @@ const ReportsPageLayout = ({
       buildPageLayoutCreateOption(createRoute),
     ]}
     breadcrumb={
-      <PageLayoutBreadcrumb breadcrumbs={[reportsBreadcrumb, breadcrumb]} />
+      <PageLayoutBreadcrumb breadcrumbs={[breadcrumb, reportsBreadcrumb]} />
     }
   >
     <PagePanel>{children}</PagePanel>

@@ -27,6 +27,7 @@ const LoginForm = (
           <Icon icon={LoginIcon}>Iniciar sesión</Icon>
         </FormSubmitBtn>
       }
+      noValidate={false}
     >
       <Form form={form}>
         <FormRow>

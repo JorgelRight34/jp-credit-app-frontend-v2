@@ -11,7 +11,9 @@ import { loanPermissionProvider } from '@/features/loans/lib/config/permission-p
 import { buildPageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/loans/create/')({
-  head: () => ({ meta: [{ title: buildPageTitle('Crear préstamo') }] }),
+  head: () => ({
+    meta: [{ title: buildPageTitle('Crear reporte para préstamos') }],
+  }),
   beforeLoad: getModulePermissionsBeforeLoad(loanPermissionProvider),
   component: RouteComponent,
 })

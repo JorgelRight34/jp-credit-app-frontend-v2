@@ -12,4 +12,4 @@ export interface Report {
 
 export type PropsWithReportKey<T = object> = { reportKey: Report["key"] } & T
 
-export interface PropsWithReport { report: Report }
+export type PropsWithReport<T = object> = { report: Report } & T;

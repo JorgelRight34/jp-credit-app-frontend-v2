@@ -31,8 +31,8 @@ const GenerateReportPageLayout = <T,>({
     breadcrumb={
       <PageLayoutBreadcrumb
         breadcrumbs={[
-          reportsBreadcrumb,
           breadcrumb,
+          reportsBreadcrumb,
           { icon: PrintIcon, title: 'Generar' },
         ]}
       />

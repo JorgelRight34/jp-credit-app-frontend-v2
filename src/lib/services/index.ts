@@ -1,4 +1,4 @@
 // index.ts
 export * from "./api";
 export * from "./errorHandler";
-export * from "./fileStorageService"
+export * from "./fileStorageApiService"

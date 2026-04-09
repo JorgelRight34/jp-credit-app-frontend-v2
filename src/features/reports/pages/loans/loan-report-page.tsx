@@ -9,7 +9,7 @@ const LoanReportPage = ({ report }: ReportPageProps) => (
   <ReportPageLayout
     breadcrumb={loanModuleBreadcrumb}
     templateDefinition={loanTemplateDefinition}
-    editRoute="/loans/reports/$id"
+    editRoute="/loans/reports/$id/edit"
     report={report}
     searchInput={LoanSearchInput}
     onSubmit={generateLoanReport}

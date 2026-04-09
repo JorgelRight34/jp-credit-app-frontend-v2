@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import type { FileUploads } from "./useFileAttachments";
 import type { FileAccept } from "../models/fileAccept";
 import type { FileModel } from "@/models/fileModel";
@@ -12,12 +12,14 @@ export type UseFileAttachmentsFormProps = {
     filesMaxLength?: number;
     accept: FileAccept;
     keysToInvalidate: Array<CacheKey>;
+    resetValues?: boolean;
     onUpload: (files: Array<File>) => Promise<unknown>;
     onDelete?: (files: Array<FileModel>) => Promise<void>;
     onCreate?: (fileData: Array<FileFormFieldValues>) => Promise<void>;
 };
 
 export const useFileAttachmentsForm = ({
+    resetValues,
     initialFiles,
     filesMaxLength,
     keysToInvalidate,
@@ -31,18 +33,17 @@ export const useFileAttachmentsForm = ({
         deletedExisting: [],
     });
 
-    const [isDirty, setIsDirty] = useState(false);
-
     const handleSubmit = async () => {
         await Promise.all([processUploads(), processDeletions()]);
-
-        setFileUploads((prev) => ({ ...prev, deletedExisting: [] }));
+        startTransition(() => setFileUploads((prev) => ({ ...prev, deletedExisting: [] })))
     };
 
     const dataClient = useDataClient();
     const { mutateAsync, isPending } = useDataMutation({
         mutationFn: handleSubmit,
         onSuccess: () => {
+            if (resetValues) init();
+
             for (const key of keysToInvalidate) {
                 dataClient.invalidate({ key })
             }
@@ -66,20 +67,20 @@ export const useFileAttachmentsForm = ({
     };
 
     const init = () => {
-        setFileUploads({
-            pending: [],
-            removedPending: [],
-            deletedExisting: [],
-            existing: initialFiles ?? [],
-        });
+        startTransition(() => {
+            setFileUploads({
+                pending: [],
+                removedPending: [],
+                deletedExisting: [],
+                existing: initialFiles ?? [],
+            });
+        })
     };
 
     return {
         value: fileUploads,
         filesMaxLength,
         isPending,
-        isDirty,
-        onDirtyChange: setIsDirty,
         onSubmit: mutateAsync,
         onChange: setFileUploads,
         reset: init,

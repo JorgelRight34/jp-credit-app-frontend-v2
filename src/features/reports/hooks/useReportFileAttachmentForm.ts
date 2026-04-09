@@ -1,30 +1,23 @@
-import { useMemo, useRef } from "react";
-import type { FileAttachmentsFormRef, UseDeferredFileAttachmentsFormReturn } from "@/components";
+import { useDataFileAttachmentsForm } from "@/components";
 import { Report } from "../models/report";
-import { deleteReportFiles, uploadReportFiles } from "../services/reportsClient";
 import { reporstQueryKey } from "../lib/query-keys";
+import { DeleteFilesHandler, UploadFilesHandler } from "../models/handlers";
 
-export const useReportFileAttachmentForm = ({ report }: { report?: Report } = {}): UseDeferredFileAttachmentsFormReturn<Report> => {
-    const reportRef = useRef(report);
-    const formRef = useRef<FileAttachmentsFormRef>(null);
+interface UseReportFileAttachmentFormProps {
+    report?: Report;
+    onUpload: UploadFilesHandler;
+    onDelete: DeleteFilesHandler
+}
 
-    const memoizedReportFiles = useMemo(() => report?.documents, [report])
-
-    return {
-        form: {
-            onUpload: (files) => uploadReportFiles(reportRef.current!.id, files),
-            onDelete: (files) => deleteReportFiles(files.map(f => f.id)),
-            initialFiles: memoizedReportFiles,
+export const useReportFileAttachmentForm = ({ report, onUpload, onDelete }: UseReportFileAttachmentFormProps) => {
+    return useDataFileAttachmentsForm({
+        entity: report,
+        getFiles: (r) => r?.documents,
+        formConfig: (ref) => ({
+            onUpload: (files) => onUpload(ref.current!.id, files),
+            onDelete: (files) => onDelete(ref.current!.id, files.map(f => f.publicId!)),
             keysToInvalidate: [[reporstQueryKey]],
-            accept: ".txt,.doc,.docx,.pdf,.rtf,.odt,.md,.csv,.json,.xml,.html,.htm"
-        },
-        setRef: (value) => reportRef.current = value,
-        submit: async (value) => {
-            reportRef.current = value;
-            await formRef.current?.submit();
-        },
-        handleSubmit: async () => formRef.current?.submit(),
-        handleReset: () => formRef.current?.reset(),
-        formRef
-    }
+            accept: ".txt,.doc,.docx,.pdf,.rtf,.odt,.md,.csv,.json,.xml,.html,.htm",
+        }),
+    });
 }

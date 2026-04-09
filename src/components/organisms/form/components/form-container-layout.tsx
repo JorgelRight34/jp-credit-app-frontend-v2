@@ -6,6 +6,7 @@ type FormLayoutProps = PropsWithChildren & {
   className?: string
   errors?: ReactNode
   footer?: ReactNode
+  noValidate?: boolean
   onError?: (err: unknown) => void
   onSubmit?: (e: FormEvent) => void
   onSuccess?: () => void
@@ -16,6 +17,7 @@ const FormLayout = ({
   className,
   errors,
   footer,
+  noValidate = true,
   onSubmit,
   onError,
   onSuccess,
@@ -30,6 +32,7 @@ const FormLayout = ({
     <form
       className={clsx('flex !h-full w-full flex-col', className)}
       onSubmit={mutateAsync}
+      noValidate={noValidate}
     >
       <div className="flex flex-1 flex-col gap-6">{children}</div>
       <div className="flex-shrink-0">{errors}</div>

@@ -20,7 +20,11 @@ import ReportTemplateDefinitionFieldset from './report-template-fieldset'
 import { useReportFileAttachmentForm } from '../hooks/useReportFileAttachmentForm'
 import { ReportFormValues } from '../lib/schemas/reportFormSchema'
 import FormattersDefinitionPanel from './formatters-definition-panel'
-import { CreateReportHandler } from '../models/handlers'
+import {
+  CreateReportHandler,
+  DeleteFilesHandler,
+  UploadFilesHandler,
+} from '../models/handlers'
 import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 
 interface CreateReportFormProps<T> extends DataModuleFormProps<
@@ -28,15 +32,22 @@ interface CreateReportFormProps<T> extends DataModuleFormProps<
   ReportFormValues
 > {
   templateDefinition: ReportTemplateDefinition<T>
+  onUpload: UploadFilesHandler
+  onDelete: DeleteFilesHandler
   onSubmit: CreateReportHandler
 }
 
 const CreateReportForm = <T,>({
   defaultValues,
   templateDefinition,
+  onUpload,
+  onDelete,
   ...props
 }: CreateReportFormProps<T>) => {
-  const fileAttachmentsForm = useReportFileAttachmentForm()
+  const fileAttachmentsForm = useReportFileAttachmentForm({
+    onUpload,
+    onDelete,
+  })
   const form = useReportForm({
     defaultValues: {
       title: '',

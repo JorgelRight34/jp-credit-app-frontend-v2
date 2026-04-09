@@ -32,7 +32,6 @@ export const profileFormSchema = z.object({
 
     dateOfBirth: z
         .union([z.string(), z.date()])
-        .optional()
         .refine(
             (val) => {
                 if (!val) return true;
@@ -68,12 +67,12 @@ export const profileFormSchema = z.object({
 
     landline: z
         .string()
-        .regex(/^\d{10}$/, "El teléfono fijo debe tener 10 dígitos")
+        .regex(/^\d{11}$/, "El teléfono fijo debe tener 11 dígitos")
         .optional(),
 
     phoneNumber: z
         .string()
-        .regex(/^\d{10}$/, "El número de celular debe tener 10 dígitos")
+        .regex(/^\d{11}$/, "El número de celular debe tener 11 dígitos")
         .optional(),
 });
 

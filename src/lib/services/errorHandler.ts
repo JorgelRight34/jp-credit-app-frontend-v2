@@ -3,7 +3,15 @@ import type { AxiosError } from "axios";
 
 const errorHandler = (error: AxiosError<{ message?: string }>) => {
   const errorMsg = error.response?.data.message || error.response?.data;
-  if (error.response?.status !== 404 && typeof errorMsg === "string" && errorMsg !== "") {
+
+
+  // Only throw on get requests
+  console.log(error.response?.status)
+  console.log(error.config?.method)
+  if (error.response?.status === 404 && error.config?.method?.toLowerCase() === "get")
+    throw error;
+
+  if (typeof errorMsg === "string" && errorMsg !== "") {
     toastService.error(errorMsg);
     return;
   }
@@ -24,12 +32,12 @@ const errorHandler = (error: AxiosError<{ message?: string }>) => {
           toastService.error("No tiene permisos para ver este contenido");
           throw error
         case 404:
+          toastService.error("No encontrado")
           throw error;
         default:
           toastService.error("Ha ocurrido un error.");
           throw error;
       }
-      break;
     default:
       toastService.error("Ha ocurrido un error.");
       break;

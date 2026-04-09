@@ -143,6 +143,26 @@ export const collateralsNavItem: NavItem = {
   route: '/collaterals',
   children: [
     {
+      ...reportRouteBase,
+      route: '/collaterals/reports',
+      children: [
+        {
+          ...allRouteBase,
+          route: '/collaterals/reports',
+        },
+        {
+          name: 'Generar',
+          icon: () => <PrintIcon />,
+          route: '/collaterals/reports/generate',
+        },
+        {
+          name: addRouteName,
+          icon: addRouteIcon,
+          route: '/collaterals/reports/create',
+        },
+      ],
+    },
+    {
       ...allRouteBase,
       route: '/collaterals',
     },

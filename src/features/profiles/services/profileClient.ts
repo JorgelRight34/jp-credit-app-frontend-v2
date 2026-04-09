@@ -2,7 +2,7 @@ import { withProjectIdParams } from "@/features/projects";
 import type { ProfileFormValues } from "../lib/schemas/profileFormSchema";
 import type { Profile } from "../models/profile";
 import type { ProfileQuery } from "../models/profileQuery";
-import { FileStorageService } from "@/lib/services";
+import { FileStorageApiService } from "@/lib/services";
 import api from "@/lib/services/api";
 import { ChangeHistory, ChangeLogQuery } from "@/features/audit";
 
@@ -33,11 +33,11 @@ export const updateProfile = async (id: Profile["id"], body: ProfileFormValues) 
 }
 
 export const uploadProfilePhoto = async (id: number, file: File) => {
-    return FileStorageService.upload([file], { profileId: id })
+    return FileStorageApiService.upload([file], `${baseUrl}/${id}/files`)
 }
 
-export const deleteProfilePhoto = async (id: number) => {
-    await FileStorageService.delete([id]);
+export const deleteProfilePhoto = async (id: number, publicId: string) => {
+    await FileStorageApiService.delete([publicId], `${baseUrl}/${id}/files`);
 }
 
 export const getProfile = async (id: number): Promise<Profile> => {

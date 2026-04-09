@@ -17,7 +17,7 @@ import { FileAttachmentsPanel } from '@/components/organisms/file-attachments-pa
 type CreateProfileFormProps = DataModuleFormProps<Profile, ProfileFormValues>
 
 const CreateProfileForm = (props: CreateProfileFormProps) => {
-  const fileAttachmentsForm = useProfileFileAttachmentsForm({})
+  const fileAttachmentsForm = useProfileFileAttachmentsForm()
   const form = useProfileForm({
     defaultValues: {
       firstName: '',
@@ -29,7 +29,6 @@ const CreateProfileForm = (props: CreateProfileFormProps) => {
       dni: '',
       address: '',
       landline: '',
-      officePhone: '',
       phoneNumber: '',
     },
     onSuccess: fileAttachmentsForm.submit,

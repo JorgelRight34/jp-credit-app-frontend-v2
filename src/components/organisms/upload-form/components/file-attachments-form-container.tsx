@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 import { FormLayout } from '../../form'
-import { UseDeferredFileAttachmentsFormReturn } from '../models/useDeferredFileAttachmentsFormReturn'
+import { UseDeferredFileAttachmentsFormReturn } from '../models/useDataFileAttachmentsForm'
 import { FileAttachmentsPanel } from '../../file-attachments-panel'
 import FileAttachmentsForm from './file-attachments-form'
 import { UseFileAttachmentsReturn } from '../hooks/useFileAttachments'
@@ -24,13 +24,14 @@ const FileAttachmentsFormContainer = <T,>({
 
   return (
     <FormLayout
-      onSubmit={form.handleSubmit}
+      onSubmit={async (e) => {
+        e.preventDefault()
+        await form.handleSubmit()
+        setIsDirty(false)
+      }}
       footer={
         <div className="flex items-center gap-3">
-          <SecondaryPillBtn
-            disabled={!isDirty}
-            onClick={() => form.handleReset()}
-          >
+          <SecondaryPillBtn disabled={!isDirty} onClick={form.handleReset}>
             <Icon icon={RestartAllIcon}>Resetear</Icon>
           </SecondaryPillBtn>
           <AccentPillBtn type="submit" disabled={!isDirty}>

@@ -4,7 +4,7 @@ import { useDataClient } from '@/hooks/useDataClient'
 import {
   buildReportQueryKey,
   buildReportQueryKeyByReportKey,
-  SavedReportGenerationForm,
+  SavedTransactionReportGenerationForm,
 } from '@/features/reports'
 import { Transaction } from '../models/transaction'
 import { Suspense } from 'react'
@@ -63,14 +63,7 @@ const GenerateTransactionReceiptPanelInner = ({
     },
   })
 
-  return (
-    <SavedReportGenerationForm
-      report={data}
-      initialValues={{ id }}
-      reset={false}
-      initializeAsDirty
-    />
-  )
+  return <SavedTransactionReportGenerationForm report={data} id={id} />
 }
 
 export default GenerateTransactionReceiptPanel

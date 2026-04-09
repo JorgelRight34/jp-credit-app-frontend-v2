@@ -6,3 +6,5 @@ export const collateralsPermissionProvider: PermissionsProvider = {
     cacheKey: [collateralsQueryKey],
     loader: () => getModulePermissions("collaterals/permissions")
 }
+
+export const collateralReportsPermissionProvider = collateralsPermissionProvider

@@ -1,4 +1,9 @@
-import { editTransactionReport, PropsWithReport } from '@/features/reports'
+import {
+  deleteCollateralReportFiles,
+  editTransactionReport,
+  PropsWithReport,
+  uploadCollateralReportFiles,
+} from '@/features/reports'
 import {
   transactionBreadcrumb,
   transactionPermissionProvider,
@@ -12,6 +17,8 @@ const EditTransactionReportPage = ({ report }: PropsWithReport) => (
     report={report}
     permissionProvider={transactionPermissionProvider}
     templateDefinition={transactionTemplateDefinition}
+    onUpload={uploadCollateralReportFiles}
+    onDelete={deleteCollateralReportFiles}
     onEdit={editTransactionReport}
   />
 )

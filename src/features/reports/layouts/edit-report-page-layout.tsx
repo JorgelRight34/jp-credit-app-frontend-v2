@@ -5,7 +5,11 @@ import {
 } from '@/components'
 import EditReportForm from '../components/edit-report-form'
 import { Report } from '../models/report'
-import { EditReportHandler } from '../models/handlers'
+import {
+  DeleteFilesHandler,
+  EditReportHandler,
+  UploadFilesHandler,
+} from '../models/handlers'
 import { ReportTemplateDefinition } from '../models/reportTemplateDefinition'
 import { reportsBreadcrumb } from './reports-page-layout'
 import { buildReportBreadcrumb } from './report-page-layout'
@@ -15,6 +19,8 @@ interface EditReportPageProps<T> {
   permissionProvider: PermissionsProvider
   breadcrumb: BreadcrumbSpec
   templateDefinition: ReportTemplateDefinition<T>
+  onUpload: UploadFilesHandler
+  onDelete: DeleteFilesHandler
   onEdit: EditReportHandler
 }
 
@@ -26,7 +32,7 @@ const EditReportPageLayout = <T,>({
 }: EditReportPageProps<T>) => (
   <EditFormPageLayout
     title={`Editar ${report.title}`}
-    breadcrumbs={[reportsBreadcrumb, breadcrumb, buildReportBreadcrumb(report)]}
+    breadcrumbs={[breadcrumb, reportsBreadcrumb, buildReportBreadcrumb(report)]}
     permissionProvider={permissionProvider}
   >
     <EditReportForm report={report} {...config} />

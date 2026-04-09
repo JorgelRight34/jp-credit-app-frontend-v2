@@ -1,17 +1,15 @@
 import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
-import type { Collateral } from '../models/collateral'
+import type { PropsWithCollateral } from '../models/collateral'
 import {
   EditFormPageLayout,
   buildPageLayoutConfirmationModalOption,
 } from '@/components'
 import EditCollateralForm from '../components/edit-collateral-form'
 import { deleteCollateral } from '../services/collateralClient'
-import {
-  buildCollateralBreadcrumb,
-  collateralsBreadcrumb,
-} from './collateral-page'
+import { buildCollateralBreadcrumb } from './collateral-page'
+import { collateralsBreadcrumb } from './collaterals-page'
 
-const EditCollateralPage = ({ collateral }: { collateral: Collateral }) => {
+const EditCollateralPage = ({ collateral }: PropsWithCollateral) => {
   return (
     <EditFormPageLayout
       title={collateral.title}

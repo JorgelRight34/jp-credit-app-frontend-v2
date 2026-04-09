@@ -10,10 +10,9 @@ export interface UseCollateralFormProps extends UseDataFormProps<Collateral, Col
     collateralId?: number;
 }
 
-export const useCollateralForm = ({ collateralId, initialValues, ...config }: UseCollateralFormProps) => {
+export const useCollateralForm = ({ collateralId, ...config }: UseCollateralFormProps) => {
     return useForm({
         schema: collateralFormSchema,
-        defaultValues: initialValues,
         onSubmit: createCollateral,
         onEdit: (body) => updateCollateral(collateralId!, body),
         toastMessage: () => "Guardado",

@@ -1,9 +1,10 @@
 import CollateralDataTable from '../components/collateral-datatable'
 import { collateralTypeMap } from '../models/collateralType'
-import type { BreadcrumbsByRoute } from '@/components'
+import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
 import {
   AllIcon,
   ApartmentIcon,
+  CollateralIcon,
   DirectionsCarIcon,
   GrassIcon,
   InventoryIcon,
@@ -14,7 +15,6 @@ import {
   TabsRouter,
   buildPageLayoutCreateOption,
 } from '@/components'
-import { collateralsBreadcrumb } from './collateral-page'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Todos', icon: AllIcon }],
@@ -23,6 +23,12 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Hipotecas', icon: ApartmentIcon }],
   [{ title: 'Agrícola', icon: GrassIcon }],
 ]
+
+export const collateralsBreadcrumb: BreadcrumbSpec = {
+  title: 'Garantías',
+  icon: CollateralIcon,
+  pathname: '/collaterals',
+}
 
 const CollateralsPage = () => {
   return (

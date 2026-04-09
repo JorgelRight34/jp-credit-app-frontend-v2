@@ -5,6 +5,7 @@ export const loanTemplateDefinition:
     ReportTemplateDefinition<LoanReportModel>
     = {
     title: "PRESTAMOS",
+    label: "Préstamo",
     definitions: [
         {
             name: "id",

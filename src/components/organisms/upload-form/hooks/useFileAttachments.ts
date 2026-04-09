@@ -1,17 +1,14 @@
-import { useMemo, useState } from "react";
+import { startTransition, useMemo } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type { FileModel } from "@/models/fileModel";
 
 export type FileUploads = {
   /** Files already stored in the backend */
   existing: Array<FileModel>;
-
   /** New files added in the UI (not persisted yet) */
   pending: Array<File>;
-
   /** Pending files removed before upload (undoable) */
   removedPending: Array<File>;
-
   /** Existing files marked for deletion */
   deletedExisting: Array<FileModel>;
 };
@@ -22,22 +19,7 @@ export interface UseFileAttachmentsProps {
   onChange: Dispatch<SetStateAction<FileUploads>>;
 }
 
-export interface UseFileAttachmentsReturn {
-  add: {
-    pendingFiles: Array<File>;
-    existingFiles: Array<FileModel>;
-    addFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  };
-  remove: {
-    removedPendingFiles: Array<File>;
-    deletedExistingFiles: Array<FileModel>;
-    removeFile: (index: number, key: keyof FileUploads) => void;
-    recoverFile: (index: number, key: keyof FileUploads) => void;
-  };
-  isDirty: boolean;
-  reachedLimit: boolean;
-  onChange: Dispatch<SetStateAction<FileUploads>>;
-}
+export type UseFileAttachmentsReturn = ReturnType<typeof useFileAttachments>;
 
 const deleteMap: Partial<Record<keyof FileUploads, keyof FileUploads>> = {
   existing: "deletedExisting",
@@ -46,15 +28,16 @@ const deleteMap: Partial<Record<keyof FileUploads, keyof FileUploads>> = {
 
 export const useFileAttachments = (
   { filesMaxLength = 10, value: fileUploads, onChange }: UseFileAttachmentsProps,
-): UseFileAttachmentsReturn => {
-  const [isDirty, setIsDirty] = useState(false);
-
+  onDirtyChange?: (dirty: boolean) => void
+) => {
   const reachedLimit = useMemo(
     () => fileUploads.pending.length + fileUploads.existing.length >= filesMaxLength,
     [fileUploads, filesMaxLength],
   );
 
-  const markDirty = () => setIsDirty(true);
+  const markDirty = () => startTransition(() => {
+    onDirtyChange?.(true);
+  });
 
   const addFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const pendingFile = event.target.files?.[0];
@@ -109,7 +92,6 @@ export const useFileAttachments = (
       removeFile,
       recoverFile,
     },
-    isDirty,
     reachedLimit,
     onChange,
   };
