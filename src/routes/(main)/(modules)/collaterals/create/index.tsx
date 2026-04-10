@@ -1,4 +1,4 @@
-import { CreateCollateralFormPage } from '@/features/collaterals'
+import { CreateCollateralPage } from '@/features/collaterals'
 import { createFileRoute } from '@tanstack/react-router'
 import {
   getModulePermissionsBeforeLoad,
@@ -15,5 +15,5 @@ export const Route = createFileRoute('/(main)/(modules)/collaterals/create/')({
 function RouteComponent() {
   const projectId = useSuspenseCurrentProjectId()
 
-  return <CreateCollateralFormPage projectId={projectId} />
+  return <CreateCollateralPage projectId={projectId} />
 }

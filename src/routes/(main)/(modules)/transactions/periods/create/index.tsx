@@ -1,10 +1,14 @@
-import { CreateClosedPeriodPage } from '@/features/transactions'
+import {
+  CreateClosedPeriodPage,
+  transactionPermissionProvider,
+} from '@/features/transactions'
 import { createCurrentAccountingPeriodQueryKey } from '@/features/transactions/lib/query-keys'
 import { getCurrentAccountingPeriod } from '@/features/transactions/services/transactionClient'
 import { useSuspenseData } from '@/hooks/useData'
 import { buildPageTitle } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
+import { requireModulePermissionToDelete } from '../../../route'
 
 const getCurrentAccountingPeriodFn = createIsomorphicFn()
   .server(() => getCurrentAccountingPeriod())
@@ -14,6 +18,7 @@ export const Route = createFileRoute(
   '/(main)/(modules)/transactions/periods/create/',
 )({
   head: () => ({ meta: [{ title: buildPageTitle('Cerrar periodo') }] }),
+  beforeLoad: requireModulePermissionToDelete(transactionPermissionProvider),
   component: RouteComponent,
 })
 

@@ -11,10 +11,10 @@ import LoanPurposeDataTable from '../components/loan-purpose-datatable'
 export const loanPurposeBreadcrumb: BreadcrumbSpec = {
   icon: () => <FlagIcon />,
   title: 'Destinos',
-  pathname: '/loans/purpouses',
+  pathname: '/loans/purposes',
 }
 
-const LoanPurpousesPage = () => {
+const LoanPurposesPage = () => {
   return (
     <PageLayout
       title="Destinos"
@@ -31,4 +31,4 @@ const LoanPurpousesPage = () => {
   )
 }
 
-export default LoanPurpousesPage
+export default LoanPurposesPage

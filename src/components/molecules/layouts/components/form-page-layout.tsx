@@ -2,21 +2,19 @@ import type { BreadcrumbSpec } from '../../breadcrumb'
 import type { PageLayoutProps } from './page-layout'
 import type { CacheKey } from '@/models'
 import {
+  ClosedProcessPanel,
   ConfirmationModalProps,
-  ProtectedComponent,
-  type PermissionsProvider,
 } from '@/components/organisms'
 import PageLayout from './page-layout'
 import { AddIcon, EditIcon } from '@/components/atoms'
 import PageLayoutBreadcrumb from './page-layout-breadcrumb'
-import Unauthorized from '../../pages/unathorized'
+import PagePanel from './page-panel'
 
 export type FormPageLayoutProps = React.PropsWithChildren &
-  PageLayoutProps &
+  Omit<PageLayoutProps, 'breadcrumb'> &
   Partial<ConfirmationModalProps> & {
     cacheKey?: CacheKey
     deleteConfirmationMessage?: string
-    permissionProvider: PermissionsProvider
     breadcrumbs: Array<BreadcrumbSpec>
   }
 
@@ -34,7 +32,6 @@ export const createBreadcrumb: BreadcrumbSpec = {
 }
 
 export const CreateFormPageLayout = ({
-  permissionProvider,
   title,
   breadcrumbs,
   children,
@@ -49,19 +46,12 @@ export const CreateFormPageLayout = ({
       }
       options={[]}
     >
-      <ProtectedComponent
-        provider={permissionProvider}
-        isAuthorizedFn={(p) => p.canCreate}
-        fallback={Unauthorized}
-      >
-        {children}
-      </ProtectedComponent>
+      {children}
     </PageLayout>
   )
 }
 
 export const EditFormPageLayout = ({
-  permissionProvider,
   title,
   breadcrumbs,
   cacheKey,
@@ -80,13 +70,21 @@ export const EditFormPageLayout = ({
         />
       }
     >
-      <ProtectedComponent
-        provider={permissionProvider}
-        isAuthorizedFn={(p) => p.canEdit}
-        fallback={Unauthorized}
-      >
-        {children}
-      </ProtectedComponent>
+      {children}
     </PageLayout>
   )
 }
+
+export const DeleteFormPageLayout = ({
+  title,
+  disabled,
+  breadcrumbs,
+  children,
+}: FormPageLayoutProps & { disabled?: boolean }) => (
+  <PageLayout
+    title={title}
+    breadcrumb={<PageLayoutBreadcrumb breadcrumbs={breadcrumbs} />}
+  >
+    <PagePanel>{disabled ? <ClosedProcessPanel /> : children}</PagePanel>
+  </PageLayout>
+)

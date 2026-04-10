@@ -1,5 +1,5 @@
 export { default as CollateralsPage } from "./pages/collaterals-page"
-export { default as CreateCollateralFormPage } from './pages/create-collateral-form-page'
+export { default as CreateCollateralPage } from './pages/create-collateral-page'
 export { default as EditCollateralPage } from './pages/edit-collateral-page'
 export { default as CollateralPage } from './pages/collateral-page'
 export { default as CollateralSettingsPage } from './pages/collateral-settings-page'
@@ -13,3 +13,4 @@ export { default as CollateralDataTable } from './components/collateral-datatabl
 export { default as CollateralChangeHistoryPage } from './pages/collateral-change-history-page'
 export * from './pages/collaterals-page'
 export * from './lib/config/permissionsProvider'
+export { default as DeleteCollateralPage } from './pages/delete-collateral-page'

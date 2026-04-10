@@ -335,7 +335,7 @@ export const loansNavItem: NavItem = {
     {
       name: 'Destinos',
       icon: () => <FlagIcon />,
-      route: '/loans/purpouses',
+      route: '/loans/purposes',
     },
     {
       name: addRouteName,
@@ -345,7 +345,7 @@ export const loansNavItem: NavItem = {
     {
       name: 'Añadir destino',
       icon: addRouteIcon,
-      route: '/loans/purpouses/create',
+      route: '/loans/purposes/create',
     },
   ],
 }

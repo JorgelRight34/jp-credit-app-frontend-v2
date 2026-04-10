@@ -1,6 +1,6 @@
 import { CreateTransactionReportPage } from '@/features/reports'
 import { createFileRoute } from '@tanstack/react-router'
-import { getModulePermissionsBeforeLoad } from '../../../route'
+import { requireModulePermissionToCreate } from '../../../route'
 import { transactionReportPermissionProvider } from '@/features/transactions'
 import { buildPageTitle } from '@/lib/utils'
 
@@ -10,7 +10,7 @@ export const Route = createFileRoute(
   head: () => ({
     meta: [{ title: buildPageTitle('Crear reporte para transacciones') }],
   }),
-  beforeLoad: getModulePermissionsBeforeLoad(
+  beforeLoad: requireModulePermissionToCreate(
     transactionReportPermissionProvider,
   ),
   component: RouteComponent,

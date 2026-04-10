@@ -1,6 +1,6 @@
 import { buildLinkDataCell, BuildSearchInputDataTableConfigHandler, buildSingleSelectCell, DataTableConfig } from "@/components";
 import { LoanPurpose } from "../../models/loanPurpose";
-import { getLoanPurpouses } from "../../services/loanClient";
+import { getLoanPurposes } from "../../services/loanClient";
 
 export const loanPurposeDataTableConfig: DataTableConfig<LoanPurpose> = {
     columns: [
@@ -8,12 +8,12 @@ export const loanPurposeDataTableConfig: DataTableConfig<LoanPurpose> = {
         { accessorKey: "name", header: "DESTINO", enableSorting: true },
         {
             header: "OPCIONES", cell: ({ row }) => buildLinkDataCell("Editar", {
-                to: "/loans/purpouses/$id/edit",
+                to: "/loans/purposes/$id/edit",
                 params: { id: row.original.id.toString() }
             })
         }
     ],
-    loader: getLoanPurpouses
+    loader: getLoanPurposes
 }
 
 export const buildLoanPurposeSearchInputDataTableConfig: BuildSearchInputDataTableConfigHandler<LoanPurpose> = (setValue) => ({
@@ -22,5 +22,5 @@ export const buildLoanPurposeSearchInputDataTableConfig: BuildSearchInputDataTab
         { accessorKey: "name", header: "DESTINO", enableSorting: true },
         { id: "select", header: "OPCIONES", cell: ({ row }) => buildSingleSelectCell(() => setValue(row.original)) }
     ],
-    loader: getLoanPurpouses
+    loader: getLoanPurposes
 })

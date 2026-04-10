@@ -10,6 +10,7 @@ export { default as CreateClosedPeriodPage } from './pages/create-closed-period-
 export { default as TransactionDataTable } from './components/transaction-datatable'
 export { default as CreateTransactionReceiptTemplatePage } from './pages/create-transaction-receipt-template-page'
 export { default as TransactionSearchInput } from './components/transaction-search-input'
+export { default as DeleteTransactionPage } from './pages/delete-transaction-page'
 export * from './lib/utils'
 export * from './services/transactionClient'
 export * from './lib/config/permission-provider'

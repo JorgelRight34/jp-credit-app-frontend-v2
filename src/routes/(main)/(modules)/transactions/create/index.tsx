@@ -8,7 +8,7 @@ import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getProjectFn } from '../../projects/settings'
 import {
-  getModulePermissionsBeforeLoad,
+  requireModulePermissionToCreate,
   useSuspenseCurrentProjectId,
 } from '../../route'
 import { buildPageTitle } from '@/lib/utils'
@@ -24,7 +24,7 @@ type SearchParams = z.infer<typeof searchSchema>
 export const Route = createFileRoute('/(main)/(modules)/transactions/create/')({
   head: () => ({ meta: [{ title: buildPageTitle('Crear transacción') }] }),
   component: RouteComponent,
-  beforeLoad: getModulePermissionsBeforeLoad(transactionPermissionProvider),
+  beforeLoad: requireModulePermissionToCreate(transactionPermissionProvider),
   validateSearch: (search) => search as SearchParams,
 })
 

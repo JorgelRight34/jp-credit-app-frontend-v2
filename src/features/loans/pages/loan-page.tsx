@@ -14,7 +14,7 @@ import {
   TabsList,
   TabPanel,
 } from '@/components'
-import { Loan } from '../models/loan'
+import { Loan, PropsWithLoan } from '../models/loan'
 import LoanOverview from '../components/loan-overview'
 import LoanAmortizationPreview from '../components/loan-amortization-preview'
 import { collateralDataTableConfig } from '@/features/collaterals'
@@ -41,7 +41,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Garantías', icon: CollateralIcon }],
 ]
 
-const LoanPage = ({ loan }: { loan: Loan }) => {
+const LoanPage = ({ loan }: PropsWithLoan) => {
   return (
     <PageRouterLayout
       title={buildLoanLabel(loan)}

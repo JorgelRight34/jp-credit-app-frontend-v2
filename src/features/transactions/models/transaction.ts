@@ -22,3 +22,5 @@ export interface Transaction {
     isClosed: boolean;
     client: ProfileSummary;
 }
+
+export type PropsWithTransaction<T = object> = { transaction: Transaction } & T;

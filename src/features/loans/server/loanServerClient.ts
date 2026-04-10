@@ -7,5 +7,5 @@ export const getLoanFromServer = async (id: Loan["id"]): Promise<Loan> => {
 }
 
 export const getLoanPurposeFromServer = async (id: LoanPurpose["id"]): Promise<LoanPurpose> => {
-    return await serverClient.get("loans/purpouses" + id)
+    return await serverClient.get("loans/purposes" + id)
 }

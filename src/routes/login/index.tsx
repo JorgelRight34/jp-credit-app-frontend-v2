@@ -24,8 +24,6 @@ export const Route = createFileRoute('/login/')({
             maxAge: 604800,
           })
 
-          console.log('lets go!!!!')
-
           return Response.json(response)
         })
       },

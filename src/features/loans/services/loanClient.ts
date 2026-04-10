@@ -55,23 +55,23 @@ export const exportLoans: ExportHandler<LoanQuery> = async (options, params) => 
     return data;
 }
 
-export const getLoanPurpouses = async (params: LoanPurposeQuery): Promise<PagedResponse<LoanPurpose>> => {
-    const { data } = await api.get(`${baseUrl}/purpouses`, { params })
+export const getLoanPurposes = async (params: LoanPurposeQuery): Promise<PagedResponse<LoanPurpose>> => {
+    const { data } = await api.get(`${baseUrl}/purposes`, { params })
     return data;
 }
 
 export const getLoanPurpose = async (id: LoanPurpose["id"]): Promise<LoanPurpose> => {
-    const { data } = await api.get(`${baseUrl}/purpouses/${id}`)
+    const { data } = await api.get(`${baseUrl}/purposes/${id}`)
     return data;
 }
 
 export const createLoanPurpose = async (body: LoanPurposeFormValues): Promise<LoanPurpose> => {
-    const { data } = await api.post(`${baseUrl}/purpouses`, body);
+    const { data } = await api.post(`${baseUrl}/purposes`, body);
     return data;
 }
 
 export const editLoanPurpose = async (id: LoanPurpose["id"], body: LoanPurposeFormValues) => {
-    await api.put(`${baseUrl}/purpouses/${id}`, body);
+    await api.put(`${baseUrl}/purposes/${id}`, body);
 }
 
 export const editLoan = async (id: Loan["id"], body: LoanEditFormValues) => {

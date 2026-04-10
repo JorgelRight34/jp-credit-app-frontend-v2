@@ -1,6 +1,5 @@
 import {
   settingsBreadcrumb,
-  buildPageLayoutConfirmationModalOption,
   ProtectedComponent,
   PageRouterLayout,
   BreadcrumbsByRoute,
@@ -9,11 +8,11 @@ import {
   Tab,
   TabsList,
   TabPanel,
+  buildPageLayoutDeleteOption,
 } from '@/components'
-import { Loan } from '../models/loan'
+import { PropsWithLoan } from '../models/loan'
 import { loanPermissionProvider } from '../lib/config/permission-provider'
 import LoanStatusForm from '../components/loan-status-form'
-import { deleteLoan } from '../services/loanClient'
 import { buildLoanLabel } from '../lib/utils'
 import { loanModuleBreadcrumb } from './loans-page'
 import { buildLoanBreadcrumb } from './loan-page'
@@ -24,22 +23,17 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [settingsBreadcrumb],
 ]
 
-const LoanSettingsPage = ({ loan }: { loan: Loan }) => {
+const LoanSettingsPage = ({ loan }: PropsWithLoan) => {
   return (
     <PageRouterLayout
       title={`${buildLoanLabel(loan)} / Ajustes`}
       options={[
-        buildPageLayoutConfirmationModalOption(
-          {
-            disabled: !!loan.lastTransactionDate,
-            tooltip: 'Un préstamo con transacciones no puede ser borrado.',
-          },
-          {
-            header: 'Borrar préstamo',
-            confirmationMessage: 'Deseo borrar este préstamo',
-            onConfirm: () => deleteLoan(loan.id),
-          },
-        ),
+        buildPageLayoutDeleteOption({
+          disabled: !!loan.lastTransactionDate,
+          tooltip: 'Un préstamo con transacciones no puede ser borrado.',
+          to: '/loans/$id/delete',
+          params: { id: loan.id.toString() },
+        }),
       ]}
       routerConfig={{
         baseBreadcrumbs: [loanModuleBreadcrumb, buildLoanBreadcrumb(loan)],

@@ -1,6 +1,6 @@
 import { CreateFormPageLayout, PagePanel } from '@/components'
 import LoanPurposeForm from '../components/loan-purpose-form'
-import { loanPurposeBreadcrumb } from './loan-purpouses-page'
+import { loanPurposeBreadcrumb } from './loan-purposes-page'
 import { loanModuleBreadcrumb } from './loans-page'
 import { loanPermissionProvider } from '../lib/config/permission-provider'
 

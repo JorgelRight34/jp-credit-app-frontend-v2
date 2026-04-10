@@ -10,7 +10,7 @@ export const getLoanPurposeFn = createIsomorphicFn()
   .client((id) => getLoanPurpose(id))
 
 export const Route = createFileRoute(
-  '/(main)/(modules)/loans/purpouses/$id/edit/',
+  '/(main)/(modules)/loans/purposes/$id/edit/',
 )({
   component: RouteComponent,
 })

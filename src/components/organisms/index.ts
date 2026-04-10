@@ -45,3 +45,5 @@ export * from "./table"
 export * from "./editor"
 
 export * from "./file-attachments-panel"
+
+export * from './confirmation'

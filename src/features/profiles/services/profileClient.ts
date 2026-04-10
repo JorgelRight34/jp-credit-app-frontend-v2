@@ -40,6 +40,10 @@ export const deleteProfilePhoto = async (id: number, publicId: string) => {
     await FileStorageApiService.delete([publicId], `${baseUrl}/${id}/files`);
 }
 
+export const deleteProfile = async (id: number) => {
+    await api.delete(`${baseUrl}/${id}`);
+}
+
 export const getProfile = async (id: number): Promise<Profile> => {
     const { data } = await api.get(`${baseUrl}/${id}`);
     return data;
