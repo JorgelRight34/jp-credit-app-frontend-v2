@@ -11,17 +11,15 @@ export const getTransactionFn = createIsomorphicFn()
   .client((id) => getTransaction(id))
 
 export const Route = createFileRoute('/(main)/(modules)/transactions/$id/')({
-  loader: async ({ context, params: { id } }) => {
-    const transaction = await context.dataClient.ensureQueryData({
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
       queryKey: createTransactionQueryKey(+id),
       queryFn: () => getTransactionFn(id),
-    })
-    return transaction
-  },
+    }),
   head: ({ loaderData }) => ({
     meta: [
       {
-        title: buildPageTitle(`Eliminar ${buildTransactionLabel(loaderData!)}`),
+        title: buildPageTitle(buildTransactionLabel(loaderData!)),
       },
     ],
   }),

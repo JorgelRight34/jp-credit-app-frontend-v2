@@ -1,9 +1,15 @@
 import { CreateFormPageLayout, ReceiptLongIcon } from '@/components'
-import { transactionPermissionProvider } from '../lib/config/permission-provider'
-import { CreateReportForm } from '@/features/reports'
-import { transactionReceiptReportKeyParts } from '../lib/constants'
-import { TransactionType } from '../models/transactionType'
-import { transactionBreadcrumb } from './transactions-page'
+import {
+  CreateReportForm,
+  createTransactionReport,
+  uploadTransactionReportFiles,
+} from '@/features/reports'
+import {
+  transactionBreadcrumb,
+  transactionReceiptReportKeyParts,
+  TransactionType,
+} from '@/features/transactions'
+import { transactionTemplateDefinition } from '../../lib/templates/transaction-template-definition'
 
 const CreateTransactionReceiptTemplatePage = ({
   type,
@@ -17,14 +23,15 @@ const CreateTransactionReceiptTemplatePage = ({
         transactionBreadcrumb,
         { icon: ReceiptLongIcon, title: 'Plantilla de recibo' },
       ]}
-      permissionProvider={transactionPermissionProvider}
     >
       <CreateReportForm
-        reportKey="Transaction"
         defaultValues={{
           subkey: transactionReceiptReportKeyParts.buildSubkey(type),
           description: 'Recibo',
         }}
+        templateDefinition={transactionTemplateDefinition}
+        onUpload={uploadTransactionReportFiles}
+        onSubmit={createTransactionReport}
       />
     </CreateFormPageLayout>
   )

@@ -5,3 +5,4 @@ export * from "./models/project"
 export { default as ProjectUserTransferList } from './components/project-user-transfer-list'
 export * from './hooks/useProjectUserForm'
 export * from './lib/projectApiUtils'
+export * from './lib/config/permissionProvider'

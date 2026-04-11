@@ -1,22 +1,26 @@
 import { buildProfileKey } from '@/features/profiles/lib/query-keys'
-import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getProfileFn } from '..'
-import { getModulePermissionsBeforeLoad } from '../../../route'
+import { requireModulePermissionToDelete } from '../../../route'
 import { profilesPermissionProvider } from '@/features/profiles/lib/config/permissionProvider'
 import { DeleteProfilePage } from '@/features/profiles'
+import { buildDeletePageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/profiles/$id/delete/')({
-  beforeLoad: getModulePermissionsBeforeLoad(profilesPermissionProvider),
+  beforeLoad: requireModulePermissionToDelete(profilesPermissionProvider),
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildProfileKey(+id),
+      queryFn: () => getProfileFn(id),
+    }),
+  head: ({ loaderData }) => ({
+    meta: [{ title: buildDeletePageTitle(loaderData!.firstName) }],
+  }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: profile } = useSuspenseData({
-    key: buildProfileKey(id),
-    loader: () => getProfileFn(+id),
-  })
+  const profile = Route.useLoaderData()
 
   return <DeleteProfilePage profile={profile} />
 }

@@ -4,23 +4,23 @@ import { CollateralPage } from '@/features/collaterals'
 import { buildCollateralQueryKey } from '@/features/collaterals/lib/query-keys'
 import { getCollateralFromServer } from '@/features/collaterals/server/collateralClient'
 import { getCollateral } from '@/features/collaterals/services/collateralClient'
-import { useSuspenseData } from '@/hooks/useData'
 
 export const getCollateralFn = createIsomorphicFn()
-  .server((id: number) => getCollateralFromServer(id))
-  .client((id: number) => getCollateral(id))
+  .server((id) => getCollateralFromServer(id))
+  .client((id) => getCollateral(id))
 
 export const Route = createFileRoute('/(main)/(modules)/collaterals/$id/')({
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildCollateralQueryKey(+id),
+      queryFn: () => getCollateralFn(id),
+    }),
   head: ({ params }) => ({ meta: [{ title: `Garantía ${params.id}` }] }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: collateral } = useSuspenseData({
-    key: buildCollateralQueryKey(+id),
-    loader: () => getCollateralFn(+id),
-  })
+  const collateral = Route.useLoaderData()
 
   return <CollateralPage collateral={collateral} />
 }

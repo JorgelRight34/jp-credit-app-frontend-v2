@@ -1,9 +1,9 @@
 import { CreateProjectFormPage } from '@/features/projects'
-import { buildPageTitle } from '@/lib/utils'
+import { buildCreatePageTitle } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/(main)/(modules)/projects/create/')({
-  head: () => ({ meta: [{ title: buildPageTitle('Crear proyecto') }] }),
+  head: () => ({ meta: [{ title: buildCreatePageTitle('Proyecto') }] }),
   component: RouteComponent,
 })
 

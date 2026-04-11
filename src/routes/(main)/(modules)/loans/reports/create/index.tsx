@@ -1,6 +1,6 @@
-import { buildPageTitle } from '@/lib/utils'
+import { buildCreatePageTitle } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
-import { getModulePermissionsBeforeLoad } from '../../../route'
+import { requireModulePermissionToCreate } from '../../../route'
 import { loanReportPermissionProvider } from '@/features/loans'
 import { CreateLoanReportPage } from '@/features/reports'
 
@@ -8,10 +8,14 @@ export const Route = createFileRoute('/(main)/(modules)/loans/reports/create/')(
   {
     head: () => ({
       meta: [
-        { title: buildPageTitle('Crear plantilla de reporte para préstamo') },
+        {
+          title: buildCreatePageTitle(
+            'Crear plantilla de reporte para préstamo',
+          ),
+        },
       ],
     }),
-    beforeLoad: getModulePermissionsBeforeLoad(loanReportPermissionProvider),
+    beforeLoad: requireModulePermissionToCreate(loanReportPermissionProvider),
     component: RouteComponent,
   },
 )

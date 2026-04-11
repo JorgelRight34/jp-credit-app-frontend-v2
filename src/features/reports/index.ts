@@ -27,3 +27,5 @@ export { default as CollateralReportsPage } from './pages/collaterals/collateral
 export { default as CreateCollateralReportPage } from './pages/collaterals/create-collateral-report-page'
 export { default as EditCollateralReportPage } from './pages/collaterals/edit-collateral-report-page'
 export { default as GenerateCollateralReportPage } from './pages/collaterals/generate-collateral-report-page'
+export { default as CreateTransactionReceiptTemplatePage } from './pages/transactions/create-transaction-receipt-template-page'
+export * from './lib/utils'

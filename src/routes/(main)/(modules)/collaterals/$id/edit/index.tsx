@@ -1,24 +1,28 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { getCollateralFn } from '..'
 import { buildCollateralQueryKey } from '@/features/collaterals/lib/query-keys'
-import { useSuspenseData } from '@/hooks/useData'
 import { EditCollateralPage } from '@/features/collaterals'
 import { collateralsPermissionProvider } from '@/features/collaterals/lib/config/permissionsProvider'
-import { getModulePermissionsBeforeLoad } from '@/routes/(main)/(modules)/route'
+import { requireModulePermissionToEdit } from '@/routes/(main)/(modules)/route'
+import { buildEditPageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/collaterals/$id/edit/')(
   {
-    beforeLoad: getModulePermissionsBeforeLoad(collateralsPermissionProvider),
+    beforeLoad: requireModulePermissionToEdit(collateralsPermissionProvider),
+    loader: async ({ context, params: { id } }) =>
+      await context.dataClient.ensureQueryData({
+        queryKey: buildCollateralQueryKey(+id),
+        queryFn: () => getCollateralFn(id),
+      }),
+    head: ({ loaderData }) => ({
+      meta: [{ title: buildEditPageTitle(loaderData!.title, 'Garantía') }],
+    }),
     component: RouteComponent,
   },
 )
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: collateral } = useSuspenseData({
-    key: buildCollateralQueryKey(+id),
-    loader: () => getCollateralFn(+id),
-  })
+  const collateral = Route.useLoaderData()
 
   return <EditCollateralPage collateral={collateral} />
 }

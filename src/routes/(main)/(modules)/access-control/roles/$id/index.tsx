@@ -3,24 +3,27 @@ import { createIsomorphicFn } from '@tanstack/react-start'
 import { RolePage, buildRoleQueryKey } from '@/features/auth'
 import { getRoleFromServer } from '@/features/auth/server/authServerService'
 import { getRole } from '@/features/auth/services/authService'
-import { useSuspenseData } from '@/hooks/useData'
 
 export const getRoleFn = createIsomorphicFn()
-  .server((id: number) => getRoleFromServer(id))
-  .client((id: number) => getRole(id))
+  .server((id) => getRoleFromServer(id))
+  .client((id) => getRole(id))
 
 export const Route = createFileRoute(
   '/(main)/(modules)/access-control/roles/$id/',
 )({
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildRoleQueryKey(id),
+      queryFn: () => getRoleFn(id),
+    }),
+  head: ({ loaderData }) => ({
+    meta: [{ title: loaderData?.name }],
+  }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: role } = useSuspenseData({
-    key: buildRoleQueryKey(id),
-    loader: () => getRoleFn(+id),
-  })
+  const role = Route.useLoaderData()
 
   return (
     <RolePage

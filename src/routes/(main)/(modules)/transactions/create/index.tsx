@@ -1,4 +1,3 @@
-import { z } from 'zod'
 import { createProjectQueryKey } from '@/features/projects/lib/query-keys'
 import {
   CreateTransactionPage,
@@ -11,21 +10,14 @@ import {
   requireModulePermissionToCreate,
   useSuspenseCurrentProjectId,
 } from '../../route'
-import { buildPageTitle } from '@/lib/utils'
-
-const searchSchema = z.object({
-  tab: z.number().optional(),
-  loanId: z.coerce.number().int().positive().optional(),
-  amount: z.coerce.number().positive().optional(),
-})
-
-type SearchParams = z.infer<typeof searchSchema>
+import { buildCreatePageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/transactions/create/')({
-  head: () => ({ meta: [{ title: buildPageTitle('Crear transacción') }] }),
+  head: () => ({ meta: [{ title: buildCreatePageTitle('Transacción') }] }),
   component: RouteComponent,
   beforeLoad: requireModulePermissionToCreate(transactionPermissionProvider),
-  validateSearch: (search) => search as SearchParams,
+  validateSearch: (search) =>
+    search as { tab?: number; loanId?: number; amount?: number },
 })
 
 function RouteComponent() {

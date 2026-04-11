@@ -1,14 +1,16 @@
 import { CreateAdjustmentNotePage } from '@/features/adjustment-notes'
 import { createFileRoute } from '@tanstack/react-router'
-import { getModulePermissionsBeforeLoad } from '../../route'
+import { requireModulePermissionToCreate } from '../../route'
 import { adjustmentNotesPermissionProvider } from '@/features/adjustment-notes/lib/config/permission-provider'
-import { buildPageTitle } from '@/lib/utils'
+import { buildCreatePageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/adjustment-notes/create/',
 )({
-  head: () => ({ meta: [{ title: buildPageTitle('Crear nota') }] }),
-  beforeLoad: getModulePermissionsBeforeLoad(adjustmentNotesPermissionProvider),
+  head: () => ({ meta: [{ title: buildCreatePageTitle('Nota') }] }),
+  beforeLoad: requireModulePermissionToCreate(
+    adjustmentNotesPermissionProvider,
+  ),
   component: RouteComponent,
 })
 

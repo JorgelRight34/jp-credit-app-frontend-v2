@@ -1,20 +1,19 @@
-import { CreateLoanPage } from '@/features/loans'
+import { CreateLoanPage, loanPermissionProvider } from '@/features/loans'
 import { createProjectQueryKey } from '@/features/projects/lib/query-keys'
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getProjectFn } from '../../projects/settings'
 import {
-  getModulePermissionsBeforeLoad,
+  requireModulePermissionToCreate,
   useSuspenseCurrentProjectId,
 } from '../../route'
-import { loanPermissionProvider } from '@/features/loans/lib/config/permission-provider'
-import { buildPageTitle } from '@/lib/utils'
+import { buildCreatePageTitle, buildPageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/loans/create/')({
   head: () => ({
-    meta: [{ title: buildPageTitle('Crear reporte para préstamos') }],
+    meta: [{ title: buildCreatePageTitle('Préstamo') }],
   }),
-  beforeLoad: getModulePermissionsBeforeLoad(loanPermissionProvider),
+  beforeLoad: requireModulePermissionToCreate(loanPermissionProvider),
   component: RouteComponent,
 })
 

@@ -1,8 +1,10 @@
+import { CreateTransactionReceiptTemplatePage } from '@/features/reports'
 import {
-  CreateTransactionReceiptTemplatePage,
+  transactionReportPermissionProvider,
   TransactionType,
 } from '@/features/transactions'
 import { buildPageTitle } from '@/lib/utils'
+import { requireModulePermissionToCreate } from '@/routes/(main)/(modules)/route'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute(
@@ -11,6 +13,9 @@ export const Route = createFileRoute(
   head: () => ({
     meta: [{ title: buildPageTitle('Crear plantilla comprobante') }],
   }),
+  beforeLoad: requireModulePermissionToCreate(
+    transactionReportPermissionProvider,
+  ),
   component: RouteComponent,
   validateSearch: (search: Record<string, unknown>) => ({
     type: search.type as TransactionType | undefined,

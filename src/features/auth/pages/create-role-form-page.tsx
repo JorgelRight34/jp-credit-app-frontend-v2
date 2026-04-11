@@ -1,5 +1,4 @@
 import RoleForm from '../components/create-role-form'
-import { rolesPermissionProvider } from '../lib/config/permissionProvider'
 import {
   CreateFormPageLayout,
   Tab,
@@ -14,7 +13,6 @@ const CreateRoleFormPage = () => {
   return (
     <CreateFormPageLayout
       title="Crear grupo"
-      permissionProvider={rolesPermissionProvider}
       breadcrumbs={[accessControlBreadcrumb, rolesModuleBreadcrumb]}
     >
       <Tabs defaultActiveIndex={0}>

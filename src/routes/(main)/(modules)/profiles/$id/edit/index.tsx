@@ -1,22 +1,28 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { getProfileFn } from '..'
 import { buildProfileKey } from '@/features/profiles/lib/query-keys'
-import { useSuspenseData } from '@/hooks/useData'
-import { EditProfilePage } from '@/features/profiles'
-import { getModulePermissionsBeforeLoad } from '../../../route'
-import { profilesPermissionProvider } from '@/features/profiles/lib/config/permissionProvider'
+import {
+  EditProfilePage,
+  profilesPermissionProvider,
+} from '@/features/profiles'
+import { requireModulePermissionToEdit } from '../../../route'
+import { buildEditPageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/profiles/$id/edit/')({
-  beforeLoad: getModulePermissionsBeforeLoad(profilesPermissionProvider),
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildProfileKey(+id),
+      queryFn: () => getProfileFn(id),
+    }),
+  head: ({ loaderData }) => ({
+    meta: [{ title: buildEditPageTitle(loaderData!.firstName, 'Pérfil') }],
+  }),
+  beforeLoad: requireModulePermissionToEdit(profilesPermissionProvider),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: profile } = useSuspenseData({
-    key: buildProfileKey(id),
-    loader: () => getProfileFn(+id),
-  })
+  const profile = Route.useLoaderData()
 
   return <EditProfilePage profile={profile} />
 }

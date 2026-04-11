@@ -1,24 +1,30 @@
-import { LoanSettingsPage } from '@/features/loans'
+import { buildLoanLabel, LoanSettingsPage } from '@/features/loans'
 import { buildLoanQueryKey } from '@/features/loans/lib/query-keys'
-import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getLoanFn } from '..'
-import { getModulePermissionsBeforeLoad } from '@/routes/(main)/(modules)/route'
+import { requireModulePermissionToEdit } from '@/routes/(main)/(modules)/route'
 import { loanPermissionProvider } from '@/features/loans/lib/config/permission-provider'
+import { buildPageSettingsTitle } from '@/lib/utils'
 
-export const Route = createFileRoute(
-  '/(main)/(modules)/loans/$id/settings/',
-)({
-  beforeLoad: getModulePermissionsBeforeLoad(loanPermissionProvider),
+export const Route = createFileRoute('/(main)/(modules)/loans/$id/settings/')({
+  beforeLoad: requireModulePermissionToEdit(loanPermissionProvider),
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildLoanQueryKey(+id),
+      queryFn: () => getLoanFn(id),
+    }),
+  head: ({ loaderData }) => ({
+    meta: [
+      {
+        title: buildPageSettingsTitle(buildLoanLabel(loaderData!), 'Préstamo'),
+      },
+    ],
+  }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: loan } = useSuspenseData({
-    key: buildLoanQueryKey(+id),
-    loader: () => getLoanFn(id),
-  })
+  const loan = Route.useLoaderData()
 
   return <LoanSettingsPage loan={loan} />
 }

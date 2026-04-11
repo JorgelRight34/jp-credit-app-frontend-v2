@@ -1,4 +1,3 @@
-import { profilesPermissionProvider } from '../lib/config/permissionProvider'
 import type { PropsWithProfile } from '../models/profile'
 import { buildPageLayoutDeleteOption, EditFormPageLayout } from '@/components'
 import { getFullName } from '@/lib/utils'
@@ -10,7 +9,6 @@ const EditProfilePage = ({ profile }: PropsWithProfile) => (
   <EditFormPageLayout
     title={getFullName(profile)}
     breadcrumbs={[profilesBreadcrumb, buildProfileBreadcrumb(profile)]}
-    permissionProvider={profilesPermissionProvider}
     options={[
       buildPageLayoutDeleteOption({
         disabled: profile.hasLoans,

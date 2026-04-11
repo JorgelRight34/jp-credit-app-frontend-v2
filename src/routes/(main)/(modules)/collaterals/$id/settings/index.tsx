@@ -1,21 +1,25 @@
 import { CollateralSettingsPage } from '@/features/collaterals'
 import { buildCollateralQueryKey } from '@/features/collaterals/lib/query-keys'
-import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getCollateralFn } from '..'
+import { buildPageSettingsTitle } from '@/lib/utils'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/collaterals/$id/settings/',
 )({
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildCollateralQueryKey(+id),
+      queryFn: () => getCollateralFn(id),
+    }),
+  head: ({ loaderData }) => ({
+    meta: [{ title: buildPageSettingsTitle(loaderData!.title, 'Garantía') }],
+  }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: collateral } = useSuspenseData({
-    key: buildCollateralQueryKey(+id),
-    loader: () => getCollateralFn(+id),
-  })
+  const collateral = Route.useLoaderData()
 
   return <CollateralSettingsPage collateral={collateral} />
 }

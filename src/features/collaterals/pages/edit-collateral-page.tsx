@@ -1,4 +1,3 @@
-import { collateralsPermissionProvider } from '../lib/config/permissionsProvider'
 import type { PropsWithCollateral } from '../models/collateral'
 import { EditFormPageLayout, buildPageLayoutDeleteOption } from '@/components'
 import EditCollateralForm from '../components/edit-collateral-form'
@@ -9,7 +8,6 @@ const EditCollateralPage = ({ collateral }: PropsWithCollateral) => (
   <EditFormPageLayout
     title={collateral.title}
     breadcrumbs={[collateralsBreadcrumb, buildCollateralBreadcrumb(collateral)]}
-    permissionProvider={collateralsPermissionProvider}
     options={[
       buildPageLayoutDeleteOption({
         disabled: collateral.isActive,

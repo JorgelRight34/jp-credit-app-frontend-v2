@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { getModulePermissionsBeforeLoad } from '../../../route'
+import { requireModulePermissionToCreate } from '../../../route'
 import { collateralReportsPermissionProvider } from '@/features/collaterals'
 import { buildPageTitle } from '@/lib/utils'
 import { CreateCollateralReportPage } from '@/features/reports'
@@ -10,7 +10,7 @@ export const Route = createFileRoute(
   head: () => ({
     meta: [{ title: buildPageTitle('Crear reporte para garantías') }],
   }),
-  beforeLoad: getModulePermissionsBeforeLoad(
+  beforeLoad: requireModulePermissionToCreate(
     collateralReportsPermissionProvider,
   ),
   component: RouteComponent,

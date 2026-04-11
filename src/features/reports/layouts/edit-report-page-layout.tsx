@@ -16,7 +16,6 @@ import { buildReportBreadcrumb } from './report-page-layout'
 
 interface EditReportPageProps<T> {
   report: Report
-  permissionProvider: PermissionsProvider
   breadcrumb: BreadcrumbSpec
   templateDefinition: ReportTemplateDefinition<T>
   onUpload: UploadFilesHandler
@@ -27,13 +26,11 @@ interface EditReportPageProps<T> {
 const EditReportPageLayout = <T,>({
   report,
   breadcrumb,
-  permissionProvider,
   ...config
 }: EditReportPageProps<T>) => (
   <EditFormPageLayout
     title={`Editar ${report.title}`}
     breadcrumbs={[breadcrumb, reportsBreadcrumb, buildReportBreadcrumb(report)]}
-    permissionProvider={permissionProvider}
   >
     <EditReportForm report={report} {...config} />
   </EditFormPageLayout>

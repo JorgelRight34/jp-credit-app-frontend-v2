@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 import { UserPage, buildUserQueryKey, getUser } from '@/features/auth'
-import { useSuspenseData } from '@/hooks/useData'
 import { getUserFromServer } from '@/features/auth/server/authServerService'
 
 export const getUserFn = createIsomorphicFn()
@@ -11,16 +10,17 @@ export const getUserFn = createIsomorphicFn()
 export const Route = createFileRoute(
   '/(main)/(modules)/access-control/users/$username/',
 )({
+  loader: async ({ context, params: { username } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildUserQueryKey(username),
+      queryFn: () => getUserFn(username),
+    }),
   head: ({ params }) => ({ meta: [{ title: params.username }] }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { username } = Route.useParams()
-  const { data: user } = useSuspenseData({
-    key: buildUserQueryKey(username),
-    loader: () => getUserFn(username),
-  })
+  const user = Route.useLoaderData()
 
   return (
     <UserPage

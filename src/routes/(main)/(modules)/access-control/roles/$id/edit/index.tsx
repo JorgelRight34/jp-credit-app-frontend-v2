@@ -1,23 +1,27 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { getRoleFn } from '..'
 import { EditRoleFormPage, buildRoleQueryKey } from '@/features/auth'
-import { useSuspenseData } from '@/hooks/useData'
-import { getModulePermissionsBeforeLoad } from '@/routes/(main)/(modules)/route'
+import { requireModulePermissionToEdit } from '@/routes/(main)/(modules)/route'
 import { accessControlPermissionProvider } from '@/features/auth/lib/config/permissionProvider'
+import { buildEditPageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/access-control/roles/$id/edit/',
 )({
-  beforeLoad: getModulePermissionsBeforeLoad(accessControlPermissionProvider),
+  beforeLoad: requireModulePermissionToEdit(accessControlPermissionProvider),
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildRoleQueryKey(id),
+      queryFn: () => getRoleFn(id),
+    }),
+  head: ({ loaderData }) => ({
+    meta: [{ title: buildEditPageTitle(loaderData?.name, 'Rol') }],
+  }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: role } = useSuspenseData({
-    key: buildRoleQueryKey(id),
-    loader: () => getRoleFn(+id),
-  })
+  const role = Route.useLoaderData()
 
   return <EditRoleFormPage role={role} />
 }

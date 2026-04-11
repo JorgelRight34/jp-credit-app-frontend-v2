@@ -1,20 +1,30 @@
-import { buildLoanQueryKey, LoanChangeHistoryPage } from '@/features/loans'
-import { useSuspenseData } from '@/hooks/useData'
+import {
+  buildLoanLabel,
+  buildLoanQueryKey,
+  LoanChangeHistoryPage,
+} from '@/features/loans'
 import { createFileRoute } from '@tanstack/react-router'
 import { getLoanFn } from '..'
-import { buildPageTitle } from '@/lib/utils'
+import { buildHistoryPageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/loans/$id/changes/')({
-  head: () => ({ meta: [{ title: buildPageTitle('Historial de cambios') }] }),
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildLoanQueryKey(+id),
+      queryFn: () => getLoanFn(id),
+    }),
+  head: ({ loaderData }) => ({
+    meta: [
+      {
+        title: buildHistoryPageTitle(buildLoanLabel(loaderData!)),
+      },
+    ],
+  }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: loan } = useSuspenseData({
-    key: buildLoanQueryKey(+id),
-    loader: () => getLoanFn(id),
-  })
+  const loan = Route.useLoaderData()
 
   return <LoanChangeHistoryPage loan={loan} />
 }

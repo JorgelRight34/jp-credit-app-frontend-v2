@@ -4,7 +4,6 @@ import {
   getCollateralReport,
 } from '@/features/reports'
 import { getCollateralReportFromServer } from '@/features/reports/server/reportServerClient'
-import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
@@ -15,15 +14,17 @@ export const getCollateralReportFn = createIsomorphicFn()
 export const Route = createFileRoute(
   '/(main)/(modules)/collaterals/reports/$id/',
 )({
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildReportQueryKey(+id, 'Collateral'),
+      queryFn: () => getCollateralReportFn(id),
+    }),
+  head: ({ loaderData }) => ({ meta: [{ title: loaderData?.title }] }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: report } = useSuspenseData({
-    key: buildReportQueryKey(+id, 'Collateral'),
-    loader: () => getCollateralReportFn(id),
-  })
+  const report = Route.useLoaderData()
 
   return <CollateralReportPage report={report} />
 }

@@ -1,5 +1,4 @@
 import { EditFormPageLayout } from '@/components'
-import { rolesPermissionProvider } from '../lib/config/permissionProvider'
 import type { PropsWithRole } from '../models/role'
 import { accessControlBreadcrumb } from './access-control-page'
 import { buildRoleBreadcrumb, rolesModuleBreadcrumb } from './role-page'
@@ -9,7 +8,6 @@ const EditRoleFormPage = ({ role }: PropsWithRole) => {
   return (
     <EditFormPageLayout
       title={role.name}
-      permissionProvider={rolesPermissionProvider}
       breadcrumbs={[
         accessControlBreadcrumb,
         rolesModuleBreadcrumb,

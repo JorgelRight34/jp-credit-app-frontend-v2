@@ -1,7 +1,4 @@
-import {
-  loanModuleBreadcrumb,
-  loanReportPermissionProvider,
-} from '@/features/loans'
+import { loanModuleBreadcrumb } from '@/features/loans'
 import {
   deleteCollateralReportFiles,
   editLoanReport,
@@ -15,7 +12,6 @@ const EditLoanReportPage = ({ report }: PropsWithReport) => (
   <EditReportPageLayout
     breadcrumb={loanModuleBreadcrumb}
     report={report}
-    permissionProvider={loanReportPermissionProvider}
     templateDefinition={loanTemplateDefinition}
     onUpload={uploadCollateralReportFiles}
     onDelete={deleteCollateralReportFiles}

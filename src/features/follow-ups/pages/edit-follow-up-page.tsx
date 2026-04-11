@@ -7,7 +7,6 @@ import {
   TabsList,
 } from '@/components'
 import { FollowUp } from '../models/followUp'
-import { followUpPermissionProvider } from '../lib/config/permission-provider'
 import FollowUpForm from '../components/follow-up-form'
 import { deleteFollowUp } from '../services/followUpClient'
 import { buildFollowUpBreadcrumb, followUpBreadcrumb } from './follow-up-page'
@@ -29,7 +28,6 @@ const EditFollowUpPage = ({ followUp }: { followUp: FollowUp }) => {
           },
         ),
       ]}
-      permissionProvider={followUpPermissionProvider}
       breadcrumbs={[followUpBreadcrumb, buildFollowUpBreadcrumb(followUp)]}
     >
       <Tabs>

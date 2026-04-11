@@ -1,10 +1,11 @@
 import {
+  buildReportLabel,
   buildReportQueryKey,
   getLoanReport,
   LoanReportPage,
 } from '@/features/reports'
 import { getLoanReportFromServer } from '@/features/reports/server/reportServerClient'
-import { useSuspenseData } from '@/hooks/useData'
+import { buildPageTitle } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
@@ -13,15 +14,19 @@ export const getLoanReportFn = createIsomorphicFn()
   .client((id) => getLoanReport(id))
 
 export const Route = createFileRoute('/(main)/(modules)/loans/reports/$id/')({
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildReportQueryKey(+id, 'Loan'),
+      queryFn: () => getLoanReportFn(id),
+    }),
+  head: ({ loaderData }) => ({
+    meta: [{ title: buildPageTitle(buildReportLabel(loaderData!)) }],
+  }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: report } = useSuspenseData({
-    key: buildReportQueryKey(+id, 'Loan'),
-    loader: () => getLoanReportFn(id),
-  })
+  const report = Route.useLoaderData()
 
   return <LoanReportPage report={report} />
 }

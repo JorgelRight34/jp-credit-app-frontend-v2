@@ -1,22 +1,24 @@
 import { buildUserQueryKey, UserChangeHistoryPage } from '@/features/auth'
-import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getUserFn } from '..'
-import { buildPageTitle } from '@/lib/utils'
+import { buildHistoryPageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/access-control/users/$username/changes/',
 )({
-  head: () => ({ meta: [{ title: buildPageTitle('Historial de cambios') }] }),
+  loader: async ({ context, params: { username } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildUserQueryKey(username),
+      queryFn: () => getUserFn(username),
+    }),
+  head: ({ params }) => ({
+    meta: [{ title: buildHistoryPageTitle(params.username) }],
+  }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { username } = Route.useParams()
-  const { data: user } = useSuspenseData({
-    key: buildUserQueryKey(username),
-    loader: () => getUserFn(username),
-  })
+  const user = Route.useLoaderData()
 
   return <UserChangeHistoryPage user={user} />
 }

@@ -8,7 +8,7 @@ import { useSuspenseData } from '@/hooks/useData'
 import { buildPageTitle } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
-import { requireModulePermissionToDelete } from '../../../route'
+import { requireModulePermissionToCreate } from '../../../route'
 
 const getCurrentAccountingPeriodFn = createIsomorphicFn()
   .server(() => getCurrentAccountingPeriod())
@@ -18,7 +18,7 @@ export const Route = createFileRoute(
   '/(main)/(modules)/transactions/periods/create/',
 )({
   head: () => ({ meta: [{ title: buildPageTitle('Cerrar periodo') }] }),
-  beforeLoad: requireModulePermissionToDelete(transactionPermissionProvider),
+  beforeLoad: requireModulePermissionToCreate(transactionPermissionProvider),
   component: RouteComponent,
 })
 

@@ -1,6 +1,5 @@
 import {
   settingsBreadcrumb,
-  ProtectedComponent,
   PageRouterLayout,
   BreadcrumbsByRoute,
   EditIcon,
@@ -11,7 +10,6 @@ import {
   buildPageLayoutDeleteOption,
 } from '@/components'
 import { PropsWithLoan } from '../models/loan'
-import { loanPermissionProvider } from '../lib/config/permission-provider'
 import LoanStatusForm from '../components/loan-status-form'
 import { buildLoanLabel } from '../lib/utils'
 import { loanModuleBreadcrumb } from './loans-page'
@@ -40,23 +38,18 @@ const LoanSettingsPage = ({ loan }: PropsWithLoan) => {
         breadcrumbsByRoute,
       }}
     >
-      <ProtectedComponent
-        provider={loanPermissionProvider}
-        isAuthorizedFn={(p) => p.canEdit}
-      >
-        <Tabs>
-          <TabsList>
-            <Tab index={0}>Editar</Tab>
-            <Tab index={1}>Estado</Tab>
-          </TabsList>
-          <TabPanel index={0}>
-            <EditLoanForm loan={loan} />
-          </TabPanel>
-          <TabPanel index={1}>
-            <LoanStatusForm loan={loan} />
-          </TabPanel>
-        </Tabs>
-      </ProtectedComponent>
+      <Tabs>
+        <TabsList>
+          <Tab index={0}>Editar</Tab>
+          <Tab index={1}>Estado</Tab>
+        </TabsList>
+        <TabPanel index={0}>
+          <EditLoanForm loan={loan} />
+        </TabPanel>
+        <TabPanel index={1}>
+          <LoanStatusForm loan={loan} />
+        </TabPanel>
+      </Tabs>
     </PageRouterLayout>
   )
 }

@@ -5,7 +5,6 @@ import {
   ProjectIcon,
 } from '@/components'
 import { Project } from '../models/project'
-import { projectsPermissionProvider } from '../lib/config/permissionProvider'
 import ProjectForm from '../components/project-form'
 
 export const projectsBreadcrumb: BreadcrumbSpec = {
@@ -17,7 +16,6 @@ const EditProjectFormPage = ({ project }: { project: Project }) => {
   return (
     <EditFormPageLayout
       breadcrumbs={[projectsBreadcrumb]}
-      permissionProvider={projectsPermissionProvider}
       title={`Proyecto No. ${project.id} | ${project.name}`}
     >
       <PagePanel>

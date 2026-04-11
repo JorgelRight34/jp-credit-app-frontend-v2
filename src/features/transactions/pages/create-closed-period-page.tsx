@@ -7,7 +7,6 @@ import {
   Tabs,
   TabsList,
 } from '@/components'
-import { transactionPermissionProvider } from '../lib/config/permission-provider'
 import CreateClosedPeriodForm from '../components/create-closed-period-form'
 import { AccountingPeriod } from '../models/accountingPeriod'
 import { transactionBreadcrumb } from './transactions-page'
@@ -27,7 +26,6 @@ const CreateClosedPeriodPage = ({
     <CreateFormPageLayout
       title="Cerrar periodo contable"
       breadcrumbs={[transactionBreadcrumb, closedPeriodsBreadcrumb]}
-      permissionProvider={transactionPermissionProvider}
     >
       <Tabs>
         <TabsList>

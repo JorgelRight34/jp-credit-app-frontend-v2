@@ -1,8 +1,8 @@
-import { LoanPage } from '@/features/loans'
+import { buildLoanLabel, LoanPage } from '@/features/loans'
 import { buildLoanQueryKey } from '@/features/loans/lib/query-keys'
 import { getLoanFromServer } from '@/features/loans/server/loanServerClient'
 import { getLoan } from '@/features/loans/services/loanClient'
-import { useSuspenseData } from '@/hooks/useData'
+import { buildPageTitle } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
@@ -10,18 +10,20 @@ export const getLoanFn = createIsomorphicFn()
   .server((id) => getLoanFromServer(id))
   .client((id) => getLoan(id))
 
-export const Route = createFileRoute(
-  '/(main)/(modules)/loans/$id/',
-)({
+export const Route = createFileRoute('/(main)/(modules)/loans/$id/')({
+  loader: async ({ context, params: { id } }) =>
+    await context.dataClient.ensureQueryData({
+      queryKey: buildLoanQueryKey(+id),
+      queryFn: () => getLoanFn(id),
+    }),
+  head: ({ loaderData }) => ({
+    meta: [{ title: buildPageTitle(buildLoanLabel(loaderData!)) }],
+  }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { id } = Route.useParams()
-  const { data: loan } = useSuspenseData({
-    key: buildLoanQueryKey(+id),
-    loader: () => getLoanFn(id),
-  })
+  const loan = Route.useLoaderData()
 
   return <LoanPage loan={loan} />
 }
