@@ -4,7 +4,7 @@ import { getProfileFn } from '..'
 import { requireModulePermissionToDelete } from '../../../route'
 import { profilesPermissionProvider } from '@/features/profiles/lib/config/permissionProvider'
 import { DeleteProfilePage } from '@/features/profiles'
-import { buildDeletePageTitle } from '@/lib/utils'
+import { buildDeleteHead } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/profiles/$id/delete/')({
   beforeLoad: requireModulePermissionToDelete(profilesPermissionProvider),
@@ -13,9 +13,7 @@ export const Route = createFileRoute('/(main)/(modules)/profiles/$id/delete/')({
       queryKey: buildProfileKey(+id),
       queryFn: () => getProfileFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildDeletePageTitle(loaderData!.firstName) }],
-  }),
+  head: ({ loaderData }) => buildDeleteHead(loaderData, (l) => l.firstName),
   component: RouteComponent,
 })
 

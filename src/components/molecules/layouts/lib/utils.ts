@@ -45,6 +45,7 @@ export const buildPageLayoutMenuOption = (
 ): LayoutOption => ({
   title: 'Opciones',
   options,
+  childOptions: options,
   className: "!hidden md:!block",
   component: (props) => LightPillMenuBtn({ ...props, options }),
 })

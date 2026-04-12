@@ -4,7 +4,7 @@ import { buildCollateralQueryKey } from '@/features/collaterals/lib/query-keys'
 import { EditCollateralPage } from '@/features/collaterals'
 import { collateralsPermissionProvider } from '@/features/collaterals/lib/config/permissionsProvider'
 import { requireModulePermissionToEdit } from '@/routes/(main)/(modules)/route'
-import { buildEditPageTitle } from '@/lib/utils'
+import { buildEditHead } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/collaterals/$id/edit/')(
   {
@@ -14,9 +14,7 @@ export const Route = createFileRoute('/(main)/(modules)/collaterals/$id/edit/')(
         queryKey: buildCollateralQueryKey(+id),
         queryFn: () => getCollateralFn(id),
       }),
-    head: ({ loaderData }) => ({
-      meta: [{ title: buildEditPageTitle(loaderData!.title, 'Garantía') }],
-    }),
+    head: ({ loaderData }) => buildEditHead(loaderData, (l) => l.title),
     component: RouteComponent,
   },
 )

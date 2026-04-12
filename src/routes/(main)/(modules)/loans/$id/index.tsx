@@ -2,7 +2,7 @@ import { buildLoanLabel, LoanPage } from '@/features/loans'
 import { buildLoanQueryKey } from '@/features/loans/lib/query-keys'
 import { getLoanFromServer } from '@/features/loans/server/loanServerClient'
 import { getLoan } from '@/features/loans/services/loanClient'
-import { buildPageTitle } from '@/lib/utils'
+import { buildHead } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
@@ -16,9 +16,7 @@ export const Route = createFileRoute('/(main)/(modules)/loans/$id/')({
       queryKey: buildLoanQueryKey(+id),
       queryFn: () => getLoanFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildPageTitle(buildLoanLabel(loaderData!)) }],
-  }),
+  head: ({ loaderData }) => buildHead(loaderData, buildLoanLabel),
   component: RouteComponent,
 })
 

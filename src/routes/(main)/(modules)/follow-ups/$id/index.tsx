@@ -2,7 +2,7 @@ import { buildFollowUpQueryKey } from '@/features/follow-ups/lib/query-keys'
 import FollowUpPage from '@/features/follow-ups/pages/follow-up-page'
 import { getFollowUpFromServer } from '@/features/follow-ups/server/followUpServerClient'
 import { getFollowUp } from '@/features/follow-ups/services/followUpClient'
-import { buildCreatePageTitle } from '@/lib/utils'
+import { buildCreateHead } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
@@ -16,9 +16,7 @@ export const Route = createFileRoute('/(main)/(modules)/follow-ups/$id/')({
       queryKey: buildFollowUpQueryKey(+id),
       queryFn: () => getFollowUpFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildCreatePageTitle(loaderData!.title) }],
-  }),
+  head: ({ loaderData }) => buildCreateHead(loaderData, (l) => l.title),
   component: RouteComponent,
 })
 

@@ -9,16 +9,13 @@ import { VisibleFrom } from '@/components/organisms'
 
 export type PageLayoutOptionsContainerProps = {
   options: Array<LayoutOption>
-  smallScreenExtraMenuOptions?: Array<MenuOption>
 }
 
 interface PageLayoutMenuProps {
-  options: Array<LayoutOption>
-  smallScreenExtraMenuOptions?: Array<MenuOption>
+  options: Array<MenuOption>
 }
 
 const PageLayoutOptionsContainer = ({
-  smallScreenExtraMenuOptions,
   options,
 }: PageLayoutOptionsContainerProps) => {
   return (
@@ -31,10 +28,7 @@ const PageLayoutOptionsContainer = ({
       </div>
       <div className="ml-auto block md:hidden">
         <VisibleFrom breakpoint={SMALL_SCREEN_BREAKPOINT}>
-          <PageLayoutOptionsMenu
-            options={options}
-            smallScreenExtraMenuOptions={smallScreenExtraMenuOptions}
-          />
+          <PageLayoutOptionsMenu options={options} />
         </VisibleFrom>
       </div>
     </>
@@ -43,23 +37,17 @@ const PageLayoutOptionsContainer = ({
 
 const PageLayoutOptionsMenu = ({
   options,
-  smallScreenExtraMenuOptions,
-}: PageLayoutMenuProps) => {
-  if (options.length + (smallScreenExtraMenuOptions?.length ?? 0) === 0)
-    return null
+}: PageLayoutOptionsContainerProps) => {
+  if (options.length === 0) return null
 
   return (
     <PageLayoutOptionsInner
-      options={options}
-      smallScreenExtraMenuOptions={smallScreenExtraMenuOptions}
+      options={options.flatMap((o) => o.childOptions ?? [])}
     />
   )
 }
 
-const PageLayoutOptionsInner = ({
-  options,
-  smallScreenExtraMenuOptions,
-}: PageLayoutMenuProps) => {
+const PageLayoutOptionsInner = ({ options }: PageLayoutMenuProps) => {
   const menuRef = useRef<MenuRef>(null)
 
   return (
@@ -69,19 +57,17 @@ const PageLayoutOptionsInner = ({
         onClick={(e) => menuRef.current?.open(e)}
         icon={MoreVertIcon}
       />
-      {options.length + (smallScreenExtraMenuOptions?.length ?? 0) > 0 && (
+      {options.length > 0 && (
         <Menu
           ref={menuRef}
-          options={options
-            .map(
-              (el) =>
-                ({
-                  ...el,
-                  label: el.title ?? '',
-                  icon: undefined,
-                }) as MenuOption,
-            )
-            .concat(smallScreenExtraMenuOptions ?? [])}
+          options={options.map(
+            (el) =>
+              ({
+                ...el,
+                label: el.title ?? '',
+                icon: undefined,
+              }) as MenuOption,
+          )}
         />
       )}
     </>

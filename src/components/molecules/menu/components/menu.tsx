@@ -7,7 +7,7 @@ import Icon, { IconProps } from '@/components/atoms/icon/components/icon'
 import { Link, LinkProps, Tooltip } from '@/components/atoms'
 
 export interface MenuOption {
-  label: string
+  title?: string
   disabled?: boolean
   tooltip?: string
   to?: LinkProps['to']
@@ -88,7 +88,7 @@ const Menu = forwardRef<MenuRef, MenuRefProps>(
                 search={option.search}
               >
                 <Icon icon={option.icon} as={option.as}>
-                  {option.label}
+                  {option.title}
                 </Icon>
               </Link>
             </MenuItem>

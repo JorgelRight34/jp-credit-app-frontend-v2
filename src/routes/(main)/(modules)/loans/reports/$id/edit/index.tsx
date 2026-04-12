@@ -6,7 +6,7 @@ import {
 import { useSuspenseData } from '@/hooks/useData'
 import { createFileRoute } from '@tanstack/react-router'
 import { getLoanReportFn } from '..'
-import { buildPageTitle } from '@/lib/utils'
+import { buildEditHead } from '@/lib/utils'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/loans/reports/$id/edit/',
@@ -16,9 +16,7 @@ export const Route = createFileRoute(
       queryKey: buildReportQueryKey(+id, 'Loan'),
       queryFn: () => getLoanReportFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildPageTitle(buildReportLabel(loaderData!)) }],
-  }),
+  head: ({ loaderData }) => buildEditHead(loaderData, buildReportLabel),
   component: RouteComponent,
 })
 

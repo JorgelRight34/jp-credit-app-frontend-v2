@@ -6,7 +6,7 @@ import { ACCESS_TOKEN_KEY } from "../constants";
 
 const URLS = {
   PROD: "https://jp-credit-app.onrender.com/api/",
-  DEV: "http://192.168.4.156:5270/api/",
+  DEV: "http://192.168.4.153:5270/api/",
 };
 
 export const baseURL = IS_DEV_MODE ? URLS.DEV : URLS.PROD;

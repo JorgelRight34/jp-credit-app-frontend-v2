@@ -15,7 +15,7 @@ export const Route = createFileRoute(
       queryFn: () => getUserFn(username),
     }),
   head: ({ params }) => ({
-    meta: [{ title: buildEditPageTitle(params.username, 'Acceso') }],
+    meta: [{ title: buildEditPageTitle(params.username) }],
   }),
   component: RouteComponent,
 })

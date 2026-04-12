@@ -15,7 +15,7 @@ import {
   TanStackQueryDevtools,
   getContext,
 } from '@/contexts/root-provider'
-import { LoadingBar, LoadingScreen } from '@/components'
+import { LoadingScreen } from '@/components'
 import { User } from '@/models/user'
 
 export interface AppRouteContext {

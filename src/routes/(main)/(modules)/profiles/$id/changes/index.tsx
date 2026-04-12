@@ -2,7 +2,7 @@ import { ProfileChangeHistoryPage } from '@/features/profiles'
 import { buildProfileKey } from '@/features/profiles/lib/query-keys'
 import { createFileRoute } from '@tanstack/react-router'
 import { getProfileFn } from '..'
-import { buildHistoryPageTitle } from '@/lib/utils'
+import { buildHistoryHead } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/profiles/$id/changes/')(
   {
@@ -12,9 +12,7 @@ export const Route = createFileRoute('/(main)/(modules)/profiles/$id/changes/')(
         queryFn: () => getProfileFn(id),
       }),
 
-    head: ({ loaderData }) => ({
-      meta: [{ title: buildHistoryPageTitle(loaderData!.firstName) }],
-    }),
+    head: ({ loaderData }) => buildHistoryHead(loaderData, (l) => l.firstName),
     component: RouteComponent,
   },
 )

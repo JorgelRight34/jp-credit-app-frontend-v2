@@ -7,7 +7,7 @@ import {
 import { createFileRoute } from '@tanstack/react-router'
 import { getTransactionFn } from '..'
 import { requireModulePermissionToDelete } from '../../../route'
-import { buildDeletePageTitle } from '@/lib/utils'
+import { buildDeleteHead } from '@/lib/utils'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/transactions/$id/delete/',
@@ -18,13 +18,7 @@ export const Route = createFileRoute(
       queryKey: createTransactionQueryKey(+id),
       queryFn: () => getTransactionFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [
-      {
-        title: buildDeletePageTitle(buildTransactionLabel(loaderData!)),
-      },
-    ],
-  }),
+  head: ({ loaderData }) => buildDeleteHead(loaderData, buildTransactionLabel),
   component: RouteComponent,
 })
 

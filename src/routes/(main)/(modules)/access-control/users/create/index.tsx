@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { CreateUserFormPage } from '@/features/auth'
+import { CreateUserPage } from '@/features/auth'
 import { requireModulePermissionToCreate } from '../../../route'
 import { accessControlPermissionProvider } from '@/features/auth/lib/config/permissionProvider'
 import { buildCreatePageTitle } from '@/lib/utils'
@@ -13,5 +13,5 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  return <CreateUserFormPage />
+  return <CreateUserPage />
 }

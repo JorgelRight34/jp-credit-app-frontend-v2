@@ -6,7 +6,7 @@ import {
   collateralsPermissionProvider,
   DeleteCollateralPage,
 } from '@/features/collaterals'
-import { buildDeletePageTitle } from '@/lib/utils'
+import { buildDeleteHead } from '@/lib/utils'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/collaterals/$id/delete/',
@@ -17,9 +17,7 @@ export const Route = createFileRoute(
       queryKey: buildCollateralQueryKey(+id),
       queryFn: () => getCollateralFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildDeletePageTitle(loaderData!.title, 'Garantía') }],
-  }),
+  head: ({ loaderData }) => buildDeleteHead(loaderData, (l) => l.title),
   component: RouteComponent,
 })
 

@@ -38,12 +38,13 @@ export * from './models/currentUser'
 // ----------------------
 export { default as LoginPanel } from "./pages/login-panel"
 export { default as AccessControlPage } from "./pages/access-control-page"
-export { default as CreateUserFormPage } from "./pages/create-user-form-page"
+export { default as CreateUserPage } from "./pages/create-user-page"
 export { default as EditUserFormPage } from "./pages/edit-user-form-page"
 export { default as UserPage } from './pages/user-page'
 export { default as RolePage } from './pages/role-page'
 export { default as ResetPasswordPage } from './pages/reset-password-page'
 export { default as RoleChangeHistoryPage } from './pages/role-change-history-page'
+export { default as DeleteRolePage } from './pages/delete-role-page'
 
 // ----------------------
 // Services

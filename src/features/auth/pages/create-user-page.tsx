@@ -3,7 +3,7 @@ import { CreateFormPageLayout } from '@/components'
 import { accessControlBreadcrumb } from './access-control-page'
 import { usersModuleBreadcrumb } from './user-page'
 
-const CreateUserFormPage = () => (
+const CreateUserPage = () => (
   <CreateFormPageLayout
     title="Acceso"
     breadcrumbs={[accessControlBreadcrumb, usersModuleBreadcrumb]}
@@ -12,4 +12,4 @@ const CreateUserFormPage = () => (
   </CreateFormPageLayout>
 )
 
-export default CreateUserFormPage
+export default CreateUserPage

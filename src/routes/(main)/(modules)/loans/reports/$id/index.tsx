@@ -5,7 +5,7 @@ import {
   LoanReportPage,
 } from '@/features/reports'
 import { getLoanReportFromServer } from '@/features/reports/server/reportServerClient'
-import { buildPageTitle } from '@/lib/utils'
+import { buildPageHead } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
@@ -19,9 +19,7 @@ export const Route = createFileRoute('/(main)/(modules)/loans/reports/$id/')({
       queryKey: buildReportQueryKey(+id, 'Loan'),
       queryFn: () => getLoanReportFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildPageTitle(buildReportLabel(loaderData!)) }],
-  }),
+  head: ({ loaderData }) => buildPageHead(loaderData, buildReportLabel),
   component: RouteComponent,
 })
 

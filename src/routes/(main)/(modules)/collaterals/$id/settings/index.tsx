@@ -2,7 +2,7 @@ import { CollateralSettingsPage } from '@/features/collaterals'
 import { buildCollateralQueryKey } from '@/features/collaterals/lib/query-keys'
 import { createFileRoute } from '@tanstack/react-router'
 import { getCollateralFn } from '..'
-import { buildPageSettingsTitle } from '@/lib/utils'
+import { buildSettingsHead } from '@/lib/utils'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/collaterals/$id/settings/',
@@ -12,9 +12,7 @@ export const Route = createFileRoute(
       queryKey: buildCollateralQueryKey(+id),
       queryFn: () => getCollateralFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildPageSettingsTitle(loaderData!.title, 'Garantía') }],
-  }),
+  head: ({ loaderData }) => buildSettingsHead(loaderData, (l) => l.title),
   component: RouteComponent,
 })
 

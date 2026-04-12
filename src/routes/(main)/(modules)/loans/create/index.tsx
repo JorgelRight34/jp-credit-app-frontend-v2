@@ -7,7 +7,7 @@ import {
   requireModulePermissionToCreate,
   useSuspenseCurrentProjectId,
 } from '../../route'
-import { buildCreatePageTitle, buildPageTitle } from '@/lib/utils'
+import { buildCreatePageTitle } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/loans/create/')({
   head: () => ({

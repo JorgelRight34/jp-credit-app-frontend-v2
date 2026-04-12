@@ -5,7 +5,7 @@ import {
 } from '@/features/loans'
 import { createFileRoute } from '@tanstack/react-router'
 import { getLoanFn } from '..'
-import { buildHistoryPageTitle } from '@/lib/utils'
+import { buildHistoryHead } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/loans/$id/changes/')({
   loader: async ({ context, params: { id } }) =>
@@ -13,13 +13,7 @@ export const Route = createFileRoute('/(main)/(modules)/loans/$id/changes/')({
       queryKey: buildLoanQueryKey(+id),
       queryFn: () => getLoanFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [
-      {
-        title: buildHistoryPageTitle(buildLoanLabel(loaderData!)),
-      },
-    ],
-  }),
+  head: ({ loaderData }) => buildHistoryHead(loaderData, buildLoanLabel),
   component: RouteComponent,
 })
 

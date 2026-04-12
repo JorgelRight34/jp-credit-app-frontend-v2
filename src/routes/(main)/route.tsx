@@ -29,6 +29,7 @@ export const Route = createFileRoute('/(main)')({
       context.dataClient.setQueryData([usersQueryKey, 0], user)
     } catch (err: any) {
       if (isRedirect(err)) throw err
+      console.log(err)
       if (err.status === 401 || err?.status === 404) {
         throw redirect({ to: '/login' })
       }

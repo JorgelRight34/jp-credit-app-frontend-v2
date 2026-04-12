@@ -23,7 +23,7 @@ export interface Profile {
     label?: string;
     createdAt: string;
     updatedAt?: string;
-    hasLoans?: boolean;
+    canBeDeleted?: boolean;
     city: string;
 }
 

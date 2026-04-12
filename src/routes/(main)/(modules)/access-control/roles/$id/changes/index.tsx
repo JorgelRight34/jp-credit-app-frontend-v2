@@ -1,7 +1,7 @@
 import { buildRoleQueryKey, RoleChangeHistoryPage } from '@/features/auth'
 import { createFileRoute } from '@tanstack/react-router'
 import { getRoleFn } from '..'
-import { buildHistoryPageTitle } from '@/lib/utils'
+import { buildHistoryHead } from '@/lib/utils'
 
 export const Route = createFileRoute(
   '/(main)/(modules)/access-control/roles/$id/changes/',
@@ -11,9 +11,7 @@ export const Route = createFileRoute(
       queryKey: buildRoleQueryKey(id),
       queryFn: () => getRoleFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildHistoryPageTitle(loaderData?.name) }],
-  }),
+  head: ({ loaderData }) => buildHistoryHead(loaderData, (l) => l.name),
   component: RouteComponent,
 })
 

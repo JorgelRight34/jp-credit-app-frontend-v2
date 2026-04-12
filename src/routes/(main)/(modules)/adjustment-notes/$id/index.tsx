@@ -3,11 +3,11 @@ import { buildAdjustmentNoteQueryKey } from '@/features/adjustment-notes/lib/que
 import { buildAdjustmentNoteLabel } from '@/features/adjustment-notes/lib/utils'
 import { getAdjustmentNoteFromServer } from '@/features/adjustment-notes/server/adjustmentNoteServerClient'
 import { getAdjustmentNote } from '@/features/adjustment-notes/services/adjustmentNoteClient'
-import { buildPageTitle } from '@/lib/utils'
+import { buildHead } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
-const getAdjustmentNoteFn = createIsomorphicFn()
+export const getAdjustmentNoteFn = createIsomorphicFn()
   .server((id) => getAdjustmentNoteFromServer(id))
   .client((id) => getAdjustmentNote(id))
 
@@ -18,9 +18,7 @@ export const Route = createFileRoute('/(main)/(modules)/adjustment-notes/$id/')(
         queryKey: buildAdjustmentNoteQueryKey(+id),
         queryFn: () => getAdjustmentNoteFn(id),
       }),
-    head: ({ loaderData }) => ({
-      meta: [{ title: buildPageTitle(buildAdjustmentNoteLabel(loaderData!)) }],
-    }),
+    head: ({ loaderData }) => buildHead(loaderData, buildAdjustmentNoteLabel),
     component: RouteComponent,
   },
 )

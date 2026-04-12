@@ -4,7 +4,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { getLoanFn } from '..'
 import { requireModulePermissionToEdit } from '@/routes/(main)/(modules)/route'
 import { loanPermissionProvider } from '@/features/loans/lib/config/permission-provider'
-import { buildPageSettingsTitle } from '@/lib/utils'
+import { buildSettingsHead } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/loans/$id/settings/')({
   beforeLoad: requireModulePermissionToEdit(loanPermissionProvider),
@@ -13,13 +13,7 @@ export const Route = createFileRoute('/(main)/(modules)/loans/$id/settings/')({
       queryKey: buildLoanQueryKey(+id),
       queryFn: () => getLoanFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [
-      {
-        title: buildPageSettingsTitle(buildLoanLabel(loaderData!), 'Préstamo'),
-      },
-    ],
-  }),
+  head: ({ loaderData }) => buildSettingsHead(loaderData, buildLoanLabel),
   component: RouteComponent,
 })
 

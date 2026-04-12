@@ -6,7 +6,7 @@ import {
   profilesPermissionProvider,
 } from '@/features/profiles'
 import { requireModulePermissionToEdit } from '../../../route'
-import { buildEditPageTitle } from '@/lib/utils'
+import { buildEditHead } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/profiles/$id/edit/')({
   loader: async ({ context, params: { id } }) =>
@@ -14,9 +14,7 @@ export const Route = createFileRoute('/(main)/(modules)/profiles/$id/edit/')({
       queryKey: buildProfileKey(+id),
       queryFn: () => getProfileFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildEditPageTitle(loaderData!.firstName, 'Pérfil') }],
-  }),
+  head: ({ loaderData }) => buildEditHead(loaderData, (l) => l.firstName),
   beforeLoad: requireModulePermissionToEdit(profilesPermissionProvider),
   component: RouteComponent,
 })

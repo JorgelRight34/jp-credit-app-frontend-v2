@@ -44,7 +44,7 @@ const TransactionPage = ({ transaction }: PropsWithTransaction) => (
     options={[
       buildPageLayoutMenuOption([
         {
-          label: 'Eliminar',
+          title: 'Eliminar',
           disabled: transaction.isClosed,
           to: '/transactions/$id/delete',
           params: { id: transaction.id.toString() },

@@ -33,6 +33,10 @@ export const updateRoleClaims: UpdatePermissionsHandler = async (id, body) => {
     await api.patch("auth/roles/" + id + "/claims", body);
 }
 
+export const deleteRole = async (id: Role["id"]) => {
+    await api.delete("auth/roles/" + id);
+}
+
 export const getRoles = async (params: RoleQuery): Promise<PagedResponse<Role>> => {
     const { data } = await api.get("auth/roles", { params })
     return data;

@@ -7,7 +7,7 @@ import {
   loanPermissionProvider,
 } from '@/features/loans'
 import { getLoanFn } from '..'
-import { buildDeletePageTitle } from '@/lib/utils'
+import { buildDeleteHead } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/loans/$id/delete/')({
   beforeLoad: requireModulePermissionToDelete(loanPermissionProvider),
@@ -16,11 +16,7 @@ export const Route = createFileRoute('/(main)/(modules)/loans/$id/delete/')({
       queryKey: buildLoanQueryKey(+id),
       queryFn: () => getLoanFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: buildDeletePageTitle(buildLoanLabel(loaderData!), 'Préstamo') },
-    ],
-  }),
+  head: ({ loaderData }) => buildDeleteHead(loaderData, buildLoanLabel),
   component: RouteComponent,
 })
 

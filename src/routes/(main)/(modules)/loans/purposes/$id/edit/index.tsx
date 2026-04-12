@@ -5,7 +5,7 @@ import {
 } from '@/features/loans'
 import { buildLoanPurposeQueryKey } from '@/features/loans/lib/query-keys'
 import { getLoanPurposeFromServer } from '@/features/loans/server/loanServerClient'
-import { buildEditPageTitle } from '@/lib/utils'
+import { buildEditHead } from '@/lib/utils'
 import { requireModulePermissionToEdit } from '@/routes/(main)/(modules)/route'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
@@ -23,9 +23,7 @@ export const Route = createFileRoute(
       queryKey: buildLoanPurposeQueryKey(+id),
       queryFn: () => getLoanPurposeFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildEditPageTitle(loaderData!.name) }],
-  }),
+  head: ({ loaderData }) => buildEditHead(loaderData, (l) => l.name),
   component: RouteComponent,
 })
 

@@ -4,7 +4,7 @@ import { buildProfileFullName, ProfilePage } from '@/features/profiles'
 import { getProfileFromServer } from '@/features/profiles/server/profileServerClient'
 import { getProfile } from '@/features/profiles/services/profileClient'
 import { buildProfileKey } from '@/features/profiles/lib/query-keys'
-import { buildPageTitle } from '@/lib/utils'
+import { buildHead } from '@/lib/utils'
 
 export const getProfileFn = createIsomorphicFn()
   .server((id) => getProfileFromServer(id))
@@ -16,9 +16,7 @@ export const Route = createFileRoute('/(main)/(modules)/profiles/$id/')({
       queryKey: buildProfileKey(+id),
       queryFn: () => getProfileFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildPageTitle(buildProfileFullName(loaderData!)) }],
-  }),
+  head: ({ loaderData }) => buildHead(loaderData, buildProfileFullName),
   component: RouteComponent,
 })
 

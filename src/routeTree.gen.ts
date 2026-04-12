@@ -70,6 +70,7 @@ import { Route as mainmodulesCollateralsIdSettingsIndexRouteImport } from './rou
 import { Route as mainmodulesCollateralsIdEditIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/edit/index'
 import { Route as mainmodulesCollateralsIdDeleteIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/delete/index'
 import { Route as mainmodulesCollateralsIdChangesIndexRouteImport } from './routes/(main)/(modules)/collaterals/$id/changes/index'
+import { Route as mainmodulesAdjustmentNotesIdDeleteIndexRouteImport } from './routes/(main)/(modules)/adjustment-notes/$id/delete/index'
 import { Route as mainmodulesAccessControlUsersCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/users/create/index'
 import { Route as mainmodulesAccessControlUsersUsernameIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/index'
 import { Route as mainmodulesAccessControlRolesCreateIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/create/index'
@@ -82,6 +83,7 @@ import { Route as mainmodulesCollateralsReportsIdEditIndexRouteImport } from './
 import { Route as mainmodulesAccessControlUsersUsernameEditIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/edit/index'
 import { Route as mainmodulesAccessControlUsersUsernameChangesIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/changes/index'
 import { Route as mainmodulesAccessControlRolesIdEditIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/edit/index'
+import { Route as mainmodulesAccessControlRolesIdDeleteIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/delete/index'
 import { Route as mainmodulesAccessControlRolesIdChangesIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/changes/index'
 
 const mainRouteRoute = mainRouteRouteImport.update({
@@ -440,6 +442,12 @@ const mainmodulesCollateralsIdChangesIndexRoute =
     path: '/collaterals/$id/changes/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesAdjustmentNotesIdDeleteIndexRoute =
+  mainmodulesAdjustmentNotesIdDeleteIndexRouteImport.update({
+    id: '/adjustment-notes/$id/delete/',
+    path: '/adjustment-notes/$id/delete/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesAccessControlUsersCreateIndexRoute =
   mainmodulesAccessControlUsersCreateIndexRouteImport.update({
     id: '/access-control/users/create/',
@@ -512,6 +520,12 @@ const mainmodulesAccessControlRolesIdEditIndexRoute =
     path: '/access-control/roles/$id/edit/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesAccessControlRolesIdDeleteIndexRoute =
+  mainmodulesAccessControlRolesIdDeleteIndexRouteImport.update({
+    id: '/access-control/roles/$id/delete/',
+    path: '/access-control/roles/$id/delete/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesAccessControlRolesIdChangesIndexRoute =
   mainmodulesAccessControlRolesIdChangesIndexRouteImport.update({
     id: '/access-control/roles/$id/changes/',
@@ -560,6 +574,7 @@ export interface FileRoutesByFullPath {
   '/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/access-control/users/create/': typeof mainmodulesAccessControlUsersCreateIndexRoute
+  '/adjustment-notes/$id/delete/': typeof mainmodulesAdjustmentNotesIdDeleteIndexRoute
   '/collaterals/$id/changes/': typeof mainmodulesCollateralsIdChangesIndexRoute
   '/collaterals/$id/delete/': typeof mainmodulesCollateralsIdDeleteIndexRoute
   '/collaterals/$id/edit/': typeof mainmodulesCollateralsIdEditIndexRoute
@@ -584,6 +599,7 @@ export interface FileRoutesByFullPath {
   '/transactions/reports/create/': typeof mainmodulesTransactionsReportsCreateIndexRoute
   '/transactions/reports/generate/': typeof mainmodulesTransactionsReportsGenerateIndexRoute
   '/access-control/roles/$id/changes/': typeof mainmodulesAccessControlRolesIdChangesIndexRoute
+  '/access-control/roles/$id/delete/': typeof mainmodulesAccessControlRolesIdDeleteIndexRoute
   '/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/changes/': typeof mainmodulesAccessControlUsersUsernameChangesIndexRoute
   '/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -634,6 +650,7 @@ export interface FileRoutesByTo {
   '/access-control/roles/create': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/access-control/users/$username': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/access-control/users/create': typeof mainmodulesAccessControlUsersCreateIndexRoute
+  '/adjustment-notes/$id/delete': typeof mainmodulesAdjustmentNotesIdDeleteIndexRoute
   '/collaterals/$id/changes': typeof mainmodulesCollateralsIdChangesIndexRoute
   '/collaterals/$id/delete': typeof mainmodulesCollateralsIdDeleteIndexRoute
   '/collaterals/$id/edit': typeof mainmodulesCollateralsIdEditIndexRoute
@@ -658,6 +675,7 @@ export interface FileRoutesByTo {
   '/transactions/reports/create': typeof mainmodulesTransactionsReportsCreateIndexRoute
   '/transactions/reports/generate': typeof mainmodulesTransactionsReportsGenerateIndexRoute
   '/access-control/roles/$id/changes': typeof mainmodulesAccessControlRolesIdChangesIndexRoute
+  '/access-control/roles/$id/delete': typeof mainmodulesAccessControlRolesIdDeleteIndexRoute
   '/access-control/roles/$id/edit': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/changes': typeof mainmodulesAccessControlUsersUsernameChangesIndexRoute
   '/access-control/users/$username/edit': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -711,6 +729,7 @@ export interface FileRoutesById {
   '/(main)/(modules)/access-control/roles/create/': typeof mainmodulesAccessControlRolesCreateIndexRoute
   '/(main)/(modules)/access-control/users/$username/': typeof mainmodulesAccessControlUsersUsernameIndexRoute
   '/(main)/(modules)/access-control/users/create/': typeof mainmodulesAccessControlUsersCreateIndexRoute
+  '/(main)/(modules)/adjustment-notes/$id/delete/': typeof mainmodulesAdjustmentNotesIdDeleteIndexRoute
   '/(main)/(modules)/collaterals/$id/changes/': typeof mainmodulesCollateralsIdChangesIndexRoute
   '/(main)/(modules)/collaterals/$id/delete/': typeof mainmodulesCollateralsIdDeleteIndexRoute
   '/(main)/(modules)/collaterals/$id/edit/': typeof mainmodulesCollateralsIdEditIndexRoute
@@ -735,6 +754,7 @@ export interface FileRoutesById {
   '/(main)/(modules)/transactions/reports/create/': typeof mainmodulesTransactionsReportsCreateIndexRoute
   '/(main)/(modules)/transactions/reports/generate/': typeof mainmodulesTransactionsReportsGenerateIndexRoute
   '/(main)/(modules)/access-control/roles/$id/changes/': typeof mainmodulesAccessControlRolesIdChangesIndexRoute
+  '/(main)/(modules)/access-control/roles/$id/delete/': typeof mainmodulesAccessControlRolesIdDeleteIndexRoute
   '/(main)/(modules)/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/(main)/(modules)/access-control/users/$username/changes/': typeof mainmodulesAccessControlUsersUsernameChangesIndexRoute
   '/(main)/(modules)/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -787,6 +807,7 @@ export interface FileRouteTypes {
     | '/access-control/roles/create/'
     | '/access-control/users/$username/'
     | '/access-control/users/create/'
+    | '/adjustment-notes/$id/delete/'
     | '/collaterals/$id/changes/'
     | '/collaterals/$id/delete/'
     | '/collaterals/$id/edit/'
@@ -811,6 +832,7 @@ export interface FileRouteTypes {
     | '/transactions/reports/create/'
     | '/transactions/reports/generate/'
     | '/access-control/roles/$id/changes/'
+    | '/access-control/roles/$id/delete/'
     | '/access-control/roles/$id/edit/'
     | '/access-control/users/$username/changes/'
     | '/access-control/users/$username/edit/'
@@ -861,6 +883,7 @@ export interface FileRouteTypes {
     | '/access-control/roles/create'
     | '/access-control/users/$username'
     | '/access-control/users/create'
+    | '/adjustment-notes/$id/delete'
     | '/collaterals/$id/changes'
     | '/collaterals/$id/delete'
     | '/collaterals/$id/edit'
@@ -885,6 +908,7 @@ export interface FileRouteTypes {
     | '/transactions/reports/create'
     | '/transactions/reports/generate'
     | '/access-control/roles/$id/changes'
+    | '/access-control/roles/$id/delete'
     | '/access-control/roles/$id/edit'
     | '/access-control/users/$username/changes'
     | '/access-control/users/$username/edit'
@@ -937,6 +961,7 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/access-control/roles/create/'
     | '/(main)/(modules)/access-control/users/$username/'
     | '/(main)/(modules)/access-control/users/create/'
+    | '/(main)/(modules)/adjustment-notes/$id/delete/'
     | '/(main)/(modules)/collaterals/$id/changes/'
     | '/(main)/(modules)/collaterals/$id/delete/'
     | '/(main)/(modules)/collaterals/$id/edit/'
@@ -961,6 +986,7 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/transactions/reports/create/'
     | '/(main)/(modules)/transactions/reports/generate/'
     | '/(main)/(modules)/access-control/roles/$id/changes/'
+    | '/(main)/(modules)/access-control/roles/$id/delete/'
     | '/(main)/(modules)/access-control/roles/$id/edit/'
     | '/(main)/(modules)/access-control/users/$username/changes/'
     | '/(main)/(modules)/access-control/users/$username/edit/'
@@ -1406,6 +1432,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesCollateralsIdChangesIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/adjustment-notes/$id/delete/': {
+      id: '/(main)/(modules)/adjustment-notes/$id/delete/'
+      path: '/adjustment-notes/$id/delete'
+      fullPath: '/adjustment-notes/$id/delete/'
+      preLoaderRoute: typeof mainmodulesAdjustmentNotesIdDeleteIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/access-control/users/create/': {
       id: '/(main)/(modules)/access-control/users/create/'
       path: '/access-control/users/create'
@@ -1490,6 +1523,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesAccessControlRolesIdEditIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/access-control/roles/$id/delete/': {
+      id: '/(main)/(modules)/access-control/roles/$id/delete/'
+      path: '/access-control/roles/$id/delete'
+      fullPath: '/access-control/roles/$id/delete/'
+      preLoaderRoute: typeof mainmodulesAccessControlRolesIdDeleteIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/access-control/roles/$id/changes/': {
       id: '/(main)/(modules)/access-control/roles/$id/changes/'
       path: '/access-control/roles/$id/changes'
@@ -1537,6 +1577,7 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesAccessControlRolesCreateIndexRoute: typeof mainmodulesAccessControlRolesCreateIndexRoute
   mainmodulesAccessControlUsersUsernameIndexRoute: typeof mainmodulesAccessControlUsersUsernameIndexRoute
   mainmodulesAccessControlUsersCreateIndexRoute: typeof mainmodulesAccessControlUsersCreateIndexRoute
+  mainmodulesAdjustmentNotesIdDeleteIndexRoute: typeof mainmodulesAdjustmentNotesIdDeleteIndexRoute
   mainmodulesCollateralsIdChangesIndexRoute: typeof mainmodulesCollateralsIdChangesIndexRoute
   mainmodulesCollateralsIdDeleteIndexRoute: typeof mainmodulesCollateralsIdDeleteIndexRoute
   mainmodulesCollateralsIdEditIndexRoute: typeof mainmodulesCollateralsIdEditIndexRoute
@@ -1561,6 +1602,7 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesTransactionsReportsCreateIndexRoute: typeof mainmodulesTransactionsReportsCreateIndexRoute
   mainmodulesTransactionsReportsGenerateIndexRoute: typeof mainmodulesTransactionsReportsGenerateIndexRoute
   mainmodulesAccessControlRolesIdChangesIndexRoute: typeof mainmodulesAccessControlRolesIdChangesIndexRoute
+  mainmodulesAccessControlRolesIdDeleteIndexRoute: typeof mainmodulesAccessControlRolesIdDeleteIndexRoute
   mainmodulesAccessControlRolesIdEditIndexRoute: typeof mainmodulesAccessControlRolesIdEditIndexRoute
   mainmodulesAccessControlUsersUsernameChangesIndexRoute: typeof mainmodulesAccessControlUsersUsernameChangesIndexRoute
   mainmodulesAccessControlUsersUsernameEditIndexRoute: typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
@@ -1621,6 +1663,8 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
     mainmodulesAccessControlUsersUsernameIndexRoute,
   mainmodulesAccessControlUsersCreateIndexRoute:
     mainmodulesAccessControlUsersCreateIndexRoute,
+  mainmodulesAdjustmentNotesIdDeleteIndexRoute:
+    mainmodulesAdjustmentNotesIdDeleteIndexRoute,
   mainmodulesCollateralsIdChangesIndexRoute:
     mainmodulesCollateralsIdChangesIndexRoute,
   mainmodulesCollateralsIdDeleteIndexRoute:
@@ -1662,6 +1706,8 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
     mainmodulesTransactionsReportsGenerateIndexRoute,
   mainmodulesAccessControlRolesIdChangesIndexRoute:
     mainmodulesAccessControlRolesIdChangesIndexRoute,
+  mainmodulesAccessControlRolesIdDeleteIndexRoute:
+    mainmodulesAccessControlRolesIdDeleteIndexRoute,
   mainmodulesAccessControlRolesIdEditIndexRoute:
     mainmodulesAccessControlRolesIdEditIndexRoute,
   mainmodulesAccessControlUsersUsernameChangesIndexRoute:

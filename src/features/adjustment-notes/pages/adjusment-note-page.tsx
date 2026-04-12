@@ -1,22 +1,31 @@
 import {
   AdjustmentNoteIcon,
+  BreadcrumbSpec,
   buildPageLayoutConfirmationModalOption,
   overviewBreadcrumb,
   PageLayout,
   PageLayoutBreadcrumb,
   PagePanel,
 } from '@/components'
-import { AdjustmentNote } from '../models/adjustmentNote'
+import {
+  AdjustmentNote,
+  PropsWithAdjustmentNote,
+} from '../models/adjustmentNote'
 import { buildAdjustmentNoteLabel } from '../lib/utils'
 import AdjustmentNoteOverview from '../components/adjustment-note-overview'
 import { deleteAdjustmentNote } from '../services/adjustmentNoteClient'
 import { adjustmentNotesBreadcrumb } from './adjustment-notes-page'
 
-const AdjustmentNotePage = ({
-  adjustmentNote,
-}: {
-  adjustmentNote: AdjustmentNote
-}) => {
+export const buildAdjusmentNoteBreadcrumb = (
+  adjustmentNote: AdjustmentNote,
+): BreadcrumbSpec => ({
+  title: buildAdjustmentNoteLabel(adjustmentNote),
+  pathname: '/adjustment-notes/$id',
+  params: { id: adjustmentNote.id.toString() },
+  icon: AdjustmentNoteIcon,
+})
+
+const AdjustmentNotePage = ({ adjustmentNote }: PropsWithAdjustmentNote) => {
   const title = buildAdjustmentNoteLabel(adjustmentNote)
 
   return (

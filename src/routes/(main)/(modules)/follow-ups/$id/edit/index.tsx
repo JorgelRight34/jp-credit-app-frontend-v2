@@ -4,7 +4,7 @@ import { getFollowUpFn } from '..'
 import { EditFollowUpPage } from '@/features/follow-ups'
 import { requireModulePermissionToEdit } from '@/routes/(main)/(modules)/route'
 import { followUpPermissionProvider } from '@/features/follow-ups/lib/config/permission-provider'
-import { buildEditPageTitle } from '@/lib/utils'
+import { buildEditHead } from '@/lib/utils'
 
 export const Route = createFileRoute('/(main)/(modules)/follow-ups/$id/edit/')({
   beforeLoad: requireModulePermissionToEdit(followUpPermissionProvider),
@@ -13,9 +13,7 @@ export const Route = createFileRoute('/(main)/(modules)/follow-ups/$id/edit/')({
       queryKey: buildFollowUpQueryKey(+id),
       queryFn: () => getFollowUpFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildEditPageTitle(loaderData!.title, 'Seguimiento') }],
-  }),
+  head: ({ loaderData }) => buildEditHead(loaderData, (l) => l.title),
   component: RouteComponent,
 })
 

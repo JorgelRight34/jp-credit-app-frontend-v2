@@ -11,3 +11,5 @@ export interface AdjustmentNote {
     date: string;
     isClosed?: boolean;
 }
+
+export type PropsWithAdjustmentNote<T = object> = { adjustmentNote: AdjustmentNote } & T;

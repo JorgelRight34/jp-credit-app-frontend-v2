@@ -1,7 +1,7 @@
 import { buildProfileFullName } from '../lib/utils'
 import ProfileOverview from '../components/profile-overview'
 import type { BreadcrumbsByRoute, BreadcrumbSpec } from '@/components'
-import type { Profile } from '../models/profile'
+import type { Profile, PropsWithProfile } from '../models/profile'
 import {
   buildPageLayoutEditOption,
   buildPageLayoutMenuOption,
@@ -38,7 +38,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Archivos', icon: UploadIcon }],
 ]
 
-const ProfilePage = ({ profile }: { profile: Profile }) => {
+const ProfilePage = ({ profile }: PropsWithProfile) => {
   const title = buildProfileFullName(profile)
   const id = profile.id.toString()
 
@@ -48,7 +48,13 @@ const ProfilePage = ({ profile }: { profile: Profile }) => {
       options={[
         buildPageLayoutMenuOption([
           {
-            label: changeHistoryLinkLabel,
+            title: 'Borrar',
+            disabled: profile.canBeDeleted,
+            to: '/profiles/$id/delete',
+            params: { id },
+          },
+          {
+            title: changeHistoryLinkLabel,
             to: '/profiles/$id/changes',
             params: { id },
           },
@@ -69,11 +75,15 @@ const ProfilePage = ({ profile }: { profile: Profile }) => {
           <ProfileOverview profile={profile} />
         </TabPanel>
         <TabPanel index={1}>
-          <FileTable files={profile.files.map(mapApiFileToTableFile)} />
+          <ProfileFileTable profile={profile} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>
   )
 }
+
+const ProfileFileTable = ({ profile }: PropsWithProfile) => (
+  <FileTable files={profile.files.map(mapApiFileToTableFile)} />
+)
 
 export default ProfilePage
