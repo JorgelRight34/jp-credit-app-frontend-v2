@@ -12,7 +12,7 @@ const CollateralReportPage = ({ report }: ReportPageProps) => (
   <ReportPageLayout
     breadcrumb={collateralsBreadcrumb}
     templateDefinition={collateralTemplateDefinition}
-    editRoute="/collaterals/reports/$id"
+    editRoute="/collaterals/reports/$id/edit"
     report={report}
     searchInput={CollateralSearchInput}
     onSubmit={generateCollateralReport}

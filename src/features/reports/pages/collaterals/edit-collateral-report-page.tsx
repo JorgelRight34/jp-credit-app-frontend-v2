@@ -13,6 +13,7 @@ const EditCollateralReportPage = ({ report }: PropsWithReport) => (
     breadcrumb={collateralsBreadcrumb}
     report={report}
     templateDefinition={collateralTemplateDefinition}
+    deleteRoute="/collaterals/reports/$id/delete"
     onUpload={uploadCollateralReportFiles}
     onDelete={deleteCollateralReportFiles}
     onEdit={editCollateralReport}

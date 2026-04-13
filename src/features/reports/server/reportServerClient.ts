@@ -6,7 +6,7 @@ export const getReportFromServer = async (baseUrl: string, id: Report["id"]): Pr
 }
 
 const createGetReportFromServerHandler = (baseUrl: string) => (id: Report["id"]): Promise<Report> => {
-    return serverClient.get(`${baseUrl}reports/${id}`);
+    return serverClient.get(`${baseUrl}/reports/${id}`);
 }
 
 export const getLoanReportFromServer = createGetReportFromServerHandler("loans")

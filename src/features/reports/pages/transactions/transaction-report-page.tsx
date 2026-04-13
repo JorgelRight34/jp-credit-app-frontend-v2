@@ -12,7 +12,7 @@ const TransactionReportPage = ({ report }: ReportPageProps) => (
   <ReportPageLayout
     breadcrumb={transactionBreadcrumb}
     templateDefinition={transactionTemplateDefinition}
-    editRoute="/transactions/reports/$id"
+    editRoute="/transactions/reports/$id/edit"
     report={report}
     searchInput={TransactionSearchInput}
     onSubmit={generateTransactionReport}

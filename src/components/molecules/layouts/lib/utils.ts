@@ -59,7 +59,7 @@ export const buildPageLayoutDeleteOption = ({
   icon: DeleteIcon,
   disabled,
   tooltip: disabled ? tooltip : undefined,
-  component: AccentPillBtn,
+  component: AccentPillLinkBtn,
   ...options,
 })
 

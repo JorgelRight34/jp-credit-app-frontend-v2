@@ -18,8 +18,9 @@ export const getModulePermissionsBeforeLoad =
       queryFn: provider.loader,
     })
 
-    if (!isAuthorized(permissions))
-      throw new Response('Unathorized', { status: 401 })
+    if (!isAuthorized(permissions)) {
+      throw new Error(JSON.stringify({ status: 401, message: 'Unauthorized' }))
+    }
   }
 
 export const requireModulePermissionToCreate = (

@@ -29,3 +29,6 @@ export { default as EditCollateralReportPage } from './pages/collaterals/edit-co
 export { default as GenerateCollateralReportPage } from './pages/collaterals/generate-collateral-report-page'
 export { default as CreateTransactionReceiptTemplatePage } from './pages/transactions/create-transaction-receipt-template-page'
 export * from './lib/utils'
+export { default as DeleteCollateralReportPage } from './pages/collaterals/delete-collateral-report-page'
+export { default as DeleteLoanReportPage } from './pages/loans/delete-loan-report-page';
+export { default as DeleteTransactionReportPage } from './pages/transactions/delete-transaction-report-page'

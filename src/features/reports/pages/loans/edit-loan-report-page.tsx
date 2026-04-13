@@ -13,6 +13,7 @@ const EditLoanReportPage = ({ report }: PropsWithReport) => (
     breadcrumb={loanModuleBreadcrumb}
     report={report}
     templateDefinition={loanTemplateDefinition}
+    deleteRoute="/loans/reports/$id/delete"
     onUpload={uploadCollateralReportFiles}
     onDelete={deleteCollateralReportFiles}
     onEdit={editLoanReport}

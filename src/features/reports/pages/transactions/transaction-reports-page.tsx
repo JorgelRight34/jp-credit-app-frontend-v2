@@ -3,7 +3,10 @@ import {
   ReportsDataTable,
   ReportsPageLayout,
 } from '@/features/reports'
-import { transactionBreadcrumb } from '@/features/transactions'
+import {
+  transactionBreadcrumb,
+  transactionsQueryKey,
+} from '@/features/transactions'
 
 const TransactionReportsPage = () => (
   <ReportsPageLayout
@@ -14,6 +17,7 @@ const TransactionReportsPage = () => (
   >
     <ReportsDataTable
       reportPageRoute="/transactions/reports/$id"
+      cacheKey={transactionsQueryKey}
       loader={getTransactionReports}
     />
   </ReportsPageLayout>

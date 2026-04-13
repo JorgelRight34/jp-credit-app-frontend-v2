@@ -1,10 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { getCollateralReportFn } from '..'
 import {
+  buildReportLabel,
   buildReportQueryKey,
   EditCollateralReportPage,
 } from '@/features/reports'
-import { buildEditPageTitle } from '@/lib/utils'
+import { buildEditHead } from '@/lib/utils'
 import { requireModulePermissionToEdit } from '@/routes/(main)/(modules)/route'
 import { collateralReportsPermissionProvider } from '@/features/collaterals'
 
@@ -19,9 +20,7 @@ export const Route = createFileRoute(
       queryKey: buildReportQueryKey(+id, 'Collateral'),
       queryFn: () => getCollateralReportFn(id),
     }),
-  head: ({ loaderData }) => ({
-    meta: [{ title: buildEditPageTitle(loaderData!.title, 'Reporte') }],
-  }),
+  head: ({ loaderData }) => buildEditHead(loaderData, buildReportLabel),
   component: RouteComponent,
 })
 

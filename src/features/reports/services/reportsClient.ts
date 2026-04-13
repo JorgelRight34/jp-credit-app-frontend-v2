@@ -47,7 +47,7 @@ const createUpdateReportHandler = (prefix: string) =>
     };
 
 const createDeleteReportHandler = (prefix: string) =>
-    async (id: Report["id"]) => await api.delete(`${prefix}/reports/${id}`);
+    async (id: Report["id"]) => { await api.delete(`${prefix}/reports/${id}`) };
 
 const createUploadReportFilesHandler = (prefix: string) =>
     async (id: Report["id"], files: Array<File>) => {

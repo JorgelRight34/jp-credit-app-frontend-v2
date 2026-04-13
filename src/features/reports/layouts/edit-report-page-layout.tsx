@@ -1,7 +1,10 @@
 import {
   BreadcrumbSpec,
+  buildPageLayoutDeleteOption,
   EditFormPageLayout,
   PermissionsProvider,
+  Route,
+  RouteParams,
 } from '@/components'
 import EditReportForm from '../components/edit-report-form'
 import { Report } from '../models/report'
@@ -18,6 +21,7 @@ interface EditReportPageProps<T> {
   report: Report
   breadcrumb: BreadcrumbSpec
   templateDefinition: ReportTemplateDefinition<T>
+  deleteRoute: Route
   onUpload: UploadFilesHandler
   onDelete: DeleteFilesHandler
   onEdit: EditReportHandler
@@ -26,11 +30,18 @@ interface EditReportPageProps<T> {
 const EditReportPageLayout = <T,>({
   report,
   breadcrumb,
+  deleteRoute,
   ...config
 }: EditReportPageProps<T>) => (
   <EditFormPageLayout
     title={`Editar ${report.title}`}
     breadcrumbs={[breadcrumb, reportsBreadcrumb, buildReportBreadcrumb(report)]}
+    options={[
+      buildPageLayoutDeleteOption({
+        to: deleteRoute,
+        params: { id: report.id.toString() },
+      }),
+    ]}
   >
     <EditReportForm report={report} {...config} />
   </EditFormPageLayout>

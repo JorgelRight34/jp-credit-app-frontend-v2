@@ -10,17 +10,19 @@ import { Report } from '../models/report'
 import { PagedResponse } from '@/models'
 import { buildReportDataTableColumns } from '../lib/config/report-datatable-config'
 
-export interface ReportDataTableProps extends DataTableContainerOverrides<
-  Report,
-  ReportQuery
+export interface ReportDataTableProps extends Omit<
+  DataTableContainerOverrides<Report, ReportQuery>,
+  'cacheKey'
 > {
   reportPageRoute: Route
+  cacheKey: string
   loader: (query: ReportQuery) => Promise<PagedResponse<Report>>
 }
 
 const ReportDataTable = ({
   reportPageRoute,
   loader,
+  cacheKey,
   ...props
 }: ReportDataTableProps) => (
   <DataTableContainer
@@ -29,7 +31,7 @@ const ReportDataTable = ({
       columns: buildReportDataTableColumns(reportPageRoute),
       loader,
     }}
-    cacheKey={[reporstQueryKey]}
+    cacheKey={[reporstQueryKey, cacheKey]}
     {...props}
   />
 )

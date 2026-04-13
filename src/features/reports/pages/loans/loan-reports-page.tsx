@@ -1,4 +1,4 @@
-import { loanModuleBreadcrumb } from '@/features/loans'
+import { loanModuleBreadcrumb, loansQueryKey } from '@/features/loans'
 import {
   getLoanReports,
   ReportsDataTable,
@@ -14,6 +14,7 @@ const LoanReportsPage = () => (
   >
     <ReportsDataTable
       reportPageRoute="/loans/reports/$id"
+      cacheKey={loansQueryKey}
       loader={getLoanReports}
     />
   </ReportsPageLayout>

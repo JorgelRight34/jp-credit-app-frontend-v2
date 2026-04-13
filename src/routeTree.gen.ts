@@ -77,9 +77,12 @@ import { Route as mainmodulesAccessControlRolesCreateIndexRouteImport } from './
 import { Route as mainmodulesAccessControlRolesIdIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/index'
 import { Route as mainmodulesTransactionsReportsReceiptCreateIndexRouteImport } from './routes/(main)/(modules)/transactions/reports/receipt/create/index'
 import { Route as mainmodulesTransactionsReportsIdEditIndexRouteImport } from './routes/(main)/(modules)/transactions/reports/$id/edit/index'
+import { Route as mainmodulesTransactionsReportsIdDeleteIndexRouteImport } from './routes/(main)/(modules)/transactions/reports/$id/delete/index'
 import { Route as mainmodulesLoansReportsIdEditIndexRouteImport } from './routes/(main)/(modules)/loans/reports/$id/edit/index'
+import { Route as mainmodulesLoansReportsIdDeleteIndexRouteImport } from './routes/(main)/(modules)/loans/reports/$id/delete/index'
 import { Route as mainmodulesLoansPurposesIdEditIndexRouteImport } from './routes/(main)/(modules)/loans/purposes/$id/edit/index'
 import { Route as mainmodulesCollateralsReportsIdEditIndexRouteImport } from './routes/(main)/(modules)/collaterals/reports/$id/edit/index'
+import { Route as mainmodulesCollateralsReportsIdDeleteIndexRouteImport } from './routes/(main)/(modules)/collaterals/reports/$id/delete/index'
 import { Route as mainmodulesAccessControlUsersUsernameEditIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/edit/index'
 import { Route as mainmodulesAccessControlUsersUsernameChangesIndexRouteImport } from './routes/(main)/(modules)/access-control/users/$username/changes/index'
 import { Route as mainmodulesAccessControlRolesIdEditIndexRouteImport } from './routes/(main)/(modules)/access-control/roles/$id/edit/index'
@@ -484,10 +487,22 @@ const mainmodulesTransactionsReportsIdEditIndexRoute =
     path: '/transactions/reports/$id/edit/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesTransactionsReportsIdDeleteIndexRoute =
+  mainmodulesTransactionsReportsIdDeleteIndexRouteImport.update({
+    id: '/transactions/reports/$id/delete/',
+    path: '/transactions/reports/$id/delete/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
 const mainmodulesLoansReportsIdEditIndexRoute =
   mainmodulesLoansReportsIdEditIndexRouteImport.update({
     id: '/loans/reports/$id/edit/',
     path: '/loans/reports/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesLoansReportsIdDeleteIndexRoute =
+  mainmodulesLoansReportsIdDeleteIndexRouteImport.update({
+    id: '/loans/reports/$id/delete/',
+    path: '/loans/reports/$id/delete/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesLoansPurposesIdEditIndexRoute =
@@ -500,6 +515,12 @@ const mainmodulesCollateralsReportsIdEditIndexRoute =
   mainmodulesCollateralsReportsIdEditIndexRouteImport.update({
     id: '/collaterals/reports/$id/edit/',
     path: '/collaterals/reports/$id/edit/',
+    getParentRoute: () => mainmodulesRouteRoute,
+  } as any)
+const mainmodulesCollateralsReportsIdDeleteIndexRoute =
+  mainmodulesCollateralsReportsIdDeleteIndexRouteImport.update({
+    id: '/collaterals/reports/$id/delete/',
+    path: '/collaterals/reports/$id/delete/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
 const mainmodulesAccessControlUsersUsernameEditIndexRoute =
@@ -603,9 +624,12 @@ export interface FileRoutesByFullPath {
   '/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/changes/': typeof mainmodulesAccessControlUsersUsernameChangesIndexRoute
   '/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
+  '/collaterals/reports/$id/delete/': typeof mainmodulesCollateralsReportsIdDeleteIndexRoute
   '/collaterals/reports/$id/edit/': typeof mainmodulesCollateralsReportsIdEditIndexRoute
   '/loans/purposes/$id/edit/': typeof mainmodulesLoansPurposesIdEditIndexRoute
+  '/loans/reports/$id/delete/': typeof mainmodulesLoansReportsIdDeleteIndexRoute
   '/loans/reports/$id/edit/': typeof mainmodulesLoansReportsIdEditIndexRoute
+  '/transactions/reports/$id/delete/': typeof mainmodulesTransactionsReportsIdDeleteIndexRoute
   '/transactions/reports/$id/edit/': typeof mainmodulesTransactionsReportsIdEditIndexRoute
   '/transactions/reports/receipt/create/': typeof mainmodulesTransactionsReportsReceiptCreateIndexRoute
 }
@@ -679,9 +703,12 @@ export interface FileRoutesByTo {
   '/access-control/roles/$id/edit': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/access-control/users/$username/changes': typeof mainmodulesAccessControlUsersUsernameChangesIndexRoute
   '/access-control/users/$username/edit': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
+  '/collaterals/reports/$id/delete': typeof mainmodulesCollateralsReportsIdDeleteIndexRoute
   '/collaterals/reports/$id/edit': typeof mainmodulesCollateralsReportsIdEditIndexRoute
   '/loans/purposes/$id/edit': typeof mainmodulesLoansPurposesIdEditIndexRoute
+  '/loans/reports/$id/delete': typeof mainmodulesLoansReportsIdDeleteIndexRoute
   '/loans/reports/$id/edit': typeof mainmodulesLoansReportsIdEditIndexRoute
+  '/transactions/reports/$id/delete': typeof mainmodulesTransactionsReportsIdDeleteIndexRoute
   '/transactions/reports/$id/edit': typeof mainmodulesTransactionsReportsIdEditIndexRoute
   '/transactions/reports/receipt/create': typeof mainmodulesTransactionsReportsReceiptCreateIndexRoute
 }
@@ -758,9 +785,12 @@ export interface FileRoutesById {
   '/(main)/(modules)/access-control/roles/$id/edit/': typeof mainmodulesAccessControlRolesIdEditIndexRoute
   '/(main)/(modules)/access-control/users/$username/changes/': typeof mainmodulesAccessControlUsersUsernameChangesIndexRoute
   '/(main)/(modules)/access-control/users/$username/edit/': typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
+  '/(main)/(modules)/collaterals/reports/$id/delete/': typeof mainmodulesCollateralsReportsIdDeleteIndexRoute
   '/(main)/(modules)/collaterals/reports/$id/edit/': typeof mainmodulesCollateralsReportsIdEditIndexRoute
   '/(main)/(modules)/loans/purposes/$id/edit/': typeof mainmodulesLoansPurposesIdEditIndexRoute
+  '/(main)/(modules)/loans/reports/$id/delete/': typeof mainmodulesLoansReportsIdDeleteIndexRoute
   '/(main)/(modules)/loans/reports/$id/edit/': typeof mainmodulesLoansReportsIdEditIndexRoute
+  '/(main)/(modules)/transactions/reports/$id/delete/': typeof mainmodulesTransactionsReportsIdDeleteIndexRoute
   '/(main)/(modules)/transactions/reports/$id/edit/': typeof mainmodulesTransactionsReportsIdEditIndexRoute
   '/(main)/(modules)/transactions/reports/receipt/create/': typeof mainmodulesTransactionsReportsReceiptCreateIndexRoute
 }
@@ -836,9 +866,12 @@ export interface FileRouteTypes {
     | '/access-control/roles/$id/edit/'
     | '/access-control/users/$username/changes/'
     | '/access-control/users/$username/edit/'
+    | '/collaterals/reports/$id/delete/'
     | '/collaterals/reports/$id/edit/'
     | '/loans/purposes/$id/edit/'
+    | '/loans/reports/$id/delete/'
     | '/loans/reports/$id/edit/'
+    | '/transactions/reports/$id/delete/'
     | '/transactions/reports/$id/edit/'
     | '/transactions/reports/receipt/create/'
   fileRoutesByTo: FileRoutesByTo
@@ -912,9 +945,12 @@ export interface FileRouteTypes {
     | '/access-control/roles/$id/edit'
     | '/access-control/users/$username/changes'
     | '/access-control/users/$username/edit'
+    | '/collaterals/reports/$id/delete'
     | '/collaterals/reports/$id/edit'
     | '/loans/purposes/$id/edit'
+    | '/loans/reports/$id/delete'
     | '/loans/reports/$id/edit'
+    | '/transactions/reports/$id/delete'
     | '/transactions/reports/$id/edit'
     | '/transactions/reports/receipt/create'
   id:
@@ -990,9 +1026,12 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/access-control/roles/$id/edit/'
     | '/(main)/(modules)/access-control/users/$username/changes/'
     | '/(main)/(modules)/access-control/users/$username/edit/'
+    | '/(main)/(modules)/collaterals/reports/$id/delete/'
     | '/(main)/(modules)/collaterals/reports/$id/edit/'
     | '/(main)/(modules)/loans/purposes/$id/edit/'
+    | '/(main)/(modules)/loans/reports/$id/delete/'
     | '/(main)/(modules)/loans/reports/$id/edit/'
+    | '/(main)/(modules)/transactions/reports/$id/delete/'
     | '/(main)/(modules)/transactions/reports/$id/edit/'
     | '/(main)/(modules)/transactions/reports/receipt/create/'
   fileRoutesById: FileRoutesById
@@ -1481,11 +1520,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof mainmodulesTransactionsReportsIdEditIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
+    '/(main)/(modules)/transactions/reports/$id/delete/': {
+      id: '/(main)/(modules)/transactions/reports/$id/delete/'
+      path: '/transactions/reports/$id/delete'
+      fullPath: '/transactions/reports/$id/delete/'
+      preLoaderRoute: typeof mainmodulesTransactionsReportsIdDeleteIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
     '/(main)/(modules)/loans/reports/$id/edit/': {
       id: '/(main)/(modules)/loans/reports/$id/edit/'
       path: '/loans/reports/$id/edit'
       fullPath: '/loans/reports/$id/edit/'
       preLoaderRoute: typeof mainmodulesLoansReportsIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/loans/reports/$id/delete/': {
+      id: '/(main)/(modules)/loans/reports/$id/delete/'
+      path: '/loans/reports/$id/delete'
+      fullPath: '/loans/reports/$id/delete/'
+      preLoaderRoute: typeof mainmodulesLoansReportsIdDeleteIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/loans/purposes/$id/edit/': {
@@ -1500,6 +1553,13 @@ declare module '@tanstack/react-router' {
       path: '/collaterals/reports/$id/edit'
       fullPath: '/collaterals/reports/$id/edit/'
       preLoaderRoute: typeof mainmodulesCollateralsReportsIdEditIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/collaterals/reports/$id/delete/': {
+      id: '/(main)/(modules)/collaterals/reports/$id/delete/'
+      path: '/collaterals/reports/$id/delete'
+      fullPath: '/collaterals/reports/$id/delete/'
+      preLoaderRoute: typeof mainmodulesCollateralsReportsIdDeleteIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/access-control/users/$username/edit/': {
@@ -1606,9 +1666,12 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesAccessControlRolesIdEditIndexRoute: typeof mainmodulesAccessControlRolesIdEditIndexRoute
   mainmodulesAccessControlUsersUsernameChangesIndexRoute: typeof mainmodulesAccessControlUsersUsernameChangesIndexRoute
   mainmodulesAccessControlUsersUsernameEditIndexRoute: typeof mainmodulesAccessControlUsersUsernameEditIndexRoute
+  mainmodulesCollateralsReportsIdDeleteIndexRoute: typeof mainmodulesCollateralsReportsIdDeleteIndexRoute
   mainmodulesCollateralsReportsIdEditIndexRoute: typeof mainmodulesCollateralsReportsIdEditIndexRoute
   mainmodulesLoansPurposesIdEditIndexRoute: typeof mainmodulesLoansPurposesIdEditIndexRoute
+  mainmodulesLoansReportsIdDeleteIndexRoute: typeof mainmodulesLoansReportsIdDeleteIndexRoute
   mainmodulesLoansReportsIdEditIndexRoute: typeof mainmodulesLoansReportsIdEditIndexRoute
+  mainmodulesTransactionsReportsIdDeleteIndexRoute: typeof mainmodulesTransactionsReportsIdDeleteIndexRoute
   mainmodulesTransactionsReportsIdEditIndexRoute: typeof mainmodulesTransactionsReportsIdEditIndexRoute
   mainmodulesTransactionsReportsReceiptCreateIndexRoute: typeof mainmodulesTransactionsReportsReceiptCreateIndexRoute
 }
@@ -1714,12 +1777,18 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
     mainmodulesAccessControlUsersUsernameChangesIndexRoute,
   mainmodulesAccessControlUsersUsernameEditIndexRoute:
     mainmodulesAccessControlUsersUsernameEditIndexRoute,
+  mainmodulesCollateralsReportsIdDeleteIndexRoute:
+    mainmodulesCollateralsReportsIdDeleteIndexRoute,
   mainmodulesCollateralsReportsIdEditIndexRoute:
     mainmodulesCollateralsReportsIdEditIndexRoute,
   mainmodulesLoansPurposesIdEditIndexRoute:
     mainmodulesLoansPurposesIdEditIndexRoute,
+  mainmodulesLoansReportsIdDeleteIndexRoute:
+    mainmodulesLoansReportsIdDeleteIndexRoute,
   mainmodulesLoansReportsIdEditIndexRoute:
     mainmodulesLoansReportsIdEditIndexRoute,
+  mainmodulesTransactionsReportsIdDeleteIndexRoute:
+    mainmodulesTransactionsReportsIdDeleteIndexRoute,
   mainmodulesTransactionsReportsIdEditIndexRoute:
     mainmodulesTransactionsReportsIdEditIndexRoute,
   mainmodulesTransactionsReportsReceiptCreateIndexRoute:

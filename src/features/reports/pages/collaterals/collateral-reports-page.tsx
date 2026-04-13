@@ -1,4 +1,7 @@
-import { collateralsBreadcrumb } from '@/features/collaterals'
+import {
+  collateralsBreadcrumb,
+  collateralsQueryKey,
+} from '@/features/collaterals'
 import {
   getCollateralsReport,
   ReportsDataTable,
@@ -14,6 +17,7 @@ const CollateralReportsPage = () => (
   >
     <ReportsDataTable
       reportPageRoute="/loans/reports/$id"
+      cacheKey={collateralsQueryKey}
       loader={getCollateralsReport}
     />
   </ReportsPageLayout>

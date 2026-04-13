@@ -1,18 +1,18 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { getTransactionReportFn } from '..'
 import {
   buildReportLabel,
   buildReportQueryKey,
-  EditTransactionReportPage,
+  DeleteTransactionReportPage,
 } from '@/features/reports'
-import { buildEditHead } from '@/lib/utils'
-import { requireModulePermissionToEdit } from '@/routes/(main)/(modules)/route'
+import { buildDeleteHead } from '@/lib/utils'
+import { createFileRoute } from '@tanstack/react-router'
+import { getTransactionReportFn } from '..'
+import { requireModulePermissionToDelete } from '@/routes/(main)/(modules)/route'
 import { transactionReportPermissionProvider } from '@/features/transactions'
 
 export const Route = createFileRoute(
-  '/(main)/(modules)/transactions/reports/$id/edit/',
+  '/(main)/(modules)/transactions/reports/$id/delete/',
 )({
-  beforeLoad: requireModulePermissionToEdit(
+  beforeLoad: requireModulePermissionToDelete(
     transactionReportPermissionProvider,
   ),
   loader: async ({ context, params: { id } }) =>
@@ -20,12 +20,12 @@ export const Route = createFileRoute(
       queryKey: buildReportQueryKey(+id, 'Transaction'),
       queryFn: () => getTransactionReportFn(id),
     }),
-  head: ({ loaderData }) => buildEditHead(loaderData, buildReportLabel),
+  head: ({ loaderData }) => buildDeleteHead(loaderData, buildReportLabel),
   component: RouteComponent,
 })
 
 function RouteComponent() {
   const report = Route.useLoaderData()
 
-  return <EditTransactionReportPage report={report} />
+  return <DeleteTransactionReportPage report={report} />
 }

@@ -1,9 +1,11 @@
 import {
+  buildReportLabel,
   buildReportQueryKey,
   CollateralReportPage,
   getCollateralReport,
 } from '@/features/reports'
 import { getCollateralReportFromServer } from '@/features/reports/server/reportServerClient'
+import { buildHead } from '@/lib/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { createIsomorphicFn } from '@tanstack/react-start'
 
@@ -19,7 +21,7 @@ export const Route = createFileRoute(
       queryKey: buildReportQueryKey(+id, 'Collateral'),
       queryFn: () => getCollateralReportFn(id),
     }),
-  head: ({ loaderData }) => ({ meta: [{ title: loaderData?.title }] }),
+  head: ({ loaderData }) => buildHead(loaderData, buildReportLabel),
   component: RouteComponent,
 })
 
