@@ -16,6 +16,7 @@ import { Route as mainIndexRouteImport } from './routes/(main)/index'
 import { Route as mainmodulesRouteRouteImport } from './routes/(main)/(modules)/route'
 import { Route as mainResetPasswordIndexRouteImport } from './routes/(main)/reset-password/index'
 import { Route as mainmodulesTransactionsIndexRouteImport } from './routes/(main)/(modules)/transactions/index'
+import { Route as mainmodulesSystemIndexRouteImport } from './routes/(main)/(modules)/system/index'
 import { Route as mainmodulesProjectsIndexRouteImport } from './routes/(main)/(modules)/projects/index'
 import { Route as mainmodulesProfilesIndexRouteImport } from './routes/(main)/(modules)/profiles/index'
 import { Route as mainmodulesLoansIndexRouteImport } from './routes/(main)/(modules)/loans/index'
@@ -123,6 +124,11 @@ const mainmodulesTransactionsIndexRoute =
     path: '/transactions/',
     getParentRoute: () => mainmodulesRouteRoute,
   } as any)
+const mainmodulesSystemIndexRoute = mainmodulesSystemIndexRouteImport.update({
+  id: '/system/',
+  path: '/system/',
+  getParentRoute: () => mainmodulesRouteRoute,
+} as any)
 const mainmodulesProjectsIndexRoute =
   mainmodulesProjectsIndexRouteImport.update({
     id: '/projects/',
@@ -568,6 +574,7 @@ export interface FileRoutesByFullPath {
   '/loans/': typeof mainmodulesLoansIndexRoute
   '/profiles/': typeof mainmodulesProfilesIndexRoute
   '/projects/': typeof mainmodulesProjectsIndexRoute
+  '/system/': typeof mainmodulesSystemIndexRoute
   '/transactions/': typeof mainmodulesTransactionsIndexRoute
   '/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
   '/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
@@ -647,6 +654,7 @@ export interface FileRoutesByTo {
   '/loans': typeof mainmodulesLoansIndexRoute
   '/profiles': typeof mainmodulesProfilesIndexRoute
   '/projects': typeof mainmodulesProjectsIndexRoute
+  '/system': typeof mainmodulesSystemIndexRoute
   '/transactions': typeof mainmodulesTransactionsIndexRoute
   '/adjustment-notes/$id': typeof mainmodulesAdjustmentNotesIdIndexRoute
   '/adjustment-notes/create': typeof mainmodulesAdjustmentNotesCreateIndexRoute
@@ -729,6 +737,7 @@ export interface FileRoutesById {
   '/(main)/(modules)/loans/': typeof mainmodulesLoansIndexRoute
   '/(main)/(modules)/profiles/': typeof mainmodulesProfilesIndexRoute
   '/(main)/(modules)/projects/': typeof mainmodulesProjectsIndexRoute
+  '/(main)/(modules)/system/': typeof mainmodulesSystemIndexRoute
   '/(main)/(modules)/transactions/': typeof mainmodulesTransactionsIndexRoute
   '/(main)/(modules)/adjustment-notes/$id/': typeof mainmodulesAdjustmentNotesIdIndexRoute
   '/(main)/(modules)/adjustment-notes/create/': typeof mainmodulesAdjustmentNotesCreateIndexRoute
@@ -810,6 +819,7 @@ export interface FileRouteTypes {
     | '/loans/'
     | '/profiles/'
     | '/projects/'
+    | '/system/'
     | '/transactions/'
     | '/adjustment-notes/$id/'
     | '/adjustment-notes/create/'
@@ -889,6 +899,7 @@ export interface FileRouteTypes {
     | '/loans'
     | '/profiles'
     | '/projects'
+    | '/system'
     | '/transactions'
     | '/adjustment-notes/$id'
     | '/adjustment-notes/create'
@@ -970,6 +981,7 @@ export interface FileRouteTypes {
     | '/(main)/(modules)/loans/'
     | '/(main)/(modules)/profiles/'
     | '/(main)/(modules)/projects/'
+    | '/(main)/(modules)/system/'
     | '/(main)/(modules)/transactions/'
     | '/(main)/(modules)/adjustment-notes/$id/'
     | '/(main)/(modules)/adjustment-notes/create/'
@@ -1091,6 +1103,13 @@ declare module '@tanstack/react-router' {
       path: '/transactions'
       fullPath: '/transactions/'
       preLoaderRoute: typeof mainmodulesTransactionsIndexRouteImport
+      parentRoute: typeof mainmodulesRouteRoute
+    }
+    '/(main)/(modules)/system/': {
+      id: '/(main)/(modules)/system/'
+      path: '/system'
+      fullPath: '/system/'
+      preLoaderRoute: typeof mainmodulesSystemIndexRouteImport
       parentRoute: typeof mainmodulesRouteRoute
     }
     '/(main)/(modules)/projects/': {
@@ -1610,6 +1629,7 @@ interface mainmodulesRouteRouteChildren {
   mainmodulesLoansIndexRoute: typeof mainmodulesLoansIndexRoute
   mainmodulesProfilesIndexRoute: typeof mainmodulesProfilesIndexRoute
   mainmodulesProjectsIndexRoute: typeof mainmodulesProjectsIndexRoute
+  mainmodulesSystemIndexRoute: typeof mainmodulesSystemIndexRoute
   mainmodulesTransactionsIndexRoute: typeof mainmodulesTransactionsIndexRoute
   mainmodulesAdjustmentNotesIdIndexRoute: typeof mainmodulesAdjustmentNotesIdIndexRoute
   mainmodulesAdjustmentNotesCreateIndexRoute: typeof mainmodulesAdjustmentNotesCreateIndexRoute
@@ -1687,6 +1707,7 @@ const mainmodulesRouteRouteChildren: mainmodulesRouteRouteChildren = {
   mainmodulesLoansIndexRoute: mainmodulesLoansIndexRoute,
   mainmodulesProfilesIndexRoute: mainmodulesProfilesIndexRoute,
   mainmodulesProjectsIndexRoute: mainmodulesProjectsIndexRoute,
+  mainmodulesSystemIndexRoute: mainmodulesSystemIndexRoute,
   mainmodulesTransactionsIndexRoute: mainmodulesTransactionsIndexRoute,
   mainmodulesAdjustmentNotesIdIndexRoute:
     mainmodulesAdjustmentNotesIdIndexRoute,
