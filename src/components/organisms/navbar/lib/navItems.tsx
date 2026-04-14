@@ -36,6 +36,7 @@ import {
   ScheduleIcon,
   SettingsIcon,
   TrendingUpIcon,
+  WorkerIcon,
 } from '@/components/atoms'
 
 const addRouteName = 'Añadir'
@@ -405,25 +406,12 @@ export const followUpsNavItem: NavItem = {
 export const systemNavItem: NavItem = {
   name: 'Sistema',
   icon: () => <ComputerIcon />,
-  route: '/finance/projections',
+  route: '/system',
   children: [
     {
-      name: 'Proyecciones',
-      icon: () => <TrendingUpIcon />,
-      route: '/finance/projections',
-      activeOptions: { exact: false },
-    },
-    {
-      name: 'Ingresos',
-      icon: () => <AttachMoneyIcon />,
-      route: '/finance/incomes',
-      activeOptions: { exact: false },
-    },
-    {
-      name: 'Egresos',
-      icon: () => <AccountBalanceWalletIcon />,
-      route: '/finance/expenses',
-      activeOptions: { exact: false },
+      name: 'Workers',
+      icon: () => <WorkerIcon />,
+      route: '/system',
     },
   ],
 }

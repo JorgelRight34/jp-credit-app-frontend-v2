@@ -4,6 +4,7 @@ import {
   PageLayout,
   PageLayoutBreadcrumb,
   PagePanel,
+  WorkerIcon,
 } from '@/components'
 import BackgroundServicesDataTable from '../components/background-services-datatable'
 
@@ -14,13 +15,17 @@ export const systemModuleBreadcrumb: BreadcrumbSpec = {
 
 export const backgroundServiceBreadcrumb: BreadcrumbSpec = {
   title: 'Trabajos',
-  icon: ComputerIcon,
+  icon: WorkerIcon,
 }
 
 const SystemPage = () => (
   <PageLayout
     title="Sistemas"
-    breadcrumb={<PageLayoutBreadcrumb breadcrumbs={[systemModuleBreadcrumb]} />}
+    breadcrumb={
+      <PageLayoutBreadcrumb
+        breadcrumbs={[systemModuleBreadcrumb, backgroundServiceBreadcrumb]}
+      />
+    }
   >
     <PagePanel>
       <BackgroundServicesDataTable />
