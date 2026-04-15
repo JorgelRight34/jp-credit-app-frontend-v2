@@ -22,7 +22,11 @@ import SafeHtml from '@/components/molecules/safe-html/safe-html'
 
 export const buildLinkDataCell = (label: ReactNode, linkProps: LinkProps) => {
   return (
-    <Link className="text-accent-secondary break-words" {...linkProps}>
+    <Link
+      className="text-accent-secondary break-words"
+      preloadDelay={300} // 1 seconds
+      {...linkProps}
+    >
       {label}
     </Link>
   )

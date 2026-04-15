@@ -1,6 +1,7 @@
 export { default as PaymentConfirmationStep } from './components/payment-confirmation-step'
 export * from './models/transaction'
 export { default as PaymentReceiptStep } from './components/payment-receipt-step'
+export * from './components/payment-receipt-step'
 export { default as TransactionsPage } from './pages/transactions-page'
 export { default as CreateTransactionPage } from './pages/create-transaction-page'
 export * from './models/paymentResult'

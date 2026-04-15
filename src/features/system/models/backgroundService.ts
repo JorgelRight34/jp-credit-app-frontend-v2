@@ -1,6 +1,7 @@
 export interface BackgroundService {
     id: number;
     name: string;
+    shortDescription?: string;
     configurations: Array<{
         id: number;
         serviceId: number;

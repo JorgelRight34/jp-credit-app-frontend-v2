@@ -15,6 +15,7 @@ export const systemModuleBreadcrumb: BreadcrumbSpec = {
 
 export const backgroundServiceBreadcrumb: BreadcrumbSpec = {
   title: 'Trabajos',
+  pathname: '/system',
   icon: WorkerIcon,
 }
 

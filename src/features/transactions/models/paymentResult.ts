@@ -17,3 +17,7 @@ interface LoanSnapshot {
     accruedInterest: number;
     status: LoanStatus
 }
+
+export type PropsWithPaymentResult<T = object> = {
+    paymentResult: PaymentResult
+} & T;

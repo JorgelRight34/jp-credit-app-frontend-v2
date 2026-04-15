@@ -292,7 +292,8 @@ input:focus {
   outline: none !important;
 }
 
-input[type='date'] {
+input[type='date'],
+input[type='time'] {
   color-scheme: var(--color-scheme);
 }
 

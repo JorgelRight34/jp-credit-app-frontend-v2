@@ -15,7 +15,7 @@ const TableContainer = ({
       className="flex flex-col !overflow-hidden rounded border shadow-sm"
       {...props}
     >
-      <div className="flex w-full flex-col rounded-xl">{children}</div>
+      <div className="flex w-full flex-col rounded-xl border">{children}</div>
       <div className="bg-surface flex-shrink-0 border-t">{navigation}</div>
     </div>
   )

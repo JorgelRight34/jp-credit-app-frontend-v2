@@ -1,15 +1,18 @@
 import { Query, UseDataFormProps, useForm } from "@/components/organisms"
 import { exportFormSchema, ExportFormValues } from "../lib/schemas/exportFormSchema";
+import { AxiosResponse } from "axios";
+
+export type ExportHandlerResponse = AxiosResponse<Blob>;
 
 export type ExportHandler<T = Query> = (
     options: ExportFormValues,
     values: T,
-) => Promise<Blob>
+) => Promise<ExportHandlerResponse>
 
-interface UseExportFormProps extends UseDataFormProps<Blob, ExportFormValues> {
+interface UseExportFormProps extends UseDataFormProps<ExportHandlerResponse, ExportFormValues> {
     onSubmit: (
         options: ExportFormValues,
-    ) => Promise<Blob>
+    ) => Promise<ExportHandlerResponse>
 }
 
 export const useExportForm = ({ onSubmit, ...config }: UseExportFormProps) => {

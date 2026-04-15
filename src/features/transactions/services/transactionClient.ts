@@ -35,12 +35,11 @@ export const getClosedPeriods = async (params: Query): Promise<PagedResponse<Clo
     return data
 }
 
-export const createPayment = async ({ loanId, ...request }: PaymentFormValues): Promise<Transaction> => {
+export const createPayment = async ({ loanId, ...request }: PaymentFormValues): Promise<PaymentResult> => {
     console.warn("create payment is on preview mode")
-    const { data } = await api.post(baseUrl + "/payment", {
+    const { data } = await api.post(baseUrl + "/payment/preview", {  // Just for testing
         request,
         loanId,
-        isPreview: true // JUST FOR TESTING 
     });
     return data;
 }
@@ -56,7 +55,7 @@ export const closePeriod = async (body: ClosedPeriodFormValues): Promise<ClosedP
 }
 
 export const getPaymentPreview = async ({ loanId, ...request }: PaymentFormValues): Promise<PaymentResult> => {
-    const { data } = await api.post(baseUrl + "/payment", { request, loanId, isPreview: true });
+    const { data } = await api.post(baseUrl + "/payment/preview", { request, loanId });
     return data;
 }
 
@@ -82,9 +81,8 @@ export const deleteTransaction = async (id: Transaction["id"], type: Transaction
 }
 
 export const exportTransactions: ExportHandler<TransactionQuery> = async (options, params) => {
-    const { data } = await api.get(baseUrl + "/export", {
+    return await api.get(baseUrl + "/export", {
         params: withProjectIdParams({ ...params, ...options }),
         responseType: "blob"
     })
-    return data;
 }

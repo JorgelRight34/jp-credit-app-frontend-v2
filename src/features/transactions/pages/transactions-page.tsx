@@ -6,7 +6,7 @@ import {
   DisbursementIcon,
   PageRouterLayout,
   PaymentIcon,
-  ScheduleIcon,
+  SellIcon,
   Tab,
   TabPanel,
   TabsList,
@@ -35,7 +35,7 @@ const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Todos', icon: AllIcon }],
   [paymentsBreadcrumb],
   [disbursementsBreadcrumb],
-  [{ title: 'Atrasados', icon: ScheduleIcon }],
+  [{ title: 'Ventas', icon: SellIcon }],
 ]
 
 const TransactionsPage = () => {
@@ -53,7 +53,7 @@ const TransactionsPage = () => {
           <Tab index={0}>Todos</Tab>
           <Tab index={1}>Pagos</Tab>
           <Tab index={2}>Desembolsos</Tab>
-          <Tab index={3}>Atrasados</Tab>
+          <Tab index={3}>Ventas</Tab>
         </TabsList>
         <TabPanel index={0}>
           <TransactionDataTable />
@@ -65,7 +65,7 @@ const TransactionsPage = () => {
           <TransactionDataTable initialQuery={{ type: 'ds' }} />
         </TabPanel>
         <TabPanel index={3}>
-          <TransactionDataTable initialQuery={{ isOverdue: true }} />
+          <TransactionDataTable initialQuery={{ type: 'vg' }} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

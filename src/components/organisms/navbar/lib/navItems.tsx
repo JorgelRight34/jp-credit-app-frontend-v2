@@ -56,6 +56,7 @@ export const accountStatusNavItem: NavItem = {
   name: 'Estados de Cuenta',
   icon: () => <AccountStatementsIcon />,
   route: '/account-statements',
+  search: { tab: 0 },
   children: [
     {
       name: 'Clientes',
@@ -242,7 +243,7 @@ export const transactionsNavItem: NavItem = {
       search: { tab: 2 },
     },
     {
-      name: 'Atrasos',
+      name: 'Ventas',
       icon: () => <ErrorIcon />,
       route: '/transactions',
       search: { tab: 3 },

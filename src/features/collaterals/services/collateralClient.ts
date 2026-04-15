@@ -10,6 +10,7 @@ import { CollateralSellFormValues } from "../lib/schemas/collateralSellFormSchem
 import { ExportHandler } from "@/components";
 import { withProjectIdParams } from "@/features/projects";
 import { ChangeHistory, ChangeLogQuery } from "@/features/audit";
+import { CollateralLiquidationResult } from "../models/collateralLiquidationResult";
 
 const baseUrl = "collaterals"
 
@@ -46,7 +47,7 @@ export const deleteCollateral = async (id: Collateral["id"]) => {
     await api.delete(baseUrl + "/" + id)
 }
 
-export const liquidateCollateral = async (id: Collateral["id"], body: CollateralLiquidateFormValues) => {
+export const liquidateCollateral = async (id: Collateral["id"], body: CollateralLiquidateFormValues): Promise<CollateralLiquidationResult> => {
     const { data } = await api.post(baseUrl + "/" + id + "/liquidation", { ...body, isPreview: true }); // JUST FOR TESTS OF NOW
     return data;
 }
@@ -62,11 +63,9 @@ export const sellCollateral = async (id: Collateral["id"], body: CollateralSellF
 }
 
 export const exportCollaterals: ExportHandler<CollateralQuery> = async (options, params) => {
-    const { data } = await api.get(baseUrl, { params: { ...params, ...options } })
-    return data;
+    return await api.get(baseUrl, { params: { ...params, ...options } })
 }
 
 export const getCollateralChangeHistory = async (id: Collateral["id"], params: ChangeLogQuery): Promise<ChangeHistory> => {
-    const { data } = await api.get(`${baseUrl}/${id}/changes`, { params })
-    return data;
+    return await api.get(`${baseUrl}/${id}/changes`, { params })
 }

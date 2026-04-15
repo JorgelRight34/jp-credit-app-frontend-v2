@@ -3,8 +3,9 @@ import { collateralLiquidateFormSchema, CollateralLiquidateFormValues } from "..
 import { liquidateCollateral } from "../services/collateralClient";
 import { collateralsQueryKey } from "../lib/constants";
 import { loansQueryKey } from "@/features/loans";
+import { CollateralLiquidationResult } from "../models/collateralLiquidationResult";
 
-interface UseCollateralLiquidateFormProps extends UseDataFormProps<null, CollateralLiquidateFormValues> {
+interface UseCollateralLiquidateFormProps extends UseDataFormProps<CollateralLiquidationResult, CollateralLiquidateFormValues> {
     collateralId: number;
 }
 
@@ -12,7 +13,7 @@ export const useCollateralLiquidateForm = ({ collateralId, ...props }: UseCollat
     return useForm({
         schema: collateralLiquidateFormSchema,
         defaultValues: { description: '' },
-        onSubmit: async (data) => liquidateCollateral(collateralId, data),
+        onSubmit: (data) => liquidateCollateral(collateralId, data),
         keysToInvalidate: [[collateralsQueryKey], [loansQueryKey]],
         ...props
     })

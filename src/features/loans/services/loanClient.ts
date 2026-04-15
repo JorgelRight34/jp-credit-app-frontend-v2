@@ -48,11 +48,10 @@ export const getLoanActors = async (loanId: Loan["id"]): Promise<{
 }
 
 export const exportLoans: ExportHandler<LoanQuery> = async (options, params) => {
-    const { data } = await api.get(baseUrl + "/reports/export", {
+    return await api.get(baseUrl + "/reports/export", {
         params: withProjectIdParams({ ...params, ...options }),
         responseType: "blob"
     })
-    return data;
 }
 
 export const getLoanPurposes = async (params: LoanPurposeQuery): Promise<PagedResponse<LoanPurpose>> => {

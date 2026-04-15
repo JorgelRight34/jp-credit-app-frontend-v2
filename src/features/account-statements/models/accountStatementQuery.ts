@@ -2,5 +2,5 @@ import { Query } from "@/components";
 
 export interface AccountStatementQuery extends Query {
     profileId?: number
-    profileAs?: "client" | "guarantor" | "loanOfficer"
+    profileAs: "client" | "guarantor" | "loanOfficer"
 }

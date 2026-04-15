@@ -27,23 +27,21 @@ const FormConfirmationFlowContainer = <T extends FieldValues>({
   children,
   initializeAsDirty,
   form,
-}: FormConfirmationFlowContainerProps<T>) => {
-  return (
-    <FormLayout
-      footer={
-        <FormConfirmationButtons
-          form={form}
-          initializeAsDirty={initializeAsDirty}
-        />
-      }
-      errors={<FormErrorsPanel control={form.control} />}
-    >
-      {children}
-    </FormLayout>
-  )
-}
+}: FormConfirmationFlowContainerProps<T>) => (
+  <FormLayout
+    footer={
+      <FormConfirmationButtons
+        form={form}
+        initializeAsDirty={initializeAsDirty}
+      />
+    }
+    errors={<FormErrorsPanel control={form.control} />}
+  >
+    {children}
+  </FormLayout>
+)
 
-const FormConfirmationButtons = <T extends FieldValues>({
+export const FormConfirmationButtons = <T extends FieldValues>({
   initializeAsDirty,
   form,
 }: FormConfirmationFlowContainerProps<T>) => {

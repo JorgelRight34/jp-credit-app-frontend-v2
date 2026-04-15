@@ -7,7 +7,7 @@ import {
   FormRow,
 } from '@/components/organisms'
 import { ExportFormValues } from '../lib/schemas/exportFormSchema'
-import { useExportForm } from '../hooks/useExportForm'
+import { ExportHandlerResponse, useExportForm } from '../hooks/useExportForm'
 import {
   AccentBtn,
   DownloadIcon,
@@ -16,14 +16,20 @@ import {
   NumericInput,
   SelectInput,
 } from '@/components/atoms'
-import { downloadFile } from '@/lib/utils'
+import { downloadFileFromAxiosResponse } from '@/lib/utils'
 
-interface ExportFormProps extends DataModuleFormProps<Blob, ExportFormValues> {
-  onSubmit: (options: ExportFormValues) => Promise<Blob>
+interface ExportFormProps extends DataModuleFormProps<
+  ExportHandlerResponse,
+  ExportFormValues
+> {
+  onSubmit: (options: ExportFormValues) => Promise<ExportHandlerResponse>
 }
 
 const ExportForm = (props: ExportFormProps) => {
-  const form = useExportForm({ ...props, onSuccess: downloadFile })
+  const form = useExportForm({
+    ...props,
+    onSuccess: downloadFileFromAxiosResponse,
+  })
 
   return (
     <Form form={form}>
@@ -58,17 +64,15 @@ const ExportForm = (props: ExportFormProps) => {
   )
 }
 
-const ExportFormatSelect = (props: InputProps) => {
-  return (
-    <SelectInput
-      {...props}
-      label={''}
-      options={[
-        ['pdf', 'PDF'],
-        ['csv', 'CSV'],
-      ]}
-    />
-  )
-}
+const ExportFormatSelect = (props: InputProps) => (
+  <SelectInput
+    {...props}
+    label={''}
+    options={[
+      ['pdf', 'PDF'],
+      ['csv', 'CSV'],
+    ]}
+  />
+)
 
 export default ExportForm

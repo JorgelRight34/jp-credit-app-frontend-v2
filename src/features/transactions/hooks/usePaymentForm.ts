@@ -1,12 +1,12 @@
 import { UseDataFormProps, useForm } from "@/components"
 import { paymentFormSchema, PaymentFormValues } from "../lib/schemas/paymentFormSchema"
 import { Project } from "@/features/projects"
-import { Transaction } from "../models/transaction"
 import { createPayment } from "../services/transactionClient"
 import { transactionsQueryKey } from "../lib/constants"
 import { getTodayAsInputDate } from "@/lib/utils"
+import { PaymentResult } from "../models/paymentResult"
 
-interface UsePaymentFormProps extends UseDataFormProps<Transaction, PaymentFormValues> {
+interface UsePaymentFormProps extends UseDataFormProps<PaymentResult, PaymentFormValues> {
     project: Project
 }
 

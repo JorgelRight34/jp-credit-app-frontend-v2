@@ -7,7 +7,7 @@ export type SecondaryPillBtnProps = SecondaryBtnProps
 const SecondaryPillBtn = ({ className, ...props }: SecondaryPillBtnProps) => {
   return (
     <SecondaryBtn
-      className={clsx('px-6 !rounded-full', className)}
+      className={clsx('!rounded-full !px-6', className)}
       {...props}
     />
   )

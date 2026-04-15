@@ -17,7 +17,7 @@ const PaymentPreviewCard = ({ loan, amount = 0 }: PaymentPreviewCardProps) => {
 
   return (
     <FinancialCard
-      title="CALCULOS"
+      title="CÁLCULOS"
       subheading="Monto"
       className="shadow-sm"
       headers={[

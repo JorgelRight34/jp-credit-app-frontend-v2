@@ -1,19 +1,21 @@
 import { buildLinkDataCell, DataTableConfig } from "@/components";
 import { BackgroundService } from "../../models/backgroundService";
 import { getBackgroundServices } from "../../services/backgroundServiceClient";
+import BackgroundServiceConfigurationsTable from "../../components/background-service-configurations-table";
 
 export const backgroundServicesDataTableConfig: DataTableConfig<BackgroundService> = {
     columns: [
-        { header: "ID", accessorKey: "id", enableSorting: true, },
-        { header: "NOMBRE", accessorKey: "name", enableSorting: true },
+        { header: "ID", accessorKey: "id" },
+        { header: "NOMBRE", accessorKey: "name" },
+        { header: "DESCRIPCIÓN", accessorKey: "shortDescription" },
         {
-            header: "Opciones", cell: ({ row }) => buildLinkDataCell("Editar", {
+            header: "OPCIONES", cell: ({ row }) => buildLinkDataCell("Editar", {
                 to: "/system/workers/$id/edit",
                 params: { id: row.original.id.toString() }
             })
         }
     ],
     allowExpand: true,
-    onExpand: (r) => JSON.stringify(r.original.configurations, null, 2),
+    onExpand: (r) => BackgroundServiceConfigurationsTable({ worker: r.original }),
     loader: getBackgroundServices
 }

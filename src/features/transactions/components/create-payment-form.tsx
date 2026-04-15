@@ -15,43 +15,49 @@ import {
   PickerInputDataControllerRef,
   RichTextEditor,
 } from '@/components'
-import { Transaction } from '../models/transaction'
 import { PaymentFormValues } from '../lib/schemas/paymentFormSchema'
 import { Project } from '@/features/projects'
 import { Loan, LoanSearchInput } from '@/features/loans'
-import TransactionConfirmationStep from './payment-confirmation-step'
-import TransactionReceiptStep from './payment-receipt-step'
+import PaymentConfirmationStep from './payment-confirmation-step'
+import PaymentReceiptStep, {
+  usePaymentReceiptStepRef,
+} from './payment-receipt-step'
 import { getPaymentPreview } from '../services/transactionClient'
 import PaymentPreviewCard from './payment-preview-card'
 import { useRef } from 'react'
 import { transactionsQueryKey } from '../lib/constants'
 import { getPaymentLoanActorsSelectOptions } from '../lib/utils'
 import { getTodayAsInputDate } from '@/lib/utils'
+import { PaymentResult } from '../models/paymentResult'
 
 interface CreatePaymentProps extends DataModuleFormProps<
-  Transaction,
+  PaymentResult,
   PaymentFormValues
 > {
   project: Project
 }
 
 const CreatePayment = (props: CreatePaymentProps) => {
-  const form = usePaymentForm(props)
+  const receiptRef = usePaymentReceiptStepRef()
+  const form = usePaymentForm({
+    ...props,
+    resetValues: true,
+    onSuccess: (data) => receiptRef.current?.setPaymentResult(data),
+  })
   const loanPickerInputDataControllerRef =
     useRef<PickerInputDataControllerRef<Loan>>(null)
 
   return (
     <FormConfirmationFlow
       confirmation={
-        <TransactionConfirmationStep
+        <PaymentConfirmationStep
           form={form}
           previewLoader={getPaymentPreview}
-          cacheKeyBuilder={(body) =>
-            body ? ['create-payment', body?.loanId, body.amount] : []
-          }
         />
       }
-      overview={<TransactionReceiptStep successText="Pago realizado" />}
+      overview={
+        <PaymentReceiptStep ref={receiptRef} successText="Pago realizado" />
+      }
     >
       <FormConfirmationFlowContainer form={form}>
         <Form form={form}>

@@ -7,7 +7,7 @@ import type { ReactNode } from 'react'
 import 'react-tabs/style/react-tabs.css'
 import { type VariationKey } from '../lib/variations'
 import TabsList from './tabs-list'
-import TabsPanelContainer from './tabs-panel-container'
+import TabsPanelContainer from './tab-panel-container'
 
 export interface TabsProps extends UseTabsProps {
   children: ReactNode

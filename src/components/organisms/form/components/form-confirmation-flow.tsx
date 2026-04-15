@@ -31,7 +31,13 @@ const FormConfirmationFlowInner = ({
 
   return (
     <>
-      <Activity mode={active === 0 ? 'visible' : 'hidden'}>{children}</Activity>
+      {/* 
+        Using a plain div instead of <Activity> because <Activity mode="hidden"> 
+        runs effect cleanups on hidden tabs, which breaks react-hook-form's internal 
+        state when other steps reset or mutate the form. The div keeps the form 
+        fully mounted and reactive at all times.
+      */}
+      <div className={active === 0 ? '' : 'hidden'}>{children}</div>
       <Activity mode={active === 1 ? 'visible' : 'hidden'}>
         <Suspense fallback="confirmation...">{confirmation}</Suspense>
       </Activity>

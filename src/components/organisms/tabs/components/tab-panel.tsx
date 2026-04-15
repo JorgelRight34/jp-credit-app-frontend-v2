@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import TabsPanelContainer from './tabs-panel-container'
+import TabPanelContainer from './tab-panel-container'
 
 interface TabPanelProps extends PropsWithChildren {
   index: number
@@ -8,21 +8,10 @@ interface TabPanelProps extends PropsWithChildren {
   unmountOnExit?: boolean
 }
 
-const TabPanel = ({
-  className,
-  index,
-  unmountOnExit,
-  children,
-}: TabPanelProps) => {
-  return (
-    <TabsPanelContainer
-      index={index}
-      className={className}
-      unmountOnExit={unmountOnExit}
-    >
-      {children}
-    </TabsPanelContainer>
-  )
-}
+const TabPanel = ({ className, index, children }: TabPanelProps) => (
+  <TabPanelContainer index={index} className={className}>
+    {children}
+  </TabPanelContainer>
+)
 
 export default TabPanel

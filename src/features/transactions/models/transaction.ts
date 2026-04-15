@@ -8,7 +8,7 @@ export interface Transaction {
     description?: string;
     interestValue: number;
     penaltyFee: number;
-    arrearBalance?: number;
+    paidArrears: number;
     actor?: ProfileSummary;
     loanId: number;
     clientId: number;

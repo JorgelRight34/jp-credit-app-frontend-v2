@@ -76,15 +76,14 @@ export const getFinancialBreakdownSummary = async (params: FinanceQuery): Promis
     return data;
 }
 
-export const exportIncomes: ExportHandler<FinanceQuery> = async (body, params): Promise<Blob> => {
-    const { data } = await api.get(`${baseUrl}/incomes/export`, {
+export const exportIncomes: ExportHandler<FinanceQuery> = async (body, params) => {
+    return await api.get(`${baseUrl}/incomes/export`, {
         params: getFinanceEndpointParams(params, body),
         responseType: "blob"
     })
-    return data;
 }
 
-export const exportExpenses: ExportHandler<FinanceQuery> = async (body, params): Promise<Blob> => {
+export const exportExpenses: ExportHandler<FinanceQuery> = async (body, params) => {
     const { data } = await api.get(`${baseUrl}/expenses/export`, {
         params: getFinanceEndpointParams(params, body),
         responseType: "blob"
@@ -92,12 +91,11 @@ export const exportExpenses: ExportHandler<FinanceQuery> = async (body, params):
     return data;
 }
 
-export const exportProjections: ExportHandler<FinanceQuery> = async (body, params): Promise<Blob> => {
-    const { data } = await api.get(`${baseUrl}/payment-projection/export`, {
+export const exportProjections: ExportHandler<FinanceQuery> = async (body, params) => {
+    return await api.get(`${baseUrl}/payment-projection/export`, {
         params: getFinanceEndpointParams(params, body),
         responseType: "blob"
     })
-    return data;
 }
 
 export const getProjectionSummary = async (params: FinanceQuery): Promise<FinancialBreakdown> => {

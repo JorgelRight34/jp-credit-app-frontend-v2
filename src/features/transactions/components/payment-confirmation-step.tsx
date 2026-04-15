@@ -21,31 +21,34 @@ import {
 } from '@/components'
 import { buildLoanLabel } from '@/features/loans'
 import { toCurrency, toFormattedDate } from '@/lib/utils'
-import { CacheKey } from '@/models'
-import { PaymentResult } from '../models/paymentResult'
+import { PaymentResult, PropsWithPaymentResult } from '../models/paymentResult'
 import { loanStatusSpanishTranslations } from '@/features/loans/lib/constants'
+import { PropsWithTransaction } from '../models/transaction'
+import { startTransition } from 'react'
 
 interface PaymentConfirmationStepProps<T extends FieldValues> {
   form: UseFormReturn<T>
   previewLoader: (data: T) => Promise<PaymentResult>
-  cacheKeyBuilder: (data?: T) => CacheKey
 }
 
 const PaymentConfirmationStep = <T extends FieldValues>({
+  form,
   previewLoader,
-  cacheKeyBuilder,
 }: PaymentConfirmationStepProps<T>) => {
   const [body] = useFormConfirmationFlowData()
   const { data, isLoading } = useData({
     loader: () => previewLoader(body as T),
-    key: cacheKeyBuilder(body as T),
+    key: [],
+    refetchOnWindowFocus: false,
     enabled: body !== null,
+    gcTime: 0,
+    staleTime: 0,
   })
 
   if (isLoading || !data) return null
 
   return (
-    <FormLayout footer={<Footer />}>
+    <FormLayout footer={<Footer form={form} />}>
       <Paragraph>
         Verifique su pago. Para aceptar, presione <b>Continuar</b>
       </Paragraph>
@@ -61,77 +64,70 @@ const PaymentConfirmationStep = <T extends FieldValues>({
   )
 }
 
-const PaymentDetails = ({
-  transaction,
-}: {
-  transaction: PaymentResult['transaction']
-}) => {
-  return (
-    <OverviewLayout>
-      <FormRow>
-        <FormReadOnlyGroup
-          name="loanId"
-          label="Préstamo"
-          value={buildLoanLabel({ id: transaction.loanId })}
-        />
-        <FormReadOnlyGroup
-          name="amount"
-          label="Monto a pagar"
-          value={toCurrency(transaction.value)}
-        />
-      </FormRow>
-      <FormRow>
-        <FormReadOnlyGroup
-          name="capital"
-          label="Capital"
-          value={toCurrency(transaction.capitalValue)}
-        />
-        <FormReadOnlyGroup
-          name="interest"
-          label="Interés"
-          value={toCurrency(transaction.interestValue)}
-        />
-      </FormRow>
-      <FormRow>
-        <FormReadOnlyGroup
-          name="fee"
-          label="Mora"
-          value={toCurrency(transaction.penaltyFee)}
-        />
-        <FormReadOnlyGroup
-          name="lateDays"
-          label="Días de tardanza"
-          value={transaction.lateDays}
-        />
-      </FormRow>
-      <FormRow>
-        <FormReadOnlyGroup
-          name="date"
-          label="Fecha de pago"
-          value={toFormattedDate(transaction.date)}
-        />
-        <FormReadOnlyGroup
-          name="arrearBalance"
-          label="Balance pendiente pagado"
-          value={toCurrency(transaction.arrearBalance!)}
-        />
-      </FormRow>
-      <FormHtmlDisplayGroup
-        name="description"
-        label="Descripción"
-        value={transaction.description}
-        optional
+const PaymentDetails = ({ transaction }: PropsWithTransaction) => (
+  <OverviewLayout>
+    <FormRow>
+      <FormReadOnlyGroup
+        name="loanId"
+        label="Préstamo"
+        value={buildLoanLabel({ id: transaction.loanId })}
       />
-    </OverviewLayout>
-  )
-}
+      <FormReadOnlyGroup
+        name="amount"
+        label="Monto a pagar"
+        value={toCurrency(transaction.value)}
+      />
+    </FormRow>
+    <FormRow>
+      <FormReadOnlyGroup
+        name="capital"
+        label="Capital"
+        value={toCurrency(transaction.capitalValue)}
+      />
+      <FormReadOnlyGroup
+        name="interest"
+        label="Interés"
+        value={toCurrency(transaction.interestValue)}
+      />
+    </FormRow>
+    <FormRow>
+      <FormReadOnlyGroup
+        name="fee"
+        label="Mora"
+        value={toCurrency(transaction.penaltyFee)}
+      />
+      <FormReadOnlyGroup
+        name="lateDays"
+        label="Días de tardanza"
+        value={transaction.lateDays}
+      />
+    </FormRow>
+    <FormRow>
+      <FormReadOnlyGroup
+        name="date"
+        label="Fecha de pago"
+        value={toFormattedDate(transaction.date)}
+      />
+      <FormReadOnlyGroup
+        name="arrearBalance"
+        label="Balance pendiente pagado"
+        value={toCurrency(transaction.paidArrears)}
+      />
+    </FormRow>
+    <FormHtmlDisplayGroup
+      name="description"
+      label="Descripción"
+      value={transaction.description}
+      optional
+    />
+  </OverviewLayout>
+)
 
 const PaymentLoanChangesCard = ({
   paymentResult: { transaction, loanBefore, loanAfter, ...paymentResult },
-}: {
-  paymentResult: PaymentResult
-}) => {
+}: PropsWithPaymentResult) => {
   const loanLabel = buildLoanLabel({ id: transaction.loanId }).toUpperCase()
+
   return (
     <div className="flex w-full flex-col gap-6 px-3">
       <Fieldset className="p-4" legend={`${loanLabel} / DETALLES`}>
@@ -170,7 +166,7 @@ const PaymentLoanChangesCard = ({
           />
         </DetailRowGroup>
       </Fieldset>
-      <Fieldset className="p-4" legend={`${loanLabel} / DESPUES`}>
+      <Fieldset className="p-4" legend={`${loanLabel} / DESPUÉS`}>
         <DetailRowGroup>
           <DetailRow
             title="Balance capital"
@@ -182,7 +178,7 @@ const PaymentLoanChangesCard = ({
           />
           <DetailRow
             title="Mora pendiente"
-            subtitle={toCurrency(loanAfter.totalFees)}
+            subtitle={toCurrency(loanAfter.penaltyBalance)}
           />
           <DetailRow
             title="Monto atrasado"
@@ -198,7 +194,11 @@ const PaymentLoanChangesCard = ({
   )
 }
 
-const Footer = () => {
+const Footer = <T extends FieldValues>({
+  form,
+}: {
+  form: UseFormReturn<T>
+}) => {
   const [_, setActive] = useFormConfirmationFlowActiveStep()
 
   return (
@@ -207,7 +207,13 @@ const Footer = () => {
         <Icon icon={ArrowBackIcon}>Atrás</Icon>
       </LightPillBtn>
 
-      <AccentPillBtn className="w-full md:!w-fit" onClick={() => setActive(2)}>
+      <AccentPillBtn
+        className="w-full md:!w-fit"
+        onClick={() => {
+          setActive(2)
+          startTransition(() => form.submit())
+        }}
+      >
         <Icon icon={ArrowForwardIcon} className="!flex-row-reverse">
           Continuar
         </Icon>
