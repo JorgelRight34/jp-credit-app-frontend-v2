@@ -9,8 +9,8 @@ import {
   TabsList,
   TabsRouter,
 } from '@/components'
-import AdjustmentNoteForm from '../components/adjustment-note-form'
 import { adjustmentNotesBreadcrumb } from './adjustment-notes-page'
+import CreateAdjustmentNoteForm from '../components/create-adjustment-note-form'
 
 const breadcrumbsByRoute: BreadcrumbsByRoute = [
   [{ title: 'Crédito', icon: CreditIcon }, createBreadcrumb],
@@ -32,10 +32,10 @@ const CreateAdjustmentNotePage = () => {
           <Tab index={1}>Débito</Tab>
         </TabsList>
         <TabPanel index={0}>
-          <AdjustmentNoteForm initialValues={{ type: 'nc' }} />
+          <CreateAdjustmentNoteForm initialValues={{ type: 'nc' }} />
         </TabPanel>
         <TabPanel index={1}>
-          <AdjustmentNoteForm initialValues={{ type: 'nd' }} />
+          <CreateAdjustmentNoteForm initialValues={{ type: 'nd' }} />
         </TabPanel>
       </TabsRouter>
     </PageRouterLayout>

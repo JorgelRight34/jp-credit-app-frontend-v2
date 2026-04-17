@@ -38,15 +38,6 @@ export const updateLoanStatus = async (id: Loan["id"], status: LoanStatus) => {
     await api.put(baseUrl + "/" + id + "/status", { status });
 }
 
-export const getLoanActors = async (loanId: Loan["id"]): Promise<{
-    client: ProfileSummary,
-    guarantor?: ProfileSummary,
-    loanOfficer?: ProfileSummary
-}> => {
-    const { data } = await api.get(baseUrl + "/" + loanId + "/actors");
-    return data;
-}
-
 export const exportLoans: ExportHandler<LoanQuery> = async (options, params) => {
     return await api.get(baseUrl + "/reports/export", {
         params: withProjectIdParams({ ...params, ...options }),

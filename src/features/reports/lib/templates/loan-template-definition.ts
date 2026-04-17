@@ -32,12 +32,6 @@ export const loanTemplateDefinition:
             mapper: (l) => l.loanOfficerId,
         },
         {
-            name: "overduePaymentsNumber",
-            description: "Número de pagos vencidos.",
-            fieldType: "number",
-            mapper: (l) => l.overduePaymentsNumber,
-        },
-        {
             name: "interestBalance",
             description: "Saldo de intereses acumulados pendientes.",
             fieldType: "currency",

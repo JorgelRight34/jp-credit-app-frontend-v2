@@ -8,7 +8,6 @@ export interface Transaction {
     description?: string;
     interestValue: number;
     penaltyFee: number;
-    paidArrears: number;
     actor?: ProfileSummary;
     loanId: number;
     clientId: number;
@@ -18,7 +17,6 @@ export interface Transaction {
     createdByUsername: string;
     type: TransactionType;
     value: number;
-    lateDays: number;
     isClosed: boolean;
     client: ProfileSummary;
 }

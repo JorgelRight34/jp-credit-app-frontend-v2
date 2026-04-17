@@ -1,9 +1,9 @@
 import z from "zod";
 
 export const paymentFormSchema = z.object({
-    amount: z.string().transform((val) => Number(val)),
+    amount: z.union([z.string(), z.number()]).transform((val) => Number(val)),
     loanId: z.number(),
-    payerId: z.number(),
+    payer: z.string(),
     date: z.string(),
     penaltyRate: z.number().optional(),
     description: z.string().optional(),

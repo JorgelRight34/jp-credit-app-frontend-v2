@@ -5,6 +5,7 @@ import { createPayment } from "../services/transactionClient"
 import { transactionsQueryKey } from "../lib/constants"
 import { getTodayAsInputDate } from "@/lib/utils"
 import { PaymentResult } from "../models/paymentResult"
+import { loansQueryKey } from "@/features/loans"
 
 interface UsePaymentFormProps extends UseDataFormProps<PaymentResult, PaymentFormValues> {
     project: Project
@@ -16,7 +17,7 @@ export const usePaymentForm = ({ project, defaultValues, initialValues, ...confi
         defaultValues: {
             amount: "",
             loanId: null,
-            payerId: null,
+            payer: "client",
             date: getTodayAsInputDate(),
             penaltyRate: project.defaultPenaltyRate,
             description: '',
@@ -25,7 +26,7 @@ export const usePaymentForm = ({ project, defaultValues, initialValues, ...confi
             ...defaultValues
         },
         onSubmit: createPayment,
-        keysToInvalidate: [[transactionsQueryKey]],
+        keysToInvalidate: [[transactionsQueryKey, loansQueryKey]],
         ...config,
     })
 }

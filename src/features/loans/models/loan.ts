@@ -7,7 +7,6 @@ export interface Loan {
     projectId: number;
     guarantorId?: number;
     loanOfficerId?: number;
-    overduePaymentsNumber?: number;
     interestBalance: number;
     lastTransactionDate?: string;
     feePaid: number;
@@ -20,9 +19,6 @@ export interface Loan {
     isActive: boolean;
     daysOfGrace: number;
 
-    clientProfileId: number;
-    guarantorProfileId?: number;
-    loanOfficerProfileId?: number;
     penaltyRate: number;
 
     // Loan details
@@ -33,11 +29,8 @@ export interface Loan {
     accruedInterest: number;
     annualInterestRate: number;
     numberOfPayments: number;
-    paymentFrequency: LoanPaymentFrequency;
+    paymentFrequency: LoanPaymentFrequency; // Times paid in a year (monthly = 12, yearly = 1...)
     expirationDate: Date | string;
-    latePaymentCredit: number; // Abono de mora (mora pagada)
-    isOverdue: boolean;
-    effectivePaymentDate: string;
 
     // Details
     paymentValue: number;
@@ -46,8 +39,6 @@ export interface Loan {
     status: LoanStatus;
 
     clientId: number
-    overduePayments: number;
-    delinquency: number;
     loanPurpose: string
 
     // Audit fields

@@ -36,8 +36,7 @@ export const getClosedPeriods = async (params: Query): Promise<PagedResponse<Clo
 }
 
 export const createPayment = async ({ loanId, ...request }: PaymentFormValues): Promise<PaymentResult> => {
-    console.warn("create payment is on preview mode")
-    const { data } = await api.post(baseUrl + "/payment/preview", {  // Just for testing
+    const { data } = await api.post(baseUrl + "/payment", {  // Just for testing
         request,
         loanId,
     });

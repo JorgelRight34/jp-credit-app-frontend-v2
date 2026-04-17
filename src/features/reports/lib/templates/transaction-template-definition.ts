@@ -60,18 +60,6 @@ export const transactionTemplateDefinition: ReportTemplateDefinition<Transaction
             mapper: (t) => t.feePaid,
         },
         {
-            name: "arrearBalance",
-            description: "Saldo pendiente tras la transacción.",
-            fieldType: "currency",
-            mapper: (t) => t.arrearBalance,
-        },
-        {
-            name: "lateDays",
-            description: "Número de días de atraso al momento de la transacción.",
-            fieldType: "number",
-            mapper: (t) => t.lateDays,
-        },
-        {
             name: "description",
             description: "Descripción o nota de la transacción.",
             fieldType: "text",

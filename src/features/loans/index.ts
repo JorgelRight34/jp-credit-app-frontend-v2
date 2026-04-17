@@ -18,3 +18,4 @@ export { default as LoanChangeHistoryPage } from './pages/loan-change-history-pa
 export { default as DeleteLoanPage } from './pages/delete-loan-page'
 export * from './lib/config/permission-provider'
 export * from './lib/query-keys'
+export * from './providers/loan-picker-provider'
