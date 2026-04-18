@@ -7,7 +7,6 @@ export interface Transaction {
     capitalValue: number;
     description?: string;
     interestValue: number;
-    penaltyFee: number;
     actor?: ProfileSummary;
     loanId: number;
     clientId: number;

@@ -27,6 +27,7 @@ import {
   getTodayAsInputDate,
   ND,
   toCurrencyOrND,
+  toDate,
   toFormattedDate,
 } from '@/lib/utils'
 import { PaymentResult } from '../models/paymentResult'
@@ -127,12 +128,12 @@ const LoanSummary = () => {
         <FormReadOnlyGroup
           name="payDay"
           label="Día de pago"
-          value={19}
+          value={loan ? toDate(loan?.startDate).getDate() : ND}
           disabled
         />
         <FormReadOnlyGroup
           name="paymentValue"
-          label="Ultimo pago"
+          label="Ultimo movimiento"
           value={
             loan?.lastTransactionDate
               ? toFormattedDate(loan.lastTransactionDate)
