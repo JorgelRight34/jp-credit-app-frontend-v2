@@ -40,10 +40,13 @@ const Modal = ({
 
   return createPortal(
     <div
-      className={clsx('modal-overlay', modalOverlay, {
-        'pointer-events-auto opacity-100': show,
-        'pointer-events-none opacity-0': !show,
-      })}
+      className={clsx(
+        'fixed inset-0 z-[900] flex animate-[fadeIn_0.2s] items-center justify-center',
+        show
+          ? 'pointer-events-auto opacity-100'
+          : 'pointer-events-none opacity-0',
+        modalOverlay,
+      )}
       onClick={onHide}
     >
       <div

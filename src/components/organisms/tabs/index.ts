@@ -4,12 +4,8 @@ export { default as Tab } from "./components/tab";
 export { default as TabsRouter } from './components/tabs-router'
 export { default as TabsRouterBreadcrumb } from "./components/tabs-router-breadcrumb"
 export { default as TabsRouterProvider } from "./providers/tabs-router-provider.tsx"
-export { default as ProtectedTab } from "./components/protected-tab"
 export { default as TabsPanelContainer } from './components/tab-panel-container.tsx'
 export * from './components/tabs-router'
-
-// hooks
-export * from "./hooks/useTabs";
 
 // lib
 export * from "./lib/variations";

@@ -3,6 +3,7 @@ import FormSubmitBtn from './form-submit-btn'
 import type { FormSubmitBtnProps } from './form-submit-btn'
 import { UseFormReturn } from '../hooks/useFormMethods'
 import FormResetBtn from './form-reset-btn'
+import { CheckCircleIcon, Icon } from '@/components/atoms'
 
 type FormContainerButtonsProps<T extends FieldValues> =
   Partial<FormSubmitBtnProps> & {
@@ -14,20 +15,15 @@ type FormContainerButtonsProps<T extends FieldValues> =
 
 const FormContainerButtons = <T extends FieldValues>({
   form: { control, reset },
-  text,
+  text = 'Confirmar',
   initializeAsDirty,
   onReset = reset,
-  icon,
 }: FormContainerButtonsProps<T>) => {
   return (
     <div className="flex items-center gap-3">
       <FormResetBtn control={control} onReset={onReset} />
-      <FormSubmitBtn
-        icon={icon}
-        control={control}
-        initializeAsDirty={initializeAsDirty}
-      >
-        {text}
+      <FormSubmitBtn control={control} initializeAsDirty={initializeAsDirty}>
+        <Icon icon={CheckCircleIcon}>{text}</Icon>
       </FormSubmitBtn>
     </div>
   )

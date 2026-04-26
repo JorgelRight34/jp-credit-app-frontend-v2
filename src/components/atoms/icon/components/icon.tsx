@@ -40,9 +40,7 @@ const Icon = ({
       title={props['data-title' as keyof typeof props] || dataTitle || title}
       onClick={onClick}
     >
-      <span
-        className={`flex !w-auto items-center justify-center gap-2 ${className}`}
-      >
+      <span className={`flex !w-auto items-center gap-2 ${className}`}>
         {IconComponent && <IconComponent className={className} style={style} />}
         {children}
       </span>

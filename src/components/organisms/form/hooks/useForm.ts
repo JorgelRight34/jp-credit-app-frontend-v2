@@ -48,7 +48,7 @@ export const useForm = <T, TData extends FieldValues, TReturn = T>({
         if (toastMessage) {
             toastService.success(toastMessage(result))
         }
-        alert(resetValues)
+
         if (resetValues) {
             methods.reset(defaultValues, {
                 keepErrors: false,

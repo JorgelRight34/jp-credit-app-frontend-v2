@@ -5,7 +5,7 @@ import type { PagedResponse } from "@/models";
 import api from "@/lib/services/api";
 import { FileStorageApiService } from "@/lib/services";
 import { CollateralLiquidateFormValues } from "../lib/schemas/collateralLiquidateFormSchema";
-import { PaymentResult } from "@/features/transactions";
+import { Transaction } from "@/features/transactions";
 import { CollateralSellFormValues } from "../lib/schemas/collateralSellFormSchema";
 import { ExportHandler } from "@/components";
 import { withProjectIdParams } from "@/features/projects";
@@ -52,13 +52,8 @@ export const liquidateCollateral = async (id: Collateral["id"], body: Collateral
     return data;
 }
 
-export const previewLiquidateCollateral = async (id: Collateral["id"], body: CollateralLiquidateFormValues) => {
-    const { data } = await api.post<PaymentResult>(baseUrl + "/" + id + "/liquidation", { ...body, isPreview: true });
-    return data
-}
-
 export const sellCollateral = async (id: Collateral["id"], body: CollateralSellFormValues) => {
-    const { data } = await api.post<PaymentResult>(baseUrl + "/" + id + "/sell", { ...body, isPreview: true });
+    const { data } = await api.post<Transaction>(baseUrl + "/" + id + "/sell", { ...body, isPreview: true });
     return data
 }
 

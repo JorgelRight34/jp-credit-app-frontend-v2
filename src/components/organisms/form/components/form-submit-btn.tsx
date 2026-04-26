@@ -1,10 +1,5 @@
 import type { IconName } from '@/components/atoms/icon/models/iconName'
-import {
-  AccentPillBtn,
-  ButtonProps,
-  CheckCircleIcon,
-  Icon,
-} from '@/components/atoms'
+import { AccentPillBtn, ButtonProps } from '@/components/atoms'
 import { Control, useFormState } from 'react-hook-form'
 
 export interface FormSubmitBtnProps extends ButtonProps {
@@ -18,12 +13,10 @@ export interface FormSubmitBtnProps extends ButtonProps {
 }
 
 const FormSubmitBtn = ({
-  text = 'Confirmar',
-  children,
+  children = 'Confirmar',
   isValid,
   control,
   initializeAsDirty,
-  icon = CheckCircleIcon,
   ...props
 }: FormSubmitBtnProps) => {
   const { isDirty } = useFormState({ control })
@@ -37,7 +30,7 @@ const FormSubmitBtn = ({
       }
       {...props}
     >
-      {children ?? <Icon icon={icon}>{text}</Icon>}
+      {children}
     </AccentPillBtn>
   )
 }

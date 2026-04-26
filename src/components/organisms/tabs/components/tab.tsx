@@ -25,12 +25,10 @@ const Tab = ({
       {...props}
       className={clsx(
         variations[variation].tab,
-        'w-fit cursor-pointer focus-visible:outline-none text-secondary',
+        'text-secondary w-fit cursor-pointer focus-visible:outline-none',
+        index == activeIndex &&
+          'border-secondary-color text-accent-secondary border-b',
         className,
-        {
-          'border-b border-secondary-color text-accent-secondary':
-            index == activeIndex,
-        },
       )}
       onClick={() => setIndex(index)}
     >

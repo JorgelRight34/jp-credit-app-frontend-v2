@@ -1,7 +1,7 @@
 import { useState, type PropsWithChildren } from 'react'
 import { FieldValues } from 'react-hook-form'
 import FormContainerButtons from './form-container-buttons'
-import FormLayout from './form-container-layout'
+import FormContainerLayout from './form-container-layout'
 import { UseFormReturn } from '../hooks/useFormMethods'
 import FormErrorsPanel from './form-errors-panel'
 
@@ -23,7 +23,7 @@ const FormContainer = <T extends FieldValues>({
   const [mutationError, setMutationError] = useState<unknown>()
 
   return (
-    <FormLayout
+    <FormContainerLayout
       className={className}
       onSubmit={onSubmit}
       onError={setMutationError}
@@ -38,7 +38,7 @@ const FormContainer = <T extends FieldValues>({
       }
     >
       {children}
-    </FormLayout>
+    </FormContainerLayout>
   )
 }
 

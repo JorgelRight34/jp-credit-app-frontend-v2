@@ -2,7 +2,7 @@ import { useDataMutation } from '@/hooks/useMutate'
 import clsx from 'clsx'
 import { FormEvent, type PropsWithChildren, type ReactNode } from 'react'
 
-type FormLayoutProps = PropsWithChildren & {
+type FormContainerLayoutProps = PropsWithChildren & {
   className?: string
   errors?: ReactNode
   footer?: ReactNode
@@ -12,7 +12,7 @@ type FormLayoutProps = PropsWithChildren & {
   onSuccess?: () => void
 }
 
-const FormLayout = ({
+const FormContainerLayout = ({
   children,
   className,
   errors,
@@ -21,7 +21,7 @@ const FormLayout = ({
   onSubmit,
   onError,
   onSuccess,
-}: FormLayoutProps) => {
+}: FormContainerLayoutProps) => {
   const { mutateAsync } = useDataMutation({
     mutationFn: async (e: FormEvent) => await onSubmit?.(e),
     onSuccess,
@@ -41,4 +41,4 @@ const FormLayout = ({
   )
 }
 
-export default FormLayout
+export default FormContainerLayout
