@@ -42,4 +42,4 @@ jobs:
             --platform managed \
             --region ${{ env.REGION }} \
             --allow-unauthenticated \
-            --set-env-vars VITE_BACKEND_URL="${{ secrets.BACKEND_URL }}"
+            --set-env-vars VITE_BACKEND_URL="${{ secrets.VITE_BACKEND_URL }}"
