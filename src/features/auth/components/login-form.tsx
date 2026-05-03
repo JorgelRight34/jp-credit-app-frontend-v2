@@ -37,12 +37,7 @@ const LoginForm = (
           <FormGroup label="Usuario" name="username" input={Input} />
         </FormRow>
         <FormRow>
-          <FormGroup
-            label="Contraseña"
-            name="password"
-            autoComplete="new-password"
-            input={PasswordInput}
-          />
+          <FormGroup label="Contraseña" name="password" input={PasswordInput} />
         </FormRow>
       </Form>
     </FormLayout>
