@@ -1,15 +1,10 @@
 import axios from "axios";
-import { IS_DEV_MODE } from "../constants/constants";
 import { isJwtValid } from "../utils/auth-utils";
 import type { InternalAxiosRequestConfig } from "axios";
 import { ACCESS_TOKEN_KEY } from "../constants";
 
-const URLS = {
-  PROD: "https://jp-credit-app.onrender.com/api/",
-  DEV: "http://192.168.4.156:5270/api/",
-};
 
-export const baseURL = IS_DEV_MODE ? URLS.DEV : URLS.PROD;
+export const baseURL = process.env.VITE_BACKEND_URL;
 
 const api = axios.create({ baseURL, paramsSerializer: { indexes: null } });
 

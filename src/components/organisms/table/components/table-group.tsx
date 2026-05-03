@@ -9,7 +9,7 @@ import {
   TableNavigation,
   TableRow,
   useTableState,
-} from '..'
+} from '../index'
 import { TableBuilderProps } from './table-builder'
 import TableCompositor from './table-container'
 import TableStateWrapper from './table-state-wrapper'
