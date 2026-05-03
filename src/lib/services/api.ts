@@ -3,8 +3,7 @@ import { isJwtValid } from "../utils/auth-utils";
 import type { InternalAxiosRequestConfig } from "axios";
 import { ACCESS_TOKEN_KEY } from "../constants";
 
-
-export const baseURL = process.env.VITE_BACKEND_URL;
+export const baseURL = import.meta.env.VITE_BACKEND_URL;
 
 const api = axios.create({ baseURL, paramsSerializer: { indexes: null } });
 

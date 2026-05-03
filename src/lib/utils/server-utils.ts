@@ -19,7 +19,6 @@ export const withErrorHandler = async (func: () => Promise<Response>) => {
         return await func()
     } catch (error) {
         if (error instanceof HttpClientError) {
-            console.log("Erees instancia")
             return toUpstreamResponse(error)
         }
         throw error;

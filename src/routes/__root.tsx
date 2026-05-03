@@ -15,7 +15,7 @@ import {
   TanStackQueryDevtools,
   getContext,
 } from '@/contexts/root-provider'
-import { LoadingScreen } from '@/components'
+import { LoadingBar, LoadingScreen } from '@/components'
 import { User } from '@/models/user'
 
 export interface AppRouteContext {
@@ -79,7 +79,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body className="antialiased">
         <Provider dataClient={context.dataClient}>
-          {/* <LoadingBar /> */}
+          <LoadingBar />
           <LoadingScreen />
           <CssBaseline />
           {children}

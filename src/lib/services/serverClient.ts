@@ -1,4 +1,3 @@
 import { HttpClient } from "./httpClient";
-import { baseURL } from ".";
 
-export const serverClient = new HttpClient(baseURL);
+export const serverClient = new HttpClient(process.env.VITE_BACKEND_URL!);
