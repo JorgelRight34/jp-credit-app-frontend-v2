@@ -12,7 +12,7 @@ export const getLoanFn = createIsomorphicFn()
 
 export const Route = createFileRoute('/(main)/(modules)/loans/$id/')({
   loader: async ({ context, params: { id } }) =>
-    await context.dataClient.ensureQueryData({
+    await context.dataClient.fetchQuery({
       queryKey: buildLoanQueryKey(+id),
       queryFn: () => getLoanFn(id),
     }),

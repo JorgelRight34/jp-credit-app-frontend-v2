@@ -20,7 +20,7 @@ const onError = (error: unknown) => {
 export function getContext() {
   const dataClient = new QueryClient({
     defaultOptions: {
-      queries: { staleTime: 120000, gcTime: 12000, retry: false },
+      queries: { staleTime: 120000, gcTime: 240000, retry: false },
     },
     queryCache: new QueryCache({
       onError,

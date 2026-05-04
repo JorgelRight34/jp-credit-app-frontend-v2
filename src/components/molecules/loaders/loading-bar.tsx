@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 import TopLoadingBar from 'react-top-loading-bar'
 import type { LoadingBarRef } from 'react-top-loading-bar'
-import { useIsLoading } from '@/hooks/useIsLoading'
+import { useIsFetching } from '@/hooks'
+import { useRouterState } from '@tanstack/react-router'
 
 /**
  * Loading bar component for representing a progress.
@@ -12,20 +13,21 @@ import { useIsLoading } from '@/hooks/useIsLoading'
  * @returns {JSX.Element} The rendered loading bar component.
  */
 const LoadingBar = () => {
-  const { isFetching } = useIsLoading()
+  const isLoading = useRouterState({ select: (s) => s.isLoading })
+  const isFetching = useIsFetching()
   const ref = useRef<LoadingBarRef>(null)
 
   useEffect(() => {
-    if (isFetching) {
+    if (isFetching || isLoading) {
       ref.current?.continuousStart()
     } else {
       ref.current?.complete()
     }
 
     return () => ref.current?.complete()
-  }, [isFetching])
+  }, [isFetching, isLoading])
 
-  return <TopLoadingBar color="#d09d0c" ref={ref} />
+  return <TopLoadingBar color="var(--primary-color)" ref={ref} />
 }
 
 export default LoadingBar

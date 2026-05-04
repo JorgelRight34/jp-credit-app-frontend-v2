@@ -10,7 +10,6 @@ import {
   notesNavItem,
   profileNavItem,
   projectsNavItem,
-  systemNavItem,
   transactionsNavItem,
 } from '../../lib/navItems'
 import NavbarFooter from './navbar-footer'
@@ -30,7 +29,6 @@ const options = [
   projectsNavItem,
   followUpsNavItem,
   notesNavItem,
-  systemNavItem,
   armotizationsNavItem,
 ]
 

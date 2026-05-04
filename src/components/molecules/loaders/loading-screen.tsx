@@ -1,8 +1,8 @@
+import { useIsMutating } from '@/hooks'
 import { LoadingIndicator } from './loading-indicator'
-import { useIsLoading } from '@/hooks/useIsLoading'
 
 const LoadingScreen = () => {
-  const { isMutating } = useIsLoading()
+  const isMutating = useIsMutating()
 
   if (isMutating) {
     return (

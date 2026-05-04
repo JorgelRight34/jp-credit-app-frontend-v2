@@ -13,7 +13,6 @@ import {
   BadgeIcon,
   CheckCircleIcon,
   CollateralIcon,
-  ComputerIcon,
   CreditCardIcon,
   DirectionsCarIcon,
   ErrorIcon,
@@ -36,7 +35,6 @@ import {
   ScheduleIcon,
   SettingsIcon,
   TrendingUpIcon,
-  WorkerIcon,
 } from '@/components/atoms'
 
 const addRouteName = 'Añadir'
@@ -77,6 +75,7 @@ export const accessControlNavItem: NavItem = {
   name: 'Accesos',
   icon: () => <LockIcon />,
   route: '/access-control',
+  search: { tab: 0 },
   children: [
     {
       name: 'Usuarios',
@@ -107,6 +106,7 @@ export const profileNavItem: NavItem = {
   name: 'Pérfiles',
   icon: () => <PersonIcon />,
   route: '/profiles',
+  search: { tab: 0 },
   children: [
     {
       ...allRouteBase,
@@ -143,6 +143,7 @@ export const collateralsNavItem: NavItem = {
   name: 'Garantías',
   icon: () => <CollateralIcon />,
   route: '/collaterals',
+  search: { tab: 0 },
   children: [
     {
       ...reportRouteBase,
@@ -204,6 +205,7 @@ export const transactionsNavItem: NavItem = {
   name: 'Transacciones',
   icon: () => <CreditCardIcon />,
   route: '/transactions',
+  search: { tab: 0 },
   children: [
     {
       ...reportRouteBase,
@@ -272,6 +274,7 @@ export const projectsNavItem: NavItem = {
   name: 'Proyectos',
   icon: () => <ProjectIcon />,
   route: '/projects',
+  search: { tab: 0 },
   children: [
     {
       name: 'Configuraciones',
@@ -290,6 +293,7 @@ export const loansNavItem: NavItem = {
   name: 'Préstamos',
   icon: () => <MailIcon />,
   route: '/loans',
+  search: { tab: 0 },
   children: [
     {
       ...reportRouteBase,
@@ -356,6 +360,7 @@ export const notesNavItem: NavItem = {
   name: 'Notas',
   icon: () => <AdjustmentNoteIcon />,
   route: '/adjustment-notes',
+  search: { tab: 0 },
   children: [
     {
       ...allRouteBase,
@@ -400,19 +405,6 @@ export const followUpsNavItem: NavItem = {
       name: addRouteName,
       icon: addRouteIcon,
       route: '/follow-ups/create',
-    },
-  ],
-}
-
-export const systemNavItem: NavItem = {
-  name: 'Sistema',
-  icon: () => <ComputerIcon />,
-  route: '/system',
-  children: [
-    {
-      name: 'Workers',
-      icon: () => <WorkerIcon />,
-      route: '/system',
     },
   ],
 }
